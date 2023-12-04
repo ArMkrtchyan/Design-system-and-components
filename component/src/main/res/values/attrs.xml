@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+
+        <!-- Backgrounds -->
+        <attr name="backgroundBase" format="color" />
+        <attr name="backgroundBrand" format="color" />
+        <attr name="backgroundBrandPressed" format="color" />
+        <attr name="backgroundBrandDisable" format="color" />
+        <attr name="backgroundSecondary" format="color" />
+        <attr name="backgroundNeutral" format="color" />
+        <attr name="backgroundNeutralReadOnly" format="color" />
+
+        <!-- Borders -->
+        <attr name="borderBase" format="color" />
+        <attr name="borderPrimary" format="color" />
+        <attr name="borderBrand" format="color" />
+        <attr name="borderBrandTonal1" format="color" />
+        <attr name="borderBrandTonal1Disable" format="color" />
+        <attr name="borderSecondary" format="color" />
+        <attr name="borderNeutral" format="color" />
+
+        <!-- Content -->
+        <attr name="contentBrand" format="color" />
+        <attr name="contentBrandTonal1" format="color" />
+        <attr name="contentBrandTonal1Disable" format="color" />
+        <attr name="contentPrimary" format="color" />
+        <attr name="contentPrimaryDisable" format="color" />
+        <attr name="contentPrimaryTonal1" format="color" />
+        <attr name="contentPrimaryTonal2" format="color" />
+        <attr name="contentPrimaryTonal1Disable" format="color" />
+        <attr name="contentSecondary" format="color" />
+        <attr name="contentSecondaryDisable" format="color" />
+
+        <!-- Status -->
+        <attr name="statusError" format="color" />
+
+    </declare-styleable>
+</resources>

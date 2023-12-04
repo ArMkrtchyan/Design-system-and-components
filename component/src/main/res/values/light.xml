@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseTextStyle.Light" parent="BaseTextStyle">
+        <item name="android:fontFamily">@font/light</item>
+    </style>
+
+    <style name="XSmall.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="Small.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="Body1.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="Body2.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Subtitle1.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Subtitle2.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="Heading1.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_36</item>
+    </style>
+
+    <style name="Heading2.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_32</item>
+    </style>
+
+    <style name="Heading3.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_28</item>
+    </style>
+
+    <style name="Heading4.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_25</item>
+    </style>
+
+    <style name="Heading5.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_22</item>
+    </style>
+
+    <style name="Heading6.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="Heading7.Light" parent="BaseTextStyle.Light">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+</resources>

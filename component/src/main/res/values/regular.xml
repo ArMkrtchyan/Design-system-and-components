@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseTextStyle.Regular" parent="BaseTextStyle">
+        <item name="android:fontFamily">@font/regular</item>
+    </style>
+
+    <style name="XSmall.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_10</item>
+    </style>
+
+    <style name="Small.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="Body1.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="Body2.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Subtitle1.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="Subtitle2.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="Heading1.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_36</item>
+    </style>
+
+    <style name="Heading2.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_32</item>
+    </style>
+
+    <style name="Heading3.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_28</item>
+    </style>
+
+    <style name="Heading4.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_25</item>
+    </style>
+
+    <style name="Heading5.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_22</item>
+    </style>
+
+    <style name="Heading6.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="Heading7.Regular" parent="BaseTextStyle.Regular">
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+</resources>

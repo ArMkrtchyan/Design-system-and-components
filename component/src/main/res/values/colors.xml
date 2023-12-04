@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Green_400">#33BBA0</color>
+    <color name="Green_450">#19AF94</color>
+    <color name="Green_500">#00A688</color>
+    <color name="Green_600">#00856D</color>
+    <color name="Green_650">#00745F</color>
+
+    <color name="White">#FFFFFF</color>
+
+    <color name="Grey_100">#BEBFC3</color>
+    <color name="Grey_200">#A0A1A6</color>
+    <color name="Grey_400">#63656C</color>
+    <color name="Grey_500">#45474F</color>
+
+    <color name="BlueGrey_50">#F2F3F7</color>
+    <color name="BlueGrey_100">#EEEFF4</color>
+    <color name="BlueGrey_150">#E6E7EF</color>
+    <color name="BlueGrey_200">#DDDFE9</color>
+    <color name="BlueGrey_250">#D5D8E4</color>
+    <color name="BlueGrey_350">#C4C8D9</color>
+    <color name="BlueGrey_400">#BBC0D4</color>
+    <color name="BlueGrey_500">#AAB0C9</color>
+    <color name="BlueGrey_550">#999EB5</color>
+    <color name="BlueGrey_600">#888DA1</color>
+    <color name="BlueGrey_650">#777B8D</color>
+    <color name="BlueGrey_700">#666A79</color>
+    <color name="BlueGrey_800">#444650</color>
+    <color name="BlueGrey_850">#33353C</color>
+    <color name="BlueGrey_900">#222328</color>
+    <color name="BlueGrey_950">#1A1B1F</color>
+    <color name="BlueGrey_1000">#111214</color>
+
+    <color name="Red_500">#F44766</color>
+    <color name="Red_600">#C73952</color>
+
+
+</resources>
