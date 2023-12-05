@@ -3,6 +3,7 @@
 
     <style name="Theme.Dark" parent="Theme.Base">
         <item name="android:windowBackground">@color/BlueGrey_1000</item>
+        <item name="android:statusBarColor">@color/BlueGrey_1000</item>
 
         <!-- Backgrounds -->
         <item name="backgroundBase">@color/BlueGrey_1000</item>
