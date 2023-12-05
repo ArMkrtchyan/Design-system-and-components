@@ -12,6 +12,8 @@
 
         <!-- Buttons styles -->
         <item name="primaryButtonStyle">@style/Button.Style.Primary</item>
+        <item name="primaryInputStyle">@style/Input.Style.Base</item>
+        <item name="inputEditTextStyle">@style/InputStyle</item>
     </style>
     <style name="BaseTextStyle">
         <item name="android:textColor">?attr/contentPrimary</item>

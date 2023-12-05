@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="InputStyle">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <!--        <item name="android:textColor">?attr/contentSecondary</item>-->
+        <item name="android:fontFamily">@font/regular</item>
+        <!--        <item name="android:gravity">center_vertical</item>-->
+        <!--        <item name="android:enabled">true</item>-->
+        <!--        <item name="android:textColorHint">?attr/contentBrandTonal1Disable</item>-->
+        <item name="android:background">@drawable/background_primary_input</item>
+    </style>
+
+    <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+</resources>
