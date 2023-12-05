@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="isPreventClick" format="boolean" />
+    <attr name="clickInterval" format="integer" />
+
     <declare-styleable name="ds">
+
+        <attr name="primaryButtonStyle" format="reference" />
+        <attr name="secondaryButtonStyle" format="reference" />
+        <attr name="ghostButtonStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
@@ -9,6 +17,7 @@
         <attr name="backgroundBrandDisable" format="color" />
         <attr name="backgroundSecondary" format="color" />
         <attr name="backgroundNeutral" format="color" />
+        <attr name="backgroundNeutralPressed" format="color" />
         <attr name="backgroundNeutralReadOnly" format="color" />
 
         <!-- Borders -->
@@ -35,5 +44,20 @@
         <!-- Status -->
         <attr name="statusError" format="color" />
 
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryButton">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
+    </declare-styleable>
+
+    <declare-styleable name="SecondaryButton">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
+    </declare-styleable>
+
+    <declare-styleable name="GhostButton">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
     </declare-styleable>
 </resources>

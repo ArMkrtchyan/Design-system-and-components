@@ -7,14 +7,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        style="@style/Heading7.Bold"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switcher"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="սյդկնսդյկց դսցհցբհդ "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        android:background="@null"
+        android:checked="false"
+        android:text="Night mode"
+        android:textColor="?attr/contentPrimary"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
+        <am.acba.component.button.PrimaryButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:enabled="true"
+            android:text="Primary button enabled"
+            app:icon="@drawable/default_icon" />
+
+        <am.acba.component.button.PrimaryButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:enabled="false"
+            android:text="Primary button disabled" />
+
+
+        <am.acba.component.button.PrimaryButton
+            style="@style/Button.Style.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:enabled="true"
+            app:icon="@drawable/default_icon"
+            android:text="Secondary button enabled" />
+
+        <am.acba.component.button.PrimaryButton
+            style="@style/Button.Style.Secondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:enabled="false"
+            android:text="Secondary button disabled" />
+
+
+        <am.acba.component.button.PrimaryButton
+            style="@style/Button.Style.Ghost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:enabled="true"
+            android:text="Ghost button enabled" />
+
+        <am.acba.component.button.PrimaryButton
+            style="@style/Button.Style.Ghost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            app:icon="@drawable/default_icon"
+            android:enabled="false"
+            android:text="Ghost button disabled" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

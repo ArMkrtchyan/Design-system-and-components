@@ -7,6 +7,7 @@
     <color name="Green_650">#00745F</color>
 
     <color name="White">#FFFFFF</color>
+    <color name="Transparent">#00000000</color>
 
     <color name="Grey_100">#BEBFC3</color>
     <color name="Grey_200">#A0A1A6</color>

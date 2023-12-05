@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppThemeDark" parent="BaseAppTheme">
+
+    <style name="Theme.Dark" parent="Theme.Base">
         <item name="android:windowBackground">@color/BlueGrey_1000</item>
 
         <!-- Backgrounds -->
@@ -10,6 +11,7 @@
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
         <item name="backgroundSecondary">@color/BlueGrey_850</item>
         <item name="backgroundNeutral">@color/BlueGrey_900</item>
+        <item name="backgroundNeutralPressed">#1d2025</item>
         <item name="backgroundNeutralReadOnly">@color/BlueGrey_850</item>
 
         <!-- Borders -->
