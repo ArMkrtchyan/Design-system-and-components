@@ -30,27 +30,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/app_name"
+            android:textColorHint="?attr/contentPrimaryTonal1"
             app:boxBackgroundMode="filled"
-            app:boxCollapsedPaddingTop="@dimen/spacing_8"
-            app:boxCornerRadiusBottomEnd="@dimen/radius_12"
-            app:boxCornerRadiusBottomStart="@dimen/radius_12"
-            app:boxCornerRadiusTopEnd="@dimen/radius_12"
-            app:boxCornerRadiusTopStart="@dimen/radius_12"
-            app:boxStrokeColor="@color/Transparent"
-            app:boxStrokeErrorColor="?attr/statusError"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:errorIconDrawable="@null"
-            app:errorIconTint="?attr/statusError"
             app:errorTextColor="?attr/statusError"
-            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:helperText="@string/app_name"
-            app:hintTextColor="?attr/contentBrandTonal1Disable">
+            app:helperTextTextColor="?attr/contentPrimaryTonal1"
+            app:hintTextColor="?attr/contentPrimaryTonal1">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_primary_input" />
+                android:background="@drawable/background_primary_input"
+                android:textColor="?attr/contentPrimary"
+                android:textColorHint="?attr/contentPrimaryTonal1" />
         </am.acba.component.input.PrimaryInput>
 
         <am.acba.component.button.PrimaryButton
@@ -94,6 +89,7 @@
 
 
         <am.acba.component.button.PrimaryButton
+            android:id="@+id/buttonGhost"
             style="@style/Button.Style.Ghost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -11,7 +11,7 @@
         <item name="backgroundBrandPressed">@color/Green_400</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
         <item name="backgroundSecondary">@color/BlueGrey_850</item>
-        <item name="backgroundNeutral">@color/BlueGrey_900</item>
+        <item name="backgroundNeutral">@color/BlueGrey_950</item>
         <item name="backgroundNeutralPressed">#1d2025</item>
         <item name="backgroundNeutralReadOnly">@color/BlueGrey_850</item>
 
