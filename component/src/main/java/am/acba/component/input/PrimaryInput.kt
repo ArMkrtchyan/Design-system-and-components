@@ -1,6 +1,7 @@
 package am.acba.component.input
 
 import am.acba.component.R
+import am.acba.component.extensions.getColorStateListFromAttr
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
@@ -16,11 +17,7 @@ class PrimaryInput : TextInputLayout {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
 
@@ -34,37 +31,16 @@ class PrimaryInput : TextInputLayout {
     override fun setErrorEnabled(enabled: Boolean) {
         super.setErrorEnabled(enabled)
         if (enabled) {
-            editText?.background = ContextCompat.getDrawable(
-                context,
-                R.drawable.background_error_input
-            )
-            val errorTextView: TextView? =
-                findViewById(com.google.android.material.R.id.textinput_error)
-            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.ic_error_default
-                ),
-                null,
-                null,
-                null
-            )
+            editText?.background = ContextCompat.getDrawable(context, R.drawable.background_error_input)
+            val errorTextView: TextView? = findViewById(com.google.android.material.R.id.textinput_error)
+            val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
+            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(errorIcon, null, null, null)
             errorTextView?.compoundDrawablePadding = 8
-            errorTextView?.compoundDrawableTintList =
-                ContextCompat.getColorStateList(context, R.color.Red_500)
+            errorTextView?.compoundDrawableTintList = context.getColorStateListFromAttr(R.attr.statusError)
         } else {
-            editText?.background = ContextCompat.getDrawable(
-                context,
-                R.drawable.background_primary_input
-            )
-            val errorTextView: TextView? =
-                findViewById(com.google.android.material.R.id.textinput_error)
-            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                null,
-                null,
-                null,
-                null
-            )
+            editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input)
+            val errorTextView: TextView? = findViewById(com.google.android.material.R.id.textinput_error)
+            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
         }
     }
 }

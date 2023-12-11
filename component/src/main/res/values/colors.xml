@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Green_400">#33BBA0</color>
-    <color name="Green_450">#19AF94</color>
-    <color name="Green_500">#00A688</color>
-    <color name="Green_600">#00856D</color>
-    <color name="Green_650">#00745F</color>
-
     <color name="White">#FFFFFF</color>
+    <color name="Black">#000000</color>
     <color name="Transparent">#00000000</color>
+
+    <color name="BrandGreen_400">#33BBA0</color>
+    <color name="BrandGreen_450">#19AF94</color>
+    <color name="BrandGreen_500">#00A688</color>
+    <color name="BrandGreen_600">#00856D</color>
+    <color name="BrandGreen_650">#00745F</color>
 
     <color name="Grey_100">#BEBFC3</color>
     <color name="Grey_200">#A0A1A6</color>
@@ -22,15 +23,20 @@
     <color name="BlueGrey_350">#C4C8D9</color>
     <color name="BlueGrey_400">#BBC0D4</color>
     <color name="BlueGrey_500">#AAB0C9</color>
-    <color name="BlueGrey_550">#999EB5</color>
+    <color name="BlueGrey_550">#8A91B5</color>
+    <color name="BlueGrey_550_10">#1A8A91B5</color>
+    <color name="BlueGrey_550_15">#268A91B5</color>
+    <color name="BlueGrey_550_30">#4D8A91B5</color>
     <color name="BlueGrey_600">#888DA1</color>
-    <color name="BlueGrey_650">#777B8D</color>
-    <color name="BlueGrey_700">#666A79</color>
-    <color name="BlueGrey_800">#444650</color>
-    <color name="BlueGrey_850">#33353C</color>
-    <color name="BlueGrey_900">#222328</color>
-    <color name="BlueGrey_950">#1A1B1F</color>
-    <color name="BlueGrey_1000">#111214</color>
+    <color name="BlueGrey_650">#6B718D</color>
+    <color name="BlueGrey_700">#5C6279</color>
+    <color name="BlueGrey_800">#3D4050</color>
+    <color name="BlueGrey_850">#2E313C</color>
+    <color name="BlueGrey_850_30">#4D2E313C</color>
+    <color name="BlueGrey_850_60">#992E313C</color>
+    <color name="BlueGrey_900">#23272E</color>
+    <color name="BlueGrey_950">#1B1E24</color>
+    <color name="BlueGrey_1000">#14161A</color>
 
     <color name="Red_500">#F44766</color>
     <color name="Red_600">#C73952</color>

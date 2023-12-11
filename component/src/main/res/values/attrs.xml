@@ -15,10 +15,10 @@
         <attr name="backgroundBrand" format="color" />
         <attr name="backgroundBrandPressed" format="color" />
         <attr name="backgroundBrandDisable" format="color" />
-        <attr name="backgroundSecondary" format="color" />
-        <attr name="backgroundNeutral" format="color" />
-        <attr name="backgroundNeutralPressed" format="color" />
-        <attr name="backgroundNeutralReadOnly" format="color" />
+        <attr name="backgroundTonal1" format="color" />
+        <attr name="backgroundTonal2" format="color" />
+        <attr name="backgroundTonal2ReadOnly" format="color" />
+        <attr name="backgroundTonal2Disable" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />

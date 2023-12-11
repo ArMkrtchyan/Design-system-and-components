@@ -7,31 +7,31 @@
 
         <!-- Backgrounds -->
         <item name="backgroundBase">@color/BlueGrey_1000</item>
-        <item name="backgroundBrand">@color/Green_500</item>
-        <item name="backgroundBrandPressed">@color/Green_400</item>
+        <item name="backgroundBrand">@color/BrandGreen_500</item>
+        <item name="backgroundBrandPressed">@color/BrandGreen_400</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
-        <item name="backgroundSecondary">@color/BlueGrey_850</item>
-        <item name="backgroundNeutral">@color/BlueGrey_950</item>
-        <item name="backgroundNeutralPressed">#1d2025</item>
-        <item name="backgroundNeutralReadOnly">@color/BlueGrey_850</item>
+        <item name="backgroundTonal1">@color/BlueGrey_950</item>
+        <item name="backgroundTonal2">@color/BlueGrey_850_60</item>
+        <item name="backgroundTonal2ReadOnly">@color/BlueGrey_850</item>
+        <item name="backgroundTonal2Disable">@color/BlueGrey_850_30</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_350</item>
         <item name="borderPrimary">@color/BlueGrey_100</item>
-        <item name="borderBrand">@color/Green_500</item>
-        <item name="borderBrandTonal1">@color/Green_450</item>
+        <item name="borderBrand">@color/BrandGreen_500</item>
+        <item name="borderBrandTonal1">@color/BrandGreen_450</item>
         <item name="borderBrandTonal1Disable">@color/BlueGrey_700</item>
         <item name="borderSecondary">@color/BlueGrey_800</item>
         <item name="borderNeutral">@color/BlueGrey_900</item>
 
         <!-- Content -->
-        <item name="contentBrand">@color/Green_500</item>
-        <item name="contentBrandTonal1">@color/Green_450</item>
+        <item name="contentBrand">@color/BrandGreen_500</item>
+        <item name="contentBrandTonal1">@color/BrandGreen_450</item>
         <item name="contentBrandTonal1Disable">@color/BlueGrey_700</item>
         <item name="contentPrimary">@color/BlueGrey_100</item>
         <item name="contentPrimaryDisable">@color/BlueGrey_700</item>
         <item name="contentPrimaryTonal1">@color/Grey_200</item>
-        <item name="contentPrimaryTonal2">@color/Grey_100</item>
+        <item name="contentPrimaryTonal2">@color/Grey_500</item>
         <item name="contentPrimaryTonal1Disable">@color/BlueGrey_700</item>
         <item name="contentSecondary">@color/White</item>
         <item name="contentSecondaryDisable">@color/BlueGrey_700</item>

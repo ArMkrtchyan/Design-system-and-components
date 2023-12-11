@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/Green_500</item>
-        <item name="colorPrimaryDark">@color/Green_600</item>
+        <item name="colorPrimary">@color/BrandGreen_500</item>
+        <item name="colorPrimaryDark">@color/BrandGreen_600</item>
         <item name="colorAccent">@color/White</item>
         <item name="android:statusBarColor">#FFFFFF</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>

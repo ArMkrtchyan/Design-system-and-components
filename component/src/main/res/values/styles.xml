@@ -7,26 +7,26 @@
 
         <!-- Backgrounds -->
         <item name="backgroundBase">@color/BlueGrey_50</item>
-        <item name="backgroundBrand">@color/Green_500</item>
-        <item name="backgroundBrandPressed">@color/Green_600</item>
+        <item name="backgroundBrand">@color/BrandGreen_500</item>
+        <item name="backgroundBrandPressed">@color/BrandGreen_600</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_200</item>
-        <item name="backgroundSecondary">@color/White</item>
-        <item name="backgroundNeutral">@color/BlueGrey_150</item>
-        <item name="backgroundNeutralPressed">@color/BlueGrey_100</item>
-        <item name="backgroundNeutralReadOnly">@color/BlueGrey_250</item>
+        <item name="backgroundTonal1">@color/White</item>
+        <item name="backgroundTonal2">@color/BlueGrey_550_15</item>
+        <item name="backgroundTonal2ReadOnly">@color/BlueGrey_550_30</item>
+        <item name="backgroundTonal2Disable">@color/BlueGrey_550_10</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>
         <item name="borderPrimary">@color/BlueGrey_900</item>
-        <item name="borderBrand">@color/Green_500</item>
-        <item name="borderBrandTonal1">@color/Green_650</item>
+        <item name="borderBrand">@color/BrandGreen_500</item>
+        <item name="borderBrandTonal1">@color/BrandGreen_650</item>
         <item name="borderBrandTonal1Disable">@color/BlueGrey_350</item>
         <item name="borderSecondary">@color/White</item>
         <item name="borderNeutral">@color/BlueGrey_150</item>
 
         <!-- Content -->
-        <item name="contentBrand">@color/Green_500</item>
-        <item name="contentBrandTonal1">@color/Green_650</item>
+        <item name="contentBrand">@color/BrandGreen_500</item>
+        <item name="contentBrandTonal1">@color/BrandGreen_650</item>
         <item name="contentBrandTonal1Disable">@color/BlueGrey_350</item>
         <item name="contentPrimary">@color/BlueGrey_900</item>
         <item name="contentPrimaryDisable">@color/BlueGrey_600</item>

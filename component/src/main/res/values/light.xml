@@ -42,7 +42,7 @@
     </style>
 
     <style name="Heading4.Light" parent="BaseTextStyle.Light">
-        <item name="android:textSize">@dimen/text_size_25</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
     </style>
 
     <style name="Heading5.Light" parent="BaseTextStyle.Light">
