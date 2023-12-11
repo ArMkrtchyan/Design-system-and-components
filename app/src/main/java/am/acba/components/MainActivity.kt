@@ -5,6 +5,7 @@ import am.acba.component.input.PrimaryInput
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -33,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<PrimaryInput>(R.id.input).apply {
 //            isErrorEnabled = true
 //            error = "Error"
+            setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setOnFocusChangeListener { v, hasFocus ->
 
             }

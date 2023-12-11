@@ -8,6 +8,7 @@
 
         <attr name="primaryButtonStyle" format="reference" />
         <attr name="primaryInputStyle" format="reference" />
+        <attr name="searchInputStyle" format="reference" />
         <attr name="inputEditTextStyle" format="reference" />
 
         <!-- Backgrounds -->
@@ -52,10 +53,13 @@
     </declare-styleable>
 
     <declare-styleable name="PrimaryInput">
-
+        <attr name="textMaxLength" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="PrimaryEditText">
-
+    <declare-styleable name="SearchInput">
+        <attr name="withBackIcon" format="boolean" />
+        <attr name="android:hint" />
+        <attr name="android:text" />
     </declare-styleable>
+    <declare-styleable name="PrimaryEditText"></declare-styleable>
 </resources>

@@ -29,24 +29,36 @@
             android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="true"
             android:hint="@string/app_name"
-            android:textColorHint="?attr/contentPrimaryTonal1"
-            app:boxBackgroundMode="filled"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:errorIconDrawable="@null"
-            app:errorTextColor="?attr/statusError"
-            app:helperText="@string/app_name"
-            app:helperTextTextColor="?attr/contentPrimaryTonal1"
-            app:hintTextColor="?attr/contentPrimaryTonal1">
+            app:counterEnabled="true"
+            app:counterMaxLength="1000"
+            app:endIconDrawable="@drawable/ic_add"
+            app:helperText="Helper text"
+            app:startIconDrawable="@drawable/ic_add" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_primary_input"
-                android:textColor="?attr/contentPrimary"
-                android:textColorHint="?attr/contentPrimaryTonal1" />
-        </am.acba.component.input.PrimaryInput>
+        <am.acba.component.input.SearchInput
+            android:id="@+id/search"
+            style="@style/Input.Style.Search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:enabled="true"
+            android:hint="Որոնել..."
+            app:endIconDrawable="@drawable/ic_close"
+            app:startIconDrawable="@drawable/ic_search"
+            app:withBackIcon="true" />
+
+        <am.acba.component.input.SearchInput
+            android:id="@+id/search2"
+            style="@style/Input.Style.Search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:enabled="true"
+            android:hint="Որոնել..."
+            app:startIconDrawable="@drawable/ic_search"
+            app:endIconDrawable="@drawable/ic_close"/>
 
         <am.acba.component.button.PrimaryButton
             android:id="@+id/buttonPr"

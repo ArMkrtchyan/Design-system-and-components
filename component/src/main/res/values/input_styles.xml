@@ -3,16 +3,42 @@
 
     <style name="InputStyle">
         <item name="android:textSize">@dimen/text_size_16</item>
-        <!--        <item name="android:textColor">?attr/contentSecondary</item>-->
+        <item name="android:textColor">?attr/contentPrimary</item>
         <item name="android:fontFamily">@font/regular</item>
-        <!--        <item name="android:gravity">center_vertical</item>-->
-        <!--        <item name="android:enabled">true</item>-->
-        <!--        <item name="android:textColorHint">?attr/contentBrandTonal1Disable</item>-->
+        <item name="android:textColorHint">?attr/contentPrimaryTonal1</item>
         <item name="android:background">@drawable/background_primary_input</item>
     </style>
 
-    <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat.Caption">
-        <item name="android:paddingStart">0dp</item>
-        <item name="android:paddingEnd">0dp</item>
+    <style name="Input.Style.Primary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">?attr/contentPrimaryTonal1</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="startIconTint">?attr/contentPrimaryTonal1</item>
+        <item name="endIconMode">custom</item>
+        <item name="endIconTint">?attr/contentPrimaryTonal1</item>
+        <item name="errorTextColor">?attr/statusError</item>
+        <item name="helperTextTextColor">?attr/contentPrimaryTonal1</item>
+        <item name="hintTextColor">?attr/contentPrimaryTonal1</item>
+        <item name="counterTextColor">?attr/contentPrimaryTonal1</item>
+        <item name="cursorColor">?attr/backgroundBrand</item>
+        <item name="cursorErrorColor">?attr/backgroundBrand</item>
+    </style>
+
+    <style name="Input.Style.Search" parent="">
+        <item name="android:background">@drawable/background_search_input</item>
+        <item name="boxBackgroundMode">filled</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="errorIconDrawable">@null</item>
+        <item name="startIconTint">?attr/contentPrimaryTonal1</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="hintEnabled">false</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="endIconTint">?attr/contentPrimaryTonal1</item>
+        <item name="cursorColor">?attr/backgroundBrand</item>
+        <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 </resources>

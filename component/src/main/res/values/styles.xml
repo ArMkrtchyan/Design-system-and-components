@@ -39,6 +39,4 @@
         <!-- Status -->
         <item name="statusError">@color/Red_600</item>
     </style>
-
-    <style name="Input.Style.Base" parent="Widget.MaterialComponents.TextInputLayout.FilledBox" />
 </resources>
