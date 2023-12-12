@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Base" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Base" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/BrandGreen_500</item>
         <item name="colorPrimaryDark">@color/BrandGreen_600</item>
         <item name="colorAccent">@color/White</item>
@@ -15,6 +15,13 @@
         <item name="primaryInputStyle">@style/Input.Style.Primary</item>
         <item name="searchInputStyle">@style/Input.Style.Search</item>
         <item name="inputEditTextStyle">@style/InputStyle</item>
+        <item name="primaryToolbarStyle">@style/Toolbar.Primary</item>
+        <item name="primaryCheckboxStyle">@style/CheckBox.Primary</item>
+        <item name="primarySwitcherStyle">@style/Switcher.Primary</item>
+        <item name="primaryImageViewStyle">@style/ImageView.Primary</item>
+        <item name="primaryRadioButtonStyle">@style/RadioButton.Primary</item>
+        <item name="primaryTextViewStyle">@style/TextView.Primary</item>
+        <item name="exchangeRatesStyle">@style/ExchangeRates</item>
     </style>
     <style name="BaseTextStyle">
         <item name="android:textColor">?attr/contentPrimary</item>

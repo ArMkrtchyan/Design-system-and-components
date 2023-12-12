@@ -10,6 +10,13 @@
         <attr name="primaryInputStyle" format="reference" />
         <attr name="searchInputStyle" format="reference" />
         <attr name="inputEditTextStyle" format="reference" />
+        <attr name="exchangeRatesStyle" format="reference" />
+        <attr name="primaryToolbarStyle" format="reference" />
+        <attr name="primaryCheckboxStyle" format="reference" />
+        <attr name="primarySwitcherStyle" format="reference" />
+        <attr name="primaryImageViewStyle" format="reference" />
+        <attr name="primaryRadioButtonStyle" format="reference" />
+        <attr name="primaryTextViewStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
@@ -61,5 +68,33 @@
         <attr name="android:hint" />
         <attr name="android:text" />
     </declare-styleable>
-    <declare-styleable name="PrimaryEditText"></declare-styleable>
+    <declare-styleable name="PrimaryEditText">
+
+    </declare-styleable>
+
+    <declare-styleable name="ExchangeRates">
+
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryCheckBox">
+
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryRadioButton">
+
+    </declare-styleable>
+
+    <declare-styleable name="PrimarySwitcher">
+
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryToolbar" />
+
+    <declare-styleable name="PrimaryTextView">
+        <attr name="isPreventClick" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryImageView">
+        <attr name="isPreventClick" />
+    </declare-styleable>
 </resources>

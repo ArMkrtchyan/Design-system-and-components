@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/first_rates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_exchange_rates_first"
+        android:clickable="false"
+        android:focusable="false"
+        android:orientation="horizontal"
+        android:layout_marginEnd="1dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/second_rates"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_close_in_round" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/second_rates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_exchange_rates_second"
+        android:clickable="false"
+        android:focusable="false"
+        android:orientation="horizontal"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/third_rates"
+        app:layout_constraintStart_toEndOf="@id/first_rates"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_close_in_round" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/third_rates"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_exchange_rates_second"
+        android:clickable="false"
+        android:focusable="false"
+        android:orientation="horizontal"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="2dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/arrow_right"
+        app:layout_constraintStart_toEndOf="@id/second_rates"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_close_in_round" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+
+            <TextView
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$ 451.26" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/background_exchange_rates_arrow"
+        android:clickable="false"
+        android:focusable="false"
+        android:src="@drawable/ic_right"
+        android:tint="?attr/contentPrimaryTonal1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseAppTint" />
+</androidx.constraintlayout.widget.ConstraintLayout>

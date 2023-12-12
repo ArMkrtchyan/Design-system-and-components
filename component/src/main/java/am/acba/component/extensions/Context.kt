@@ -3,6 +3,7 @@ package am.acba.component.extensions
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.TypedValue
+import android.view.LayoutInflater
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 
@@ -20,3 +21,5 @@ fun Context.getColorStateListFromAttr(
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return ColorStateList.valueOf(typedValue.data)
 }
+
+fun Context.inflater(): LayoutInflater = LayoutInflater.from(this)

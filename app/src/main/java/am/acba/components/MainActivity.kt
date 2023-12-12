@@ -1,20 +1,15 @@
 package am.acba.components
 
 import am.acba.component.button.PrimaryButton
+import am.acba.component.exchange.ExchangeRates
 import am.acba.component.input.PrimaryInput
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.constraintlayout.widget.ConstraintHelper
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -60,6 +55,11 @@ class MainActivity : AppCompatActivity() {
                 this@MainActivity.findViewById<PrimaryInput>(R.id.input).apply {
                     clearFocus()
                 }
+            }
+        }
+        findViewById<ExchangeRates>(R.id.exchange_rates).apply {
+            setOnClickListener {
+                Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
             }
         }
         findViewById<SwitchCompat>(R.id.switcher).setOnCheckedChangeListener { buttonView, isChecked ->

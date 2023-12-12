@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- State Disabled, Unchecked -->
+    <item android:color="?attr/contentSecondaryDisable" android:state_enabled="false" android:state_checked="false" />
+
+    <!-- State Disabled, Checked -->
+    <item android:color="?attr/contentSecondaryDisable" android:state_enabled="false" android:state_checked="true" />
+
+    <!-- State Checked, Pressed -->
+    <item android:color="@color/White" android:state_checked="true" android:state_pressed="true" />
+
+    <!-- State Checked -->
+    <item android:color="@color/White" android:state_checked="true" />
+
+    <!-- State Unchecked, Pressed -->
+    <item android:color="?attr/contentPrimaryTonal1" android:state_pressed="true" />
+
+    <!-- State Unchecked -->
+    <item android:color="?attr/contentPrimaryTonal1" />
+</selector>
