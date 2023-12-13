@@ -15,4 +15,6 @@ class PrimarySwitcher : SwitchMaterial {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
 
     }
+
+
 }

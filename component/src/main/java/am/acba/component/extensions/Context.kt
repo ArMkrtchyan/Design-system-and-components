@@ -23,3 +23,11 @@ fun Context.getColorStateListFromAttr(
 }
 
 fun Context.inflater(): LayoutInflater = LayoutInflater.from(this)
+fun Context.getActionBarHeight(): Int {
+    var actionBarHeight = 0
+    val tv = TypedValue()
+    if (this.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+        actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
+    }
+    return actionBarHeight
+}
