@@ -14,6 +14,11 @@
         <item name="backgroundTonal2">@color/BlueGrey_550_15</item>
         <item name="backgroundTonal2ReadOnly">@color/BlueGrey_550_30</item>
         <item name="backgroundTonal2Disable">@color/BlueGrey_550_10</item>
+        <item name="backgroundDanger">@color/Red_500</item>
+        <item name="backgroundSuccess">@color/Green_500</item>
+        <item name="backgroundInfo">@color/Blue_500</item>
+        <item name="backgroundWarning">@color/Orange_500</item>
+        <item name="backgroundPending">@color/BlueGrey_200</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>
@@ -23,6 +28,7 @@
         <item name="borderBrandTonal1Disable">@color/BlueGrey_350</item>
         <item name="borderSecondary">@color/White</item>
         <item name="borderNeutral">@color/BlueGrey_150</item>
+        <item name="borderDanger">@color/Red_600</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
@@ -35,8 +41,14 @@
         <item name="contentPrimaryTonal1Disable">@color/BlueGrey_550</item>
         <item name="contentSecondary">@color/White</item>
         <item name="contentSecondaryDisable">@color/BlueGrey_400</item>
-
-        <!-- Status -->
-        <item name="statusError">@color/Red_600</item>
+        <item name="contentDanger">@color/Red_900</item>
+        <item name="contentDangerTonal1">@color/Red_600</item>
+        <item name="contentInfo">@color/Blue_900</item>
+        <item name="contentInfoTonal1">@color/Blue_600</item>
+        <item name="contentSuccess">@color/Green_900</item>
+        <item name="contentSuccessTonal1">@color/Green_600</item>
+        <item name="contentWarning">@color/Orange_900</item>
+        <item name="contentWarningTonal1">@color/Orange_600</item>
+        <item name="contentPending">@color/BlueGrey_900</item>
     </style>
 </resources>

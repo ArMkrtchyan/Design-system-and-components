@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.Dark" parent="Theme.Base">
         <item name="android:windowBackground">@color/BlueGrey_1000</item>
@@ -11,9 +11,14 @@
         <item name="backgroundBrandPressed">@color/BrandGreen_400</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
         <item name="backgroundTonal1">@color/BlueGrey_950</item>
-        <item name="backgroundTonal2">@color/BlueGrey_850_60</item>
+        <item name="backgroundTonal2">@color/BlueGrey_850_70</item>
         <item name="backgroundTonal2ReadOnly">@color/BlueGrey_850</item>
         <item name="backgroundTonal2Disable">@color/BlueGrey_850_30</item>
+        <item name="backgroundDanger">@color/Red_500</item>
+        <item name="backgroundSuccess">@color/Green_500</item>
+        <item name="backgroundInfo">@color/Blue_500</item>
+        <item name="backgroundWarning">@color/Orange_500</item>
+        <item name="backgroundPending">@color/BlueGrey_400</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_350</item>
@@ -23,6 +28,7 @@
         <item name="borderBrandTonal1Disable">@color/BlueGrey_700</item>
         <item name="borderSecondary">@color/BlueGrey_800</item>
         <item name="borderNeutral">@color/BlueGrey_900</item>
+        <item name="borderDanger">@color/Red_500</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
@@ -35,8 +41,14 @@
         <item name="contentPrimaryTonal1Disable">@color/BlueGrey_700</item>
         <item name="contentSecondary">@color/White</item>
         <item name="contentSecondaryDisable">@color/BlueGrey_700</item>
-
-        <!-- Status -->
-        <item name="statusError">@color/Red_500</item>
+        <item name="contentDanger">@color/Red_900</item>
+        <item name="contentDangerTonal1">@color/Red_500</item>
+        <item name="contentInfo">@color/Blue_900</item>
+        <item name="contentInfoTonal1">@color/Blue_500</item>
+        <item name="contentSuccess">@color/Green_900</item>
+        <item name="contentSuccessTonal1">@color/Green_500</item>
+        <item name="contentWarning">@color/Orange_900</item>
+        <item name="contentWarningTonal1">@color/Orange_500</item>
+        <item name="contentPending">@color/BlueGrey_950</item>
     </style>
 </resources>

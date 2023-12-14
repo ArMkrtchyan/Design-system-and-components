@@ -27,6 +27,11 @@
         <attr name="backgroundTonal2" format="color" />
         <attr name="backgroundTonal2ReadOnly" format="color" />
         <attr name="backgroundTonal2Disable" format="color" />
+        <attr name="backgroundDanger" format="color" />
+        <attr name="backgroundSuccess" format="color" />
+        <attr name="backgroundInfo" format="color" />
+        <attr name="backgroundWarning" format="color" />
+        <attr name="backgroundPending" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />
@@ -36,6 +41,7 @@
         <attr name="borderBrandTonal1Disable" format="color" />
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
+        <attr name="borderDanger" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -48,10 +54,15 @@
         <attr name="contentPrimaryTonal1Disable" format="color" />
         <attr name="contentSecondary" format="color" />
         <attr name="contentSecondaryDisable" format="color" />
-
-        <!-- Status -->
-        <attr name="statusError" format="color" />
-
+        <attr name="contentDanger" format="color" />
+        <attr name="contentDangerTonal1" format="color" />
+        <attr name="contentSuccess" format="color" />
+        <attr name="contentSuccessTonal1" format="color" />
+        <attr name="contentInfo" format="color" />
+        <attr name="contentInfoTonal1" format="color" />
+        <attr name="contentWarning" format="color" />
+        <attr name="contentWarningTonal1" format="color" />
+        <attr name="contentPending" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryButton">

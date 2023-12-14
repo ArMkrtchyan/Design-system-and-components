@@ -5,12 +5,10 @@ import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -59,7 +57,7 @@ open class PrimaryInput : TextInputLayout {
             val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
             errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(errorIcon, null, null, null)
             errorTextView?.compoundDrawablePadding = 4.dpToPx()
-            errorTextView?.compoundDrawableTintList = context.getColorStateListFromAttr(R.attr.statusError)
+            errorTextView?.compoundDrawableTintList = context.getColorStateListFromAttr(R.attr.borderDanger)
         } else {
             editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input)
             val errorTextView: TextView? = findViewById(com.google.android.material.R.id.textinput_error)

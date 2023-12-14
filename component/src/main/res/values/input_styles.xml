@@ -19,7 +19,7 @@
         <item name="startIconTint">?attr/contentPrimaryTonal1</item>
         <item name="endIconMode">custom</item>
         <item name="endIconTint">?attr/contentPrimaryTonal1</item>
-        <item name="errorTextColor">?attr/statusError</item>
+        <item name="errorTextColor">?attr/borderDanger</item>
         <item name="helperTextTextColor">?attr/contentPrimaryTonal1</item>
         <item name="hintTextColor">?attr/contentPrimaryTonal1</item>
         <item name="counterTextColor">?attr/contentPrimaryTonal1</item>
