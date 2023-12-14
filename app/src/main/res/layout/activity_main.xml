@@ -21,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_margin="20dp"
-        android:text="Night mode"
         android:checked="false"
+        android:text="Night mode"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
@@ -51,9 +51,35 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name" />
 
+            <am.acba.component.checkbox.PrimaryCheckbox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/app_name" />
+
+            <am.acba.component.checkbox.PrimaryCheckbox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="false"
+                android:text="@string/app_name" />
+
             <am.acba.component.radiobutton.PrimaryRadioButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/app_name" />
+
+            <am.acba.component.radiobutton.PrimaryRadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@string/app_name" />
+
+            <am.acba.component.radiobutton.PrimaryRadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:enabled="false"
                 android:text="@string/app_name" />
 
             <am.acba.component.switcher.PrimarySwitcher

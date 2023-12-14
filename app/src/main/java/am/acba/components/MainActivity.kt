@@ -3,6 +3,7 @@ package am.acba.components
 import am.acba.component.button.PrimaryButton
 import am.acba.component.exchange.ExchangeRates
 import am.acba.component.input.PrimaryInput
+import am.acba.component.switcher.PrimarySwitcher
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,8 +28,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         findViewById<PrimaryInput>(R.id.input).apply {
-//            isErrorEnabled = true
-//            error = "Error"
             setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setOnFocusChangeListener { v, hasFocus ->
@@ -64,11 +63,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
             }
         }
-//        findViewById<SwitchCompat>(R.id.switcher).setOnCheckedChangeListener { buttonView, isChecked ->
-//            if (buttonView.isPressed) {
-//                darkTheme = isChecked
-//                recreate()
-//            }
-//        }
+        findViewById<PrimarySwitcher>(R.id.switcher).setOnCheckedChangeListener { buttonView, isChecked ->
+            if (buttonView.isPressed) {
+                darkTheme = isChecked
+                recreate()
+            }
+        }
     }
 }

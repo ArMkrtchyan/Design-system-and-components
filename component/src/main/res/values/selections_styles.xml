@@ -7,6 +7,8 @@
         <item name="trackTint">@null</item>
         <item name="trackDecoration">@null</item>
         <item name="trackDecorationTint">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">32dp</item>
         <item name="thumbTint">@color/switcher_thumb_tint</item>
         <item name="android:textAppearance">@style/Subtitle1.Regular</item>
         <item name="android:textColor">?attr/contentPrimary</item>
@@ -15,11 +17,24 @@
     <style name="BasePrimaryCheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="android:textAppearance">@style/Subtitle1.Regular</item>
         <item name="android:textColor">?attr/contentPrimary</item>
+        <item name="buttonIcon">@drawable/checkbox_button_icon</item>
+        <item name="buttonIconTint">@null</item>
+        <item name="buttonTint">@color/Transparent</item>
+        <item name="android:drawablePadding">-5dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:translationX">-5dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
     </style>
 
     <style name="BasePrimaryRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
         <item name="android:textAppearance">@style/Subtitle1.Regular</item>
         <item name="android:textColor">?attr/contentPrimary</item>
+        <item name="buttonTint">@color/radiobutton_button_tint_selector</item>
+        <item name="android:button">@drawable/radiobutton_selector</item>
+        <item name="android:paddingStart">7dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">25dp</item>
     </style>
 
     <style name="Switcher.Primary" parent="BasePrimarySwitcher" />

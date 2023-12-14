@@ -1,10 +1,10 @@
 package am.acba.component.toolbar
 
 import am.acba.component.R
+import am.acba.component.extensions.dpToPx
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageButton
 import com.google.android.material.appbar.MaterialToolbar
 
 class PrimaryToolbar : MaterialToolbar {
@@ -22,7 +22,7 @@ class PrimaryToolbar : MaterialToolbar {
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryToolbar).apply {
             val titleTextView = getTextView()
-            val navIconView = getNavIcon()
+            titleTextView?.translationX = (-12).dpToPx().toFloat()
             recycle()
         }
     }
@@ -31,16 +31,6 @@ class PrimaryToolbar : MaterialToolbar {
         for (i in 0 until this.childCount) {
             val child = this.getChildAt(i)
             if (child is TextView) {
-                return child
-            }
-        }
-        return null
-    }
-
-    private fun getNavIcon(): AppCompatImageButton? {
-        for (i in 0 until this.childCount) {
-            val child = this.getChildAt(i)
-            if (child is AppCompatImageButton) {
                 return child
             }
         }

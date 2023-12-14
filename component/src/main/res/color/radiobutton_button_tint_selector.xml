@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Disabled -->
+    <item android:color="?attr/contentBrandTonal1Disable" android:state_enabled="false" />
+    <item android:color="?attr/contentBrandTonal1Disable" android:state_enabled="false" android:state_pressed="true" />
+
+    <!-- Checked -->
+    <item android:color="?attr/contentBrand" android:state_checked="true" android:state_pressed="true" />
+    <item android:color="?attr/backgroundTonal2" android:state_checked="true" android:state_focused="true" />
+    <item android:color="?attr/backgroundTonal2" android:state_checked="true" android:state_hovered="true" />
+    <item android:color="?attr/contentBrand" android:state_checked="true" />
+
+    <!-- Unchecked -->
+    <item android:color="?attr/contentBrandTonal1Disable" android:state_checked="false" android:state_pressed="true" />
+    <item android:color="?attr/backgroundTonal2" android:state_checked="true" android:state_focused="true" />
+    <item android:color="?attr/backgroundTonal2" android:state_checked="true" android:state_hovered="true" />
+    <item android:color="?attr/borderBase" android:state_checked="false" />
+</selector>
