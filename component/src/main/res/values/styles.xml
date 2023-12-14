@@ -39,49 +39,4 @@
         <!-- Status -->
         <item name="statusError">@color/Red_600</item>
     </style>
-
-    <style name="ExchangeRates" parent="">
-
-    </style>
-
-    <style name="TextView.Primary" parent="Body1.Regular">
-
-    </style>
-
-    <style name="Switcher.Primary" parent="Widget.Material3.CompoundButton.MaterialSwitch">
-        <item name="track">@drawable/switch_track</item>
-        <item name="useMaterialThemeColors">false</item>
-        <item name="trackTint">@null</item>
-        <item name="trackDecoration">@null</item>
-        <item name="trackDecorationTint">@null</item>
-        <item name="thumbTint">@color/switcher_thumb_tint</item>
-        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
-        <item name="android:textColor">?attr/contentPrimary</item>
-    </style>
-
-    <style name="CheckBox.Primary" parent="Widget.Material3.CompoundButton.CheckBox">
-
-        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
-        <item name="android:textColor">?attr/contentPrimary</item>
-    </style>
-
-    <style name="RadioButton.Primary" parent="Widget.Material3.CompoundButton.RadioButton">
-        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
-        <item name="android:textColor">?attr/contentPrimary</item>
-    </style>
-
-    <style name="Toolbar.Primary" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/backgroundBase</item>
-        <item name="titleTextAppearance">@style/MyTitleTextAppearance</item>
-        <item name="navigationIcon">@drawable/ic_back</item>
-        <item name="navigationIconTint">?attr/contentPrimary</item>
-    </style>
-
-    <style name="MyTitleTextAppearance" parent="Body1.Bold">
-        <item name="android:layout_gravity">center_vertical</item>
-    </style>
-
-    <style name="ImageView.Primary" parent="">
-
-    </style>
 </resources>

@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         findViewById<PrimaryButton>(R.id.buttonGhost).apply {
             setOnClickListener {
                 this@MainActivity.findViewById<PrimaryInput>(R.id.input).apply {
@@ -62,11 +64,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
             }
         }
-        findViewById<SwitchCompat>(R.id.switcher).setOnCheckedChangeListener { buttonView, isChecked ->
-            if (buttonView.isPressed) {
-                darkTheme = isChecked
-                recreate()
-            }
-        }
+//        findViewById<SwitchCompat>(R.id.switcher).setOnCheckedChangeListener { buttonView, isChecked ->
+//            if (buttonView.isPressed) {
+//                darkTheme = isChecked
+//                recreate()
+//            }
+//        }
     }
 }

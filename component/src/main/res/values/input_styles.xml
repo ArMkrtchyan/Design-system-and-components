@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="InputStyle">
+    <style name="BaseInputStyle">
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:textColor">?attr/contentPrimary</item>
         <item name="android:fontFamily">@font/regular</item>
@@ -9,7 +9,7 @@
         <item name="android:background">@drawable/background_primary_input</item>
     </style>
 
-    <style name="Input.Style.Primary" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <style name="BasePrimaryInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">?attr/contentPrimaryTonal1</item>
         <item name="hintAnimationEnabled">true</item>
         <item name="boxBackgroundMode">filled</item>
@@ -27,7 +27,7 @@
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 
-    <style name="Input.Style.Search" parent="">
+    <style name="BaseSearchInputStyle">
         <item name="android:background">@drawable/background_search_input</item>
         <item name="boxBackgroundMode">filled</item>
         <item name="boxStrokeWidth">0dp</item>
@@ -41,4 +41,10 @@
         <item name="cursorColor">?attr/backgroundBrand</item>
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
+
+    <style name="Input.Style.Search" parent="BaseSearchInputStyle" />
+
+    <style name="Input.Style.Primary" parent="BasePrimaryInputStyle" />
+
+    <style name="InputStyle" parent="BaseInputStyle" />
 </resources>

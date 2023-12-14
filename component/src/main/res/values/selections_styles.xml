@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BasePrimarySwitcher" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="track">@drawable/switch_track</item>
+        <item name="useMaterialThemeColors">false</item>
+        <item name="trackTint">@null</item>
+        <item name="trackDecoration">@null</item>
+        <item name="trackDecorationTint">@null</item>
+        <item name="thumbTint">@color/switcher_thumb_tint</item>
+        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="BasePrimaryCheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="BasePrimaryRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:textAppearance">@style/Subtitle1.Regular</item>
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="Switcher.Primary" parent="BasePrimarySwitcher" />
+
+    <style name="CheckBox.Primary" parent="BasePrimaryCheckBox" />
+
+    <style name="RadioButton.Primary" parent="BasePrimaryRadioButton" />
+</resources>

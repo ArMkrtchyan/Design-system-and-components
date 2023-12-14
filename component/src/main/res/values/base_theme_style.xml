@@ -21,7 +21,7 @@
         <item name="primaryImageViewStyle">@style/ImageView.Primary</item>
         <item name="primaryRadioButtonStyle">@style/RadioButton.Primary</item>
         <item name="primaryTextViewStyle">@style/TextView.Primary</item>
-        <item name="exchangeRatesStyle">@style/ExchangeRates</item>
+        <item name="exchangeRatesStyle">@style/ExchangeRatesStyle</item>
     </style>
     <style name="BaseTextStyle">
         <item name="android:textColor">?attr/contentPrimary</item>

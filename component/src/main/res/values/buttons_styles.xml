@@ -19,17 +19,21 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="Button.Style.Primary" parent="BaseButtonStyle" />
-
-    <style name="Button.Style.Secondary" parent="BaseButtonStyle">
+    <style name="BaseSecondaryButtonStyle" parent="BaseButtonStyle">
         <item name="android:background">@drawable/background_secondary_brand</item>
         <item name="android:textColor">@color/content_primary_selector</item>
         <item name="iconTint">@color/content_primary_selector</item>
     </style>
 
-    <style name="Button.Style.Ghost" parent="BaseButtonStyle">
+    <style name="BaseGhostButtonStyle" parent="BaseButtonStyle">
         <item name="android:background">@drawable/background_ghost_brand</item>
         <item name="android:textColor">@color/content_primary_selector</item>
         <item name="iconTint">@color/content_primary_selector</item>
     </style>
+
+    <style name="Button.Style.Primary" parent="BaseButtonStyle" />
+
+    <style name="Button.Style.Secondary" parent="BaseSecondaryButtonStyle" />
+
+    <style name="Button.Style.Ghost" parent="BaseGhostButtonStyle" />
 </resources>
