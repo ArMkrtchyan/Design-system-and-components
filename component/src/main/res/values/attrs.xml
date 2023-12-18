@@ -7,6 +7,7 @@
     <declare-styleable name="ds">
 
         <attr name="primaryButtonStyle" format="reference" />
+        <attr name="primaryActionTextButtonStyle" format="reference" />
         <attr name="primaryInputStyle" format="reference" />
         <attr name="searchInputStyle" format="reference" />
         <attr name="inputEditTextStyle" format="reference" />
@@ -70,6 +71,31 @@
         <attr name="isPreventClick" />
     </declare-styleable>
 
+    <declare-styleable name="PrimaryActionTextButton">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
+        <attr name="android:text" />
+        <attr name="actionButtonType" format="enum">
+            <enum name="ActionButton" value="0" />
+            <enum name="Avatar" value="1" />
+            <enum name="Text" value="2" />
+        </attr>
+        <attr name="showActionText" format="boolean" />
+        <attr name="badgeChecked" format="boolean" />
+        <attr name="checkable" format="boolean" />
+        <attr name="badgeIcon" format="reference" />
+        <attr name="actionIcon" format="reference" />
+        <attr name="actionIconSize" format="enum">
+            <enum name="XLarge" value="0" />
+            <enum name="Large" value="1" />
+            <enum name="Medium" value="2" />
+            <enum name="Small" value="3" />
+            <enum name="XSmall" value="4" />
+        </attr>
+        <attr name="actionIconBackground" format="reference" />
+        <attr name="actionIconTint" format="color" />
+        <attr name="actionIconPadding" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
     </declare-styleable>
@@ -83,7 +109,7 @@
 
     </declare-styleable>
 
-    <declare-styleable name="ExchangeRates">
+    <declare-styleable name="ExchangeRatesButton">
 
     </declare-styleable>
 

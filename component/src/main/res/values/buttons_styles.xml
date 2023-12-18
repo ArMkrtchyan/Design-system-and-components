@@ -31,9 +31,15 @@
         <item name="iconTint">@color/content_primary_selector</item>
     </style>
 
+    <style name="BasePrimaryActionTextButtonStyle">
+
+    </style>
+
     <style name="Button.Style.Primary" parent="BaseButtonStyle" />
 
     <style name="Button.Style.Secondary" parent="BaseSecondaryButtonStyle" />
 
     <style name="Button.Style.Ghost" parent="BaseGhostButtonStyle" />
+
+    <style name="Button.Style.ActionText" parent="BasePrimaryActionTextButtonStyle" />
 </resources>

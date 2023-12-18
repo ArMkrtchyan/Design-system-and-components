@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.Base" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <style name="Theme.Material3.DayNight.NoActionBar" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/BrandGreen_500</item>
         <item name="colorPrimaryDark">@color/BrandGreen_600</item>
         <item name="colorAccent">@color/White</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
-
         <!-- Buttons styles -->
         <item name="primaryButtonStyle">@style/Button.Style.Primary</item>
+        <item name="primaryActionTextButtonStyle">@style/Button.Style.ActionText</item>
         <item name="primaryInputStyle">@style/Input.Style.Primary</item>
         <item name="searchInputStyle">@style/Input.Style.Search</item>
         <item name="inputEditTextStyle">@style/InputStyle</item>
@@ -22,7 +21,57 @@
         <item name="primaryRadioButtonStyle">@style/RadioButton.Primary</item>
         <item name="primaryTextViewStyle">@style/TextView.Primary</item>
         <item name="exchangeRatesStyle">@style/ExchangeRatesStyle</item>
+
+        <item name="android:windowBackground">@color/BlueGrey_50</item>
+        <item name="android:statusBarColor">@color/BlueGrey_50</item>
+
+        <!-- Backgrounds -->
+        <item name="backgroundBase">@color/BlueGrey_50</item>
+        <item name="backgroundBrand">@color/BrandGreen_500</item>
+        <item name="backgroundBrandPressed">@color/BrandGreen_600</item>
+        <item name="backgroundBrandDisable">@color/BlueGrey_200</item>
+        <item name="backgroundTonal1">@color/White</item>
+        <item name="backgroundTonal2">@color/BlueGrey_550_15</item>
+        <item name="backgroundTonal2ReadOnly">@color/BlueGrey_550_30</item>
+        <item name="backgroundTonal2Disable">@color/BlueGrey_550_10</item>
+        <item name="backgroundDanger">@color/Red_500</item>
+        <item name="backgroundSuccess">@color/Green_500</item>
+        <item name="backgroundInfo">@color/Blue_500</item>
+        <item name="backgroundWarning">@color/Orange_500</item>
+        <item name="backgroundPending">@color/BlueGrey_200</item>
+
+        <!-- Borders -->
+        <item name="borderBase">@color/BlueGrey_650</item>
+        <item name="borderPrimary">@color/BlueGrey_900</item>
+        <item name="borderBrand">@color/BrandGreen_500</item>
+        <item name="borderBrandTonal1">@color/BrandGreen_650</item>
+        <item name="borderBrandTonal1Disable">@color/BlueGrey_350</item>
+        <item name="borderSecondary">@color/White</item>
+        <item name="borderNeutral">@color/BlueGrey_150</item>
+        <item name="borderDanger">@color/Red_600</item>
+
+        <!-- Content -->
+        <item name="contentBrand">@color/BrandGreen_500</item>
+        <item name="contentBrandTonal1">@color/BrandGreen_650</item>
+        <item name="contentBrandTonal1Disable">@color/BlueGrey_350</item>
+        <item name="contentPrimary">@color/BlueGrey_900</item>
+        <item name="contentPrimaryDisable">@color/BlueGrey_600</item>
+        <item name="contentPrimaryTonal1">@color/Grey_400</item>
+        <item name="contentPrimaryTonal2">@color/Grey_100</item>
+        <item name="contentPrimaryTonal1Disable">@color/BlueGrey_550</item>
+        <item name="contentSecondary">@color/White</item>
+        <item name="contentSecondaryDisable">@color/BlueGrey_400</item>
+        <item name="contentDanger">@color/White</item>
+        <item name="contentDangerTonal1">@color/Red_600</item>
+        <item name="contentInfo">@color/White</item>
+        <item name="contentInfoTonal1">@color/Blue_600</item>
+        <item name="contentSuccess">@color/White</item>
+        <item name="contentSuccessTonal1">@color/Green_600</item>
+        <item name="contentWarning">@color/Orange_900</item>
+        <item name="contentWarningTonal1">@color/Orange_600</item>
+        <item name="contentPending">@color/BlueGrey_900</item>
     </style>
+
     <style name="BaseTextStyle">
         <item name="android:textColor">?attr/contentPrimary</item>
     </style>

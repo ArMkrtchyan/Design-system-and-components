@@ -6,7 +6,7 @@
     </style>
 
     <style name="BasePrimaryImageView">
-
+        <item name="android:tint">?attr/contentPrimaryTonal1</item>
     </style>
 
     <style name="TextView.Primary" parent="BasePrimaryTextView" />

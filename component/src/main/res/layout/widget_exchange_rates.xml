@@ -9,40 +9,44 @@
         android:id="@+id/first_rates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/background_exchange_rates_first"
         android:clickable="false"
         android:focusable="false"
         android:orientation="horizontal"
-        android:layout_marginEnd="1dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/second_rates"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/flag_for_first_rate"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_close_in_round" />
+            tools:src="@drawable/flag_usa"
+            android:tint="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/buy_amount_for_first_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/sell_amount_for_first_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
 
@@ -50,41 +54,45 @@
         android:id="@+id/second_rates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         android:background="@drawable/background_exchange_rates_second"
         android:clickable="false"
         android:focusable="false"
         android:orientation="horizontal"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/third_rates"
         app:layout_constraintStart_toEndOf="@id/first_rates"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/flag_for_second_rate"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_close_in_round" />
+            tools:src="@drawable/flag_russian"
+            android:tint="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/buy_amount_for_second_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/sell_amount_for_second_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
 
@@ -92,45 +100,49 @@
         android:id="@+id/third_rates"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="2dp"
         android:background="@drawable/background_exchange_rates_second"
         android:clickable="false"
         android:focusable="false"
         android:orientation="horizontal"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="2dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/arrow_right"
         app:layout_constraintStart_toEndOf="@id/second_rates"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/flag_for_third_rate"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_close_in_round" />
+            tools:src="@drawable/flag_usa"
+            android:tint="@null" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/buy_amount_for_third_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
 
-            <TextView
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/sell_amount_for_third_rate"
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$ 451.26" />
+                tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
+    <am.acba.component.imageView.PrimaryImageView
         android:id="@+id/arrow_right"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

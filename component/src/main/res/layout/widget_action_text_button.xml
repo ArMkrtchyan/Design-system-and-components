@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/action_icon"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/background_rounded"
+            tools:src="@drawable/ic_acba_contacts" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/badge_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="end|bottom"
+            android:background="@drawable/background_rounded_with_border"
+            android:padding="2dp"
+            android:src="@drawable/ic_success_filled"
+            android:tint="@null"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/action_text"
+        style="@style/Small.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="80dp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/action_icon"
+        tools:text="action text" />
+</LinearLayout>
