@@ -57,9 +57,7 @@
         <attr name="contentSecondaryDisable" format="color" />
         <attr name="contentDanger" format="color" />
         <attr name="contentDangerTonal1" format="color" />
-        <attr name="contentSuccess" format="color" />
         <attr name="contentSuccessTonal1" format="color" />
-        <attr name="contentInfo" format="color" />
         <attr name="contentInfoTonal1" format="color" />
         <attr name="contentWarning" format="color" />
         <attr name="contentWarningTonal1" format="color" />

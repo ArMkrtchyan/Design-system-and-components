@@ -69,23 +69,7 @@ class PrimaryActionTextButton : FrameLayout {
                     height = iconSizeEnum.badgeSize.dpToPx()
                 }
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
-                when (type) {
-                    ActionButtonType.ACTION_BUTTON -> {
-                        binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
-                    }
-
-                    else -> {
-                        binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
-                        binding.actionIcon.setBackgroundColor(ContextCompat.getColor(context, R.color.Transparent))
-                        binding.actionIcon.imageTintList = null
-                        binding.actionIcon.setPadding(0)
-                        if (type == ActionButtonType.TEXT) {
-                            MaterialTextDrawable.with(context)
-                                .text(binding.actionText.text.toString())
-                                .into(binding.actionIcon)
-                        }
-                    }
-                }
+                setType(type)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -166,10 +150,41 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setText(@StringRes stringRes: Int) {
         binding.actionText.setText(stringRes)
+        if (type == ActionButtonType.TEXT) {
+            MaterialTextDrawable.with(context)
+                .text(binding.actionText.text.toString())
+                .into(binding.actionIcon)
+        }
     }
 
     fun setText(text: String?) {
         binding.actionText.text = text
+        if (type == ActionButtonType.TEXT) {
+            MaterialTextDrawable.with(context)
+                .text(binding.actionText.text.toString())
+                .into(binding.actionIcon)
+        }
+    }
+
+    fun setType(type: ActionButtonType) {
+        this.type = type
+        when (type) {
+            ActionButtonType.ACTION_BUTTON -> {
+                binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
+            }
+
+            else -> {
+                binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
+                binding.actionIcon.setBackgroundColor(ContextCompat.getColor(context, R.color.Transparent))
+                binding.actionIcon.imageTintList = null
+                binding.actionIcon.setPadding(0)
+                if (type == ActionButtonType.TEXT) {
+                    MaterialTextDrawable.with(context)
+                        .text(binding.actionText.text.toString())
+                        .into(binding.actionIcon)
+                }
+            }
+        }
     }
 
     enum class ActionIconSize(val size: Int, val badgeSize: Int, val padding: Int) {

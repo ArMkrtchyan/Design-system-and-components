@@ -42,14 +42,14 @@ class MainActivity : AppCompatActivity() {
         }
         buttonSec.apply {
             setOnClickListener {
-                this@MainActivity.findViewById<PrimaryInput>(R.id.input).apply {
+                input.apply {
                     isErrorEnabled = false
                 }
             }
         }
         buttonPr.apply {
             setOnClickListener {
-                this@MainActivity.findViewById<PrimaryInput>(R.id.input).apply {
+                input.apply {
                     isErrorEnabled = true
                     error = "Error"
                 }
@@ -78,5 +78,6 @@ class MainActivity : AppCompatActivity() {
                 recreate()
             }
         }
+
     }
 }

@@ -12,9 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_constraintTop_toBottomOf="@id/switcher"
-        app:title="Toolbar"
-        app:titleMargin="0dp"
-        app:titleMarginStart="-20dp" />
+        app:title="Toolbar" />
 
     <am.acba.component.switcher.PrimarySwitcher
         android:id="@+id/switcher"
@@ -37,7 +35,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="100dp">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -53,15 +51,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Action button1"
+                        app:actionIcon="@drawable/ic_acba_contacts"
                         app:badgeChecked="true"
-                        app:checkable="true"
-                        app:actionIcon="@drawable/ic_acba_contacts" />
+                        app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:checkable="true"
                         app:actionIcon="@drawable/ic_acba_contacts"
+                        app:checkable="true"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -296,12 +294,14 @@
             <am.acba.component.switcher.PrimarySwitcher
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:enabled="false"
                 android:text="@string/app_name" />
 
             <am.acba.component.switcher.PrimarySwitcher
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:checked="true"
                 android:enabled="false"
                 android:text="@string/app_name" />
@@ -412,4 +412,9 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,9 +63,7 @@
         <item name="contentSecondaryDisable">@color/BlueGrey_400</item>
         <item name="contentDanger">@color/White</item>
         <item name="contentDangerTonal1">@color/Red_600</item>
-        <item name="contentInfo">@color/White</item>
         <item name="contentInfoTonal1">@color/Blue_600</item>
-        <item name="contentSuccess">@color/White</item>
         <item name="contentSuccessTonal1">@color/Green_600</item>
         <item name="contentWarning">@color/Orange_900</item>
         <item name="contentWarningTonal1">@color/Orange_600</item>

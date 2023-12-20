@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseInputStyle">
+    <style name="BaseInputStyle" parent="ThemeOverlay.Material3.TextInputEditText.FilledBox">
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:textColor">?attr/contentPrimary</item>
         <item name="android:fontFamily">@font/regular</item>
