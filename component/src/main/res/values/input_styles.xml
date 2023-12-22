@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseInputStyle" parent="ThemeOverlay.Material3.TextInputEditText.FilledBox">
+    <style name="BasePrimaryEditTextStyle" parent="ThemeOverlay.Material3.TextInputEditText.FilledBox">
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:textColor">?attr/contentPrimary</item>
         <item name="android:fontFamily">@font/regular</item>
@@ -27,7 +27,7 @@
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 
-    <style name="BaseSearchInputStyle">
+    <style name="BasePrimarySearchInputStyle">
         <item name="android:background">@drawable/background_search_input</item>
         <item name="boxBackgroundMode">filled</item>
         <item name="boxStrokeWidth">0dp</item>
@@ -42,9 +42,9 @@
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 
-    <style name="Input.Style.Search" parent="BaseSearchInputStyle" />
+    <style name="Input.Style.Search" parent="BasePrimarySearchInputStyle" />
 
     <style name="Input.Style.Primary" parent="BasePrimaryInputStyle" />
 
-    <style name="InputStyle" parent="BaseInputStyle" />
+    <style name="InputStyle" parent="BasePrimaryEditTextStyle" />
 </resources>

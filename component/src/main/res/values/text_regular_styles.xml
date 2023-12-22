@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseTextStyle.Regular" parent="BaseTextStyle">
+    <style name="BaseTextStyle.Regular" parent="BasePrimaryTextStyle">
         <item name="android:fontFamily">@font/regular</item>
     </style>
 

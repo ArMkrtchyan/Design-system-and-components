@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="BaseButtonStyle" parent="Widget.AppCompat.Button">
+    <style name="BasePrimaryButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/background_primary_brand</item>
         <item name="android:textColor">@color/content_secondary_selector</item>
         <item name="android:textAllCaps">false</item>
@@ -19,13 +19,13 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="BaseSecondaryButtonStyle" parent="BaseButtonStyle">
+    <style name="BaseSecondaryButtonStyle" parent="BasePrimaryButtonStyle">
         <item name="android:background">@drawable/background_secondary_brand</item>
         <item name="android:textColor">@color/content_primary_selector</item>
         <item name="iconTint">@color/content_primary_selector</item>
     </style>
 
-    <style name="BaseGhostButtonStyle" parent="BaseButtonStyle">
+    <style name="BaseGhostButtonStyle" parent="BasePrimaryButtonStyle">
         <item name="android:background">@drawable/background_ghost_brand</item>
         <item name="android:textColor">@color/content_primary_selector</item>
         <item name="iconTint">@color/content_primary_selector</item>
@@ -35,7 +35,7 @@
 
     </style>
 
-    <style name="Button.Style.Primary" parent="BaseButtonStyle" />
+    <style name="Button.Style.Primary" parent="BasePrimaryButtonStyle" />
 
     <style name="Button.Style.Secondary" parent="BaseSecondaryButtonStyle" />
 

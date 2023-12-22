@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ACBA.Theme.Light" parent="BaseThemeLight" />
+    <style name="ACBA.Theme.Light" parent="BasePrimaryThemeLight" />
 </resources>
