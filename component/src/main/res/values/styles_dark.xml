@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Dark" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="BaseThemDark" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/BlueGrey_1000</item>
         <item name="android:statusBarColor">@color/BlueGrey_1000</item>
 
@@ -49,4 +49,6 @@
         <item name="contentWarningTonal1">@color/Orange_500</item>
         <item name="contentPending">@color/BlueGrey_950</item>
     </style>
+
+    <style name="ACBA.Theme.Dark" parent="BaseThemDark" />
 </resources>

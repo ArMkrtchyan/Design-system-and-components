@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Material3.DayNight.NoActionBar" parent="Theme.Material3.Light.NoActionBar">
+    <style name="BaseThemeLight" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/BrandGreen_500</item>
         <item name="colorPrimaryDark">@color/BrandGreen_600</item>
         <item name="colorAccent">@color/White</item>

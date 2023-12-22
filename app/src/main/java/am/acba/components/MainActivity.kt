@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(if (darkTheme) am.acba.component.R.style.Theme_Dark else am.acba.component.R.style.Theme_Light)
+        setTheme(if (darkTheme) am.acba.component.R.style.ACBA_Theme_Dark else am.acba.component.R.style.ACBA_Theme_Light)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         binding.initView()
-
     }
 
     private fun ActivityMainBinding.initView() {
