@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="BaseTextStyle">
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
     <style name="BaseTextStyle.Bold" parent="BaseTextStyle">
         <item name="android:fontFamily">@font/bold</item>
     </style>

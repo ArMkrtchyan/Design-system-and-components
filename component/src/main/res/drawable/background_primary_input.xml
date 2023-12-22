@@ -13,7 +13,7 @@
             <solid android:color="?attr/backgroundTonal2" />
         </shape>
     </item>
-    <item android:state_enabled="false" >
+    <item android:state_enabled="false">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/radius_12" />
             <solid android:color="?attr/backgroundTonal2" />

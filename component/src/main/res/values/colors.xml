@@ -47,13 +47,12 @@
     <color name="BlueGrey_850_60">#992E313C</color>
     <color name="BlueGrey_850_70">#B32E313C</color>
     <color name="BlueGrey_900">#23272E</color>
-    <color name="BlueGrey_950">#1B1E24</color>
+    <color name="BlueGrey_950">#1E2129</color>
     <color name="BlueGrey_1000">#14161A</color>
 
     <color name="Red_500">#C95155</color>
     <color name="Red_600">#9E4245</color>
     <color name="Red_900">#281011</color>
-
 
 
 </resources>

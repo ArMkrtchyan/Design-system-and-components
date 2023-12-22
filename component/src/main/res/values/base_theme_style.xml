@@ -5,9 +5,13 @@
         <item name="colorPrimary">@color/BrandGreen_500</item>
         <item name="colorPrimaryDark">@color/BrandGreen_600</item>
         <item name="colorAccent">@color/White</item>
+
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:windowBackground">@color/BlueGrey_50</item>
+        <item name="android:statusBarColor">@color/BlueGrey_50</item>
+
         <!-- Buttons styles -->
         <item name="primaryButtonStyle">@style/Button.Style.Primary</item>
         <item name="primaryActionTextButtonStyle">@style/Button.Style.ActionText</item>
@@ -21,9 +25,6 @@
         <item name="primaryRadioButtonStyle">@style/RadioButton.Primary</item>
         <item name="primaryTextViewStyle">@style/TextView.Primary</item>
         <item name="exchangeRatesStyle">@style/ExchangeRatesStyle</item>
-
-        <item name="android:windowBackground">@color/BlueGrey_50</item>
-        <item name="android:statusBarColor">@color/BlueGrey_50</item>
 
         <!-- Backgrounds -->
         <item name="backgroundBase">@color/BlueGrey_50</item>
@@ -68,9 +69,5 @@
         <item name="contentWarning">@color/Orange_900</item>
         <item name="contentWarningTonal1">@color/Orange_600</item>
         <item name="contentPending">@color/BlueGrey_900</item>
-    </style>
-
-    <style name="BaseTextStyle">
-        <item name="android:textColor">?attr/contentPrimary</item>
     </style>
 </resources>

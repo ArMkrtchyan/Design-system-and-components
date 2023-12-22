@@ -76,8 +76,8 @@ open class PrimaryInput : TextInputLayout {
         val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
         endIcon.background = ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
         endIcon.updateLayoutParams<FrameLayout.LayoutParams> {
-            updateMarginsRelative(0,0,0,0)
-            updateMargins(0,0,0,0)
+            updateMarginsRelative(0, 0, 0, 0)
+            updateMargins(0, 0, 0, 0)
         }
     }
 
@@ -85,8 +85,8 @@ open class PrimaryInput : TextInputLayout {
         val startIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
         startIcon.background = ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
         startIcon.updateLayoutParams<LayoutParams> {
-            updateMarginsRelative(0,0,0,0)
-            updateMargins(0,0,0,0)
+            updateMarginsRelative(0, 0, 0, 0)
+            updateMargins(0, 0, 0, 0)
         }
     }
 }

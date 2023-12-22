@@ -1,9 +1,6 @@
 package am.acba.component.extensions
 
-import android.content.Context
 import android.content.res.Resources
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import kotlin.math.roundToInt
 
 

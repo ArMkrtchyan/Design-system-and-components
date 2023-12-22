@@ -4,7 +4,6 @@ import am.acba.component.PreventDoubleClickListener
 import am.acba.component.R
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.button.MaterialButton
 
 class PrimaryButton : MaterialButton {
