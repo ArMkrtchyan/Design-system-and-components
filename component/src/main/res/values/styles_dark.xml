@@ -14,6 +14,7 @@
         <item name="backgroundTonal2">@color/BlueGrey_850_70</item>
         <item name="backgroundTonal2ReadOnly">@color/BlueGrey_850</item>
         <item name="backgroundTonal2Disable">@color/BlueGrey_850_30</item>
+        <item name="backgroundTonal3">@color/BlueGrey_850</item>
         <item name="backgroundDanger">@color/Red_500</item>
         <item name="backgroundSuccess">@color/Green_500</item>
         <item name="backgroundInfo">@color/Blue_500</item>
