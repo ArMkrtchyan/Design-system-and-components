@@ -18,6 +18,7 @@
         <attr name="primaryImageViewStyle" format="reference" />
         <attr name="primaryRadioButtonStyle" format="reference" />
         <attr name="primaryTextViewStyle" format="reference" />
+        <attr name="pinInputStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
@@ -133,4 +134,9 @@
     <declare-styleable name="PrimaryImageView">
         <attr name="isPreventClick" />
     </declare-styleable>
+
+    <declare-styleable name="PinInput">
+
+    </declare-styleable>
+
 </resources>

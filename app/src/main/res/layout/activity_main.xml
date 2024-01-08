@@ -408,6 +408,13 @@
                 android:text="Ghost button disabled"
                 app:icon="@drawable/default_icon" />
 
+            <am.acba.component.input.PinInput
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                style="@style/PinInputStyle"/>
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
