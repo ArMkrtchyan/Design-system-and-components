@@ -42,6 +42,12 @@
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 
+    <style name="BasePinInputStyle">
+
+    </style>
+
+    <style name="PinInputStyle" parent="BasePinInputStyle" />
+
     <style name="Input.Style.Search" parent="BasePrimarySearchInputStyle" />
 
     <style name="Input.Style.Primary" parent="BasePrimaryInputStyle" />

@@ -36,6 +36,7 @@
         <attr name="primaryImageViewStyle" format="reference" />
         <attr name="primaryRadioButtonStyle" format="reference" />
         <attr name="primaryTextViewStyle" format="reference" />
+        <attr name="pinInputStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
@@ -331,4 +332,9 @@
         <attr name="badgePaddingEnd" />
         <attr name="showBadge" />
     </declare-styleable>
+
+    <declare-styleable name="PinInput">
+
+    </declare-styleable>
+
 </resources>
