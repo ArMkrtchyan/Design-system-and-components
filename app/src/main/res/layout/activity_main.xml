@@ -415,12 +415,12 @@
                 android:focusable="true"
                 android:clickable="true"
                 android:layout_marginTop="20dp"/>
-            <Button
+            <am.acba.component.button.PrimaryButton
                 android:id="@+id/btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="add"/>
-            <Button
+            <am.acba.component.button.PrimaryButton
                 android:id="@+id/btnDel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
