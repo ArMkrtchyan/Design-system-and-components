@@ -50,7 +50,7 @@
         <item name="android:paddingBottom">@dimen/spacing_8</item>
         <item name="android:height">@dimen/spacing_60</item>
         <item name="android:width">@dimen/spacing_48</item>
-        <item name="android:layout_marginStart">@dimen/spacing_4</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_4</item>
         <item name="android:gravity">center</item>
     </style>
 
