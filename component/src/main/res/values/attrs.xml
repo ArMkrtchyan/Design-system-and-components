@@ -18,7 +18,6 @@
         <attr name="primaryImageViewStyle" format="reference" />
         <attr name="primaryRadioButtonStyle" format="reference" />
         <attr name="primaryTextViewStyle" format="reference" />
-        <attr name="pinInputStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />

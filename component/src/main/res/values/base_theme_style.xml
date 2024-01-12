@@ -25,7 +25,6 @@
         <item name="primaryRadioButtonStyle">@style/RadioButton.Primary</item>
         <item name="primaryTextViewStyle">@style/TextView.Primary</item>
         <item name="exchangeRatesStyle">@style/ExchangeRatesStyle</item>
-        <item name="pinInputStyle">@style/PinInputStyle</item>
 
         <!-- Backgrounds -->
         <item name="backgroundBase">@color/BlueGrey_50</item>

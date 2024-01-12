@@ -409,10 +409,23 @@
                 app:icon="@drawable/default_icon" />
 
             <am.acba.component.input.PinInput
-                android:layout_width="match_parent"
+                android:id="@+id/pinInput"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                style="@style/PinInputStyle"/>
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="add"/>
+            <Button
+                android:id="@+id/btnDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="delete"/>
+
 
 
         </LinearLayout>
