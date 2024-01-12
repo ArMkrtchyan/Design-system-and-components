@@ -408,6 +408,26 @@
                 android:text="Ghost button disabled"
                 app:icon="@drawable/default_icon" />
 
+            <am.acba.component.input.PinInput
+                android:id="@+id/pinInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_marginTop="20dp"/>
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="add"/>
+            <Button
+                android:id="@+id/btnDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="delete"/>
+
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

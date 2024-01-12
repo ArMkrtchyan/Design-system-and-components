@@ -71,6 +71,18 @@ class MainActivity : AppCompatActivity() {
             val rates = Triple(firstRate, secondRate, thirdRate)
             setExchangeRates(rates)
         }
+
+        pinInput.apply {
+            btn.setOnClickListener{
+                setError( true, "Error text")
+            }
+            btnDel.setOnClickListener {
+                setError( false)
+            }
+
+        }
+
+
         switcher.setOnCheckedChangeListener { buttonView, isChecked ->
             if (buttonView.isPressed) {
                 darkTheme = isChecked

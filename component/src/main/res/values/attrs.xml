@@ -133,4 +133,9 @@
     <declare-styleable name="PrimaryImageView">
         <attr name="isPreventClick" />
     </declare-styleable>
+
+    <declare-styleable name="PinInput">
+
+    </declare-styleable>
+
 </resources>
