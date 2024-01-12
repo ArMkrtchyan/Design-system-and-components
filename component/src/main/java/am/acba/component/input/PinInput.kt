@@ -14,6 +14,14 @@ import androidx.core.content.ContextCompat
 
 class PinInput : FrameLayout {
 
+    private val binding by lazy { WidgetPinInputBinding.inflate(context.inflater(), this, false) }
+    private val errorTextView: TextView = binding.errorText
+    private val pinItemBackground =
+        ContextCompat.getDrawable(context, R.drawable.background_pin_input)
+    private val pinItemErrorBackground =
+        ContextCompat.getDrawable(context, R.drawable.background_error_input)
+    private val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
+
     constructor(context: Context) : super(context, null)
 
     constructor(context: Context, attrs: AttributeSet) : super(
@@ -30,17 +38,25 @@ class PinInput : FrameLayout {
     ) {
         init(attrs)
     }
-    private val binding by lazy { WidgetPinInputBinding.inflate(context.inflater(), this, false) }
 
+
+    @SuppressLint("UseCompatTextViewDrawableApis")
     private fun init(attrs: AttributeSet) {
-
         context.obtainStyledAttributes(attrs, R.styleable.PinInput).apply {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
             addView(binding.root, layoutParams)
             recycle()
             invalidate()
-
         }
+        errorTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            errorIcon,
+            null,
+            null,
+            null
+        )
+        errorTextView.compoundDrawablePadding = 4.dpToPx()
+        errorTextView.compoundDrawableTintList =
+            context.getColorStateListFromAttr(R.attr.borderDanger)
     }
 
     private fun setUiPinAsterisk(pinCount: String) {
@@ -75,45 +91,20 @@ class PinInput : FrameLayout {
         }
     }
 
-    @SuppressLint("UseCompatTextViewDrawableApis")
     fun setError(errorEnabled: Boolean, message: String = "") {
-        val errorTextView: TextView = binding.errorText
+        binding.errorText.text = message
         if (errorEnabled) {
-
-            binding.box1.background =
-                ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            binding.box1.background =
-                ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            binding.box2.background =
-                ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            binding.box3.background =
-                ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            binding.box4.background =
-                ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            binding.errorText.text = message
-            val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
-            errorTextView.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                errorIcon,
-                null,
-                null,
-                null
-            )
-            errorTextView.compoundDrawablePadding = 4.dpToPx()
-            errorTextView.compoundDrawableTintList =
-                context.getColorStateListFromAttr(R.attr.borderDanger)
+            binding.box1.background = pinItemErrorBackground
+            binding.box2.background = pinItemErrorBackground
+            binding.box3.background = pinItemErrorBackground
+            binding.box4.background = pinItemErrorBackground
             errorTextView.animate().alpha(1.0f).setDuration(200)
         } else {
-            binding.box1.background =
-                ContextCompat.getDrawable(context, R.drawable.background_pin_input)
-            binding.box2.background =
-                ContextCompat.getDrawable(context, R.drawable.background_pin_input)
-            binding.box3.background =
-                ContextCompat.getDrawable(context, R.drawable.background_pin_input)
-            binding.box4.background =
-                ContextCompat.getDrawable(context, R.drawable.background_pin_input)
+            binding.box1.background = pinItemBackground
+            binding.box2.background = pinItemBackground
+            binding.box3.background = pinItemBackground
+            binding.box4.background = pinItemBackground
             errorTextView.animate().alpha(0.0f).setDuration(200)
-
         }
     }
-
 }
