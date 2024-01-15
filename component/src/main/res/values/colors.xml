@@ -4,21 +4,26 @@
     <color name="Black">#000000</color>
     <color name="Transparent">#00000000</color>
 
-    <color name="BrandGreen_150">#B3E4DB</color>
+    <color name="BrandGreen_200">#B3E4DB</color>
     <color name="BrandGreen_400">#33BBA0</color>
     <color name="BrandGreen_450">#19AF94</color>
     <color name="BrandGreen_500">#00A688</color>
+    <color name="BrandGreen_550">#00957A</color>
     <color name="BrandGreen_600">#00856D</color>
     <color name="BrandGreen_650">#00745F</color>
 
     <color name="Green_500">#38A96C</color>
     <color name="Green_600">#2D8756</color>
 
+    <color name="Blue_200">#AED9FA</color>
     <color name="Blue_500">#349FF3</color>
     <color name="Blue_600">#2A7FC2</color>
+    <color name="Blue_700">#1F5F92</color>
 
+    <color name="Orange_200_40">#66F6CE51</color>
     <color name="Orange_500">#F6CE51</color>
     <color name="Orange_600">#CBA941</color>
+    <color name="Orange_800_40">#66746022</color>
     <color name="Orange_900">#493C12</color>
 
     <color name="Grey_100">#BEBFC3</color>
@@ -47,12 +52,25 @@
     <color name="BlueGrey_850_60">#992E313C</color>
     <color name="BlueGrey_850_70">#B32E313C</color>
     <color name="BlueGrey_900">#23272E</color>
-    <color name="BlueGrey_950">#1E2129</color>
+    <color name="BlueGrey_950">#1B1E24</color>
     <color name="BlueGrey_1000">#14161A</color>
 
+    <color name="Red_200_40">#66E8BABB</color>
     <color name="Red_500">#C95155</color>
     <color name="Red_600">#9E4245</color>
     <color name="Red_900">#281011</color>
+    <color name="Red_800_40">#664F2122</color>
+
+    <color name="AztecPurple_200">#C7B6FF</color>
+    <color name="AztecPurple_700">#492CA6</color>
+    <color name="Purple_200">#DACAFF</color>
+    <color name="Purple_700">#6C49B9</color>
+
+    <color name="Yellow_200">#FDDFB3</color>
+    <color name="Yellow_700">#9D6D26</color>
+
+    <color name="Orchid_200">#F1C3E9</color>
+    <color name="Orchid_700">#8E4081</color>
 
 
 </resources>

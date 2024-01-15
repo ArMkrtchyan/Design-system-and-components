@@ -105,7 +105,7 @@ class MaterialTextDrawable private constructor(builder: Builder) {
         bounds.left += (areaRectangle.width() - bounds.right) / 2.0f
         bounds.top += (areaRectangle.height() - bounds.bottom) / 2.0f
 
-        painter.color = ContextCompat.getColor(context, R.color.BrandGreen_150)
+        painter.color = ContextCompat.getColor(context, R.color.BrandGreen_200)
         canvas.drawCircle(size.toFloat() / 2, size.toFloat() / 2, size.toFloat() / 2, painter)
         canvas.drawText(initials, bounds.left, bounds.top - textPaint.ascent(), textPaint)
         return BitmapDrawable(context.resources, bitmap)
