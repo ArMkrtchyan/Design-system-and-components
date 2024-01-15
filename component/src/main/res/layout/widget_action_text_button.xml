@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@drawable/background_rounded"
-            tools:src="@drawable/ic_acba_contacts" />
+            tools:src="@drawable/ic_contacts" />
 
         <am.acba.component.imageView.PrimaryImageView
             android:id="@+id/badge_icon"

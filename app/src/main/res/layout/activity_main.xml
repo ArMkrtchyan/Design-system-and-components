@@ -51,14 +51,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Action button1"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:badgeChecked="true"
                         app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:checkable="true"
                         app:showActionText="false" />
 
@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Large"
                         app:showActionText="false" />
 
@@ -74,7 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Medium"
                         app:showActionText="false" />
 
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Small"
                         app:showActionText="false" />
 
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:actionIcon="@drawable/ic_acba_contacts"
+                        app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="XSmall"
                         app:showActionText="false" />
 
@@ -286,6 +286,11 @@
                 android:enabled="false"
                 android:text="@string/app_name" />
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                style="@style/Widget.Material3.CompoundButton.MaterialSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <am.acba.component.switcher.PrimarySwitcher
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -318,12 +323,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
-                android:hint="@string/app_name"
-                app:counterEnabled="true"
-                app:counterMaxLength="1000"
-                app:endIconDrawable="@drawable/ic_add"
-                app:helperText="Helper text"
-                app:startIconDrawable="@drawable/ic_add" />
+                android:hint="@string/app_name" />
 
             <am.acba.component.input.SearchInput
                 android:id="@+id/search"
@@ -408,6 +408,9 @@
                 android:text="Ghost button disabled"
                 app:icon="@drawable/default_icon" />
 
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
