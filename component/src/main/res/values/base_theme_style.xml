@@ -37,10 +37,17 @@
         <item name="backgroundTonal2Disable">@color/BlueGrey_550_10</item>
         <item name="backgroundTonal3">@color/BlueGrey_150</item>
         <item name="backgroundDanger">@color/Red_500</item>
+        <item name="backgroundDangerTonal1">@color/Red_200_40</item>
         <item name="backgroundSuccess">@color/Green_500</item>
         <item name="backgroundInfo">@color/Blue_500</item>
         <item name="backgroundWarning">@color/Orange_500</item>
         <item name="backgroundPending">@color/BlueGrey_200</item>
+        <item name="backgroundAlternative">@color/Purple_200</item>
+        <item name="backgroundAlternative2">@color/Yellow_200</item>
+        <item name="backgroundAlternative3">@color/AztecPurple_200</item>
+        <item name="backgroundAlternative4">@color/Orchid_200</item>
+        <item name="backgroundAlternative5">@color/BrandGreen_200</item>
+        <item name="backgroundAlternative6">@color/Blue_200</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>
@@ -70,5 +77,11 @@
         <item name="contentWarning">@color/Orange_900</item>
         <item name="contentWarningTonal1">@color/Orange_600</item>
         <item name="contentPending">@color/BlueGrey_900</item>
+        <item name="contentAlternative">@color/Purple_700</item>
+        <item name="contentAlternative2">@color/Yellow_700</item>
+        <item name="contentAlternative3">@color/AztecPurple_700</item>
+        <item name="contentAlternative4">@color/Orchid_700</item>
+        <item name="contentAlternative5">@color/BrandGreen_550</item>
+        <item name="contentAlternative6">@color/Blue_700</item>
     </style>
 </resources>
