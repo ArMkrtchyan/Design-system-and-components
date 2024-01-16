@@ -74,6 +74,8 @@ class PrimaryActionTextButton : FrameLayout {
                     height = iconSizeEnum.badgeSize.dpToPx()
                 }
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
+                val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_android_textAppearance, R.style.Button_Style_Text)
+                binding.actionText.setTextAppearance(textStyle)
                 setType(type)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -148,6 +150,7 @@ class PrimaryActionTextButton : FrameLayout {
     fun setIconBackground(iconDrawable: Drawable?) {
         binding.actionIcon.background = iconDrawable
     }
+
     fun setIconTint(colorStateList: ColorStateList?) {
         binding.actionIcon.imageTintList = colorStateList
     }

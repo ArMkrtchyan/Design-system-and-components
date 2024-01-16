@@ -40,7 +40,6 @@
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/action_text"
-        style="@style/Button.Style.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

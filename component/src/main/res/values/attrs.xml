@@ -87,6 +87,7 @@
         <attr name="clickInterval" />
         <attr name="isPreventClick" />
         <attr name="android:text" />
+        <attr name="android:textAppearance" />
         <attr name="actionButtonType" format="enum">
             <enum name="ActionButton" value="0" />
             <enum name="Avatar" value="1" />
