@@ -35,6 +35,10 @@
 
     </style>
 
+    <style name="BasePrimaryActionTextStyle" parent="Small.Regular">
+
+    </style>
+
     <style name="Button.Style.Primary" parent="BasePrimaryButtonStyle" />
 
     <style name="Button.Style.Secondary" parent="BaseSecondaryButtonStyle" />
@@ -42,4 +46,6 @@
     <style name="Button.Style.Ghost" parent="BaseGhostButtonStyle" />
 
     <style name="Button.Style.ActionText" parent="BasePrimaryActionTextButtonStyle" />
+
+    <style name="Button.Style.Text" parent="BasePrimaryActionTextStyle" />
 </resources>
