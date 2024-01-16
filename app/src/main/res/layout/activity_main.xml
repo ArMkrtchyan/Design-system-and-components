@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:text="Action button1"
                         app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconTint="?attr/contentBrand"
                         app:badgeChecked="true"
                         app:checkable="true" />
 

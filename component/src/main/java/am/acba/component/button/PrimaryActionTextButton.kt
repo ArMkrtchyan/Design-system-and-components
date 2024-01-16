@@ -9,6 +9,7 @@ import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.MaterialTextDrawable
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View.OnClickListener
@@ -58,8 +59,12 @@ class PrimaryActionTextButton : FrameLayout {
                 val background =
                     getDrawable(R.styleable.PrimaryActionTextButton_actionIconBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_rounded)
                 setIconBackground(background)
+                val tint =
+                    getColorStateList(R.styleable.PrimaryActionTextButton_actionIconTint)
+                if (tint != null) setIconTint(tint)
                 val iconSizeEnum = getInt(R.styleable.PrimaryActionTextButton_actionIconSize, 0).findSizeByOrdinal() ?: ActionIconSize.XLAGRE
                 setIconPadding(getDimension(R.styleable.PrimaryActionTextButton_actionIconPadding, iconSizeEnum.padding.dpToPx().toFloat()).toInt())
+
                 binding.actionIcon.updateLayoutParams<LayoutParams> {
                     width = iconSizeEnum.size.dpToPx()
                     height = iconSizeEnum.size.dpToPx()
@@ -142,6 +147,9 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setIconBackground(iconDrawable: Drawable?) {
         binding.actionIcon.background = iconDrawable
+    }
+    fun setIconTint(colorStateList: ColorStateList?) {
+        binding.actionIcon.imageTintList = colorStateList
     }
 
     fun setIconPadding(padding: Int) {
