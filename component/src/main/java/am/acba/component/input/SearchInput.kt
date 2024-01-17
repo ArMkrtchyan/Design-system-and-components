@@ -1,7 +1,6 @@
 package am.acba.component.input
 
 import am.acba.component.R
-import am.acba.component.extensions.dpToPx
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -36,26 +35,9 @@ class SearchInput : PrimaryInput {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            handleFocusForStartIcon()
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             recycle()
-        }
-    }
-
-    private fun handleFocusForStartIcon() {
-        editText?.setOnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus && editText?.text.isNullOrEmpty()) {
-                setStartIconDrawable(R.drawable.ic_search)
-                editText?.updateLayoutParams<FrameLayout.LayoutParams> { setPadding(0, paddingTop, paddingEnd, paddingBottom) }
-            } else {
-                if (withBackIcon) {
-                    setStartIconDrawable(R.drawable.ic_back)
-                } else {
-                    setStartIconDrawable(null)
-                    editText?.updateLayoutParams<FrameLayout.LayoutParams> { setPadding(12.dpToPx(), paddingTop, paddingEnd, paddingBottom) }
-                }
-            }
         }
     }
 

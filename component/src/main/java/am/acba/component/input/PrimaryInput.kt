@@ -89,4 +89,12 @@ open class PrimaryInput : TextInputLayout {
             updateMargins(0, 0, 0, 0)
         }
     }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        if (l != null) {
+            editText?.isFocusable = false
+            editText?.isClickable = true
+        }
+        editText?.setOnClickListener(l)
+    }
 }

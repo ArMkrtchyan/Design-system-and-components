@@ -77,6 +77,6 @@ class MainActivity : AppCompatActivity() {
                 recreate()
             }
         }
-
+        search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
     }
 }
