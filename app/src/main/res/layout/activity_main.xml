@@ -193,10 +193,12 @@
                         android:layout_height="wrap_content"
                         android:text="Աննա Հովսեփյան"
                         app:actionButtonType="Text"
-                        app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XLarge"
-                        app:checkable="true"
-                        app:showActionText="false" />
+                        app:badgeIcon="@drawable/ic_burger_menu"
+                        app:badgeIconGravity="Top"
+                        app:showActionText="false"
+                        app:textDrawableBackgroundColor="@color/BrandGreen_400"
+                        app:textDrawableColor="@color/BrandGreen_650" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"

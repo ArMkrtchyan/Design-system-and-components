@@ -30,6 +30,8 @@ class MaterialTextDrawable private constructor(builder: Builder) {
 
 
     private var context: Context
+    private var textColor: Int
+    private var backgroundColor: Int
     private var size: Int
     private var text: String
 
@@ -37,12 +39,16 @@ class MaterialTextDrawable private constructor(builder: Builder) {
         this.context = builder.context
         this.size = builder.size
         this.text = builder.text
+        this.textColor = builder.textColor ?: ContextCompat.getColor(builder.context, R.color.BrandGreen_650)
+        this.backgroundColor = builder.backgroundColor ?: ContextCompat.getColor(builder.context, R.color.BrandGreen_200)
     }
 
     class Builder {
 
         internal lateinit var context: Context
         internal var size = 56.dpToPx()
+        internal var textColor: Int? = null
+        internal var backgroundColor: Int? = null
         internal var text: String = ""
 
         fun with(context: Context): Builder {
@@ -52,6 +58,16 @@ class MaterialTextDrawable private constructor(builder: Builder) {
 
         fun textSize(size: Int): Builder {
             this.size = size
+            return this
+        }
+
+        fun textColor(textColor: Int): Builder {
+            this.textColor = textColor
+            return this
+        }
+
+        fun textBackgroundColor(backgroundColor: Int): Builder {
+            this.backgroundColor = backgroundColor
             return this
         }
 
@@ -105,7 +121,7 @@ class MaterialTextDrawable private constructor(builder: Builder) {
         bounds.left += (areaRectangle.width() - bounds.right) / 2.0f
         bounds.top += (areaRectangle.height() - bounds.bottom) / 2.0f
 
-        painter.color = ContextCompat.getColor(context, R.color.BrandGreen_200)
+        painter.color = backgroundColor
         canvas.drawCircle(size.toFloat() / 2, size.toFloat() / 2, size.toFloat() / 2, painter)
         canvas.drawText(initials, bounds.left, bounds.top - textPaint.ascent(), textPaint)
         return BitmapDrawable(context.resources, bitmap)
@@ -126,7 +142,7 @@ class MaterialTextDrawable private constructor(builder: Builder) {
         val textPaint = TextPaint()
         textPaint.isAntiAlias = true
         textPaint.textSize = 20.dpToPx().toFloat()
-        textPaint.color = ContextCompat.getColor(context, R.color.BrandGreen_650)
+        textPaint.color = textColor
         return textPaint
     }
 }

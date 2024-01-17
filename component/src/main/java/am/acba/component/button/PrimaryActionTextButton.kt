@@ -12,6 +12,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
@@ -28,6 +29,9 @@ class PrimaryActionTextButton : FrameLayout {
     private var checkable = false
     private var clickInterval = 1000
     private var type = ActionButtonType.ACTION_BUTTON
+    private var textDrawableBackgroundColor: Int = 0
+    private var textDrawableColor: Int = 0
+    private var badgeIconGravity: Int = 0
     private val binding by lazy { WidgetActionTextButtonBinding.inflate(context.inflater(), this, false) }
 
     constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle)
@@ -49,6 +53,16 @@ class PrimaryActionTextButton : FrameLayout {
                 clickInterval = getInt(R.styleable.PrimaryActionTextButton_clickInterval, 1000)
 
                 type = getInt(R.styleable.PrimaryActionTextButton_actionButtonType, 0).findTypeByOrdinal() ?: ActionButtonType.ACTION_BUTTON
+                badgeIconGravity = getInt(R.styleable.PrimaryActionTextButton_badgeIconGravity, 0)
+                binding.badgeIcon.updateLayoutParams<FrameLayout.LayoutParams> {
+                    gravity = when (badgeIconGravity) {
+                        1 -> Gravity.TOP or Gravity.END
+                        else -> Gravity.BOTTOM or Gravity.END
+                    }
+                }
+                textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
+                textDrawableBackgroundColor =
+                    getColor(R.styleable.PrimaryActionTextButton_textDrawableBackgroundColor, ContextCompat.getColor(context, R.color.BrandGreen_200))
 
                 setBadgeCheckable(getBoolean(R.styleable.PrimaryActionTextButton_checkable, false))
                 setBadgeChecked(getBoolean(R.styleable.PrimaryActionTextButton_badgeChecked, false))
@@ -172,6 +186,8 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionText.text = text
         if (type == ActionButtonType.TEXT) {
             MaterialTextDrawable.with(context)
+                .textColor(textDrawableColor)
+                .textBackgroundColor(textDrawableBackgroundColor)
                 .text(binding.actionText.text.toString())
                 .into(binding.actionIcon)
         }
@@ -191,6 +207,8 @@ class PrimaryActionTextButton : FrameLayout {
                 binding.actionIcon.setPadding(0)
                 if (type == ActionButtonType.TEXT) {
                     MaterialTextDrawable.with(context)
+                        .textColor(textDrawableColor)
+                        .textBackgroundColor(textDrawableBackgroundColor)
                         .text(binding.actionText.text.toString())
                         .into(binding.actionIcon)
                 }
