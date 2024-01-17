@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
+import androidx.core.widget.TextViewCompat
 
 class PrimaryActionTextButton : FrameLayout {
     var isChecked = false
@@ -88,8 +89,8 @@ class PrimaryActionTextButton : FrameLayout {
                     height = iconSizeEnum.badgeSize.dpToPx()
                 }
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
-                val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_android_textAppearance, R.style.Button_Style_Text)
-                binding.actionText.setTextAppearance(textStyle)
+                val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
+                TextViewCompat.setTextAppearance(binding.actionText, textStyle)
                 setType(type)
             } catch (e: Exception) {
                 e.printStackTrace()
