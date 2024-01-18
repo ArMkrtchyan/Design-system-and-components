@@ -48,6 +48,7 @@
         <item name="backgroundAlternative4">@color/Orchid_200</item>
         <item name="backgroundAlternative5">@color/BrandGreen_200</item>
         <item name="backgroundAlternative6">@color/Blue_200</item>
+        <item name="backgroundInverse">@color/BlueGrey_300</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>
@@ -58,6 +59,7 @@
         <item name="borderSecondary">@color/White</item>
         <item name="borderNeutral">@color/BlueGrey_150</item>
         <item name="borderDanger">@color/Red_600</item>
+        <item name="borderPrimaryTonal1">@color/BlueGrey_250</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
