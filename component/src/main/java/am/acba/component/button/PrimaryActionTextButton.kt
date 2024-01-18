@@ -2,6 +2,8 @@ package am.acba.component.button
 
 import am.acba.component.PreventDoubleClickListener
 import am.acba.component.R
+import am.acba.component.badge.PrimaryBadge
+import am.acba.component.badge.PrimaryBadge.BadgeType.Companion.findBadgeTypeByOrdinal
 import am.acba.component.button.PrimaryActionTextButton.ActionButtonType.Companion.findTypeByOrdinal
 import am.acba.component.button.PrimaryActionTextButton.ActionIconSize.Companion.findSizeByOrdinal
 import am.acba.component.databinding.WidgetActionTextButtonBinding
@@ -24,6 +26,14 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
 
 class PrimaryActionTextButton : FrameLayout {
+
+    private lateinit var badgeType: PrimaryBadge.BadgeType
+    private var textColor: Int = 0
+    private var text: String? = null
+    private var icon: Drawable? = null
+    private var iconTint: ColorStateList? = null
+    private var backgroundTint: ColorStateList? = null
+
     var isChecked = false
     private var isPreventDoubleClick = true
     private var showActionText = true
@@ -61,14 +71,29 @@ class PrimaryActionTextButton : FrameLayout {
                         else -> Gravity.BOTTOM or Gravity.END
                     }
                 }
+
+                text = getString(R.styleable.PrimaryActionTextButton_badgeText)
+                textColor = getColor(R.styleable.PrimaryActionTextButton_badgeTextColor, ContextCompat.getColor(context, R.color.White))
+                icon = getDrawable(R.styleable.PrimaryActionTextButton_badgeIcon)
+                iconTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeIconTint)
+                backgroundTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeBackgroundTint)
+                badgeType = getInt(R.styleable.PrimaryActionTextButton_badgeType, 0).findBadgeTypeByOrdinal() ?: PrimaryBadge.BadgeType.DOT
+                binding.badgeIcon.isVisible = getBoolean(R.styleable.PrimaryActionTextButton_showBadge, false)
+                binding.badgeIcon.setBadgeIcon(icon)
+                binding.badgeIcon.setBadgeText(text)
+                binding.badgeIcon.setBadgeTextColor(textColor)
+                binding.badgeIcon.setBadgeIconTint(iconTint)
+                binding.badgeIcon.setBadgeBackgroundTint(backgroundTint)
+                binding.badgeIcon.setBadgeType(badgeType)
+                binding.badgeIcon.updateBadge()
+
+
                 textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
                 textDrawableBackgroundColor =
                     getColor(R.styleable.PrimaryActionTextButton_textDrawableBackgroundColor, ContextCompat.getColor(context, R.color.BrandGreen_200))
 
                 setBadgeCheckable(getBoolean(R.styleable.PrimaryActionTextButton_checkable, false))
                 setBadgeChecked(getBoolean(R.styleable.PrimaryActionTextButton_badgeChecked, false))
-                val badgeIcon = getDrawable(R.styleable.PrimaryActionTextButton_badgeIcon)
-                setBadgeIcon(badgeIcon)
 
                 setIcon(getDrawable(R.styleable.PrimaryActionTextButton_actionIcon))
                 val background =
@@ -84,10 +109,6 @@ class PrimaryActionTextButton : FrameLayout {
                     width = iconSizeEnum.size.dpToPx()
                     height = iconSizeEnum.size.dpToPx()
                 }
-                binding.badgeIcon.updateLayoutParams<LayoutParams> {
-                    width = iconSizeEnum.badgeSize.dpToPx()
-                    height = iconSizeEnum.badgeSize.dpToPx()
-                }
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
@@ -98,6 +119,10 @@ class PrimaryActionTextButton : FrameLayout {
             recycle()
             invalidate()
         }
+    }
+
+    fun getBadge(): PrimaryBadge {
+        return binding.badgeIcon
     }
 
     override fun setOnClickListener(onClickListener: OnClickListener?) {
@@ -120,24 +145,10 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    fun setBadgeIcon(@DrawableRes iconRes: Int) {
-        if (!checkable) {
-            binding.badgeIcon.setImageResource(iconRes)
-            binding.badgeIcon.isVisible = true
-        }
-    }
-
-    fun setBadgeIcon(iconDrawable: Drawable?) {
-        if (!checkable) {
-            binding.badgeIcon.setImageDrawable(iconDrawable)
-            binding.badgeIcon.isVisible = iconDrawable != null
-        }
-    }
-
     fun setBadgeCheckable(isCheckable: Boolean) {
         checkable = isCheckable
         if (checkable) {
-            binding.badgeIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_success_filled))
+            binding.badgeIcon.setBadgeIcon(ContextCompat.getDrawable(context, R.drawable.ic_success_filled))
             setOnClickListener(null)
             binding.badgeIcon.isVisible = isChecked
         }

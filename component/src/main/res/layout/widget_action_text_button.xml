@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/action_icon_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
@@ -23,15 +24,11 @@
             tools:background="@drawable/background_rounded"
             tools:src="@drawable/ic_contacts" />
 
-        <am.acba.component.imageView.PrimaryImageView
+        <am.acba.component.badge.PrimaryBadge
             android:id="@+id/badge_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:background="@drawable/background_rounded_with_border"
-            android:padding="2dp"
-            android:src="@drawable/ic_success_filled"
-            android:tint="@null"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +38,8 @@
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/action_text"
         android:layout_width="match_parent"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:gravity="center"

@@ -3,6 +3,18 @@
 
     <attr name="isPreventClick" format="boolean" />
     <attr name="clickInterval" format="integer" />
+    <attr name="badgeText" format="string" />
+    <attr name="badgeTextColor" format="color" />
+    <attr name="badgeIcon" format="reference" />
+    <attr name="badgeIconTint" format="color" />
+    <attr name="badgeBackgroundTint" format="color" />
+    <attr name="badgeType" format="enum">
+        <enum name="Dot" value="0" />
+        <enum name="SmallIcon" value="1" />
+        <enum name="LargeIcon" value="2" />
+        <enum name="Number" value="3" />
+        <enum name="Text" value="4" />
+    </attr>
 
     <declare-styleable name="ds">
 
@@ -98,7 +110,13 @@
         <attr name="showActionText" format="boolean" />
         <attr name="badgeChecked" format="boolean" />
         <attr name="checkable" format="boolean" />
-        <attr name="badgeIcon" format="reference" />
+        <attr name="showBadge" format="boolean" />
+        <attr name="badgeText" />
+        <attr name="badgeTextColor" />
+        <attr name="badgeIcon" />
+        <attr name="badgeIconTint" />
+        <attr name="badgeBackgroundTint" />
+        <attr name="badgeType" />
         <attr name="badgeIconGravity" format="enum">
             <enum name="Bottom" value="0" />
             <enum name="Top" value="1" />
@@ -154,5 +172,14 @@
 
     <declare-styleable name="PrimaryImageView">
         <attr name="isPreventClick" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryBadge">
+        <attr name="badgeText" />
+        <attr name="badgeTextColor" />
+        <attr name="badgeIcon" />
+        <attr name="badgeIconTint" />
+        <attr name="badgeBackgroundTint" />
+        <attr name="badgeType" />
     </declare-styleable>
 </resources>

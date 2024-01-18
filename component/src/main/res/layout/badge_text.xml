@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<am.acba.component.textView.PrimaryTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text"
+    style="@style/Small.Regular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_badge"
+    android:paddingStart="@dimen/spacing_4"
+    android:paddingTop="@dimen/spacing_2"
+    android:paddingEnd="@dimen/spacing_4"
+    android:paddingBottom="@dimen/spacing_2"
+    android:textColor="@color/White"
+    tools:text="Badge" />
