@@ -41,6 +41,7 @@
         <attr name="backgroundAlternative4" format="color" />
         <attr name="backgroundAlternative5" format="color" />
         <attr name="backgroundAlternative6" format="color" />
+        <attr name="backgroundInverse" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />
@@ -51,6 +52,7 @@
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
+        <attr name="borderPrimaryTonal1" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
