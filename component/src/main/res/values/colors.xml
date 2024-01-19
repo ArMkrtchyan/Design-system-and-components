@@ -30,6 +30,8 @@
     <color name="Grey_200">#A0A1A6</color>
     <color name="Grey_400">#63656C</color>
     <color name="Grey_500">#45474F</color>
+    <color name="Grey_700">#292B2F</color>
+    <color name="Grey_900">#0E0E10</color>
 
     <color name="BlueGrey_50">#F2F3F7</color>
     <color name="BlueGrey_100">#EEEFF4</color>

@@ -78,6 +78,7 @@
         <attr name="contentAlternative4" format="color" />
         <attr name="contentAlternative5" format="color" />
         <attr name="contentAlternative6" format="color" />
+        <attr name="contentInverse" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryButton">
