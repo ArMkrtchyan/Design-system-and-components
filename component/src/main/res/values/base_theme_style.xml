@@ -85,5 +85,6 @@
         <item name="contentAlternative4">@color/Orchid_700</item>
         <item name="contentAlternative5">@color/BrandGreen_550</item>
         <item name="contentAlternative6">@color/Blue_700</item>
+        <item name="contentInverse">@color/Grey_700</item>
     </style>
 </resources>
