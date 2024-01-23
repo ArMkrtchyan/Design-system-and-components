@@ -149,7 +149,7 @@
     </declare-styleable>
 
     <declare-styleable name="ExchangeRatesButton">
-
+        <attr name="ratesIconTint" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryCheckBox">

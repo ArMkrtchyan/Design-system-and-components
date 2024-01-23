@@ -71,8 +71,8 @@ class MaterialTextDrawable private constructor(builder: Builder) {
             return this
         }
 
-        fun text(text: String): Builder {
-            this.text = text
+        fun text(text: String?): Builder {
+            this.text = text ?: ""
             return this
         }
 

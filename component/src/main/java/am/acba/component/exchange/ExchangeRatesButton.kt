@@ -16,6 +16,10 @@ class ExchangeRatesButton @JvmOverloads constructor(
         context.obtainStyledAttributes(attrs, R.styleable.ExchangeRatesButton).apply {
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             addView(binding.root, layoutParams)
+            val ratesIconTint = getColorStateList(R.styleable.ExchangeRatesButton_ratesIconTint)
+            binding.flagForFirstRate.imageTintList = ratesIconTint
+            binding.flagForSecondRate.imageTintList = ratesIconTint
+            binding.flagForThirdRate.imageTintList = ratesIconTint
             recycle()
             invalidate()
         }

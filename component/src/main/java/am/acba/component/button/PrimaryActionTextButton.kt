@@ -24,6 +24,8 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -162,11 +164,17 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setIcon(@DrawableRes iconRes: Int) {
-        binding.actionIcon.setImageResource(iconRes)
+        if (type == ActionButtonType.AVATAR) {
+            Glide.with(context).asBitmap().load(iconRes).apply(RequestOptions.circleCropTransform()).into(binding.actionIcon)
+        } else
+            binding.actionIcon.setImageResource(iconRes)
     }
 
     fun setIcon(iconDrawable: Drawable?) {
-        binding.actionIcon.setImageDrawable(iconDrawable)
+        if (type == ActionButtonType.AVATAR) {
+            Glide.with(context).asBitmap().load(iconDrawable).apply(RequestOptions.circleCropTransform()).into(binding.actionIcon)
+        } else
+            binding.actionIcon.setImageDrawable(iconDrawable)
     }
 
     fun setIconBackground(@DrawableRes iconRes: Int) {

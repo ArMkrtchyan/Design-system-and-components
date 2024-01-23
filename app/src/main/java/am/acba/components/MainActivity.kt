@@ -1,5 +1,6 @@
 package am.acba.components
 
+import am.acba.component.button.PrimaryActionTextButton
 import am.acba.component.exchange.ExchangeRate
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
@@ -9,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -78,5 +80,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+        profile.setText("Աստղիկ  Մխիթարյան  Հարությունի")
+        profile.setType(PrimaryActionTextButton.ActionButtonType.TEXT)
+        profile.isVisible = true
     }
 }
