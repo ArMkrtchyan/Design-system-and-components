@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="White">#FFFFFF</color>
+    <color name="White_60">#99FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="Black_60">#99000000</color>
+    <color name="Black_20">#33000000</color>
     <color name="Transparent">#00000000</color>
 
     <color name="BrandGreen_200">#B3E4DB</color>
@@ -20,7 +23,7 @@
     <color name="Blue_600">#2A7FC2</color>
     <color name="Blue_700">#1F5F92</color>
 
-    <color name="Orange_200_40">#66F6CE51</color>
+    <color name="Orange_200_40">#66FBEBB9</color>
     <color name="Orange_500">#F6CE51</color>
     <color name="Orange_600">#CBA941</color>
     <color name="Orange_800_40">#66746022</color>
@@ -41,7 +44,6 @@
     <color name="BlueGrey_300">#CCD0DF</color>
     <color name="BlueGrey_350">#C4C8D9</color>
     <color name="BlueGrey_400">#BBC0D4</color>
-    <color name="BlueGrey_500">#AAB0C9</color>
     <color name="BlueGrey_550">#8A91B5</color>
     <color name="BlueGrey_550_10">#1A8A91B5</color>
     <color name="BlueGrey_550_15">#268A91B5</color>

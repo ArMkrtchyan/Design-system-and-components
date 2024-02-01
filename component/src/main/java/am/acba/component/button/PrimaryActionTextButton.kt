@@ -45,6 +45,11 @@ class PrimaryActionTextButton : FrameLayout {
     private var textDrawableBackgroundColor: Int = 0
     private var textDrawableColor: Int = 0
     private var badgeIconGravity: Int = 0
+    private var badgeTextPaddingTop = 0f
+    private var badgeTextPaddingBottom = 0f
+    private var badgeTextPaddingEnd = 0f
+    private var badgeTextPaddingStart = 0f
+    private var badgeTextStyle = -1
     private val binding by lazy { WidgetActionTextButtonBinding.inflate(context.inflater(), this, false) }
 
     constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle)
@@ -80,14 +85,20 @@ class PrimaryActionTextButton : FrameLayout {
                 iconTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeIconTint)
                 backgroundTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeBackgroundTint)
                 badgeType = getInt(R.styleable.PrimaryActionTextButton_badgeType, 0).findBadgeTypeByOrdinal() ?: PrimaryBadge.BadgeType.DOT
+                badgeTextPaddingTop = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
+                badgeTextPaddingBottom = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
+                badgeTextPaddingEnd = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
+                badgeTextPaddingStart = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
+                badgeTextStyle = getResourceId(R.styleable.PrimaryActionTextButton_badgeTextAppearance, R.style.Small_Regular)
                 binding.badgeIcon.isVisible = getBoolean(R.styleable.PrimaryActionTextButton_showBadge, false)
                 binding.badgeIcon.setBadgeIcon(icon)
                 binding.badgeIcon.setBadgeText(text)
                 binding.badgeIcon.setBadgeTextColor(textColor)
                 binding.badgeIcon.setBadgeIconTint(iconTint)
                 binding.badgeIcon.setBadgeBackgroundTint(backgroundTint)
+                binding.badgeIcon.setPaddings(badgeTextPaddingStart, badgeTextPaddingEnd, badgeTextPaddingTop, badgeTextPaddingBottom)
+                binding.badgeIcon.setTextAppearance(badgeTextStyle)
                 binding.badgeIcon.setBadgeType(badgeType)
-                binding.badgeIcon.updateBadge()
 
 
                 textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))

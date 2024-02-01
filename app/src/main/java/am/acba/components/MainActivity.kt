@@ -80,8 +80,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-        profile.setText("Աստղիկ  Մխիթարյան  Հարությունի")
-        profile.setType(PrimaryActionTextButton.ActionButtonType.TEXT)
-        profile.isVisible = true
     }
 }

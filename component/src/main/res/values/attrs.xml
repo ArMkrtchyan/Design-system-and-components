@@ -15,6 +15,11 @@
         <enum name="Number" value="3" />
         <enum name="Text" value="4" />
     </attr>
+    <attr name="badgePaddingTop" format="dimension" />
+    <attr name="badgePaddingBottom" format="dimension" />
+    <attr name="badgePaddingStart" format="dimension" />
+    <attr name="badgePaddingEnd" format="dimension" />
+    <attr name="badgeTextAppearance" format="reference" />
 
     <declare-styleable name="ds">
 
@@ -46,6 +51,7 @@
         <attr name="backgroundSuccess" format="color" />
         <attr name="backgroundInfo" format="color" />
         <attr name="backgroundWarning" format="color" />
+        <attr name="backgroundWarningTonal1" format="color" />
         <attr name="backgroundPending" format="color" />
         <attr name="backgroundAlternative" format="color" />
         <attr name="backgroundAlternative2" format="color" />
@@ -54,17 +60,19 @@
         <attr name="backgroundAlternative5" format="color" />
         <attr name="backgroundAlternative6" format="color" />
         <attr name="backgroundInverse" format="color" />
+        <attr name="backgroundNavBar" format="color" />
+        <attr name="backgroundOverLayTonal1" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />
         <attr name="borderPrimary" format="color" />
+        <attr name="borderPrimaryTonal1" format="color" />
         <attr name="borderBrand" format="color" />
         <attr name="borderBrandTonal1" format="color" />
         <attr name="borderBrandTonal1Disable" format="color" />
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
-        <attr name="borderPrimaryTonal1" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -77,10 +85,10 @@
         <attr name="contentPrimaryTonal1Disable" format="color" />
         <attr name="contentSecondary" format="color" />
         <attr name="contentSecondaryDisable" format="color" />
-        <attr name="contentDanger" format="color" />
+        <attr name="contentInverse" format="color" />
         <attr name="contentDangerTonal1" format="color" />
-        <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentInfoTonal1" format="color" />
+        <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentWarning" format="color" />
         <attr name="contentWarningTonal1" format="color" />
         <attr name="contentPending" format="color" />
@@ -90,7 +98,6 @@
         <attr name="contentAlternative4" format="color" />
         <attr name="contentAlternative5" format="color" />
         <attr name="contentAlternative6" format="color" />
-        <attr name="contentInverse" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryButton">
@@ -113,6 +120,7 @@
         <attr name="checkable" format="boolean" />
         <attr name="showBadge" format="boolean" />
         <attr name="badgeText" />
+        <attr name="badgeTextAppearance" />
         <attr name="badgeTextColor" />
         <attr name="badgeIcon" />
         <attr name="badgeIconTint" />
@@ -122,6 +130,10 @@
             <enum name="Bottom" value="0" />
             <enum name="Top" value="1" />
         </attr>
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
         <attr name="actionIcon" format="reference" />
         <attr name="actionIconSize" format="enum">
             <enum name="XLarge" value="0" />
@@ -176,11 +188,16 @@
     </declare-styleable>
 
     <declare-styleable name="PrimaryBadge">
+        <attr name="badgeTextAppearance" />
         <attr name="badgeText" />
         <attr name="badgeTextColor" />
         <attr name="badgeIcon" />
         <attr name="badgeIconTint" />
         <attr name="badgeBackgroundTint" />
         <attr name="badgeType" />
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
     </declare-styleable>
 </resources>

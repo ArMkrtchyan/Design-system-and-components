@@ -58,16 +58,16 @@
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:badgeText="100"
                 app:badgeBackgroundTint="?attr/backgroundDanger"
+                app:badgeText="100"
                 app:badgeType="Number" />
 
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:badgeBackgroundTint="?attr/backgroundDanger"
                 app:badgeText="Badge"
                 app:badgeTextColor="@color/Black"
-                app:badgeBackgroundTint="?attr/backgroundDanger"
                 app:badgeType="Text" />
 
             <am.acba.component.button.PrimaryActionTextButton
@@ -75,10 +75,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:visibility="gone"
                 app:actionIconSize="Large"
                 app:badgeIcon="@drawable/background_rounded"
                 app:badgeIconGravity="Top"
-                android:visibility="gone"
                 app:badgeType="SmallIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -226,13 +226,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical">
 
-<!--                    <am.acba.component.button.PrimaryActionTextButton-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Աննա Հովսեփյան"-->
-<!--                        app:actionButtonType="Text"-->
-<!--                        app:actionIcon="@drawable/default_avatar"-->
-<!--                        app:actionIconSize="XLarge"/>-->
+                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->
+                    <!--                        android:layout_width="80dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="Աննա Հովսեփյան"-->
+                    <!--                        app:actionButtonType="Text"-->
+                    <!--                        app:actionIcon="@drawable/default_avatar"-->
+                    <!--                        app:actionIconSize="XLarge"/>-->
 
                     <!--                    <am.acba.component.button.PrimaryActionTextButton-->
                     <!--                        android:layout_width="wrap_content"-->
