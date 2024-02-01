@@ -37,9 +37,25 @@
             android:paddingHorizontal="20dp"
             android:paddingBottom="100dp">
 
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:badgeText="New"
+                app:badgeType="Text"
+                app:endComponentType="Icon"
+                app:badgeBackgroundTint="?attr/backgroundWarning"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:showBadge="true"
+                app:startComponentType="Avatar" />
+
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
                 app:badgeIconTint="?attr/backgroundDanger"
                 app:badgeType="Dot" />
 
@@ -75,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:actionIconSize="Large"
                 app:badgeIcon="@drawable/background_rounded"
                 app:badgeIconGravity="Top"
@@ -84,6 +100,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:showActionText="false" />
+
+            <am.acba.component.button.PrimaryActionTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:actionButtonType="Avatar"
+                app:actionIcon="@drawable/default_avatar"
+                app:actionIconSize="XLarge" />
 
             <!--            <HorizontalScrollView-->
             <!--                android:layout_width="match_parent"-->

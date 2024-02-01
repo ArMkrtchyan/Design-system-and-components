@@ -3,6 +3,7 @@
 
     <attr name="isPreventClick" format="boolean" />
     <attr name="clickInterval" format="integer" />
+    <attr name="showBadge" format="boolean" />
     <attr name="badgeText" format="string" />
     <attr name="badgeTextColor" format="color" />
     <attr name="badgeIcon" format="reference" />
@@ -118,7 +119,7 @@
         <attr name="showActionText" format="boolean" />
         <attr name="badgeChecked" format="boolean" />
         <attr name="checkable" format="boolean" />
-        <attr name="showBadge" format="boolean" />
+        <attr name="showBadge" />
         <attr name="badgeText" />
         <attr name="badgeTextAppearance" />
         <attr name="badgeTextColor" />
@@ -199,5 +200,58 @@
         <attr name="badgePaddingBottom" />
         <attr name="badgePaddingStart" />
         <attr name="badgePaddingEnd" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PrimaryListItem">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
+        <attr name="isChecked" format="boolean" />
+        <attr name="listTitleTextAppearance" format="reference" />
+        <attr name="listTitleText" format="string" />
+        <attr name="listDescriptionTextAppearance" format="reference" />
+        <attr name="listDescriptionText" format="string" />
+        <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
+        <attr name="listSecondaryDescriptionText" format="string" />
+        <attr name="listStartIcon" format="reference" />
+        <attr name="listEndIcon" format="reference" />
+        <attr name="listStartIconTint" format="color" />
+        <attr name="listEndIconTint" format="color" />
+        <attr name="startComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Avatar" value="1" />
+            <enum name="Icon" value="2" />
+        </attr>
+        <attr name="endComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Icon" value="1" />
+            <enum name="Checkbox" value="2" />
+            <enum name="Radiobutton" value="3" />
+            <enum name="Switch" value="4" />
+        </attr>
+        <attr name="descriptionComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="secondaryDescriptionComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="badgeTextAppearance" />
+        <attr name="badgeText" />
+        <attr name="badgeTextColor" />
+        <attr name="badgeIcon" />
+        <attr name="badgeIconTint" />
+        <attr name="badgeBackgroundTint" />
+        <attr name="badgeType" />
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
+        <attr name="showBadge" />
     </declare-styleable>
 </resources>

@@ -10,6 +10,8 @@ import am.acba.component.databinding.WidgetActionTextButtonBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.MaterialTextDrawable
+import am.acba.component.imageView.PrimaryImageView
+import am.acba.component.textView.PrimaryTextView
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -24,8 +26,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -52,7 +52,9 @@ class PrimaryActionTextButton : FrameLayout {
     private var badgeTextStyle = -1
     private val binding by lazy { WidgetActionTextButtonBinding.inflate(context.inflater(), this, false) }
 
-    constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle)
+    constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle) {
+        addView(binding.root)
+    }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs, R.attr.primaryActionTextButtonStyle) {
         init(attrs)
@@ -117,11 +119,7 @@ class PrimaryActionTextButton : FrameLayout {
                 if (tint != null) setIconTint(tint)
                 val iconSizeEnum = getInt(R.styleable.PrimaryActionTextButton_actionIconSize, 0).findSizeByOrdinal() ?: ActionIconSize.XLAGRE
                 setIconPadding(getDimension(R.styleable.PrimaryActionTextButton_actionIconPadding, iconSizeEnum.padding.dpToPx().toFloat()).toInt())
-
-                binding.actionIcon.updateLayoutParams<LayoutParams> {
-                    width = iconSizeEnum.size.dpToPx()
-                    height = iconSizeEnum.size.dpToPx()
-                }
+                setActionIconSize(iconSizeEnum)
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
@@ -136,6 +134,14 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun getBadge(): PrimaryBadge {
         return binding.badgeIcon
+    }
+
+    fun getActionIcon(): PrimaryImageView {
+        return binding.actionIcon
+    }
+
+    fun getActionText(): PrimaryTextView {
+        return binding.actionText
     }
 
     override fun setOnClickListener(onClickListener: OnClickListener?) {
@@ -175,17 +181,11 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setIcon(@DrawableRes iconRes: Int) {
-        if (type == ActionButtonType.AVATAR) {
-            Glide.with(context).asBitmap().load(iconRes).apply(RequestOptions.circleCropTransform()).into(binding.actionIcon)
-        } else
-            binding.actionIcon.setImageResource(iconRes)
+        binding.actionIcon.setImageResource(iconRes)
     }
 
     fun setIcon(iconDrawable: Drawable?) {
-        if (type == ActionButtonType.AVATAR) {
-            Glide.with(context).asBitmap().load(iconDrawable).apply(RequestOptions.circleCropTransform()).into(binding.actionIcon)
-        } else
-            binding.actionIcon.setImageDrawable(iconDrawable)
+        binding.actionIcon.setImageDrawable(iconDrawable)
     }
 
     fun setIconBackground(@DrawableRes iconRes: Int) {
@@ -202,6 +202,18 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setIconPadding(padding: Int) {
         binding.actionIcon.setPadding(padding)
+    }
+
+    fun showActionText(showText: Boolean) {
+        showActionText = showText
+        binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
+    }
+
+    fun setActionIconSize(iconSize: ActionIconSize) {
+        binding.actionIcon.updateLayoutParams<LayoutParams> {
+            width = iconSize.size.dpToPx()
+            height = iconSize.size.dpToPx()
+        }
     }
 
     fun setText(@StringRes stringRes: Int) {
@@ -228,6 +240,12 @@ class PrimaryActionTextButton : FrameLayout {
         this.type = type
         when (type) {
             ActionButtonType.ACTION_BUTTON -> {
+                binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
+            }
+
+            ActionButtonType.AVATAR -> {
+                binding.actionIcon.imageTintList = null
+                binding.actionIcon.setPadding(0)
                 binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
             }
 
