@@ -35,13 +35,13 @@ class PrimaryListItem : FrameLayout {
         }
     }
     val badge by lazy { PrimaryBadge(context) }
-    private val startIcon by lazy { PrimaryImageView(context) }
-    private val endIcon by lazy { PrimaryImageView(context) }
+    val startIcon by lazy { PrimaryImageView(context) }
+    val endIcon by lazy { PrimaryImageView(context) }
     val switch by lazy { PrimarySwitcher(context) }
     val checkbox by lazy { PrimaryCheckbox(context) }
     val radiobutton by lazy { PrimaryRadioButton(context) }
-    private val description by lazy { PrimaryTextView(context) }
-    private val secondaryDescription by lazy { PrimaryTextView(context) }
+    val description by lazy { PrimaryTextView(context) }
+    val secondaryDescription by lazy { PrimaryTextView(context) }
 
     private var startComponentType = ListStartComponentType.NONE
     private var endComponentType = ListEndComponentType.NONE
@@ -132,20 +132,22 @@ class PrimaryListItem : FrameLayout {
                     val badgeTextPaddingStart = getDimension(R.styleable.PrimaryListItem_badgePaddingTop, -1f)
                     val badgeTextStyle = getResourceId(R.styleable.PrimaryListItem_badgeTextAppearance, R.style.Small_Regular)
                     val badgeType = getInt(R.styleable.PrimaryListItem_badgeType, 0).findBadgeTypeByOrdinal() ?: PrimaryBadge.BadgeType.TEXT
-                    badge.setBadgeType(badgeType)
-                    when (badgeType){
+                    when (badgeType) {
                         PrimaryBadge.BadgeType.DOT -> {
                             badge.setBadgeIconTint(iconTint)
                             badge.setBadgeBackgroundTint(backgroundTint)
                         }
+
                         PrimaryBadge.BadgeType.SMALL_ICON -> {
                             badge.setBadgeIcon(icon)
                             badge.setBadgeIconTint(iconTint)
                         }
+
                         PrimaryBadge.BadgeType.LARGE_ICON -> {
                             badge.setBadgeIcon(icon)
                             badge.setBadgeIconTint(iconTint)
                         }
+
                         PrimaryBadge.BadgeType.NUMBER -> {
                             badge.setBadgeText(text)
                             badge.setBadgeTextColor(textColor)
@@ -153,7 +155,8 @@ class PrimaryListItem : FrameLayout {
                             badge.setPaddings(badgeTextPaddingStart, badgeTextPaddingEnd, badgeTextPaddingTop, badgeTextPaddingBottom)
                             badge.setTextAppearance(badgeTextStyle)
                         }
-                        PrimaryBadge.BadgeType.TEXT ->{
+
+                        PrimaryBadge.BadgeType.TEXT -> {
                             badge.setBadgeText(text)
                             badge.setBadgeTextColor(textColor)
                             badge.setBadgeBackgroundTint(backgroundTint)
@@ -169,6 +172,17 @@ class PrimaryListItem : FrameLayout {
             recycle()
             invalidate()
         }
+    }
+
+    fun getTitleTextView() = binding.listTitle
+
+    fun showBadge() {
+        binding.listBadgeContainer.removeAllViews()
+        binding.listBadgeContainer.addView(badge)
+    }
+
+    fun hideBadge() {
+        binding.listBadgeContainer.removeAllViews()
     }
 
     fun setStartIconTint(colorStateList: ColorStateList?) {
