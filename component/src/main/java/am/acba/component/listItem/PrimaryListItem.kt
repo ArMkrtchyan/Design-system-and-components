@@ -132,6 +132,7 @@ class PrimaryListItem : FrameLayout {
                     val badgeTextPaddingStart = getDimension(R.styleable.PrimaryListItem_badgePaddingTop, -1f)
                     val badgeTextStyle = getResourceId(R.styleable.PrimaryListItem_badgeTextAppearance, R.style.Small_Regular)
                     val badgeType = getInt(R.styleable.PrimaryListItem_badgeType, 0).findBadgeTypeByOrdinal() ?: PrimaryBadge.BadgeType.TEXT
+                    badge.setBadgeType(badgeType)
                     when (badgeType) {
                         PrimaryBadge.BadgeType.DOT -> {
                             badge.setBadgeIconTint(iconTint)

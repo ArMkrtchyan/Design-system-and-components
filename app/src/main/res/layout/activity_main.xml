@@ -49,6 +49,24 @@
                 app:listTitleText="List Item"
                 app:startComponentType="Avatar" />
 
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:badgeBackgroundTint="?attr/backgroundWarning"
+                app:badgePaddingBottom="@dimen/spacing_4"
+                app:badgePaddingTop="@dimen/spacing_4"
+                app:badgeType="Number"
+                app:showBadge="true"
+                tools:badgeText="2"
+                android:background="@drawable/background_primary_input"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:startComponentType="Avatar" />
+
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
