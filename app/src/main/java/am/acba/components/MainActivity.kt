@@ -1,7 +1,10 @@
 package am.acba.components
 
+import am.acba.component.badge.PrimaryBadge
 import am.acba.component.button.PrimaryActionTextButton
 import am.acba.component.exchange.ExchangeRate
+import am.acba.component.extensions.getColorFromAttr
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
 import android.os.Bundle
@@ -34,6 +37,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun ActivityMainBinding.initView() {
         setSupportActionBar(toolbar)
+
+        listItem.showBadge()
+        listItem.badge.setBadgeType(PrimaryBadge.BadgeType.TEXT)
+        listItem.badge.setBadgeText("Առաջարկ")
+        listItem.badge.setBadgeTextColor(this@MainActivity.getColorFromAttr(am.acba.component.R.attr.contentWarning))
+        listItem.badge.setBadgeBackgroundTint(this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
+
         input.apply {
             setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }

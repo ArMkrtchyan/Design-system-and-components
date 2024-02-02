@@ -39,18 +39,14 @@
 
 
             <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_primary_input"
-                app:badgeText="New"
-                app:badgeType="Text"
-                app:badgeTextColor="@color/BrandGreen_650"
                 app:endComponentType="Icon"
-                app:badgeBackgroundTint="?attr/backgroundWarning"
                 app:listEndIcon="@drawable/ic_right"
                 app:listStartIcon="@drawable/default_avatar"
                 app:listTitleText="List Item"
-                app:showBadge="true"
                 app:startComponentType="Avatar" />
 
             <am.acba.component.badge.PrimaryBadge

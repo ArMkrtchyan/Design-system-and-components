@@ -179,10 +179,12 @@ class PrimaryListItem : FrameLayout {
     fun showBadge() {
         binding.listBadgeContainer.removeAllViews()
         binding.listBadgeContainer.addView(badge)
+        binding.listBadgeContainer.isVisible = true
     }
 
     fun hideBadge() {
         binding.listBadgeContainer.removeAllViews()
+        binding.listBadgeContainer.isVisible = false
     }
 
     fun setStartIconTint(colorStateList: ColorStateList?) {

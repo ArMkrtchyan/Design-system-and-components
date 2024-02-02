@@ -16,21 +16,23 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
 
 class PrimaryBadge : FrameLayout {
-    private lateinit var type: BadgeType
+    private var type: BadgeType = BadgeType.DOT
     private var textColor: Int = 0
     private var text: String? = null
     private var icon: Drawable? = null
     private var iconTint: ColorStateList? = null
     private var backgroundTint: ColorStateList? = null
-    private var textPaddingTop = 0f
-    private var textPaddingBottom = 0f
-    private var textPaddingEnd = 0f
-    private var textPaddingStart = 0f
-    private var textStyle = -1
+    private var textPaddingTop = -1f
+    private var textPaddingBottom = -1f
+    private var textPaddingEnd = -1f
+    private var textPaddingStart = -1f
+    private var textStyle = R.style.Small_Regular
     private val iconBinding by lazy { BadgeIconBinding.inflate(context.inflater(), this, false) }
     private val textBinding by lazy { BadgeTextBinding.inflate(context.inflater(), this, false) }
 
-    constructor(context: Context) : super(context)
+    constructor(context: Context) : super(context){
+        textColor = ContextCompat.getColor(context, R.color.White)
+    }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(attrs)
@@ -150,7 +152,7 @@ class PrimaryBadge : FrameLayout {
                 val startPadding = if (textPaddingStart == -1f) resources.getDimension(R.dimen.spacing_8).toInt() else textPaddingStart.toInt()
                 val topPadding = if (textPaddingTop == -1f) resources.getDimension(R.dimen.spacing_2).toInt() else textPaddingTop.toInt()
                 val endPadding = if (textPaddingEnd == -1f) resources.getDimension(R.dimen.spacing_8).toInt() else textPaddingEnd.toInt()
-                val bottomPadding = if (textPaddingBottom == -1f) resources.getDimension(R.dimen.spacing_2).toInt() else textPaddingBottom.toInt()
+                val bottomPadding = if (textPaddingBottom == -1f) resources.getDimension(R.dimen.spacing_4).toInt() else textPaddingBottom.toInt()
                 textBinding.text.setPadding(
                     startPadding,
                     topPadding,
@@ -231,7 +233,7 @@ class PrimaryBadge : FrameLayout {
                 val startPadding = if (textPaddingStart == -1f) resources.getDimension(R.dimen.spacing_8).toInt() else textPaddingStart.toInt()
                 val topPadding = if (textPaddingTop == -1f) resources.getDimension(R.dimen.spacing_2).toInt() else textPaddingTop.toInt()
                 val endPadding = if (textPaddingEnd == -1f) resources.getDimension(R.dimen.spacing_8).toInt() else textPaddingEnd.toInt()
-                val bottomPadding = if (textPaddingBottom == -1f) resources.getDimension(R.dimen.spacing_2).toInt() else textPaddingBottom.toInt()
+                val bottomPadding = if (textPaddingBottom == -1f) resources.getDimension(R.dimen.spacing_4).toInt() else textPaddingBottom.toInt()
                 textBinding.text.setPadding(
                     startPadding,
                     topPadding,
