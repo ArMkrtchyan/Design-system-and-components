@@ -92,6 +92,7 @@
         <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentWarning" format="color" />
         <attr name="contentWarningTonal1" format="color" />
+        <attr name="contentWarningTonal2" format="color" />
         <attr name="contentPending" format="color" />
         <attr name="contentAlternative" format="color" />
         <attr name="contentAlternative2" format="color" />

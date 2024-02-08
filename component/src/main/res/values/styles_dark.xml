@@ -60,6 +60,7 @@
         <item name="contentSuccessTonal1">@color/Green_500</item>
         <item name="contentWarning">@color/Orange_900</item>
         <item name="contentWarningTonal1">@color/Orange_500</item>
+        <item name="contentWarningTonal2">@color/Orange_600</item>
         <item name="contentPending">@color/BlueGrey_950</item>
         <item name="contentAlternative">@color/Purple_700</item>
         <item name="contentAlternative2">@color/Yellow_700</item>
