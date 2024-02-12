@@ -74,6 +74,7 @@
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
+        <attr name="borderDangerTonal1" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />

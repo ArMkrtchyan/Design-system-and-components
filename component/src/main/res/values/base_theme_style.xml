@@ -63,6 +63,7 @@
         <item name="borderSecondary">@color/White</item>
         <item name="borderNeutral">@color/BlueGrey_150</item>
         <item name="borderDanger">@color/Red_600</item>
+        <item name="borderDangerTonal1">@color/Red_100</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
