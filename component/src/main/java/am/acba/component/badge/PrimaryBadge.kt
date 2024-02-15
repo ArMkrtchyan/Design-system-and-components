@@ -72,6 +72,7 @@ class PrimaryBadge : FrameLayout {
                 val number = text?.toInt() ?: -1
                 if (number == -1) textBinding.text.text = ""
                 else if (number >= 100) textBinding.text.text = "99+"
+                else textBinding.text.text = "$number"
             } catch (e: Exception) {
 
             }
