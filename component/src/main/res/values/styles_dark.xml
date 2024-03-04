@@ -15,6 +15,7 @@
         <item name="backgroundTonal2ReadOnly">@color/BlueGrey_850</item>
         <item name="backgroundTonal2Disable">@color/BlueGrey_850_30</item>
         <item name="backgroundTonal3">@color/BlueGrey_850</item>
+        <item name="backgroundTonal6">@color/BlueGrey_850</item>
         <item name="backgroundDanger">@color/Red_500</item>
         <item name="backgroundDangerTonal1">@color/Red_800_40</item>
         <item name="backgroundSuccess">@color/Green_500</item>
@@ -29,13 +30,14 @@
         <item name="backgroundAlternative4">@color/Orchid_200</item>
         <item name="backgroundAlternative5">@color/BrandGreen_200</item>
         <item name="backgroundAlternative6">@color/Blue_200</item>
+        <item name="backgroundAlternative7">@color/Silver_100</item>
         <item name="backgroundNavBar">@color/Black_60</item>
-        <item name="backgroundOverLayTonal1">@color/Black_20</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_350</item>
         <item name="borderPrimary">@color/BlueGrey_650</item>
         <item name="borderPrimaryTonal1">@color/BlueGrey_850</item>
+        <item name="borderPrimaryTonal2">@color/White_10</item>
         <item name="borderBrand">@color/BrandGreen_500</item>
         <item name="borderBrandTonal1">@color/BrandGreen_450</item>
         <item name="borderBrandTonal1Disable">@color/BlueGrey_700</item>
@@ -43,6 +45,16 @@
         <item name="borderNeutral">@color/BlueGrey_900</item>
         <item name="borderDanger">@color/Red_500</item>
         <item name="borderDangerTonal1">@color/Red_800</item>
+
+        <!-- Overlay -->
+        <item name="overlayTonal1">@color/BlueGrey_700_0</item>
+        <item name="overlayTonal2">@color/BlueGrey_700</item>
+        <item name="overlayTonal3">@color/White_8</item>
+        <item name="overlayTonal4">@color/Silver_200_95</item>
+        <item name="overlayBackground">@color/Black_70</item>
+        <item name="overlayBackgroundTonal1">@color/Black_20</item>
+        <item name="overlayBackgroundTonal2">@color/Black_30</item>
+        <item name="overlayBackgroundTonal5">@color/Silver_200_82</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
