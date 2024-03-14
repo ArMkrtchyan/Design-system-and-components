@@ -53,7 +53,7 @@
         <item name="backgroundAlternative6">@color/Blue_200</item>
         <item name="backgroundAlternative7">@color/Silver_150</item>
         <item name="backgroundAlternative8">@color/Orange_500</item>
-        <item name="backgroundAlternative9">@color/BlueGrey_800</item>
+        <item name="backgroundAlternative9">@color/Blue_800</item>
         <item name="backgroundNavBar">@color/White_60</item>
 
         <!-- Borders -->
