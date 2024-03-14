@@ -62,6 +62,8 @@
         <attr name="backgroundAlternative5" format="color" />
         <attr name="backgroundAlternative6" format="color" />
         <attr name="backgroundAlternative7" format="color" />
+        <attr name="backgroundAlternative8" format="color" />
+        <attr name="backgroundAlternative9" format="color" />
         <attr name="backgroundInverse" format="color" />
         <attr name="backgroundNavBar" format="color" />
 
@@ -100,6 +102,7 @@
         <attr name="contentSecondary" format="color" />
         <attr name="contentSecondaryDisable" format="color" />
         <attr name="contentInverse" format="color" />
+        <attr name="contentNeutralTonal1" format="color" />
         <attr name="contentDangerTonal1" format="color" />
         <attr name="contentInfoTonal1" format="color" />
         <attr name="contentSuccessTonal1" format="color" />

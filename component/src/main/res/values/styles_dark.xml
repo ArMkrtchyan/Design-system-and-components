@@ -31,6 +31,8 @@
         <item name="backgroundAlternative5">@color/BrandGreen_200</item>
         <item name="backgroundAlternative6">@color/Blue_200</item>
         <item name="backgroundAlternative7">@color/Silver_100</item>
+        <item name="backgroundAlternative8">@color/Orange_500</item>
+        <item name="backgroundAlternative9">@color/BlueGrey_800</item>
         <item name="backgroundNavBar">@color/Black_60</item>
 
         <!-- Borders -->
@@ -69,6 +71,7 @@
         <item name="contentSecondaryDisable">@color/BlueGrey_700</item>
         <item name="contentInverse">@color/Grey_900</item>
         <item name="contentDangerTonal1">@color/Red_500</item>
+        <item name="contentNeutralTonal1">@color/BlueGrey_150</item>
         <item name="contentInfoTonal1">@color/Blue_500</item>
         <item name="contentSuccessTonal1">@color/Green_500</item>
         <item name="contentWarning">@color/Orange_900</item>
