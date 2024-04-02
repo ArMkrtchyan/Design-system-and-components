@@ -44,9 +44,10 @@
         <attr name="backgroundBrandDisable" format="color" />
         <attr name="backgroundTonal1" format="color" />
         <attr name="backgroundTonal2" format="color" />
+        <attr name="backgroundTonal3" format="color" />
+        <attr name="backgroundTonal6" format="color" />
         <attr name="backgroundTonal2ReadOnly" format="color" />
         <attr name="backgroundTonal2Disable" format="color" />
-        <attr name="backgroundTonal3" format="color" />
         <attr name="backgroundDanger" format="color" />
         <attr name="backgroundDangerTonal1" format="color" />
         <attr name="backgroundSuccess" format="color" />
@@ -60,20 +61,34 @@
         <attr name="backgroundAlternative4" format="color" />
         <attr name="backgroundAlternative5" format="color" />
         <attr name="backgroundAlternative6" format="color" />
+        <attr name="backgroundAlternative7" format="color" />
+        <attr name="backgroundAlternative8" format="color" />
+        <attr name="backgroundAlternative9" format="color" />
         <attr name="backgroundInverse" format="color" />
         <attr name="backgroundNavBar" format="color" />
-        <attr name="backgroundOverLayTonal1" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />
         <attr name="borderPrimary" format="color" />
         <attr name="borderPrimaryTonal1" format="color" />
+        <attr name="borderPrimaryTonal2" format="color" />
         <attr name="borderBrand" format="color" />
         <attr name="borderBrandTonal1" format="color" />
         <attr name="borderBrandTonal1Disable" format="color" />
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
+        <attr name="borderDangerTonal1" format="color" />
+
+        <!-- Overlay -->
+        <attr name="overlayTonal1" format="color" />
+        <attr name="overlayTonal2" format="color" />
+        <attr name="overlayTonal3" format="color" />
+        <attr name="overlayTonal4" format="color" />
+        <attr name="overlayBackground" format="color" />
+        <attr name="overlayBackgroundTonal1" format="color" />
+        <attr name="overlayBackgroundTonal2" format="color" />
+        <attr name="overlayBackgroundTonal5" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -87,11 +102,13 @@
         <attr name="contentSecondary" format="color" />
         <attr name="contentSecondaryDisable" format="color" />
         <attr name="contentInverse" format="color" />
+        <attr name="contentNeutralTonal1" format="color" />
         <attr name="contentDangerTonal1" format="color" />
         <attr name="contentInfoTonal1" format="color" />
         <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentWarning" format="color" />
         <attr name="contentWarningTonal1" format="color" />
+        <attr name="contentWarningTonal2" format="color" />
         <attr name="contentPending" format="color" />
         <attr name="contentAlternative" format="color" />
         <attr name="contentAlternative2" format="color" />
@@ -230,6 +247,12 @@
             <enum name="Switch" value="4" />
         </attr>
         <attr name="descriptionComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="titleComponentType" format="enum">
             <enum name="None" value="0" />
             <enum name="Singleline" value="1" />
             <enum name="TwoLine" value="2" />

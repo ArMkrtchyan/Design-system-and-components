@@ -9,9 +9,9 @@ import am.acba.component.checkbox.PrimaryCheckbox
 import am.acba.component.databinding.ListItemLayoutBinding
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.PrimaryImageView
-import am.acba.component.listItem.PrimaryListItem.ListDescriptionComponentType.Companion.findDescriptionComponentTypeByOrdinal
 import am.acba.component.listItem.PrimaryListItem.ListEndComponentType.Companion.findEndComponentTypeByOrdinal
 import am.acba.component.listItem.PrimaryListItem.ListStartComponentType.Companion.findStartComponentTypeByOrdinal
+import am.acba.component.listItem.PrimaryListItem.ListTextComponentType.Companion.findDescriptionComponentTypeByOrdinal
 import am.acba.component.radiobutton.PrimaryRadioButton
 import am.acba.component.switcher.PrimarySwitcher
 import am.acba.component.textView.PrimaryTextView
@@ -45,8 +45,9 @@ class PrimaryListItem : FrameLayout {
 
     private var startComponentType = ListStartComponentType.NONE
     private var endComponentType = ListEndComponentType.NONE
-    private var descriptionComponentType = ListDescriptionComponentType.NONE
-    private var secondaryDescriptionComponentType = ListDescriptionComponentType.NONE
+    private var titleComponentType = ListTextComponentType.NONE
+    private var descriptionComponentType = ListTextComponentType.NONE
+    private var secondaryDescriptionComponentType = ListTextComponentType.NONE
 
     private var startIconDrawable: Drawable? = null
     private var endIconDrawable: Drawable? = null
@@ -85,10 +86,13 @@ class PrimaryListItem : FrameLayout {
                 endComponentType = getInt(R.styleable.PrimaryListItem_endComponentType, 0).findEndComponentTypeByOrdinal()
                     ?: ListEndComponentType.NONE
                 descriptionComponentType = getInt(R.styleable.PrimaryListItem_descriptionComponentType, 0).findDescriptionComponentTypeByOrdinal()
-                    ?: ListDescriptionComponentType.NONE
+                    ?: ListTextComponentType.NONE
                 secondaryDescriptionComponentType =
                     getInt(R.styleable.PrimaryListItem_secondaryDescriptionComponentType, 0).findDescriptionComponentTypeByOrdinal()
-                        ?: ListDescriptionComponentType.NONE
+                        ?: ListTextComponentType.NONE
+                titleComponentType =
+                    getInt(R.styleable.PrimaryListItem_titleComponentType, 0).findDescriptionComponentTypeByOrdinal()
+                        ?: ListTextComponentType.NONE
 
                 val startIconTint = getColorStateList(R.styleable.PrimaryListItem_listStartIconTint)
                 val endIconTint = getColorStateList(R.styleable.PrimaryListItem_listEndIconTint)
@@ -100,6 +104,7 @@ class PrimaryListItem : FrameLayout {
                 setEndIcon(getDrawable(R.styleable.PrimaryListItem_listEndIcon))
                 setTitleText(getString(R.styleable.PrimaryListItem_listTitleText))
                 setTitleTextAppearance(getResourceId(R.styleable.PrimaryListItem_listTitleTextAppearance, R.style.Body1_Bold))
+                setComponentType(titleComponentType)
 
                 descriptionText = getString(R.styleable.PrimaryListItem_listDescriptionText)
                 descriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listDescriptionTextAppearance, R.style.Body2_Regular)
@@ -279,18 +284,37 @@ class PrimaryListItem : FrameLayout {
         TextViewCompat.setTextAppearance(binding.listTitle, titleTextStyle)
     }
 
+    fun setComponentType(descriptionComponentType: ListTextComponentType) {
+        when (descriptionComponentType) {
+            ListTextComponentType.NONE -> Unit
+            ListTextComponentType.SINGLE_LINE -> {
+                binding.listTitle.setSingleLine()
+            }
+
+            ListTextComponentType.TWO_LINE -> {
+                binding.listTitle.isSingleLine = false
+                binding.listTitle.maxLines = 2
+            }
+
+            ListTextComponentType.THREE_LINE -> {
+                binding.listTitle.isSingleLine = false
+                binding.listTitle.maxLines = 3
+            }
+        }
+    }
+
     fun setDescription(
         listDescriptionComponentContainer: FrameLayout,
-        descriptionComponentType: ListDescriptionComponentType,
+        descriptionComponentType: ListTextComponentType,
         description: PrimaryTextView,
         textStyle: Int,
         descriptionText: String?
     ) {
-        listDescriptionComponentContainer.isVisible = descriptionComponentType != ListDescriptionComponentType.NONE
+        listDescriptionComponentContainer.isVisible = descriptionComponentType != ListTextComponentType.NONE
         listDescriptionComponentContainer.removeAllViews()
         when (descriptionComponentType) {
-            ListDescriptionComponentType.NONE -> Unit
-            ListDescriptionComponentType.SINGLE_LINE -> {
+            ListTextComponentType.NONE -> Unit
+            ListTextComponentType.SINGLE_LINE -> {
                 listDescriptionComponentContainer.addView(description)
                 description.setSingleLine()
                 description.ellipsize = TextUtils.TruncateAt.END
@@ -298,7 +322,7 @@ class PrimaryListItem : FrameLayout {
                 description.text = descriptionText
             }
 
-            ListDescriptionComponentType.TWO_LINE -> {
+            ListTextComponentType.TWO_LINE -> {
                 listDescriptionComponentContainer.addView(description)
                 description.isSingleLine = false
                 description.maxLines = 2
@@ -307,7 +331,7 @@ class PrimaryListItem : FrameLayout {
                 description.text = descriptionText
             }
 
-            ListDescriptionComponentType.THREE_LINE -> {
+            ListTextComponentType.THREE_LINE -> {
                 listDescriptionComponentContainer.addView(description)
                 description.isSingleLine = false
                 description.maxLines = 3
@@ -338,14 +362,14 @@ class PrimaryListItem : FrameLayout {
         }
     }
 
-    enum class ListDescriptionComponentType {
+    enum class ListTextComponentType {
         NONE,
         SINGLE_LINE,
         TWO_LINE,
         THREE_LINE;
 
         companion object {
-            fun Int.findDescriptionComponentTypeByOrdinal(): ListDescriptionComponentType? {
+            fun Int.findDescriptionComponentTypeByOrdinal(): ListTextComponentType? {
                 return entries.find { it.ordinal == this }
             }
         }

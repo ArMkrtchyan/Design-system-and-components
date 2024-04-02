@@ -30,7 +30,7 @@ class PrimaryBadge : FrameLayout {
     private val iconBinding by lazy { BadgeIconBinding.inflate(context.inflater(), this, false) }
     private val textBinding by lazy { BadgeTextBinding.inflate(context.inflater(), this, false) }
 
-    constructor(context: Context) : super(context){
+    constructor(context: Context) : super(context) {
         textColor = ContextCompat.getColor(context, R.color.White)
     }
 
@@ -67,7 +67,18 @@ class PrimaryBadge : FrameLayout {
 
     fun setBadgeText(text: String?) {
         this.text = text
-        textBinding.text.text = text
+        if (type == BadgeType.NUMBER) {
+            try {
+                val number = text?.toInt() ?: -1
+                if (number == -1) textBinding.text.text = ""
+                else if (number >= 100) textBinding.text.text = "99+"
+                else textBinding.text.text = "$number"
+            } catch (e: Exception) {
+
+            }
+        } else if (type == BadgeType.TEXT) {
+            textBinding.text.text = text
+        }
     }
 
     fun setBadgeTextColor(textColor: Int) {
