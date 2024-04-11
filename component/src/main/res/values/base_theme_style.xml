@@ -78,6 +78,9 @@
         <item name="overlayBackgroundTonal1">@color/Black_20</item>
         <item name="overlayBackgroundTonal2">@color/Black_30</item>
         <item name="overlayBackgroundTonal5">@color/Silver_50_82</item>
+        <item name="overlayBackgroundTonal6">@color/Black_10</item>
+        <item name="overlayBackgroundTonal7">@color/White_10</item>
+        <item name="overlayBackgroundTonal8">@color/BlueGrey_950_60</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
