@@ -45,6 +45,7 @@
         <item name="backgroundWarningTonal1">@color/Orange_200_40</item>
         <item name="backgroundPending">@color/BlueGrey_200</item>
         <item name="backgroundInverse">@color/BlueGrey_300</item>
+        <item name="backgroundInverse2">@color/BlueGrey_800</item>
         <item name="backgroundAlternative">@color/Purple_200</item>
         <item name="backgroundAlternative2">@color/Yellow_200</item>
         <item name="backgroundAlternative3">@color/AztecPurple_200</item>
@@ -93,7 +94,8 @@
         <item name="contentPrimaryTonal1Disable">@color/BlueGrey_550</item>
         <item name="contentSecondary">@color/White</item>
         <item name="contentSecondaryDisable">@color/BlueGrey_400</item>
-        <item name="contentInverse">@color/Grey_700</item>
+        <item name="contentInverse">@color/BlueGrey_900</item>
+        <item name="contentInverse2">@color/BlueGrey_100</item>
         <item name="contentDangerTonal1">@color/Red_600</item>
         <item name="contentNeutralTonal1">@color/BlueGrey_850</item>
         <item name="contentInfoTonal1">@color/Blue_600</item>
