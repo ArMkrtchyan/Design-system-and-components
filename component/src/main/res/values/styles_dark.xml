@@ -9,6 +9,7 @@
         <item name="backgroundBase">@color/BlueGrey_1000</item>
         <item name="backgroundBrand">@color/BrandGreen_500</item>
         <item name="backgroundBrandPressed">@color/BrandGreen_400</item>
+        <item name="backgroundSecondary">@color/Orange_500</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
         <item name="backgroundTonal1">@color/BlueGrey_950</item>
         <item name="backgroundTonal2">@color/BlueGrey_850_70</item>

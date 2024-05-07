@@ -41,6 +41,7 @@
         <attr name="backgroundBase" format="color" />
         <attr name="backgroundBrand" format="color" />
         <attr name="backgroundBrandPressed" format="color" />
+        <attr name="backgroundSecondary" format="color" />
         <attr name="backgroundBrandDisable" format="color" />
         <attr name="backgroundTonal1" format="color" />
         <attr name="backgroundTonal2" format="color" />
