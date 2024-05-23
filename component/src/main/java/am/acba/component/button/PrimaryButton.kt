@@ -21,6 +21,7 @@ class PrimaryButton : MaterialButton {
     }
 
     private fun init(attrs: AttributeSet, defStyleAttr: Int) {
+        filterTouchesWhenObscured = true
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryButton, defStyleAttr, R.style.Button_Style_Primary).apply {
             isPreventDoubleClick = getBoolean(R.styleable.PrimaryButton_isPreventClick, true)
             clickInterval = getInt(R.styleable.PrimaryButton_clickInterval, 1000)
