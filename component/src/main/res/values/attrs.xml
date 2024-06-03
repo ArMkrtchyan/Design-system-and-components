@@ -190,7 +190,7 @@
         <attr name="ratesIconTint" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="PrimaryCheckBox">
+    <declare-styleable name="PrimaryCheckbox">
 
     </declare-styleable>
 
