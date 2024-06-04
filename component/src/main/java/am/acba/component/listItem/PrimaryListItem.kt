@@ -22,12 +22,9 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
-import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
@@ -102,9 +99,15 @@ class PrimaryListItem : FrameLayout {
                 titleComponentType =
                     getInt(R.styleable.PrimaryListItem_titleComponentType, 0).findDescriptionComponentTypeByOrdinal()
                         ?: ListTextComponentType.NONE
-                startComponentGravity = getInt(R.styleable.PrimaryListItem_listStartIconGravity, 0).findStartAndEndComponentGravityByOrdinal()
+                startComponentGravity = getInt(
+                    R.styleable.PrimaryListItem_listStartIconGravity,
+                    ListStartAndEndComponentGravity.TOP.ordinal
+                ).findStartAndEndComponentGravityByOrdinal()
                     ?: ListStartAndEndComponentGravity.TOP
-                endComponentGravity = getInt(R.styleable.PrimaryListItem_listEndIconGravity, 0).findStartAndEndComponentGravityByOrdinal()
+                endComponentGravity = getInt(
+                    R.styleable.PrimaryListItem_listEndIconGravity,
+                    ListStartAndEndComponentGravity.CENTER.ordinal
+                ).findStartAndEndComponentGravityByOrdinal()
                     ?: ListStartAndEndComponentGravity.CENTER
 
                 val startIconTint = getColorStateList(R.styleable.PrimaryListItem_listStartIconTint)
@@ -118,18 +121,8 @@ class PrimaryListItem : FrameLayout {
                 setTitleText(getString(R.styleable.PrimaryListItem_listTitleText))
                 setTitleTextAppearance(getResourceId(R.styleable.PrimaryListItem_listTitleTextAppearance, R.style.Body1_Bold))
                 setComponentType(titleComponentType)
-
-                when (startComponentGravity) {
-                    ListStartAndEndComponentGravity.TOP -> setStartIconGravity(Gravity.TOP)
-                    ListStartAndEndComponentGravity.CENTER -> setStartIconGravity(Gravity.CENTER)
-                    ListStartAndEndComponentGravity.BOTTOM -> setStartIconGravity(Gravity.BOTTOM)
-                }
-
-                when (endComponentGravity) {
-                    ListStartAndEndComponentGravity.TOP -> setStartIconGravity(Gravity.TOP)
-                    ListStartAndEndComponentGravity.CENTER -> setStartIconGravity(Gravity.CENTER)
-                    ListStartAndEndComponentGravity.BOTTOM -> setStartIconGravity(Gravity.BOTTOM)
-                }
+                setStartIconGravity()
+                setEndIconGravity()
 
                 descriptionText = getString(R.styleable.PrimaryListItem_listDescriptionText)
                 descriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listDescriptionTextAppearance, R.style.Body2_Regular)
@@ -257,18 +250,7 @@ class PrimaryListItem : FrameLayout {
         binding.listStartComponentContainer.isVisible = startComponentType != ListStartComponentType.NONE
         when (startComponentType) {
             ListStartComponentType.NONE -> Unit
-            ListStartComponentType.AVATAR -> {
-                binding.listStartComponentContainer.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    when (startComponentGravity) {
-                        ListStartAndEndComponentGravity.TOP -> this.bottomToBottom = ConstraintLayout.LayoutParams.UNSET
-                        ListStartAndEndComponentGravity.CENTER -> Unit
-                        ListStartAndEndComponentGravity.BOTTOM -> this.topToTop = ConstraintLayout.LayoutParams.UNSET
-                    }
-                }
-                binding.listStartComponentContainer.addView(avatar)
-            }
-
+            ListStartComponentType.AVATAR -> binding.listStartComponentContainer.addView(avatar)
             ListStartComponentType.ICON -> binding.listStartComponentContainer.addView(startIcon)
             ListStartComponentType.CHECKBOX -> {
                 binding.listStartComponentContainer.setPadding(2.dpToPx(), 0, 6.dpToPx(), 0)
@@ -300,18 +282,24 @@ class PrimaryListItem : FrameLayout {
         }
     }
 
-    fun setStartIconGravity(gravity: Int = Gravity.TOP) {
-        if (binding.listStartComponentContainer.childCount > 0)
-            binding.listStartComponentContainer[0].updateLayoutParams<LayoutParams> {
-                this.gravity = gravity
+    fun setStartIconGravity() {
+        binding.listStartComponentContainer.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            when (startComponentGravity) {
+                ListStartAndEndComponentGravity.TOP -> this.bottomToBottom = ConstraintLayout.LayoutParams.UNSET
+                ListStartAndEndComponentGravity.CENTER -> Unit
+                ListStartAndEndComponentGravity.BOTTOM -> this.topToTop = ConstraintLayout.LayoutParams.UNSET
             }
+        }
     }
 
-    fun setEndIconGravity(gravity: Int = Gravity.CENTER) {
-        if (binding.listEndComponentContainer.childCount > 0)
-            binding.listEndComponentContainer[0].updateLayoutParams<LayoutParams> {
-                this.gravity = gravity
+    fun setEndIconGravity() {
+        binding.listEndComponentContainer.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            when (endComponentGravity) {
+                ListStartAndEndComponentGravity.TOP -> this.bottomToBottom = ConstraintLayout.LayoutParams.UNSET
+                ListStartAndEndComponentGravity.CENTER -> Unit
+                ListStartAndEndComponentGravity.BOTTOM -> this.topToTop = ConstraintLayout.LayoutParams.UNSET
             }
+        }
     }
 
     fun setEndIcon(icon: Drawable?) {
