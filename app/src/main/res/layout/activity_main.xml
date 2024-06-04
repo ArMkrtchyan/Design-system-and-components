@@ -10,15 +10,15 @@
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/Black"
         android:layout_marginStart="39dp"
+        android:background="@color/Black"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/Black"
         android:layout_marginStart="76dp"
+        android:background="@color/Black"
         app:layout_constraintStart_toStartOf="parent" />
 
     <am.acba.component.toolbar.PrimaryToolbar
@@ -56,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_primary_input"
-                app:descriptionComponentType="ThreeLine"
                 app:listStartIcon="@drawable/ic_passport"
                 app:listStartIconTint="?attr/contentBrand"
                 app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
@@ -69,11 +68,13 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_primary_input"
                 app:descriptionComponentType="ThreeLine"
-                app:listStartIcon="@drawable/ic_passport"
-                app:listStartIconTint="?attr/contentBrand"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listStartIconGravity="Top"
                 app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
                 app:listTitleTextAppearance="@style/Body2.Regular"
-                app:startComponentType="Icon"
+                app:startComponentType="Avatar"
                 app:titleComponentType="ThreeLine" />
 
             <am.acba.component.listItem.PrimaryListItem

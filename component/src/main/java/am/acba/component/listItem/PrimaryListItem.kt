@@ -23,7 +23,9 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.isVisible
@@ -255,7 +257,18 @@ class PrimaryListItem : FrameLayout {
         binding.listStartComponentContainer.isVisible = startComponentType != ListStartComponentType.NONE
         when (startComponentType) {
             ListStartComponentType.NONE -> Unit
-            ListStartComponentType.AVATAR -> binding.listStartComponentContainer.addView(avatar)
+            ListStartComponentType.AVATAR -> {
+                binding.listStartComponentContainer.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    when (startComponentGravity) {
+                        ListStartAndEndComponentGravity.TOP -> this.bottomToBottom = ConstraintLayout.LayoutParams.UNSET
+                        ListStartAndEndComponentGravity.CENTER -> Unit
+                        ListStartAndEndComponentGravity.BOTTOM -> this.topToTop = ConstraintLayout.LayoutParams.UNSET
+                    }
+                }
+                binding.listStartComponentContainer.addView(avatar)
+            }
+
             ListStartComponentType.ICON -> binding.listStartComponentContainer.addView(startIcon)
             ListStartComponentType.CHECKBOX -> {
                 binding.listStartComponentContainer.setPadding(2.dpToPx(), 0, 6.dpToPx(), 0)
