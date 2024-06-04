@@ -237,14 +237,26 @@
         <attr name="listDescriptionText" format="string" />
         <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
         <attr name="listSecondaryDescriptionText" format="string" />
-        <attr name="listStartIcon" format="reference" />
+        <attr name="listStartIcon" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Bottom" value="2" />
+        </attr>
+        <attr name="listStartIconGravity" format="reference" />
         <attr name="listEndIcon" format="reference" />
+        <attr name="listEndIconGravity" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Bottom" value="2" />
+        </attr>
         <attr name="listStartIconTint" format="color" />
         <attr name="listEndIconTint" format="color" />
         <attr name="startComponentType" format="enum">
             <enum name="None" value="0" />
             <enum name="Avatar" value="1" />
-            <enum name="Icon" value="2" />
+            <enum name="Checkbox" value="2" />
+            <enum name="Radiobutton" value="3" />
+            <enum name="Icon" value="4" />
         </attr>
         <attr name="endComponentType" format="enum">
             <enum name="None" value="0" />

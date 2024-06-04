@@ -7,9 +7,11 @@ import am.acba.component.badge.PrimaryBadge.BadgeType.Companion.findBadgeTypeByO
 import am.acba.component.button.PrimaryActionTextButton
 import am.acba.component.checkbox.PrimaryCheckbox
 import am.acba.component.databinding.ListItemLayoutBinding
+import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.listItem.PrimaryListItem.ListEndComponentType.Companion.findEndComponentTypeByOrdinal
+import am.acba.component.listItem.PrimaryListItem.ListStartAndEndComponentGravity.Companion.findStartAndEndComponentGravityByOrdinal
 import am.acba.component.listItem.PrimaryListItem.ListStartComponentType.Companion.findStartComponentTypeByOrdinal
 import am.acba.component.listItem.PrimaryListItem.ListTextComponentType.Companion.findDescriptionComponentTypeByOrdinal
 import am.acba.component.radiobutton.PrimaryRadioButton
@@ -20,9 +22,12 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.Gravity
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
 
 class PrimaryListItem : FrameLayout {
@@ -45,6 +50,8 @@ class PrimaryListItem : FrameLayout {
 
     private var startComponentType = ListStartComponentType.NONE
     private var endComponentType = ListEndComponentType.NONE
+    private var startComponentGravity = ListStartAndEndComponentGravity.TOP
+    private var endComponentGravity = ListStartAndEndComponentGravity.CENTER
     private var titleComponentType = ListTextComponentType.NONE
     private var descriptionComponentType = ListTextComponentType.NONE
     private var secondaryDescriptionComponentType = ListTextComponentType.NONE
@@ -93,6 +100,10 @@ class PrimaryListItem : FrameLayout {
                 titleComponentType =
                     getInt(R.styleable.PrimaryListItem_titleComponentType, 0).findDescriptionComponentTypeByOrdinal()
                         ?: ListTextComponentType.NONE
+                startComponentGravity = getInt(R.styleable.PrimaryListItem_listStartIconGravity, 0).findStartAndEndComponentGravityByOrdinal()
+                    ?: ListStartAndEndComponentGravity.TOP
+                endComponentGravity = getInt(R.styleable.PrimaryListItem_listEndIconGravity, 0).findStartAndEndComponentGravityByOrdinal()
+                    ?: ListStartAndEndComponentGravity.CENTER
 
                 val startIconTint = getColorStateList(R.styleable.PrimaryListItem_listStartIconTint)
                 val endIconTint = getColorStateList(R.styleable.PrimaryListItem_listEndIconTint)
@@ -105,6 +116,18 @@ class PrimaryListItem : FrameLayout {
                 setTitleText(getString(R.styleable.PrimaryListItem_listTitleText))
                 setTitleTextAppearance(getResourceId(R.styleable.PrimaryListItem_listTitleTextAppearance, R.style.Body1_Bold))
                 setComponentType(titleComponentType)
+
+                when (startComponentGravity) {
+                    ListStartAndEndComponentGravity.TOP -> setStartIconGravity(Gravity.TOP)
+                    ListStartAndEndComponentGravity.CENTER -> setStartIconGravity(Gravity.CENTER)
+                    ListStartAndEndComponentGravity.BOTTOM -> setStartIconGravity(Gravity.BOTTOM)
+                }
+
+                when (endComponentGravity) {
+                    ListStartAndEndComponentGravity.TOP -> setStartIconGravity(Gravity.TOP)
+                    ListStartAndEndComponentGravity.CENTER -> setStartIconGravity(Gravity.CENTER)
+                    ListStartAndEndComponentGravity.BOTTOM -> setStartIconGravity(Gravity.BOTTOM)
+                }
 
                 descriptionText = getString(R.styleable.PrimaryListItem_listDescriptionText)
                 descriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listDescriptionTextAppearance, R.style.Body2_Regular)
@@ -214,6 +237,13 @@ class PrimaryListItem : FrameLayout {
             ListEndComponentType.RADIOBUTTON -> radiobutton.isChecked = isChecked
             ListEndComponentType.SWITCH -> switch.isChecked = isChecked
         }
+        when (startComponentType) {
+            ListStartComponentType.NONE -> Unit
+            ListStartComponentType.AVATAR -> Unit
+            ListStartComponentType.ICON -> Unit
+            ListStartComponentType.CHECKBOX -> checkbox.isChecked = isChecked
+            ListStartComponentType.RADIOBUTTON -> radiobutton.isChecked = isChecked
+        }
     }
 
     fun isChecked(): Boolean {
@@ -225,13 +255,14 @@ class PrimaryListItem : FrameLayout {
         binding.listStartComponentContainer.isVisible = startComponentType != ListStartComponentType.NONE
         when (startComponentType) {
             ListStartComponentType.NONE -> Unit
-            ListStartComponentType.AVATAR -> {
-                binding.listStartComponentContainer.addView(avatar)
+            ListStartComponentType.AVATAR -> binding.listStartComponentContainer.addView(avatar)
+            ListStartComponentType.ICON -> binding.listStartComponentContainer.addView(startIcon)
+            ListStartComponentType.CHECKBOX -> {
+                binding.listStartComponentContainer.setPadding(2.dpToPx(), 0, 6.dpToPx(), 0)
+                binding.listStartComponentContainer.addView(checkbox)
             }
 
-            ListStartComponentType.ICON -> {
-                binding.listStartComponentContainer.addView(startIcon)
-            }
+            ListStartComponentType.RADIOBUTTON -> binding.listStartComponentContainer.addView(radiobutton)
         }
     }
 
@@ -240,21 +271,10 @@ class PrimaryListItem : FrameLayout {
         binding.listEndComponentContainer.isVisible = endComponentType != ListEndComponentType.NONE
         when (endComponentType) {
             ListEndComponentType.NONE -> Unit
-            ListEndComponentType.ICON -> {
-                binding.listEndComponentContainer.addView(endIcon)
-            }
-
-            ListEndComponentType.CHECKBOX -> {
-                binding.listEndComponentContainer.addView(checkbox)
-            }
-
-            ListEndComponentType.RADIOBUTTON -> {
-                binding.listEndComponentContainer.addView(radiobutton)
-            }
-
-            ListEndComponentType.SWITCH -> {
-                binding.listEndComponentContainer.addView(switch)
-            }
+            ListEndComponentType.ICON -> binding.listEndComponentContainer.addView(endIcon)
+            ListEndComponentType.CHECKBOX -> binding.listEndComponentContainer.addView(checkbox)
+            ListEndComponentType.RADIOBUTTON -> binding.listEndComponentContainer.addView(radiobutton)
+            ListEndComponentType.SWITCH -> binding.listEndComponentContainer.addView(switch)
         }
     }
 
@@ -265,6 +285,20 @@ class PrimaryListItem : FrameLayout {
         } else if (startComponentType == ListStartComponentType.AVATAR) {
             avatar.setIcon(icon)
         }
+    }
+
+    fun setStartIconGravity(gravity: Int = Gravity.TOP) {
+        if (binding.listStartComponentContainer.childCount > 0)
+            binding.listStartComponentContainer[0].updateLayoutParams<LayoutParams> {
+                this.gravity = gravity
+            }
+    }
+
+    fun setEndIconGravity(gravity: Int = Gravity.CENTER) {
+        if (binding.listEndComponentContainer.childCount > 0)
+            binding.listEndComponentContainer[0].updateLayoutParams<LayoutParams> {
+                this.gravity = gravity
+            }
     }
 
     fun setEndIcon(icon: Drawable?) {
@@ -353,6 +387,8 @@ class PrimaryListItem : FrameLayout {
     enum class ListStartComponentType {
         NONE,
         AVATAR,
+        CHECKBOX,
+        RADIOBUTTON,
         ICON;
 
         companion object {
@@ -384,6 +420,18 @@ class PrimaryListItem : FrameLayout {
 
         companion object {
             fun Int.findEndComponentTypeByOrdinal(): ListEndComponentType? {
+                return entries.find { it.ordinal == this }
+            }
+        }
+    }
+
+    enum class ListStartAndEndComponentGravity {
+        TOP,
+        CENTER,
+        BOTTOM;
+
+        companion object {
+            fun Int.findStartAndEndComponentGravityByOrdinal(): ListStartAndEndComponentGravity? {
                 return entries.find { it.ordinal == this }
             }
         }

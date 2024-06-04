@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/Black"
+        android:layout_marginStart="39dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/Black"
+        android:layout_marginStart="76dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <am.acba.component.toolbar.PrimaryToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -41,18 +55,32 @@
                 android:id="@+id/info_text_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
                 app:descriptionComponentType="ThreeLine"
-                app:titleComponentType="ThreeLine"
-                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
-                app:listTitleTextAppearance="@style/Body2.Regular"
                 app:listStartIcon="@drawable/ic_passport"
                 app:listStartIconTint="?attr/contentBrand"
-                app:startComponentType="Icon" />
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Checkbox"
+                app:titleComponentType="ThreeLine" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:descriptionComponentType="ThreeLine"
+                app:listStartIcon="@drawable/ic_passport"
+                app:listStartIconTint="?attr/contentBrand"
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Icon"
+                app:titleComponentType="ThreeLine" />
 
             <am.acba.component.listItem.PrimaryListItem
                 android:id="@+id/list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/background_primary_input"
                 app:endComponentType="Icon"
                 app:listEndIcon="@drawable/ic_right"
