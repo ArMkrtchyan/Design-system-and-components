@@ -237,12 +237,12 @@
         <attr name="listDescriptionText" format="string" />
         <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
         <attr name="listSecondaryDescriptionText" format="string" />
-        <attr name="listStartIcon" format="enum">
+        <attr name="listStartIcon" format="reference" />
+        <attr name="listStartIconGravity" format="enum">
             <enum name="Top" value="0" />
             <enum name="Center" value="1" />
             <enum name="Bottom" value="2" />
         </attr>
-        <attr name="listStartIconGravity" format="reference" />
         <attr name="listEndIcon" format="reference" />
         <attr name="listEndIconGravity" format="enum">
             <enum name="Top" value="0" />
