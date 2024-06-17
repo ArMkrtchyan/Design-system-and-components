@@ -21,7 +21,9 @@
         <item name="backgroundDanger">@color/Red_500</item>
         <item name="backgroundDangerTonal1">@color/Red_800_40</item>
         <item name="backgroundSuccess">@color/Green_500</item>
+        <item name="backgroundSuccessTonal1">@color/Green_800_40</item>
         <item name="backgroundInfo">@color/Blue_500</item>
+        <item name="backgroundInfoTonal1">@color/Blue_900</item>
         <item name="backgroundWarning">@color/Orange_500</item>
         <item name="backgroundWarningTonal1">@color/Orange_800_40</item>
         <item name="backgroundPending">@color/BlueGrey_400</item>
@@ -50,6 +52,9 @@
         <item name="borderNeutral">@color/BlueGrey_900</item>
         <item name="borderDanger">@color/Red_500</item>
         <item name="borderDangerTonal1">@color/Red_800</item>
+        <item name="borderInfoTonal1">@color/Blue_600</item>
+        <item name="borderWarning">@color/Orange_600</item>
+        <item name="borderSuccess">@color/Green_600</item>
 
         <!-- Overlay -->
         <item name="overlayTonal1">@color/BlueGrey_700_0</item>

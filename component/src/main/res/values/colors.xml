@@ -22,14 +22,18 @@
     <color name="BrandGreen_600">#00856D</color>
     <color name="BrandGreen_650">#00745F</color>
 
+    <color name="Green_200_40">#66A5D6A7</color>
     <color name="Green_500">#38A96C</color>
     <color name="Green_600">#2D8756</color>
+    <color name="Green_800_40">#6616442B</color>
 
+    <color name="Blue_100">#D6ECFD</color>
     <color name="Blue_200">#AED9FA</color>
     <color name="Blue_500">#349FF3</color>
     <color name="Blue_600">#2A7FC2</color>
     <color name="Blue_700">#1F5F92</color>
     <color name="Blue_800">#154061</color>
+    <color name="Blue_900">#0A2031</color>
 
     <color name="Orange_200_40">#66FBEBB9</color>
     <color name="Orange_500">#F6CE51</color>
