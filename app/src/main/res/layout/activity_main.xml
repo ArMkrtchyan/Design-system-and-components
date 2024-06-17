@@ -509,6 +509,15 @@
             <am.acba.component.textView.PrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:id="@+id/alert"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:showCloseIcon="true"
+                tools:title="Title"
+                tools:body="Body"
+                tools:link="@string/appbar_scrolling_view_behavior"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
