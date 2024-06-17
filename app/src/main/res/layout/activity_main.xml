@@ -454,6 +454,14 @@
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:hint="@string/app_name" />
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/inputa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                app:isListDialog="true"
+                android:hint="@string/app_name" />
 
             <am.acba.component.input.SearchInput
                 android:id="@+id/search"

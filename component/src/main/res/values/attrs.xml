@@ -175,6 +175,7 @@
     </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
+        <attr name="isListDialog" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SearchInput">
