@@ -1,7 +1,7 @@
 package am.acba.components
 
+import am.acba.component.alert.PrimaryAlert
 import am.acba.component.badge.PrimaryBadge
-import am.acba.component.button.PrimaryActionTextButton
 import am.acba.component.exchange.ExchangeRate
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
@@ -13,7 +13,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -45,8 +44,20 @@ class MainActivity : AppCompatActivity() {
         listItem.badge.setBadgeBackgroundTint(this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
 
         input.apply {
-            setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-            setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setEndIconOnClickListener {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            setStartIconOnClickListener {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             setOnFocusChangeListener { v, hasFocus ->
 
             }
@@ -77,9 +88,12 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener {
                 Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
             }
-            val firstRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
-            val secondRate = ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
-            val thirdRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
+            val firstRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
+            val secondRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
+            val thirdRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
             val rates = Triple(firstRate, secondRate, thirdRate)
             setExchangeRates(rates)
         }
@@ -89,6 +103,23 @@ class MainActivity : AppCompatActivity() {
                 recreate()
             }
         }
-        search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+        search2.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+        }
+        alert.initAlert()
+    }
+
+    private fun PrimaryAlert.initAlert() {
+        setTitle("Title")
+        setBody("Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam nunc adipiscing. Quis nec diam fames feugiat ac non.")
+        setLink("Link")
+        setOnCloseClickListener {
+            Toast.makeText(this@MainActivity, "Button clicked", Toast.LENGTH_SHORT)
+                .show()
+        }
+        setOnLinkClickListener {
+            Toast.makeText(this@MainActivity, "Link clicked", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }
