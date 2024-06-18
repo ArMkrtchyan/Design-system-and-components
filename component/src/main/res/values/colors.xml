@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="White">#FFFFFF</color>
+    <color name="White_8">#14FFFFFF</color>
+    <color name="White_10">#1AFFFFFF</color>
+    <color name="White_28">#47FFFFFF</color>
+    <color name="White_60">#99FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="Black_10">#1A000000</color>
+    <color name="Black_20">#33000000</color>
+    <color name="Black_30">#4D000000</color>
+    <color name="Black_50">#80000000</color>
+    <color name="Black_60">#99000000</color>
+    <color name="Black_70">#B3000000</color>
     <color name="Transparent">#00000000</color>
 
     <color name="BrandGreen_200">#B3E4DB</color>
@@ -19,8 +29,9 @@
     <color name="Blue_500">#349FF3</color>
     <color name="Blue_600">#2A7FC2</color>
     <color name="Blue_700">#1F5F92</color>
+    <color name="Blue_800">#154061</color>
 
-    <color name="Orange_200_40">#66F6CE51</color>
+    <color name="Orange_200_40">#66FBEBB9</color>
     <color name="Orange_500">#F6CE51</color>
     <color name="Orange_600">#CBA941</color>
     <color name="Orange_800_40">#66746022</color>
@@ -37,11 +48,11 @@
     <color name="BlueGrey_100">#EEEFF4</color>
     <color name="BlueGrey_150">#E6E7EF</color>
     <color name="BlueGrey_200">#DDDFE9</color>
+    <color name="BlueGrey_200_0">#00DDDFE9</color>
     <color name="BlueGrey_250">#D5D8E4</color>
     <color name="BlueGrey_300">#CCD0DF</color>
     <color name="BlueGrey_350">#C4C8D9</color>
     <color name="BlueGrey_400">#BBC0D4</color>
-    <color name="BlueGrey_500">#AAB0C9</color>
     <color name="BlueGrey_550">#8A91B5</color>
     <color name="BlueGrey_550_10">#1A8A91B5</color>
     <color name="BlueGrey_550_15">#268A91B5</color>
@@ -49,6 +60,7 @@
     <color name="BlueGrey_600">#7A82A1</color>
     <color name="BlueGrey_650">#6B718D</color>
     <color name="BlueGrey_700">#5C6279</color>
+    <color name="BlueGrey_700_0">#005C6279</color>
     <color name="BlueGrey_800">#3D4050</color>
     <color name="BlueGrey_850">#2E313C</color>
     <color name="BlueGrey_850_30">#4D2E313C</color>
@@ -56,11 +68,14 @@
     <color name="BlueGrey_850_70">#B32E313C</color>
     <color name="BlueGrey_900">#23272E</color>
     <color name="BlueGrey_950">#1B1E24</color>
+    <color name="BlueGrey_950_60">#991E2129</color>
     <color name="BlueGrey_1000">#14161A</color>
 
     <color name="Red_200_40">#66E8BABB</color>
+    <color name="Red_200">#E8BABB</color>
     <color name="Red_500">#C95155</color>
     <color name="Red_600">#9E4245</color>
+    <color name="Red_800">#4F2122</color>
     <color name="Red_900">#281011</color>
     <color name="Red_800_40">#664F2122</color>
 
@@ -74,6 +89,13 @@
 
     <color name="Orchid_200">#F1C3E9</color>
     <color name="Orchid_700">#8E4081</color>
+
+    <color name="Silver_100">#BCBCBC</color>
+    <color name="Silver_150">#383838</color>
+    <color name="Silver_40_95">#F2D7D7D7</color>
+    <color name="Silver_50_82">#D1B3B3B3</color>
+    <color name="Silver_200_95">#F2252525</color>
+    <color name="Silver_200_82">#D1252525</color>
 
 
 </resources>

@@ -9,36 +9,60 @@
         <item name="backgroundBase">@color/BlueGrey_1000</item>
         <item name="backgroundBrand">@color/BrandGreen_500</item>
         <item name="backgroundBrandPressed">@color/BrandGreen_400</item>
+        <item name="backgroundSecondary">@color/Orange_500</item>
+        <item name="backgroundSecondaryPressed">@color/Orange_600</item>
         <item name="backgroundBrandDisable">@color/BlueGrey_850</item>
         <item name="backgroundTonal1">@color/BlueGrey_950</item>
         <item name="backgroundTonal2">@color/BlueGrey_850_70</item>
         <item name="backgroundTonal2ReadOnly">@color/BlueGrey_850</item>
         <item name="backgroundTonal2Disable">@color/BlueGrey_850_30</item>
         <item name="backgroundTonal3">@color/BlueGrey_850</item>
+        <item name="backgroundTonal6">@color/BlueGrey_850</item>
         <item name="backgroundDanger">@color/Red_500</item>
         <item name="backgroundDangerTonal1">@color/Red_800_40</item>
         <item name="backgroundSuccess">@color/Green_500</item>
         <item name="backgroundInfo">@color/Blue_500</item>
         <item name="backgroundWarning">@color/Orange_500</item>
+        <item name="backgroundWarningTonal1">@color/Orange_800_40</item>
         <item name="backgroundPending">@color/BlueGrey_400</item>
+        <item name="backgroundInverse">@color/BlueGrey_50</item>
+        <item name="backgroundInverse2">@color/BlueGrey_50</item>
         <item name="backgroundAlternative">@color/Purple_200</item>
         <item name="backgroundAlternative2">@color/Yellow_200</item>
         <item name="backgroundAlternative3">@color/AztecPurple_200</item>
         <item name="backgroundAlternative4">@color/Orchid_200</item>
         <item name="backgroundAlternative5">@color/BrandGreen_200</item>
         <item name="backgroundAlternative6">@color/Blue_200</item>
-        <item name="backgroundInverse">@color/BlueGrey_50</item>
+        <item name="backgroundAlternative7">@color/Silver_100</item>
+        <item name="backgroundAlternative8">@color/Orange_500</item>
+        <item name="backgroundAlternative9">@color/Blue_800</item>
+        <item name="backgroundNavBar">@color/Black_60</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_350</item>
-        <item name="borderPrimary">@color/BlueGrey_100</item>
+        <item name="borderPrimary">@color/BlueGrey_650</item>
+        <item name="borderPrimaryTonal1">@color/BlueGrey_850</item>
+        <item name="borderPrimaryTonal2">@color/White_10</item>
         <item name="borderBrand">@color/BrandGreen_500</item>
         <item name="borderBrandTonal1">@color/BrandGreen_450</item>
         <item name="borderBrandTonal1Disable">@color/BlueGrey_700</item>
         <item name="borderSecondary">@color/BlueGrey_800</item>
         <item name="borderNeutral">@color/BlueGrey_900</item>
         <item name="borderDanger">@color/Red_500</item>
-        <item name="borderPrimaryTonal1">@color/BlueGrey_850</item>
+        <item name="borderDangerTonal1">@color/Red_800</item>
+
+        <!-- Overlay -->
+        <item name="overlayTonal1">@color/BlueGrey_700_0</item>
+        <item name="overlayTonal2">@color/BlueGrey_700</item>
+        <item name="overlayTonal3">@color/White_8</item>
+        <item name="overlayTonal4">@color/Silver_200_95</item>
+        <item name="overlayBackground">@color/Black_70</item>
+        <item name="overlayBackgroundTonal1">@color/Black_20</item>
+        <item name="overlayBackgroundTonal2">@color/Black_30</item>
+        <item name="overlayBackgroundTonal5">@color/Silver_200_82</item>
+        <item name="overlayBackgroundTonal6">@color/Black_10</item>
+        <item name="overlayBackgroundTonal7">@color/BlueGrey_950_60</item>
+        <item name="overlayBackgroundTonal8">@color/BlueGrey_950_60</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
@@ -51,12 +75,15 @@
         <item name="contentPrimaryTonal1Disable">@color/BlueGrey_700</item>
         <item name="contentSecondary">@color/White</item>
         <item name="contentSecondaryDisable">@color/BlueGrey_700</item>
-        <item name="contentDanger">@color/Red_900</item>
+        <item name="contentInverse">@color/BlueGrey_900</item>
+        <item name="contentInverse2">@color/BlueGrey_900</item>
         <item name="contentDangerTonal1">@color/Red_500</item>
+        <item name="contentNeutralTonal1">@color/BlueGrey_150</item>
         <item name="contentInfoTonal1">@color/Blue_500</item>
         <item name="contentSuccessTonal1">@color/Green_500</item>
         <item name="contentWarning">@color/Orange_900</item>
         <item name="contentWarningTonal1">@color/Orange_500</item>
+        <item name="contentWarningTonal2">@color/Orange_600</item>
         <item name="contentPending">@color/BlueGrey_950</item>
         <item name="contentAlternative">@color/Purple_700</item>
         <item name="contentAlternative2">@color/Yellow_700</item>
@@ -64,7 +91,6 @@
         <item name="contentAlternative4">@color/Orchid_700</item>
         <item name="contentAlternative5">@color/BrandGreen_550</item>
         <item name="contentAlternative6">@color/Blue_700</item>
-        <item name="contentInverse">@color/Grey_900</item>
     </style>
 
     <style name="ACBA.Theme.Dark" parent="BasePrimaryThemeDark" />

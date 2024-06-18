@@ -7,6 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="39dp"
+        android:background="@color/Black"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="76dp"
+        android:background="@color/Black"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <am.acba.component.toolbar.PrimaryToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -37,9 +51,68 @@
             android:paddingHorizontal="20dp"
             android:paddingBottom="100dp">
 
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/info_text_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:listStartIcon="@drawable/ic_passport"
+                app:listStartIconTint="?attr/contentBrand"
+                app:listStartIconGravity="Center"
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Checkbox"
+                app:titleComponentType="ThreeLine" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:descriptionComponentType="ThreeLine"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listEndIconGravity="Top"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listStartIconGravity="Center"
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ըուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Avatar"
+                app:titleComponentType="ThreeLine" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_primary_input"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:startComponentType="Avatar" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_primary_input"
+                app:badgeBackgroundTint="?attr/backgroundWarning"
+                app:badgePaddingBottom="@dimen/spacing_4"
+                app:badgePaddingTop="@dimen/spacing_4"
+                app:badgeType="Number"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:showBadge="true"
+                app:startComponentType="Avatar"
+                tools:badgeText="2" />
+
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
                 app:badgeIconTint="?attr/backgroundDanger"
                 app:badgeType="Dot" />
 
@@ -58,16 +131,16 @@
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:badgeText="100"
                 app:badgeBackgroundTint="?attr/backgroundDanger"
+                app:badgeText="100"
                 app:badgeType="Number" />
 
             <am.acba.component.badge.PrimaryBadge
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:badgeBackgroundTint="?attr/backgroundDanger"
                 app:badgeText="Badge"
                 app:badgeTextColor="@color/Black"
-                app:badgeBackgroundTint="?attr/backgroundDanger"
                 app:badgeType="Text" />
 
             <am.acba.component.button.PrimaryActionTextButton
@@ -75,15 +148,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:visibility="visible"
                 app:actionIconSize="Large"
                 app:badgeIcon="@drawable/background_rounded"
                 app:badgeIconGravity="Top"
-                android:visibility="gone"
                 app:badgeType="SmallIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:showActionText="false" />
+
+            <am.acba.component.button.PrimaryActionTextButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:actionButtonType="Avatar"
+                app:actionIcon="@drawable/default_avatar"
+                app:actionIconSize="XLarge" />
 
             <!--            <HorizontalScrollView-->
             <!--                android:layout_width="match_parent"-->
@@ -226,13 +307,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical">
 
-<!--                    <am.acba.component.button.PrimaryActionTextButton-->
-<!--                        android:layout_width="80dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Աննա Հովսեփյան"-->
-<!--                        app:actionButtonType="Text"-->
-<!--                        app:actionIcon="@drawable/default_avatar"-->
-<!--                        app:actionIconSize="XLarge"/>-->
+                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->
+                    <!--                        android:layout_width="80dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="Աննա Հովսեփյան"-->
+                    <!--                        app:actionButtonType="Text"-->
+                    <!--                        app:actionIcon="@drawable/default_avatar"-->
+                    <!--                        app:actionIconSize="XLarge"/>-->
 
                     <!--                    <am.acba.component.button.PrimaryActionTextButton-->
                     <!--                        android:layout_width="wrap_content"-->
@@ -372,6 +453,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
+                android:hint="@string/app_name" />
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/inputa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                app:isListDialog="true"
                 android:hint="@string/app_name" />
 
             <am.acba.component.input.SearchInput

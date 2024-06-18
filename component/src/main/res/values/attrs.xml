@@ -3,6 +3,7 @@
 
     <attr name="isPreventClick" format="boolean" />
     <attr name="clickInterval" format="integer" />
+    <attr name="showBadge" format="boolean" />
     <attr name="badgeText" format="string" />
     <attr name="badgeTextColor" format="color" />
     <attr name="badgeIcon" format="reference" />
@@ -15,6 +16,11 @@
         <enum name="Number" value="3" />
         <enum name="Text" value="4" />
     </attr>
+    <attr name="badgePaddingTop" format="dimension" />
+    <attr name="badgePaddingBottom" format="dimension" />
+    <attr name="badgePaddingStart" format="dimension" />
+    <attr name="badgePaddingEnd" format="dimension" />
+    <attr name="badgeTextAppearance" format="reference" />
 
     <declare-styleable name="ds">
 
@@ -35,17 +41,21 @@
         <attr name="backgroundBase" format="color" />
         <attr name="backgroundBrand" format="color" />
         <attr name="backgroundBrandPressed" format="color" />
+        <attr name="backgroundSecondary" format="color" />
+        <attr name="backgroundSecondaryPressed" format="color" />
         <attr name="backgroundBrandDisable" format="color" />
         <attr name="backgroundTonal1" format="color" />
         <attr name="backgroundTonal2" format="color" />
+        <attr name="backgroundTonal3" format="color" />
+        <attr name="backgroundTonal6" format="color" />
         <attr name="backgroundTonal2ReadOnly" format="color" />
         <attr name="backgroundTonal2Disable" format="color" />
-        <attr name="backgroundTonal3" format="color" />
         <attr name="backgroundDanger" format="color" />
         <attr name="backgroundDangerTonal1" format="color" />
         <attr name="backgroundSuccess" format="color" />
         <attr name="backgroundInfo" format="color" />
         <attr name="backgroundWarning" format="color" />
+        <attr name="backgroundWarningTonal1" format="color" />
         <attr name="backgroundPending" format="color" />
         <attr name="backgroundAlternative" format="color" />
         <attr name="backgroundAlternative2" format="color" />
@@ -53,18 +63,38 @@
         <attr name="backgroundAlternative4" format="color" />
         <attr name="backgroundAlternative5" format="color" />
         <attr name="backgroundAlternative6" format="color" />
+        <attr name="backgroundAlternative7" format="color" />
+        <attr name="backgroundAlternative8" format="color" />
+        <attr name="backgroundAlternative9" format="color" />
         <attr name="backgroundInverse" format="color" />
+        <attr name="backgroundInverse2" format="color" />
+        <attr name="backgroundNavBar" format="color" />
 
         <!-- Borders -->
         <attr name="borderBase" format="color" />
         <attr name="borderPrimary" format="color" />
+        <attr name="borderPrimaryTonal1" format="color" />
+        <attr name="borderPrimaryTonal2" format="color" />
         <attr name="borderBrand" format="color" />
         <attr name="borderBrandTonal1" format="color" />
         <attr name="borderBrandTonal1Disable" format="color" />
         <attr name="borderSecondary" format="color" />
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
-        <attr name="borderPrimaryTonal1" format="color" />
+        <attr name="borderDangerTonal1" format="color" />
+
+        <!-- Overlay -->
+        <attr name="overlayTonal1" format="color" />
+        <attr name="overlayTonal2" format="color" />
+        <attr name="overlayTonal3" format="color" />
+        <attr name="overlayTonal4" format="color" />
+        <attr name="overlayBackground" format="color" />
+        <attr name="overlayBackgroundTonal1" format="color" />
+        <attr name="overlayBackgroundTonal2" format="color" />
+        <attr name="overlayBackgroundTonal5" format="color" />
+        <attr name="overlayBackgroundTonal6" format="color" />
+        <attr name="overlayBackgroundTonal7" format="color" />
+        <attr name="overlayBackgroundTonal8" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -77,12 +107,15 @@
         <attr name="contentPrimaryTonal1Disable" format="color" />
         <attr name="contentSecondary" format="color" />
         <attr name="contentSecondaryDisable" format="color" />
-        <attr name="contentDanger" format="color" />
+        <attr name="contentInverse" format="color" />
+        <attr name="contentInverse2" format="color" />
+        <attr name="contentNeutralTonal1" format="color" />
         <attr name="contentDangerTonal1" format="color" />
-        <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentInfoTonal1" format="color" />
+        <attr name="contentSuccessTonal1" format="color" />
         <attr name="contentWarning" format="color" />
         <attr name="contentWarningTonal1" format="color" />
+        <attr name="contentWarningTonal2" format="color" />
         <attr name="contentPending" format="color" />
         <attr name="contentAlternative" format="color" />
         <attr name="contentAlternative2" format="color" />
@@ -90,7 +123,6 @@
         <attr name="contentAlternative4" format="color" />
         <attr name="contentAlternative5" format="color" />
         <attr name="contentAlternative6" format="color" />
-        <attr name="contentInverse" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryButton">
@@ -111,8 +143,9 @@
         <attr name="showActionText" format="boolean" />
         <attr name="badgeChecked" format="boolean" />
         <attr name="checkable" format="boolean" />
-        <attr name="showBadge" format="boolean" />
+        <attr name="showBadge" />
         <attr name="badgeText" />
+        <attr name="badgeTextAppearance" />
         <attr name="badgeTextColor" />
         <attr name="badgeIcon" />
         <attr name="badgeIconTint" />
@@ -122,6 +155,10 @@
             <enum name="Bottom" value="0" />
             <enum name="Top" value="1" />
         </attr>
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
         <attr name="actionIcon" format="reference" />
         <attr name="actionIconSize" format="enum">
             <enum name="XLarge" value="0" />
@@ -138,6 +175,7 @@
     </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
+        <attr name="isListDialog" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SearchInput">
@@ -153,7 +191,7 @@
         <attr name="ratesIconTint" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="PrimaryCheckBox">
+    <declare-styleable name="PrimaryCheckbox">
 
     </declare-styleable>
 
@@ -176,11 +214,87 @@
     </declare-styleable>
 
     <declare-styleable name="PrimaryBadge">
+        <attr name="badgeTextAppearance" />
         <attr name="badgeText" />
         <attr name="badgeTextColor" />
         <attr name="badgeIcon" />
         <attr name="badgeIconTint" />
         <attr name="badgeBackgroundTint" />
         <attr name="badgeType" />
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PrimaryListItem">
+        <attr name="clickInterval" />
+        <attr name="isPreventClick" />
+        <attr name="isChecked" format="boolean" />
+        <attr name="listTitleTextAppearance" format="reference" />
+        <attr name="listTitleText" format="string" />
+        <attr name="listDescriptionTextAppearance" format="reference" />
+        <attr name="listDescriptionText" format="string" />
+        <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
+        <attr name="listSecondaryDescriptionText" format="string" />
+        <attr name="listStartIcon" format="reference" />
+        <attr name="listStartIconGravity" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Bottom" value="2" />
+        </attr>
+        <attr name="listEndIcon" format="reference" />
+        <attr name="listEndIconGravity" format="enum">
+            <enum name="Top" value="0" />
+            <enum name="Center" value="1" />
+            <enum name="Bottom" value="2" />
+        </attr>
+        <attr name="listStartIconTint" format="color" />
+        <attr name="listEndIconTint" format="color" />
+        <attr name="startComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Avatar" value="1" />
+            <enum name="Checkbox" value="2" />
+            <enum name="Radiobutton" value="3" />
+            <enum name="Icon" value="4" />
+        </attr>
+        <attr name="endComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Icon" value="1" />
+            <enum name="Checkbox" value="2" />
+            <enum name="Radiobutton" value="3" />
+            <enum name="Switch" value="4" />
+        </attr>
+        <attr name="descriptionComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="titleComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="secondaryDescriptionComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Singleline" value="1" />
+            <enum name="TwoLine" value="2" />
+            <enum name="ThreeLine" value="3" />
+        </attr>
+        <attr name="badgeTextAppearance" />
+        <attr name="badgeText" />
+        <attr name="badgeTextColor" />
+        <attr name="badgeIcon" />
+        <attr name="badgeIconTint" />
+        <attr name="badgeBackgroundTint" />
+        <attr name="badgeType" />
+        <attr name="badgePaddingTop" />
+        <attr name="badgePaddingBottom" />
+        <attr name="badgePaddingStart" />
+        <attr name="badgePaddingEnd" />
+        <attr name="showBadge" />
     </declare-styleable>
 </resources>
