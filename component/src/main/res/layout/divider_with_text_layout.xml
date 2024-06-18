@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/divider_background" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/divider_text"
+        style="@style/Small.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="?attr/backgroundBase"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="8dp"
+        android:singleLine="true"
+        android:textColor="?attr/contentPrimaryTonal1"
+        tools:maxWidth="350dp"
+        tools:text="Divider" />
+</FrameLayout>

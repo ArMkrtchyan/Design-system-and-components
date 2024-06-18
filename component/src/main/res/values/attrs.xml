@@ -227,6 +227,16 @@
         <attr name="badgePaddingEnd" />
     </declare-styleable>
 
+    <declare-styleable name="PrimaryDivider">
+        <attr name="android:text" />
+        <attr name="dividerThickness" format="dimension" />
+        <attr name="dividerBackground" format="reference" />
+        <attr name="dividerTint" format="color" />
+        <attr name="dividerTextAppearance" format="reference" />
+        <attr name="dividerTextColor" format="color" />
+        <attr name="dividerTextMaxWidth" format="float" />
+    </declare-styleable>
+
 
     <declare-styleable name="PrimaryListItem">
         <attr name="clickInterval" />

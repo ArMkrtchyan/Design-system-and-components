@@ -2,8 +2,10 @@ package am.acba.component.extensions
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.WindowManager
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 
@@ -30,4 +32,11 @@ fun Context.getActionBarHeight(): Int {
         actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
     }
     return actionBarHeight
+}
+
+fun Context.getDisplayWidth(): Int {
+    val displayMetrics = DisplayMetrics()
+    val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics.widthPixels
 }

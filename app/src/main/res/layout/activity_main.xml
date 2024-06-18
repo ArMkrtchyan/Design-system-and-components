@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="39dp"
         android:background="@color/Black"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -19,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="76dp"
         android:background="@color/Black"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent" />
 
     <am.acba.component.toolbar.PrimaryToolbar
@@ -37,10 +39,28 @@
         android:text="Night mode"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+        <am.acba.component.divider.PrimaryDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Or"
+            app:dividerThickness="1dp"
+            android:layout_marginBottom="10dp" />
+    </LinearLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -49,7 +69,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
-            android:paddingBottom="100dp">
+            android:paddingBottom="100dp"
+            android:visibility="gone">
 
             <am.acba.component.listItem.PrimaryListItem
                 android:id="@+id/info_text_2"
@@ -57,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_primary_input"
                 app:listStartIcon="@drawable/ic_passport"
-                app:listStartIconTint="?attr/contentBrand"
                 app:listStartIconGravity="Center"
+                app:listStartIconTint="?attr/contentBrand"
                 app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
                 app:listTitleTextAppearance="@style/Body2.Regular"
                 app:startComponentType="Checkbox"
@@ -454,14 +475,15 @@
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:hint="@string/app_name" />
+
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/inputa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
-                app:isListDialog="true"
-                android:hint="@string/app_name" />
+                android:hint="@string/app_name"
+                app:isListDialog="true" />
 
             <am.acba.component.input.SearchInput
                 android:id="@+id/search"
