@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun ActivityMainBinding.initView() {
         setSupportActionBar(toolbar)
-
         listItem.showBadge()
         listItem.badge.setBadgeType(PrimaryBadge.BadgeType.TEXT)
         listItem.badge.setBadgeText("Առաջարկ")
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         input.apply {
             setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-            setOnFocusChangeListener { v, hasFocus ->
+            setOnFocusChangeListener { _, _ ->
 
             }
         }

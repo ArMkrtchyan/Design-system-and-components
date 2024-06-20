@@ -60,7 +60,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -70,7 +70,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingBottom="100dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <am.acba.component.listItem.PrimaryListItem
                 android:id="@+id/info_text_2"
@@ -492,7 +492,7 @@
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:hint="@string/app_name"
-                app:isListDialog="true" />
+                app:hasDropDown="true" />
 
             <am.acba.component.input.SearchInput
                 android:id="@+id/search"
@@ -516,15 +516,6 @@
                 android:hint="@string/app_name"
                 app:endIconTint="@color/AztecPurple_700"
                 app:hasDropDown="true" />
-
-            <am.acba.component.input.SearchInput
-                android:id="@+id/search"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Որոնել..."
-                app:endIconDrawable="@drawable/ic_close"
-                app:startIconDrawable="@drawable/ic_search" />
 
             <am.acba.component.button.PrimaryButton
                 android:id="@+id/buttonPr"

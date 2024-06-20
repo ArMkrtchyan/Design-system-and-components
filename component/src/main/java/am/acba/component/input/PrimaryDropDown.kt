@@ -27,6 +27,9 @@ class PrimaryDropDown @JvmOverloads constructor(
         }
     }
 
+    override fun setOnClickListener(l: OnClickListener?) {
+        binding.frame.setOnClickListener(l)
+    }
     fun setText(text: String) {
         binding.inputDropDown.editText?.setText(text)
     }
