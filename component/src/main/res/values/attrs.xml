@@ -175,7 +175,7 @@
     </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
-        <attr name="isListDialog" format="boolean"/>
+        <attr name="hasDropDown" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="SearchInput">
@@ -187,6 +187,10 @@
 
     </declare-styleable>
 
+    <declare-styleable name="PrimaryDropDown">
+        <attr name="android:text" />
+        <attr name="android:hint" />
+    </declare-styleable>
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />
     </declare-styleable>

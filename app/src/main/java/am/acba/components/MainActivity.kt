@@ -8,6 +8,7 @@ import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
