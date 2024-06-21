@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
     private fun ActivityMainBinding.initView() {
         setSupportActionBar(toolbar)
         listItem.showBadge()
+        binding.dropDown.setOnClickListener {
+            binding.dropDown.addFocus()
+        }
+
         listItem.badge.setBadgeType(PrimaryBadge.BadgeType.TEXT)
         listItem.badge.setBadgeText("Առաջարկ")
         listItem.badge.setBadgeTextColor(this@MainActivity.getColorFromAttr(am.acba.component.R.attr.contentWarning))
@@ -75,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
         exchangeRates.apply {
             setOnClickListener {
-                Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+                binding.dropDown.removeFocus()
             }
             val firstRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
             val secondRate = ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")

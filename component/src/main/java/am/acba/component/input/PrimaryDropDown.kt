@@ -4,7 +4,6 @@ import am.acba.component.R
 import am.acba.component.databinding.PrimaryDropdownBinding
 import am.acba.component.extensions.inflater
 import android.content.Context
-import android.text.Editable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 
@@ -25,16 +24,33 @@ class PrimaryDropDown @JvmOverloads constructor(
                 recycle()
             }
         }
+        binding.root.setOnClickListener {
+            binding.inputDropDown.editText?.requestFocus()
+        }
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        binding.frame.setOnClickListener(l)
+
+        binding.frame.setOnClickListener {
+            l?.onClick(it)
+        }
     }
+
     fun setText(text: String) {
         binding.inputDropDown.editText?.setText(text)
     }
 
     fun setHint(hint: String) {
         binding.inputDropDown.hint = hint
+    }
+
+    fun addFocus() {
+        binding.inputDropDown.editText?.setBackgroundResource(R.drawable.background_dropdown_focused)
+        binding.inputDropDown.setEndIconDrawable(R.drawable.ic_up)
+    }
+
+    fun removeFocus() {
+        binding.inputDropDown.editText?.setBackgroundResource(R.drawable.background_primary_input)
+        binding.inputDropDown.setEndIconDrawable(R.drawable.ic_down)
     }
 }
