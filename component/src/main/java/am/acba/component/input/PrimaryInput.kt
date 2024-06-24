@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 open class PrimaryInput : TextInputLayout {
     private var textMaxLength = -1
+    private var hasDropDown = false
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
@@ -37,10 +38,17 @@ open class PrimaryInput : TextInputLayout {
             try {
                 if (hasValueOrEmpty(R.styleable.PrimaryInput_textMaxLength))
                     textMaxLength = getInt(R.styleable.PrimaryInput_textMaxLength, -1)
+                hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
             if (textMaxLength != -1) setMaxLength(textMaxLength)
+            if (hasDropDown) {
+                val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
+                editText?.isEnabled = false
+                endIcon.setImageResource(R.drawable.ic_down)
+                endIcon.imageTintList = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+            }
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             recycle()
@@ -69,7 +77,7 @@ open class PrimaryInput : TextInputLayout {
         textMaxLength = maxLength
         val fArray = arrayOfNulls<InputFilter>(1)
         fArray[0] = LengthFilter(maxLength)
-        editText?.setFilters(fArray)
+        editText?.filters = fArray
     }
 
     private fun updateEndIconBackgroundState() {

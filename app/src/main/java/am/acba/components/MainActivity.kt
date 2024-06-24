@@ -8,6 +8,7 @@ import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,8 +38,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun ActivityMainBinding.initView() {
         setSupportActionBar(toolbar)
-
         listItem.showBadge()
+        binding.dropDown.setOnClickListener {
+            binding.dropDown.addFocus()
+        }
+
         listItem.badge.setBadgeType(PrimaryBadge.BadgeType.TEXT)
         listItem.badge.setBadgeText("Առաջարկ")
         listItem.badge.setBadgeTextColor(this@MainActivity.getColorFromAttr(am.acba.component.R.attr.contentWarning))
@@ -47,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         input.apply {
             setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-            setOnFocusChangeListener { v, hasFocus ->
+            setOnFocusChangeListener { _, _ ->
 
             }
         }
@@ -75,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
         exchangeRates.apply {
             setOnClickListener {
-                Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+                binding.dropDown.removeFocus()
             }
             val firstRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
             val secondRate = ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
