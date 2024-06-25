@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ButtonsFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Buttons" />
+
+    <am.acba.component.textView.PrimaryTextView
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Buttons communicate actions that users can take." />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <am.acba.component.button.PrimaryButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                android:text="Primary button"
+                app:icon="@drawable/ic_question" />
+
+            <am.acba.component.button.PrimaryButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="false"
+                android:text="Primary button disabled" />
+
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/buttonSec"
+                style="@style/Button.Style.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                android:text="Secondary button enabled"
+                app:icon="@drawable/default_icon" />
+
+            <am.acba.component.button.PrimaryButton
+                style="@style/Button.Style.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="false"
+                android:text="Secondary button disabled" />
+
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/buttonGhost"
+                style="@style/Button.Style.Ghost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                android:text="Ghost button enabled" />
+
+            <am.acba.component.button.PrimaryButton
+                style="@style/Button.Style.Ghost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:enabled="false"
+                android:text="Ghost button disabled"
+                app:icon="@drawable/default_icon" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

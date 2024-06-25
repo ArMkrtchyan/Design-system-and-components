@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mainScreen.MainFragment">
+
+    <am.acba.component.switcher.PrimarySwitcher
+        android:id="@+id/switcher"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:checked="true"
+        android:paddingHorizontal="20dp"
+        android:text="@string/app_name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/components_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingHorizontal="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_components" />
+</LinearLayout>

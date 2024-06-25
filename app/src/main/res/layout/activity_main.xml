@@ -5,14 +5,24 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".mainScreen.MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container_authorization"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/navigation_graph" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_marginStart="39dp"
         android:background="@color/Black"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -20,49 +30,16 @@
         android:layout_height="match_parent"
         android:layout_marginStart="76dp"
         android:background="@color/Black"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <am.acba.component.toolbar.PrimaryToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintTop_toBottomOf="@id/switcher"
-        app:title="Toolbar" />
-
-    <am.acba.component.switcher.PrimarySwitcher
-        android:id="@+id/switcher"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_margin="20dp"
-        android:checked="false"
-        android:text="Night mode"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-
-        <am.acba.component.divider.PrimaryDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Or"
-            app:dividerThickness="1dp" />
-    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -495,8 +472,8 @@
                 android:id="@+id/dropDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="asASas"
-                android:hint="asASas"/>
+                android:hint="asASas"
+                android:text="asASas" />
 
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/inputa"
@@ -531,55 +508,6 @@
                 app:endIconTint="@color/AztecPurple_700"
                 app:hasDropDown="true" />
 
-            <am.acba.component.button.PrimaryButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:enabled="false"
-                android:text="Primary button disabled" />
-
-
-            <am.acba.component.button.PrimaryButton
-                android:id="@+id/buttonSec"
-                style="@style/Button.Style.Secondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:enabled="true"
-                android:text="Secondary button enabled"
-                app:icon="@drawable/default_icon" />
-
-            <am.acba.component.button.PrimaryButton
-                style="@style/Button.Style.Secondary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:enabled="false"
-                android:text="Secondary button disabled" />
-
-
-            <am.acba.component.button.PrimaryButton
-                android:id="@+id/buttonGhost"
-                style="@style/Button.Style.Ghost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:enabled="true"
-                android:text="Ghost button enabled" />
-
-            <am.acba.component.button.PrimaryButton
-                style="@style/Button.Style.Ghost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:enabled="false"
-                android:text="Ghost button disabled"
-                app:icon="@drawable/default_icon" />
 
             <am.acba.component.textView.PrimaryTextView
                 android:layout_width="match_parent"
@@ -588,9 +516,97 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipEndIcon="@drawable/ic_close"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/ic_file_download"
+                app:chipStartIconType="Icon"
+
+                app:chipText="100 000" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/ic_file_download"
+                app:chipStartIconType="Icon"
+                app:chipText="100 000" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/flag_usa"
+                app:chipStartIconType="Image"
+                app:chipText="United States"
+                app:isChipSelected="true" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Small"
+                app:chipText="100 000" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_medium_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipEndIcon="@drawable/ic_close"
+                app:chipSize="Medium"
+                app:chipStartIcon="@drawable/ic_file_download"
+                app:chipStartIconType="Icon"
+                app:chipText="Lorem ipsum dolor" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_medium_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Medium"
+                app:chipStartIcon="@drawable/ic_card"
+                app:chipStartIconType="Icon"
+                app:chipText="Lorem ipsum dolor" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_medium_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Medium"
+                app:chipStartIcon="@drawable/flag_usa"
+                app:chipStartIconType="Image"
+                app:chipText="United States" />
+
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_medium_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:chipSize="Medium"
+                app:chipText="Lorem ipsum dolor" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

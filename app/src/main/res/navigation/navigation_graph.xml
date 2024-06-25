@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="am.acba.components.mainScreen.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_buttonsFragment"
+            app:destination="@id/buttonsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listItemFragment"
+            app:destination="@id/listItemFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_phoneNumberInputFragment"
+            app:destination="@id/phoneNumberInputFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_pinInputFragment"
+            app:destination="@id/pinInputFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_quickActionAndAvatarFragment"
+            app:destination="@id/quickActionAndAvatarFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_dialogsFragment"
+            app:destination="@id/dialogsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_dividerFragment"
+            app:destination="@id/dividerFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_dropDownFragment"
+            app:destination="@id/dropDownFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_exchangeFragment"
+            app:destination="@id/exchangeFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_inputsFragment"
+            app:destination="@id/inputsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_alertsFragment"
+            app:destination="@id/alertsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_badgesFragment"
+            app:destination="@id/badgesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_bannersFragment"
+            app:destination="@id/bannersFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chipsFragment"
+            app:destination="@id/chipsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_controlsFragment"
+            app:destination="@id/controlsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchInputFragment"
+            app:destination="@id/searchInputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/buttonsFragment"
+        android:name="am.acba.components.ButtonsFragment"
+        android:label="fragment_buttons"
+        tools:layout="@layout/fragment_buttons" />
+    <fragment
+        android:id="@+id/alertsFragment"
+        android:name="am.acba.components.AlertsFragment"
+        tools:layout="@layout/fragment_alerts"
+        android:label="AlertsFragment" />
+    <fragment
+        android:id="@+id/badgesFragment"
+        android:name="am.acba.components.BadgesFragment"
+        tools:layout="@layout/fragment_badges"
+        android:label="BadgesFragment" />
+    <fragment
+        android:id="@+id/bannersFragment"
+        android:name="am.acba.components.BannersFragment"
+        tools:layout="@layout/fragment_banners"
+        android:label="BannersFragment" />
+    <fragment
+        android:id="@+id/chipsFragment"
+        android:name="am.acba.components.ChipsFragment"
+        tools:layout="@layout/fragment_chips"
+        android:label="ChipsFragment" />
+    <fragment
+        android:id="@+id/controlsFragment"
+        android:name="am.acba.components.ControlsFragment"
+        tools:layout="@layout/fragment_controls"
+        android:label="ControlsFragment" />
+    <fragment
+        android:id="@+id/dialogsFragment"
+        android:name="am.acba.components.DialogsFragment"
+        tools:layout="@layout/fragment_dialogs"
+        android:label="DialogsFragment" />
+    <fragment
+        android:id="@+id/dividerFragment"
+        android:name="am.acba.components.DividerFragment"
+        tools:layout="@layout/fragment_divider"
+        android:label="DividerFragment" />
+    <fragment
+        android:id="@+id/dropDownFragment"
+        android:name="am.acba.components.DropDownFragment"
+        tools:layout="@layout/fragment_drop_down"
+        android:label="DropDownFragment" />
+    <fragment
+        android:id="@+id/exchangeFragment"
+        android:name="am.acba.components.ExchangeFragment"
+        tools:layout="@layout/fragment_exchange"
+        android:label="ExchangeFragment" />
+    <fragment
+        android:id="@+id/inputsFragment"
+        android:name="am.acba.components.InputsFragment"
+        tools:layout="@layout/fragment_inputs"
+        android:label="InputsFragment" />
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="am.acba.components.ListItemFragment"
+        tools:layout="@layout/fragment_list_item"
+        android:label="ListItemFragment" />
+    <fragment
+        android:id="@+id/phoneNumberInputFragment"
+        android:name="am.acba.components.PhoneNumberInputFragment"
+        tools:layout="@layout/fragment_phone_number_input"
+        android:label="PhoneNumberInputFragment" />
+    <fragment
+        android:id="@+id/pinInputFragment"
+        android:name="am.acba.components.PinInputFragment"
+        tools:layout="@layout/fragment_pin_input"
+        android:label="PinInputFragment" />
+    <fragment
+        android:id="@+id/quickActionAndAvatarFragment"
+        android:name="am.acba.components.QuickActionAndAvatarFragment"
+        tools:layout="@layout/fragment_quick_action_and_avatar"
+        android:label="QuickActionAndAvatarFragment" />
+    <fragment
+        android:id="@+id/searchInputFragment"
+        tools:layout="@layout/fragment_search"
+        android:name="am.acba.components.SearchInputFragment"
+        android:label="SearchInputFragment" />
+</navigation>
