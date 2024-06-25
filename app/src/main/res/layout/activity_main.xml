@@ -490,14 +490,23 @@
                 android:enabled="true"
                 android:hint="@string/app_name" />
 
+
+            <am.acba.component.input.PrimaryDropDown
+                android:id="@+id/dropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="asASas"
+                android:hint="asASas"/>
+
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/inputa"
+                style="@style/Input.Style.Search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:hint="@string/app_name"
-                app:isListDialog="true" />
+                app:hasDropDown="true" />
 
             <am.acba.component.input.SearchInput
                 android:id="@+id/search"
@@ -517,9 +526,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:hint="Որոնել..."
-                app:endIconDrawable="@drawable/ic_close"
-                app:startIconDrawable="@drawable/ic_search" />
+                android:enabled="true"
+                android:hint="@string/app_name"
+                app:endIconTint="@color/AztecPurple_700"
+                app:hasDropDown="true" />
 
             <am.acba.component.button.PrimaryButton
                 android:layout_width="match_parent"

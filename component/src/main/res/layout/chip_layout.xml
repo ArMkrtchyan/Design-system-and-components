@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_primary_chip"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="8dp">
+
+    <FrameLayout
+        android:id="@+id/first_icon_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/chip_text"
+        style="@style/Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/chip_text_and_icons_selector"
+        android:layout_gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:text="100 000"
+        tools:text="100 000" />
+
+    <FrameLayout
+        android:id="@+id/last_icon_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
+</androidx.appcompat.widget.LinearLayoutCompat>

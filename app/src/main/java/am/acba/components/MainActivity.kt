@@ -1,6 +1,7 @@
 package am.acba.components
 
 import am.acba.component.badge.PrimaryBadge
+import am.acba.component.chip.PrimaryChip
 import am.acba.component.databinding.DialogContentTestBinding
 import am.acba.component.dialog.PrimaryAlertDialog
 import am.acba.component.exchange.ExchangeRate
@@ -37,29 +38,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun ActivityMainBinding.initView() {
         setSupportActionBar(toolbar)
-
         listItem.showBadge()
+        binding.dropDown.setOnClickListener {
+            binding.dropDown.addFocus()
+        }
+
         listItem.badge.setBadgeType(PrimaryBadge.BadgeType.TEXT)
         listItem.badge.setBadgeText("Առաջարկ")
         listItem.badge.setBadgeTextColor(this@MainActivity.getColorFromAttr(am.acba.component.R.attr.contentWarning))
         listItem.badge.setBadgeBackgroundTint(this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
 
         input.apply {
-            setEndIconOnClickListener {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Click",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            setStartIconOnClickListener {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Click",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            setOnFocusChangeListener { v, hasFocus ->
+            setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setOnFocusChangeListener { _, _ ->
 
             }
         }
@@ -84,14 +76,11 @@ class MainActivity : AppCompatActivity() {
         }
         exchangeRates.apply {
             setOnClickListener {
-                Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+                binding.dropDown.removeFocus()
             }
-            val firstRate =
-                ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
-            val secondRate =
-                ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
-            val thirdRate =
-                ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
+            val firstRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
+            val secondRate = ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
+            val thirdRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
             val rates = Triple(firstRate, secondRate, thirdRate)
             setExchangeRates(rates)
         }
@@ -142,5 +131,23 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(true)
             .build()
 
+        search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+
+
+        setChipClicks(chipSmall1)
+        chipSmall1.setEndIconClickListener {
+            Toast.makeText(this@MainActivity, "Click on close", Toast.LENGTH_SHORT).show()
+        }
+        setChipClicks(chipSmall2)
+        setChipClicks(chipSmall3)
+        setChipClicks(chipSmall4)
+        setChipClicks(chipMedium1)
+        setChipClicks(chipMedium2)
+        setChipClicks(chipMedium3)
+        setChipClicks(chipMedium4)
+    }
+
+    private fun setChipClicks(chip: PrimaryChip) {
+        chip.setOnClickListener { chip.isSelected = !chip.isSelected }
     }
 }
