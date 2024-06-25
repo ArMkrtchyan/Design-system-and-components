@@ -1,41 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/chip_card_view"
-    app:cardBackgroundColor="?attr/backgroundTonal2"
-    app:cardCornerRadius="@dimen/radius_full"
-    app:cardElevation="0dp">
+    android:background="@drawable/background_primary_chip"
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="8dp">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/parent_layout"
+    <FrameLayout
+        android:id="@+id/first_icon_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp">
+        android:layout_gravity="center_vertical" />
 
-        <FrameLayout
-            android:id="@+id/first_icon_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical" />
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/chip_text"
+        style="@style/Body2.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/chip_text_and_icons_selector"
+        android:layout_gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:text="100 000"
+        tools:text="100 000" />
 
-        <am.acba.component.textView.PrimaryTextView
-            android:id="@+id/chip_text"
-            style="@style/Body2.Regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="8dp"
-            android:layout_gravity="center_vertical"
-            android:text="100 000"
-            tools:text="100 000" />
-
-        <FrameLayout
-            android:id="@+id/last_icon_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.cardview.widget.CardView>
+    <FrameLayout
+        android:id="@+id/last_icon_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
+</androidx.appcompat.widget.LinearLayoutCompat>

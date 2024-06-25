@@ -200,8 +200,7 @@
     </declare-styleable>
 
     <declare-styleable name="PrimaryChip">
-        <attr name="chipSelectedBackgroundColor" format="color" />
-        <attr name="chipUnselectedBackgroundColor" format="color" />
+        <attr name="chipBackground" format="reference" />
         <attr name="chipText" format="string" />
         <attr name="chipTextAppearance" format="reference" />
         <attr name="chipStartIconType" format="enum">
@@ -211,9 +210,7 @@
             <enum name="Avatar" value="3" />
         </attr>
         <attr name="isChipSelected" format="boolean" />
-        <attr name="chipEndIconTint" format="color" />
         <attr name="chipEndIcon" format="reference" />
-        <attr name="chipStartIconTint" format="color" />
         <attr name="chipStartIcon" format="reference" />
         <attr name="chipSize" format="enum">
             <enum name="Small" value="0" />

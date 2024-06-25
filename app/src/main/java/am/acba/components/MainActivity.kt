@@ -1,20 +1,18 @@
 package am.acba.components
 
 import am.acba.component.badge.PrimaryBadge
-import am.acba.component.button.PrimaryActionTextButton
+import am.acba.component.chip.PrimaryChip
 import am.acba.component.exchange.ExchangeRate
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -94,5 +92,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
         search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+
+
+        setChipClicks(chipSmall1)
+        chipSmall1.setEndIconClickListener {
+            Toast.makeText(this@MainActivity, "Click on close", Toast.LENGTH_SHORT).show()
+        }
+        setChipClicks(chipSmall2)
+        setChipClicks(chipSmall3)
+        setChipClicks(chipSmall4)
+        setChipClicks(chipMedium1)
+        setChipClicks(chipMedium2)
+        setChipClicks(chipMedium3)
+        setChipClicks(chipMedium4)
+    }
+
+    private fun setChipClicks(chip: PrimaryChip) {
+        chip.setOnClickListener { chip.isSelected = !chip.isSelected }
     }
 }

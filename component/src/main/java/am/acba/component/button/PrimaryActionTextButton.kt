@@ -53,7 +53,7 @@ class PrimaryActionTextButton : FrameLayout {
     private val binding by lazy { WidgetActionTextButtonBinding.inflate(context.inflater(), this, false) }
 
     constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle) {
-        addView(binding.root)
+        init(null)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs, R.attr.primaryActionTextButtonStyle) {
@@ -64,7 +64,7 @@ class PrimaryActionTextButton : FrameLayout {
         init(attrs)
     }
 
-    private fun init(attrs: AttributeSet) {
+    private fun init(attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryActionTextButton).apply {
             addView(binding.root)
             try {
