@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
         }
 
-        setChipClicks(chipSmall1)
+//        setChipClicks(chipSmall1)
 //        chipSmall1.setEndIconClickListener {
 //            Toast.makeText(this@MainActivity, "Click on close", Toast.LENGTH_SHORT).show()
 //        }
