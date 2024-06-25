@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="20dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -31,6 +32,40 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
+
+            <am.acba.component.badge.PrimaryBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:badgeIconTint="?attr/backgroundDanger"
+                app:badgeType="Dot" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeIcon="@drawable/ic_success_filled"
+                app:badgeType="SmallIcon" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeIcon="@drawable/ic_success_filled"
+                app:badgeType="LargeIcon" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeBackgroundTint="?attr/backgroundDanger"
+                app:badgeText="100"
+                app:badgeType="Number" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeBackgroundTint="?attr/backgroundDanger"
+                app:badgeText="Badge"
+                app:badgeTextColor="@color/Black"
+                app:badgeType="Text" />
 
 
         </LinearLayout>

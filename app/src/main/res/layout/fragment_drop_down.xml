@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="20dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -32,6 +33,22 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
+            <am.acba.component.input.PrimaryDropDown
+                android:id="@+id/dropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="asASas"
+                android:text="asASas" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/inputa"
+                style="@style/Input.Style.Search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                android:hint="@string/app_name"
+                app:hasDropDown="true" />
 
         </LinearLayout>
     </ScrollView>

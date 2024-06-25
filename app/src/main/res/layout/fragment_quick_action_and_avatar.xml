@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="20dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -31,6 +32,213 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Action button1"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconTint="?attr/contentBrand"
+                        app:badgeChecked="true"
+                        app:checkable="true" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:checkable="true"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconSize="Large"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconSize="Medium"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconSize="Small"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconSize="XSmall"
+                        app:showActionText="false" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fillViewport="true">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="XLarge"
+                        app:badgeChecked="true"
+                        app:checkable="true" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="XLarge"
+                        app:checkable="true"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Large"
+                        app:badgeIcon="@drawable/ic_success_filled" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Medium"
+                        app:badgeIcon="@drawable/ic_success_filled" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Small"
+                        app:badgeIcon="@drawable/ic_success_filled" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:actionButtonType="Avatar"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="XSmall"
+                        app:badgeIcon="@drawable/ic_success_filled" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fillViewport="true">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="XLarge" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIconSize="XLarge"
+                        app:badgeIcon="@drawable/ic_burger_menu"
+                        app:badgeIconGravity="Top"
+                        app:showActionText="false"
+                        app:textDrawableBackgroundColor="@color/BrandGreen_400"
+                        app:textDrawableColor="@color/BrandGreen_650" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Large"
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Medium"
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="Small"
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:showActionText="false" />
+
+                    <am.acba.component.button.PrimaryActionTextButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Աննա Հովսեփյան"
+                        app:actionButtonType="Text"
+                        app:actionIcon="@drawable/default_avatar"
+                        app:actionIconSize="XSmall"
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:showActionText="false" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </HorizontalScrollView>
 
 
         </LinearLayout>

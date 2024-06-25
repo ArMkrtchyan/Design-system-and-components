@@ -12,7 +12,9 @@ class DropDownFragment : BaseViewBindingFragment<FragmentDropDownBinding>() {
         get() = mBinding.toolbar
 
     override fun FragmentDropDownBinding.initView() {
-
+        dropDown.setOnClickListener {
+            dropDown.addFocus()
+        }
     }
 
 }

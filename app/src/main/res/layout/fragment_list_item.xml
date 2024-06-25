@@ -23,6 +23,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
@@ -32,6 +33,64 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/info_text_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:listStartIcon="@drawable/ic_passport"
+                app:listStartIconGravity="Center"
+                app:listStartIconTint="?attr/contentBrand"
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Checkbox"
+                app:titleComponentType="ThreeLine" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_primary_input"
+                app:descriptionComponentType="ThreeLine"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listEndIconGravity="Top"
+                android:layout_marginTop="16dp"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listStartIconGravity="Center"
+                app:listTitleText="Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ըուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի"
+                app:listTitleTextAppearance="@style/Body2.Regular"
+                app:startComponentType="Avatar"
+                app:titleComponentType="ThreeLine" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_primary_input"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:startComponentType="Avatar" />
+
+            <am.acba.component.listItem.PrimaryListItem
+                android:id="@+id/list_item2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_primary_input"
+                app:badgeBackgroundTint="?attr/backgroundWarning"
+                app:badgePaddingBottom="@dimen/spacing_4"
+                app:badgePaddingTop="@dimen/spacing_4"
+                app:badgeType="Number"
+                app:endComponentType="Icon"
+                app:listEndIcon="@drawable/ic_right"
+                app:listStartIcon="@drawable/default_avatar"
+                app:listTitleText="List Item"
+                app:showBadge="true"
+                app:startComponentType="Avatar"
+                tools:badgeText="2" />
 
         </LinearLayout>
     </ScrollView>
