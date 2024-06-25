@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingHorizontal="20dp">
+
+    <LinearLayout
+        android:id="@+id/linearContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background"
+        android:orientation="vertical">
+
+         <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/topIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:padding="6dp"
+            android:tint="?attr/contentPrimary"
+            android:visibility="gone"
+            tools:src="@drawable/ic_block"
+            tools:visibility="visible" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textColor="?attr/contentPrimary"
+            android:textSize="@dimen/text_size_18"
+            android:visibility="gone"
+            tools:text="Title"
+            tools:visibility="visible" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="3"
+            android:textColor="?attr/contentPrimary"
+            android:textSize="@dimen/text_size_14"
+            android:visibility="gone"
+            tools:text="User is blocked because of too many attemts to log in"
+            tools:visibility="visible" />
+
+        <FrameLayout
+            android:layout_marginTop="8dp"
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <am.acba.component.divider.PrimaryDivider
+            android:id="@+id/topDivider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp" />
+
+        <am.acba.component.button.PrimaryButton
+            android:id="@+id/buttonPrimary"
+            style="@style/Button.Style.Ghost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:enabled="true"
+            android:textSize="@dimen/text_size_14"
+            tools:text="Block" />
+
+        <am.acba.component.divider.PrimaryDivider
+            android:id="@+id/bottomDivider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <am.acba.component.button.PrimaryButton
+            android:id="@+id/buttonSecondary"
+            style="@style/Button.Style.Ghost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:enabled="true"
+            android:textColor="?attr/contentPrimary"
+            android:textSize="@dimen/text_size_14"
+            android:visibility="gone"
+            tools:text="Cancel"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,7 +1,8 @@
 package am.acba.components
 
 import am.acba.component.badge.PrimaryBadge
-import am.acba.component.button.PrimaryActionTextButton
+import am.acba.component.databinding.DialogContentTestBinding
+import am.acba.component.dialog.PrimaryAlertDialog
 import am.acba.component.exchange.ExchangeRate
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
@@ -13,7 +14,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -45,8 +45,20 @@ class MainActivity : AppCompatActivity() {
         listItem.badge.setBadgeBackgroundTint(this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
 
         input.apply {
-            setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-            setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setEndIconOnClickListener {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            setStartIconOnClickListener {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
             setOnFocusChangeListener { v, hasFocus ->
 
             }
@@ -60,10 +72,7 @@ class MainActivity : AppCompatActivity() {
         }
         buttonPr.apply {
             setOnClickListener {
-                input.apply {
-                    isErrorEnabled = true
-                    error = "Error"
-                }
+                showPrimaryAlertDialog()
             }
         }
         buttonGhost.apply {
@@ -77,9 +86,12 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener {
                 Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
             }
-            val firstRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
-            val secondRate = ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
-            val thirdRate = ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
+            val firstRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_usa, "$ 406.00", "$ 410.50")
+            val secondRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_russian, "₽ 4.30", "₽ 4.72")
+            val thirdRate =
+                ExchangeRate(am.acba.component.R.drawable.flag_usa, "€ 435.50", "€ 452.00")
             val rates = Triple(firstRate, secondRate, thirdRate)
             setExchangeRates(rates)
         }
@@ -89,6 +101,46 @@ class MainActivity : AppCompatActivity() {
                 recreate()
             }
         }
-        search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+        search2.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showPrimaryAlertDialog() {
+
+        val positiveButtonTextColor =
+            this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.contentBrandTonal1)
+        val negativeButtonTextColor =
+            this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.contentDangerTonal1)
+
+        //Create any xml file in FrameLayout and add in Alertdialog as content
+        val dialogLayoutBinding = DialogContentTestBinding.inflate(layoutInflater)
+
+        PrimaryAlertDialog.Builder(this@MainActivity)
+            .icon(am.acba.component.R.drawable.checkbox_button_icon)
+            .title("Օգտատերը բլոկավորված է")
+            .description("Դուք կարող եք ապաբլոկավորել սեղմելով ապաբլոկավորման կոճակը:")
+            .positiveButtonText("Ok")
+            .positiveButtonTextColor(positiveButtonTextColor)
+            .negativeButtonText("Cancel")
+            .negativeButtonTextColor(negativeButtonTextColor)
+            .content(dialogLayoutBinding.root)
+            .positiveButtonClick {
+                Toast.makeText(
+                    this@MainActivity,
+                    "positive Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .negativeButtonClick {
+                Toast.makeText(
+                    this@MainActivity,
+                    "negative Click",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            .setCancelable(true)
+            .build()
+
     }
 }

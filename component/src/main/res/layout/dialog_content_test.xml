@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_content_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <am.acba.component.button.PrimaryActionTextButton
+            android:id="@+id/infoPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:actionIcon="@drawable/ic_user_protect"
+            app:actionIconSize="Large"
+            app:badgeIcon="@drawable/background_rounded"
+            app:badgeIconGravity="Top"
+            app:badgeType="SmallIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showActionText="false"
+            tools:visibility="visible" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/infoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="armen.amir"
+            android:textColor="?attr/contentPrimary"
+            android:textSize="16sp"
+            tools:visibility="visible" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/infoSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="18dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="armen.amiryan@gmail.com"
+            android:textColor="?attr/contentPrimaryTonal1"
+            android:textSize="14sp"
+            tools:visibility="visible" />
+    </LinearLayout>
+</FrameLayout>
