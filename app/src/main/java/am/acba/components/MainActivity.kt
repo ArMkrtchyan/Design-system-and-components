@@ -9,7 +9,9 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.input.PrimaryInput
 import am.acba.components.databinding.ActivityMainBinding
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         input.apply {
             setEndIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-            setStartIconOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
+            setStartIconOnClickListener {Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
             setOnFocusChangeListener { _, _ ->
 
             }
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         }
         buttonPr.apply {
             setOnClickListener {
-                showPrimaryAlertDialog()
+                showPrimaryAlertDialog(this@MainActivity, layoutInflater)
             }
         }
         buttonGhost.apply {
@@ -93,61 +95,56 @@ class MainActivity : AppCompatActivity() {
         search2.setOnClickListener {
             Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun showPrimaryAlertDialog() {
-
-        val positiveButtonTextColor =
-            this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.contentBrandTonal1)
-        val negativeButtonTextColor =
-            this@MainActivity.getColorStateListFromAttr(am.acba.component.R.attr.contentDangerTonal1)
-
-        //Create any xml file in FrameLayout and add in Alertdialog as content
-        val dialogLayoutBinding = DialogContentTestBinding.inflate(layoutInflater)
-
-        PrimaryAlertDialog.Builder(this@MainActivity)
-            .icon(am.acba.component.R.drawable.checkbox_button_icon)
-            .title("Օգտատերը բլոկավորված է")
-            .description("Դուք կարող եք ապաբլոկավորել սեղմելով ապաբլոկավորման կոճակը:")
-            .positiveButtonText("Ok")
-            .positiveButtonTextColor(positiveButtonTextColor)
-            .negativeButtonText("Cancel")
-            .negativeButtonTextColor(negativeButtonTextColor)
-            .content(dialogLayoutBinding.root)
-            .positiveButtonClick {
-                Toast.makeText(
-                    this@MainActivity,
-                    "positive Click",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .negativeButtonClick {
-                Toast.makeText(
-                    this@MainActivity,
-                    "negative Click",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .setCancelable(true)
-            .build()
-
-        search2.setOnClickListener { Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show() }
-
+        search2.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Click", Toast.LENGTH_SHORT).show()
+        }
 
         setChipClicks(chipSmall1)
-        chipSmall1.setEndIconClickListener {
-            Toast.makeText(this@MainActivity, "Click on close", Toast.LENGTH_SHORT).show()
-        }
-        setChipClicks(chipSmall2)
-        setChipClicks(chipSmall3)
-        setChipClicks(chipSmall4)
-        setChipClicks(chipMedium1)
-        setChipClicks(chipMedium2)
-        setChipClicks(chipMedium3)
-        setChipClicks(chipMedium4)
-    }
+//        chipSmall1.setEndIconClickListener {
+//            Toast.makeText(this@MainActivity, "Click on close", Toast.LENGTH_SHORT).show()
+//        }
 
-    private fun setChipClicks(chip: PrimaryChip) {
-        chip.setOnClickListener { chip.isSelected = !chip.isSelected }
     }
+}
+
+private fun showPrimaryAlertDialog(context: Context, inflater: LayoutInflater) {
+
+    val positiveButtonTextColor =
+        context.getColorStateListFromAttr(am.acba.component.R.attr.contentBrandTonal1)
+    val negativeButtonTextColor =
+        context.getColorStateListFromAttr(am.acba.component.R.attr.contentDangerTonal1)
+
+    //Create any xml file in FrameLayout and add in Alertdialog as content
+    val dialogLayoutBinding = DialogContentTestBinding.inflate(inflater)
+
+    PrimaryAlertDialog.Builder(context)
+        .icon(am.acba.component.R.drawable.checkbox_button_icon)
+        .title("Օգտատերը բլոկավորված է")
+        .description("Դուք կարող եք ապաբլոկավորել սեղմելով ապաբլոկավորման կոճակը:")
+        .positiveButtonText("Ok")
+        .positiveButtonTextColor(positiveButtonTextColor)
+        .negativeButtonText("Cancel")
+        .negativeButtonTextColor(negativeButtonTextColor)
+        .content(dialogLayoutBinding.root)
+        .positiveButtonClick {
+            Toast.makeText(
+                context,
+                "positive Click",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        .negativeButtonClick {
+            Toast.makeText(
+                context,
+                "negative Click",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        .setCancelable(true)
+        .build()
+}
+
+
+private fun setChipClicks(chip: PrimaryChip) {
+    chip.setOnClickListener { chip.isSelected = !chip.isSelected }
 }
