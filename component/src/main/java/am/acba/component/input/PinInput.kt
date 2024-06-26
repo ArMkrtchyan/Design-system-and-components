@@ -59,8 +59,9 @@ class PinInput : FrameLayout {
             context.getColorStateListFromAttr(R.attr.borderDanger)
     }
 
-    private fun setUiPinAsterisk(pinCount: String) {
+    fun setUiPinCount(pinCount: String) {
         when (pinCount.length) {
+            0 -> clearPinInput()
             1 -> {
                 binding.box1.text = "*"
                 binding.box2.text = ""
@@ -91,20 +92,28 @@ class PinInput : FrameLayout {
         }
     }
 
-    fun setError(errorEnabled: Boolean, message: String = "") {
+    fun addErrorState(message: String = "") {
         binding.errorText.text = message
-        if (errorEnabled) {
-            binding.box1.background = pinItemErrorBackground
-            binding.box2.background = pinItemErrorBackground
-            binding.box3.background = pinItemErrorBackground
-            binding.box4.background = pinItemErrorBackground
-            errorTextView.animate().alpha(1.0f).setDuration(200)
-        } else {
-            binding.box1.background = pinItemBackground
-            binding.box2.background = pinItemBackground
-            binding.box3.background = pinItemBackground
-            binding.box4.background = pinItemBackground
-            errorTextView.animate().alpha(0.0f).setDuration(200)
-        }
+        binding.box1.background = pinItemErrorBackground
+        binding.box2.background = pinItemErrorBackground
+        binding.box3.background = pinItemErrorBackground
+        binding.box4.background = pinItemErrorBackground
+        errorTextView.animate().alpha(1.0f).setDuration(200)
+    }
+
+    fun removeErrorState() {
+        binding.errorText.text = ""
+        binding.box1.background = pinItemBackground
+        binding.box2.background = pinItemBackground
+        binding.box3.background = pinItemBackground
+        binding.box4.background = pinItemBackground
+        errorTextView.animate().alpha(0.0f).setDuration(200)
+    }
+
+    fun clearPinInput() {
+        binding.box1.text = ""
+        binding.box2.text = ""
+        binding.box3.text = ""
+        binding.box4.text = ""
     }
 }

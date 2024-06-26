@@ -33,6 +33,47 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
+            <am.acba.component.input.PinInput
+                android:id="@+id/pinInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/addError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Error" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/removeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Remove Error" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/clearPinInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Clear Pin" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/addPinCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="+" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/removePinCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="-" />
 
         </LinearLayout>
     </ScrollView>
