@@ -63,6 +63,7 @@
         <attr name="backgroundWarning" format="color" />
         <attr name="backgroundWarningTonal1" format="color" />
         <attr name="backgroundPending" format="color" />
+        <attr name="backgroundPendingTonal1" format="color" />
         <attr name="backgroundAlternative" format="color" />
         <attr name="backgroundAlternative2" format="color" />
         <attr name="backgroundAlternative3" format="color" />
@@ -104,6 +105,8 @@
         <attr name="overlayBackgroundTonal6" format="color" />
         <attr name="overlayBackgroundTonal7" format="color" />
         <attr name="overlayBackgroundTonal8" format="color" />
+        <attr name="overlayBackgroundTonal9" format="color" />
+        <attr name="overlayBackgroundTonal10" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -357,10 +360,14 @@
             <enum name="Danger" value="1" />
             <enum name="Warning" value="2" />
             <enum name="Success" value="3" />
+            <enum name="Neutral" value="4" />
         </attr>
-        <attr name="title" />
-        <attr name="body" />
-        <attr name="link" format="string" />
-        <attr name="showCloseIcon" />
+        <attr name="isFilledBackground" format="boolean"/>
+        <attr name="title"/>
+        <attr name="body"/>
+        <attr name="bodyMaxLines" format="integer"/>
+        <attr name="link" format="string"/>
+        <attr name="showCloseIcon"/>
+        <attr name="neutralIcon" format="reference"/>
     </declare-styleable>
 </resources>

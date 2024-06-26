@@ -27,6 +27,7 @@
         <item name="backgroundWarning">@color/Orange_500</item>
         <item name="backgroundWarningTonal1">@color/Orange_800_40</item>
         <item name="backgroundPending">@color/BlueGrey_400</item>
+        <item name="backgroundPendingTonal1">@color/BlueGrey_550_15</item>
         <item name="backgroundInverse">@color/BlueGrey_50</item>
         <item name="backgroundInverse2">@color/BlueGrey_50</item>
         <item name="backgroundAlternative">@color/Purple_200</item>
