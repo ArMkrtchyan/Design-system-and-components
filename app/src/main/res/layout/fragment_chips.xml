@@ -23,8 +23,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -72,6 +72,51 @@
                 android:layout_marginTop="20dp"
                 app:chipSize="Small"
                 app:chipText="100 000" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4">
+
+                <am.acba.component.chip.PrimaryChip
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    app:chipSize="Small"
+                    app:chipText="6 months" />
+
+                <am.acba.component.chip.PrimaryChip
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    app:chipSize="Small"
+                    app:chipText="1 year" />
+
+                <am.acba.component.chip.PrimaryChip
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    app:chipSize="Small"
+                    app:chipText="2 years" />
+
+                <am.acba.component.chip.PrimaryChip
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    app:chipSize="Small"
+                    app:chipText="3 years" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <am.acba.component.chip.PrimaryChip
                 android:id="@+id/chip_medium_1"
