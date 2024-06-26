@@ -15,7 +15,8 @@ class AlertsFragment : BaseViewBindingFragment<FragmentAlertsBinding>() {
 
     override fun FragmentAlertsBinding.initView() {
         alert.apply {
-            setType(PrimaryAlert.AlertTypes.INFO)
+            setType(PrimaryAlert.AlertTypes.NEUTRAL)
+            setNeutralIcon(am.acba.component.R.drawable.ic_info)
             setTitle("Title")
             setBody("Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam nunc adipiscing. Quis nec diam fames feugiat ac non.")
             setLink("Link")

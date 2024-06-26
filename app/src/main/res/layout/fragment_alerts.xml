@@ -76,6 +76,17 @@
                 app:title="Title"
                 app:type="Success" />
 
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:isFilledBackground="true"
+                app:neutralIcon="@drawable/ic_repeat"
+                app:showCloseIcon="false"
+                app:title="Title"
+                app:type="Neutral" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
