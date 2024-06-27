@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_mainFragment_to_searchInputFragment"
             app:destination="@id/searchInputFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_toolbarFragment"
+            app:destination="@id/toolbarFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -139,4 +142,9 @@
         tools:layout="@layout/fragment_search"
         android:name="am.acba.components.SearchInputFragment"
         android:label="SearchInputFragment" />
+    <fragment
+        android:id="@+id/toolbarFragment"
+        android:name="am.acba.components.ToolbarFragment"
+        tools:layout="@layout/fragment_toolbar"
+        android:label="ToolbarFragment" />
 </navigation>

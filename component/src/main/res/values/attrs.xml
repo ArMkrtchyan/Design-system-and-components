@@ -36,6 +36,7 @@
         <attr name="primaryImageViewStyle" format="reference" />
         <attr name="primaryRadioButtonStyle" format="reference" />
         <attr name="primaryTextViewStyle" format="reference" />
+        <attr name="primaryCollapsingToolbarStyle" format="reference" />
 
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
@@ -336,6 +337,10 @@
 
     <declare-styleable name="PinInput">
 
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryCollapsingToolbar">
+        <attr name="toolbarTitle" format="string" />
     </declare-styleable>
 
 </resources>

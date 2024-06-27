@@ -41,6 +41,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.PIN_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_pinInputFragment)
             ComponentTypeEnum.QUICK_ACTION_AVATAR -> findNavController().navigate(R.id.action_mainFragment_to_quickActionAndAvatarFragment)
             ComponentTypeEnum.SEARCH_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_searchInputFragment)
+            ComponentTypeEnum.TOOLBAR -> findNavController().navigate(R.id.action_mainFragment_to_toolbarFragment)
         }
     }
 
@@ -61,5 +62,6 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.DIALOGS, ComponentTypeEnum.DIALOGS.componentName),
         Component(ComponentTypeEnum.DROP_DOWN, ComponentTypeEnum.DROP_DOWN.componentName),
         Component(ComponentTypeEnum.LIST_ITEMS, ComponentTypeEnum.LIST_ITEMS.componentName),
+        Component(ComponentTypeEnum.TOOLBAR, ComponentTypeEnum.TOOLBAR.componentName),
     )
 }

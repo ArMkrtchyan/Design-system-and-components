@@ -6,25 +6,8 @@
         <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
         <item name="navigationIcon">@drawable/ic_back</item>
         <item name="navigationIconTint">?attr/contentPrimary</item>
-        <item name="colorControlHighlight">@android:color/transparent</item>
-
-        <item name="subtitleTextAppearance">
-            @style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle
-        </item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="titleMargin">4dp</item>
-        <item name="maxButtonHeight">@dimen/abc_action_bar_default_height_material</item>
-        <item name="buttonGravity">top</item>
-        <item name="collapseIcon">?attr/homeAsUpIndicator</item>
-        <item name="collapseContentDescription">@string/abc_toolbar_collapse_description</item>
-        <item name="contentInsetStart">16dp</item>
-        <item name="contentInsetStartWithNavigation">@dimen/abc_action_bar_content_inset_with_nav
-        </item>
-        <item name="android:paddingLeft">@dimen/abc_action_bar_default_padding_start_material</item>
-        <item name="android:paddingStart">@dimen/abc_action_bar_default_padding_start_material
-        </item>
-        <item name="android:paddingRight">@dimen/abc_action_bar_default_padding_end_material</item>
-        <item name="android:paddingEnd">@dimen/abc_action_bar_default_padding_end_material</item>
+        <item name="collapseStatusBarHeight">true</item>
+        <item name="android:paddingEnd">6dp</item>
     </style>
 
     <style name="BaseToolbarTitleTextAppearance" parent="Body1.Bold">
@@ -34,4 +17,10 @@
     <style name="Toolbar.Primary" parent="BasePrimaryToolbar" />
 
     <style name="ToolbarTitleTextAppearance" parent="BaseToolbarTitleTextAppearance" />
+
+    <style name="BaseCollapsingToolbarStyle" parent="">
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <style name="CollapsingToolbarStyle" parent="BaseCollapsingToolbarStyle" />
 </resources>
