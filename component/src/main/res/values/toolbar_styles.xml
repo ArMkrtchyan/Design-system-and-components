@@ -7,6 +7,7 @@
         <item name="navigationIcon">@drawable/ic_back</item>
         <item name="navigationIconTint">?attr/contentPrimary</item>
         <item name="collapseStatusBarHeight">true</item>
+        <item name="android:paddingEnd">6dp</item>
     </style>
 
     <style name="BaseToolbarTitleTextAppearance" parent="Body1.Bold">

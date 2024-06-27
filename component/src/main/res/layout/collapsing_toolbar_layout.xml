@@ -9,6 +9,7 @@
     app:expandedTitleGravity="bottom"
     app:expandedTitleMarginEnd="16dp"
     app:expandedTitleMarginStart="16dp"
+    app:layout_collapseMode="none"
     app:expandedTitleTextAppearance="@style/Heading5.Bold"
     app:expandedTitleTextColor="?attr/contentPrimary"
     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
