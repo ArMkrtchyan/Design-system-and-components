@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -46,6 +47,14 @@ class PrimaryCollapsingToolbar : AppBarLayout {
 
     fun setNavigationOnClickListener(listener: OnClickListener?) {
         toolbar.setNavigationOnClickListener(listener)
+    }
+
+    fun setToolbarTitle(title: String?) {
+        binding.collapsingToolbar.title = title
+    }
+
+    fun setToolbarTitle(@StringRes stringRes: Int) {
+        binding.collapsingToolbar.title = context.getString(stringRes)
     }
 
     fun createOptionsMenu(
