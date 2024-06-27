@@ -10,7 +10,8 @@
     <am.acba.component.toolbar.PrimaryToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
+        app:menu="@menu/toolbar_menu"
         app:title="Chips" />
 
     <am.acba.component.textView.PrimaryTextView

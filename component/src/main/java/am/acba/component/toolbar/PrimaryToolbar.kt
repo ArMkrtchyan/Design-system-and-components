@@ -2,9 +2,12 @@ package am.acba.component.toolbar
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.extensions.getStatusBarHeight
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.core.graphics.drawable.DrawableCompat
 import com.google.android.material.appbar.MaterialToolbar
 
 class PrimaryToolbar : MaterialToolbar {
@@ -21,6 +24,14 @@ class PrimaryToolbar : MaterialToolbar {
 
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryToolbar).apply {
+            if (!getBoolean(R.styleable.PrimaryToolbar_collapseStatusBarHeight, false)) {
+                setPadding(0.dpToPx(), context.getStatusBarHeight(), 0.dpToPx(), 0.dpToPx())
+            }
+            for (i in 0 until menu.size()) {
+                menu.getItem(i).icon?.let { meniIcon ->
+                    DrawableCompat.setTintList(meniIcon, context.getColorStateListFromAttr(R.attr.contentPrimary))
+                }
+            }
             val titleTextView = getTextView()
             titleTextView?.translationX = (-12).dpToPx().toFloat()
             recycle()
@@ -36,4 +47,6 @@ class PrimaryToolbar : MaterialToolbar {
         }
         return null
     }
+
+
 }

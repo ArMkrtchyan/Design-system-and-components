@@ -25,6 +25,7 @@ fun Context.getColorStateListFromAttr(
 }
 
 fun Context.inflater(): LayoutInflater = LayoutInflater.from(this)
+
 fun Context.getActionBarHeight(): Int {
     var actionBarHeight = 0
     val tv = TypedValue()
@@ -32,6 +33,15 @@ fun Context.getActionBarHeight(): Int {
         actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
     }
     return actionBarHeight
+}
+
+fun Context.getStatusBarHeight(): Int {
+    var result = 0
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    return result
 }
 
 fun Context.getDisplayWidth(): Int {

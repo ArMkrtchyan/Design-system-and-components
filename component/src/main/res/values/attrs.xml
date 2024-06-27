@@ -227,7 +227,9 @@
 
     </declare-styleable>
 
-    <declare-styleable name="PrimaryToolbar" />
+    <declare-styleable name="PrimaryToolbar">
+        <attr name="collapseStatusBarHeight" format="boolean" />
+    </declare-styleable>
 
     <declare-styleable name="PrimaryTextView">
         <attr name="isPreventClick" />

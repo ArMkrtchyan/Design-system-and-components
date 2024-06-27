@@ -28,7 +28,7 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
     override fun onResume() {
         super.onResume()
         toolbar?.let {
-            mActivity.setSupportActionBar(it)
+            //    mActivity.setSupportActionBar(it)
             it.setNavigationOnClickListener { mActivity.onBackPressed() }
         }
     }
