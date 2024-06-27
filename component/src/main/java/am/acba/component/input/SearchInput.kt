@@ -37,6 +37,7 @@ class SearchInput : PrimaryInput {
             }
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
+            editText?.minHeight = 0
             recycle()
         }
     }
