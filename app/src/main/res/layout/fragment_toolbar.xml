@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="Some text" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <am.acba.component.toolbar.PrimaryCollapsingToolbar
+        android:id="@+id/collapsing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:toolbarTitle="@string/hello_blank_fragment" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

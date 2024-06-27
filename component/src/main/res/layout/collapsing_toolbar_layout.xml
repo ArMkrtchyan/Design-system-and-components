@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.CollapsingToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/collapsing_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:minHeight="130dp"
+    app:collapsedTitleTextAppearance="@style/Body1.Bold"
+    app:expandedTitleGravity="bottom"
+    app:expandedTitleMarginEnd="16dp"
+    app:expandedTitleMarginStart="16dp"
+    app:expandedTitleTextAppearance="@style/Heading5.Bold"
+    app:expandedTitleTextColor="?attr/contentPrimary"
+    app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+    app:titleCollapseMode="scale">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:collapseStatusBarHeight="true"
+        app:layout_collapseMode="pin" />
+</com.google.android.material.appbar.CollapsingToolbarLayout>

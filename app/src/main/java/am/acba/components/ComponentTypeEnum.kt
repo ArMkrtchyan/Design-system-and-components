@@ -13,6 +13,7 @@ enum class ComponentTypeEnum(val componentName: String) {
     EXCHANGE("Exchange"),
     INPUTS("Inputs"),
     LIST_ITEMS("List items"),
+    TOOLBAR("Toolbar"),
     PHONE_NUMBER_INPUT("Phone number input"),
     SEARCH_INPUT("Search input"),
     PIN_INPUT("Pin input"),

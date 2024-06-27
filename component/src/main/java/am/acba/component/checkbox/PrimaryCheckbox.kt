@@ -8,11 +8,11 @@ import com.google.android.material.checkbox.MaterialCheckBox
 class PrimaryCheckbox : MaterialCheckBox {
     constructor(context: Context) : super(context, null, R.attr.primaryCheckboxStyle)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs, R.attr.primaryCheckboxStyle) {
-        init(attrs, R.attr.primaryButtonStyle)
+        init(attrs, R.attr.primaryCheckboxStyle)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, R.attr.primaryCheckboxStyle) {
-        init(attrs, R.attr.primaryButtonStyle)
+        init(attrs, R.attr.primaryCheckboxStyle)
     }
 
     private fun init(attrs: AttributeSet, defStyleAttr: Int) {
