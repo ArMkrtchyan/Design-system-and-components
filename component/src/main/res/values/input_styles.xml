@@ -42,6 +42,20 @@
         <item name="cursorErrorColor">?attr/backgroundBrand</item>
     </style>
 
+    <style name="BasePinInputStyle" parent="Heading3.Bold">
+        <item name="android:background">@drawable/background_pin_input</item>
+        <item name="android:paddingStart">@dimen/spacing_16</item>
+        <item name="android:paddingEnd">@dimen/spacing_16</item>
+        <item name="android:paddingTop">@dimen/spacing_8</item>
+        <item name="android:paddingBottom">@dimen/spacing_8</item>
+        <item name="android:height">@dimen/spacing_60</item>
+        <item name="android:width">@dimen/spacing_48</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_4</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="PinInputStyle" parent="BasePinInputStyle" />
+
     <style name="Input.Style.Search" parent="BasePrimarySearchInputStyle" />
 
     <style name="Input.Style.Primary" parent="BasePrimaryInputStyle" />

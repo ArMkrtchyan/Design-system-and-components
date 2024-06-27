@@ -333,4 +333,9 @@
         <attr name="badgePaddingEnd" />
         <attr name="showBadge" />
     </declare-styleable>
+
+    <declare-styleable name="PinInput">
+
+    </declare-styleable>
+
 </resources>
