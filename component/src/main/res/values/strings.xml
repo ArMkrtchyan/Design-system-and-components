@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="history_filter_button_all">Բոլորը</string>
+    <string name="frequendly_search">ՀԱՃԱԽ ՈՐՈՆՎՈՂ</string>
+    <string name="acba_cantact_tel">Phone Number</string>
+</resources>

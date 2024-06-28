@@ -1,17 +1,19 @@
-package am.acba.component.phoneNumberInput
+package am.acba.component.phoneNumberInput.adapter
 
 import am.acba.component.databinding.CountryItemBinding
 import am.acba.component.extensions.dpToPx
+import am.acba.component.phoneNumberInput.CountryModel
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
-class CountriesAdapter(
+class CountriesListAdapter(
     private val itemClick: ((CountryModel) -> Unit)? = null,
-    private val countries: List<CountryModel>
-) : RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
+    private var countries: List<CountryModel>
+) : RecyclerView.Adapter<CountriesListAdapter.CountryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = CountryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CountryViewHolder(binding)
@@ -21,6 +23,13 @@ class CountriesAdapter(
         val country = countries[position]
         holder.bind(country)
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun replaceList(tList: List<CountryModel>) {
+        countries = tList
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount(): Int {
         return countries.size

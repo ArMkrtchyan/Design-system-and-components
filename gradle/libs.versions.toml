@@ -8,7 +8,8 @@ espressoCore = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.8.1"
-constraintlayout = "2.1.4"
+gson = "2.9.0"
+constraintlayout = "2.2.0-alpha13"
 glideVersion = "4.15.1"
 countriesVersion = "2.7.0"
 navigationFragmentKtx = "2.7.7"
@@ -27,6 +28,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 countries = { group = "com.hbb20", name = "ccp", version.ref = "countriesVersion" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

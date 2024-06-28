@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.hbb20.CCPCountry
+import com.hbb20.CountryCodePicker
 
 class PhoneNumberInput @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
@@ -50,7 +51,7 @@ class PhoneNumberInput @JvmOverloads constructor(
 
     private fun countriesMapping() {
         countriesList = ArrayList<CountryModel>().let {
-            CCPCountry.getLoadedLibraryMaterList().map { country ->
+            CCPCountry.getLibraryMasterCountryList(context,CountryCodePicker.Language.ENGLISH).map { country ->
                 CountryModel(
                     englishName = country.englishName,
                     flagResId = country.flagID,

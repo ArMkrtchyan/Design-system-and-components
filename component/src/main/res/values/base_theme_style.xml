@@ -59,6 +59,7 @@
         <item name="backgroundAlternative8">@color/Orange_500</item>
         <item name="backgroundAlternative9">@color/Blue_800</item>
         <item name="backgroundNavBar">@color/White_60</item>
+        <item name="homeShadowGradientStartColor">#1A000000</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>

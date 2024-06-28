@@ -23,7 +23,7 @@
     <attr name="badgeTextAppearance" format="reference" />
 
     <declare-styleable name="ds">
-
+        <attr name="homeShadowGradientStartColor" format="color" />
         <attr name="primaryButtonStyle" format="reference" />
         <attr name="primaryActionTextButtonStyle" format="reference" />
         <attr name="primaryInputStyle" format="reference" />
