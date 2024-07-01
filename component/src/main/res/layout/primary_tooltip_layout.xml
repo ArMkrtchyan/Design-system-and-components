@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/title"
+                style="@style/Subtitle2.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="0.9"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:padding="6dp"
+                android:textColor="?attr/contentPrimary"
+                tools:text="Title " />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+                <am.acba.component.imageView.PrimaryImageView
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_close"
+                    android:tint="?attr/contentPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/description"
+            style="@style/Body2.Regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="3"
+            android:padding="6dp"
+            android:textColor="?attr/contentPrimaryTonal1"
+            tools:text="Now we’ll add the initialisation to our Activity/Fragment. We are using mostly fragments in out projects, so I’m going with the examples for fragments.And keep this  always as" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/contentImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:padding="6dp"
+            android:tint="?attr/contentPrimary"
+            android:visibility="gone"
+            tools:src="@drawable/ic_user_protect"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
+
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/tooltipCount"
+                style="@style/Small.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                tools:text="2/3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+                <am.acba.component.imageView.PrimaryImageView
+                    android:id="@+id/backward"
+                    style="@style/Small.Regular"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tooltip_button_background"
+                    android:drawableTint="?attr/contentPrimary"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_left"
+
+                    tools:visibility="visible" />
+
+                <am.acba.component.textView.PrimaryTextView
+                    android:id="@+id/skip"
+                    style="@style/Small.Regular"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/tooltip_button_fill_background"
+                    android:drawableTint="?attr/contentPrimary"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+
+                    tools:text="Ok"
+                    tools:visibility="visible" />
+
+                <am.acba.component.imageView.PrimaryImageView
+                    android:id="@+id/forward"
+                    style="@style/Small.Regular"
+                    android:layout_width="55dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/tooltip_button_fill_background"
+                    android:gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_right"
+                    android:tint="#FFFFFF"
+                    tools:text="Ok"
+                    tools:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>
