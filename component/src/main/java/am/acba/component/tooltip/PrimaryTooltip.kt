@@ -1,13 +1,12 @@
 package am.acba.component.tooltip
 
-import am.acba.component.R
 import am.acba.component.databinding.PrimaryTooltipLayoutBinding
 import am.acba.component.extensions.inflater
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 
 class PrimaryTooltip : FrameLayout {
     private val binding by lazy {
@@ -36,9 +35,6 @@ class PrimaryTooltip : FrameLayout {
 
     private fun init(attrs: AttributeSet) {
         addView(binding.root)
-        setBackwardClickListener()
-        setSkipClickListener()
-        setForwardClickListener()
     }
 
     fun setTitle(title: String) {
@@ -61,6 +57,11 @@ class PrimaryTooltip : FrameLayout {
 
     }
 
+    fun setButtonTitle(title: String?) {
+        binding.skip.text = title
+
+    }
+
     fun setButtonTitle(@StringRes stringRes: Int) {
         binding.skip.text = context.getString(stringRes)
 
@@ -70,24 +71,29 @@ class PrimaryTooltip : FrameLayout {
         binding.tooltipCount.text = count
     }
 
-    fun setBackwardClickListener() {
-        binding.backward.setOnClickListener {
-            Toast.makeText(context,"back",Toast.LENGTH_SHORT).show()
-        }
+    fun setBackwardClickListener(onClickListener: OnClickListener) {
+        binding.backward.setOnClickListener(onClickListener)
     }
 
-    fun setForwardClickListener() {
-        binding.forward.setOnClickListener {
-            Toast.makeText(context,"forward",Toast.LENGTH_SHORT).show()
-
-        }
+    fun setForwardClickListener(onClickListener: OnClickListener) {
+        binding.forward.setOnClickListener(onClickListener)
     }
 
-    fun setSkipClickListener() {
-        binding.skip.setOnClickListener {
-            Toast.makeText(context,"skip",Toast.LENGTH_SHORT).show()
+    fun setSkipClickListener(onClickListener: OnClickListener) {
+        binding.skip.setOnClickListener(onClickListener)
+    }
 
-        }
+    fun setForwardVisibility(isVisible: Boolean) {
+        binding.forward.isVisible = isVisible
+    }
+
+
+    fun setBackwardVisibility(isVisible: Boolean) {
+        binding.backward.isVisible = isVisible
+    }
+
+    fun setSkipVisibility(isVisible: Boolean) {
+        binding.skip.isVisible = isVisible
     }
 
 
