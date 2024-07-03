@@ -1,6 +1,7 @@
 package am.acba.components
 
-import am.acba.component.toolbar.OnboardingHint
+import am.acba.component.tooltip.OnboardingHint
+import am.acba.component.tooltip.TooltipModel
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentChipsBinding
@@ -36,6 +37,11 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipMedium3)
         setChipClicks(chipMedium4)
         setChipClicks(linear)
+
+        val tooltipModel1 = TooltipModel("AAA", "AAA AAA AAA AAA")
+        val tooltipModel2 = TooltipModel("BBB", "BBB BBB BBB BBB")
+        val tooltipModel3 = TooltipModel("CCC", "CCC CCC CCC CCC")
+
         chipSmall1.setEndIconClickListener {
             Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_SHORT).show()
         }
@@ -43,12 +49,17 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
             delay(100)
             if (onboardingHint == null)
                 onboardingHint = OnboardingHint(requireContext()).apply {
+                    setButtonTitle(R.string.ok)
+                    setOnBoardingList(
+                        arrayListOf(tooltipModel1, tooltipModel2, tooltipModel3)
+                    )
                     setTargetViews(
                         arrayListOf(
                             mBinding.chipSmall2, mBinding.chipSmall4, mBinding.chipMedium3
                         )
                     )
                 }
+
             mBinding.frame.addView(onboardingHint)
             onboardingHint?.handleSkip {
                 mBinding.frame.removeView(onboardingHint)

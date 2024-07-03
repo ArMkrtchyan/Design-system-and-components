@@ -67,8 +67,8 @@ class PrimaryTooltip : FrameLayout {
 
     }
 
-    fun setTooltipCount(count: String) {
-        binding.tooltipCount.text = count
+    fun setTooltipCount(currentPosition:Int,tooltipCount: Int) {
+        binding.tooltipCount.text = "$currentPosition/$tooltipCount"
     }
 
     fun setBackwardClickListener(onClickListener: OnClickListener) {
@@ -83,6 +83,10 @@ class PrimaryTooltip : FrameLayout {
         binding.skip.setOnClickListener(onClickListener)
     }
 
+    fun setCloseTooltipClickListener(onClickListener: OnClickListener) {
+        binding.close.setOnClickListener(onClickListener)
+    }
+
     fun setForwardVisibility(isVisible: Boolean) {
         binding.forward.isVisible = isVisible
     }
@@ -94,6 +98,11 @@ class PrimaryTooltip : FrameLayout {
 
     fun setSkipVisibility(isVisible: Boolean) {
         binding.skip.isVisible = isVisible
+    }
+
+    fun setTooltip(tooltipModel: TooltipModel) {
+        binding.title.text = tooltipModel.title
+        binding.description.text = tooltipModel.description
     }
 
 

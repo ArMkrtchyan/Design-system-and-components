@@ -24,10 +24,6 @@ class OnboardingTooltipFragment: BaseViewBindingFragment<FragmentOnboardingToolt
             }
         }
 
-        mBinding.tooltip.setTitle("AAA")
-        mBinding.tooltip.setDescription("AAA AAA AAA AAA")
-        mBinding.tooltip.setButtonTitle(R.string.ok)
-        mBinding.tooltip.setTooltipCount("2/3")
     }
 
     private fun showPrimaryAlertDialog(context: Context, inflater: LayoutInflater) {
