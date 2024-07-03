@@ -61,6 +61,10 @@
         <action
             android:id="@+id/action_mainFragment_to_toolbarFragment"
             app:destination="@id/toolbarFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_tooltipFragment"
+            app:destination="@id/tooltipFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -147,4 +151,11 @@
         android:name="am.acba.components.ToolbarFragment"
         tools:layout="@layout/fragment_toolbar"
         android:label="ToolbarFragment" />
+    <fragment
+        android:id="@+id/tooltipFragment"
+        android:name="am.acba.components.OnboardingTooltipFragment"
+        tools:layout="@layout/fragment_onboarding_tooltip"
+        android:label="TooltipFragment" />
+
+
 </navigation>

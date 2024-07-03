@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     companion object {
-        var darkTheme = true
+        var darkTheme = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

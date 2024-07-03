@@ -40,6 +40,10 @@ class PrimaryDropDown @JvmOverloads constructor(
         binding.inputDropDown.editText?.setText(text)
     }
 
+    fun getText():String{
+        return binding.inputDropDown.editText?.text.toString()
+    }
+
     fun setHint(hint: String) {
         binding.inputDropDown.hint = hint
     }
