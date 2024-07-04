@@ -29,10 +29,69 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
+            <am.acba.component.alert.PrimaryAlertPagination
+                android:id="@+id/alert_pagination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:id="@+id/alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                tools:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                tools:link="link"
+                tools:showCloseIcon="true"
+                tools:title="Title" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:showCloseIcon="true"
+                app:title="Title"
+                app:type="Info" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showCloseIcon="false"
+                app:type="Danger" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showCloseIcon="false"
+                app:title="Title"
+                app:type="Warning" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showCloseIcon="false"
+                app:title="Title"
+                app:type="Success" />
+
+            <am.acba.component.alert.PrimaryAlert
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:isFilledBackground="true"
+                app:neutralIcon="@drawable/ic_repeat"
+                app:showCloseIcon="false"
+                app:title="Title"
+                app:type="Neutral" />
 
         </LinearLayout>
     </ScrollView>
