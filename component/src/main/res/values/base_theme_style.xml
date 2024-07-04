@@ -91,6 +91,8 @@
         <item name="overlayBackgroundTonal6">@color/Black_10</item>
         <item name="overlayBackgroundTonal7">@color/White_10</item>
         <item name="overlayBackgroundTonal8">@color/BlueGrey_950_60</item>
+        <item name="overlayBackgroundTonal9">@color/Black_30</item>
+        <item name="overlayBackgroundTonal10">@color/Black_10</item>
 
         <!-- Content -->
         <item name="contentBrand">@color/BrandGreen_500</item>
