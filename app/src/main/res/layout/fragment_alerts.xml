@@ -33,10 +33,16 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
+            <am.acba.component.alert.PrimaryAlertPagination
+                android:id="@+id/alert_pagination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <am.acba.component.alert.PrimaryAlert
                 android:id="@+id/alert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 tools:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
                 tools:link="link"
                 tools:showCloseIcon="true"
