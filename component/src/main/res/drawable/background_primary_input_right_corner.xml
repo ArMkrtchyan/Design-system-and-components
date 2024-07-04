@@ -6,6 +6,13 @@
             <solid android:color="?attr/backgroundTonal2" />
         </shape>
     </item>
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners  android:topRightRadius="@dimen/radius_12"
+                android:bottomRightRadius="@dimen/radius_12" />
+            <solid android:color="?attr/backgroundTonal2Disable" />
+        </shape>
+    </item>
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <corners  android:topRightRadius="@dimen/radius_12"
@@ -14,11 +21,5 @@
             <solid android:color="?attr/backgroundTonal2" />
         </shape>
     </item>
-    <item android:state_enabled="false">
-        <shape android:shape="rectangle">
-            <corners  android:topRightRadius="@dimen/radius_12"
-                android:bottomRightRadius="@dimen/radius_12" />
-            <solid android:color="?attr/backgroundTonal2" />
-        </shape>
-    </item>
+
 </selector>

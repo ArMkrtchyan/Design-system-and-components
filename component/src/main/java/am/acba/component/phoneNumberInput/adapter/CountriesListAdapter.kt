@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
 class CountriesListAdapter(
@@ -49,6 +50,7 @@ class CountriesListAdapter(
             binding.apply {
                 Glide.with(binding.root.context).asBitmap().load(country.flagResId)
                     .apply(RequestOptions.circleCropTransform().override(24.dpToPx(), 24.dpToPx()))
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.icFlag)
                 countryText.text = country.name
             }

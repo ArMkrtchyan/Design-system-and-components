@@ -1,12 +1,16 @@
 package am.acba.components.mainScreen
 
+import am.acba.component.phoneNumberInput.PhoneNumberInput
 import am.acba.components.R
 import am.acba.components.databinding.ActivityMainBinding
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val CONTACT_PERMISSION_REQUEST = 100
 
     companion object {
         var darkTheme = false
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action == MotionEvent.ACTION_DOWN) {
             if (ev.action == MotionEvent.FLAG_WINDOW_IS_OBSCURED) {

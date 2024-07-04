@@ -36,7 +36,11 @@
             <am.acba.component.phoneNumberInput.PhoneNumberInput
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_countryAutoDetectionPref="LOCALE_SIM"
+                app:phoneInputHelpText="Phone number is"
+                app:phoneInputErrorText="Phone number is not valid"/>
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

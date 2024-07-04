@@ -178,7 +178,10 @@
         <attr name="textMaxLength" format="integer" />
         <attr name="hasDropDown" format="boolean" />
     </declare-styleable>
-
+    <declare-styleable name="PhoneNumberInput">
+        <attr name="phoneInputErrorText" format="string" />
+        <attr name="phoneInputHelpText" format="string" />
+    </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />
         <attr name="android:hint" />
