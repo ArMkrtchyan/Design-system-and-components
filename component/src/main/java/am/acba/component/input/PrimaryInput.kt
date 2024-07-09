@@ -8,11 +8,15 @@ import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
@@ -51,6 +55,19 @@ open class PrimaryInput : TextInputLayout {
             }
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
+            suffixTextView.translationY = -8.dpToPx().toFloat()
+            suffixTextView.updateLayoutParams<ViewGroup.LayoutParams> {
+                height = ViewGroup.LayoutParams.MATCH_PARENT
+
+            }
+            suffixTextView.gravity = Gravity.CENTER_VERTICAL
+            val suffixParent = suffixTextView.parent as View
+            suffixParent.viewTreeObserver.addOnGlobalLayoutListener {
+                if (!suffixText.isNullOrEmpty()) {
+                    (suffixTextView.parent as View).isVisible = true
+                    suffixTextView.isVisible = true
+                }
+            }
             recycle()
         }
     }
@@ -105,4 +122,5 @@ open class PrimaryInput : TextInputLayout {
         }
         editText?.setOnClickListener(l)
     }
+
 }
