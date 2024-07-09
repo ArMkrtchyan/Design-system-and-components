@@ -32,15 +32,14 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipSmall2)
         setChipClicks(chipSmall3)
         setChipClicks(chipSmall4)
-        setChipClicks(chipMedium1)
-        setChipClicks(chipMedium2)
-        setChipClicks(chipMedium3)
-        setChipClicks(chipMedium4)
-        setChipClicks(linear)
 
         val tooltipModel1 = TooltipModel("AAA", "AAA AAA AAA AAA")
         val tooltipModel2 = TooltipModel("BBB", "BBB BBB BBB BBB")
         val tooltipModel3 = TooltipModel("CCC", "CCC CCC CCC CCC")
+        val tooltipModel4 = TooltipModel("CCC", "CCC 444 CCC CCC")
+        val tooltipModel5 = TooltipModel("CCC", "CCC 555 CCC CCC")
+        val tooltipModel6 = TooltipModel("CCC", "info 555 CCC CCC")
+        val tooltipModel7 = TooltipModel("CCC", "info 555 CCC CCC")
 
         chipSmall1.setEndIconClickListener {
             Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_SHORT).show()
@@ -51,18 +50,18 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
                 onboardingHint = OnboardingHint(requireContext()).apply {
                     setButtonTitle(R.string.ok)
                     setOnBoardingList(
-                        arrayListOf(tooltipModel1, tooltipModel2, tooltipModel3)
+                        arrayListOf(tooltipModel1, tooltipModel2, tooltipModel3,tooltipModel4,tooltipModel5,tooltipModel6,tooltipModel7)
                     )
                     setTargetViews(
                         arrayListOf(
-                            mBinding.chipSmall2, mBinding.chipSmall4, mBinding.chipMedium3
+                            mBinding.chipSmall1,mBinding.chipSmall2,mBinding.chipSmall3,mBinding.chipSmall4,mBinding.chipSmall5,mBinding.chipSmall6,mBinding.chipSmall8
                         )
                     )
                 }
 
-            mBinding.frame.addView(onboardingHint)
+            mBinding.clContainer.addView(onboardingHint)
             onboardingHint?.handleSkip {
-                mBinding.frame.removeView(onboardingHint)
+                mBinding.clContainer.removeView(onboardingHint)
             }
         }
     }

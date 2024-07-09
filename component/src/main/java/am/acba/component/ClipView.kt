@@ -25,7 +25,7 @@ class ClipView @JvmOverloads constructor(
     private var startViewCenterY = 0f
     private var endViewCenterX = 0f
     private var endViewCenterY = 0f
-    private var duration = 150
+    private var duration = 200
 
     private val backgroundPaint = Paint()
     private var startClipRect: RectF? = null
@@ -33,7 +33,7 @@ class ClipView @JvmOverloads constructor(
     private var endClipRect = RectF()
 
     private val clipPath = Path()
-    private val cornerRadius = 12.dpToPx().toFloat()
+    private val cornerRadius = 16.dpToPx().toFloat()
     private val clipPadding = 8.dpToPx()
 
     init {

@@ -15,6 +15,7 @@
         app:title="Chips" />
 
     <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/info"
         style="@style/Subtitle1.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,150 +29,197 @@
         android:layout_weight="1"
         android:fillViewport="true">
 
-        <FrameLayout
-            android:id="@+id/frame"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp">
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                app:chipEndIcon="@drawable/ic_close"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/ic_file_download"
+                app:chipStartIconType="Icon"
+                app:chipText="100 000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_small_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:chipEndIcon="@drawable/ic_close"
-                    app:chipSize="Small"
-                    app:chipStartIcon="@drawable/ic_file_download"
-                    app:chipStartIconType="Icon"
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/ic_file_download"
+                app:chipStartIconType="Icon"
+                app:chipText="100 000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    app:chipText="100 000" />
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                app:chipSize="Small"
+                app:chipStartIcon="@drawable/flag_usa"
+                app:chipStartIconType="Image"
+                app:chipText="United States"
+                app:isChipSelected="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_small_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Small"
-                    app:chipStartIcon="@drawable/ic_file_download"
-                    app:chipStartIconType="Icon"
-                    app:chipText="100 000" />
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:chipSize="Small"
+                app:chipText="100 000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_small_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Small"
-                    app:chipStartIcon="@drawable/flag_usa"
-                    app:chipStartIconType="Image"
-                    app:chipText="United States"
-                    app:isChipSelected="true" />
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="100dp"
+                app:chipSize="Small"
+                app:chipText="100 000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chip_small_4" />
 
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_small_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Small"
-                    app:chipText="100 000" />
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="50dp"
+                app:chipSize="Small"
+                app:chipText="100 000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chip_small_8" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/linear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="4">
-
-                    <am.acba.component.chip.PrimaryChip
-                        android:id="@+id/chip1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        app:chipSize="Small"
-                        app:chipText="6 months" />
-
-                    <am.acba.component.chip.PrimaryChip
-                        android:id="@+id/chip2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        app:chipSize="Small"
-                        app:chipText="1 year" />
-
-                    <am.acba.component.chip.PrimaryChip
-                        android:id="@+id/chip3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="2dp"
-                        android:layout_weight="1"
-                        app:chipSize="Small"
-                        app:chipText="2 years" />
-
-                    <am.acba.component.chip.PrimaryChip
-                        android:id="@+id/chip4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        app:chipSize="Small"
-                        app:chipText="3 years" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_medium_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipEndIcon="@drawable/ic_close"
-                    app:chipSize="Medium"
-                    app:chipStartIcon="@drawable/ic_file_download"
-                    app:chipStartIconType="Icon"
-                    app:chipText="Lorem ipsum dolor" />
-
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_medium_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Medium"
-                    app:chipStartIcon="@drawable/ic_card"
-                    app:chipStartIconType="Icon"
-                    app:chipText="Lorem ipsum dolor" />
-
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_medium_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Medium"
-                    app:chipStartIcon="@drawable/flag_usa"
-                    app:chipStartIconType="Image"
-                    app:chipText="United States" />
-
-                <am.acba.component.chip.PrimaryChip
-                    android:id="@+id/chip_medium_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:chipSize="Medium"
-                    app:chipText="Lorem ipsum dolor" />
-
-            </LinearLayout>
+            <am.acba.component.chip.PrimaryChip
+                android:id="@+id/chip_small_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:chipSize="Small"
+                app:chipText="100 000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        </FrameLayout>
+            <!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+            <!--                    android:id="@+id/linear"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp">-->
+
+            <!--                    <am.acba.component.chip.PrimaryChip-->
+            <!--                        android:id="@+id/chip1"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="2dp"-->
+            <!--                        android:layout_marginEnd="2dp"-->
+            <!--                        app:chipSize="Small"-->
+            <!--                        app:chipText="6 months" />-->
+
+            <!--                    <am.acba.component.chip.PrimaryChip-->
+            <!--                        android:id="@+id/chip2"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="2dp"-->
+            <!--                        android:layout_marginEnd="2dp"-->
+            <!--                        app:chipSize="Small"-->
+            <!--                        app:chipText="1 year" />-->
+
+            <!--                    <am.acba.component.chip.PrimaryChip-->
+            <!--                        android:id="@+id/chip3"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="2dp"-->
+            <!--                        android:layout_marginEnd="2dp"-->
+            <!--                        app:chipSize="Small"-->
+            <!--                        app:chipText="2 years" />-->
+
+            <!--                    <am.acba.component.chip.PrimaryChip-->
+            <!--                        android:id="@+id/chip4"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginStart="2dp"-->
+            <!--                        app:chipSize="Small"-->
+            <!--                        app:chipText="3 years" />-->
+            <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_1"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipEndIcon="@drawable/ic_close"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipStartIcon="@drawable/ic_file_download"-->
+            <!--                    app:chipStartIconType="Icon"-->
+            <!--                    app:chipText="Lorem ipsum dolor" />-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_2"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipStartIcon="@drawable/ic_card"-->
+            <!--                    app:chipStartIconType="Icon"-->
+            <!--                    app:chipText="Lorem ipsum dolor" />-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_3"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipStartIcon="@drawable/flag_usa"-->
+            <!--                    app:chipStartIconType="Image"-->
+            <!--                    app:chipText="United States" />-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_4"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipText="Lorem ipsum dolor" />-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_5"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipText="Lorem ipsum dolor 5" />-->
+
+            <!--                <am.acba.component.chip.PrimaryChip-->
+            <!--                    android:id="@+id/chip_medium_6"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginTop="20dp"-->
+            <!--                    app:chipSize="Medium"-->
+            <!--                    app:chipText="Lorem ipsum dolor 6" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
