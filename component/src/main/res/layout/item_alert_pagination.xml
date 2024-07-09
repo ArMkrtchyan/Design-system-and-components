@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <am.acba.component.alert.PrimaryAlert
+        android:id="@+id/alert"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="4dp"
+        tools:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+        tools:link="link"
+        tools:showCloseIcon="true"
+        tools:title="Title" />
+
+</FrameLayout>

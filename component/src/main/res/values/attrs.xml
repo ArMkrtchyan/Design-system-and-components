@@ -21,6 +21,9 @@
     <attr name="badgePaddingStart" format="dimension" />
     <attr name="badgePaddingEnd" format="dimension" />
     <attr name="badgeTextAppearance" format="reference" />
+    <attr name="title" format="string" />
+    <attr name="body" format="string" />
+    <attr name="showCloseIcon" format="boolean" />
 
     <declare-styleable name="ds">
 
@@ -54,10 +57,13 @@
         <attr name="backgroundDanger" format="color" />
         <attr name="backgroundDangerTonal1" format="color" />
         <attr name="backgroundSuccess" format="color" />
+        <attr name="backgroundSuccessTonal1" format="color" />
         <attr name="backgroundInfo" format="color" />
+        <attr name="backgroundInfoTonal1" format="color" />
         <attr name="backgroundWarning" format="color" />
         <attr name="backgroundWarningTonal1" format="color" />
         <attr name="backgroundPending" format="color" />
+        <attr name="backgroundPendingTonal1" format="color" />
         <attr name="backgroundAlternative" format="color" />
         <attr name="backgroundAlternative2" format="color" />
         <attr name="backgroundAlternative3" format="color" />
@@ -83,6 +89,9 @@
         <attr name="borderNeutral" format="color" />
         <attr name="borderDanger" format="color" />
         <attr name="borderDangerTonal1" format="color" />
+        <attr name="borderInfoTonal1" format="color" />
+        <attr name="borderWarning" format="color" />
+        <attr name="borderSuccess" format="color" />
 
         <!-- Overlay -->
         <attr name="overlayTonal1" format="color" />
@@ -96,6 +105,8 @@
         <attr name="overlayBackgroundTonal6" format="color" />
         <attr name="overlayBackgroundTonal7" format="color" />
         <attr name="overlayBackgroundTonal8" format="color" />
+        <attr name="overlayBackgroundTonal9" format="color" />
+        <attr name="overlayBackgroundTonal10" format="color" />
 
         <!-- Content -->
         <attr name="contentBrand" format="color" />
@@ -343,4 +354,20 @@
         <attr name="toolbarTitle" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="PrimaryAlert">
+        <attr name="type" format="enum">
+            <enum name="Info" value="0" />
+            <enum name="Danger" value="1" />
+            <enum name="Warning" value="2" />
+            <enum name="Success" value="3" />
+            <enum name="Neutral" value="4" />
+        </attr>
+        <attr name="isFilledBackground" format="boolean"/>
+        <attr name="title"/>
+        <attr name="body"/>
+        <attr name="bodyMaxLines" format="integer"/>
+        <attr name="link" format="string"/>
+        <attr name="showCloseIcon"/>
+        <attr name="neutralIcon" format="reference"/>
+    </declare-styleable>
 </resources>
