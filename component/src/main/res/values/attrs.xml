@@ -356,19 +356,19 @@
     </declare-styleable>
 
     <declare-styleable name="PrimaryAlert">
-        <attr name="type" format="enum">
+        <attr name="alertType" format="enum">
             <enum name="Info" value="0" />
             <enum name="Danger" value="1" />
             <enum name="Warning" value="2" />
             <enum name="Success" value="3" />
             <enum name="Neutral" value="4" />
         </attr>
-        <attr name="isFilledBackground" format="boolean"/>
-        <attr name="title"/>
-        <attr name="body"/>
-        <attr name="bodyMaxLines" format="integer"/>
-        <attr name="link" format="string"/>
-        <attr name="showCloseIcon"/>
-        <attr name="neutralIcon" format="reference"/>
+        <attr name="isFilledBackground" format="boolean" />
+        <attr name="alertTitle" format="string" />
+        <attr name="alertDescription" format="string" />
+        <attr name="alertDescriptionMaxLines" format="integer" />
+        <attr name="alertLink" format="string" />
+        <attr name="showAlertCloseIcon" format="reference" />
+        <attr name="alertNeutralIcon" format="reference" />
     </declare-styleable>
 </resources>

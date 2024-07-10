@@ -42,16 +42,16 @@ class PrimaryAlert : FrameLayout {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryAlert).apply {
             addView(binding.root)
             try {
-                showCloseIcon = getBoolean(R.styleable.PrimaryAlert_showCloseIcon, true)
-                type = getInt(R.styleable.PrimaryAlert_type, 0).findAlertTypeByOrdinal()
+                showCloseIcon = getBoolean(R.styleable.PrimaryAlert_showAlertCloseIcon, true)
+                type = getInt(R.styleable.PrimaryAlert_alertType, 0).findAlertTypeByOrdinal()
                     ?: AlertTypes.INFO
 
                 isFilledBackground = getBoolean(R.styleable.PrimaryAlert_isFilledBackground, false)
-                val title = getString(R.styleable.PrimaryAlert_title)
-                val body = getString(R.styleable.PrimaryAlert_body)
-                val bodyMaxLines = getInt(R.styleable.PrimaryAlert_bodyMaxLines, 0)
-                val link = getString(R.styleable.PrimaryAlert_link)
-                val neutralIcon = getDrawable(R.styleable.PrimaryAlert_neutralIcon)
+                val title = getString(R.styleable.PrimaryAlert_alertTitle)
+                val body = getString(R.styleable.PrimaryAlert_alertDescription)
+                val bodyMaxLines = getInt(R.styleable.PrimaryAlert_alertDescriptionMaxLines, 0)
+                val link = getString(R.styleable.PrimaryAlert_alertLink)
+                val neutralIcon = getDrawable(R.styleable.PrimaryAlert_alertNeutralIcon)
 
                 updateCloseIconVisibility()
                 setType(type)
