@@ -40,9 +40,9 @@
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:hint="dscsdcdssdcsdc"
+                app:expandedHintEnabled="false"
                 app:endIconMode="none"
-                app:suffixTextColor="?attr/contentPrimaryTonal1"
-                app:suffixText="AMD" />
+                android:text="dscmsdlcpxkosdmn k" />
 
         </LinearLayout>
     </ScrollView>

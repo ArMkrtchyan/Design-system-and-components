@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -46,6 +47,7 @@ open class PrimaryInput : TextInputLayout {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+            setText(getString(R.styleable.PrimaryInput_android_text))
             if (textMaxLength != -1) setMaxLength(textMaxLength)
             if (hasDropDown) {
                 val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
@@ -123,4 +125,11 @@ open class PrimaryInput : TextInputLayout {
         editText?.setOnClickListener(l)
     }
 
+    fun setText(text: String?) {
+        editText?.setText(text)
+    }
+
+    fun setText(@StringRes resId: Int) {
+        editText?.setText(resId)
+    }
 }

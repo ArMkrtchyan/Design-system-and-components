@@ -188,6 +188,7 @@
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
         <attr name="hasDropDown" format="boolean" />
+        <attr name="android:text" />
     </declare-styleable>
 
     <declare-styleable name="SearchInput">
