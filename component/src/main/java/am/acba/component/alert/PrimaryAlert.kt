@@ -48,8 +48,8 @@ class PrimaryAlert : FrameLayout {
 
                 isFilledBackground = getBoolean(R.styleable.PrimaryAlert_isFilledBackground, false)
                 val title = getString(R.styleable.PrimaryAlert_alertTitle)
-                val body = getString(R.styleable.PrimaryAlert_alertDescription)
-                val bodyMaxLines = getInt(R.styleable.PrimaryAlert_alertDescriptionMaxLines, 0)
+                val body = getString(R.styleable.PrimaryAlert_alertBody)
+                val bodyMaxLines = getInt(R.styleable.PrimaryAlert_alertBodyMaxLines, 0)
                 val link = getString(R.styleable.PrimaryAlert_alertLink)
                 val neutralIcon = getDrawable(R.styleable.PrimaryAlert_alertNeutralIcon)
 

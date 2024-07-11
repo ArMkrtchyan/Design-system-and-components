@@ -43,55 +43,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
-                tools:link="link"
-                tools:showCloseIcon="true"
-                tools:title="Title" />
+                tools:alertLink="link"
+                tools:alertTitle="Title"
+                tools:alertBody="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                tools:showAlertCloseIcon="true" />
 
             <am.acba.component.alert.PrimaryAlert
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:showCloseIcon="true"
-                app:title="Title"
-                app:type="Info" />
+                app:alertTitle="Title"
+                app:alertType="Info"
+                app:showAlertCloseIcon="true" />
 
             <am.acba.component.alert.PrimaryAlert
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
-                app:showCloseIcon="false"
-                app:type="Danger" />
+                app:alertType="Danger"
+                app:alertBody="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showAlertCloseIcon="false" />
 
             <am.acba.component.alert.PrimaryAlert
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
-                app:showCloseIcon="false"
-                app:title="Title"
-                app:type="Warning" />
+                app:alertTitle="Title"
+                app:alertType="Warning"
+                app:alertBody="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showAlertCloseIcon="false" />
 
             <am.acba.component.alert.PrimaryAlert
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
-                app:showCloseIcon="false"
-                app:title="Title"
-                app:type="Success" />
+                app:alertTitle="Title"
+                app:alertType="Success"
+                app:alertBody="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:showAlertCloseIcon="false" />
 
             <am.acba.component.alert.PrimaryAlert
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:body="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
+                app:alertNeutralIcon="@drawable/ic_repeat"
+                app:alertTitle="Title"
+                app:alertType="Neutral"
+                app:alertBody="Alert messages, including info, warning, danger, and success, serve to inform, caution, indicate critical issues, or confirm successful actions respectively in user experience design."
                 app:isFilledBackground="true"
-                app:neutralIcon="@drawable/ic_repeat"
-                app:showCloseIcon="false"
-                app:title="Title"
-                app:type="Neutral" />
+                app:showAlertCloseIcon="false" />
 
         </LinearLayout>
     </ScrollView>

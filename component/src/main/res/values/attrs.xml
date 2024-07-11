@@ -365,10 +365,10 @@
         </attr>
         <attr name="isFilledBackground" format="boolean" />
         <attr name="alertTitle" format="string" />
-        <attr name="alertDescription" format="string" />
-        <attr name="alertDescriptionMaxLines" format="integer" />
+        <attr name="alertBody" format="string" />
+        <attr name="alertBodyMaxLines" format="integer" />
         <attr name="alertLink" format="string" />
-        <attr name="showAlertCloseIcon" format="reference" />
+        <attr name="showAlertCloseIcon" format="boolean" />
         <attr name="alertNeutralIcon" format="reference" />
     </declare-styleable>
 </resources>
