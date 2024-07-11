@@ -1,6 +1,7 @@
 package am.acba.component
 
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getStatusBarHeight
 import am.acba.component.extensions.log
 import android.app.Activity
@@ -13,7 +14,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ class ClipView @JvmOverloads constructor(
     private var startViewCenterY = 0f
     private var endViewCenterX = 0f
     private var endViewCenterY = 0f
-    private var duration = 200
+    private var duration = 400
 
     private val backgroundPaint = Paint()
     private var startClipRect: RectF? = null
@@ -40,7 +40,7 @@ class ClipView @JvmOverloads constructor(
     private val clipPadding = 8.dpToPx()
 
     init {
-        backgroundPaint.color = ContextCompat.getColor(context, R.color.Black_50)
+        backgroundPaint.color = context.getColorFromAttr(R.attr.overlayBackground)
     }
 
     override fun onDraw(canvas: Canvas) {

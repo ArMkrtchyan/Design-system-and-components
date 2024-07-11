@@ -100,19 +100,11 @@ class PrimaryTooltip : FrameLayout {
         binding.skip.isVisible = isVisible
     }
 
-    fun isImageVisible(): Boolean {
-        return binding.contentImage.isVisible
-    }
-
-    fun isLottieVisible(): Boolean {
-        return binding.lottie.isVisible
-    }
-
     fun setTooltip(tooltipModel: TooltipModel) {
         binding.title.text = tooltipModel.title
         binding.description.text = tooltipModel.description
         if (tooltipModel.imageUrl.isNotEmpty()) {
-            binding.contentImage.visibility = FrameLayout.VISIBLE
+            binding.contentImage.visibility = VISIBLE
             Glide.with(context)
                 .load(tooltipModel.imageUrl)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
@@ -132,7 +124,6 @@ class PrimaryTooltip : FrameLayout {
         } else {
             binding.lottie.visibility = GONE
         }
-
     }
 
 

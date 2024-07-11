@@ -3,6 +3,7 @@ package am.acba.component.tooltip
 import am.acba.component.databinding.OnboardingHintLayoutBinding
 import am.acba.component.databinding.OnboardingInfoLayoutBinding
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.getDisplayHeight
 import am.acba.component.extensions.getDisplayWidth
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
@@ -120,12 +121,12 @@ class OnboardingHint @JvmOverloads constructor(
                     onboardingHintBinding.infoContainer.animate()
                         .y(coordinates.second)
                         .setInterpolator(LinearInterpolator())
-                        .setDuration(390)
+                        .setDuration(300)
                         .start()
                     onboardingHintBinding.infoContainer.animate()
                         .x(coordinates.first)
                         .setInterpolator(LinearInterpolator())
-                        .setDuration(390)
+                        .setDuration(300)
                         .withStartAction {
                             onboardingHintBinding.clipView.clipForView(
                                 view,
@@ -147,14 +148,15 @@ class OnboardingHint @JvmOverloads constructor(
         view: View,
         height: Int
     ): Pair<Float, Float> {
-        val displayHeight = (view.parent as View).height
+//        val displayHeight = (view.parent as View).height
+        val displayHeight = context.getDisplayHeight()
         val location = intArrayOf(-1, -1)
         view.getLocationOnScreen(location)
         val viewX = location[0].toFloat().log("Coordinates", "Location X ->")
         val viewY = location[1].toFloat().log("Coordinates", "Location Y ->")
         onboardingInfoBinding.root.height.toString().log("info height")
 
-        return if ((displayHeight - viewY - view.height - 32.dpToPx()) < height) {
+        return if ((displayHeight - viewY - view.height - 16.dpToPx()) < height) {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
                 false,
