@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -57,21 +58,30 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="3"
-            android:padding="6dp"
+            android:padding="4dp"
             android:textColor="?attr/contentPrimaryTonal1"
             tools:text="Now we’ll add the initialisation to our Activity/Fragment. We are using mostly fragments in out projects, so I’m going with the examples for fragments.And keep this  always as" />
 
         <am.acba.component.imageView.PrimaryImageView
             android:id="@+id/contentImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:padding="6dp"
-            android:tint="?attr/contentPrimary"
+            android:tint="@null"
             android:visibility="gone"
             tools:src="@drawable/ic_user_protect"
             tools:visibility="visible" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true" />
 
         <LinearLayout
             android:layout_width="match_parent"

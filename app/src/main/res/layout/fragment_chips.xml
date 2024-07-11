@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,6 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/toolbar_menu"
         app:title="Chips" />
 
@@ -20,18 +22,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:text="Chips help people enter information, make selections, filter content, or trigger actions" />
+        android:text="Chips help people enter information, make selections, filter content, or trigger actions"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -66,15 +70,15 @@
                 android:id="@+id/chip_small_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
+                android:layout_marginTop="140dp"
                 app:chipSize="Small"
                 app:chipStartIcon="@drawable/flag_usa"
                 app:chipStartIconType="Image"
                 app:chipText="United States"
                 app:isChipSelected="true"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
                 android:id="@+id/chip_small_4"
@@ -222,4 +226,4 @@
 
 
     </ScrollView>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,11 +33,11 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipSmall3)
         setChipClicks(chipSmall4)
 
-        val tooltipModel1 = TooltipModel("AAA", "AAA AAA AAA AAA")
-        val tooltipModel2 = TooltipModel("BBB", "BBB BBB BBB BBB")
+        val tooltipModel1 = TooltipModel("AAA", "AAA AAA AAA AAA", "https://pixlr.com/images/index/ai-image-generator-one.webp")
+        val tooltipModel2 = TooltipModel("BBB", "BBB BBB BBB BBB", "", "welcome_animation.json")
         val tooltipModel3 = TooltipModel("CCC", "CCC CCC CCC CCC")
         val tooltipModel4 = TooltipModel("CCC", "CCC 444 CCC CCC")
-        val tooltipModel5 = TooltipModel("CCC", "CCC 555 CCC CCC")
+        val tooltipModel5 = TooltipModel("CCC", "CCC 555 CCC CCC", "https://pixlr.com/images/index/ai-image-generator-one.webp")
         val tooltipModel6 = TooltipModel("CCC", "info 555 CCC CCC")
         val tooltipModel7 = TooltipModel("CCC", "info 555 CCC CCC")
 
@@ -47,15 +47,29 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         lifecycleScope.launch {
             delay(100)
             if (onboardingHint == null)
-                onboardingHint = OnboardingHint(requireContext()).apply {
+                onboardingHint = OnboardingHint(requireContext(), null, requireActivity()).apply {
                     setButtonTitle(R.string.ok)
-                    setOnBoardingList(
-                        arrayListOf(tooltipModel1, tooltipModel2, tooltipModel3,tooltipModel4,tooltipModel5,tooltipModel6,tooltipModel7)
+                    setTooltipList(
+                        arrayListOf(
+                            tooltipModel1,
+                            tooltipModel2,
+                            tooltipModel3,
+                            tooltipModel4,
+                            tooltipModel5,
+                            tooltipModel6,
+                            tooltipModel7
+                        )
                     )
                     setTargetViews(
                         arrayListOf(
-                            mBinding.chipSmall1,mBinding.chipSmall2,mBinding.chipSmall3,mBinding.chipSmall4,mBinding.chipSmall5,mBinding.chipSmall6,mBinding.chipSmall8
-                        )
+                            mBinding.chipSmall1,
+                            mBinding.chipSmall2,
+                            mBinding.chipSmall3,
+                            mBinding.chipSmall4,
+                            mBinding.chipSmall5,
+                            mBinding.chipSmall6,
+                            mBinding.chipSmall8
+                        ), requireActivity()
                     )
                 }
 
@@ -64,12 +78,12 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
                 mBinding.clContainer.removeView(onboardingHint)
             }
         }
+
     }
 
 
     private fun setChipClicks(chip: View) {
         chip.setOnClickListener {
-
             //  chip.isSelected = !chip.isSelected
         }
     }

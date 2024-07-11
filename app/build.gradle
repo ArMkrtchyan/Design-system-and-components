@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation libs.glide
+    implementation libs.lottie
     implementation project(":component")
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat

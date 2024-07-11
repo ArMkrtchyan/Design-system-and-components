@@ -1,7 +1,9 @@
 package am.acba.component
 
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.getStatusBarHeight
 import am.acba.component.extensions.log
+import android.app.Activity
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -10,6 +12,7 @@ import android.graphics.RectF
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
+import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
@@ -50,35 +53,54 @@ class ClipView @JvmOverloads constructor(
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), backgroundPaint)
     }
 
-    fun clipForView(view: View) {
-        clipRect.top = (view.top - clipPadding).toFloat()
-        clipRect.left = (view.left - clipPadding).toFloat()
-        clipRect.right = (view.right + clipPadding).toFloat()
-        clipRect.bottom = (view.bottom + clipPadding).toFloat()
+    fun isFullScreen(activity: Activity): Boolean {
+        val flg: Int = activity.getWindow().getAttributes().flags
+        var flag = false
+        if (flg and WindowManager.LayoutParams.FLAG_FULLSCREEN == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
+            flag = true
+        }
+        return flag
+    }
+
+    fun clipForView(view: View, activity: Activity) {
+        val location = intArrayOf(-1, -1)
+        view.getLocationOnScreen(location)
+
+        val viewX = location[0].toFloat().log("Coordinates", "Location X ->")
+        var viewY = location[1].toFloat().log("Coordinates", "Location Y ->")
+
+        if (!isFullScreen(activity)) {
+            viewY -= context.getStatusBarHeight()
+        }
+
+        clipRect.top = (viewY - clipPadding).toFloat()
+        clipRect.left = (viewX - clipPadding).toFloat()
+        clipRect.right = (viewX + view.width + clipPadding).toFloat()
+        clipRect.bottom = (viewY + view.height + clipPadding).toFloat()
         clipPath.reset()
         clipPath.addRoundRect(clipRect, cornerRadius, cornerRadius, Path.Direction.CW)
         clipPath.close()
         invalidate()
         if (startClipRect == null) {
-            startViewCenterX = view.x + view.width / 2
-            startViewCenterY = view.y + view.height / 2
+            startViewCenterX = viewX + view.width / 2
+            startViewCenterY = viewY + view.height / 2
             startClipRect = RectF()
-            startClipRect?.top = (view.top - clipPadding).toFloat()
-            startClipRect?.left = (view.left - clipPadding).toFloat()
-            startClipRect?.right = (view.right + clipPadding).toFloat()
-            startClipRect?.bottom = (view.bottom + clipPadding).toFloat()
+            startClipRect?.top = (viewY - clipPadding).toFloat()
+            startClipRect?.left = (viewX - clipPadding).toFloat()
+            startClipRect?.right = (viewX + view.width + clipPadding).toFloat()
+            startClipRect?.bottom = (viewY + view.height + clipPadding).toFloat()
             clipPath.reset()
             clipPath.addRoundRect(startClipRect!!, cornerRadius, cornerRadius, Path.Direction.CW)
             clipPath.close()
             invalidate()
         } else {
-            endViewCenterX = view.x + view.width / 2
-            endViewCenterY = view.y + view.height / 2
-            endClipRect.top = (view.top - clipPadding).toFloat()
-            endClipRect.left = (view.left - clipPadding).toFloat()
-            endClipRect.right = (view.right + clipPadding).toFloat()
-            endClipRect.bottom = (view.bottom + clipPadding).toFloat()
-            animateTranslation()
+            endViewCenterX = viewX + view.width / 2
+            endViewCenterY = viewY + view.height / 2
+            endClipRect.top = (viewY - clipPadding).toFloat()
+            endClipRect.left = (viewX - clipPadding).toFloat()
+            endClipRect.right = (viewX + view.width + clipPadding).toFloat()
+            endClipRect.bottom = (viewY + view.height + clipPadding).toFloat()
+           invalidate()
         }
     }
 
@@ -87,8 +109,10 @@ class ClipView @JvmOverloads constructor(
             startViewCenterX = view.x + view.width / 2
             startViewCenterY = view.y + view.height / 2
             startClipRect = RectF()
-            startClipRect?.top = (startViewCenterY.log(prefix = "Start Y ->") - clipHeight / 2) - clipPadding
-            startClipRect?.left = (startViewCenterX.log(prefix = "Start X ->") - clipWidth / 2) - clipPadding
+            startClipRect?.top =
+                (startViewCenterY.log(prefix = "Start Y ->") - clipHeight / 2) - clipPadding
+            startClipRect?.left =
+                (startViewCenterX.log(prefix = "Start X ->") - clipWidth / 2) - clipPadding
             startClipRect?.right = (startViewCenterX + clipWidth / 2) + clipPadding
             startClipRect?.bottom = (startViewCenterY + clipHeight / 2) + clipPadding
             clipPath.reset()
@@ -98,8 +122,10 @@ class ClipView @JvmOverloads constructor(
         } else {
             endViewCenterX = view.x + view.width / 2
             endViewCenterY = view.y + view.height / 2
-            endClipRect.top = (endViewCenterY.log(prefix = "End Y ->") - clipHeight / 2) - clipPadding
-            endClipRect.left = (endViewCenterX.log(prefix = "End X ->") - clipWidth / 2) - clipPadding
+            endClipRect.top =
+                (endViewCenterY.log(prefix = "End Y ->") - clipHeight / 2) - clipPadding
+            endClipRect.left =
+                (endViewCenterX.log(prefix = "End X ->") - clipWidth / 2) - clipPadding
             endClipRect.right = (endViewCenterX + clipWidth / 2) + clipPadding
             endClipRect.bottom = (endViewCenterY + clipHeight / 2) + clipPadding
             animateTranslation()
@@ -111,8 +137,10 @@ class ClipView @JvmOverloads constructor(
             startViewCenterX = viewX
             startViewCenterY = viewY
             startClipRect = RectF()
-            startClipRect?.top = (startViewCenterY.log(prefix = "Start Y ->") - clipHeight / 2) - clipPadding
-            startClipRect?.left = (startViewCenterX.log(prefix = "Start X ->") - clipWidth / 2) - clipPadding
+            startClipRect?.top =
+                (startViewCenterY.log(prefix = "Start Y ->") - clipHeight / 2) - clipPadding
+            startClipRect?.left =
+                (startViewCenterX.log(prefix = "Start X ->") - clipWidth / 2) - clipPadding
             startClipRect?.right = (startViewCenterX + clipWidth / 2) + clipPadding
             startClipRect?.bottom = (startViewCenterY + clipHeight / 2) + clipPadding
             clipPath.reset()
@@ -122,8 +150,10 @@ class ClipView @JvmOverloads constructor(
         } else {
             endViewCenterX = viewX
             endViewCenterY = viewY
-            endClipRect.top = (endViewCenterY.log(prefix = "End Y ->") - clipHeight / 2) - clipPadding
-            endClipRect.left = (endViewCenterX.log(prefix = "End X ->") - clipWidth / 2) - clipPadding
+            endClipRect.top =
+                (endViewCenterY.log(prefix = "End Y ->") - clipHeight / 2) - clipPadding
+            endClipRect.left =
+                (endViewCenterX.log(prefix = "End X ->") - clipWidth / 2) - clipPadding
             endClipRect.right = (endViewCenterX + clipWidth / 2) + clipPadding
             endClipRect.bottom = (endViewCenterY + clipHeight / 2) + clipPadding
             animateTranslation()

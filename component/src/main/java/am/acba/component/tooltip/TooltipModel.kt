@@ -1,4 +1,12 @@
 package am.acba.component.tooltip
 
-data class TooltipModel(val title:String, val description:String)
+import androidx.annotation.DrawableRes
+
+data class TooltipModel(
+    val title: String = "",
+    val description: String = "",
+    val imageUrl: String = "",
+    val lottieAnimationName: String = "",
+    @DrawableRes val localImage: Int? = null,
+)
 

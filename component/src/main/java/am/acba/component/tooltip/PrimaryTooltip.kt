@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class PrimaryTooltip : FrameLayout {
     private val binding by lazy {
@@ -17,9 +19,7 @@ class PrimaryTooltip : FrameLayout {
         )
     }
 
-    constructor(context: Context) : super(context) {
-
-    }
+    constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(attrs)
@@ -67,7 +67,7 @@ class PrimaryTooltip : FrameLayout {
 
     }
 
-    fun setTooltipCount(currentPosition:Int,tooltipCount: Int) {
+    fun setTooltipCount(currentPosition: Int, tooltipCount: Int) {
         binding.tooltipCount.text = "$currentPosition/$tooltipCount"
     }
 
@@ -100,9 +100,39 @@ class PrimaryTooltip : FrameLayout {
         binding.skip.isVisible = isVisible
     }
 
+    fun isImageVisible(): Boolean {
+        return binding.contentImage.isVisible
+    }
+
+    fun isLottieVisible(): Boolean {
+        return binding.lottie.isVisible
+    }
+
     fun setTooltip(tooltipModel: TooltipModel) {
         binding.title.text = tooltipModel.title
         binding.description.text = tooltipModel.description
+        if (tooltipModel.imageUrl.isNotEmpty()) {
+            binding.contentImage.visibility = FrameLayout.VISIBLE
+            Glide.with(context)
+                .load(tooltipModel.imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .into(binding.contentImage)
+        } else {
+            binding.contentImage.visibility = GONE
+        }
+
+        tooltipModel.localImage?.let {
+            binding.contentImage.setImageResource(tooltipModel.localImage)
+        }
+
+        if (tooltipModel.lottieAnimationName.isNotEmpty()) {
+            binding.lottie.visibility = VISIBLE
+            binding.lottie.setAnimation(tooltipModel.lottieAnimationName)
+            binding.lottie.playAnimation()
+        } else {
+            binding.lottie.visibility = GONE
+        }
+
     }
 
 
