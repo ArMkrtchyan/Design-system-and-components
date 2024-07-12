@@ -45,7 +45,7 @@ fun Context.saveCountryLastAction(country: CountryModel) {
         dBActionsList.removeAt(dBActionsList.size - 1)
     }
     dBActionsList.add(0, country)
-    val sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
     val editor = sharedPreferences?.edit()
     val gson = Gson()
     val json = gson.toJson(dBActionsList)
@@ -55,13 +55,14 @@ fun Context.saveCountryLastAction(country: CountryModel) {
 
 fun Context.getCountryLastActions(): MutableList<CountryModel> {
     val dBActionsList: MutableList<CountryModel>
-    val sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
     val gson = Gson()
     val json = sharedPreferences?.getString("LastActionCountryList", "")
     val type = object : TypeToken<ArrayList<CountryModel>>() {}.type
     dBActionsList = gson.fromJson(json, type) ?: ArrayList()
     return dBActionsList
 }
+
 
 fun Context.getStatusBarHeight(): Int {
     var result = 0

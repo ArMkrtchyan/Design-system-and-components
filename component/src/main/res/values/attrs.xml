@@ -181,6 +181,7 @@
     <declare-styleable name="PhoneNumberInput">
         <attr name="phoneInputErrorText" format="string" />
         <attr name="phoneInputHelpText" format="string" />
+        <attr name="countryTopChips" format="string" />
     </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />
