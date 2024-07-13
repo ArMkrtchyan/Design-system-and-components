@@ -37,7 +37,7 @@
                 android:id="@+id/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:countryTopChips="am,ru,us"
+                app:countryTopChips="am,us"
                 app:phoneInputErrorText="Phone number is not valid"
                 app:phoneInputHelpText="Phone number is" />
 

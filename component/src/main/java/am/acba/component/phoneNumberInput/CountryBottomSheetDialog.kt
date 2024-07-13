@@ -35,20 +35,10 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
         _binding = CountryBottomSheetBinding.inflate(inflater, container, false)
         binding.btnClose.setOnClickListener { dismiss() }
         val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
-        dBActionsList = context?.getCountryLastActions() ?: mutableListOf()
-//        getCountryChipListFromDb()
+        getCountryChipListFromDb()
         setupAdapter(countriesList as ArrayList)
         searchCountry(countriesList)
-        binding.rvCountries.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val scrollY = recyclerView.computeVerticalScrollOffset()
-                if (scrollY in 0..350) {
-                    scrollY.log()
-                    val alpha: Double = (scrollY / 350.0).log()
-                    binding.shadow.alpha = alpha.toFloat()
-                } else if (scrollY > 350) binding.shadow.alpha = 1f
-            }
-        })
+        setUpShadow()
         return binding.root
     }
 
@@ -86,22 +76,29 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-//    private fun getCountryChipListFromDb() {
-//        val listFromDb = context?.getCountryLastActions() ?: mutableListOf()
-//        if (listFromDb.size == 5) {
-//            dBActionsList.addAll(listFromDb)
-//        } else if (listFromDb.size < 5) {
-//            dBActionsList.addAll(listFromDb)
-//            var listFromDbCount = listFromDb.size
-//            topChipsListByDigital.forEach {
-//                if ((5 - listFromDbCount) != 0) {
-//                    dBActionsList.add(it)
-//                    listFromDbCount++
-//                }
-//            }
-////            dBActionsList.addAll(topChipsListByDigital)
-//        }
-//    }
+    private fun getCountryChipListFromDb() {
+        dBActionsList = context?.getCountryLastActions() ?: mutableListOf()
+        if (dBActionsList.isEmpty()) {
+            dBActionsList.addAll(topChipsListByDigital)
+            topChipsListByDigital.forEach {
+                context?.saveCountryLastAction(it)
+            }
+        }
+
+    }
+
+    private fun setUpShadow() {
+        binding.rvCountries.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val scrollY = recyclerView.computeVerticalScrollOffset()
+                if (scrollY in 0..350) {
+                    scrollY.log()
+                    val alpha: Double = (scrollY / 350.0).log()
+                    binding.shadow.alpha = alpha.toFloat()
+                } else if (scrollY > 350) binding.shadow.alpha = 1f
+            }
+        })
+    }
 
     private fun setupAdapter(countriesList: List<CountryModel>) {
         if (binding.rvCountries.adapter == null) {
@@ -110,10 +107,12 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
             val countriesTitleAdapter = TitleAdapter(getString(R.string.history_filter_button_all))
             val chipList = dBActionsList
             val chipsAdapter = CountriesChipsAdapter(chipList, ::selectCountry)
-            val concatAdapter = ConcatAdapter(titleAdapter, chipsAdapter, countriesTitleAdapter, countriesAdapter)
-            binding.rvCountries.apply {
-                adapter = concatAdapter
+            val concatAdapter = if (dBActionsList.isNotEmpty()) {
+                ConcatAdapter(titleAdapter, chipsAdapter, countriesTitleAdapter, countriesAdapter)
+            } else {
+                ConcatAdapter(countriesAdapter)
             }
+            binding.rvCountries.adapter = concatAdapter
         } else {
             countriesAdapter.replaceList(countriesList)
         }
@@ -133,7 +132,7 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
     private fun filterAction(countriesList: List<CountryModel>, char: CharSequence) {
         val filterList = ArrayList<CountryModel>()
         countriesList.forEach {
-            if (it.name?.lowercase()?.startsWith(char)!!) {
+            if (it.name?.lowercase()?.startsWith(char)!! || it.englishName?.startsWith(char)!! || it.phoneCode?.startsWith(char)!!) {
                 filterList.add(it)
             }
         }
@@ -152,11 +151,7 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setTopChipsList(topChipsList: MutableList<CountryModel>) {
-        val indexForAddTop = dBActionsList.size
         topChipsListByDigital.addAll(topChipsList)
-//        dBActionsList.forEach { country ->
-//            context?.saveCountryLastAction(country)
-//        }
     }
 
     private var mAction: ((CountryModel) -> Unit?)? = null

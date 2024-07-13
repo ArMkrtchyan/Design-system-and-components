@@ -75,7 +75,6 @@ class PhoneNumberInput @JvmOverloads constructor(
         if (!isInEditMode) {
             ccpBinding.countryCodeLib.registerCarrierNumberEditText(binding.phoneNumber)
             ccpBinding.countryCodeLib.setNumberAutoFormattingEnabled(true)
-            ccpBinding.countryCodeLib.setHintExampleNumberEnabled(true)
             countriesMapping()
             ccpBinding.countryCodeLib.setPhoneNumberValidityChangeListener { isValidNumber(it) }
             ccpBinding.countryCodeLib.changeDefaultLanguage(CountryCodePicker.Language.RUSSIAN)
@@ -90,7 +89,7 @@ class PhoneNumberInput @JvmOverloads constructor(
 
         binding.countryCodeLayout.setOnClickListener { openCountryDialog() }
         binding.icPhoneBook.setOnClickListener { contactIconClick() }
-        setCountryChipsForSpecificFeature()
+        setCountryChipsFromDigital()
         copyPaste()
     }
 
@@ -131,7 +130,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     // Ex..hy,ru,us
-    private fun setCountryChipsForSpecificFeature() {
+    private fun setCountryChipsFromDigital() {
         val topChipsCountryNameCodes = countryTopShips?.split(",")
         countriesList.forEach { country ->
             topChipsCountryNameCodes?.forEach {

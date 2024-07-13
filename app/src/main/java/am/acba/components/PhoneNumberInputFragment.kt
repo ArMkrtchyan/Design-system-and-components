@@ -18,7 +18,11 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
         phoneNumber.handleAcbaContactClick {
             "Open acba contact dialog".log("Acba Contact")
         }
-        search.setOnClickListener { phoneNumber.getFormattedFullNumber().log("PhoneNumber") }
+        search.setOnClickListener {
+            phoneNumber.getFormattedFullNumber().log("PhoneNumber")
+            phoneNumber.getFullNumber().log("PhoneNumber")
+            phoneNumber.getFullNumberWithPlus().log("PhoneNumber")
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

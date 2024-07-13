@@ -48,6 +48,11 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
                 val child = rootView.getChildAt(i)
                 if (child is PhoneNumberInput) {
                     return child
+                }else if(child is ViewGroup) {
+                    val phoneNumberInput = findPhoneNumberInputRecursively(child)
+                    if (phoneNumberInput != null) {
+                        return phoneNumberInput
+                    }
                 }
             }
         }
