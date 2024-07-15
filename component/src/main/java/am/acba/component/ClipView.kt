@@ -54,7 +54,7 @@ class ClipView @JvmOverloads constructor(
     }
 
     fun isFullScreen(activity: Activity): Boolean {
-        val flg: Int = activity.getWindow().getAttributes().flags
+        val flg: Int = activity.window.attributes.flags
         var flag = false
         if (flg and WindowManager.LayoutParams.FLAG_FULLSCREEN == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
             flag = true
@@ -73,10 +73,10 @@ class ClipView @JvmOverloads constructor(
             viewY -= context.getStatusBarHeight()
         }
 
-        clipRect.top = (viewY - clipPadding).toFloat()
-        clipRect.left = (viewX - clipPadding).toFloat()
-        clipRect.right = (viewX + view.width + clipPadding).toFloat()
-        clipRect.bottom = (viewY + view.height + clipPadding).toFloat()
+        clipRect.top = (viewY - clipPadding)
+        clipRect.left = (viewX - clipPadding)
+        clipRect.right = (viewX + view.width + clipPadding)
+        clipRect.bottom = (viewY + view.height + clipPadding)
         clipPath.reset()
         clipPath.addRoundRect(clipRect, cornerRadius, cornerRadius, Path.Direction.CW)
         clipPath.close()
@@ -85,10 +85,10 @@ class ClipView @JvmOverloads constructor(
             startViewCenterX = viewX + view.width / 2
             startViewCenterY = viewY + view.height / 2
             startClipRect = RectF()
-            startClipRect?.top = (viewY - clipPadding).toFloat()
-            startClipRect?.left = (viewX - clipPadding).toFloat()
-            startClipRect?.right = (viewX + view.width + clipPadding).toFloat()
-            startClipRect?.bottom = (viewY + view.height + clipPadding).toFloat()
+            startClipRect?.top = (viewY - clipPadding)
+            startClipRect?.left = (viewX - clipPadding)
+            startClipRect?.right = (viewX + view.width + clipPadding)
+            startClipRect?.bottom = (viewY + view.height + clipPadding)
             clipPath.reset()
             clipPath.addRoundRect(startClipRect!!, cornerRadius, cornerRadius, Path.Direction.CW)
             clipPath.close()
@@ -96,11 +96,11 @@ class ClipView @JvmOverloads constructor(
         } else {
             endViewCenterX = viewX + view.width / 2
             endViewCenterY = viewY + view.height / 2
-            endClipRect.top = (viewY - clipPadding).toFloat()
-            endClipRect.left = (viewX - clipPadding).toFloat()
-            endClipRect.right = (viewX + view.width + clipPadding).toFloat()
-            endClipRect.bottom = (viewY + view.height + clipPadding).toFloat()
-           invalidate()
+            endClipRect.top = (viewY - clipPadding)
+            endClipRect.left = (viewX - clipPadding)
+            endClipRect.right = (viewX + view.width + clipPadding)
+            endClipRect.bottom = (viewY + view.height + clipPadding)
+            invalidate()
         }
     }
 

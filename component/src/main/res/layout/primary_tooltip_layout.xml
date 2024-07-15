@@ -126,8 +126,7 @@
                     android:drawableTint="?attr/contentPrimary"
                     android:gravity="center"
                     android:textColor="#FFFFFF"
-
-                    tools:text="Ok"
+                    android:text="Ok"
                     tools:visibility="visible" />
 
                 <am.acba.component.imageView.PrimaryImageView

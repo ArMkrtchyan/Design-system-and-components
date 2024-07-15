@@ -20,7 +20,11 @@ import androidx.core.view.updateLayoutParams
 
 
 class OnboardingHint @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, activity: Activity
+    context: Context,
+    attrs: AttributeSet? = null,
+    activity: Activity,
+    tooltipList: List<TooltipModel>,
+    viewList: List<View>
 ) : FrameLayout(context, attrs) {
 
 
@@ -42,33 +46,54 @@ class OnboardingHint @JvmOverloads constructor(
     private val targetViews: MutableList<View> = arrayListOf()
     private var currentPosition = 0
     private var onFinish: (() -> Unit)? = null
-    private var tooltipList: List<TooltipModel> = ArrayList()
+    private var tooltipList: MutableList<TooltipModel> = ArrayList()
 
 
     init {
-        addView(onboardingHintBinding.root)
-        onboardingHintBinding.infoContainer.background = null
-        onboardingHintBinding.infoContainer.addView(onboardingInfoBinding.root)
-        onboardingInfoBinding.tooltip.setForwardClickListener { changeTargetView(true, activity) }
-        onboardingInfoBinding.tooltip.setBackwardClickListener { changeTargetView(false, activity) }
-        onboardingInfoBinding.tooltip.setSkipClickListener { onFinish?.invoke() }
-        onboardingInfoBinding.tooltip.setCloseTooltipClickListener { onFinish?.invoke() }
+        if (tooltipList.isNotEmpty() && viewList.isNotEmpty()) {
+            addView(onboardingHintBinding.root)
+            onboardingHintBinding.infoContainer.background = null
+            onboardingHintBinding.infoContainer.addView(onboardingInfoBinding.root)
+            onboardingInfoBinding.tooltip.setBackwardClickListener {
+                changeTargetView(
+                    false,
+                    activity
+                )
+            }
+            onboardingInfoBinding.tooltip.setForwardClickListener {
+                changeTargetView(
+                    true,
+                    activity
+                )
+            }
+            onboardingInfoBinding.tooltip.setSkipClickListener { onFinish?.invoke() }
+            onboardingInfoBinding.tooltip.setCloseTooltipClickListener { onFinish?.invoke() }
+        } else {
+            log("Tooltip error", "Tooltips size and views size are not the same")
+        }
     }
 
-    private fun setTooltipCountAndText() {
-        if (tooltipList.size > 1)
+    private fun setTooltipCountAndText(tooltipListSize: Int) {
+        if (this.tooltipList.size > 1)
             onboardingInfoBinding.tooltip.setTooltipCount(
                 (currentPosition + 1),
-                tooltipList.size
+                tooltipListSize
             )
     }
 
-    fun setTooltipList(list: List<TooltipModel>) {
+    fun setTooltipList(list: MutableList<TooltipModel>) {
         this.tooltipList = list
         if (tooltipList.isNotEmpty()) {
             onboardingInfoBinding.tooltip.setTooltip(tooltipList.get(0))
         }
-        setTooltipCountAndText()
+    }
+
+    fun setCancelable(isCancelable: Boolean) {
+        if (isCancelable) {
+            onboardingHintBinding.root.setOnClickListener {
+                onboardingHintBinding.root.removeAllViews()
+            }
+        }
     }
 
     fun setButtonTitle(@StringRes title: Int) {
@@ -83,6 +108,8 @@ class OnboardingHint @JvmOverloads constructor(
                 override fun onGlobalLayout() {
                     onboardingInfoBinding.root.getViewTreeObserver()
                         .removeOnGlobalLayoutListener(this)
+                    checkListsEquality()
+
                     if (targetViews.isNotEmpty()) {
                         currentPosition = 0
                         val view = targetViews.first()
@@ -98,6 +125,16 @@ class OnboardingHint @JvmOverloads constructor(
             })
     }
 
+    private fun checkListsEquality() {
+        if (tooltipList.size > targetViews.size) {
+            val count = tooltipList.size - targetViews.size
+            tooltipList.dropLast(count)
+            setTooltipCountAndText(tooltipList.size - count)
+        } else {
+            setTooltipCountAndText(tooltipList.size)
+        }
+    }
+
     private fun changeTargetView(isNext: Boolean = true, activity: Activity) {
         if (isNext) {
             currentPosition++
@@ -105,10 +142,8 @@ class OnboardingHint @JvmOverloads constructor(
             currentPosition--
         }
         onboardingInfoBinding.tooltip.setTooltip(tooltipList.get(currentPosition))
-        setTooltipCountAndText()
-
+        checkListsEquality()
         var height: Int
-
         onboardingInfoBinding.root.getViewTreeObserver()
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
@@ -148,7 +183,6 @@ class OnboardingHint @JvmOverloads constructor(
         view: View,
         height: Int
     ): Pair<Float, Float> {
-//        val displayHeight = (view.parent as View).height
         val displayHeight = context.getDisplayHeight()
         val location = intArrayOf(-1, -1)
         view.getLocationOnScreen(location)

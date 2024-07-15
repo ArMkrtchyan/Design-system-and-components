@@ -33,43 +33,70 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipSmall3)
         setChipClicks(chipSmall4)
 
-        val tooltipModel1 = TooltipModel("AAA", "AAA AAA AAA AAA", "https://pixlr.com/images/index/ai-image-generator-one.webp")
+        val tooltipModel1 = TooltipModel(
+            "AAA",
+            "AAA AAA AAA AAA",
+            localImage = R.drawable.ic_launcher_background
+        )
         val tooltipModel2 = TooltipModel("BBB", "BBB BBB BBB BBB", "", "welcome_animation.json")
         val tooltipModel3 = TooltipModel("CCC", "CCC CCC CCC CCC")
-        val tooltipModel4 = TooltipModel("CCC", "CCC 444 CCC CCC","https://pixlr.com/images/index/ai-image-generator-one.webp")
-        val tooltipModel5 = TooltipModel("CCC", "CCC 555 CCC CCC", "https://pixlr.com/images/index/ai-image-generator-one.webp")
-        val tooltipModel6 = TooltipModel("CCC", "info 555 CCC CCC","https://pixlr.com/images/index/ai-image-generator-one.webp")
+        val tooltipModel4 = TooltipModel(
+            "CCC",
+            "CCC 444 CCC CCC",
+            "https://pixlr.com/images/index/ai-image-generator-one.webp"
+        )
+        val tooltipModel5 = TooltipModel(
+            "CCC",
+            "CCC 555 CCC CCC",
+            localImage = R.drawable.ic_launcher_background
+        )
+        val tooltipModel6 = TooltipModel(
+            "CCC",
+            "info 555 CCC CCC",
+            "https://pixlr.com/images/index/ai-image-generator-one.webp"
+        )
         val tooltipModel7 = TooltipModel("CCC", "info 555 CCC CCC")
 
+        val tooltipList = arrayListOf(
+            tooltipModel1,
+            tooltipModel2,
+            tooltipModel3,
+            tooltipModel4,
+            tooltipModel5,
+            tooltipModel6,
+            tooltipModel7
+        )
+
+        val viewsList = arrayListOf(
+            mBinding.chipSmall1,
+            mBinding.chipSmall2,
+            mBinding.chipSmall3,
+            mBinding.chipSmall4,
+            mBinding.chipSmall5,
+            mBinding.chipSmall6,
+            mBinding.chipSmall8
+        )
+
         chipSmall1.setEndIconClickListener {
-            Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
         }
         lifecycleScope.launch {
             delay(100)
-            if (onboardingHint == null)
-                onboardingHint = OnboardingHint(requireContext(), null, requireActivity()).apply {
+            if (onboardingHint == null && tooltipList.isNotEmpty() && viewsList.isNotEmpty())
+                onboardingHint = OnboardingHint(
+                    requireContext(),
+                    null,
+                    requireActivity(),
+                    tooltipList,
+                    viewsList
+                ).apply {
+                    setCancelable(false)
                     setButtonTitle(R.string.ok)
                     setTooltipList(
-                        arrayListOf(
-                            tooltipModel1,
-                            tooltipModel2,
-                            tooltipModel3,
-                            tooltipModel4,
-                            tooltipModel5,
-                            tooltipModel6,
-                            tooltipModel7
-                        )
+                        tooltipList
                     )
                     setTargetViews(
-                        arrayListOf(
-                            mBinding.chipSmall1,
-                            mBinding.chipSmall2,
-                            mBinding.chipSmall3,
-                            mBinding.chipSmall4,
-                            mBinding.chipSmall5,
-                            mBinding.chipSmall6,
-                            mBinding.chipSmall8
-                        ), requireActivity()
+                        viewsList, requireActivity()
                     )
                 }
 

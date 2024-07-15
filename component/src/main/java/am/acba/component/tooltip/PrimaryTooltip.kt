@@ -114,7 +114,13 @@ class PrimaryTooltip : FrameLayout {
         }
 
         tooltipModel.localImage?.let {
-            binding.contentImage.setImageResource(tooltipModel.localImage)
+            if (it != 0) {
+                binding.contentImage.visibility = VISIBLE
+                binding.contentImage.setImageResource(it)
+            } else {
+                binding.contentImage.visibility = GONE
+            }
+
         }
 
         if (tooltipModel.lottieAnimationName.isNotEmpty()) {

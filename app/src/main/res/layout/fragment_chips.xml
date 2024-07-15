@@ -40,6 +40,7 @@
             android:layout_height="wrap_content">
 
             <am.acba.component.chip.PrimaryChip
+                android:tag="chip_small_1"
                 android:id="@+id/chip_small_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
+                android:tag="chip_small_2"
                 android:id="@+id/chip_small_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,6 +70,7 @@
 
             <am.acba.component.chip.PrimaryChip
                 android:id="@+id/chip_small_3"
+                android:tag="chip_small_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="140dp"
@@ -81,6 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
+                android:tag="chip_small_4"
                 android:id="@+id/chip_small_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,6 +96,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
+                android:tag="chip_small_5"
                 android:id="@+id/chip_small_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
