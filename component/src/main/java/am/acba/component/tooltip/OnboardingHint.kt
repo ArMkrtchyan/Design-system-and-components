@@ -47,6 +47,7 @@ class OnboardingHint @JvmOverloads constructor(
     private var currentPosition = 0
     private var onFinish: (() -> Unit)? = null
     private var tooltipList: MutableList<TooltipModel> = ArrayList()
+    private var sizeOfTooltipToShow = 0
 
 
     init {
@@ -109,7 +110,6 @@ class OnboardingHint @JvmOverloads constructor(
                     onboardingInfoBinding.root.getViewTreeObserver()
                         .removeOnGlobalLayoutListener(this)
                     checkListsEquality()
-
                     if (targetViews.isNotEmpty()) {
                         currentPosition = 0
                         val view = targetViews.first()
@@ -127,10 +127,15 @@ class OnboardingHint @JvmOverloads constructor(
 
     private fun checkListsEquality() {
         if (tooltipList.size > targetViews.size) {
-            val count = tooltipList.size - targetViews.size
-            tooltipList.dropLast(count)
-            setTooltipCountAndText(tooltipList.size - count)
+            val differCount = tooltipList.size - targetViews.size
+            sizeOfTooltipToShow = tooltipList.dropLast(differCount).toMutableList().size
+            setTooltipCountAndText(sizeOfTooltipToShow)
+        } else if (tooltipList.size < targetViews.size) {
+            val differCount = targetViews.size - tooltipList.size
+            sizeOfTooltipToShow = targetViews.dropLast(differCount).toMutableList().size
+            setTooltipCountAndText(sizeOfTooltipToShow)
         } else {
+            sizeOfTooltipToShow = targetViews.size
             setTooltipCountAndText(tooltipList.size)
         }
     }
@@ -172,8 +177,8 @@ class OnboardingHint @JvmOverloads constructor(
                 }
             })
 
-        onboardingInfoBinding.tooltip.setSkipVisibility(targetViews.size - 1 == currentPosition)
-        onboardingInfoBinding.tooltip.setForwardVisibility(targetViews.size - 1 != currentPosition)
+        onboardingInfoBinding.tooltip.setSkipVisibility(sizeOfTooltipToShow - 1 == currentPosition)
+        onboardingInfoBinding.tooltip.setForwardVisibility(sizeOfTooltipToShow - 1 != currentPosition)
         onboardingInfoBinding.tooltip.setBackwardVisibility(currentPosition != 0)
         onboardingInfoBinding.root.invalidate()
 
