@@ -20,14 +20,6 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
     private var onboardingHint: OnboardingHint? = null
 
     override fun FragmentChipsBinding.initView() {
-        toolbar.setOnMenuItemClickListener {
-            if (it.itemId == am.acba.component.R.id.menu_main_download) {
-                Toast.makeText(requireContext(), "Download", Toast.LENGTH_SHORT).show()
-            } else if (it.itemId == am.acba.component.R.id.menu_main_download) {
-                Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show()
-            }
-            false
-        }
         setChipClicks(chipSmall1)
         setChipClicks(chipSmall2)
         setChipClicks(chipSmall3)

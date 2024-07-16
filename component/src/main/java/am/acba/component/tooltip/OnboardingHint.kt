@@ -18,7 +18,6 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 
-
 class OnboardingHint @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -26,7 +25,6 @@ class OnboardingHint @JvmOverloads constructor(
     tooltipList: List<TooltipModel>,
     viewList: List<View>
 ) : FrameLayout(context, attrs) {
-
 
     private val onboardingHintBinding by lazy {
         OnboardingHintLayoutBinding.inflate(
@@ -48,7 +46,6 @@ class OnboardingHint @JvmOverloads constructor(
     private var onFinish: (() -> Unit)? = null
     private var tooltipList: MutableList<TooltipModel> = ArrayList()
     private var sizeOfTooltipToShow = 0
-
 
     init {
         if (tooltipList.isNotEmpty() && viewList.isNotEmpty()) {
@@ -85,7 +82,7 @@ class OnboardingHint @JvmOverloads constructor(
     fun setTooltipList(list: MutableList<TooltipModel>) {
         this.tooltipList = list
         if (tooltipList.isNotEmpty()) {
-            onboardingInfoBinding.tooltip.setTooltip(tooltipList.get(0))
+            onboardingInfoBinding.tooltip.setTooltip(tooltipList[0])
         }
     }
 
@@ -104,11 +101,10 @@ class OnboardingHint @JvmOverloads constructor(
     fun setTargetViews(views: List<View>, activity: Activity) {
         targetViews.clear()
         targetViews.addAll(views)
-        onboardingInfoBinding.root.getViewTreeObserver()
+        onboardingInfoBinding.root.viewTreeObserver
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    onboardingInfoBinding.root.getViewTreeObserver()
-                        .removeOnGlobalLayoutListener(this)
+                    onboardingInfoBinding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     checkListsEquality()
                     if (targetViews.isNotEmpty()) {
                         currentPosition = 0
@@ -126,18 +122,16 @@ class OnboardingHint @JvmOverloads constructor(
     }
 
     private fun checkListsEquality() {
-        if (tooltipList.size > targetViews.size) {
+        sizeOfTooltipToShow = if (tooltipList.size > targetViews.size) {
             val differCount = tooltipList.size - targetViews.size
-            sizeOfTooltipToShow = tooltipList.dropLast(differCount).toMutableList().size
-            setTooltipCountAndText(sizeOfTooltipToShow)
+            tooltipList.dropLast(differCount).toMutableList().size
         } else if (tooltipList.size < targetViews.size) {
             val differCount = targetViews.size - tooltipList.size
-            sizeOfTooltipToShow = targetViews.dropLast(differCount).toMutableList().size
-            setTooltipCountAndText(sizeOfTooltipToShow)
+            targetViews.dropLast(differCount).toMutableList().size
         } else {
-            sizeOfTooltipToShow = targetViews.size
-            setTooltipCountAndText(tooltipList.size)
+            targetViews.size
         }
+        setTooltipCountAndText(sizeOfTooltipToShow)
     }
 
     private fun changeTargetView(isNext: Boolean = true, activity: Activity) {
@@ -146,14 +140,13 @@ class OnboardingHint @JvmOverloads constructor(
         } else {
             currentPosition--
         }
-        onboardingInfoBinding.tooltip.setTooltip(tooltipList.get(currentPosition))
+        onboardingInfoBinding.tooltip.setTooltip(tooltipList[currentPosition])
         checkListsEquality()
         var height: Int
-        onboardingInfoBinding.root.getViewTreeObserver()
+        onboardingInfoBinding.root.viewTreeObserver
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    onboardingInfoBinding.root.getViewTreeObserver()
-                        .removeOnGlobalLayoutListener(this)
+                    onboardingInfoBinding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     height = onboardingInfoBinding.root.height
                     height.log("info height by observer")
                     val view = targetViews[currentPosition]
@@ -168,10 +161,7 @@ class OnboardingHint @JvmOverloads constructor(
                         .setInterpolator(LinearInterpolator())
                         .setDuration(300)
                         .withStartAction {
-                            onboardingHintBinding.clipView.clipForView(
-                                view,
-                                activity
-                            )
+                            onboardingHintBinding.clipView.clipForView(view, activity)
                         }
                         .start()
                 }
@@ -203,13 +193,13 @@ class OnboardingHint @JvmOverloads constructor(
             )
 
             Pair(x, viewY - height - 48.dpToPx())
-
         } else {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
                 true,
                 viewX - x + view.width / 2 - onboardingInfoBinding.anchor.width / 2
             )
+
             Pair(x, viewY + view.height - 16.dpToPx())
         }
 

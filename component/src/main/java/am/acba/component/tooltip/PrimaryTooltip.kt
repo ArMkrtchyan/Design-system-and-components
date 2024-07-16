@@ -19,10 +19,10 @@ class PrimaryTooltip : FrameLayout {
         )
     }
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(attrs)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -30,41 +30,35 @@ class PrimaryTooltip : FrameLayout {
         attrs,
         defStyleAttr
     ) {
-        init(attrs)
+        init()
     }
 
-    private fun init(attrs: AttributeSet) {
+    private fun init() {
         addView(binding.root)
     }
 
     fun setTitle(title: String) {
         binding.title.text = title
-
     }
 
     fun setTitle(@StringRes stringRes: Int) {
         binding.title.text = context.getString(stringRes)
-
     }
 
     fun setDescription(title: String) {
         binding.description.text = title
-
     }
 
     fun setDescription(@StringRes stringRes: Int) {
         binding.description.text = context.getString(stringRes)
-
     }
 
     fun setButtonTitle(title: String?) {
         binding.skip.text = title
-
     }
 
     fun setButtonTitle(@StringRes stringRes: Int) {
         binding.skip.text = context.getString(stringRes)
-
     }
 
     fun setTooltipCount(currentPosition: Int, tooltipCount: Int) {
@@ -90,7 +84,6 @@ class PrimaryTooltip : FrameLayout {
     fun setForwardVisibility(isVisible: Boolean) {
         binding.forward.isVisible = isVisible
     }
-
 
     fun setBackwardVisibility(isVisible: Boolean) {
         binding.backward.isVisible = isVisible
@@ -131,6 +124,4 @@ class PrimaryTooltip : FrameLayout {
             binding.lottie.visibility = GONE
         }
     }
-
-
 }
