@@ -65,6 +65,10 @@
         <action
             android:id="@+id/action_mainFragment_to_tooltipFragment"
             app:destination="@id/tooltipFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_cardListingFragment"
+            app:destination="@id/cardListingFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -155,6 +159,11 @@
         android:id="@+id/tooltipFragment"
         android:name="am.acba.components.OnboardingTooltipFragment"
         tools:layout="@layout/fragment_onboarding_tooltip"
+        android:label="TooltipFragment" />
+ <fragment
+        android:id="@+id/cardListingFragment"
+        android:name="am.acba.components.CardListingsFragment"
+        tools:layout="@layout/fragment_card_listings"
         android:label="TooltipFragment" />
 
 

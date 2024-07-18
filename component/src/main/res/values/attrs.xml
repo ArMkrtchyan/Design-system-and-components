@@ -371,4 +371,31 @@
         <attr name="showAlertCloseIcon" format="boolean" />
         <attr name="alertNeutralIcon" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="PrimaryCardListing">
+        <attr name="cardListingLayoutBackgroundColor" format="color"/>
+        <attr name="cardListingLayoutBorderColor" format="color"/>
+
+        <attr name="startTitleText" format="string"/>
+        <attr name="startBodyText" format="string"/>
+        <attr name="endTitleText" format="string"/>
+        <attr name="endBodyText" format="string"/>
+        <attr name="cardCurrencyText" format="string"/>
+
+        <attr name="cardListingStartIconType" format="enum">
+            <enum name="Large" value="0" />
+            <enum name="Small" value="1" />
+        </attr>
+        <attr name="cardListingStartIconBackgroundColor" format="color"/>
+        <attr name="cardListingStartIconBackgroundTint" format="color"/>
+        <attr name="cardListingStartIcon" format="reference"/>
+        <attr name="cardListingEndIcon" format="reference"/>
+
+        <attr name="showCardStatus" format="boolean"/>
+        <attr name="cardListingStatusBackgroundColor" format="color"/>
+        <attr name="cardListingStatusText" format="string"/>
+        <attr name="cardListingStatusTextColor" format="color"/>
+        <attr name="cardListingStatusIcon" format="reference"/>
+        <attr name="cardListingStatusIconTint" format="color"/>
+    </declare-styleable>
 </resources>

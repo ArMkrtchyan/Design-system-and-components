@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ButtonsFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/toolbar_menu"
+        app:title="Card Listings" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/info"
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Chips help people enter information, make selections, filter content, or trigger actions" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:orientation="vertical">
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCurrencyText="AMD"
+                app:cardListingEndIcon="@drawable/ic_right"
+                app:cardListingLayoutBackgroundColor="@color/Red_200"
+                app:cardListingStartIcon="@drawable/ic_success"
+                app:cardListingStartIconBackgroundColor="@color/Red_500"
+                app:cardListingStartIconBackgroundTint="@color/Black_70"
+                app:cardListingStartIconType="Small"
+                app:cardListingStatusIcon="@drawable/ic_add"
+                app:cardListingStatusText="Բլոկավորված է"
+                app:endBodyText="400.000.000.000․000"
+                app:endTitleText="հասանելի մնացորդի մասին ինֆ"
+                app:showCardStatus="true"
+                app:startBodyText="************0345"
+                app:startTitleText="Դրամային հաշվի մասին կարելիի" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:id="@+id/card_listing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCurrencyText="AMD"
+                app:cardListingStartIcon="@drawable/ic_success"
+                app:cardListingStatusIcon="@drawable/ic_add"
+                app:cardListingStatusText="Բլոկավորված է"
+                app:endBodyText="400.000"
+                app:endTitleText="հասանելի"
+                app:showCardStatus="true"
+                app:startBodyText="****0345"
+                app:startTitleText="Դրամային" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCurrencyText="AMD"
+                app:cardListingLayoutBorderColor="?attr/borderNeutral"
+                app:cardListingStartIcon="@drawable/ic_success"
+                app:cardListingStatusIcon="@drawable/ic_add"
+                app:cardListingStatusText="Բլոկավորված է"
+                app:endBodyText="400.000"
+                app:endTitleText="հասանելի"
+                app:showCardStatus="true"
+                app:startBodyText="****0345"
+                tools:cardListingLayoutBorderColor="@color/black"
+                app:startTitleText="Դրամային" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCurrencyText="AMD"
+                app:cardListingStatusText="Բլոկավերված է"
+                app:endBodyText="400.000"
+                app:endTitleText="հասանելի"
+                app:showCardStatus="true"
+                app:startBodyText="****0345"
+                app:startTitleText="Դրամային" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardListingStatusText="Բլոկավորված է"
+                app:endBodyText="400.000"
+                app:startTitleText="Դրամային" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardListingEndIcon="@drawable/ic_right"
+                app:cardListingStartIcon="@drawable/ic_card"
+                app:cardListingStatusText="Բլոկավորված է"
+                app:endBodyText="400.000.000.000․000"
+                app:startTitleText="Դրամային հաշվի մասին կարելիի" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardListingEndIcon="@drawable/ic_right"
+                app:cardListingStartIcon="@drawable/ic_card"
+                app:endBodyText="400.000"
+                app:startTitleText="Դրամային" />
+
+            <am.acba.component.cardListing.PrimaryCardListing
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:endBodyText="400.000"
+                app:startTitleText="Դրամային" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
