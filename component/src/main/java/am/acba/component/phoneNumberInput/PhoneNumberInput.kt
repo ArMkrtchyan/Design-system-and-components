@@ -303,6 +303,9 @@ class PhoneNumberInput @JvmOverloads constructor(
 
     private fun openCountryDialog() {
         val bundle = Bundle()
+        bundle.putBoolean("needToSavActionsOnDB", true)
+        bundle.putBoolean("isSearchInputVisible", true)
+        bundle.putString("bottomSheetTitle", "Phone Number")
         bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
         CountryBottomSheetDialog.show(getFragmentManager(), bundle, ::selectCountry, topCountryChipList)
     }
@@ -311,8 +314,6 @@ class PhoneNumberInput @JvmOverloads constructor(
         try {
             val fragmentActivity = context as? FragmentActivity
             fragmentActivity?.let {
-                val bundle = Bundle()
-                bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
                 val fragmentManager = it.supportFragmentManager
                 return fragmentManager
             }

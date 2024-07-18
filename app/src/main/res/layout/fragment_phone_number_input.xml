@@ -41,6 +41,15 @@
                 app:phoneInputErrorText="Phone number is not valid"
                 app:phoneInputHelpText="Phone number is" />
 
+            <am.acba.component.currencyInput.CurrencyInput
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_20"
+                app:countryTopChips="am,us"
+                app:currencyInputErrorText="amount is not valid"
+                app:currencyInputHelpText="Amount" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -22,6 +22,11 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
             phoneNumber.getFormattedFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumberWithPlus().log("PhoneNumber")
+            amount.getDeFormatedStringAmount().log("amountCurrency")
+            amount.getFormatedStringAmount().log("amountCurrency")
+            amount.getDoubleAmount().log("amountCurrency")
+            amount.setCurrency("USD")
+            amount.setAmountText("5555")
         }
     }
 

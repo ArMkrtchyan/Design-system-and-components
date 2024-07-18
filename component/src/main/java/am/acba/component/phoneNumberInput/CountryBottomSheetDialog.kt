@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ConcatAdapter
@@ -29,15 +30,15 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
     private var dBActionsList: MutableList<CountryModel> = mutableListOf()
     private var topChipsListByDigital: MutableList<CountryModel> = mutableListOf()
     private lateinit var countriesAdapter: CountriesListAdapter
+    private var needToSaveActions: Boolean = true
+    private var isSearchInputVisible: Boolean = true
+    private var title: String = ""
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = CountryBottomSheetBinding.inflate(inflater, container, false)
         binding.btnClose.setOnClickListener { dismiss() }
-        val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
-        getCountryChipListFromDb()
-        setupAdapter(countriesList as ArrayList)
-        searchCountry(countriesList)
+        getBundleVariablesAndSetupUi()
         setUpShadow()
         return binding.root
     }
@@ -74,6 +75,18 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
             }
             parent.layoutParams = behavior
         }
+    }
+
+    private fun getBundleVariablesAndSetupUi() {
+        val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
+        needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") ?: false
+        isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") ?: false
+        title = arguments?.getString("bottomSheetTitle") ?: ""
+        if (needToSaveActions) getCountryChipListFromDb()
+        binding.search.isVisible = isSearchInputVisible
+        binding.title.text = title
+        setupAdapter(countriesList as ArrayList)
+        searchCountry(countriesList)
     }
 
     private fun getCountryChipListFromDb() {
@@ -146,7 +159,7 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun selectCountry(country: CountryModel) {
         mAction?.invoke(country)
-        context?.saveCountryLastAction(country)
+        if (needToSaveActions) context?.saveCountryLastAction(country)
         dismiss()
     }
 
