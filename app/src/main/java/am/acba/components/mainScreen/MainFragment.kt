@@ -38,6 +38,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.EXCHANGE -> findNavController().navigate(R.id.action_mainFragment_to_exchangeFragment)
             ComponentTypeEnum.LIST_ITEMS -> findNavController().navigate(R.id.action_mainFragment_to_listItemFragment)
             ComponentTypeEnum.PHONE_NUMBER_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_phoneNumberInputFragment)
+            ComponentTypeEnum.CURRENCY_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_currencyInputFragment)
             ComponentTypeEnum.PIN_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_pinInputFragment)
             ComponentTypeEnum.QUICK_ACTION_AVATAR -> findNavController().navigate(R.id.action_mainFragment_to_quickActionAndAvatarFragment)
             ComponentTypeEnum.SEARCH_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_searchInputFragment)
@@ -50,6 +51,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.BUTTONS, ComponentTypeEnum.BUTTONS.componentName),
         Component(ComponentTypeEnum.INPUTS, ComponentTypeEnum.INPUTS.componentName),
         Component(ComponentTypeEnum.PHONE_NUMBER_INPUT, ComponentTypeEnum.PHONE_NUMBER_INPUT.componentName),
+        Component(ComponentTypeEnum.CURRENCY_INPUT, ComponentTypeEnum.CURRENCY_INPUT.componentName),
         Component(ComponentTypeEnum.SEARCH_INPUT, ComponentTypeEnum.SEARCH_INPUT.componentName),
         Component(ComponentTypeEnum.PIN_INPUT, ComponentTypeEnum.PIN_INPUT.componentName),
         Component(ComponentTypeEnum.CONTROLS, ComponentTypeEnum.CONTROLS.componentName),

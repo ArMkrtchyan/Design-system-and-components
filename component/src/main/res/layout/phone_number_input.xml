@@ -70,9 +70,7 @@
                 android:inputType="phone"
                 android:background="@color/Transparent"
                 android:hint="Phone number"
-                android:maxLength="15"
-                android:textColor="?attr/contentPrimary"
-                android:textColorHint="?attr/contentPrimaryTonal1" />
+                android:maxLength="15" />
 
             <am.acba.component.imageView.PrimaryImageView
                 android:id="@+id/clear"

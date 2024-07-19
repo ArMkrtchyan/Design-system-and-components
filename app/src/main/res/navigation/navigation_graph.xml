@@ -20,6 +20,9 @@
             android:id="@+id/action_mainFragment_to_phoneNumberInputFragment"
             app:destination="@id/phoneNumberInputFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_currencyInputFragment"
+            app:destination="@id/currencyInputFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_pinInputFragment"
             app:destination="@id/pinInputFragment" />
         <action
@@ -131,6 +134,11 @@
         android:name="am.acba.components.PhoneNumberInputFragment"
         tools:layout="@layout/fragment_phone_number_input"
         android:label="PhoneNumberInputFragment" />
+    <fragment
+        android:id="@+id/currencyInputFragment"
+        android:name="am.acba.components.CurrencyInputFragment"
+        android:label="CurrencyInputFragment"
+        tools:layout="@layout/fragment_currency_input" />
     <fragment
         android:id="@+id/pinInputFragment"
         android:name="am.acba.components.PinInputFragment"

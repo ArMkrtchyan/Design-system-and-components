@@ -38,7 +38,7 @@ open class PrimaryInput : TextInputLayout {
             try {
                 if (hasValueOrEmpty(R.styleable.PrimaryInput_textMaxLength))
                     textMaxLength = getInt(R.styleable.PrimaryInput_textMaxLength, -1)
-                cornerStyle = getInt(R.styleable.PrimaryInput_cornerStyle, 0)
+                cornerStyle = getInt(R.styleable.PrimaryInput_cornerStyle, -1)
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
             } catch (e: Exception) {
                 e.printStackTrace()

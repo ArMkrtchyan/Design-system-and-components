@@ -31,9 +31,12 @@ class CurrencyInput @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, 0) {
 
     private val binding by lazy { CurrencyInputBinding.inflate(context.inflater(), this, false) }
-    private var errorText: String? = null
-    private var helpText: String? = null
-    private var isValidNumber = true
+    private var errorText: String
+    private var helpText: String
+    private var maxAmount: Int
+    private var minAmount: Int
+    private var isMoreThanMax = false
+    private var isLessThanMin = false
     private var currency: String = ""
         get() = binding.currency.text.toString()
 
@@ -43,42 +46,40 @@ class CurrencyInput @JvmOverloads constructor(
         addView(binding.root)
         context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
             try {
-                errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText)
-                helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText)
+                errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
+                helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
+                maxAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0)
+                minAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0)
             } finally {
                 recycle()
             }
         }
-        binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
+        setupFirstUi()
         setupCurrenciesList()
-        setupBackgrounds()
-        setupHelpErrorText()
+        setupBackgroundsByFocusChange()
     }
 
-     fun setErrorBackground() {
-        binding.amount.isErrorEnabled = true
-        binding.icError.isVisible = true
-        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
-        binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
-        binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
-        binding.currencyLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_right_border)
-    }
-
-    private fun setupBackgroundByFocusable() {
-        binding.currencyLayout.background = ContextCompat.getDrawable(
-            context, if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
+    private fun setupFirstUi() {
+        binding.helpText.isVisible = helpText.isNotEmpty()
+        binding.helpText.text = helpText
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(
+            if (!isLessThanMin && !isMoreThanMax) R.attr.contentPrimaryTonal1
+            else R.attr.contentDangerTonal1
         )
+
+        binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
     }
 
-    private fun setupBackgrounds() {
+    private fun setupBackgroundsByFocusChange() {
         binding.amount.editText?.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
             amountTextFormatting(isFocusable)
-            if (isValidNumber) {
+            if (isFocusable) {
                 setupBackgroundByFocusable()
             } else {
-                setErrorBackground()
+                isMoreThanMax()
+                isLessThanMin()
             }
         }
     }
@@ -88,49 +89,51 @@ class CurrencyInput @JvmOverloads constructor(
         if (isFocusable) {
             binding.amount.editText?.setText(getDeFormatedStringAmount())
         } else {
-            val text = binding.amount.editText?.text?.toString()?.trim()
-            binding.amount.editText?.setText(text?.numberFormatting())
+            val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
+            binding.amount.editText?.setText(if (text.length >= 15) text else text.numberFormatting())
         }
     }
 
-
-    fun setCurrency(currency: String) {
-        currencyList.forEach { if (it.currency == currency) selectCurrency(it) }
-    }
-
-    fun setAmountText(amount: String) {
-        this.currency = currency
-        binding.amount.editText?.setText(amount.numberFormatting())
-    }
-
-    fun getDoubleAmount(): Double {
-        val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
-        return if (amountText.isEmpty()) 0.0 else amountText.numberDeFormatting().toDouble()
-    }
-
-    fun getDeFormatedStringAmount(): String {
-        val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
-        return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
+    private fun isMoreThanMax() {
+        val amountText = binding.amount.editText?.text ?: ""
+        if (maxAmount != 0 && amountText.isNotEmpty() && !isLessThanMin) {
+            isMoreThanMax = getFloatAmount() > maxAmount
+            if (isMoreThanMax) {
+                setErrorState()
+            } else {
+                setValidState()
+            }
+        }
 
     }
 
-    fun getFormatedStringAmount(): String {
-        return binding.amount.editText?.text?.toString()?.trim() ?: ""
+    fun isValidAmount(): Boolean {
+        return !isLessThanMin && !isMoreThanMax
     }
 
-    private fun isValidNumber(): Boolean {
-        return false
+    private fun isLessThanMin() {
+        val amountText = binding.amount.editText?.text ?: ""
+        if (minAmount != 0 && amountText.isNotEmpty() && !isMoreThanMax) {
+            isLessThanMin = getFloatAmount() < minAmount
+            if (isLessThanMin) {
+                setErrorState()
+            } else {
+                setValidState()
+            }
+        }
+
     }
+
 
     private fun setupCurrenciesList() {
         currencyList = arrayListOf()
-        currencyList.add(CountryModel(currency = "AMD", flagResId = R.drawable.ic_am_flag))
-        currencyList.add(CountryModel(currency = "USD", flagResId = R.drawable.flag_usa))
-        currencyList.add(CountryModel(currency = "EUR", flagResId = R.drawable.eur_flag))
-        currencyList.add(CountryModel(currency = "RUB", flagResId = R.drawable.flag_russian))
-        currencyList.add(CountryModel(currency = "GBP", flagResId = R.drawable.gb_flag))
-        currencyList.add(CountryModel(currency = "CHF", flagResId = R.drawable.sw_flag))
-        currencyList.add(CountryModel(currency = "GEL", flagResId = R.drawable.gel_flag))
+        currencyList.add(CountryModel(currency = "AMD", name = "AMD", flagResId = R.drawable.ic_am_flag))
+        currencyList.add(CountryModel(currency = "USD", name = "USD", flagResId = R.drawable.flag_usa))
+        currencyList.add(CountryModel(currency = "EUR", name = "EUR", flagResId = R.drawable.eur_flag))
+        currencyList.add(CountryModel(currency = "RUB", name = "RUB", flagResId = R.drawable.flag_russian))
+        currencyList.add(CountryModel(currency = "GBP", name = "GBP", flagResId = R.drawable.gb_flag))
+        currencyList.add(CountryModel(currency = "CHF", name = "CHF", flagResId = R.drawable.sw_flag))
+        currencyList.add(CountryModel(currency = "GEL", name = "GEL", flagResId = R.drawable.gel_flag))
     }
 
     private fun currencyIconClick() {
@@ -155,18 +158,42 @@ class CurrencyInput @JvmOverloads constructor(
         return getFragmentManager()
     }
 
-    private fun setupHelpErrorText() {
-        if (isValidNumber) {
-            binding.helpText.setTextColor(context.getColorFromAttr(R.attr.contentPrimaryTonal1))
-            binding.helpText.text = helpText
-            binding.icError.visibility = GONE
-            binding.helpText.isVisible = helpText?.isNotEmpty() == true
-        } else {
-            binding.helpText.text = errorText
-            binding.helpText.setTextColor(context.getColorFromAttr(R.attr.contentDangerTonal1))
-            binding.icError.visibility = VISIBLE
-        }
+    private fun setValidState() {
+        binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.helpText.text = helpText
+        binding.icError.isVisible = false
+        binding.helpText.isVisible = helpText.isNotEmpty() == true
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.currencyLayout.background = ContextCompat.getDrawable(
+            context, if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
+        )
+        binding.amount.editText?.background = ContextCompat.getDrawable(
+            context, if (isFocusable) R.drawable.background_primary_input_left_border
+            else R.drawable.background_primary_input_left_corner
+        )
     }
+
+    private fun setErrorState() {
+        binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+        binding.helpText.text = errorText
+        binding.icError.isVisible = true
+        binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
+        binding.currencyLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_right_border)
+    }
+
+    private fun setupBackgroundByFocusable() {
+        binding.currencyLayout.background = ContextCompat.getDrawable(
+            context, if (!isLessThanMin && !isMoreThanMax) R.drawable.background_primary_input_right_border
+            else R.drawable.background_primary_input_error_right_border
+        )
+        binding.amount.editText?.background = ContextCompat.getDrawable(
+            context, if (!isLessThanMin && !isMoreThanMax) R.drawable.background_primary_input_left_border
+            else R.drawable.background_primary_input_error_left_border
+        )
+    }
+
 
     @SuppressLint("SetTextI18n")
     private fun selectCurrency(countryModel: CountryModel) {
@@ -174,6 +201,30 @@ class CurrencyInput @JvmOverloads constructor(
         currency = countryModel.name ?: ""
         Glide.with(context).asBitmap().load(countryModel.flagResId).apply(RequestOptions.circleCropTransform().override(22.dpToPx(), 22.dpToPx()))
             .into(binding.currencyFlag)
+    }
+
+    fun setCurrency(currency: String) {
+        currencyList.forEach { if (it.currency == currency) selectCurrency(it) }
+    }
+
+    fun setAmountText(amount: String) {
+        this.currency = currency
+        binding.amount.editText?.setText(amount.numberFormatting())
+    }
+
+    fun getFloatAmount(): Float {
+        val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
+        return if (amountText.isEmpty()) 0.0F else amountText.numberDeFormatting().toFloat()
+    }
+
+    fun getDeFormatedStringAmount(): String {
+        val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
+        return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
+
+    }
+
+    fun getFormatedStringAmount(): String {
+        return binding.amount.editText?.text?.toString()?.trim() ?: ""
     }
 
 }

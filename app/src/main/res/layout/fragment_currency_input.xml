@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:text="Phone Inputs allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
+        android:text="Currency Inputs allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,20 +29,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <am.acba.component.phoneNumberInput.PhoneNumberInput
-                android:id="@+id/phone_number"
+            <am.acba.component.currencyInput.CurrencyInput
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_20"
                 app:countryTopChips="am,us"
-                app:phoneInputErrorText="Phone number is not valid"
-                app:phoneInputHelpText="Phone number is" />
+                app:currencyInputErrorText="amount is not valid"
+                app:currencyInputHelpText="Amount"
+                app:currencyInputMaxAmount="10000"
+                app:currencyInputMinAmount="100" />
         </LinearLayout>
     </ScrollView>
-
 
     <am.acba.component.button.PrimaryButton
         android:id="@+id/search"

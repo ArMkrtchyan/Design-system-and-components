@@ -188,6 +188,8 @@
     <declare-styleable name="CurrencyInputInput">
         <attr name="currencyInputErrorText" format="string" />
         <attr name="currencyInputHelpText" format="string" />
+        <attr name="currencyInputMaxAmount" format="integer" />
+        <attr name="currencyInputMinAmount" format="integer" />
     </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />

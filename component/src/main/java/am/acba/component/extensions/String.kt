@@ -6,7 +6,7 @@ import java.util.Locale
 
 fun String.numberDeFormatting(): String {
     val index = this.indexOf(".")
-    val numberAfterDot = this.substring(index + 1, this.length).toDouble()
+    val numberAfterDot = this.substring(index + 1, this.length).toFloat()
     return if (numberAfterDot.toInt() == 0) {
         this.substring(0, index).replace(",", "")
     } else {
@@ -16,9 +16,9 @@ fun String.numberDeFormatting(): String {
 
 fun String.numberFormatting(): String {
     return try {
-        val value = this.toDoubleOrNull() ?: 0.0
+        val value = this.toDoubleOrNull()
         val decimalFormat = DecimalFormat("#,###.00", DecimalFormatSymbols(Locale.US))
-        decimalFormat.format(value)
+        if (value != null) decimalFormat.format(value) else ""
     } catch (e: NumberFormatException) {
         e.stackTrace
         ""

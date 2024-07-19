@@ -47,6 +47,7 @@ import kotlinx.coroutines.withContext
 class PhoneNumberInput @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs, 0) {
+
     private val binding by lazy { PhoneNumberInputBinding.inflate(context.inflater(), this, false) }
     private val ccpBinding by lazy { CountryPickerLayoutBinding.inflate(context.inflater(), this, false) }
     private lateinit var countriesList: List<CountryModel>
@@ -158,7 +159,8 @@ class PhoneNumberInput @JvmOverloads constructor(
 
     private fun countriesMapping() {
         val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        val simCountryISO = telephonyManager.simCountryIso
+        val simCountryISO = telephonyManager.simCountryIso.ifEmpty { "am" }
+
         Log.i("simCountry", "$simCountryISO")
         countriesList = ArrayList<CountryModel>().let {
             CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.ENGLISH).map { country ->
