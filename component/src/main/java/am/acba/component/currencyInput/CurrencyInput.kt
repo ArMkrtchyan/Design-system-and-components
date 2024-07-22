@@ -19,6 +19,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -228,6 +229,18 @@ class CurrencyInput @JvmOverloads constructor(
 
     }
 
+    override fun setEnabled(isEnable: Boolean) {
+        binding.amount.isEnabled = isEnable
+        binding.currencyLayout.isEnabled = isEnable
+        binding.currency.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable))
+        binding.icArrow.imageTintList =
+            context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable)
+        binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable)
+        binding.amount.editText?.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
+        binding.currencyFlag.alpha = if (isEnable) 1f else 0.4f
+        binding.helpText.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
+    }
+
     fun getFormatedStringAmount(): String {
         return binding.amount.editText?.text?.toString()?.trim() ?: ""
     }
@@ -235,5 +248,24 @@ class CurrencyInput @JvmOverloads constructor(
     fun setHintText(hintText: String) {
         this.hintText = hintText
         binding.amount.hint = hintText
+    }
+
+    fun setCurrencyList(currencies: List<String>) {
+        val currencyListByUsage: MutableList<CountryModel> = mutableListOf()
+        currencyList.forEach { currency ->
+            if (currencies.contains(currency.currency)) {
+                currencyListByUsage.add(currency)
+            }
+        }
+        if (currencyListByUsage.isNotEmpty()) {
+            currencyList.clear()
+            currencyList.addAll(currencyListByUsage)
+            if (currencyListByUsage.size > 1) {
+                binding.icArrow.visibility = VISIBLE
+            } else {
+                binding.icArrow.visibility = INVISIBLE
+                binding.currencyLayout.setOnClickListener(null)
+            }
+        }
     }
 }
