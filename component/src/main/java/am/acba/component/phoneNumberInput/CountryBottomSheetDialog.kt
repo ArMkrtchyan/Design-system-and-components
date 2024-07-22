@@ -132,9 +132,10 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun searchCountry(countriesList: List<CountryModel>) {
-        binding.search.editText?.doAfterTextChanged {
-            if (it?.length!! > 0) {
-                filterAction(countriesList, it)
+        binding.search.editText?.doAfterTextChanged { text ->
+            val searchText = text?.toString().orEmpty()
+            if (searchText.isNotEmpty()) {
+                filterAction(countriesList, searchText)
             } else {
                 setupAdapter(countriesList)
             }
@@ -143,12 +144,11 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun filterAction(countriesList: List<CountryModel>, char: CharSequence) {
-        val filterList = ArrayList<CountryModel>()
-        countriesList.forEach {
-            if (it.name?.lowercase()?.startsWith(char)!! || it.englishName?.startsWith(char)!! || it.phoneCode?.startsWith(char)!!) {
-                filterList.add(it)
-            }
-        }
+        val filterList = countriesList.filter { country ->
+            country.name?.lowercase()?.startsWith(char) == true ||
+                    country.englishName?.startsWith(char) == true ||
+                    country.phoneCode?.startsWith(char) == true
+        }.toMutableList()
         setupAdapter(filterList)
     }
 

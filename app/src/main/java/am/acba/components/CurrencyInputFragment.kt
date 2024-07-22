@@ -19,6 +19,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.getFloatAmount().log("amountCurrency")
             amount.setCurrency("USD")
             amount.setAmountText("5555")
+            amount.setHintText("5555")
             amount.isValidAmount()
         }
     }

@@ -102,6 +102,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun pastTextWithClipBoard() {
         val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (clipboardManager.hasPrimaryClip()) {
@@ -120,7 +121,6 @@ class PhoneNumberInput @JvmOverloads constructor(
             this.isFocusable = isFocusable
             if (!isFocusable) {
                 isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
-
             }
             if (isValidNumber) {
                 setupBackgroundByFocusable()

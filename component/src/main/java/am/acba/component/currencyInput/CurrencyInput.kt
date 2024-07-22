@@ -32,6 +32,7 @@ class CurrencyInput @JvmOverloads constructor(
 
     private val binding by lazy { CurrencyInputBinding.inflate(context.inflater(), this, false) }
     private var errorText: String
+    private var hintText: String
     private var helpText: String
     private var maxAmount: Int
     private var minAmount: Int
@@ -47,6 +48,7 @@ class CurrencyInput @JvmOverloads constructor(
         context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
             try {
                 errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
+                hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
                 maxAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0)
                 minAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0)
@@ -63,11 +65,11 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setupFirstUi() {
         binding.helpText.isVisible = helpText.isNotEmpty()
         binding.helpText.text = helpText
+        binding.amount.hint = hintText
         binding.amount.hintTextColor = context.getColorStateListFromAttr(
             if (!isLessThanMin && !isMoreThanMax) R.attr.contentPrimaryTonal1
             else R.attr.contentDangerTonal1
         )
-
         binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
     }
 
@@ -75,8 +77,11 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.editText?.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
             amountTextFormatting(isFocusable)
+            val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
                 setupBackgroundByFocusable()
+            } else if (amountText.isEmpty()) {
+                setValidState()
             } else {
                 isMoreThanMax()
                 isLessThanMin()
@@ -95,8 +100,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     private fun isMoreThanMax() {
-        val amountText = binding.amount.editText?.text ?: ""
-        if (maxAmount != 0 && amountText.isNotEmpty() && !isLessThanMin) {
+        if (maxAmount != 0 && !isLessThanMin) {
             isMoreThanMax = getFloatAmount() > maxAmount
             if (isMoreThanMax) {
                 setErrorState()
@@ -112,8 +116,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     private fun isLessThanMin() {
-        val amountText = binding.amount.editText?.text ?: ""
-        if (minAmount != 0 && amountText.isNotEmpty() && !isMoreThanMax) {
+        if (minAmount != 0 && !isMoreThanMax) {
             isLessThanMin = getFloatAmount() < minAmount
             if (isLessThanMin) {
                 setErrorState()
@@ -161,6 +164,7 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setValidState() {
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.helpText.text = helpText
         binding.icError.isVisible = false
         binding.helpText.isVisible = helpText.isNotEmpty() == true
@@ -177,6 +181,7 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setErrorState() {
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+        binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.helpText.text = errorText
         binding.icError.isVisible = true
         binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
@@ -227,4 +232,8 @@ class CurrencyInput @JvmOverloads constructor(
         return binding.amount.editText?.text?.toString()?.trim() ?: ""
     }
 
+    fun setHintText(hintText: String) {
+        this.hintText = hintText
+        binding.amount.hint = hintText
+    }
 }

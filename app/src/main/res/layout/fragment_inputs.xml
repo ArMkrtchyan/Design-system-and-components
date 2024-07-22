@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
+                app:errorEnabled="true"
                 android:hint="@string/app_name" />
 
         </LinearLayout>
