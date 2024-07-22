@@ -13,6 +13,8 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {
+        amount.setCurrencyList(arrayListOf("AMD","USD","EUR"))
+        amount.isEnabled = false
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
