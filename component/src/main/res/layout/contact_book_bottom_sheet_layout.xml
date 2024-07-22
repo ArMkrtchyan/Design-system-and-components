@@ -1,0 +1,61 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center|bottom"
+    android:background="@drawable/background_popup_top_corner"
+    android:paddingBottom="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            app:layout_constraintBottom_toBottomOf="@id/btn_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_close" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:padding="@dimen/spacing_4"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/acba_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:drawableEnd="@drawable/ic_contacts"
+            android:text="acba contacts"
+            app:layout_constraintTop_toBottomOf="@id/btn_close" />
+
+
+        <am.acba.component.divider.PrimaryDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8"
+            app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/phone_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:drawableEnd="@drawable/ic_phonebook"
+            android:text="phone contacts"
+            app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,10 @@ espressoCore = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.8.1"
-constraintlayout = "2.1.4"
+gson = "2.9.0"
+constraintlayout = "2.2.0-alpha13"
 glideVersion = "4.15.1"
+countriesVersion = "2.7.0"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 pivVersion = "1.0.3"
@@ -29,6 +31,8 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 pageIndicatorView = { group = "com.romandanylyk", name = "pageindicatorview", version.ref = "pivVersion" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion" }
+countries = { group = "com.hbb20", name = "ccp", version.ref = "countriesVersion" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

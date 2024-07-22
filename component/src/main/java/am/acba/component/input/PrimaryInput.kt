@@ -25,6 +25,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 open class PrimaryInput : TextInputLayout {
     private var textMaxLength = -1
+    private var cornerStyle = -1
     private var hasDropDown = false
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
@@ -39,14 +40,16 @@ open class PrimaryInput : TextInputLayout {
 
     private fun init(attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryInput).apply {
-            addView(LayoutInflater.from(context).inflate(R.layout.text_input_edittext_layout, this@PrimaryInput, false))
             try {
                 if (hasValueOrEmpty(R.styleable.PrimaryInput_textMaxLength))
                     textMaxLength = getInt(R.styleable.PrimaryInput_textMaxLength, -1)
+                cornerStyle = getInt(R.styleable.PrimaryInput_cornerStyle, -1)
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+            val layoutStyle = if (cornerStyle == 1) R.layout.text_input_edittext_left_corner_layout else R.layout.text_input_edittext_layout
+            addView(LayoutInflater.from(context).inflate(layoutStyle, this@PrimaryInput, false))
             setText(getString(R.styleable.PrimaryInput_android_text))
             if (textMaxLength != -1) setMaxLength(textMaxLength)
             if (hasDropDown) {

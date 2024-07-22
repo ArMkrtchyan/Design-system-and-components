@@ -9,6 +9,15 @@
         <item name="android:background">@drawable/background_primary_input</item>
     </style>
 
+    <style name="BasePrimaryLeftCornerEditTextStyle" parent="ThemeOverlay.Material3.TextInputEditText.FilledBox">
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">?attr/contentPrimary</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColorHint">?attr/contentPrimaryTonal1</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="android:background">@drawable/background_primary_input_left_corner</item>
+    </style>
+
     <style name="BasePrimaryInputStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">?attr/contentPrimaryTonal1</item>
         <item name="hintAnimationEnabled">true</item>
@@ -61,4 +70,6 @@
     <style name="Input.Style.Primary" parent="BasePrimaryInputStyle" />
 
     <style name="InputStyle" parent="BasePrimaryEditTextStyle" />
+
+    <style name="InputStyleLeftCorner" parent="BasePrimaryLeftCornerEditTextStyle" />
 </resources>

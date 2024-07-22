@@ -11,14 +11,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:title="Text inputs" />
+        app:title="Phone number input" />
 
     <am.acba.component.textView.PrimaryTextView
         style="@style/Subtitle1.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:text="Text Inputs allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
+        android:text="Currency Inputs allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,22 +29,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <am.acba.component.input.PrimaryInput
-                android:id="@+id/input"
+            <am.acba.component.currencyInput.CurrencyInput
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:enabled="true"
-                app:errorEnabled="true"
-                android:hint="dscsdcdssdcsdc"
-                app:expandedHintEnabled="false"
-                app:endIconMode="none"
-                android:text="dscmsdlcpxkosdmn k" />
-
+                android:layout_marginTop="@dimen/spacing_20"
+                app:countryTopChips="am,us"
+                app:currencyInputErrorText="amount is not valid"
+                app:currencyInputHintText="Fill the amount"
+                app:currencyInputHelpText="Amount"
+                app:currencyInputMaxAmount="10000"
+                app:currencyInputMinAmount="100" />
         </LinearLayout>
     </ScrollView>
+
+    <am.acba.component.button.PrimaryButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_marginBottom="@dimen/spacing_20"
+        android:text="Serach" />
 </androidx.appcompat.widget.LinearLayoutCompat>

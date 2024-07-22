@@ -33,7 +33,22 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-
+            <am.acba.component.phoneNumberInput.PhoneNumberInput
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:countryTopChips="am,us"
+                app:phoneInputErrorText="Phone number is not valid"
+                app:phoneInputHelpText="Phone number is" />
         </LinearLayout>
     </ScrollView>
+
+
+    <am.acba.component.button.PrimaryButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_marginBottom="@dimen/spacing_20"
+        android:text="Serach" />
 </androidx.appcompat.widget.LinearLayoutCompat>
