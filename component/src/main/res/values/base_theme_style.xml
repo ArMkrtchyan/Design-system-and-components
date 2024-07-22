@@ -18,6 +18,7 @@
         <item name="primaryInputStyle">@style/Input.Style.Primary</item>
         <item name="searchInputStyle">@style/Input.Style.Search</item>
         <item name="inputEditTextStyle">@style/InputStyle</item>
+        <item name="inputEditTextStyleLeftCorner">@style/InputStyleLeftCorner</item>
         <item name="primaryToolbarStyle">@style/Toolbar.Primary</item>
         <item name="primaryCheckboxStyle">@style/CheckBox.Primary</item>
         <item name="primarySwitcherStyle">@style/Switcher.Primary</item>
@@ -62,6 +63,7 @@
         <item name="backgroundAlternative8">@color/Orange_500</item>
         <item name="backgroundAlternative9">@color/Blue_800</item>
         <item name="backgroundNavBar">@color/White_60</item>
+        <item name="homeShadowGradientStartColor">#1A000000</item>
 
         <!-- Borders -->
         <item name="borderBase">@color/BlueGrey_650</item>

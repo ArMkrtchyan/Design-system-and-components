@@ -26,12 +26,13 @@
     <attr name="showCloseIcon" format="boolean" />
 
     <declare-styleable name="ds">
-
+        <attr name="homeShadowGradientStartColor" format="color" />
         <attr name="primaryButtonStyle" format="reference" />
         <attr name="primaryActionTextButtonStyle" format="reference" />
         <attr name="primaryInputStyle" format="reference" />
         <attr name="searchInputStyle" format="reference" />
         <attr name="inputEditTextStyle" format="reference" />
+        <attr name="inputEditTextStyleLeftCorner" format="reference" />
         <attr name="exchangeRatesStyle" format="reference" />
         <attr name="primaryToolbarStyle" format="reference" />
         <attr name="primaryCheckboxStyle" format="reference" />
@@ -187,10 +188,22 @@
     </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
+        <attr name="cornerStyle" format="integer" />
         <attr name="hasDropDown" format="boolean" />
         <attr name="android:text" />
     </declare-styleable>
-
+    <declare-styleable name="PhoneNumberInput">
+        <attr name="phoneInputErrorText" format="string" />
+        <attr name="phoneInputHelpText" format="string" />
+        <attr name="countryTopChips" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CurrencyInputInput">
+        <attr name="currencyInputErrorText" format="string" />
+        <attr name="currencyInputHintText" format="string" />
+        <attr name="currencyInputHelpText" format="string" />
+        <attr name="currencyInputMaxAmount" format="integer" />
+        <attr name="currencyInputMinAmount" format="integer" />
+    </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />
         <attr name="android:hint" />

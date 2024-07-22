@@ -1,5 +1,6 @@
 package am.acba.component.extensions
 
+import am.acba.component.phoneNumberInput.CountryModel
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.DisplayMetrics
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 @ColorInt
 fun Context.getColorFromAttr(
@@ -34,6 +37,32 @@ fun Context.getActionBarHeight(): Int {
     }
     return actionBarHeight
 }
+
+fun Context.saveCountryLastAction(country: CountryModel) {
+    val dBActionsList: MutableList<CountryModel> = this.getCountryLastActions()
+    dBActionsList.remove(dBActionsList.find { it.name == country.name })
+    if (dBActionsList.size > 4) {
+        dBActionsList.removeAt(dBActionsList.size - 1)
+    }
+    dBActionsList.add(0, country)
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
+    val editor = sharedPreferences?.edit()
+    val gson = Gson()
+    val json = gson.toJson(dBActionsList)
+    editor?.putString("LastActionCountryList", json)
+    editor?.apply()
+}
+
+fun Context.getCountryLastActions(): MutableList<CountryModel> {
+    val dBActionsList: MutableList<CountryModel>
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
+    val gson = Gson()
+    val json = sharedPreferences?.getString("LastActionCountryList", "")
+    val type = object : TypeToken<ArrayList<CountryModel>>() {}.type
+    dBActionsList = gson.fromJson(json, type) ?: ArrayList()
+    return dBActionsList
+}
+
 
 fun Context.getStatusBarHeight(): Int {
     var result = 0

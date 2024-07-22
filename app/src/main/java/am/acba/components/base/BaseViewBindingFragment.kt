@@ -1,6 +1,8 @@
 package am.acba.components.base
 
+import am.acba.component.phoneNumberInput.PhoneNumberInput
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,5 +33,29 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
             mActivity.setSupportActionBar(toolbar)
             it.setNavigationOnClickListener { mActivity.onBackPressed() }
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.i("PermissionsResult", "$requestCode")
+        findPhoneNumberInputRecursively(view)?.onRequestPermissionsResult(requestCode, grantResults)
+    }
+
+    private fun findPhoneNumberInputRecursively(rootView: View?): PhoneNumberInput? {
+        if (rootView is ViewGroup) {
+            for (i in 0 until rootView.childCount) {
+                val child = rootView.getChildAt(i)
+                if (child is PhoneNumberInput) {
+                    return child
+                }else if(child is ViewGroup) {
+                    val phoneNumberInput = findPhoneNumberInputRecursively(child)
+                    if (phoneNumberInput != null) {
+                        return phoneNumberInput
+                    }
+                }
+            }
+        }
+        return null
     }
 }

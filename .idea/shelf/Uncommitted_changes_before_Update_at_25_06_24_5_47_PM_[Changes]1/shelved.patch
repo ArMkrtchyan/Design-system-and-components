@@ -1,0 +1,539 @@
+Index: component/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.androidLibrary)\r\n    alias(libs.plugins.jetbrainsKotlinAndroid)\r\n}\r\n\r\nandroid {\r\n    namespace 'am.acba.component'\r\n    compileSdk 34\r\n\r\n    defaultConfig {\r\n        minSdk 23\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n        consumerProguardFiles \"consumer-rules.pro\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_17\r\n        targetCompatibility JavaVersion.VERSION_17\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = '17'\r\n    }\r\n    buildFeatures {\r\n        dataBinding true\r\n        viewBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation libs.androidx.core.ktx\r\n    implementation libs.androidx.appcompat\r\n    implementation libs.material\r\n    implementation libs.glide\r\n    testImplementation libs.junit\r\n    androidTestImplementation libs.androidx.junit\r\n    androidTestImplementation libs.androidx.espresso.core\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/build.gradle b/component/build.gradle
+--- a/component/build.gradle	
++++ b/component/build.gradle	
+@@ -39,6 +39,7 @@
+     implementation libs.androidx.appcompat
+     implementation libs.material
+     implementation libs.glide
++    implementation libs.countries
+     testImplementation libs.junit
+     androidTestImplementation libs.androidx.junit
+     androidTestImplementation libs.androidx.espresso.core
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.1.0-rc01\"\r\nkotlin = \"1.9.10\"\r\ncoreKtx = \"1.12.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.1.5\"\r\nespressoCore = \"3.5.1\"\r\nappcompat = \"1.6.1\"\r\nmaterial = \"1.10.0\"\r\nactivity = \"1.8.1\"\r\nconstraintlayout = \"2.1.4\"\r\nglideVersion = \"4.15.1\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nandroidx-activity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nandroidx-constraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\nglide = { group = \"com.github.bumptech.glide\", name = \"glide\", version.ref = \"glideVersion\" }\r\n\r\n[plugins]\r\nandroidApplication = { id = \"com.android.application\", version.ref = \"agp\" }\r\njetbrainsKotlinAndroid = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\nandroidLibrary = { id = \"com.android.library\", version.ref = \"agp\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	
++++ b/gradle/libs.versions.toml	
+@@ -10,6 +10,7 @@
+ activity = "1.8.1"
+ constraintlayout = "2.1.4"
+ glideVersion = "4.15.1"
++countriesVersion = "2.6.0"
+ 
+ [libraries]
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+@@ -21,6 +22,7 @@
+ androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
++countries = { group = "com.hbb20", name = "ccp", version.ref = "countriesVersion" }
+ 
+ [plugins]
+ androidApplication = { id = "com.android.application", version.ref = "agp" }
+Index: component/src/main/res/drawable/ic_am_flag.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/drawable/ic_am_flag.xml b/component/src/main/res/drawable/ic_am_flag.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/drawable/ic_am_flag.xml	
+@@ -0,0 +1,19 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="20dp"
++    android:height="20dp"
++    android:viewportWidth="20"
++    android:viewportHeight="20">
++  <group>
++    <clip-path
++        android:pathData="M0,0h20v20h-20z"/>
++    <path
++        android:pathData="M20,10C20,8.777 19.78,7.605 19.378,6.522L10,6.087L0.622,6.522C0.22,7.605 0,8.777 0,10C0,11.223 0.22,12.395 0.622,13.478L10,13.913L19.378,13.478C19.78,12.395 20,11.223 20,10Z"
++        android:fillColor="#0052B4"/>
++    <path
++        android:pathData="M10,20C14.3,20 17.965,17.286 19.378,13.478H0.622C2.035,17.286 5.7,20 10,20Z"
++        android:fillColor="#FF9811"/>
++    <path
++        android:pathData="M0.622,6.522H19.378C17.965,2.714 14.3,0 10,0C5.7,0 2.035,2.714 0.622,6.522Z"
++        android:fillColor="#D80027"/>
++  </group>
++</vector>
+Index: component/src/main/res/drawable/background_primary_input_left_border.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/drawable/background_primary_input_left_border.xml b/component/src/main/res/drawable/background_primary_input_left_border.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/drawable/background_primary_input_left_border.xml	
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape android:shape="rectangle">
++            <corners android:bottomLeftRadius="@dimen/radius_12" android:topLeftRadius="@dimen/radius_12" />
++            <stroke android:width="1dp" android:color="?attr/borderPrimary" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <View\r\n        android:layout_width=\"1dp\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_marginStart=\"39dp\"\r\n        android:background=\"@color/Black\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <View\r\n        android:layout_width=\"1dp\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_marginStart=\"76dp\"\r\n        android:background=\"@color/Black\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <am.acba.component.toolbar.PrimaryToolbar\r\n        android:id=\"@+id/toolbar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?actionBarSize\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/switcher\"\r\n        app:title=\"Toolbar\" />\r\n\r\n    <am.acba.component.switcher.PrimarySwitcher\r\n        android:id=\"@+id/switcher\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?attr/actionBarSize\"\r\n        android:layout_margin=\"20dp\"\r\n        android:checked=\"false\"\r\n        android:text=\"Night mode\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:orientation=\"vertical\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/toolbar\">\r\n\r\n\r\n        <am.acba.component.divider.PrimaryDivider\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:text=\"Or\"\r\n            app:dividerThickness=\"1dp\"\r\n            android:layout_marginBottom=\"10dp\" />\r\n    </LinearLayout>\r\n\r\n    <androidx.core.widget.NestedScrollView\r\n        android:id=\"@+id/scrollView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:visibility=\"visible\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/toolbar\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\"\r\n            android:paddingHorizontal=\"20dp\"\r\n            android:paddingBottom=\"100dp\"\r\n            android:visibility=\"visible\">\r\n\r\n            <am.acba.component.listItem.PrimaryListItem\r\n                android:id=\"@+id/info_text_2\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@drawable/background_primary_input\"\r\n                app:listStartIcon=\"@drawable/ic_passport\"\r\n                app:listStartIconGravity=\"Center\"\r\n                app:listStartIconTint=\"?attr/contentBrand\"\r\n                app:listTitleText=\"Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի\"\r\n                app:listTitleTextAppearance=\"@style/Body2.Regular\"\r\n                app:startComponentType=\"Checkbox\"\r\n                app:titleComponentType=\"ThreeLine\" />\r\n\r\n            <am.acba.component.listItem.PrimaryListItem\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:background=\"@drawable/background_primary_input\"\r\n                app:descriptionComponentType=\"ThreeLine\"\r\n                app:endComponentType=\"Icon\"\r\n                app:listEndIcon=\"@drawable/ic_right\"\r\n                app:listEndIconGravity=\"Top\"\r\n                app:listStartIcon=\"@drawable/default_avatar\"\r\n                app:listStartIconGravity=\"Center\"\r\n                app:listTitleText=\"Ստուգեք լուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ըուսավորությունը։ Համոզվեք որ փաստաթուղթը չփայլի և լինի ընթերցելի\"\r\n                app:listTitleTextAppearance=\"@style/Body2.Regular\"\r\n                app:startComponentType=\"Avatar\"\r\n                app:titleComponentType=\"ThreeLine\" />\r\n\r\n            <am.acba.component.listItem.PrimaryListItem\r\n                android:id=\"@+id/list_item\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:background=\"@drawable/background_primary_input\"\r\n                app:endComponentType=\"Icon\"\r\n                app:listEndIcon=\"@drawable/ic_right\"\r\n                app:listStartIcon=\"@drawable/default_avatar\"\r\n                app:listTitleText=\"List Item\"\r\n                app:startComponentType=\"Avatar\" />\r\n\r\n            <am.acba.component.listItem.PrimaryListItem\r\n                android:id=\"@+id/list_item2\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:background=\"@drawable/background_primary_input\"\r\n                app:badgeBackgroundTint=\"?attr/backgroundWarning\"\r\n                app:badgePaddingBottom=\"@dimen/spacing_4\"\r\n                app:badgePaddingTop=\"@dimen/spacing_4\"\r\n                app:badgeType=\"Number\"\r\n                app:endComponentType=\"Icon\"\r\n                app:listEndIcon=\"@drawable/ic_right\"\r\n                app:listStartIcon=\"@drawable/default_avatar\"\r\n                app:listTitleText=\"List Item\"\r\n                app:showBadge=\"true\"\r\n                app:startComponentType=\"Avatar\"\r\n                tools:badgeText=\"2\" />\r\n\r\n            <am.acba.component.badge.PrimaryBadge\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"100dp\"\r\n                app:badgeIconTint=\"?attr/backgroundDanger\"\r\n                app:badgeType=\"Dot\" />\r\n\r\n            <am.acba.component.badge.PrimaryBadge\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                app:badgeIcon=\"@drawable/ic_success_filled\"\r\n                app:badgeType=\"SmallIcon\" />\r\n\r\n            <am.acba.component.badge.PrimaryBadge\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                app:badgeIcon=\"@drawable/ic_success_filled\"\r\n                app:badgeType=\"LargeIcon\" />\r\n\r\n            <am.acba.component.badge.PrimaryBadge\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                app:badgeBackgroundTint=\"?attr/backgroundDanger\"\r\n                app:badgeText=\"100\"\r\n                app:badgeType=\"Number\" />\r\n\r\n            <am.acba.component.badge.PrimaryBadge\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                app:badgeBackgroundTint=\"?attr/backgroundDanger\"\r\n                app:badgeText=\"Badge\"\r\n                app:badgeTextColor=\"@color/Black\"\r\n                app:badgeType=\"Text\" />\r\n\r\n            <am.acba.component.button.PrimaryActionTextButton\r\n                android:id=\"@+id/profile\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                android:visibility=\"visible\"\r\n                app:actionIconSize=\"Large\"\r\n                app:badgeIcon=\"@drawable/background_rounded\"\r\n                app:badgeIconGravity=\"Top\"\r\n                app:badgeType=\"SmallIcon\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\"\r\n                app:showActionText=\"false\" />\r\n\r\n            <am.acba.component.button.PrimaryActionTextButton\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"10dp\"\r\n                app:actionButtonType=\"Avatar\"\r\n                app:actionIcon=\"@drawable/default_avatar\"\r\n                app:actionIconSize=\"XLarge\" />\r\n\r\n            <!--            <HorizontalScrollView-->\r\n            <!--                android:layout_width=\"match_parent\"-->\r\n            <!--                android:layout_height=\"wrap_content\"-->\r\n            <!--                android:fillViewport=\"true\">-->\r\n\r\n            <!--                <androidx.appcompat.widget.LinearLayoutCompat-->\r\n            <!--                    android:layout_width=\"wrap_content\"-->\r\n            <!--                    android:layout_height=\"wrap_content\"-->\r\n            <!--                    android:layout_gravity=\"center_vertical\">-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:text=\"Action button1\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:actionIconTint=\"?attr/contentBrand\"-->\r\n            <!--                        app:badgeChecked=\"true\"-->\r\n            <!--                        app:checkable=\"true\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:checkable=\"true\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:actionIconSize=\"Large\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:actionIconSize=\"Medium\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:actionIconSize=\"Small\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionIcon=\"@drawable/ic_contacts\"-->\r\n            <!--                        app:actionIconSize=\"XSmall\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->\r\n            <!--            </HorizontalScrollView>-->\r\n\r\n            <!--            <HorizontalScrollView-->\r\n            <!--                android:layout_width=\"match_parent\"-->\r\n            <!--                android:layout_height=\"wrap_content\"-->\r\n            <!--                android:layout_marginTop=\"20dp\"-->\r\n            <!--                android:fillViewport=\"true\">-->\r\n\r\n            <!--                <androidx.appcompat.widget.LinearLayoutCompat-->\r\n            <!--                    android:layout_width=\"wrap_content\"-->\r\n            <!--                    android:layout_height=\"wrap_content\"-->\r\n            <!--                    android:layout_gravity=\"center_vertical\">-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"XLarge\"-->\r\n            <!--                        app:badgeChecked=\"true\"-->\r\n            <!--                        app:checkable=\"true\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"XLarge\"-->\r\n            <!--                        app:checkable=\"true\"-->\r\n            <!--                        app:showActionText=\"false\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"Large\"-->\r\n            <!--                        app:badgeIcon=\"@drawable/ic_success_filled\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"Medium\"-->\r\n            <!--                        app:badgeIcon=\"@drawable/ic_success_filled\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"Small\"-->\r\n            <!--                        app:badgeIcon=\"@drawable/ic_success_filled\" />-->\r\n\r\n            <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n            <!--                        android:layout_width=\"wrap_content\"-->\r\n            <!--                        android:layout_height=\"wrap_content\"-->\r\n            <!--                        android:layout_marginStart=\"10dp\"-->\r\n            <!--                        app:actionButtonType=\"Avatar\"-->\r\n            <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n            <!--                        app:actionIconSize=\"XSmall\"-->\r\n            <!--                        app:badgeIcon=\"@drawable/ic_success_filled\" />-->\r\n            <!--                </androidx.appcompat.widget.LinearLayoutCompat>-->\r\n            <!--            </HorizontalScrollView>-->\r\n\r\n            <HorizontalScrollView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:fillViewport=\"true\">\r\n\r\n                <androidx.appcompat.widget.LinearLayoutCompat\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_gravity=\"center_vertical\">\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"80dp\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n                    <!--                        app:actionIconSize=\"XLarge\"/>-->\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"wrap_content\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIconSize=\"XLarge\"-->\r\n                    <!--                        app:badgeIcon=\"@drawable/ic_burger_menu\"-->\r\n                    <!--                        app:badgeIconGravity=\"Top\"-->\r\n                    <!--                        app:showActionText=\"false\"-->\r\n                    <!--                        app:textDrawableBackgroundColor=\"@color/BrandGreen_400\"-->\r\n                    <!--                        app:textDrawableColor=\"@color/BrandGreen_650\" />-->\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"wrap_content\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:layout_marginStart=\"10dp\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n                    <!--                        app:actionIconSize=\"Large\"-->\r\n                    <!--                        app:badgeIcon=\"@drawable/ic_success_filled\"-->\r\n                    <!--                        app:showActionText=\"false\" />-->\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"wrap_content\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:layout_marginStart=\"10dp\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n                    <!--                        app:actionIconSize=\"Medium\"-->\r\n                    <!--                        app:badgeIcon=\"@drawable/ic_success_filled\"-->\r\n                    <!--                        app:showActionText=\"false\" />-->\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"wrap_content\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:layout_marginStart=\"10dp\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n                    <!--                        app:actionIconSize=\"Small\"-->\r\n                    <!--                        app:badgeIcon=\"@drawable/ic_success_filled\"-->\r\n                    <!--                        app:showActionText=\"false\" />-->\r\n\r\n                    <!--                    <am.acba.component.button.PrimaryActionTextButton-->\r\n                    <!--                        android:layout_width=\"wrap_content\"-->\r\n                    <!--                        android:layout_height=\"wrap_content\"-->\r\n                    <!--                        android:layout_marginStart=\"10dp\"-->\r\n                    <!--                        android:text=\"Աննա Հովսեփյան\"-->\r\n                    <!--                        app:actionButtonType=\"Text\"-->\r\n                    <!--                        app:actionIcon=\"@drawable/default_avatar\"-->\r\n                    <!--                        app:actionIconSize=\"XSmall\"-->\r\n                    <!--                        app:badgeIcon=\"@drawable/ic_success_filled\"-->\r\n                    <!--                        app:showActionText=\"false\" />-->\r\n                </androidx.appcompat.widget.LinearLayoutCompat>\r\n            </HorizontalScrollView>\r\n\r\n\r\n            <am.acba.component.textView.PrimaryTextView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.checkbox.PrimaryCheckbox\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.checkbox.PrimaryCheckbox\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.checkbox.PrimaryCheckbox\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:checked=\"true\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.radiobutton.PrimaryRadioButton\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.radiobutton.PrimaryRadioButton\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.radiobutton.PrimaryRadioButton\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:checked=\"true\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <com.google.android.material.switchmaterial.SwitchMaterial\r\n                style=\"@style/Widget.Material3.CompoundButton.MaterialSwitch\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\" />\r\n\r\n            <am.acba.component.switcher.PrimarySwitcher\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.switcher.PrimarySwitcher\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.switcher.PrimarySwitcher\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:checked=\"true\"\r\n                android:enabled=\"false\"\r\n                android:text=\"@string/app_name\" />\r\n\r\n            <am.acba.component.exchange.ExchangeRatesButton\r\n                android:id=\"@+id/exchange_rates\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\" />\r\n\r\n            <am.acba.component.input.PrimaryInput\r\n                android:id=\"@+id/input\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:hint=\"@string/app_name\" />\r\n\r\n\r\n            <am.acba.component.input.PrimaryDropDown\r\n                android:id=\"@+id/dropDown\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"asASas\"\r\n                android:hint=\"asASas\"/>\r\n\r\n            <am.acba.component.input.PrimaryInput\r\n                android:id=\"@+id/inputa\"\r\n                style=\"@style/Input.Style.Search\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:hint=\"@string/app_name\"\r\n                app:hasDropDown=\"true\" />\r\n\r\n            <am.acba.component.input.SearchInput\r\n                android:id=\"@+id/search\"\r\n                style=\"@style/Input.Style.Search\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"40dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:hint=\"Որոնել...\"\r\n                app:endIconDrawable=\"@drawable/ic_close\"\r\n                app:startIconDrawable=\"@drawable/ic_search\"\r\n                app:withBackIcon=\"true\" />\r\n\r\n            <am.acba.component.input.SearchInput\r\n                android:id=\"@+id/search2\"\r\n                style=\"@style/Input.Style.Search\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"40dp\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:hint=\"@string/app_name\"\r\n                app:endIconTint=\"@color/AztecPurple_700\"\r\n                app:hasDropDown=\"true\" />\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                android:id=\"@+id/buttonPr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:text=\"Primary button enabled\"\r\n                app:icon=\"@drawable/ic_question\" />\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"false\"\r\n                android:text=\"Primary button disabled\" />\r\n\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                android:id=\"@+id/buttonSec\"\r\n                style=\"@style/Button.Style.Secondary\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:text=\"Secondary button enabled\"\r\n                app:icon=\"@drawable/default_icon\" />\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                style=\"@style/Button.Style.Secondary\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"false\"\r\n                android:text=\"Secondary button disabled\" />\r\n\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                android:id=\"@+id/buttonGhost\"\r\n                style=\"@style/Button.Style.Ghost\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"true\"\r\n                android:text=\"Ghost button enabled\" />\r\n\r\n            <am.acba.component.button.PrimaryButton\r\n                style=\"@style/Button.Style.Ghost\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_gravity=\"center\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:enabled=\"false\"\r\n                android:text=\"Ghost button disabled\"\r\n                app:icon=\"@drawable/default_icon\" />\r\n\r\n            <am.acba.component.textView.PrimaryTextView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\" />\r\n        </LinearLayout>\r\n\r\n    </androidx.core.widget.NestedScrollView>\r\n\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/bottom_navigation\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"?actionBarSize\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	
++++ b/app/src/main/res/layout/activity_main.xml	
+@@ -51,9 +51,9 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="10dp"
++            android:layout_marginBottom="10dp"
+             android:text="Or"
+-            app:dividerThickness="1dp"
+-            android:layout_marginBottom="10dp" />
++            app:dividerThickness="1dp" />
+     </LinearLayout>
+ 
+     <androidx.core.widget.NestedScrollView
+@@ -85,6 +85,12 @@
+                 app:startComponentType="Checkbox"
+                 app:titleComponentType="ThreeLine" />
+ 
++            <am.acba.component.input.PhoneNumberInput
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:layout_marginTop="@dimen/spacing_20"
++                android:layout_marginBottom="@dimen/spacing_20"/>
++
+             <am.acba.component.listItem.PrimaryListItem
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+@@ -481,8 +487,8 @@
+                 android:id="@+id/dropDown"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="asASas"
+-                android:hint="asASas"/>
++                android:hint="asASas"
++                android:text="asASas" />
+ 
+             <am.acba.component.input.PrimaryInput
+                 android:id="@+id/inputa"
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n            <option value=\"$PROJECT_DIR$/component\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -4,8 +4,9 @@
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
++        <option name="testRunner" value="GRADLE" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
++        <option name="gradleJvm" value="jbr-17" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: component/src/main/res/layout/text_input_edittext_layout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<com.google.android.material.textfield.TextInputEditText xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    style=\"?attr/inputEditTextStyle\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\" />
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/layout/text_input_edittext_layout.xml b/component/src/main/res/layout/text_input_edittext_layout.xml
+--- a/component/src/main/res/layout/text_input_edittext_layout.xml	
++++ b/component/src/main/res/layout/text_input_edittext_layout.xml	
+@@ -2,4 +2,5 @@
+ <com.google.android.material.textfield.TextInputEditText xmlns:android="http://schemas.android.com/apk/res/android"
+     style="?attr/inputEditTextStyle"
+     android:layout_width="match_parent"
+-    android:layout_height="wrap_content" />
+\ No newline at end of file
++    android:layout_height="wrap_content"
++    android:minHeight="56dp" />
+\ No newline at end of file
+Index: component/src/main/java/am/acba/component/phoneNumberInput/CountryBottomSheetDialog.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/java/am/acba/component/phoneNumberInput/CountryBottomSheetDialog.kt b/component/src/main/java/am/acba/component/phoneNumberInput/CountryBottomSheetDialog.kt
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/java/am/acba/component/phoneNumberInput/CountryBottomSheetDialog.kt	
+@@ -0,0 +1,39 @@
++package am.acba.component.phoneNumberInput
++
++import am.acba.component.databinding.CountryBottomSheetBinding
++import android.os.Bundle
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import androidx.fragment.app.FragmentManager
++import com.google.android.material.bottomsheet.BottomSheetDialogFragment
++
++class CountryBottomSheetDialog : BottomSheetDialogFragment() {
++
++    private var _binding: CountryBottomSheetBinding? = null
++    private val binding get() = _binding
++
++    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
++        _binding = CountryBottomSheetBinding.inflate(inflater, container, false)
++        return binding?.root
++    }
++
++    override fun onDestroyView() {
++        super.onDestroyView()
++        _binding = null
++    }
++    companion object{
++        private var instance: CountryBottomSheetDialog? = null
++        fun  show(
++            fragmentManager: FragmentManager,
++            bundle: Bundle? = null,
++        ): CountryBottomSheetDialog {
++            if (instance == null) {
++                instance = CountryBottomSheetDialog()
++                instance?.show(fragmentManager, CountryBottomSheetDialog::class.java.simpleName)
++            }
++            return instance as CountryBottomSheetDialog
++        }
++    }
++
++}
+\ No newline at end of file
+Index: component/src/main/res/layout/country_bottom_sheet.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/layout/country_bottom_sheet.xml b/component/src/main/res/layout/country_bottom_sheet.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/layout/country_bottom_sheet.xml	
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: component/src/main/res/drawable/background_primary_input_right_border.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/drawable/background_primary_input_right_border.xml b/component/src/main/res/drawable/background_primary_input_right_border.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/drawable/background_primary_input_right_border.xml	
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape android:shape="rectangle">
++            <corners android:bottomRightRadius="@dimen/radius_12" android:topRightRadius="@dimen/radius_12" />
++            <stroke android:width="1dp" android:color="?attr/borderPrimary" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: component/src/main/res/layout/phone_number_input.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/layout/phone_number_input.xml b/component/src/main/res/layout/phone_number_input.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/layout/phone_number_input.xml	
+@@ -0,0 +1,105 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:layout_weight="1">
++
++    <LinearLayout
++        android:id="@+id/country_code_layout"
++        android:layout_width="wrap_content"
++        android:layout_height="56dp"
++        android:layout_marginEnd="1dp"
++        android:layout_weight="0.05"
++        android:background="@drawable/background_primary_input_left_corner"
++        android:orientation="horizontal">
++
++        <com.hbb20.CountryCodePicker
++            android:id="@+id/country_code_lib"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:visibility="gone"
++            app:ccp_autoFormatNumber="true"
++            app:ccp_showArrow="true"
++            app:ccp_showFlag="true"
++            app:ccp_showFullName="false"
++            app:ccp_showNameCode="false"
++            app:ccp_showPhoneCode="true" />
++
++        <am.acba.component.imageView.PrimaryImageView
++            android:id="@+id/country_flag"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:layout_marginStart="@dimen/spacing_16"
++            android:tint="@null"
++            tools:src="@drawable/ic_am_flag" />
++
++        <am.acba.component.textView.PrimaryTextView
++            android:id="@+id/country_code"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:layout_marginStart="4dp"
++            tools:text="+374" />
++
++        <am.acba.component.imageView.PrimaryImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:layout_marginStart="4dp"
++            android:layout_marginEnd="10dp"
++            android:src="@drawable/ic_down" />
++
++    </LinearLayout>
++
++    <!--    <am.acba.component.input.PrimaryDropDown-->
++    <!--        android:id="@+id/country_code"-->
++    <!--        android:layout_width="wrap_content"-->
++    <!--        android:layout_height="wrap_content"-->
++    <!--        android:layout_marginEnd="1dp"-->
++    <!--        android:layout_weight="0.1"-->
++    <!--        android:text="+374" />-->
++    <LinearLayout
++        android:id="@+id/phone_number_layout"
++        android:layout_width="wrap_content"
++        android:layout_height="56dp"
++        android:layout_marginEnd="1dp"
++        android:layout_weight="0.95"
++        android:background="@drawable/background_primary_input_right_corner"
++        android:orientation="horizontal"
++        android:weightSum="1">
++
++        <EditText
++            android:id="@+id/phone_number"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="start|center"
++            android:layout_marginStart="@dimen/spacing_16"
++            android:layout_weight="0.9"
++            android:background="@color/Transparent"
++            android:hint="Phone number"
++            android:textColor="?attr/contentPrimary"
++            android:textColorHint="?attr/contentPrimaryTonal1" />
++
++        <am.acba.component.imageView.PrimaryImageView
++            android:id="@+id/clear"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="end|center"
++            android:src="@drawable/ic_close"
++            android:visibility="gone"
++            tools:visibility="visible" />
++
++        <am.acba.component.imageView.PrimaryImageView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="end|center"
++            android:layout_marginStart="@dimen/spacing_16"
++            android:layout_marginEnd="@dimen/spacing_16"
++            android:layout_weight="0.1"
++            android:src="@drawable/ic_contacts" />
++    </LinearLayout>
++</LinearLayout>
+\ No newline at end of file
+Index: component/src/main/res/drawable/background_primary_input_right_corner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/drawable/background_primary_input_right_corner.xml b/component/src/main/res/drawable/background_primary_input_right_corner.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/drawable/background_primary_input_right_corner.xml	
+@@ -0,0 +1,24 @@
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:state_enabled="true" android:state_focused="false">
++        <shape android:shape="rectangle">
++            <corners android:topRightRadius="@dimen/radius_12"
++            android:bottomRightRadius="@dimen/radius_12" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++    <item android:state_focused="true">
++        <shape android:shape="rectangle">
++            <corners  android:topRightRadius="@dimen/radius_12"
++                android:bottomRightRadius="@dimen/radius_12" />
++            <stroke android:width="1dp" android:color="?attr/borderPrimary" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++    <item android:state_enabled="false">
++        <shape android:shape="rectangle">
++            <corners  android:topRightRadius="@dimen/radius_12"
++                android:bottomRightRadius="@dimen/radius_12" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: component/src/main/res/drawable/background_primary_input_left_corner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/res/drawable/background_primary_input_left_corner.xml b/component/src/main/res/drawable/background_primary_input_left_corner.xml
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/res/drawable/background_primary_input_left_corner.xml	
+@@ -0,0 +1,24 @@
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:state_enabled="true" android:state_focused="false">
++        <shape android:shape="rectangle">
++            <corners android:topLeftRadius="@dimen/radius_12"
++                android:bottomLeftRadius="@dimen/radius_12" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++    <item android:state_focused="true">
++        <shape android:shape="rectangle">
++            <corners  android:topLeftRadius="@dimen/radius_12"
++                android:bottomLeftRadius="@dimen/radius_12" />
++            <stroke android:width="1dp" android:color="?attr/borderPrimary" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++    <item android:state_enabled="false">
++        <shape android:shape="rectangle">
++            <corners  android:topLeftRadius="@dimen/radius_12"
++                android:bottomLeftRadius="@dimen/radius_12" />
++            <solid android:color="?attr/backgroundTonal2" />
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
+Index: component/src/main/java/am/acba/component/phoneNumberInput/PhoneNumberInput.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/component/src/main/java/am/acba/component/phoneNumberInput/PhoneNumberInput.kt b/component/src/main/java/am/acba/component/phoneNumberInput/PhoneNumberInput.kt
+new file mode 100644
+--- /dev/null	
++++ b/component/src/main/java/am/acba/component/phoneNumberInput/PhoneNumberInput.kt	
+@@ -0,0 +1,75 @@
++package am.acba.component.phoneNumberInput
++
++import am.acba.component.R
++import am.acba.component.databinding.PhoneNumberInputBinding
++import am.acba.component.extensions.dpToPx
++import am.acba.component.extensions.inflater
++import android.annotation.SuppressLint
++import android.content.Context
++import android.text.InputType
++import android.util.AttributeSet
++import android.widget.LinearLayout
++import androidx.core.content.ContextCompat
++import androidx.core.widget.doOnTextChanged
++import androidx.fragment.app.Fragment
++import androidx.fragment.app.FragmentManager
++import com.bumptech.glide.Glide
++import com.bumptech.glide.request.RequestOptions
++import com.hbb20.CCPCountry
++
++class PhoneNumberInput @JvmOverloads constructor(
++    context: Context, attrs: AttributeSet? = null
++) : LinearLayout(context, attrs, 0) {
++    private val binding by lazy { PhoneNumberInputBinding.inflate(context.inflater(), this, false) }
++    private var fragmentManager: FragmentManager? = null
++
++    init {
++        addView(binding.root)
++        setupBackgrounds()
++        setDefaultCountry()
++        clear()
++    }
++
++    private fun setupBackgrounds() {
++        binding.countryCodeLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_left_corner)
++        binding.phoneNumberLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_right_corner)
++        binding.phoneNumber.setOnFocusChangeListener { _, isFocusable ->
++            binding.phoneNumberLayout.background = ContextCompat.getDrawable(
++                context, if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
++            )
++            binding.countryCodeLayout.background = ContextCompat.getDrawable(
++                context, if (isFocusable) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_left_corner
++            )
++        }
++        binding.phoneNumber.inputType = InputType.TYPE_CLASS_NUMBER
++        binding.countryCodeLib.registerCarrierNumberEditText(binding.phoneNumber)
++    }
++
++    private fun setDefaultCountry() {
++        CCPCountry.getLoadedLibraryMaterList().forEach {
++            if (it.nameCode == "AM") {
++                setupCountry(it.phoneCode, it.flagID)
++            }
++        }
++    }
++
++    @SuppressLint("SetTextI18n")
++    private fun clear() {
++        binding.phoneNumber.doOnTextChanged { text, _, _, _ ->
++            binding.clear.visibility = if (text?.isEmpty() == true) GONE else VISIBLE
++        }
++        binding.clear.setOnClickListener { binding.phoneNumber.setText("") }
++    }
++
++    @SuppressLint("SetTextI18n")
++    private fun setupCountry(countryCode: String, flag: Int) {
++        binding.countryCode.text = "+$countryCode"
++        Glide.with(context).asBitmap().load(flag).apply(RequestOptions.circleCropTransform().override(20.dpToPx(), 20.dpToPx()))
++            .into(binding.countryFlag)
++    }
++
++    fun openCountryDialog() {
++        val countryBottomSheetDialog = CountryBottomSheetDialog()
++        countryBottomSheetDialog.show(fragmentManager, countryBottomSheetDialog.tag)
++    }
++}
