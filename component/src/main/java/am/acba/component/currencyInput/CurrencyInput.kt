@@ -8,7 +8,7 @@ import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
-import am.acba.component.phoneNumberInput.CountryBottomSheetDialog
+import am.acba.component.dialog.CountryBottomSheetDialog
 import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
@@ -19,7 +19,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager

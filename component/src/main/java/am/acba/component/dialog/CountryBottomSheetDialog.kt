@@ -1,11 +1,14 @@
-package am.acba.component.phoneNumberInput
+package am.acba.component.dialog
 
 import am.acba.component.R
 import am.acba.component.databinding.CountryBottomSheetBinding
+import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getCountryLastActions
 import am.acba.component.extensions.log
 import am.acba.component.extensions.parcelableArrayList
+import am.acba.component.extensions.pxToDp
 import am.acba.component.extensions.saveCountryLastAction
+import am.acba.component.phoneNumberInput.CountryModel
 import am.acba.component.phoneNumberInput.adapter.CountriesChipsAdapter
 import am.acba.component.phoneNumberInput.adapter.CountriesListAdapter
 import am.acba.component.phoneNumberInput.adapter.TitleAdapter
@@ -43,6 +46,18 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.post {
+            val parent = view.parent as View
+            val params = parent.layoutParams
+            val behavior = (params as ViewGroup.LayoutParams).apply {
+                height = setupBottomSheetHeightByViewHeight()
+            }
+            parent.layoutParams = behavior
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog = BottomSheetDialog(requireContext(), theme).apply {
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
         behavior.isDraggable = true
@@ -65,16 +80,19 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.post {
-            val parent = view.parent as View
-            val params = parent.layoutParams
-            val behavior = (params as ViewGroup.LayoutParams).apply {
-                height = (resources.displayMetrics.heightPixels)
-            }
-            parent.layoutParams = behavior
+    private fun setupBottomSheetHeightByViewHeight(): Int {
+        var height = 0
+        if (dBActionsList.isNotEmpty()) {
+            height = resources.displayMetrics.heightPixels
+        } else {
+            binding.rvCountries.measure(
+                View.MeasureSpec.makeMeasureSpec(binding.rvCountries.width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+            val allHeight = binding.btnClose.height + binding.shadow.height + binding.search.height
+            height = allHeight + binding.rvCountries.measuredHeight + 100
         }
+        return height
     }
 
     private fun getBundleVariablesAndSetupUi() {

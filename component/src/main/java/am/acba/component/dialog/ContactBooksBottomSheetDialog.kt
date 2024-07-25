@@ -1,4 +1,4 @@
-package am.acba.component.phoneNumberInput
+package am.acba.component.dialog
 
 import am.acba.component.databinding.ContactBookBottomSheetLayoutBinding
 import android.content.DialogInterface
