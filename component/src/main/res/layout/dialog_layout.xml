@@ -13,7 +13,7 @@
         android:background="@drawable/dialog_background"
         android:orientation="vertical">
 
-         <am.acba.component.imageView.PrimaryImageView
+        <am.acba.component.imageView.PrimaryImageView
             android:id="@+id/topIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +34,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
             android:ellipsize="end"
+            android:fontFamily="@font/bold"
             android:gravity="center"
             android:maxLines="2"
             android:textColor="?attr/contentPrimary"
@@ -51,6 +52,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="18dp"
             android:ellipsize="end"
+            android:fontFamily="@font/regular"
             android:gravity="center"
             android:maxLines="3"
             android:textColor="?attr/contentPrimary"
@@ -60,10 +62,10 @@
             tools:visibility="visible" />
 
         <FrameLayout
-            android:layout_marginTop="8dp"
             android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
 
         <am.acba.component.divider.PrimaryDivider
             android:id="@+id/topDivider"
