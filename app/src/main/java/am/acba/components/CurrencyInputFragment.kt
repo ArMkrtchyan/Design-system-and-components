@@ -14,6 +14,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
 
     override fun FragmentCurrencyInputBinding.initView() {
         amount.setCurrencyList(arrayListOf("AMD","USD","EUR"))
+        amount.getEditText()?.setOnFocusChangeListener { _, isFocus ->  }
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
