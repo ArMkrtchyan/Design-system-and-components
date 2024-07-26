@@ -203,6 +203,7 @@
         <attr name="currencyInputHelpText" format="string" />
         <attr name="currencyInputMaxAmount" format="integer" />
         <attr name="currencyInputMinAmount" format="integer" />
+        <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />
