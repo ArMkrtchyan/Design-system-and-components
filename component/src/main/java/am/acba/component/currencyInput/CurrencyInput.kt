@@ -18,6 +18,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
+import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -234,6 +235,10 @@ class CurrencyInput @JvmOverloads constructor(
         val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
         return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
 
+    }
+
+    fun getEditText(): EditText? {
+        return binding.amount.editText
     }
 
     override fun setEnabled(isEnable: Boolean) {
