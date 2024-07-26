@@ -9,6 +9,7 @@ import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.dialog.CountryBottomSheetDialog
+import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
@@ -38,6 +39,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var minAmount: Int
     private var isMoreThanMax = false
     private var isLessThanMin = false
+    private var formattingWithOutDot = false
     private var currency: String = ""
         get() = binding.currency.text.toString()
 
@@ -52,6 +54,7 @@ class CurrencyInput @JvmOverloads constructor(
                 helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
                 maxAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0)
                 minAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0)
+                formattingWithOutDot = getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
             } finally {
                 recycle()
             }
@@ -95,7 +98,10 @@ class CurrencyInput @JvmOverloads constructor(
             binding.amount.editText?.setText(getDeFormatedStringAmount())
         } else {
             val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
-            binding.amount.editText?.setText(if (text.length >= 15) text else text.numberFormatting())
+            binding.amount.editText?.setText(
+                if (text.length >= 15) text else
+                    (if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting())
+            )
         }
     }
 
@@ -216,7 +222,7 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setAmountText(amount: String) {
         this.currency = currency
-        binding.amount.editText?.setText(amount.numberFormatting())
+        binding.amount.editText?.setText((if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()))
     }
 
     fun getFloatAmount(): Float {
