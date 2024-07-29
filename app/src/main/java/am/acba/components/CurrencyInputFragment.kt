@@ -13,8 +13,8 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {
-        amount.setCurrencyList(arrayListOf("AMD","USD","EUR"))
-        amount.getEditText()?.setOnFocusChangeListener { _, isFocus ->  }
+        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
+        amount.onFocusChangeListener { fosus-> }
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
@@ -22,7 +22,11 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.setCurrency("USD")
             amount.setAmountText("5555")
             amount.setHintText("5555")
-            amount.isValidAmount()
+//            amount.isValidAmount()
         }
+    }
+
+    fun onChangeText(isFocus: Boolean) {
+          isFocus.log("isEditTextCnhage")
     }
 }
