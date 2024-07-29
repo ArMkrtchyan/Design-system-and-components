@@ -2,13 +2,13 @@ package am.acba.component.currencyInput
 
 import am.acba.component.R
 import am.acba.component.databinding.CurrencyInputBinding
+import am.acba.component.dialog.CountryBottomSheetDialog
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
-import am.acba.component.dialog.CountryBottomSheetDialog
 import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
@@ -38,8 +38,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var helpText: String
     private var maxAmount: Int
     private var minAmount: Int
-    private var isMoreThanMax = false
-    private var isLessThanMin = false
+    private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
     private var currency: String = ""
         get() = binding.currency.text.toString()
@@ -66,33 +65,43 @@ class CurrencyInput @JvmOverloads constructor(
         setupBackgroundsByFocusChange()
     }
 
+    override fun setEnabled(isEnable: Boolean) {
+        binding.amount.isEnabled = isEnable
+        binding.currencyLayout.isEnabled = isEnable
+        binding.currency.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable))
+        binding.icArrow.imageTintList =
+            context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable)
+        binding.amount.defaultHintTextColor =
+            context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable)
+        binding.amount.editText?.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
+        binding.currencyFlag.alpha = if (isEnable) 1f else 0.4f
+        binding.helpText.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
+    }
+
     private fun setupFirstUi() {
         binding.helpText.isVisible = helpText.isNotEmpty()
         binding.helpText.text = helpText
         binding.amount.hint = hintText
-        binding.amount.hintTextColor = context.getColorStateListFromAttr(
-            if (!isLessThanMin && !isMoreThanMax) R.attr.contentPrimaryTonal1
-            else R.attr.contentDangerTonal1
-        )
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
     }
 
     private fun setupBackgroundsByFocusChange() {
         binding.amount.editText?.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
+            mAction?.invoke(isFocusable)
             amountTextFormatting(isFocusable)
             val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
                 setupBackgroundByFocusable()
             } else if (amountText.isEmpty()) {
+                isValidAmount = true
                 setValidState()
             } else {
-                isMoreThanMax()
-                isLessThanMin()
+                validateAmount()
             }
         }
     }
-
 
     private fun amountTextFormatting(isFocusable: Boolean) {
         if (isFocusable) {
@@ -106,34 +115,24 @@ class CurrencyInput @JvmOverloads constructor(
         }
     }
 
-    private fun isMoreThanMax() {
-        if (maxAmount != 0 && !isLessThanMin) {
-            isMoreThanMax = getFloatAmount() > maxAmount
-            if (isMoreThanMax) {
+    private fun validateAmount() {
+        when {
+            minAmount != 0 && getFloatAmount() < minAmount -> {
                 setErrorState()
-            } else {
+                isValidAmount = false
+            }
+
+            maxAmount != 0 && getFloatAmount() > maxAmount -> {
+                setErrorState()
+                isValidAmount = false
+            }
+
+            else -> {
+                isValidAmount = true
                 setValidState()
             }
         }
-
     }
-
-    fun isValidAmount(): Boolean {
-        return !isLessThanMin && !isMoreThanMax
-    }
-
-    private fun isLessThanMin() {
-        if (minAmount != 0 && !isMoreThanMax) {
-            isLessThanMin = getFloatAmount() < minAmount
-            if (isLessThanMin) {
-                setErrorState()
-            } else {
-                setValidState()
-            }
-        }
-
-    }
-
 
     private fun setupCurrenciesList() {
         currencyList = arrayListOf()
@@ -173,13 +172,12 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.helpText.text = helpText
-        isLessThanMin = false
-        isMoreThanMax = false
         binding.icError.isVisible = false
         binding.helpText.isVisible = helpText.isNotEmpty() == true
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.currencyLayout.background = ContextCompat.getDrawable(
-            context, if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
+            context, if (isFocusable) R.drawable.background_primary_input_right_border
+            else R.drawable.background_primary_input_right_corner
         )
         binding.amount.editText?.background = ContextCompat.getDrawable(
             context, if (isFocusable) R.drawable.background_primary_input_left_border
@@ -199,12 +197,11 @@ class CurrencyInput @JvmOverloads constructor(
 
     private fun setupBackgroundByFocusable() {
         binding.currencyLayout.background = ContextCompat.getDrawable(
-            context, if (!isLessThanMin && !isMoreThanMax) R.drawable.background_primary_input_right_border
-            else R.drawable.background_primary_input_error_right_border
+            context,
+            if (isValidAmount) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_error_right_border
         )
         binding.amount.editText?.background = ContextCompat.getDrawable(
-            context, if (!isLessThanMin && !isMoreThanMax) R.drawable.background_primary_input_left_border
-            else R.drawable.background_primary_input_error_left_border
+            context, if (isValidAmount) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_error_left_border
         )
     }
 
@@ -213,7 +210,11 @@ class CurrencyInput @JvmOverloads constructor(
     private fun selectCurrency(countryModel: CountryModel) {
         binding.currency.text = countryModel.name
         currency = countryModel.name ?: ""
-        Glide.with(context).asBitmap().load(countryModel.flagResId).apply(RequestOptions.circleCropTransform().override(22.dpToPx(), 22.dpToPx()))
+        Glide.with(context).asBitmap()
+            .load(countryModel.flagResId)
+            .apply(
+                RequestOptions.circleCropTransform()
+                    .override(22.dpToPx(), 22.dpToPx()))
             .into(binding.currencyFlag)
     }
 
@@ -237,22 +238,14 @@ class CurrencyInput @JvmOverloads constructor(
 
     }
 
-    fun getEditText(): EditText? {
-        return binding.amount.editText
+    fun onFocusChangeListener(action: ((Boolean) -> Unit)? = null) {
+        mAction = action
     }
 
-    override fun setEnabled(isEnable: Boolean) {
-        binding.amount.isEnabled = isEnable
-        binding.currencyLayout.isEnabled = isEnable
-        binding.currency.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable))
-        binding.icArrow.imageTintList =
-            context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable)
-        binding.amount.defaultHintTextColor =
-            context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable)
-        binding.amount.editText?.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
-        binding.currencyFlag.alpha = if (isEnable) 1f else 0.4f
-        binding.helpText.setTextColor(context.getColorStateListFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
-    }
+    private var mAction: ((Boolean) -> Unit?)? = null
+    fun isValidAmount(): Boolean = isValidAmount
+    fun getEditText(): EditText? = binding.amount.editText
+
 
     fun getFormatedStringAmount(): String {
         return binding.amount.editText?.text?.toString()?.trim() ?: ""
