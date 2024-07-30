@@ -71,7 +71,6 @@ class CurrencyInput @JvmOverloads constructor(
             rootView.getWindowVisibleDisplayFrame(rect)
             val screenHeight = rootView.height
             val keypadHeight = screenHeight - rect.bottom
-
             if (keypadHeight > screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
                 onKeyboardShown()
             } else {
@@ -242,13 +241,11 @@ class CurrencyInput @JvmOverloads constructor(
             .into(binding.currencyFlag)
     }
 
-    fun setCurrency(currency: String) {
-        currencyList.forEach { if (it.currency == currency) selectCurrency(it) }
-    }
 
     fun setAmountText(amount: String) {
         this.currency = currency
         binding.amount.editText?.setText((if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()))
+        validateAmount()
     }
 
     fun getFloatAmount(): Float {
@@ -298,6 +295,10 @@ class CurrencyInput @JvmOverloads constructor(
         helpText = text
         binding.helpText.isVisible = helpText.isNotEmpty()
         binding.helpText.text = helpText
+    }
+
+    fun setCurrency(currency: String) {
+        currencyList.forEach { if (it.currency == currency.uppercase()) selectCurrency(it) }
     }
 
     fun setCurrencyList(currencies: List<String>) {
