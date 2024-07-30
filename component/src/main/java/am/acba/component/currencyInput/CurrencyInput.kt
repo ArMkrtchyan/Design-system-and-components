@@ -14,6 +14,7 @@ import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
@@ -59,10 +60,32 @@ class CurrencyInput @JvmOverloads constructor(
                 recycle()
             }
         }
+        setHelpText(helpText)
+        setErrorText(errorText)
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
+        binding.rootConstraint.viewTreeObserver.addOnGlobalLayoutListener {
+            val rect = Rect()
+            rootView.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+
+            if (keypadHeight > screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
+                onKeyboardShown()
+            } else {
+                onKeyboardHidden()
+            }
+        }
+    }
+
+    private fun onKeyboardShown() {
+        binding.amount.editText?.requestFocus()
+    }
+
+    private fun onKeyboardHidden() {
+        binding.amount.editText?.clearFocus()
     }
 
     override fun setEnabled(isEnable: Boolean) {
@@ -214,7 +237,8 @@ class CurrencyInput @JvmOverloads constructor(
             .load(countryModel.flagResId)
             .apply(
                 RequestOptions.circleCropTransform()
-                    .override(22.dpToPx(), 22.dpToPx()))
+                    .override(22.dpToPx(), 22.dpToPx())
+            )
             .into(binding.currencyFlag)
     }
 
@@ -254,6 +278,26 @@ class CurrencyInput @JvmOverloads constructor(
     fun setHintText(hintText: String) {
         this.hintText = hintText
         binding.amount.hint = hintText
+    }
+
+    fun setMaxAmount(amount: Int) {
+        maxAmount = amount
+    }
+
+    fun setMinAmount(amount: Int) {
+        minAmount = amount
+    }
+
+    fun setErrorText(text: String) {
+        errorText = text
+        binding.helpText.isVisible = errorText.isNotEmpty()
+        binding.helpText.text = errorText
+    }
+
+    fun setHelpText(text: String) {
+        helpText = text
+        binding.helpText.isVisible = helpText.isNotEmpty()
+        binding.helpText.text = helpText
     }
 
     fun setCurrencyList(currencies: List<String>) {

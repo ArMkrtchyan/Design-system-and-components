@@ -15,6 +15,11 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
     override fun FragmentCurrencyInputBinding.initView() {
         amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
         amount.onFocusChangeListener { fosus-> }
+        amount.setHelpText("Amount")
+        amount.setErrorText("amount is not valid")
+        amount.setHintText("Fill the amount")
+        amount.setMaxAmount(10000)
+        amount.setMinAmount(100)
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
@@ -22,6 +27,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.setCurrency("USD")
             amount.setAmountText("5555")
             amount.setHintText("5555")
+
 //            amount.isValidAmount()
         }
     }
