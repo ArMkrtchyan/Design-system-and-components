@@ -71,16 +71,10 @@ class CurrencyInput @JvmOverloads constructor(
             rootView.getWindowVisibleDisplayFrame(rect)
             val screenHeight = rootView.height
             val keypadHeight = screenHeight - rect.bottom
-            if (keypadHeight > screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
-                onKeyboardShown()
-            } else {
+            if (keypadHeight < screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
                 onKeyboardHidden()
             }
         }
-    }
-
-    private fun onKeyboardShown() {
-        binding.amount.editText?.requestFocus()
     }
 
     private fun onKeyboardHidden() {
