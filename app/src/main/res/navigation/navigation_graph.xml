@@ -23,6 +23,9 @@
             android:id="@+id/action_mainFragment_to_currencyInputFragment"
             app:destination="@id/currencyInputFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_tabLayoutFragment"
+            app:destination="@id/tabLayoutFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_pinInputFragment"
             app:destination="@id/pinInputFragment" />
         <action
@@ -81,98 +84,103 @@
     <fragment
         android:id="@+id/alertsFragment"
         android:name="am.acba.components.AlertsFragment"
-        tools:layout="@layout/fragment_alerts"
-        android:label="AlertsFragment" />
+        android:label="AlertsFragment"
+        tools:layout="@layout/fragment_alerts" />
     <fragment
         android:id="@+id/badgesFragment"
         android:name="am.acba.components.BadgesFragment"
-        tools:layout="@layout/fragment_badges"
-        android:label="BadgesFragment" />
+        android:label="BadgesFragment"
+        tools:layout="@layout/fragment_badges" />
     <fragment
         android:id="@+id/bannersFragment"
         android:name="am.acba.components.BannersFragment"
-        tools:layout="@layout/fragment_banners"
-        android:label="BannersFragment" />
+        android:label="BannersFragment"
+        tools:layout="@layout/fragment_banners" />
     <fragment
         android:id="@+id/chipsFragment"
         android:name="am.acba.components.ChipsFragment"
-        tools:layout="@layout/fragment_chips"
-        android:label="ChipsFragment" />
+        android:label="ChipsFragment"
+        tools:layout="@layout/fragment_chips" />
     <fragment
         android:id="@+id/controlsFragment"
         android:name="am.acba.components.ControlsFragment"
-        tools:layout="@layout/fragment_controls"
-        android:label="ControlsFragment" />
+        android:label="ControlsFragment"
+        tools:layout="@layout/fragment_controls" />
     <fragment
         android:id="@+id/dialogsFragment"
         android:name="am.acba.components.DialogsFragment"
-        tools:layout="@layout/fragment_dialogs"
-        android:label="DialogsFragment" />
+        android:label="DialogsFragment"
+        tools:layout="@layout/fragment_dialogs" />
     <fragment
         android:id="@+id/dividerFragment"
         android:name="am.acba.components.DividerFragment"
-        tools:layout="@layout/fragment_divider"
-        android:label="DividerFragment" />
+        android:label="DividerFragment"
+        tools:layout="@layout/fragment_divider" />
     <fragment
         android:id="@+id/dropDownFragment"
         android:name="am.acba.components.DropDownFragment"
-        tools:layout="@layout/fragment_drop_down"
-        android:label="DropDownFragment" />
+        android:label="DropDownFragment"
+        tools:layout="@layout/fragment_drop_down" />
     <fragment
         android:id="@+id/exchangeFragment"
         android:name="am.acba.components.ExchangeFragment"
-        tools:layout="@layout/fragment_exchange"
-        android:label="ExchangeFragment" />
+        android:label="ExchangeFragment"
+        tools:layout="@layout/fragment_exchange" />
     <fragment
         android:id="@+id/inputsFragment"
         android:name="am.acba.components.InputsFragment"
-        tools:layout="@layout/fragment_inputs"
-        android:label="InputsFragment" />
+        android:label="InputsFragment"
+        tools:layout="@layout/fragment_inputs" />
     <fragment
         android:id="@+id/listItemFragment"
         android:name="am.acba.components.ListItemFragment"
-        tools:layout="@layout/fragment_list_item"
-        android:label="ListItemFragment" />
+        android:label="ListItemFragment"
+        tools:layout="@layout/fragment_list_item" />
     <fragment
         android:id="@+id/phoneNumberInputFragment"
         android:name="am.acba.components.PhoneNumberInputFragment"
-        tools:layout="@layout/fragment_phone_number_input"
-        android:label="PhoneNumberInputFragment" />
+        android:label="PhoneNumberInputFragment"
+        tools:layout="@layout/fragment_phone_number_input" />
     <fragment
         android:id="@+id/currencyInputFragment"
         android:name="am.acba.components.CurrencyInputFragment"
         android:label="CurrencyInputFragment"
         tools:layout="@layout/fragment_currency_input" />
     <fragment
+        android:id="@+id/tabLayoutFragment"
+        android:name="am.acba.components.TabLayoutFragment"
+        android:label="TabLayoutFragment"
+        tools:layout="@layout/fragment_tab_layout" />
+    <fragment
         android:id="@+id/pinInputFragment"
         android:name="am.acba.components.PinInputFragment"
-        tools:layout="@layout/fragment_pin_input"
-        android:label="PinInputFragment" />
+        android:label="PinInputFragment"
+        tools:layout="@layout/fragment_pin_input" />
     <fragment
         android:id="@+id/quickActionAndAvatarFragment"
         android:name="am.acba.components.QuickActionAndAvatarFragment"
-        tools:layout="@layout/fragment_quick_action_and_avatar"
-        android:label="QuickActionAndAvatarFragment" />
+        android:label="QuickActionAndAvatarFragment"
+        tools:layout="@layout/fragment_quick_action_and_avatar" />
     <fragment
         android:id="@+id/searchInputFragment"
-        tools:layout="@layout/fragment_search"
         android:name="am.acba.components.SearchInputFragment"
-        android:label="SearchInputFragment" />
+        android:label="SearchInputFragment"
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/toolbarFragment"
         android:name="am.acba.components.ToolbarFragment"
-        tools:layout="@layout/fragment_toolbar"
-        android:label="ToolbarFragment" />
+        android:label="ToolbarFragment"
+        tools:layout="@layout/fragment_toolbar" />
     <fragment
         android:id="@+id/tooltipFragment"
         android:name="am.acba.components.OnboardingTooltipFragment"
-        tools:layout="@layout/fragment_onboarding_tooltip"
-        android:label="TooltipFragment" />
- <fragment
+        android:label="TooltipFragment"
+        tools:layout="@layout/fragment_onboarding_tooltip" />
+    <fragment
         android:id="@+id/cardListingFragment"
         android:name="am.acba.components.CardListingsFragment"
-        tools:layout="@layout/fragment_card_listings"
-        android:label="TooltipFragment" />
+        android:label="TooltipFragment"
+        tools:layout="@layout/fragment_card_listings" />
 
 
 </navigation>

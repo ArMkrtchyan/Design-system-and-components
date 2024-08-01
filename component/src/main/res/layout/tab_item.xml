@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:paddingHorizontal="@dimen/spacing_12"
+    android:orientation="horizontal"
+    android:background="@android:color/transparent"
+    android:gravity="center">
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="tab"
+        android:layout_marginEnd="5dp"
+        android:textColor="@color/tab_item_selector"
+        android:textSize="@dimen/text_size_14" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/item_badge_text"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:visibility="gone"
+        android:background="@drawable/tab_item_selector"
+        android:textColor="@color/tab_item_count_selector"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_12" />
+</LinearLayout>
