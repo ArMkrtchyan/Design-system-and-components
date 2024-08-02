@@ -19,9 +19,12 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -66,6 +69,19 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
+        setupEditTextFocusActions()
+    }
+
+    private fun setupEditTextFocusActions() {
+        binding.amount.editText?.setOnEditorActionListener { textView, i, _ ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                val imm = getSystemService(context, InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(textView.windowToken, 0)
+                true
+            } else {
+                false
+            }
+        }
         binding.rootConstraint.viewTreeObserver.addOnGlobalLayoutListener {
             val rect = Rect()
             rootView.getWindowVisibleDisplayFrame(rect)
