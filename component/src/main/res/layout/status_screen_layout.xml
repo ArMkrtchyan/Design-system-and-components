@@ -53,8 +53,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0">
 
-                <am.acba.component.imageView.PrimaryImageView
-                    android:id="@+id/iv_centre"
+                <FrameLayout
+                    android:id="@+id/centre_media"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:visibility="gone"
@@ -74,7 +74,7 @@
                     android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/iv_centre"
+                    app:layout_constraintTop_toBottomOf="@id/centre_media"
                     tools:text="AMD Խնայողական հաշիվը հաջողությամբ բացված է "
                     tools:visibility="visible" />
 
@@ -124,6 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        tools:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent">
 
 

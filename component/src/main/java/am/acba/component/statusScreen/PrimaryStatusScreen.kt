@@ -5,7 +5,9 @@ import am.acba.component.R
 import am.acba.component.databinding.StatusScreenLayoutBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
-import am.acba.component.statusScreen.PrimaryStatusScreen.ImageTypes.Companion.findImageTypeByOrdinal
+import am.acba.component.imageView.PrimaryImageView
+import am.acba.component.statusScreen.PrimaryStatusScreen.MediaTypes.Companion.findMediaTypeByOrdinal
+import android.animation.Animator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -17,6 +19,7 @@ import android.widget.FrameLayout
 import android.widget.ScrollView
 import androidx.annotation.RawRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.airbnb.lottie.LottieAnimationView
@@ -35,7 +38,12 @@ class PrimaryStatusScreen : FrameLayout {
         )
     }
 
+    var onCentreAnimationEnd: ((LottieAnimationView, Animator) -> Unit) = { view, _ ->
+        onCentreAnimationEnd(view)
+    }
+
     private var clickInterval = 1000
+    private var mediaType: MediaTypes = MediaTypes.MEDIA_IMAGE
 
     var showCloseIcon = false
         set(value) {
@@ -44,11 +52,11 @@ class PrimaryStatusScreen : FrameLayout {
             setCloseIconVisibility()
         }
 
-    var showCentreImage = false
+    var showCentreMedia = false
         set(value) {
             field = value
 
-            setCentreImageVisibility()
+            setCentreMediaVisibility()
         }
 
     var showTitle = false
@@ -99,7 +107,7 @@ class PrimaryStatusScreen : FrameLayout {
                     R.styleable.PrimaryStatusScreen_showStatusScreenCloseIcon,
                     false
                 )
-                showCentreImage = getBoolean(
+                showCentreMedia = getBoolean(
                     R.styleable.PrimaryStatusScreen_showStatusScreenCentreImage,
                     false
                 )
@@ -120,10 +128,10 @@ class PrimaryStatusScreen : FrameLayout {
                     false
                 )
 
-                val centreImageType = getInt(
-                    R.styleable.PrimaryStatusScreen_statusScreenCentreImageType,
+                val mediaType = getInt(
+                    R.styleable.PrimaryStatusScreen_statusScreenMediaType,
                     0
-                ).findImageTypeByOrdinal() ?: ImageTypes.ICON
+                ).findMediaTypeByOrdinal()
 
                 val centreImage = getDrawable(
                     R.styleable.PrimaryStatusScreen_statusScreenCentreImage
@@ -133,6 +141,9 @@ class PrimaryStatusScreen : FrameLayout {
                 )
                 val centreImageBackgroundTint = getColorStateList(
                     R.styleable.PrimaryStatusScreen_statusScreenCentreImageBackgroundTint
+                )
+                val centreMediaAnimationFileName = getString(
+                    R.styleable.PrimaryStatusScreen_statusScreenCentreMediaAnimationFileName
                 )
                 val title = getString(R.styleable.PrimaryStatusScreen_statusScreenTitleText)
                 val body = getString(R.styleable.PrimaryStatusScreen_statusScreenBodyText)
@@ -148,10 +159,13 @@ class PrimaryStatusScreen : FrameLayout {
                     R.styleable.PrimaryStatusScreen_statusScreenAnimationFileName
                 )
 
-                setCentreImageType(centreImageType)
-                setCentreImage(centreImage)
-                setCentreImageBackgroundColor(centreImageBackgroundColor)
-                setCentreImageBackgroundTint(centreImageBackgroundTint)
+                mediaType?.let {
+                    setCentreMediaType(mediaType)
+                    setCentreImage(centreImage)
+                    setCentreImageBackgroundColor(centreImageBackgroundColor)
+                    setCentreImageBackgroundTint(centreImageBackgroundTint)
+                    setCentreMediaAnimation(centreMediaAnimationFileName)
+                }
                 setTitle(title)
                 setBody(body)
 
@@ -195,8 +209,36 @@ class PrimaryStatusScreen : FrameLayout {
         binding.ivClose.isVisible = showCloseIcon
     }
 
-    private fun setCentreImageVisibility() {
-        binding.ivCentre.isVisible = showCentreImage
+    private fun setCentreMediaVisibility() {
+        binding.centreMedia.isVisible = showCentreMedia
+
+        addMedia(mediaType)
+    }
+
+    private fun addMedia(type: MediaTypes?) {
+        if (type == MediaTypes.MEDIA_ANIMATION) {
+            addCentreAnimation()
+        } else {
+            addCentreImage()
+        }
+    }
+
+    private fun addCentreImage() {
+        binding.centreMedia.apply {
+            removeAllViews()
+            if (showCentreMedia) {
+                addView(PrimaryImageView(context))
+            }
+        }
+    }
+
+    private fun addCentreAnimation() {
+        binding.centreMedia.apply {
+            removeAllViews()
+            if (showCentreMedia) {
+                addView(LottieAnimationView(context))
+            }
+        }
     }
 
     private fun setTitleVisibility() {
@@ -215,24 +257,67 @@ class PrimaryStatusScreen : FrameLayout {
         binding.btnGhost.isVisible = showGhostButton
     }
 
-    fun setCentreImageType(type: ImageTypes?) {
-        val size = type?.size?.dpToPx() ?: ImageTypes.ICON.size
-        binding.ivCentre.layoutParams.apply {
+    fun setCentreMediaType(type: MediaTypes?) {
+        mediaType = type ?: MediaTypes.ICON
+        showCentreMedia = true
+
+        val size = type?.size?.dpToPx() ?: MediaTypes.ICON.size
+        binding.centreMedia.layoutParams.apply {
             width = size
             height = size
         }
     }
 
     fun setCentreImage(icon: Drawable?) {
-        binding.ivCentre.background = icon
+        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
+            binding.centreMedia.background = icon
+        }
     }
 
     fun setCentreImageBackgroundColor(colorStateList: ColorStateList?) {
-        binding.ivCentre.backgroundTintList = colorStateList
+        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
+            binding.centreMedia.backgroundTintList = colorStateList
+        }
     }
 
     fun setCentreImageBackgroundTint(colorStateList: ColorStateList?) {
-        binding.ivCentre.imageTintList = colorStateList
+        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
+            (binding.centreMedia.children.first() as? PrimaryImageView)?.imageTintList =
+                colorStateList
+        }
+    }
+
+    fun setCentreMediaAnimation(animation: String?) {
+        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
+            (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
+                addAnimationListener(animationView)
+                animationView.playLottieAnimation {
+                    animationView.setAnimation(animation)
+                }
+            }
+        }
+    }
+
+    fun setCentreMediaAnimation(animation: Animation?) {
+        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
+            (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
+                addAnimationListener(animationView)
+                animationView.playLottieAnimation {
+                    animationView.animation = animation
+                }
+            }
+        }
+    }
+
+    fun setCentreMediaAnimation(@RawRes res: Int?) {
+        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
+            (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
+                addAnimationListener(animationView)
+                animationView.playLottieAnimation {
+                    animationView.animation = animation
+                }
+            }
+        }
     }
 
     fun setTitle(text: String?) {
@@ -367,20 +452,39 @@ class PrimaryStatusScreen : FrameLayout {
         }
     }
 
+    private fun addAnimationListener(animationView: LottieAnimationView) {
+        val listener = object : Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator) = Unit
+            override fun onAnimationRepeat(p0: Animator) = Unit
+            override fun onAnimationCancel(p0: Animator) = Unit
+
+            override fun onAnimationEnd(animator: Animator) {
+                onCentreAnimationEnd.invoke(animationView, animator)
+            }
+        }
+        animationView.addAnimatorListener(listener)
+    }
+
+    private fun onCentreAnimationEnd(animationView: LottieAnimationView) {
+        animationView.frame = animationView.maxFrame.toInt()
+        animationView.pauseAnimation()
+    }
+
     private fun LottieAnimationView.playLottieAnimation(setAnimation: () -> Unit) {
         CoroutineScope(Dispatchers.Main).launch {
-            delay(500)
+            delay(300)
             setAnimation.invoke()
             playAnimation()
         }
     }
 
-    enum class ImageTypes(var size: Int) {
+    enum class MediaTypes(var size: Int) {
         ICON(40),
-        MEDIA(130);
+        MEDIA_IMAGE(130),
+        MEDIA_ANIMATION(130);
 
         companion object {
-            fun Int.findImageTypeByOrdinal() = entries.find { it.ordinal == this }
+            fun Int.findMediaTypeByOrdinal() = entries.find { it.ordinal == this }
         }
     }
 }

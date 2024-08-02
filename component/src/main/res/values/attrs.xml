@@ -421,14 +421,16 @@
         <attr name="showStatusScreenPrimaryButton" format="boolean" />
         <attr name="showStatusScreenGhostButton" format="boolean" />
 
-        <attr name="statusScreenCentreImageType" format="enum">
+        <attr name="statusScreenMediaType" format="enum">
             <enum name="Icon" value="0" />
-            <enum name="Media" value="1" />
+            <enum name="Media_Image" value="1" />
+            <enum name="Media_Animation" value="2" />
         </attr>
 
         <attr name="statusScreenCentreImage" format="reference" />
         <attr name="statusScreenCentreImageBackgroundColor" format="color" />
         <attr name="statusScreenCentreImageBackgroundTint" format="color" />
+        <attr name="statusScreenCentreMediaAnimationFileName" format="string" />
         <attr name="statusScreenTitleText" format="string" />
         <attr name="statusScreenBodyText" format="string" />
 
