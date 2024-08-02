@@ -189,7 +189,7 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.helpText.text = helpText
         binding.icError.isVisible = false
-        binding.helpText.isVisible = helpText.isNotEmpty() == true
+        binding.helpText.isVisible = helpText.isNotEmpty()
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.currencyLayout.background = ContextCompat.getDrawable(
             context, if (isFocusable) R.drawable.background_primary_input_right_border
@@ -205,6 +205,7 @@ class CurrencyInput @JvmOverloads constructor(
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+        binding.helpText.isVisible = errorText.isNotEmpty()
         binding.helpText.text = errorText
         binding.icError.isVisible = true
         binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
@@ -281,7 +282,6 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setErrorText(text: String) {
         errorText = text
-        binding.helpText.isVisible = errorText.isNotEmpty()
         binding.helpText.text = errorText
     }
 
