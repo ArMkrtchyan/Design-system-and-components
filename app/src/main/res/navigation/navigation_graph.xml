@@ -67,14 +67,15 @@
         <action
             android:id="@+id/action_mainFragment_to_toolbarFragment"
             app:destination="@id/toolbarFragment" />
-
         <action
             android:id="@+id/action_mainFragment_to_tooltipFragment"
             app:destination="@id/tooltipFragment" />
-
         <action
             android:id="@+id/action_mainFragment_to_cardListingFragment"
             app:destination="@id/cardListingFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_statusScreenFragment"
+            app:destination="@id/statusScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -179,8 +180,12 @@
     <fragment
         android:id="@+id/cardListingFragment"
         android:name="am.acba.components.CardListingsFragment"
-        android:label="TooltipFragment"
-        tools:layout="@layout/fragment_card_listings" />
-
+        tools:layout="@layout/fragment_card_listings"
+        android:label="TooltipFragment" />
+    <fragment
+        android:id="@+id/statusScreenFragment"
+        android:name="am.acba.components.StatusScreenFragment"
+        android:label="Status Screen"
+        tools:layout="@layout/fragment_status_screen" />
 
 </navigation>

@@ -19,9 +19,12 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -66,21 +69,28 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
+        setupEditTextFocusActions()
+    }
+
+    private fun setupEditTextFocusActions() {
+        binding.amount.editText?.setOnEditorActionListener { textView, i, _ ->
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                val imm = getSystemService(context, InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(textView.windowToken, 0)
+                true
+            } else {
+                false
+            }
+        }
         binding.rootConstraint.viewTreeObserver.addOnGlobalLayoutListener {
             val rect = Rect()
             rootView.getWindowVisibleDisplayFrame(rect)
             val screenHeight = rootView.height
             val keypadHeight = screenHeight - rect.bottom
-            if (keypadHeight > screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
-                onKeyboardShown()
-            } else {
+            if (keypadHeight < screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
                 onKeyboardHidden()
             }
         }
-    }
-
-    private fun onKeyboardShown() {
-        binding.amount.editText?.requestFocus()
     }
 
     private fun onKeyboardHidden() {
@@ -195,7 +205,7 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.helpText.text = helpText
         binding.icError.isVisible = false
-        binding.helpText.isVisible = helpText.isNotEmpty() == true
+        binding.helpText.isVisible = helpText.isNotEmpty()
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.currencyLayout.background = ContextCompat.getDrawable(
             context, if (isFocusable) R.drawable.background_primary_input_right_border
@@ -211,6 +221,7 @@ class CurrencyInput @JvmOverloads constructor(
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+        binding.helpText.isVisible = errorText.isNotEmpty()
         binding.helpText.text = errorText
         binding.icError.isVisible = true
         binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
@@ -287,7 +298,6 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setErrorText(text: String) {
         errorText = text
-        binding.helpText.isVisible = errorText.isNotEmpty()
         binding.helpText.text = errorText
     }
 

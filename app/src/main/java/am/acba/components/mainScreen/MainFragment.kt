@@ -46,6 +46,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.TOOLBAR -> findNavController().navigate(R.id.action_mainFragment_to_toolbarFragment)
             ComponentTypeEnum.ONBOARDING_TOOTLTIPS -> findNavController().navigate(R.id.action_mainFragment_to_tooltipFragment)
             ComponentTypeEnum.CARD_LISTING -> findNavController().navigate(R.id.action_mainFragment_to_cardListingFragment)
+            ComponentTypeEnum.STATUS_SCREEN -> findNavController().navigate(R.id.action_mainFragment_to_statusScreenFragment)
         }
     }
 
@@ -71,5 +72,6 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.TOOLBAR, ComponentTypeEnum.TOOLBAR.componentName),
         Component(ComponentTypeEnum.ONBOARDING_TOOTLTIPS, ComponentTypeEnum.ONBOARDING_TOOTLTIPS.componentName),
         Component(ComponentTypeEnum.CARD_LISTING, ComponentTypeEnum.CARD_LISTING.componentName),
+        Component(ComponentTypeEnum.STATUS_SCREEN, ComponentTypeEnum.STATUS_SCREEN.componentName),
     )
 }
