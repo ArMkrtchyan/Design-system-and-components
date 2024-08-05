@@ -370,6 +370,7 @@
 
     <declare-styleable name="PrimaryCollapsingToolbar">
         <attr name="toolbarTitle" format="string" />
+        <attr name="toolbarTitleMaxLines" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryAlert">
