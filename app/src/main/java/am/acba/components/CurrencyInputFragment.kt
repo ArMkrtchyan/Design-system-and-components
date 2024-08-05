@@ -27,12 +27,6 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.setCurrency("USD")
             amount.setAmountText("5555")
             amount.setHintText("5555")
-
-//            amount.isValidAmount()
         }
-    }
-
-    fun onChangeText(isFocus: Boolean) {
-          isFocus.log("isEditTextCnhage")
     }
 }

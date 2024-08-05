@@ -23,6 +23,9 @@
             android:id="@+id/action_mainFragment_to_currencyInputFragment"
             app:destination="@id/currencyInputFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_tabLayoutFragment"
+            app:destination="@id/tabLayoutFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_pinInputFragment"
             app:destination="@id/pinInputFragment" />
         <action
@@ -145,6 +148,11 @@
         android:label="CurrencyInputFragment"
         tools:layout="@layout/fragment_currency_input" />
     <fragment
+        android:id="@+id/tabLayoutFragment"
+        android:name="am.acba.components.TabLayoutFragment"
+        android:label="TabLayoutFragment"
+        tools:layout="@layout/fragment_tab_layout" />
+    <fragment
         android:id="@+id/pinInputFragment"
         android:name="am.acba.components.PinInputFragment"
         android:label="PinInputFragment"
@@ -172,11 +180,12 @@
     <fragment
         android:id="@+id/cardListingFragment"
         android:name="am.acba.components.CardListingsFragment"
-        android:label="TooltipFragment"
-        tools:layout="@layout/fragment_card_listings" />
+        tools:layout="@layout/fragment_card_listings"
+        android:label="TooltipFragment" />
     <fragment
         android:id="@+id/statusScreenFragment"
         android:name="am.acba.components.StatusScreenFragment"
         android:label="Status Screen"
         tools:layout="@layout/fragment_status_screen" />
+
 </navigation>

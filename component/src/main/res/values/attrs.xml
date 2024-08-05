@@ -205,6 +205,9 @@
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="PrimaryTabLayout">
+
+    </declare-styleable>
     <declare-styleable name="SearchInput">
         <attr name="withBackIcon" format="boolean" />
         <attr name="android:hint" />
