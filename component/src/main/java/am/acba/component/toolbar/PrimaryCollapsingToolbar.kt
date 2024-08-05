@@ -3,6 +3,7 @@ package am.acba.component.toolbar
 import am.acba.component.R
 import am.acba.component.databinding.CollapsingToolbarLayoutBinding
 import am.acba.component.extensions.inflater
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MenuItem
@@ -27,11 +28,13 @@ class PrimaryCollapsingToolbar : AppBarLayout {
     }
 
 
+    @SuppressLint("RestrictedApi")
     private fun init(attrs: AttributeSet, defStyleAttr: Int) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryCollapsingToolbar, defStyleAttr, R.style.CollapsingToolbarStyle).apply {
             toolbar = binding.toolbar
             background = null
             binding.collapsingToolbar.title = getString(R.styleable.PrimaryCollapsingToolbar_toolbarTitle)
+            binding.collapsingToolbar.maxLines = getInt(R.styleable.PrimaryCollapsingToolbar_toolbarTitleMaxLines, 30)
             addView(binding.root)
             recycle()
             invalidate()

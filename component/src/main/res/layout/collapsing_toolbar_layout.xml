@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.CollapsingToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/collapsing_toolbar"
     android:layout_width="match_parent"
     android:layout_height="130dp"
@@ -10,10 +11,12 @@
     app:expandedTitleGravity="bottom"
     app:expandedTitleMarginEnd="16dp"
     app:expandedTitleMarginStart="16dp"
-    app:layout_collapseMode="none"
     app:expandedTitleTextAppearance="@style/Heading5.Bold"
     app:expandedTitleTextColor="?attr/contentPrimary"
+    app:layout_collapseMode="none"
     app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+    tools:maxLines="3"
+    app:title="dsjcndjskcn dsjcdscn kjdscn jsdkcn  jnckdsc "
     app:titleCollapseMode="scale">
 
     <am.acba.component.toolbar.PrimaryToolbar
