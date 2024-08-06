@@ -205,6 +205,26 @@
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="AccordionView">
+        <attr name="accordionStartIcon" format="reference" />
+        <attr name="accordionStartIconBackground" format="reference" />
+        <attr name="accordionStartIconTint" format="color" />
+        <attr name="accordionStartIconPadding" format="dimension" />
+        <attr name="accordionEndIcon" format="reference" />
+        <attr name="accordionStartText" format="string" />
+        <attr name="accordionStartTextColor" format="color" />
+        <attr name="accordionEndText" format="string" />
+        <attr name="accordionEndTextColor" format="color" />
+        <attr name="accordionCurrencyText" format="string" />
+        <attr name="accordionCurrencyTextColor" format="color" />
+        <attr name="accordionIsExpanded" format="boolean" />
+        <attr name="startIconSize" format="enum">
+            <enum name="Wrap" value="0" />
+            <enum name="Small" value="1" />
+            <enum name="Medium" value="2" />
+            <enum name="Large" value="3" />
+        </attr>
+    </declare-styleable>
     <declare-styleable name="PrimaryTabLayout">
 
     </declare-styleable>
