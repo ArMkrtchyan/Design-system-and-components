@@ -65,10 +65,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="6dp"
+        android:paddingEnd="@dimen/spacing_32"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/root_linear">
@@ -84,14 +85,13 @@
 
         <am.acba.component.textView.PrimaryTextView
             android:id="@+id/help_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="6dp"
             android:fontFamily="@font/regular"
-            android:textColor="?attr/contentPrimaryTonal1"
             android:textSize="@dimen/text_size_12"
-            tools:text="Amount"
+            tools:text="AmounzXZxxzZXtAmounzXZxxzZXtAmounzXZxxzZXtAmounzXZxxzZXtAmounzXZxxzZXtAmounzXZxxzZXt"
             tools:visibility="visible" />
     </LinearLayout>
 

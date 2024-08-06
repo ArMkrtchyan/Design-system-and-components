@@ -298,7 +298,6 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setErrorText(text: String) {
         errorText = text
-        binding.helpText.text = errorText
     }
 
     fun setHelpText(text: String) {
