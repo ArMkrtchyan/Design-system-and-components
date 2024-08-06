@@ -113,6 +113,7 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setupFirstUi() {
         binding.helpText.isVisible = helpText.isNotEmpty()
         binding.helpText.text = helpText
+        binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hint = hintText
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
