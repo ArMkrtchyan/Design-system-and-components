@@ -16,7 +16,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
         amount.onFocusChangeListener { fosus-> }
         amount.setHelpText("Amount")
-        amount.setErrorText("amount is not valid")
+        amount.setErrorText("amount is not valid amount is not valid amount is not valid")
         amount.setHintText("Fill the amount")
         amount.setMaxAmount(10000)
         amount.setMinAmount(100)
