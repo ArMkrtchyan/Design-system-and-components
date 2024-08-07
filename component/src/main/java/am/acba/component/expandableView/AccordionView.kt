@@ -64,12 +64,12 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             }
             if (isExpandable) setOnClickListener { expandView() }
         }
-        expandableViewValidationException()
         setupUi()
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        expandableViewValidationException()
         if (childCount > 1) {
             for (i in 1 until childCount) {
                 children.elementAt(1).isVisible = isExpanded
@@ -94,9 +94,9 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     private fun expandableViewValidationException() {
         if (childCount > 2) {
-            throw IllegalStateException("The child can't be more than one element")
+            throw IllegalStateException("Accordion View child can't be more than one element")
         } else if (childCount > 1 && children.elementAt(1) !is ViewGroup) {
-            throw IllegalStateException("The child is required be ViewGroup")
+            throw IllegalStateException("Accordion View child must be ViewGroup")
         }
     }
 
