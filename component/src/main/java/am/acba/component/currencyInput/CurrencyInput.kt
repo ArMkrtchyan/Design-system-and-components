@@ -3,9 +3,11 @@ package am.acba.component.currencyInput
 import am.acba.component.R
 import am.acba.component.databinding.CurrencyInputBinding
 import am.acba.component.dialog.CountryBottomSheetDialog
+import am.acba.component.extensions.addKeyboardVisibilityListener
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.extensions.hideSoftInput
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
@@ -69,28 +71,8 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
-        setupEditTextFocusActions()
-    }
-
-    private fun setupEditTextFocusActions() {
-        binding.amount.editText?.setOnEditorActionListener { textView, i, _ ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                val imm = getSystemService(context, InputMethodManager::class.java)
-                imm?.hideSoftInputFromWindow(textView.windowToken, 0)
-                true
-            } else {
-                false
-            }
-        }
-        binding.rootConstraint.viewTreeObserver.addOnGlobalLayoutListener {
-            val rect = Rect()
-            rootView.getWindowVisibleDisplayFrame(rect)
-            val screenHeight = rootView.height
-            val keypadHeight = screenHeight - rect.bottom
-            if (keypadHeight < screenHeight * 0.15) { // Assuming the keyboard takes more than 15% of the screen height
-                onKeyboardHidden()
-            }
-        }
+        binding.amount.editText?.hideSoftInput()
+        binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
     }
 
     private fun onKeyboardHidden() {

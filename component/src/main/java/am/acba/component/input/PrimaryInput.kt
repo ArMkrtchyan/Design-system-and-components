@@ -1,8 +1,10 @@
 package am.acba.component.input
 
 import am.acba.component.R
+import am.acba.component.extensions.addKeyboardVisibilityListener
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.extensions.hideSoftInput
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.InputFilter
@@ -58,6 +60,8 @@ open class PrimaryInput : TextInputLayout {
                 endIcon.setImageResource(R.drawable.ic_down)
                 endIcon.imageTintList = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
             }
+            editText?.hideSoftInput()
+            editText?.let { rootView.addKeyboardVisibilityListener(it) }
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             suffixTextView.translationY = -8.dpToPx().toFloat()
