@@ -53,7 +53,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:paddingTop="@dimen/spacing_16">
 
                     <am.acba.component.textView.PrimaryTextView
                         android:id="@+id/confirmation_date_title"

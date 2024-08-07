@@ -4,18 +4,17 @@ import am.acba.component.R
 import am.acba.component.databinding.AccordionViewBinding
 import am.acba.component.expandableView.AccordionView.StartIconSize.Companion.findSizeByOrdinal
 import am.acba.component.extensions.animateRotation
+import am.acba.component.extensions.collapseHeight
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.expandHeight
 import am.acba.component.extensions.inflater
-import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import androidx.core.app.FrameMetricsAggregator
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -78,20 +77,16 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     private fun expandView() {
         if (childCount > 1) {
-            if (children.elementAt(1).isVisible) {
-//                for (i in 1 until childCount) {
-                    children.elementAt(1).isVisible = false
-                    children.elementAt(1).collapseHeight()
-                    isExpanded = false
-//                }
+            val child = children.elementAt(1)
+            if (isExpanded) {
+                child.collapseHeight(200)
+                isExpanded = false
             } else {
-//                for (i in 1 until childCount) {
-                    isExpanded = true
-                    children.elementAt(1).isVisible = true
-                    children.elementAt(1).expandHeight()
-//                }
+                isExpanded = true
+                child.isVisible = true
+                child.expandHeight(200)
             }
-            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F)
+            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F, duration = 200)
         }
     }
 
@@ -195,30 +190,6 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         currencyText = text
         binding.currencyText.isVisible = text.isNotEmpty()
         binding.currencyText.text = text
-    }
-    fun View.expandHeight() {
-        this.measure(MeasureSpec.makeMeasureSpec(this.rootView.width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(this.rootView.height, MeasureSpec.AT_MOST))
-        val targetHeight = this.measuredHeight
-
-        val heightAnimator = ValueAnimator.ofInt(0, targetHeight)
-        heightAnimator.addUpdateListener { animation ->
-            this.layoutParams.height = animation.animatedValue as Int
-            this.requestLayout()
-        }
-        heightAnimator.duration = FrameMetricsAggregator.ANIMATION_DURATION.toLong()
-        heightAnimator.start()
-    }
-
-    fun View.collapseHeight() {
-        val initialHeight = this.measuredHeight
-        val heightAnimator = ValueAnimator.ofInt(0, initialHeight)
-        heightAnimator.addUpdateListener { animation ->
-            val animatedValue = animation.animatedValue as Int
-            this.layoutParams.height = initialHeight - animatedValue
-            this.requestLayout()
-        }
-        heightAnimator.duration = FrameMetricsAggregator.ANIMATION_DURATION.toLong()
-        heightAnimator.start()
     }
 
 }
