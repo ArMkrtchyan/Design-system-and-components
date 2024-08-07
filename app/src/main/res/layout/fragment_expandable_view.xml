@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorOnBackground"
+    android:orientation="vertical"
+    tools:context=".ButtonsFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Phone number input" />
+
+    <am.acba.component.textView.PrimaryTextView
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Expandable View allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <am.acba.component.expandableView.AccordionView
+                android:id="@+id/accordion_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:accordionCurrencyText="AMD"
+                app:accordionEndIcon="@drawable/ic_down"
+                app:accordionEndText="400,000,000.00"
+                app:accordionEndTextColor="?attr/contentBrand"
+                app:accordionIsExpanded="false"
+                app:startIconSize="Large"
+                app:accordionStartIcon="@drawable/ic_income"
+                app:accordionStartIconBackground="@drawable/icon_background_corenr"
+                app:accordionStartIconPadding="@dimen/spacing_4"
+                app:accordionStartIconTint="?attr/contentBrand"
+                app:accordionStartText="SAS 10000000">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/spacing_16">
+
+                    <am.acba.component.textView.PrimaryTextView
+                        android:id="@+id/confirmation_date_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="Հաշվով ձևակերպման ամսաթիվ"
+                        android:textColor="?attr/contentPrimaryTonal1"
+                        android:textSize="@dimen/text_size_12"
+                        app:layout_constraintEnd_toStartOf="@+id/date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <am.acba.component.textView.PrimaryTextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/regular"
+                        android:text="15/05/2024"
+                        android:textColor="?attr/contentPrimaryTonal1"
+                        android:textSize="@dimen/text_size_12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <am.acba.component.textView.PrimaryTextView
+                        android:id="@+id/order_type_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_8"
+                        android:fontFamily="@font/regular"
+                        android:text="Վճարում (SAS 10)"
+                        android:textColor="?attr/contentPrimaryTonal1"
+                        android:textSize="@dimen/text_size_12"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/confirmation_date_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </am.acba.component.expandableView.AccordionView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

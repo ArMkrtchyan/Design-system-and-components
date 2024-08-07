@@ -1,0 +1,12 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="true" android:state_focused="false">
+        <shape android:shape="rectangle">
+            <corners android:topLeftRadius="@dimen/radius_12"
+                android:topRightRadius="@dimen/spacing_12"
+                android:bottomRightRadius="@dimen/spacing_12"
+                android:bottomLeftRadius="@dimen/radius_12" />
+            <solid android:color="?attr/backgroundTonal1" />
+        </shape>
+    </item>
+
+</selector>
