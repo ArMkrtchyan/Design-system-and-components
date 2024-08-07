@@ -42,14 +42,14 @@
                 app:accordionEndIcon="@drawable/ic_down"
                 app:accordionEndText="400,000,000.00"
                 app:accordionEndTextColor="?attr/contentBrand"
-                app:accordionIsExpanded="false"
                 app:accordionIsExpandable="true"
-                app:startIconSize="Large"
+                app:accordionIsExpanded="false"
                 app:accordionStartIcon="@drawable/ic_income"
                 app:accordionStartIconBackground="@drawable/icon_background_corenr"
                 app:accordionStartIconPadding="@dimen/spacing_4"
                 app:accordionStartIconTint="?attr/contentBrand"
-                app:accordionStartText="SAS 10000000">
+                app:accordionStartText="SAS 10000000"
+                app:startIconSize="Large">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
