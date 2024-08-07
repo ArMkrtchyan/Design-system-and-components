@@ -35,6 +35,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var currencyText: String
     private var currencyTextColor: Int = 0
     private var isExpanded = false
+    private var isExpandable = true
 
     init {
         addView(binding.root)
@@ -55,12 +56,13 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
                 currencyText = getString(R.styleable.AccordionView_accordionCurrencyText) ?: ""
                 currencyTextColor = getColor(R.styleable.AccordionView_accordionCurrencyTextColor, 0)
                 isExpanded = getBoolean(R.styleable.AccordionView_accordionIsExpanded, false)
+                isExpandable = getBoolean(R.styleable.AccordionView_accordionIsExpandable, true)
                 val iconSizeEnum = getInt(R.styleable.AccordionView_startIconSize, 0).findSizeByOrdinal() ?: StartIconSize.WRAP
                 setStartStartIconType(iconSizeEnum)
             } finally {
                 recycle()
             }
-            setOnClickListener { expandView() }
+            if (isExpandable) setOnClickListener { expandView() }
         }
         expandableViewValidationException()
         setupUi()
