@@ -43,6 +43,7 @@
                 app:accordionEndText="400,000,000.00"
                 app:accordionEndTextColor="?attr/contentBrand"
                 app:accordionIsExpanded="false"
+                app:accordionIsExpandable="true"
                 app:startIconSize="Large"
                 app:accordionStartIcon="@drawable/ic_income"
                 app:accordionStartIconBackground="@drawable/icon_background_corenr"

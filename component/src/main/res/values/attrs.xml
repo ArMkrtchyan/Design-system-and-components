@@ -218,6 +218,7 @@
         <attr name="accordionCurrencyText" format="string" />
         <attr name="accordionCurrencyTextColor" format="color" />
         <attr name="accordionIsExpanded" format="boolean" />
+        <attr name="accordionIsExpandable" format="boolean" />
         <attr name="startIconSize" format="enum">
             <enum name="Wrap" value="0" />
             <enum name="Small" value="1" />
