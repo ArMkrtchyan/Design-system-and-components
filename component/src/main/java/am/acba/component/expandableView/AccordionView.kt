@@ -40,10 +40,9 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     init {
         addView(binding.root)
         orientation = VERTICAL
-        setPadding(16.dpToPx())
-        background = ContextCompat.getDrawable(context, R.drawable.background_corner)
         context.obtainStyledAttributes(attrs, R.styleable.AccordionView).apply {
             try {
+                background = getDrawable(R.styleable.AccordionView_accordionViewBackground)
                 startIcon = getDrawable(R.styleable.AccordionView_accordionStartIcon)
                 startIconBackground = getDrawable(R.styleable.AccordionView_accordionStartIconBackground)
                 startIconTint = getColorStateList(R.styleable.AccordionView_accordionStartIconTint)
@@ -62,6 +61,8 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             } finally {
                 recycle()
             }
+
+            if (background != null) setPadding(16.dpToPx()) else setPadding(0, 16.dpToPx(), 0, 16.dpToPx())
             if (isExpandable) setOnClickListener { expandView() }
         }
         setupUi()

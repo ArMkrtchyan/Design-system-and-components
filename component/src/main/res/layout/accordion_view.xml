@@ -17,34 +17,35 @@
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/startText"
+        style="@style/Small.Regular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_8"
-        style="@style/Small.Regular"
-        android:textColor="?attr/contentPrimaryTonal1"
+        android:lines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:paddingEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/startIcon"
         app:layout_constraintEnd_toStartOf="@id/endText"
+        app:layout_constraintStart_toEndOf="@id/startIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/endText"
+        style="@style/Body2.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_2"
-        style="@style/Body2.Bold"
-        android:textColor="?attr/contentBrand"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/currencyText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/currencyText"
+        style="@style/Body2.Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_14"
-        style="@style/Body2.Regular"
-        android:textColor="?attr/contentPrimaryTonal1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/endIcon"
         app:layout_constraintTop_toTopOf="parent" />
