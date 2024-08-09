@@ -312,21 +312,17 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setCurrencyList(currencies: List<String>) {
-        val currencyListByUsage: MutableList<CountryModel> = mutableListOf()
-        currencyList.forEach { currency ->
-            if (currencies.contains(currency.currency)) {
-                currencyListByUsage.add(currency)
-            }
-        }
-        if (currencyListByUsage.isNotEmpty()) {
+        val currencySet = currencies.map { it.uppercase() }.toSet()
+        val filteredCurrencyList = currencyList.filter { it.currency in currencySet }
+
+        if (filteredCurrencyList.isNotEmpty()) {
             currencyList.clear()
-            currencyList.addAll(currencyListByUsage)
-            if (currencyListByUsage.size > 1) {
-                binding.icArrow.visibility = VISIBLE
-            } else {
-                binding.icArrow.visibility = INVISIBLE
-                binding.currencyLayout.setOnClickListener(null)
-            }
+            currencyList.addAll(filteredCurrencyList)
+
+            binding.icArrow.visibility = if (filteredCurrencyList.size > 1) VISIBLE else INVISIBLE
+            binding.currencyLayout.setOnClickListener { if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(null) }
+            selectCurrency(filteredCurrencyList[0])
+
         }
     }
 }
