@@ -116,46 +116,52 @@
                 app:accordionViewBackground="@drawable/background_corner"
                 app:startIconSize="Large">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/spacing_16">
+                    android:paddingTop="@dimen/spacing_8">
 
-                    <am.acba.component.textView.PrimaryTextView
-                        android:id="@+id/confirmation_date_title_2"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
-                        android:text="Հաշվով ձևակերպման ամսաթիվ"
-                        android:textColor="?attr/contentPrimaryTonal1"
-                        android:textSize="@dimen/text_size_12"
-                        app:layout_constraintEnd_toStartOf="@+id/date_2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:paddingTop="@dimen/spacing_16">
 
-                    <am.acba.component.textView.PrimaryTextView
-                        android:id="@+id/date_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/regular"
-                        android:text="15/05/2024"
-                        android:textColor="?attr/contentPrimaryTonal1"
-                        android:textSize="@dimen/text_size_12"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <am.acba.component.textView.PrimaryTextView
+                            android:id="@+id/confirmation_date_title_2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ Հաշվով ձևակերպման ամսաթիվ "
+                            android:textColor="?attr/contentPrimaryTonal1"
+                            android:textSize="@dimen/text_size_12"
+                            app:layout_constraintEnd_toStartOf="@+id/date_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <am.acba.component.textView.PrimaryTextView
-                        android:id="@+id/order_type_desc_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_8"
-                        android:fontFamily="@font/regular"
-                        android:text="Վճարում (SAS 10)"
-                        android:textColor="?attr/contentPrimaryTonal1"
-                        android:textSize="@dimen/text_size_12"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/confirmation_date_title_2" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <am.acba.component.textView.PrimaryTextView
+                            android:id="@+id/date_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:text="15/05/2024"
+                            android:textColor="?attr/contentPrimaryTonal1"
+                            android:textSize="@dimen/text_size_12"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <am.acba.component.textView.PrimaryTextView
+                            android:id="@+id/order_type_desc_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_8"
+                            android:fontFamily="@font/regular"
+                            android:text="Վճարում (SAS 10)"
+                            android:textColor="?attr/contentPrimaryTonal1"
+                            android:textSize="@dimen/text_size_12"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/confirmation_date_title_2" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
             </am.acba.component.expandableView.AccordionView>
         </LinearLayout>
     </ScrollView>
