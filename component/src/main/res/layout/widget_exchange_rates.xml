@@ -25,7 +25,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/spacing_8"
             android:tint="@null"
             tools:src="@drawable/ic_usd" />
 
@@ -39,6 +39,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
 
             <am.acba.component.textView.PrimaryTextView
@@ -46,6 +47,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
@@ -58,7 +60,6 @@
         android:layout_marginEnd="1dp"
         android:background="@drawable/background_exchange_rates_second"
         android:clickable="false"
-        android:focusable="false"
         android:orientation="horizontal"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +72,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/spacing_8"
             android:tint="@null"
             tools:src="@drawable/ic_rub" />
 
@@ -85,6 +86,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
 
             <am.acba.component.textView.PrimaryTextView
@@ -92,6 +94,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
@@ -117,7 +120,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/spacing_8"
             android:tint="@null"
             tools:src="@drawable/ic_eur" />
 
@@ -131,6 +134,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
 
             <am.acba.component.textView.PrimaryTextView
@@ -138,6 +142,7 @@
                 style="@style/Subtitle2.Regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 tools:text="$ 451.26" />
         </LinearLayout>
     </LinearLayout>
