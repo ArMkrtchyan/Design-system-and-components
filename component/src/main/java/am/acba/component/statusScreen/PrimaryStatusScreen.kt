@@ -43,20 +43,13 @@ class PrimaryStatusScreen : FrameLayout {
     }
 
     private var clickInterval = 1000
-    private var mediaType: MediaTypes = MediaTypes.MEDIA_IMAGE
+    private var mediaType: MediaTypes = MediaTypes.SMALL
 
     var showCloseIcon = false
         set(value) {
             field = value
 
             setCloseIconVisibility()
-        }
-
-    var showCentreMedia = false
-        set(value) {
-            field = value
-
-            setCentreMediaVisibility()
         }
 
     var showTitle = false
@@ -105,10 +98,6 @@ class PrimaryStatusScreen : FrameLayout {
             try {
                 showCloseIcon = getBoolean(
                     R.styleable.PrimaryStatusScreen_showStatusScreenCloseIcon,
-                    false
-                )
-                showCentreMedia = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenCentreImage,
                     false
                 )
                 showTitle = getBoolean(
@@ -209,24 +198,10 @@ class PrimaryStatusScreen : FrameLayout {
         binding.ivClose.isVisible = showCloseIcon
     }
 
-    private fun setCentreMediaVisibility() {
-        binding.centreMedia.isVisible = showCentreMedia
-
-        addMedia(mediaType)
-    }
-
-    private fun addMedia(type: MediaTypes?) {
-        if (type == MediaTypes.MEDIA_ANIMATION) {
-            addCentreAnimation()
-        } else {
-            addCentreImage()
-        }
-    }
-
     private fun addCentreImage() {
         binding.centreMedia.apply {
-            removeAllViews()
-            if (showCentreMedia) {
+            if (childCount == 0 || children.first() !is PrimaryImageView) {
+                removeAllViews()
                 addView(PrimaryImageView(context))
             }
         }
@@ -234,8 +209,8 @@ class PrimaryStatusScreen : FrameLayout {
 
     private fun addCentreAnimation() {
         binding.centreMedia.apply {
-            removeAllViews()
-            if (showCentreMedia) {
+            if (childCount == 0 || children.first() !is LottieAnimationView) {
+                removeAllViews()
                 addView(LottieAnimationView(context))
             }
         }
@@ -258,10 +233,9 @@ class PrimaryStatusScreen : FrameLayout {
     }
 
     fun setCentreMediaType(type: MediaTypes?) {
-        mediaType = type ?: MediaTypes.ICON
-        showCentreMedia = true
+        mediaType = type ?: MediaTypes.SMALL
 
-        val size = type?.size?.dpToPx() ?: MediaTypes.ICON.size
+        val size = type?.size?.dpToPx() ?: MediaTypes.SMALL.size
         binding.centreMedia.layoutParams.apply {
             width = size
             height = size
@@ -269,26 +243,21 @@ class PrimaryStatusScreen : FrameLayout {
     }
 
     fun setCentreImage(icon: Drawable?) {
-        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
-            binding.centreMedia.background = icon
-        }
+        addCentreImage()
+        binding.centreMedia.background = icon
     }
 
     fun setCentreImageBackgroundColor(colorStateList: ColorStateList?) {
-        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
-            binding.centreMedia.backgroundTintList = colorStateList
-        }
+        binding.centreMedia.backgroundTintList = colorStateList
     }
 
     fun setCentreImageBackgroundTint(colorStateList: ColorStateList?) {
-        if (mediaType in setOf(MediaTypes.MEDIA_IMAGE, MediaTypes.ICON)) {
-            (binding.centreMedia.children.first() as? PrimaryImageView)?.imageTintList =
-                colorStateList
-        }
+        (binding.centreMedia.children.first() as? PrimaryImageView)?.imageTintList = colorStateList
     }
 
     fun setCentreMediaAnimation(animation: String?) {
-        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
+        if (animation != null) {
+            addCentreAnimation()
             (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
                 addAnimationListener(animationView)
                 animationView.playLottieAnimation {
@@ -299,18 +268,8 @@ class PrimaryStatusScreen : FrameLayout {
     }
 
     fun setCentreMediaAnimation(animation: Animation?) {
-        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
-            (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
-                addAnimationListener(animationView)
-                animationView.playLottieAnimation {
-                    animationView.animation = animation
-                }
-            }
-        }
-    }
-
-    fun setCentreMediaAnimation(@RawRes res: Int?) {
-        if (mediaType == MediaTypes.MEDIA_ANIMATION && animation != null) {
+        if (animation != null) {
+            addCentreAnimation()
             (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
                 addAnimationListener(animationView)
                 animationView.playLottieAnimation {
@@ -479,9 +438,8 @@ class PrimaryStatusScreen : FrameLayout {
     }
 
     enum class MediaTypes(var size: Int) {
-        ICON(40),
-        MEDIA_IMAGE(130),
-        MEDIA_ANIMATION(130);
+        SMALL(40),
+        LARGE(130);
 
         companion object {
             fun Int.findMediaTypeByOrdinal() = entries.find { it.ordinal == this }

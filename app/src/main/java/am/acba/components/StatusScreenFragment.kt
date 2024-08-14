@@ -20,7 +20,7 @@ class StatusScreenFragment : BaseViewBindingFragment<FragmentStatusScreenBinding
                 AppCompatResources.getDrawable(requireContext(), am.acba.component.R.color.White)
 //            addContainer(view, ViewGroup.LayoutParams(800.dpToPx(), 50.dpToPx()))
 //            setLottieAnimation("welcome_animation.json")
-            setCentreMediaType(PrimaryStatusScreen.MediaTypes.MEDIA_ANIMATION)
+            setCentreMediaType(PrimaryStatusScreen.MediaTypes.SMALL)
             setCentreMediaAnimation("welcome_animation.json")
             onCentreAnimationEnd = { animationView, _ ->
                 animationView.frame = animationView.maxFrame.toInt() - 40

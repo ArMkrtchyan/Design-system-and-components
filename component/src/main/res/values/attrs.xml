@@ -441,16 +441,14 @@
 
     <declare-styleable name="PrimaryStatusScreen">
         <attr name="showStatusScreenCloseIcon" format="boolean" />
-        <attr name="showStatusScreenCentreImage" format="boolean" />
         <attr name="showStatusScreenTitle" format="boolean" />
         <attr name="showStatusScreenBody" format="boolean" />
         <attr name="showStatusScreenPrimaryButton" format="boolean" />
         <attr name="showStatusScreenGhostButton" format="boolean" />
 
         <attr name="statusScreenMediaType" format="enum">
-            <enum name="Icon" value="0" />
-            <enum name="Media_Image" value="1" />
-            <enum name="Media_Animation" value="2" />
+            <enum name="Small" value="0" />
+            <enum name="Large" value="1" />
         </attr>
 
         <attr name="statusScreenCentreImage" format="reference" />
