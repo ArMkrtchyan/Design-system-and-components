@@ -32,7 +32,7 @@ class PrimaryAlertPagination : FrameLayout {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
 
-            binding.piv.selection = position
+            //binding.piv.selection = position
         }
     }
 
@@ -65,15 +65,15 @@ class PrimaryAlertPagination : FrameLayout {
     ) {
         viewPager.isVisible = itemSize > 0
 
-        if (itemSize > 1) initPiv(itemSize, registerCallback) else piv.isVisible = false
+        //if (itemSize > 1) initPiv(itemSize, registerCallback) else piv.isVisible = false
     }
 
     private fun AlertPaginationLayoutBinding.initPiv(
         itemSize: Int,
         registerCallback: (() -> Unit)?
     ) {
-        piv.isVisible = true
-        piv.count = itemSize
+        /*piv.isVisible = true
+        piv.count = itemSize*/
         registerCallback?.invoke()
     }
 

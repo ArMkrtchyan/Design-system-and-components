@@ -14,7 +14,6 @@ glideVersion = "4.15.1"
 countriesVersion = "2.7.0"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
-pivVersion = "1.0.3"
 lottieVersion = "5.2.0"
 
 [libraries]
@@ -29,7 +28,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
-pageIndicatorView = { group = "com.romandanylyk", name = "pageindicatorview", version.ref = "pivVersion" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion" }
 countries = { group = "com.hbb20", name = "ccp", version.ref = "countriesVersion" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
