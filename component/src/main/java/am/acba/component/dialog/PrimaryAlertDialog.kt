@@ -24,6 +24,7 @@ class PrimaryAlertDialog(
     private val negativeButtonTextColor: ColorStateList? = null,
     private var mOnNegativeButtonClick: (() -> Unit)?,
     private var mOnPositiveButtonClick: (() -> Unit)?,
+    private var mNeedToDismissOnPositiveButtonClick: (() -> Unit)?,
 ) : Dialog(context) {
 
     private lateinit var mBinding: DialogLayoutBinding
@@ -40,13 +41,15 @@ class PrimaryAlertDialog(
         builder.negativeButtonText,
         builder.negativeButtonTextColor,
         builder.mOnNegativeButtonClick,
-        builder.mOnPositiveButtonClick
+        builder.mOnPositiveButtonClick,
+        builder.mNeedToDismissOnPositiveButtonClick,
     )
 
     companion object {
         inline fun build(required: Context, block: Builder.() -> Unit) =
             Builder(required).apply(block)
                 .build()
+          var needToDismissOnPositive = false
     }
 
     data class Builder(
@@ -62,6 +65,7 @@ class PrimaryAlertDialog(
         var negativeButtonTextColor: ColorStateList? = null,
         var mOnNegativeButtonClick: (() -> Unit)? = null,
         var mOnPositiveButtonClick: (() -> Unit)? = null,
+        var mNeedToDismissOnPositiveButtonClick: (() -> Unit)? = null,
     ) {
 
         fun setCancelable(isCancelable: Boolean) = apply { this.mCancelable = isCancelable }
@@ -71,6 +75,12 @@ class PrimaryAlertDialog(
 
         fun positiveButtonClick(onPositiveButtonClick: (() -> Unit)?) =
             apply { this.mOnPositiveButtonClick = onPositiveButtonClick }
+
+        fun needToDismissOnPositiveButtonClick(needToDismissOnPositiveButtonClick: (() -> Unit)?, needToDismiss: Boolean = false) =
+            apply {
+                this.mNeedToDismissOnPositiveButtonClick = needToDismissOnPositiveButtonClick
+                needToDismissOnPositive = needToDismiss
+            }
 
         fun icon(icon: Int) =
             apply { this.icon = icon }
@@ -138,11 +148,17 @@ class PrimaryAlertDialog(
 
         mBinding.buttonPrimary.setOnClickListener {
             mOnPositiveButtonClick?.invoke()
-        }
+            if (mNeedToDismissOnPositiveButtonClick == null || needToDismissOnPositive) {
+                run {
+                    dismiss()
+                }
+            }
 
-        mBinding.buttonSecondary.setOnClickListener {
-            mOnNegativeButtonClick?.invoke() ?: run { dismiss() }
-        }
+            mBinding.buttonSecondary.setOnClickListener {
+                mOnNegativeButtonClick?.invoke() ?: run { dismiss() }
+            }
 
+        }
     }
+
 }

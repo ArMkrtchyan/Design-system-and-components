@@ -26,6 +26,8 @@ class StatusScreenFragment : BaseViewBindingFragment<FragmentStatusScreenBinding
                 animationView.frame = animationView.maxFrame.toInt() - 40
                 animationView.pauseAnimation()
             }
+            setBody("sdfsdf")
+            setTitle("asdfasfdasdf")
 //            setCentreImage(AppCompatResources.getDrawable(requireContext(),am.acba.component.R.drawable.ic_block))
             setOnCloseClickListener {
                 Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
