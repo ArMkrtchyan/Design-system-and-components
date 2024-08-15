@@ -13,7 +13,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_alert_pagination" />
 
-    <com.rd.PageIndicatorView
+   <!-- <com.rd.PageIndicatorView
         android:id="@+id/piv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +22,6 @@
         app:piv_animationType="worm"
         app:piv_radius="4dp"
         app:piv_selectedColor="?attr/overlayBackgroundTonal9"
-        app:piv_unselectedColor="?attr/overlayBackgroundTonal10" />
+        app:piv_unselectedColor="?attr/overlayBackgroundTonal10" />-->
 
 </FrameLayout>
