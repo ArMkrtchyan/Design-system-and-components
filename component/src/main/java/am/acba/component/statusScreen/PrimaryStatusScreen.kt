@@ -23,6 +23,10 @@ import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieProperty
+import com.airbnb.lottie.SimpleColorFilter
+import com.airbnb.lottie.model.KeyPath
+import com.airbnb.lottie.value.LottieValueCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -253,6 +257,16 @@ class PrimaryStatusScreen : FrameLayout {
 
     fun setCentreImageBackgroundTint(colorStateList: ColorStateList?) {
         (binding.centreMedia.children.first() as? PrimaryImageView)?.imageTintList = colorStateList
+    }
+
+    fun setAnimationBackgroundTint(color: Int) {
+        (binding.centreMedia.children.first() as? LottieAnimationView)?.addValueCallback(
+            KeyPath("**"), LottieProperty.COLOR_FILTER, LottieValueCallback(
+                SimpleColorFilter(
+                    color
+                )
+            )
+        )
     }
 
     fun setCentreMediaAnimation(animation: String?) {
