@@ -47,13 +47,6 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
-            .negativeButtonClick {
-                Toast.makeText(
-                    context,
-                    "negative Click",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
             .setCancelable(true)
             .build()
     }
