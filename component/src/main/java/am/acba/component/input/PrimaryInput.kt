@@ -139,4 +139,8 @@ open class PrimaryInput : TextInputLayout {
     fun setText(@StringRes resId: Int) {
         editText?.setText(resId)
     }
+
+    fun setInputExpandedHintEnabled(isExpandedHintEnabled: Boolean) {
+        this.isExpandedHintEnabled = isExpandedHintEnabled
+    }
 }

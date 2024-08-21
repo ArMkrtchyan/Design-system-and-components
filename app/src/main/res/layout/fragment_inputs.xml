@@ -39,11 +39,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
-                app:errorEnabled="true"
-                android:hint="dscsdcdssdcsdc"
-                app:expandedHintEnabled="false"
+                android:hint="Hint"
+                android:text="Simple Text Input"
                 app:endIconMode="none"
-                android:text="dscmsdlcpxkosdmn k" />
+                app:errorEnabled="true"
+                app:expandedHintEnabled="false" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:hint="DatePicker"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:endIconTint="?attr/contentPrimary"
+                app:expandedHintEnabled="true" />
 
         </LinearLayout>
     </ScrollView>
