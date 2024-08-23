@@ -82,14 +82,14 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         if (childCount > 1) {
             val child = children.elementAt(1)
             if (isExpanded) {
-                child.collapseHeight(200)
+                child.collapseHeight(300)
                 isExpanded = false
             } else {
                 isExpanded = true
                 child.isVisible = true
-                child.expandHeight(200)
+                child.expandHeight(300)
             }
-            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F, duration = 200)
+            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F, duration = 300)
         }
     }
 
