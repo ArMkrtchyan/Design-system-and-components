@@ -15,7 +15,6 @@ class ExpandableViewFragment : BaseViewBindingFragment<FragmentExpandableViewBin
         get() = mBinding.toolbar
 
     override fun FragmentExpandableViewBinding.initView() {
-//        mBinding.accordionView.setStartIconDrawable(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.ic_info))
-//        mBinding.accordionView.setStartIconTint(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentPrimary))
+        mBinding.accordionView2.setEndTextColor(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentBrand))
     }
 }

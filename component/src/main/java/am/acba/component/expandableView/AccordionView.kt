@@ -195,4 +195,8 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         binding.currencyText.text = text
     }
 
+    fun setEndTextColor(iconTint: ColorStateList?) {
+        binding.endText.setTextColor(iconTint)
+    }
+
 }

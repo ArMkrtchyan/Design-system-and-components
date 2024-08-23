@@ -85,7 +85,7 @@ class PrimaryDivider : FrameLayout {
         }
     }
 
-    public fun setText(text: String) {
+    fun setText(text: String) {
         binding.dividerText.text = text
         binding.dividerText.isVisible = text.isNotEmpty()
     }
