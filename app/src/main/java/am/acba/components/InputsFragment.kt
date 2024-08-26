@@ -28,6 +28,7 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
         datePicker.apply {
            this.setOnClickListener{
                showPrimaryAlertDialog(requireContext(), layoutInflater)
+               //Use this function if you want to have in input both text and hint(You MUST set text in input by code or XML)
                this.setInputExpandedHintEnabled(false)
                this.setText("Text")
            }
