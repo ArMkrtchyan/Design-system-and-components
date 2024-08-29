@@ -12,6 +12,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -65,7 +66,9 @@ class PrimaryChip : FrameLayout {
 
     fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryChip).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                gravity = Gravity.CENTER
+            }
             addView(binding.root, layoutParams)
             chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
             setChipText(getString(R.styleable.PrimaryChip_chipText))
@@ -83,7 +86,7 @@ class PrimaryChip : FrameLayout {
     }
 
     fun setChipBackground(background: Drawable) {
-        binding.parentLayout.background = background
+        this.background = background
     }
 
     fun setChipSize(chipSize: ChipSize) {

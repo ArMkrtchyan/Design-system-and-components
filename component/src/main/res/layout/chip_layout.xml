@@ -4,7 +4,6 @@
     android:id="@+id/parent_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_primary_chip"
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp">
 
