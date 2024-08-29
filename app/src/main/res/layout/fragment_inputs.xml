@@ -39,9 +39,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
-                android:hint="Hint"
-                app:formattingWithDots="false"
-                app:inputType="amountFormatting"
                 app:endIconMode="none"
                 app:errorEnabled="true" />
 
@@ -54,7 +51,6 @@
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:endIconTint="?attr/contentPrimary"
                 app:expandedHintEnabled="true" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

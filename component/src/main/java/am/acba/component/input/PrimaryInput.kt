@@ -12,13 +12,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.text.InputType
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.StringRes
@@ -69,9 +70,9 @@ open class PrimaryInput : TextInputLayout {
                 endIcon.setImageResource(R.drawable.ic_down)
                 endIcon.imageTintList = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
             }
-            when (inputType){
+            when (inputType) {
                 0 -> setInputTypeForAmount()
-                1 -> setInputTypeForQuantity()
+                1 -> setInputTypeForNumber()
             }
             editText?.hideSoftInput()
             editText?.let { rootView.addKeyboardVisibilityListener(it) }
@@ -94,7 +95,7 @@ open class PrimaryInput : TextInputLayout {
         }
     }
 
-    private fun setInputTypeForAmount() {
+    fun setInputTypeForAmount() {
         editText?.inputType = InputType.TYPE_CLASS_NUMBER
         editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             amountTextFormatting(hasFocus)
@@ -102,8 +103,12 @@ open class PrimaryInput : TextInputLayout {
 
     }
 
-    private fun setInputTypeForQuantity() {
+    fun setInputTypeForNumber() {
         editText?.inputType = InputType.TYPE_CLASS_NUMBER
+    }
+
+    fun setInputTypeForText() {
+        editText?.inputType = InputType.TYPE_CLASS_TEXT
     }
 
     private fun amountTextFormatting(isFocusable: Boolean) {
@@ -113,7 +118,7 @@ open class PrimaryInput : TextInputLayout {
             val text = editText?.text?.toString()?.trim() ?: ""
             editText?.setText(
                 if (text.length >= 15) text else
-                    (if (formattingWithOutDot) text.numberFormatting()else text.numberFormattingWithOutDot() )
+                    (if (formattingWithOutDot) text.numberFormatting() else text.numberFormattingWithOutDot())
             )
         }
     }
