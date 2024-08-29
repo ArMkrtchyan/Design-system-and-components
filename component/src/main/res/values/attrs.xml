@@ -191,6 +191,11 @@
         <attr name="cornerStyle" format="integer" />
         <attr name="hasDropDown" format="boolean" />
         <attr name="android:text" />
+        <attr name="formattingWithDots" format="boolean" />
+        <attr name="inputType" format="enum">
+            <enum name="amountFormatting" value="0" />
+            <enum name="quantity" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">
         <attr name="phoneInputErrorText" format="string" />
