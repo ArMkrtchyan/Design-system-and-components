@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_16"
-                android:src="@drawable/ic_am_flag"
+                android:src="@drawable/ic_flag_am"
                 android:tint="@null" />
 
             <am.acba.component.textView.PrimaryTextView

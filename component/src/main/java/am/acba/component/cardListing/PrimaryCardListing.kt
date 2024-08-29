@@ -6,6 +6,7 @@ import am.acba.component.cardListing.PrimaryCardListing.IconTypes.Companion.find
 import am.acba.component.databinding.CardListingLayoutBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
@@ -68,9 +69,7 @@ class PrimaryCardListing : FrameLayout {
                 val startIconBackgroundColor = getColorStateList(
                     R.styleable.PrimaryCardListing_cardListingStartIconBackgroundColor
                 )
-                val startIconBackgroundTint = getColorStateList(
-                    R.styleable.PrimaryCardListing_cardListingStartIconBackgroundTint
-                )
+                val startIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStartIconTint)
                 val startIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingStartIcon)
                 val endIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingEndIcon)
 
@@ -82,14 +81,9 @@ class PrimaryCardListing : FrameLayout {
                     )
                 )
                 val statusText = getString(R.styleable.PrimaryCardListing_cardListingStatusText)
-                val statusTextColor = getColor(
-                    R.styleable.PrimaryCardListing_cardListingStatusTextColor,
-                    context.getColor(R.color.Black_30)
-                )
+                val statusTextColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusTextColor) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
                 val statusIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingStatusIcon)
-                val statusIconTint = getColorStateList(
-                    R.styleable.PrimaryCardListing_cardListingStatusIconTint
-                ) ?: ColorStateList.valueOf(context.getColorFromAttr(R.attr.contentPrimary))
+                val statusIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
 
                 setLayoutBackgroundColor(layoutBackgroundColor)
                 setLayoutBorderColor(layoutBorderColor)
@@ -101,8 +95,8 @@ class PrimaryCardListing : FrameLayout {
 
                 setStartIconType(startIconType)
                 setStartIcon(startIcon)
+                setStartIconTint(startIconTint)
                 setStartIconBackgroundColor(startIconBackgroundColor)
-                setStartIconBackgroundTint(startIconBackgroundTint)
                 setEndIcon(endIcon)
 
                 showStatus(showStatus)
@@ -131,6 +125,10 @@ class PrimaryCardListing : FrameLayout {
 
     fun setLayoutBackgroundColor(@ColorInt color: Int?) {
         color?.let { binding.layoutCard.setCardBackgroundColor(it) }
+    }
+
+    fun setLayoutBackgroundColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.layoutCard.setCardBackgroundColor(it) }
     }
 
     fun setLayoutBorderColor(@ColorInt color: Int?) {
@@ -172,12 +170,12 @@ class PrimaryCardListing : FrameLayout {
         binding.ivStartIcon.backgroundTintList = colorStateList
     }
 
-    fun setStartIconBackgroundTint(colorStateList: ColorStateList?) {
-        binding.ivStartIcon.imageTintList = colorStateList
-    }
-
     fun setStartIcon(icon: Drawable?) {
         binding.ivStartIcon.setIcon(icon)
+    }
+
+    fun setStartIconTint(colorStateList: ColorStateList?) {
+        binding.ivStartIcon.imageTintList = colorStateList
     }
 
     fun setEndIcon(icon: Drawable?) {
@@ -208,8 +206,8 @@ class PrimaryCardListing : FrameLayout {
         binding.tvStatus.updateTextView(text)
     }
 
-    fun setStatusTextColor(@ColorInt color: Int?) {
-        color?.let { binding.tvStatus.setTextColor(it) }
+    fun setStatusTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvStatus.setTextColor(it) }
     }
 
     fun setOnLinkClickListener(onClickListener: OnClickListener?) {

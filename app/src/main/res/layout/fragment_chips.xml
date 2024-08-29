@@ -75,7 +75,7 @@
                 android:layout_marginTop="140dp"
                 android:tag="chip_small_3"
                 app:chipSize="Small"
-                app:chipStartIcon="@drawable/flag_usa"
+                app:chipStartIcon="@drawable/ic_flag_usa"
                 app:chipStartIconType="Image"
                 app:chipText="United States"
                 app:isChipSelected="true"
@@ -240,7 +240,7 @@
                     android:layout_marginEnd="6dp"
                     android:layout_weight="0.5"
                     app:chipSize="Medium"
-                    app:chipStartIcon="@drawable/flag_usa"
+                    app:chipStartIcon="@drawable/ic_flag_usa"
                     app:chipStartIconType="Image"
                     app:chipText="USD" />
 
@@ -252,7 +252,7 @@
                     android:layout_weight="0.5"
                     app:chipSize="Medium"
                     app:isChipSelected="true"
-                    app:chipStartIcon="@drawable/ic_am_flag"
+                    app:chipStartIcon="@drawable/ic_flag_am"
                     app:chipStartIconType="Image"
                     app:chipText="AMD" />
             </LinearLayout>

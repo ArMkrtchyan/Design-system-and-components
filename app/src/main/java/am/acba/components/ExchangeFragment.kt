@@ -15,9 +15,9 @@ class ExchangeFragment : BaseViewBindingFragment<FragmentExchangeBinding>() {
 
     override fun FragmentExchangeBinding.initView() {
         exchangeRates.apply {
-            val firstRate = ExchangeRate(R.drawable.flag_usa, "406.00", "410.50")
-            val secondRate = ExchangeRate(R.drawable.flag_russian, "4.30", "4.72")
-            val thirdRate = ExchangeRate(R.drawable.flag_usa, "435.50", "452.00")
+            val firstRate = ExchangeRate(R.drawable.ic_flag_usa, "406.00", "410.50")
+            val secondRate = ExchangeRate(R.drawable.ic_flag_rus, "4.30", "4.72")
+            val thirdRate = ExchangeRate(R.drawable.ic_flag_usa, "435.50", "452.00")
             val rates = Triple(firstRate, secondRate, thirdRate)
             setExchangeRates(rates)
         }

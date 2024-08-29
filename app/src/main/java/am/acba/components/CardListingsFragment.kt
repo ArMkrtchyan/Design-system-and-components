@@ -1,7 +1,9 @@
 package am.acba.components
 
+import am.acba.component.R
 import am.acba.component.cardListing.PrimaryCardListing
 import am.acba.component.extensions.getColorFromAttr
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentCardListingsBinding
@@ -18,7 +20,7 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
 
     override fun FragmentCardListingsBinding.initView() {
         cardListing.apply {
-            setLayoutBackgroundColor(context.getColor(am.acba.component.R.color.White))
+            setLayoutBackgroundColor(context.getColorStateListFromAttr(R.attr.backgroundBase))
             setLayoutBorderColor(context.getColorFromAttr(am.acba.component.R.attr.borderNeutral))
             setStartTitleText("MasterCard")
             setStartBodyText("****5464")
@@ -32,7 +34,7 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
             setStartIconBackgroundColor(
                 ColorStateList.valueOf(context.getColor(am.acba.component.R.color.BlueGrey_100))
             )
-            setStartIconBackgroundTint(
+            setStartIconTint(
                 ColorStateList.valueOf(context.getColor(am.acba.component.R.color.BlueGrey_950_60))
             )
             setEndIcon(getDrawable(context, am.acba.component.R.drawable.ic_right))
@@ -44,7 +46,7 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
                 ColorStateList.valueOf(context.getColor(am.acba.component.R.color.AztecPurple_700))
             )
             setStatusText("Չբլոկավորված")
-            setStatusTextColor(context.getColor(am.acba.component.R.color.Black_70))
+            setStatusTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
 
             setOnLinkClickListener { Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show() }
         }

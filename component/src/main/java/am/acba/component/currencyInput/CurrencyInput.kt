@@ -16,17 +16,13 @@ import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -151,13 +147,13 @@ class CurrencyInput @JvmOverloads constructor(
 
     private fun setupCurrenciesList() {
         currencyList = arrayListOf()
-        currencyList.add(CountryModel(currency = "AMD", name = "AMD", flagResId = R.drawable.ic_am_flag))
-        currencyList.add(CountryModel(currency = "USD", name = "USD", flagResId = R.drawable.flag_usa))
-        currencyList.add(CountryModel(currency = "EUR", name = "EUR", flagResId = R.drawable.eur_flag))
-        currencyList.add(CountryModel(currency = "RUB", name = "RUB", flagResId = R.drawable.flag_russian))
-        currencyList.add(CountryModel(currency = "GBP", name = "GBP", flagResId = R.drawable.gb_flag))
-        currencyList.add(CountryModel(currency = "CHF", name = "CHF", flagResId = R.drawable.sw_flag))
-        currencyList.add(CountryModel(currency = "GEL", name = "GEL", flagResId = R.drawable.gel_flag))
+        currencyList.add(CountryModel(currency = "AMD", name = "AMD", flagResId = R.drawable.ic_flag_am))
+        currencyList.add(CountryModel(currency = "USD", name = "USD", flagResId = R.drawable.ic_flag_usa))
+        currencyList.add(CountryModel(currency = "EUR", name = "EUR", flagResId = R.drawable.ic_flag_eur))
+        currencyList.add(CountryModel(currency = "RUB", name = "RUB", flagResId = R.drawable.ic_flag_rus))
+        currencyList.add(CountryModel(currency = "GBP", name = "GBP", flagResId = R.drawable.ic_flag_gb))
+        currencyList.add(CountryModel(currency = "CHF", name = "CHF", flagResId = R.drawable.ic_flag_sw))
+        currencyList.add(CountryModel(currency = "GEL", name = "GEL", flagResId = R.drawable.ic_flag_gel))
     }
 
     private fun currencyIconClick() {
