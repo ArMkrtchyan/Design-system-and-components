@@ -2,10 +2,13 @@ package am.acba.component.input
 
 import am.acba.component.R
 import am.acba.component.databinding.PrimaryDropdownBinding
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.annotation.DrawableRes
 
 class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -20,6 +23,11 @@ class PrimaryDropDown @JvmOverloads constructor(
                 val text = getString(R.styleable.PrimaryDropDown_android_text)
                 binding.inputDropDown.editText?.setText(text)
                 binding.inputDropDown.hint = getString(R.styleable.PrimaryDropDown_android_hint)
+                binding.inputDropDown.setStartIconTintList(getColorStateList(R.styleable.PrimaryDropDown_dropDownStartIconTint))
+                binding.inputDropDown.setEndIconTintList(
+                    getColorStateList(R.styleable.PrimaryDropDown_dropDownEndIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                )
+                setStartIcon(getDrawable(R.styleable.PrimaryDropDown_dropDownStartIcon))
             } finally {
                 recycle()
             }
@@ -36,11 +44,19 @@ class PrimaryDropDown @JvmOverloads constructor(
         }
     }
 
+    fun setStartIcon(drawable: Drawable?) {
+        binding.inputDropDown.startIconDrawable = drawable
+    }
+
+    fun setStartIcon(@DrawableRes drawableRes: Int) {
+        binding.inputDropDown.setStartIconDrawable(drawableRes)
+    }
+
     fun setText(text: String) {
         binding.inputDropDown.editText?.setText(text)
     }
 
-    fun getText():String{
+    fun getText(): String {
         return binding.inputDropDown.editText?.text.toString()
     }
 

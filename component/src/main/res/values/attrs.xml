@@ -247,6 +247,9 @@
     <declare-styleable name="PrimaryDropDown">
         <attr name="android:text" />
         <attr name="android:hint" />
+        <attr name="dropDownStartIcon" format="reference" />
+        <attr name="dropDownStartIconTint" format="color" />
+        <attr name="dropDownEndIconTint" format="color" />
     </declare-styleable>
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />
