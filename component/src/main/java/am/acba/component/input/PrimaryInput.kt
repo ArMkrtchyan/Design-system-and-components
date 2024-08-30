@@ -35,7 +35,7 @@ open class PrimaryInput : TextInputLayout {
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
-    private var formattingWithOutDot = false
+    private var formattingWithDot = false
 
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
@@ -56,7 +56,7 @@ open class PrimaryInput : TextInputLayout {
                 cornerStyle = getInt(R.styleable.PrimaryInput_cornerStyle, -1)
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
                 inputType = getInt(R.styleable.PrimaryInput_inputType, -1)
-                formattingWithOutDot = getBoolean(R.styleable.PrimaryInput_formattingWithDots, false)
+                formattingWithDot = getBoolean(R.styleable.PrimaryInput_formattingWithDots, false)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -111,6 +111,10 @@ open class PrimaryInput : TextInputLayout {
         editText?.inputType = InputType.TYPE_CLASS_TEXT
     }
 
+    fun setAmountText(amount: String) {
+        editText?.setText((if (formattingWithDot) amount.numberFormatting() else amount.numberFormattingWithOutDot()))
+    }
+
     private fun amountTextFormatting(isFocusable: Boolean) {
         if (isFocusable) {
             editText?.setText(getDeFormatedStringAmount())
@@ -118,7 +122,7 @@ open class PrimaryInput : TextInputLayout {
             val text = editText?.text?.toString()?.trim() ?: ""
             editText?.setText(
                 if (text.length >= 15) text else
-                    (if (formattingWithOutDot) text.numberFormatting() else text.numberFormattingWithOutDot())
+                    (if (formattingWithDot) text.numberFormatting() else text.numberFormattingWithOutDot())
             )
         }
     }
