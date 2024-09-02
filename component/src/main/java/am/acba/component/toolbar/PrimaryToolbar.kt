@@ -17,11 +17,15 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.appbar.MaterialToolbar
 
-class PrimaryToolbar : MaterialToolbar {
+class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
     private var collapseStatusBarHeight = false
+    private var menuProvider: MenuProvider? = null
+    private var menuHost: MenuHost? = null
+    private var currentMenu: Int? = -1
 
     constructor(context: Context) : super(context, null, R.attr.primaryToolbarStyle) {
     }
@@ -42,33 +46,56 @@ class PrimaryToolbar : MaterialToolbar {
                     DrawableCompat.setTintList(meniIcon, context.getColorStateListFromAttr(R.attr.contentPrimary))
                 }
             }
-            val titleTextView = getTextView()
-            titleTextView?.translationX = (-12).dpToPx().toFloat()
             recycle()
         }
+    }
+
+    fun setLifecycleOwner(lifecycleOwner: LifecycleOwner) {
+        lifecycleOwner.lifecycle.removeObserver(this)
+        lifecycleOwner.lifecycle.addObserver(this)
     }
 
     fun createOptionsMenu(
         fragmentActivity: FragmentActivity,
         @MenuRes optionsMenu: Int,
-        viewLifecycleOwner: LifecycleOwner,
         onMenuItemSelected: (menuItem: MenuItem) -> Boolean
     ) {
-        val menuHost: MenuHost = fragmentActivity
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(optionsMenu, menu)
-                for (i in 0 until menu.size()) {
-                    menu.getItem(i).icon?.let { meniIcon ->
-                        DrawableCompat.setTintList(meniIcon, context.getColorStateListFromAttr(R.attr.contentPrimary))
+        menuHost = fragmentActivity
+        if (currentMenu != optionsMenu) {
+            currentMenu = optionsMenu
+            menuProvider = object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(optionsMenu, menu)
+                    for (i in 0 until menu.size()) {
+                        menu.getItem(i).icon?.let { meniIcon ->
+                            DrawableCompat.setTintList(meniIcon, context.getColorStateListFromAttr(R.attr.contentPrimary))
+                        }
                     }
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    return onMenuItemSelected.invoke(menuItem)
+                }
+            }
+        }
+    }
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                menuProvider?.let {
+                    menuHost?.addMenuProvider(it)
                 }
             }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return onMenuItemSelected.invoke(menuItem)
+            Lifecycle.Event.ON_PAUSE -> {
+                menuProvider?.let {
+                    menuHost?.removeMenuProvider(it)
+                }
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+            else -> {}
+        }
     }
 
     private fun getTextView(): TextView? {

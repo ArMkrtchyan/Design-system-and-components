@@ -1,15 +1,15 @@
 package am.acba.components
 
 import am.acba.component.extensions.log
+import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
-import am.acba.components.databinding.FragmentCurrencyInputBinding
 import am.acba.components.base.Inflater
-import androidx.appcompat.widget.Toolbar
+import am.acba.components.databinding.FragmentCurrencyInputBinding
 
 class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBinding>() {
     override val inflate: Inflater<FragmentCurrencyInputBinding>
         get() = FragmentCurrencyInputBinding::inflate
-    override val toolbar: Toolbar
+    override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {

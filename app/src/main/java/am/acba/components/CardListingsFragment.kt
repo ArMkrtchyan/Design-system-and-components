@@ -4,18 +4,18 @@ import am.acba.component.R
 import am.acba.component.cardListing.PrimaryCardListing
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentCardListingsBinding
 import android.content.res.ColorStateList
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.appcompat.widget.Toolbar
 
 class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding>() {
     override val inflate: Inflater<FragmentCardListingsBinding>
         get() = FragmentCardListingsBinding::inflate
-    override val toolbar: Toolbar
+    override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
 
     override fun FragmentCardListingsBinding.initView() {

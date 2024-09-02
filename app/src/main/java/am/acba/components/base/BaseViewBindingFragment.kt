@@ -1,12 +1,12 @@
 package am.acba.components.base
 
 import am.acba.component.phoneNumberInput.PhoneNumberInput
+import am.acba.component.toolbar.PrimaryToolbar
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
@@ -17,7 +17,7 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
         get() = _binding
     protected abstract val inflate: Inflater<VB>
     protected abstract fun VB.initView()
-    open val toolbar: Toolbar? = null
+    open val toolbar: PrimaryToolbar? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (!::_binding.isInitialized || !keepBindingAlive) {
@@ -32,6 +32,7 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
         toolbar?.let {
             mActivity.setSupportActionBar(toolbar)
             it.setNavigationOnClickListener { mActivity.onBackPressed() }
+            it.setLifecycleOwner(viewLifecycleOwner)
         }
     }
 

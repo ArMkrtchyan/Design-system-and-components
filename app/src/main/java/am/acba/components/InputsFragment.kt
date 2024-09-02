@@ -3,18 +3,18 @@ package am.acba.components
 import am.acba.component.databinding.DialogContentTestBinding
 import am.acba.component.dialog.PrimaryAlertDialog
 import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentInputsBinding
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 
 class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
     override val inflate: Inflater<FragmentInputsBinding>
         get() = FragmentInputsBinding::inflate
-    override val toolbar: Toolbar
+    override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
 
     override fun FragmentInputsBinding.initView() {
