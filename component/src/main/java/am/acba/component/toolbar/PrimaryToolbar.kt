@@ -77,6 +77,7 @@ class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
                     return onMenuItemSelected.invoke(menuItem)
                 }
             }
+            menuHost?.addMenuProvider(menuProvider!!)
         }
     }
 
@@ -84,6 +85,7 @@ class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
         when (event) {
             Lifecycle.Event.ON_RESUME -> {
                 menuProvider?.let {
+                    menuHost?.removeMenuProvider(it)
                     menuHost?.addMenuProvider(it)
                 }
             }
