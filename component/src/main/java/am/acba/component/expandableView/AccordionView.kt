@@ -34,7 +34,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var endTextColor: Int = 0
     private var currencyText: String
     private var currencyTextColor: Int = 0
-    private var isExpanded = false
+    public var isExpanded = false
     private var isExpandable = true
 
     init {

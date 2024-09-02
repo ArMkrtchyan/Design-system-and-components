@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:title="Phone number input" />
+        app:title="Expandable View" />
 
     <am.acba.component.textView.PrimaryTextView
         style="@style/Subtitle1.Light"
@@ -164,4 +164,12 @@
             </am.acba.component.expandableView.AccordionView>
         </LinearLayout>
     </ScrollView>
+
+    <am.acba.component.button.PrimaryButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_marginBottom="@dimen/spacing_20"
+        android:text="Serach" />
 </androidx.appcompat.widget.LinearLayoutCompat>
