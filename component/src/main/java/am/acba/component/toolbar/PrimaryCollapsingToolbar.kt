@@ -10,7 +10,6 @@ import android.view.MenuItem
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.appbar.AppBarLayout
 
 class PrimaryCollapsingToolbar : AppBarLayout {
@@ -56,9 +55,8 @@ class PrimaryCollapsingToolbar : AppBarLayout {
     fun createOptionsMenu(
         fragmentActivity: FragmentActivity,
         @MenuRes optionsMenu: Int,
-        viewLifecycleOwner: LifecycleOwner,
         onMenuItemSelected: (menuItem: MenuItem) -> Boolean
     ) {
-        toolbar.createOptionsMenu(fragmentActivity, optionsMenu, viewLifecycleOwner, onMenuItemSelected)
+        toolbar.createOptionsMenu(fragmentActivity, optionsMenu, onMenuItemSelected)
     }
 }

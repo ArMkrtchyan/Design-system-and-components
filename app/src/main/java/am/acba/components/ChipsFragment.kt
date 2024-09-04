@@ -1,5 +1,6 @@
 package am.acba.components
 
+import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.component.tooltip.OnboardingHint
 import am.acba.component.tooltip.TooltipModel
 import am.acba.components.base.BaseViewBindingFragment
@@ -7,7 +8,6 @@ import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentChipsBinding
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
     override val inflate: Inflater<FragmentChipsBinding>
         get() = FragmentChipsBinding::inflate
-    override val toolbar: Toolbar
+    override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
     private var onboardingHint: OnboardingHint? = null
 

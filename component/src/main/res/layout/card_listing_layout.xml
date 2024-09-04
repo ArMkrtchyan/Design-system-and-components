@@ -94,7 +94,7 @@
                     android:ellipsize="end"
                     android:gravity="end"
                     android:lines="1"
-                    android:textColor="?contentPrimaryTonal1"
+                    android:textColor="?attr/contentPrimaryTonal1"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/tv_end_body"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,14 +127,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:textColor="?contentPrimaryTonal1"
+                    android:textColor="?attr/contentPrimaryTonal1"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/tv_end_body"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_end_body"
                     app:layout_constraintTop_toTopOf="@id/tv_end_body"
                     tools:text="AMD"
-                    tools:textColor="@color/Black_20"
                     tools:visibility="visible" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,7 +172,7 @@
                 android:layout_height="14dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_close"
-                android:tint="?attr/contentPrimary"
+                android:tint="?attr/contentPrimaryTonal1"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_status"
@@ -186,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:textColor="?attr/contentPrimaryTonal1"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Բլոկավորված է"
                 tools:visibility="visible" />

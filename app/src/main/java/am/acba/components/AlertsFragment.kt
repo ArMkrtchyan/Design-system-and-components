@@ -2,16 +2,16 @@ package am.acba.components
 
 import am.acba.component.alert.Alert
 import am.acba.component.alert.PrimaryAlert
+import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentAlertsBinding
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 
 class AlertsFragment : BaseViewBindingFragment<FragmentAlertsBinding>() {
     override val inflate: Inflater<FragmentAlertsBinding>
         get() = FragmentAlertsBinding::inflate
-    override val toolbar: Toolbar
+    override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
 
     override fun FragmentAlertsBinding.initView() {

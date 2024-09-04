@@ -191,6 +191,11 @@
         <attr name="cornerStyle" format="integer" />
         <attr name="hasDropDown" format="boolean" />
         <attr name="android:text" />
+        <attr name="formattingWithDots" format="boolean" />
+        <attr name="inputType" format="enum">
+            <enum name="amountFormatting" value="0" />
+            <enum name="quantity" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">
         <attr name="phoneInputErrorText" format="string" />
@@ -242,6 +247,9 @@
     <declare-styleable name="PrimaryDropDown">
         <attr name="android:text" />
         <attr name="android:hint" />
+        <attr name="dropDownStartIcon" format="reference" />
+        <attr name="dropDownStartIconTint" format="color" />
+        <attr name="dropDownEndIconTint" format="color" />
     </declare-styleable>
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />
@@ -429,6 +437,7 @@
         <attr name="cardListingStartIconBackgroundColor" format="color" />
         <attr name="cardListingStartIconBackgroundTint" format="color" />
         <attr name="cardListingStartIcon" format="reference" />
+        <attr name="cardListingStartIconTint" format="reference" />
         <attr name="cardListingEndIcon" format="reference" />
 
         <attr name="showCardStatus" format="boolean" />
@@ -462,5 +471,9 @@
         <attr name="statusScreenGhostButtonText" format="string" />
 
         <attr name="statusScreenAnimationFileName" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PersistentBottomSheet">
+        <attr name="title" />
     </declare-styleable>
 </resources>

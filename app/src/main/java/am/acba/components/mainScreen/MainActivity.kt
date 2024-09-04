@@ -1,16 +1,12 @@
 package am.acba.components.mainScreen
 
-import am.acba.component.phoneNumberInput.PhoneNumberInput
 import am.acba.components.R
 import am.acba.components.databinding.ActivityMainBinding
 import android.content.Context
-import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -23,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val CONTACT_PERMISSION_REQUEST = 100
 
     companion object {
-        var darkTheme = false
+        var darkTheme = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

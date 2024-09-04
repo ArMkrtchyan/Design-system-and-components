@@ -23,5 +23,6 @@ enum class ComponentTypeEnum(val componentName: String) {
     QUICK_ACTION_AVATAR("Quick actions and avatar"),
     ONBOARDING_TOOTLTIPS("Onboarding tooltips"),
     CARD_LISTING("Card listing"),
-    STATUS_SCREEN("Status screen")
+    STATUS_SCREEN("Status screen"),
+    BOTTOM_SHEET("Bottom sheet")
 }

@@ -40,12 +40,12 @@
             android:layout_height="wrap_content">
 
             <am.acba.component.chip.PrimaryChip
-                android:tag="chip_small_1"
                 android:id="@+id/chip_small_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
+                android:tag="chip_small_1"
                 app:chipEndIcon="@drawable/ic_close"
                 app:chipSize="Small"
                 app:chipStartIcon="@drawable/ic_file_download"
@@ -55,12 +55,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
-                android:tag="chip_small_2"
                 android:id="@+id/chip_small_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
+                android:tag="chip_small_2"
                 app:chipSize="Small"
                 app:chipStartIcon="@drawable/ic_file_download"
                 app:chipStartIconType="Icon"
@@ -70,12 +70,12 @@
 
             <am.acba.component.chip.PrimaryChip
                 android:id="@+id/chip_small_3"
-                android:tag="chip_small_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="140dp"
+                android:tag="chip_small_3"
                 app:chipSize="Small"
-                app:chipStartIcon="@drawable/flag_usa"
+                app:chipStartIcon="@drawable/ic_flag_usa"
                 app:chipStartIconType="Image"
                 app:chipText="United States"
                 app:isChipSelected="true"
@@ -84,11 +84,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
-                android:tag="chip_small_4"
                 android:id="@+id/chip_small_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:tag="chip_small_4"
                 app:chipSize="Small"
                 app:chipText="100 000"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -96,11 +96,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <am.acba.component.chip.PrimaryChip
-                android:tag="chip_small_5"
                 android:id="@+id/chip_small_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="100dp"
+                android:tag="chip_small_5"
                 app:chipSize="Small"
                 app:chipText="100 000"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -226,7 +226,36 @@
             <!--                    android:layout_marginTop="20dp"-->
             <!--                    app:chipSize="Medium"-->
             <!--                    app:chipText="Lorem ipsum dolor 6" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:weightSum="1"
+                app:layout_constraintBottom_toBottomOf="parent">
 
+                <am.acba.component.chip.PrimaryChip
+                    android:id="@+id/selected_currency_chip"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="0.5"
+                    app:chipSize="Medium"
+                    app:chipStartIcon="@drawable/ic_flag_usa"
+                    app:chipStartIconType="Image"
+                    app:chipText="USD" />
+
+                <am.acba.component.chip.PrimaryChip
+                    android:id="@+id/amd_chip"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="0.5"
+                    app:chipSize="Medium"
+                    app:isChipSelected="true"
+                    app:chipStartIcon="@drawable/ic_flag_am"
+                    app:chipStartIconType="Image"
+                    app:chipText="AMD" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

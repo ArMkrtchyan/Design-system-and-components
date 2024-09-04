@@ -105,7 +105,6 @@
                 app:accordionCurrencyText="AMD"
                 app:accordionEndIcon="@drawable/ic_down"
                 app:accordionEndText="+400,000,000.00"
-                app:accordionEndTextColor="?attr/contentBrand"
                 app:accordionIsExpandable="true"
                 app:accordionIsExpanded="false"
                 app:accordionStartIcon="@drawable/ic_income"

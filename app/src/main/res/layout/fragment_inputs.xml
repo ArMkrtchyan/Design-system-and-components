@@ -35,15 +35,12 @@
 
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/input"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:enabled="true"
-                android:hint="Hint"
-                android:text="Simple Text Input"
                 app:endIconMode="none"
-                app:errorEnabled="true"
-                app:expandedHintEnabled="false" />
+                app:errorEnabled="true" />
 
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/datePicker"
@@ -54,7 +51,6 @@
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:endIconTint="?attr/contentPrimary"
                 app:expandedHintEnabled="true" />
-
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

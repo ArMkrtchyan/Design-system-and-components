@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:tint="@null"
-                tools:src="@drawable/ic_am_flag" />
+                tools:src="@drawable/ic_flag_am" />
 
             <am.acba.component.textView.PrimaryTextView
                 android:id="@+id/country_code"
