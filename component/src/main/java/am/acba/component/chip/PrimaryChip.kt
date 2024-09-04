@@ -53,7 +53,9 @@ class PrimaryChip : FrameLayout {
     private var chipTextAndIconColor: ColorStateList? = null
 
     constructor(context: Context) : super(context) {
-        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+            gravity = Gravity.CENTER
+        }
         addView(binding.root, layoutParams)
         val background = ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
         background?.let { setChipBackground(it) }
@@ -78,8 +80,7 @@ class PrimaryChip : FrameLayout {
             chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
             setChipText(getString(R.styleable.PrimaryChip_chipText))
             setChipTextAppearance(getResourceId(R.styleable.PrimaryChip_chipTextAppearance, R.style.Body2_Regular))
-            val background =
-                getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
+            val background = getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
             background?.let { setChipBackground(it) }
             setChipStartIconType(getInt(R.styleable.PrimaryChip_chipStartIconType, 0).findChipStartIconTypeByOrdinal() ?: ChipStartIconType.NONE)
             setStartIcon(getDrawable(R.styleable.PrimaryChip_chipStartIcon))
@@ -196,7 +197,7 @@ class PrimaryChip : FrameLayout {
                 binding.firstIconContainer.addView(avatar)
             }
         }
-        invalidate()
+        setChipSize(chipSize)
     }
 
     fun setStartIcon(drawable: Drawable?) {
@@ -217,7 +218,7 @@ class PrimaryChip : FrameLayout {
                 }
             }
         }
-        invalidate()
+        setChipSize(chipSize)
     }
 
     fun setEndIcon(drawable: Drawable?) {
@@ -228,7 +229,7 @@ class PrimaryChip : FrameLayout {
             }
             endIcon.setImageDrawable(drawable)
         } else binding.lastIconContainer.removeAllViews()
-        invalidate()
+        setChipSize(chipSize)
     }
 
 
