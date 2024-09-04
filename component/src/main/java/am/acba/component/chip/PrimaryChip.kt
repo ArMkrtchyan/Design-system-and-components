@@ -52,7 +52,7 @@ class PrimaryChip : FrameLayout {
     private var chipTextAndIconColor: ColorStateList? = null
 
     constructor(context: Context) : super(context) {
-        layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         addView(binding.root, layoutParams)
         val background = ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
         background?.let { setChipBackground(it) }
@@ -70,7 +70,7 @@ class PrimaryChip : FrameLayout {
 
     fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryChip).apply {
-            layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             addView(binding.root, layoutParams)
             chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
             setChipText(getString(R.styleable.PrimaryChip_chipText))
@@ -193,7 +193,7 @@ class PrimaryChip : FrameLayout {
                 binding.firstIconContainer.addView(avatar)
             }
         }
-        invalidate()
+        setChipSize(chipSize)
     }
 
     fun setStartIcon(drawable: Drawable?) {
@@ -214,7 +214,7 @@ class PrimaryChip : FrameLayout {
                 }
             }
         }
-        invalidate()
+        setChipSize(chipSize)
     }
 
     fun setEndIcon(drawable: Drawable?) {
@@ -225,7 +225,7 @@ class PrimaryChip : FrameLayout {
             }
             endIcon.setImageDrawable(drawable)
         } else binding.lastIconContainer.removeAllViews()
-        invalidate()
+        setChipSize(chipSize)
     }
 
 
