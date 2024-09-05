@@ -1,16 +1,27 @@
 package am.acba.component.primaryProductCard
 
 import am.acba.component.R
+import am.acba.component.databinding.LayoutBadgesGroupBinding
+import am.acba.component.databinding.LayoutBulletsBinding
 import am.acba.component.databinding.PrimaryProductCardBinding
 import am.acba.component.extensions.inflater
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
+import androidx.core.view.isVisible
 
 class PrimaryProductCard : FrameLayout {
     private val binding by lazy {
         PrimaryProductCardBinding.inflate(context.inflater(), this, false)
     }
+    private var title: String? = null
+    private var description: String? = null
+    private var subTitle: String? = null
+    private var subDescription: String? = null
+    private var image: Drawable? = null
+    private val badgesGroup = ArrayList<View>()
 
     constructor(context: Context) : super(context)
 
@@ -24,8 +35,80 @@ class PrimaryProductCard : FrameLayout {
 
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryProductCard).apply {
+            title = getString(R.styleable.PrimaryProductCard_productCardTitle)
+            description = getString(R.styleable.PrimaryProductCard_productCardDescription)
+            subTitle = getString(R.styleable.PrimaryProductCard_productCardSubTitle)
+            subDescription = getString(R.styleable.PrimaryProductCard_productCardSubDescription)
+            image = getDrawable(R.styleable.PrimaryProductCard_productCardImage)
+            setTitle(title)
+            setSubTitle(subTitle)
+            setDescription(description)
+            setSubDescription(subDescription)
+            setImage(image)
             addView(binding.root)
             recycle()
         }
+    }
+
+    fun setTitle(title: String?) {
+        this.title = title
+        binding.title.text = title
+        invalidate()
+    }
+
+    fun setSubTitle(subTitle: String?) {
+        this.subTitle = subTitle
+        binding.subTitle.text = subTitle
+        binding.subTitle.isVisible = !subTitle.isNullOrEmpty()
+        invalidate()
+    }
+
+    fun setDescription(description: String?) {
+        this.description = description
+        binding.description.text = description
+        binding.description.isVisible = !description.isNullOrEmpty()
+        invalidate()
+    }
+
+    fun setSubDescription(subDescription: String?) {
+        this.subDescription = subDescription
+        binding.subDescription.text = subDescription
+        binding.subDescription.isVisible = !subDescription.isNullOrEmpty()
+        invalidate()
+    }
+
+    fun setImage(image: Drawable?) {
+        this.image = image
+        binding.image.setImageDrawable(image)
+        invalidate()
+    }
+
+    fun setBadgesGroup(badgesGroup: List<Pair<Drawable?, String>>) {
+        binding.flow.referencedIds = intArrayOf()
+        this.badgesGroup.forEach { binding.parentLayout.removeView(it) }
+        this.badgesGroup.clear()
+        badgesGroup.forEach {
+            val badgeGroupView = LayoutBadgesGroupBinding.inflate(context.inflater(), this, false)
+            badgeGroupView.root.id = View.generateViewId()
+            badgeGroupView.startIcon.setImageDrawable(it.first)
+            badgeGroupView.title.text = it.second
+            binding.flow.addView(badgeGroupView.root)
+            binding.parentLayout.addView(badgeGroupView.root)
+            this.badgesGroup.add(badgeGroupView.root)
+        }
+        binding.flow.referencedIds = this.badgesGroup.map { it.id }.toIntArray()
+        binding.flow.isVisible = badgesGroup.isNotEmpty()
+        invalidate()
+    }
+
+    fun setBullets(bullets: List<String>) {
+        binding.bullets.removeAllViews()
+        bullets.forEach {
+            val bulletView = LayoutBulletsBinding.inflate(context.inflater(), this, false)
+            bulletView.title.text = it
+            binding.bullets.addView(bulletView.root)
+        }
+        binding.bullets.isVisible = bullets.isNotEmpty()
+        invalidate()
     }
 }

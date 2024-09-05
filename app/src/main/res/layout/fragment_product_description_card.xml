@@ -28,43 +28,97 @@
 
             <am.acba.component.divider.PrimaryDivider
                 android:layout_width="match_parent"
-                android:text="Show all components"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                android:layout_marginVertical="16dp"
+                android:text="With Short description/multipe tags/subtitle" />
 
-            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <am.acba.component.divider.PrimaryDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Show all components"
-                android:layout_margin="16dp" />
+                android:layout_marginVertical="16dp"
+                android:text="Without short description" />
 
-            <am.acba.component.primaryEmptyView.PrimaryEmptyView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <am.acba.component.divider.PrimaryDivider
-                android:layout_width="match_parent"
-                android:text="Show all components"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
-
-            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <am.acba.component.divider.PrimaryDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Show all components"
-                android:layout_margin="16dp" />
+                android:layout_marginVertical="16dp"
+                android:text="Without short description and subtitle" />
 
-            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="With 1 tag" />
+
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="With 2 bullet" />
+
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="With body text" />
+
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="With 2 line title" />
+
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="With Short description/multipe tags/subtitle" />
+
+            <am.acba.component.primaryProductCard.PrimaryProductCard
+                android:id="@+id/product_card_excample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:productCardDescription="Հետևիր խնայողություններիդ աճին"
+                app:productCardImage="@drawable/investment_cropped"
+                app:productCardSubDescription="Հասանելի 7 արժույթagxyagxgaxgaxajhcahjcahjgxahjgcahjchajcahach svcavchjsvhjcshcbshjcbshjcbshjbcsjkbcksbs"
+                app:productCardSubTitle="ԹՎԱՅԻՆ ՔԱՐՏ"
+                app:productCardTitle="Խնայողական" />
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

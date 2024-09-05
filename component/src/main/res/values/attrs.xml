@@ -476,9 +476,15 @@
     <declare-styleable name="PersistentBottomSheet">
         <attr name="title" />
     </declare-styleable>
-    <declare-styleable name="PrimaryProductCard">
 
+    <declare-styleable name="PrimaryProductCard">
+        <attr name="productCardTitle" format="string" />
+        <attr name="productCardDescription" format="string" />
+        <attr name="productCardSubTitle" format="string" />
+        <attr name="productCardSubDescription" format="string" />
+        <attr name="productCardImage" format="reference" />
     </declare-styleable>
+
     <declare-styleable name="PrimaryEmptyView">
         <attr name="emptyIcon" format="reference" />
         <attr name="emptyIconWidth" format="dimension" />
