@@ -320,6 +320,7 @@
         <attr name="dividerTint" format="color" />
         <attr name="dividerTextAppearance" format="reference" />
         <attr name="dividerTextColor" format="color" />
+        <attr name="dividerTextBackground" format="reference" />
         <attr name="dividerTextMaxWidth" format="float" />
     </declare-styleable>
 

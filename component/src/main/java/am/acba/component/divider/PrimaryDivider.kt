@@ -75,6 +75,10 @@ class PrimaryDivider : FrameLayout {
                     binding.divider.background =
                         getDrawable(R.styleable.PrimaryDivider_dividerBackground)
                 }
+                if (hasValue(R.styleable.PrimaryDivider_dividerTextBackground)) {
+                    binding.dividerText.background = getDrawable(R.styleable.PrimaryDivider_dividerTextBackground)
+
+                }
 
             } catch (e: Exception) {
                 e.printStackTrace()

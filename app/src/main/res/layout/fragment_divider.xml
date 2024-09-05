@@ -33,7 +33,14 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-
+            <am.acba.component.divider.PrimaryDivider
+                android:id="@+id/group_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_marginBottom="@dimen/spacing_16"
+                android:text="08 Օգս 2024"
+                app:dividerTextBackground="?attr/backgroundBase"/>
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
