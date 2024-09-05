@@ -49,6 +49,8 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.CARD_LISTING -> findNavController().navigate(R.id.action_mainFragment_to_cardListingFragment)
             ComponentTypeEnum.STATUS_SCREEN -> findNavController().navigate(R.id.action_mainFragment_to_statusScreenFragment)
             ComponentTypeEnum.BOTTOM_SHEET -> findNavController().navigate(R.id.action_mainFragment_to_bottomSheetFragment)
+            ComponentTypeEnum.EMPTY_SCREEN -> findNavController().navigate(R.id.action_mainFragment_to_emptyStateFragment)
+            ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD -> findNavController().navigate(R.id.action_mainFragment_to_productDescriptionCardFragment)
         }
     }
 
@@ -77,5 +79,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.CARD_LISTING, ComponentTypeEnum.CARD_LISTING.componentName),
         Component(ComponentTypeEnum.STATUS_SCREEN, ComponentTypeEnum.STATUS_SCREEN.componentName),
         Component(ComponentTypeEnum.BOTTOM_SHEET, ComponentTypeEnum.BOTTOM_SHEET.componentName),
+        Component(ComponentTypeEnum.EMPTY_SCREEN, ComponentTypeEnum.EMPTY_SCREEN.componentName),
+        Component(ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD, ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD.componentName),
     )
 }

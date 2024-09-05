@@ -26,11 +26,11 @@
     </style>
 
     <style name="Subtitle1.Bold" parent="BaseTextStyle.Bold">
-        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
     <style name="Subtitle2.Bold" parent="BaseTextStyle.Bold">
-        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
     <style name="Heading1.Bold" parent="BaseTextStyle.Bold">

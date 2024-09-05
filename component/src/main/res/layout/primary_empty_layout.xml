@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="ContentDescription" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="ContentDescription" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/title"
+        style="@style/Subtitle1.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        tools:text="Բացեք խնայողական հաշիվ" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/description"
+        style="@style/Body2.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="?attr/contentPrimaryTonal1"
+        tools:text="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար" />
+
+    <am.acba.component.button.PrimaryButton
+        android:id="@+id/action_button"
+        style="@style/Button.Style.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/background_secondary_brand_8_radius"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp"
+        android:enabled="true"
+        android:paddingBottom="8dp"
+        android:textSize="@dimen/text_size_14"
+        app:icon="@drawable/ic_info"
+        tools:text="Խնայել" />
+</LinearLayout>

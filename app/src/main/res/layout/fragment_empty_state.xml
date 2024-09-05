@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EmptyStateFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Empty state" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Show all components" />
+
+            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyButtonIcon="@drawable/ic_account_investment"
+                app:emptyButtonTitle="Խնայել"
+                app:emptyDescription="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար"
+                app:emptyIcon="@drawable/cards_illustrator"
+                app:emptyIconType="Image"
+                app:emptyTitle="Բացեք խնայողական հաշիվ" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Icon, title and description" />
+
+            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyDescription="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար"
+                app:emptyIcon="@drawable/cards_illustrator"
+                app:emptyIconType="Image"
+                app:emptyTitle="Բացեք խնայողական հաշիվ" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Title and description" />
+
+            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyDescription="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար"
+                app:emptyTitle="Բացեք խնայողական հաշիվ" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Icon and Title" />
+
+            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyIcon="@drawable/ic_account_settings"
+                app:emptyIconHeight="32dp"
+                app:emptyIconType="Icon"
+                app:emptyIconWidth="32dp"
+                app:emptyTitle="Բացեք խնայողական հաշիվ" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Icon and Title" />
+
+            <am.acba.component.primaryEmptyView.PrimaryEmptyView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:emptyIconHeight="80dp"
+                app:emptyIconType="Lottie"
+                app:emptyIconWidth="80dp"
+                app:emptyLottieIcon="turn_device_animation.json"
+                app:emptyTitle="Բացեք խնայողական հաշիվ" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
