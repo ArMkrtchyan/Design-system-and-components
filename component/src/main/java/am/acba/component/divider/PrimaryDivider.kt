@@ -2,7 +2,6 @@ package am.acba.component.divider
 
 import am.acba.component.R
 import am.acba.component.databinding.DividerWithTextLayoutBinding
-import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getDisplayWidth
 import am.acba.component.extensions.inflater
 import android.content.Context
@@ -62,18 +61,19 @@ class PrimaryDivider : FrameLayout {
                 val thickness =
                     getDimensionPixelOffset(R.styleable.PrimaryDivider_dividerThickness, -1)
                 if (thickness != -1) {
-                    binding.divider.updateLayoutParams<LayoutParams> { height = thickness }
+                    binding.dividerStart.updateLayoutParams<LayoutParams> { height = thickness }
+                    binding.dividerEnd.updateLayoutParams<LayoutParams> { height = thickness }
                 }
 
 
                 if (hasValue(R.styleable.PrimaryDivider_dividerTint)) {
-                    binding.divider.backgroundTintList =
-                        getColorStateList(R.styleable.PrimaryDivider_dividerTint)
+                    binding.dividerStart.backgroundTintList = getColorStateList(R.styleable.PrimaryDivider_dividerTint)
+                    binding.dividerEnd.backgroundTintList = getColorStateList(R.styleable.PrimaryDivider_dividerTint)
                 }
 
                 if (hasValue(R.styleable.PrimaryDivider_dividerBackground)) {
-                    binding.divider.background =
-                        getDrawable(R.styleable.PrimaryDivider_dividerBackground)
+                    binding.dividerStart.background = getDrawable(R.styleable.PrimaryDivider_dividerBackground)
+                    binding.dividerEnd.background = getDrawable(R.styleable.PrimaryDivider_dividerBackground)
                 }
                 if (hasValue(R.styleable.PrimaryDivider_dividerTextBackground)) {
                     binding.dividerText.background = getDrawable(R.styleable.PrimaryDivider_dividerTextBackground)

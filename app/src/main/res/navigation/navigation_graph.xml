@@ -82,6 +82,12 @@
         <action
             android:id="@+id/action_mainFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_emptyStateFragment"
+            app:destination="@id/emptyStateFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_productDescriptionCardFragment"
+            app:destination="@id/productDescriptionCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -203,4 +209,14 @@
         android:name="am.acba.components.BottomSheetsFragment"
         android:label="Bottom sheet"
         tools:layout="@layout/modal_bottom_sheet" />
+    <fragment
+        android:id="@+id/emptyStateFragment"
+        tools:layout="@layout/fragment_empty_state"
+        android:name="am.acba.components.EmptyStateFragment"
+        android:label="EmptyStateFragment" />
+    <fragment
+        android:id="@+id/productDescriptionCardFragment"
+        android:name="am.acba.components.ProductDescriptionCardFragment"
+        android:label="fragment_product_description_card"
+        tools:layout="@layout/fragment_product_description_card" />
 </navigation>
