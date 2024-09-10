@@ -63,6 +63,7 @@ class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
         menuHost = fragmentActivity
         if (currentMenu != optionsMenu) {
             currentMenu = optionsMenu
+            menuProvider?.let { menuHost?.removeMenuProvider(it) }
             menuProvider = object : MenuProvider {
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                     menuInflater.inflate(optionsMenu, menu)

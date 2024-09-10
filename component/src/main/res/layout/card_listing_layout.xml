@@ -72,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:layout_marginTop="2dp"
                     android:lines="1"
                     android:visibility="gone"
                     tools:text="*************0346"
@@ -102,7 +103,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed"
                     tools:text="հասանելի մնացորդի մասին ինչ"
-                    tools:textColor="@color/Black_50"
                     tools:visibility="visible" />
 
                 <am.acba.component.textView.PrimaryTextView
@@ -114,6 +114,7 @@
                     android:gravity="end"
                     android:lines="1"
                     android:visibility="gone"
+                    android:layout_marginTop="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_end_title"

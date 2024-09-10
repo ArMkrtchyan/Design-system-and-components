@@ -199,10 +199,8 @@ class PrimaryCardListing : FrameLayout {
     }
 
     fun setStatusText(text: String?) {
-        text?.let {
-            showStatus = true
-            showStatus(showStatus)
-        }
+        showStatus = text?.isNotEmpty() == true
+        showStatus(showStatus)
         binding.tvStatus.updateTextView(text)
     }
 
