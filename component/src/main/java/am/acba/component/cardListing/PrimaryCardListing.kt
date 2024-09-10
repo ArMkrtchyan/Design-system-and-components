@@ -81,9 +81,11 @@ class PrimaryCardListing : FrameLayout {
                     )
                 )
                 val statusText = getString(R.styleable.PrimaryCardListing_cardListingStatusText)
-                val statusTextColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusTextColor) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                val statusTextColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusTextColor)
+                    ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
                 val statusIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingStatusIcon)
-                val statusIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                val statusIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusIconTint)
+                    ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
 
                 setLayoutBackgroundColor(layoutBackgroundColor)
                 setLayoutBorderColor(layoutBorderColor)
@@ -173,6 +175,8 @@ class PrimaryCardListing : FrameLayout {
     fun setStartIcon(icon: Drawable?) {
         binding.ivStartIcon.setIcon(icon)
     }
+
+    fun getStartIcon() = binding.ivStartIcon
 
     fun setStartIconTint(colorStateList: ColorStateList?) {
         binding.ivStartIcon.imageTintList = colorStateList
