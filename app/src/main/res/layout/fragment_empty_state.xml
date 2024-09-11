@@ -39,7 +39,6 @@
                 app:emptyButtonIcon="@drawable/ic_account_investment"
                 app:emptyButtonTitle="Խնայել"
                 app:emptyDescription="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար"
-                app:emptyIcon="@drawable/cards_illustrator"
                 app:emptyIconType="Image"
                 app:emptyTitle="Բացեք խնայողական հաշիվ" />
 
@@ -53,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:emptyDescription="Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար"
-                app:emptyIcon="@drawable/cards_illustrator"
                 app:emptyIconType="Image"
                 app:emptyTitle="Բացեք խնայողական հաշիվ" />
 

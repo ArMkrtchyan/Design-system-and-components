@@ -75,6 +75,7 @@ class PrimaryChip : FrameLayout {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryChip).apply {
             layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
                 gravity = Gravity.CENTER
+                minimumWidth = 56.dpToPx()
             }
             addView(binding.root, layoutParams)
             chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
