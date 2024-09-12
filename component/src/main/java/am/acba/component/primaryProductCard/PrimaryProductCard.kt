@@ -4,13 +4,16 @@ import am.acba.component.R
 import am.acba.component.databinding.LayoutBadgesGroupBinding
 import am.acba.component.databinding.LayoutBulletsBinding
 import am.acba.component.databinding.PrimaryProductCardBinding
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 
 class PrimaryProductCard : FrameLayout {
     private val binding by lazy {
@@ -40,13 +43,28 @@ class PrimaryProductCard : FrameLayout {
             subTitle = getString(R.styleable.PrimaryProductCard_productCardSubTitle)
             subDescription = getString(R.styleable.PrimaryProductCard_productCardSubDescription)
             image = getDrawable(R.styleable.PrimaryProductCard_productCardImage)
+            val cardHeight = getDimensionPixelOffset(R.styleable.PrimaryProductCard_productCardHeight, -2)
+            val backgroundColor =
+                getColorStateList(R.styleable.PrimaryProductCard_productCardBackgroundColor) ?: context.getColorStateListFromAttr(R.attr.backgroundTonal1)
             setTitle(title)
             setSubTitle(subTitle)
             setDescription(description)
             setSubDescription(subDescription)
             setImage(image)
+            setCardHeight(cardHeight)
+            setCardBackgroundColor(backgroundColor)
             addView(binding.root)
             recycle()
+        }
+    }
+
+    private fun setCardBackgroundColor(backgroundColor: ColorStateList) {
+        binding.root.setCardBackgroundColor(backgroundColor)
+    }
+
+    private fun setCardHeight(cardHeight: Int) {
+        binding.root.updateLayoutParams<LayoutParams> {
+            height = cardHeight
         }
     }
 
