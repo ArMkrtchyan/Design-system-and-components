@@ -484,6 +484,8 @@
         <attr name="productCardSubTitle" format="string" />
         <attr name="productCardSubDescription" format="string" />
         <attr name="productCardImage" format="reference" />
+        <attr name="productCardHeight" format="dimension" />
+        <attr name="productCardBackgroundColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryEmptyView">
