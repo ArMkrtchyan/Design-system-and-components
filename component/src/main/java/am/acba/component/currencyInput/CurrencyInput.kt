@@ -243,6 +243,11 @@ class CurrencyInput @JvmOverloads constructor(
         return if (amountText.isEmpty()) 0.0F else amountText.numberDeFormatting().toFloat()
     }
 
+    fun getLongAmount(): Long {
+        val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
+        return if (amountText.isEmpty()) 0 else amountText.toLong()
+    }
+
     fun getDeFormatedStringAmount(): String {
         val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
         return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
