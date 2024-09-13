@@ -25,7 +25,6 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
         )
         list2 = arrayListOf(Pair(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.ic_info), "-50% տարեկան վճար"))
         list3 = arrayListOf(
-            "հաշիվ՝ 4 արժույթով",
             "Մինչև 4% տարեկան տոկոսադրույք",
             "Հաշվի անսահմանափակ համալրման հնարավորություն",
             "Հաշվին առկա միջոցների օգտագործում՝ առանց կուտակված տոկոսագումարների կորստի",
