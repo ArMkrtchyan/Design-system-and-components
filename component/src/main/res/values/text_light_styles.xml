@@ -22,11 +22,11 @@
     </style>
 
     <style name="Subtitle1.Light" parent="BaseTextStyle.Light">
-        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
     <style name="Subtitle2.Light" parent="BaseTextStyle.Light">
-        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
     <style name="Heading1.Light" parent="BaseTextStyle.Light">
