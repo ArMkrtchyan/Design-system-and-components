@@ -240,7 +240,10 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun getFloatAmount(): Float {
         val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
-        return if (amountText.isEmpty()) 0.0F else amountText.numberDeFormatting().toFloat()
+        return if (amountText.isEmpty()) 0.0F else {
+            if (amountText.numberDeFormatting().isEmpty()) 0.0F
+            else amountText.numberDeFormatting().toFloat()
+        }
     }
 
     fun getLongAmount(): Long {
