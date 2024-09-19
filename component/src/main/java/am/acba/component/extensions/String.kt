@@ -5,9 +5,11 @@ import java.text.DecimalFormatSymbols
 import java.util.Locale
 
 fun String.numberDeFormatting(): String {
-   return if (this.contains(".")) {
+    return if (this.contains(".")) {
         val index = this.indexOf(".")
-        val numberAfterDot = this.substring(index + 1, this.length).toFloat()
+        val numberAfterDot = if (this.substring(index + 1, this.length).isNotEmpty())
+            this.substring(index + 1, this.length).toFloat()
+        else 0
         return if (numberAfterDot.toInt() == 0) {
             this.substring(0, index).replace(",", "")
         } else {
