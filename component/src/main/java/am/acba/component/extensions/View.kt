@@ -12,7 +12,6 @@ import androidx.core.app.FrameMetricsAggregator
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
@@ -99,7 +98,6 @@ fun ImageView.load(
     shimmer?.startShimmer()
     Glide.with(context)
         .load(url)
-        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .timeout(timeout)
         .apply(if (isCircle) RequestOptions().circleCrop() else RequestOptions().dontTransform())
         .listener(object : RequestListener<Drawable> {
