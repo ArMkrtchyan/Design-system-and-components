@@ -30,6 +30,27 @@
             tools:src="@drawable/ic_info"
             tools:visibility="visible" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/iv_start_icon"
+            app:layout_constraintEnd_toEndOf="@id/iv_start_icon"
+            app:layout_constraintStart_toStartOf="@id/iv_start_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_start_icon"
+            app:shimmer_duration="900"
+            app:shimmer_fixed_width="60dp"
+            app:shimmer_shape="linear"
+            app:shimmer_tilt="0">
+
+            <View
+                android:id="@+id/shimmer_inner_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_with_border_4" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_card_details"
             android:layout_width="0dp"
@@ -71,8 +92,8 @@
                     style="@style/Body2.Regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
                     android:layout_marginTop="2dp"
+                    android:ellipsize="end"
                     android:lines="1"
                     android:visibility="gone"
                     tools:text="*************0346"
@@ -110,11 +131,11 @@
                     style="@style/Body2.Bold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:gravity="end"
                     android:lines="1"
                     android:visibility="gone"
-                    android:layout_marginTop="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_end_title"
@@ -172,7 +193,7 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_close"
+                tools:src="@drawable/ic_close"
                 android:tint="?attr/contentPrimaryTonal1"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

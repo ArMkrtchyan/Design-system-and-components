@@ -8,6 +8,7 @@ import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.load
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
 import android.content.Context
@@ -16,6 +17,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 
@@ -174,6 +176,16 @@ class PrimaryCardListing : FrameLayout {
 
     fun setStartIcon(icon: Drawable?) {
         binding.ivStartIcon.setIcon(icon)
+    }
+
+    fun setStartIcon(iconUrl: String) {
+        val iconBackgroundTint = binding.ivStartIcon.backgroundTintList
+        binding.shimmerInnerView.backgroundTintList = iconBackgroundTint
+        binding.ivStartIcon.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.transparent)
+        binding.ivStartIcon.isVisible = true
+        binding.ivStartIcon.load(iconUrl, binding.shimmerLayout) { _, _ ->
+            binding.ivStartIcon.backgroundTintList = iconBackgroundTint
+        }
     }
 
     fun getStartIcon() = binding.ivStartIcon

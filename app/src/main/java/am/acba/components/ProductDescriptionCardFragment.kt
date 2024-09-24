@@ -45,7 +45,7 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
     private fun setProductCard0() {
         mBinding.productCardFull.setTitle("Խնայողական")
         mBinding.productCardFull.setDescription("Հետևիր խնայողություններիդ աճին")
-        mBinding.productCardFull.setImage(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.coins_illustration))
+        mBinding.productCardFull.setImage("https://bcw-media.s3.ap-northeast-1.amazonaws.com/text_to_image_topbanner_mb_1_f66b5f345b.jpg")
         mBinding.productCardFull.setBullets(list3)
         mBinding.productCardExcample.setBadgesGroup(list1)
         mBinding.productCardExcample.setBullets(list3)

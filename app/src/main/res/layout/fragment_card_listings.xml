@@ -61,7 +61,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardCurrencyText="AMD"
-                app:cardListingStartIcon="@drawable/ic_success"
                 app:cardListingStatusIcon="@drawable/ic_add"
                 app:cardListingStatusText="Բլոկավորված է"
                 app:endBodyText="400.000"

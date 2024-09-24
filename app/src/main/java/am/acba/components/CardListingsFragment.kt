@@ -29,14 +29,10 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
             setCardCurrencyText("AMD")
 
             setStartIconType(PrimaryCardListing.IconTypes.LARGE)
-            setStartIcon(getDrawable(context, am.acba.component.R.drawable.ic_info))
 
-            setStartIconBackgroundColor(
-                ColorStateList.valueOf(context.getColor(am.acba.component.R.color.BlueGrey_100))
-            )
-            setStartIconTint(
-                ColorStateList.valueOf(context.getColor(am.acba.component.R.color.BlueGrey_950_60))
-            )
+            setStartIconBackgroundColor(requireContext().getColorStateListFromAttr(R.attr.backgroundAlternative))
+            setStartIconTint(requireContext().getColorStateListFromAttr(R.attr.contentAlternative))
+            setStartIcon("https://bcw-media.s3.ap-northeast-1.amazonaws.com/text_to_image_topbanner_mb_1_f66b5f345b.jpg")
             setEndIcon(getDrawable(context, am.acba.component.R.drawable.ic_right))
 
             showStatus(true)
