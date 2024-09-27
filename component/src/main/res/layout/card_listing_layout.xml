@@ -27,7 +27,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginBottom="16dp"
-            tools:src="@drawable/ic_info"
+            tools:backgroundTint="?attr/backgroundAlternative4"
+            tools:src="@drawable/ic_symbol_chf"
+            tools:tint="?attr/contentAlternative4"
             tools:visibility="visible" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -193,12 +195,12 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:layout_marginEnd="4dp"
-                tools:src="@drawable/ic_close"
                 android:tint="?attr/contentPrimaryTonal1"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_status"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_close"
                 tools:visibility="visible" />
 
             <am.acba.component.textView.PrimaryTextView
