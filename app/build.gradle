@@ -36,6 +36,11 @@ android {
 }
 
 dependencies {
+
+    implementation('com.microblink:blinkcard:2.9.3@aar') {
+        transitive = true
+    }
+
     implementation libs.glide
     implementation libs.lottie
     implementation project(":component")

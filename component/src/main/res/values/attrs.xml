@@ -136,6 +136,14 @@
         <attr name="contentAlternative4" format="color" />
         <attr name="contentAlternative5" format="color" />
         <attr name="contentAlternative6" format="color" />
+
+        <!-- logo -->
+        <attr name="visaLogo" format="reference" />
+        <attr name="masterLogo" format="reference" />
+        <attr name="amexLogo" format="reference" />
+        <attr name="unionLogo" format="reference" />
+        <attr name="arcaLogo" format="reference" />
+        <attr name="emptyLogo" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryButton">
@@ -202,13 +210,25 @@
         <attr name="phoneInputHelpText" format="string" />
         <attr name="countryTopChips" format="string" />
     </declare-styleable>
-    <declare-styleable name="CurrencyInputInput">
+    <declare-styleable name="CurrencyInput">
         <attr name="currencyInputErrorText" format="string" />
         <attr name="currencyInputHintText" format="string" />
         <attr name="currencyInputHelpText" format="string" />
         <attr name="currencyInputMaxAmount" format="integer" />
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CardInput">
+        <attr name="cardInputErrorText" format="string" />
+        <attr name="cardInputHintText" format="string" />
+        <attr name="cardInputHelpText" format="string" />
+        <attr name="cardInputMaxLength" format="integer" />
+        <attr name="cardInputMinLength" format="integer" />
+        <attr name="cardInputLogoDetectCount" format="integer" />
+        <attr name="cardInputLogoBackground" format="reference" />
+        <attr name="cardInputErrorIcon" format="reference" />
+        <attr name="cardInputEndIcon" format="reference" />
+        <attr name="cardInputErrorIconTint" format="reference" />
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
@@ -509,4 +529,5 @@
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
     </declare-styleable>
+
 </resources>

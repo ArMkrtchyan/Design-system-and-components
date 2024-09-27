@@ -38,6 +38,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.EXCHANGE -> findNavController().navigate(R.id.action_mainFragment_to_exchangeFragment)
             ComponentTypeEnum.LIST_ITEMS -> findNavController().navigate(R.id.action_mainFragment_to_listItemFragment)
             ComponentTypeEnum.PHONE_NUMBER_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_phoneNumberInputFragment)
+            ComponentTypeEnum.CARD_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_cardInputFragment)
             ComponentTypeEnum.CURRENCY_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_currencyInputFragment)
             ComponentTypeEnum.EXPANDABLE_VIEW -> findNavController().navigate(R.id.action_mainFragment_to_expandableViewFragment)
             ComponentTypeEnum.PRIMARY_TAB_LAYOUT -> findNavController().navigate(R.id.action_mainFragment_to_tabLayoutFragment)
@@ -59,6 +60,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.INPUTS, ComponentTypeEnum.INPUTS.componentName),
         Component(ComponentTypeEnum.PHONE_NUMBER_INPUT, ComponentTypeEnum.PHONE_NUMBER_INPUT.componentName),
         Component(ComponentTypeEnum.CURRENCY_INPUT, ComponentTypeEnum.CURRENCY_INPUT.componentName),
+        Component(ComponentTypeEnum.CARD_INPUT, ComponentTypeEnum.CARD_INPUT.componentName),
         Component(ComponentTypeEnum.EXPANDABLE_VIEW, ComponentTypeEnum.EXPANDABLE_VIEW.componentName),
         Component(ComponentTypeEnum.PRIMARY_TAB_LAYOUT, ComponentTypeEnum.PRIMARY_TAB_LAYOUT.componentName),
         Component(ComponentTypeEnum.SEARCH_INPUT, ComponentTypeEnum.SEARCH_INPUT.componentName),

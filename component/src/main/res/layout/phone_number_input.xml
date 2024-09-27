@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_constraint"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_constraint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -66,11 +66,13 @@
                 android:layout_gravity="start|center"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_weight="0.9"
-                android:textSize="@dimen/text_size_16"
-                android:inputType="phone"
                 android:background="@color/Transparent"
                 android:hint="Phone number"
-                android:maxLength="15" />
+                android:inputType="phone"
+                android:maxLength="15"
+                android:textColor="?attr/contentPrimary"
+                android:textColorHint="?attr/contentPrimaryTonal1"
+                android:textSize="@dimen/text_size_16" />
 
             <am.acba.component.imageView.PrimaryImageView
                 android:id="@+id/clear"
@@ -78,8 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center"
                 android:padding="5dp"
-                android:tint="?attr/contentPrimary"
                 android:src="@drawable/ic_close_small"
+                android:tint="?attr/contentPrimary"
                 android:visibility="gone"
                 tools:visibility="visible" />
 
@@ -119,12 +121,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="?attr/contentPrimaryTonal1"
             android:layout_marginStart="6dp"
+            android:textColor="?attr/contentPrimaryTonal1"
             android:textSize="@dimen/text_size_12"
             tools:text="Wrong"
-            tools:visibility="visible"
-            />
+            tools:visibility="visible" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

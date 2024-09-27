@@ -49,14 +49,14 @@ class CurrencyInput @JvmOverloads constructor(
 
     init {
         addView(binding.root)
-        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
+        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInput).apply {
             try {
-                errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
-                hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
-                helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
-                maxAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0)
-                minAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0)
-                formattingWithOutDot = getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
+                errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
+                hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
+                helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
+                maxAmount = getInt(R.styleable.CurrencyInput_currencyInputMaxAmount, 0)
+                minAmount = getInt(R.styleable.CurrencyInput_currencyInputMinAmount, 0)
+                formattingWithOutDot = getBoolean(R.styleable.CurrencyInput_formattingWithOutDot, false)
             } finally {
                 recycle()
             }
