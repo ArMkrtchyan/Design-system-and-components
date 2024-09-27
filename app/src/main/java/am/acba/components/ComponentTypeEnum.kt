@@ -27,4 +27,5 @@ enum class ComponentTypeEnum(val componentName: String) {
     BOTTOM_SHEET("Bottom sheet"),
     EMPTY_SCREEN("Empty screen"),
     PRODUCT_DESCRIPTION_CARD("Product description card"),
+    LOAN_COMPONENTS("Loan components"),
 }

@@ -51,6 +51,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.BOTTOM_SHEET -> findNavController().navigate(R.id.action_mainFragment_to_bottomSheetFragment)
             ComponentTypeEnum.EMPTY_SCREEN -> findNavController().navigate(R.id.action_mainFragment_to_emptyStateFragment)
             ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD -> findNavController().navigate(R.id.action_mainFragment_to_productDescriptionCardFragment)
+            ComponentTypeEnum.LOAN_COMPONENTS -> findNavController().navigate(R.id.action_mainFragment_to_loanComponentsFragment)
         }
     }
 
@@ -81,5 +82,6 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.BOTTOM_SHEET, ComponentTypeEnum.BOTTOM_SHEET.componentName),
         Component(ComponentTypeEnum.EMPTY_SCREEN, ComponentTypeEnum.EMPTY_SCREEN.componentName),
         Component(ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD, ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD.componentName),
+        Component(ComponentTypeEnum.LOAN_COMPONENTS, ComponentTypeEnum.LOAN_COMPONENTS.componentName),
     )
 }

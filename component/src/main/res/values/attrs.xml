@@ -509,4 +509,9 @@
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="PrimaryLoanCardView"></declare-styleable>
+    <declare-styleable name="PrimaryLoanOfferCardView"></declare-styleable>
+    <declare-styleable name="PrimaryLoanOffersView"></declare-styleable>
+    <declare-styleable name="PrimaryLoanTableView"></declare-styleable>
 </resources>

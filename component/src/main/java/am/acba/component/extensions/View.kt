@@ -3,13 +3,17 @@ package am.acba.component.extensions
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import android.view.View
 import android.view.View.MeasureSpec
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.app.FrameMetricsAggregator
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -47,6 +51,16 @@ fun View.expandHeight(duration: Long = 0) {
     heightAnimator.start()
 }
 
+fun View.expandHeightFromTo(duration: Long = 0, from: Int, to: Int) {
+    val heightAnimator = ValueAnimator.ofInt(from, to)
+    heightAnimator.addUpdateListener { animation ->
+        this.layoutParams.height = animation.animatedValue as Int
+        this.requestLayout()
+    }
+    heightAnimator.duration = if (duration > 0) duration else FrameMetricsAggregator.ANIMATION_DURATION.toLong()
+    heightAnimator.start()
+}
+
 fun View.collapseHeight(duration: Long = 0) {
     val initialHeight = this.measuredHeight
     val heightAnimator = ValueAnimator.ofInt(0, initialHeight)
@@ -57,6 +71,52 @@ fun View.collapseHeight(duration: Long = 0) {
     }
     heightAnimator.duration = if (duration > 0) duration else FrameMetricsAggregator.ANIMATION_DURATION.toLong()
     heightAnimator.start()
+}
+
+fun View.animateHeightFromTo(duration: Long = 0, from: Float, to: Float) {
+    val animator = ValueAnimator.ofFloat(from, to);
+    animator.setDuration(duration);
+
+    animator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
+        override fun onAnimationUpdate(animation: ValueAnimator) {
+            val value = animation.getAnimatedValue().toString().toFloat()
+            updateLayoutParams<ViewGroup.LayoutParams> {
+                height = value.toInt()
+                invalidate()
+            }
+        }
+    })
+    animator.start()
+}
+
+fun View.animateAlpha(
+    target: Float,
+    duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(),
+    startAction: (View.() -> Unit)? = null,
+    endAction: (View.() -> Unit)? = null,
+) {
+    startAction?.invoke(this)
+    animate().alpha(target).setDuration(duration).withEndAction {
+        endAction?.invoke(this)
+    }.start()
+}
+
+fun TextView.animateTextSize(
+    startSize: Float,
+    endSize: Float,
+    duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(),
+) {
+    val animator = ValueAnimator.ofFloat(startSize, endSize);
+    animator.setDuration(duration);
+
+    animator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
+        override fun onAnimationUpdate(animation: ValueAnimator) {
+            val value = animation.getAnimatedValue().toString().toFloat()
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, value)
+            postInvalidate()
+        }
+    })
+    animator.start()
 }
 
 fun ImageView.load(
