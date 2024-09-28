@@ -16,7 +16,7 @@ import androidx.transition.TransitionManager
 
 class PrimaryLoanOfferCardView : FrameLayout {
     private val binding by lazy { PrimaryLoanOfferCardBinding.inflate(context.inflater(), this, false) }
-    private var isOpenedState = true
+    private var isOpenedState = false
 
     constructor(context: Context) : super(context)
 
@@ -41,65 +41,11 @@ class PrimaryLoanOfferCardView : FrameLayout {
     }
 
     private fun setOpenedState() {
-        val constrainedSet = ConstraintSet()
-        constrainedSet.clone(binding.parent)
-        val openedPadding = 16.dpToPx().toInt()
-        binding.parent.setPadding(openedPadding, openedPadding, openedPadding, openedPadding)
-        setOpenedStateConnections(constrainedSet)
-        applyWithAnimation(constrainedSet)
+        binding.parent.setTransition(R.id.start)
     }
 
     private fun setClosedState() {
-        val constrainedSet = ConstraintSet()
-        constrainedSet.clone(binding.parent)
-        val closedPadding = 8.dpToPx().toInt()
-        binding.parent.setPadding(closedPadding, closedPadding, closedPadding, closedPadding)
-        setClosedStateConnections(constrainedSet)
-        applyWithAnimation(constrainedSet)
+        binding.parent.setTransition(R.id.end)
     }
 
-    private fun applyWithAnimation(constrainedSet: ConstraintSet) {
-        val transition = AutoTransition().apply {
-            interpolator = AccelerateDecelerateInterpolator()
-            duration = 250L
-        }
-        TransitionManager.beginDelayedTransition(binding.parent, transition)
-        constrainedSet.applyTo(binding.parent)
-    }
-
-    private fun setOpenedStateConnections(constrainedSet: ConstraintSet) {
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.END, R.id.loan_offer_card_arrow_right, ConstraintSet.START, 10.dpToPx())
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
-        constrainedSet.clear(R.id.loan_offer_card_title, ConstraintSet.BOTTOM)
-
-        constrainedSet.connect(R.id.loan_offer_card_amount_with_currency, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
-        constrainedSet.connect(R.id.loan_offer_card_amount_with_currency, ConstraintSet.TOP, R.id.loan_offer_card_title, ConstraintSet.BOTTOM, 4.dpToPx())
-        constrainedSet.clear(R.id.loan_offer_card_amount_with_currency, ConstraintSet.BOTTOM)
-
-        constrainedSet.connect(R.id.loan_offer_card_badge, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
-        constrainedSet.connect(R.id.loan_offer_card_badge, ConstraintSet.TOP, R.id.loan_offer_card_amount_with_currency, ConstraintSet.BOTTOM, 8.dpToPx())
-
-        binding.loanOfferCardEndDate.animateAlpha(1f)
-        binding.loanOfferCardArrowRight.animateAlpha(1f)
-        binding.loanOfferCardAmountWithCurrency.animateTextSize(12f, 20f)
-    }
-
-    private fun setClosedStateConnections(constrainedSet: ConstraintSet) {
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.START, R.id.loan_offer_card_amount_with_currency, ConstraintSet.END, 10.dpToPx())
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.TOP, R.id.loan_offer_card_amount_with_currency, ConstraintSet.TOP, 0)
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.BOTTOM, R.id.loan_offer_card_amount_with_currency, ConstraintSet.BOTTOM, 0)
-        constrainedSet.connect(R.id.loan_offer_card_title, ConstraintSet.END, R.id.loan_offer_card_badge, ConstraintSet.START, 0)
-
-        constrainedSet.connect(R.id.loan_offer_card_amount_with_currency, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0)
-        constrainedSet.connect(R.id.loan_offer_card_amount_with_currency, ConstraintSet.TOP, R.id.loan_offer_card_badge, ConstraintSet.TOP, 0)
-        constrainedSet.connect(R.id.loan_offer_card_amount_with_currency, ConstraintSet.BOTTOM, R.id.loan_offer_card_badge, ConstraintSet.BOTTOM, 0)
-
-        constrainedSet.connect(R.id.loan_offer_card_badge, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0)
-        constrainedSet.connect(R.id.loan_offer_card_badge, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
-
-        binding.loanOfferCardAmountWithCurrency.animateTextSize(20f, 12f)
-        binding.loanOfferCardEndDate.animateAlpha(0f)
-        binding.loanOfferCardArrowRight.animateAlpha(0f)
-    }
 }

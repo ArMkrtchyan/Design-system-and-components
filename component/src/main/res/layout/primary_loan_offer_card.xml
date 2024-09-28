@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_corner"
     android:backgroundTint="?attr/backgroundAlternative6"
-    android:padding="16dp">
+    app:layoutDescription="@xml/primary_loan_offer_card_scene">
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/loan_offer_card_title"
@@ -14,6 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:text="վարկային սահմանաչափ"
         app:layout_constraintEnd_toStartOf="@id/loan_offer_card_arrow_right"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:layout_marginStart="16dp"
         android:minHeight="32dp"
         android:text="10,000,000.00 AMD"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +39,7 @@
         style="@style/XSmall.Regular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="10dp"
         android:text="Վերջնաժամկետ - 12/09/2024"
         app:layout_constraintBottom_toBottomOf="@id/loan_offer_card_badge"
@@ -52,7 +55,7 @@
         app:badgeBackgroundTint="?attr/backgroundBrand"
         app:badgeText="new"
         app:badgeType="Text"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loan_offer_card_amount_with_currency" />
 
@@ -64,8 +67,10 @@
         android:backgroundTint="?attr/backgroundInverse"
         android:backgroundTintMode="add"
         android:padding="5dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_right"
-        android:tint="?attr/contentPrimary"
+        android:tint="?attr/contentInverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
