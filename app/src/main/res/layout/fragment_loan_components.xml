@@ -11,20 +11,20 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:title="Exchange" />
+        app:title="Loan components" />
 
     <am.acba.component.textView.PrimaryTextView
         style="@style/Subtitle1.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:text="The exchange widget can be used on different screens based on product needs. It quickly displays users' main currency rates, and users can press the widget for navigation to the main currency exchange screen." />
+        android:text="" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -34,7 +34,11 @@
             android:paddingHorizontal="20dp">
 
             <am.acba.component.loanComponents.PrimaryLoanOfferCardView
-                android:id="@+id/exchange_rates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <am.acba.component.loanComponents.PrimaryLoanOffersView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp" />
