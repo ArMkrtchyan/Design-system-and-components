@@ -35,7 +35,17 @@ fun View.animateRotation(
     }.start()
 }
 
-fun View.expandHeight(duration: Long = 0) {
+fun View.expandHeightTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(), height: Int) {
+    val heightAnimator = ValueAnimator.ofInt(0, height)
+    heightAnimator.addUpdateListener { animation ->
+        this.layoutParams.height = animation.animatedValue as Int
+        this.requestLayout()
+    }
+    heightAnimator.duration = duration
+    heightAnimator.start()
+}
+
+fun View.expandHeight(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong()) {
     this.measure(
         MeasureSpec.makeMeasureSpec(this.rootView.width, MeasureSpec.EXACTLY),
         MeasureSpec.makeMeasureSpec(this.rootView.height, MeasureSpec.AT_MOST)
@@ -47,7 +57,7 @@ fun View.expandHeight(duration: Long = 0) {
         this.layoutParams.height = animation.animatedValue as Int
         this.requestLayout()
     }
-    heightAnimator.duration = if (duration > 0) duration else FrameMetricsAggregator.ANIMATION_DURATION.toLong()
+    heightAnimator.duration = duration
     heightAnimator.start()
 }
 
@@ -65,15 +75,62 @@ fun View.collapseHeight(duration: Long = 0) {
     val initialHeight = this.measuredHeight
     val heightAnimator = ValueAnimator.ofInt(0, initialHeight)
     heightAnimator.addUpdateListener { animation ->
-        val animatedValue = animation.animatedValue as Int
-        this.layoutParams.height = initialHeight - animatedValue
-        this.requestLayout()
+        updateLayoutParams<ViewGroup.LayoutParams> {
+            height = initialHeight - animation.getAnimatedValue().toString().toInt()
+            invalidate()
+        }
     }
     heightAnimator.duration = if (duration > 0) duration else FrameMetricsAggregator.ANIMATION_DURATION.toLong()
     heightAnimator.start()
 }
 
-fun View.animateHeightFromTo(duration: Long = 0, from: Float, to: Float) {
+fun View.collapseWidth(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong()) {
+    val initialWidth = this.measuredWidth
+    val widthAnimator = ValueAnimator.ofInt(0, initialWidth)
+    widthAnimator.addUpdateListener { animation ->
+        updateLayoutParams<ViewGroup.LayoutParams> {
+            width = initialWidth - animation.getAnimatedValue().toString().toInt()
+            invalidate()
+        }
+    }
+    widthAnimator.duration = duration
+    widthAnimator.start()
+}
+
+fun View.expandWidth(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong()) {
+    this.measure(
+        MeasureSpec.makeMeasureSpec(this.rootView.width, MeasureSpec.AT_MOST),
+        MeasureSpec.makeMeasureSpec(this.rootView.height, MeasureSpec.EXACTLY)
+    )
+    val targetWidth = this.measuredWidth
+    val widthAnimator = ValueAnimator.ofInt(0, targetWidth)
+    widthAnimator.addUpdateListener { animation ->
+        updateLayoutParams<ViewGroup.LayoutParams> {
+            width = animation.getAnimatedValue().toString().toInt()
+            invalidate()
+        }
+    }
+    widthAnimator.duration = duration
+    widthAnimator.start()
+}
+
+fun View.expandWidthTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(), widthTo: Int) {
+    this.measure(
+        MeasureSpec.makeMeasureSpec(this.rootView.width, MeasureSpec.AT_MOST),
+        MeasureSpec.makeMeasureSpec(this.rootView.height, MeasureSpec.EXACTLY)
+    )
+    val widthAnimator = ValueAnimator.ofInt(0, widthTo)
+    widthAnimator.addUpdateListener { animation ->
+        updateLayoutParams<ViewGroup.LayoutParams> {
+            width = animation.getAnimatedValue().toString().toInt()
+            invalidate()
+        }
+    }
+    widthAnimator.duration = duration
+    widthAnimator.start()
+}
+
+fun View.animateHeightFromTo(duration: Long = 250, from: Float, to: Float) {
     val animator = ValueAnimator.ofFloat(from, to);
     animator.setDuration(duration);
 

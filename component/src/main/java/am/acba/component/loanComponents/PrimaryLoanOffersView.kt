@@ -7,13 +7,17 @@ import am.acba.component.extensions.collapseHeight
 import am.acba.component.extensions.expandHeight
 import am.acba.component.extensions.inflater
 import android.content.Context
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.PagerSnapHelper
 
 class PrimaryLoanOffersView : FrameLayout {
     private val binding by lazy { PrimaryLoanOffersBinding.inflate(context.inflater(), this, false) }
     private var isExpanded = false
+    private val adapter by lazy { LoanCardAdapter(onItemClick = {}) }
 
     constructor(context: Context) : super(context)
 
@@ -27,8 +31,12 @@ class PrimaryLoanOffersView : FrameLayout {
 
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryLoanOffersView).apply {
+            val snapHelper = PagerSnapHelper();
+            snapHelper.attachToRecyclerView(binding.offersRecycler);
+            binding.offersRecycler.adapter = adapter
+            setSeeAllText("Տեսնել բոլոր առաջարկները")
             binding.headerContainer.setOnClickListener {
-                binding.offerCard.setOpenedOrClosedState()
+                adapter.updateCardState()
                 if (isExpanded) {
                     binding.seeAll.collapseHeight()
                     binding.arrow.animateRotation(0f, duration = 250)
@@ -44,4 +52,15 @@ class PrimaryLoanOffersView : FrameLayout {
         }
     }
 
+    fun setSeeAllText(text: String?) {
+        val mSpannableString = SpannableString(text)
+        mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
+        binding.seeAll.text = mSpannableString
+    }
+
+    fun submitLoanOffers(list: List<LoanCard>) {
+        binding.loanOfferCardBadge.isVisible = list.size > 1
+        binding.loanOfferCardBadge.setBadgeText("+${list.size - 1}")
+        adapter.submitList(list)
+    }
 }

@@ -64,12 +64,6 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_loan_offer_card" />
 
-    <am.acba.component.loanComponents.PrimaryLoanOfferCardView
-        android:id="@+id/offer_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp" />
-
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/see_all"
         style="@style/Body2.Regular"

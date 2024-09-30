@@ -33,12 +33,8 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <am.acba.component.loanComponents.PrimaryLoanOfferCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp" />
-
             <am.acba.component.loanComponents.PrimaryLoanOffersView
+                android:id="@+id/loan_offers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp" />
