@@ -34,9 +34,7 @@ android {
 }
 
 dependencies {
-    implementation('com.microblink:blinkcard:2.9.3@aar') {
-        transitive = true
-    }
+    implementation fileTree(dir: "$projectDir/libs", include: ['pay-card-release.aar'])
     implementation libs.lottie
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat

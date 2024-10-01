@@ -3,7 +3,7 @@ package am.acba.component.phoneNumberInput
 import am.acba.component.R
 import am.acba.component.databinding.CountryPickerLayoutBinding
 import am.acba.component.databinding.PhoneNumberInputBinding
-import am.acba.component.dialog.ContactBooksBottomSheetDialog
+import am.acba.component.dialog.ListBottomSheetDialog
 import am.acba.component.dialog.CountryBottomSheetDialog
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
@@ -250,9 +250,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             pickContact()
         } else {
             requestContactPermission()
-
         }
-
     }
 
     private fun checkContactPermission(): Boolean {
@@ -284,7 +282,7 @@ class PhoneNumberInput @JvmOverloads constructor(
 
 
     private fun contactIconClick() {
-        ContactBooksBottomSheetDialog.show(getFragmentManager(), ::handleBookClickActions)
+        ListBottomSheetDialog.show(getFragmentManager(), ::handleBookClickActions)
     }
 
     override fun setEnabled(isEnable: Boolean) {

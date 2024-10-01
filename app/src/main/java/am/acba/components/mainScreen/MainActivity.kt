@@ -13,7 +13,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.microblink.blinkcard.MicroblinkSDK
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -32,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        MicroblinkSDK.setLicenseKey("sRwCABJhbS5hY2JhLmNvbXBvbmVudHMAbGV5SkRjbVZoZEdWa1QyNGlPakUzTWpjek16SXpNamszT0RRc0lrTnlaV0YwWldSR2IzSWlPaUkyWVRjM1pXSTNZaTFqTW1NeUxUUmlZVGN0T0RWbU5TMDNaamczWkRoak16ZGlNMlVpZlE9Pelt4fnuRM1+mewM5EFBBxMzxLW2e7x6hWXx/COBIqbFA93UXpktptAEYbLEJ/IaUmj4HkmuZNusdhsluoUIuqpmoCfO2Vm5sxgSJekXj6bT5/I8epME67x7Y4NLgw==",this)
     }
 
     fun hideSoftInput() {

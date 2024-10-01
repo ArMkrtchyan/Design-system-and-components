@@ -229,6 +229,10 @@
         <attr name="cardInputErrorIcon" format="reference" />
         <attr name="cardInputEndIcon" format="reference" />
         <attr name="cardInputErrorIconTint" format="reference" />
+        <attr name="cardInputEndIconAction" format="enum">
+            <enum name="CardScanner" value="0" />
+            <enum name="DropDown" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />

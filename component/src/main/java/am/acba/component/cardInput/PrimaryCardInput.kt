@@ -29,11 +29,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
-import com.microblink.blinkcard.entities.recognizers.Recognizer
-import com.microblink.blinkcard.entities.recognizers.RecognizerBundle
-import com.microblink.blinkcard.entities.recognizers.blinkcard.BlinkCardRecognizer
-import com.microblink.blinkcard.uisettings.ActivityRunner
-import com.microblink.blinkcard.uisettings.BlinkCardUISettings
+import cards.pay.paycardsrecognizer.sdk.Card
+import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
+import java.net.IDN
 
 
 @SuppressLint("CustomViewStyleable")
@@ -57,8 +55,9 @@ class PrimaryCardInput @JvmOverloads constructor(
     private var errorIconColor: ColorStateList? = null
     private var isValidNumber = true
     private var isFocusable = false
+    private var cardInputEndIconAction: Int
 
-    private val SCAN_REQUEST_CODE = 1001
+    private val SCAN_REQUEST_CODE = 1
     private val CAMERA_PERMISSION_CODE = 1002
 
     private var onCardScanDataAction: ((CardDataModel) -> Unit)? = null
@@ -78,6 +77,7 @@ class PrimaryCardInput @JvmOverloads constructor(
                 errorIcon = getDrawable(R.styleable.CardInput_cardInputErrorIcon)
                 endIcon = getDrawable(R.styleable.CardInput_cardInputEndIcon)
                 errorIconColor = getColorStateList(R.styleable.CardInput_cardInputErrorIconTint)
+                cardInputEndIconAction = getInt(R.styleable.CardInput_cardInputEndIconAction, 0)
             } finally {
                 recycle()
             }
@@ -88,7 +88,13 @@ class PrimaryCardInput @JvmOverloads constructor(
         setupHelpErrorText(true)
         onCardNumberTextChange()
         binding.clear.setOnClickListener { binding.cardNumber.setText("") }
-        binding.endIcon.setOnClickListener { initiateCardScan() }
+        binding.endIcon.setOnClickListener {
+            if (cardInputEndIconAction == 0)
+                initiateCardScan()
+            else {
+
+            }
+        }
     }
 
     override fun setEnabled(isEnable: Boolean) {
@@ -99,6 +105,10 @@ class PrimaryCardInput @JvmOverloads constructor(
         binding.cardNumber.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimary else R.attr.contentPrimaryTonal1Disable))
         binding.cardNumber.setHintTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
         binding.helpText.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
+    }
+
+    fun setDropDownActionsList(list: MutableList<Triple<Drawable, String, Int>>){
+
     }
 
     private fun setupUi() {
@@ -314,16 +324,8 @@ class PrimaryCardInput @JvmOverloads constructor(
         onCardScanDataAction = cardData
     }
 
-    // Camera permission and Card scanner logic
-    private lateinit var mRecognizer: BlinkCardRecognizer
-    private lateinit var mRecognizerBundle: RecognizerBundle
 
-    private fun setupScan() {
-        mRecognizer = BlinkCardRecognizer()
-        mRecognizerBundle = RecognizerBundle(mRecognizer)
-    }
-
-    private fun initiateCardScan() {
+    fun initiateCardScan() {
         if (checkCameraPermission()) {
             startCardScan()
         } else {
@@ -332,11 +334,8 @@ class PrimaryCardInput @JvmOverloads constructor(
     }
 
     private fun startCardScan() {
-        if (!::mRecognizer.isInitialized) {
-            setupScan()
-        }
-        val settings = BlinkCardUISettings(mRecognizerBundle)
-        ActivityRunner.startActivityForResult(fragment, SCAN_REQUEST_CODE, settings)
+        val intent = ScanCardIntent.Builder(fragment.requireActivity()).build()
+        fragment.activity?.startActivityFromFragment(fragment, intent, SCAN_REQUEST_CODE)
     }
 
     private fun checkCameraPermission(): Boolean {
@@ -357,23 +356,26 @@ class PrimaryCardInput @JvmOverloads constructor(
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
-            mRecognizerBundle.loadFromIntent(data!!)
+            val card = data?.getParcelableExtra<Card>(ScanCardIntent.RESULT_PAYCARDS_CARD)
 
-            val result = mRecognizer.result
-            if (result.resultState == Recognizer.Result.State.Valid) {
-                result.let {
-                    val cardNumber = it.cardNumber
-                    binding.cardNumber.setText(cardNumber)
+            if (card != null) {
+                binding.cardNumber.setText(card.cardNumber)
+
+                val expirationDate = card.expirationDate
+                val cardHolderName = card.cardHolderName
+
+                if (expirationDate != null && cardHolderName != null) {
                     val cardData = CardDataModel(
-                        cardNumber = it.cardNumber,
-                        cardCVV = it.cvv,
-                        cardOwner = it.owner,
-                        cardExDate = it.expiryDate.originalDateString
+                        cardNumber = card.cardNumber,
+                        cardCVV = "",
+                        cardOwner = cardHolderName,
+                        cardExDate = expirationDate
                     )
                     onCardScanDataAction?.invoke(cardData)
                 }
             }
-
         }
     }
+
+
 }
