@@ -88,6 +88,10 @@
         <action
             android:id="@+id/action_mainFragment_to_productDescriptionCardFragment"
             app:destination="@id/productDescriptionCardFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_progressIndicatorFragment"
+            app:destination="@id/progressIndicatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -219,4 +223,9 @@
         android:name="am.acba.components.ProductDescriptionCardFragment"
         android:label="fragment_product_description_card"
         tools:layout="@layout/fragment_product_description_card" />
+    <fragment
+        android:id="@+id/progressIndicatorFragment"
+        android:name="am.acba.components.ProgressIndicatorFragment"
+        android:label="ProgressIndicatorFragment"
+        tools:layout="@layout/fragment_progress_indicator"/>
 </navigation>
