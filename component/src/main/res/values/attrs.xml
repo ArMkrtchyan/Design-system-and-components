@@ -510,4 +510,8 @@
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="SegmentedProgressBar">
+        <attr name="segmentCount" format="integer"/>
+    </declare-styleable>
 </resources>
