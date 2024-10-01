@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 class PrimaryLoanOffersView : FrameLayout {
     private val binding by lazy { PrimaryLoanOffersBinding.inflate(context.inflater(), this, false) }
     private var isExpanded = false
-    private val adapter by lazy { LoanCardAdapter(onItemClick = {}) }
+    private val adapter by lazy { LoanOfferCardAdapter(onItemClick = {}) }
 
     constructor(context: Context) : super(context)
 
@@ -58,7 +58,7 @@ class PrimaryLoanOffersView : FrameLayout {
         binding.seeAll.text = mSpannableString
     }
 
-    fun submitLoanOffers(list: List<LoanCard>) {
+    fun submitLoanOffers(list: List<LoanOfferCard>) {
         binding.loanOfferCardBadge.isVisible = list.size > 1
         binding.loanOfferCardBadge.setBadgeText("+${list.size - 1}")
         adapter.submitList(list)

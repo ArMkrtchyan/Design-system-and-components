@@ -1,50 +1,40 @@
 package am.acba.component.loanComponents
 
-import am.acba.component.databinding.ItemLoanOfferCardBinding
+import am.acba.component.databinding.ItemLoanAdditionalInformationBinding
 import am.acba.component.extensions.inflater
-import am.acba.component.loanComponents.LoanCardAdapter.ViewHolder
+import am.acba.component.loanComponents.LoanCardAdditionalInfoAdapter.ViewHolder
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hadilq.liveevent.LiveEvent
 
-class LoanCardAdapter(private val onItemClick: (LoanCard) -> Unit) : ListAdapter<LoanCard, ViewHolder>(LoanCardDiffCallBack()) {
-    private val openCloseLiveEvent = LiveEvent<Boolean>()
-    private var isOpenedState = false
+class LoanCardAdditionalInfoAdapter() : ListAdapter<LoanCardAdditionalInfo, ViewHolder>(LoanCardAdditionalInfoDiffCallBack()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemLoanOfferCardBinding.inflate(parent.context.inflater(), parent, false)
+        val binding = ItemLoanAdditionalInformationBinding.inflate(parent.context.inflater(), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.onBind(getItem(position), onItemClick)
+        holder.onBind(getItem(position))
     }
 
-    inner class ViewHolder(private val binding: ItemLoanOfferCardBinding) :
+    inner class ViewHolder(private val binding: ItemLoanAdditionalInformationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(loanCard: LoanCard, onItemClick: (LoanCard) -> Unit) {
+        fun onBind(loanOfferCard: LoanCardAdditionalInfo) {
             setIsRecyclable(false)
-            binding.root.setLoanCard(loanCard)
-            binding.root.setOnClickListener { onItemClick.invoke(loanCard) }
-            binding.root.setState(isOpenedState)
-            openCloseLiveEvent.observeForever {
-                isOpenedState = it
-                binding.root.setOpenedOrClosedState(isOpenedState)
-            }
+            binding.infoTitle.text = loanOfferCard.title
+            binding.info.text = loanOfferCard.info
         }
     }
 
-    fun updateCardState() {
-        openCloseLiveEvent.value = !isOpenedState
-    }
 
-    private class LoanCardDiffCallBack : DiffUtil.ItemCallback<LoanCard>() {
-        override fun areItemsTheSame(oldItem: LoanCard, newItem: LoanCard) =
+    private class LoanCardAdditionalInfoDiffCallBack : DiffUtil.ItemCallback<LoanCardAdditionalInfo>() {
+        override fun areItemsTheSame(oldItem: LoanCardAdditionalInfo, newItem: LoanCardAdditionalInfo) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: LoanCard, newItem: LoanCard) =
+        override fun areContentsTheSame(oldItem: LoanCardAdditionalInfo, newItem: LoanCardAdditionalInfo) =
             oldItem == newItem
     }
 }

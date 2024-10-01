@@ -101,7 +101,7 @@ class PrimaryLoanOfferCardView : FrameLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    fun setLoanCard(loanCard: LoanCard) {
+    fun setLoanCard(loanCard: LoanOfferCard) {
         binding.loanOfferCardTitle.text = loanCard.title
         binding.loanOfferCardAmountWithCurrency.text = loanCard.amount + " " + loanCard.currency
         binding.loanOfferCardAmountWithCurrencyTop.text = loanCard.amount + " " + loanCard.currency
