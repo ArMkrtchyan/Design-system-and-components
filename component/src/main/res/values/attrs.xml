@@ -513,5 +513,6 @@
 
     <declare-styleable name="SegmentedProgressBar">
         <attr name="segmentCount" format="integer"/>
+        <attr name="trackThickness" format="dimension"/>
     </declare-styleable>
 </resources>
