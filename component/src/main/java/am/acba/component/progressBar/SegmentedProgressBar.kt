@@ -17,28 +17,31 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
 
     private val binding: SegmentedProgressLayoutBinding = SegmentedProgressLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     private var segmentCount: Int
+    private var trackThickness: Int
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.SegmentedProgressBar).apply {
             try {
                 segmentCount = getInt(R.styleable.SegmentedProgressBar_segmentCount, 2)
+                trackThickness = getDimensionPixelOffset(R.styleable.SegmentedProgressBar_trackThickness, -1)
             } finally {
                 recycle()
             }
         }
         binding.parent.weightSum = segmentCount.toFloat()
-        addProgressBar(segmentCount)
+        addProgressBar(segmentCount, trackThickness)
     }
 
-    private fun addProgressBar(count: Int) {
+    private fun addProgressBar(count: Int, trackThickness: Int) {
         for (i in 0 until count) {
             val progressLayout = ProgressIndicatorBinding.inflate(LayoutInflater.from(context), binding.parent, false)
+            if (trackThickness > 0) progressLayout.lpLimitProgressBar.trackThickness = trackThickness
             binding.parent.addView(progressLayout.root)
         }
     }
 
     @SuppressLint("ObjectAnimatorBinding")
-    fun setProgress(index: Int) {
+    fun setProgress(index: Int, progressWithAnimate: Boolean = true) {
         val delayBetweenAnimations = 200L
         val handler = Handler(Looper.getMainLooper())
 
@@ -46,13 +49,16 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
             val child = binding.parent.getChildAt(i)
             if (child is LinearProgressIndicator) {
                 if (i < index) {
-                    handler.postDelayed({
-                        val animator = ObjectAnimator.ofInt(child, "progress", child.progress, 100)
-                        animator.duration = 200
-                        animator.start()
-                    }, i * delayBetweenAnimations)
+                    if (progressWithAnimate) {
+                        handler.postDelayed({
+                            val animator = ObjectAnimator.ofInt(child, "progress", child.progress, 100)
+                            animator.duration = 200
+                            animator.start()
+                        }, i * delayBetweenAnimations)
+                    } else child.progress = 100
+
                 } else {
-                    child.setProgress(0)
+                    child.progress = 0
                 }
             }
         }
