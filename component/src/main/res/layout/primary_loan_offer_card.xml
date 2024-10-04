@@ -12,7 +12,7 @@
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/loan_offer_card_title"
         style="@style/XSmall.Regular"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="10dp"
@@ -21,7 +21,6 @@
         android:maxLines="1"
         android:textColor="?attr/contentInverse"
         android:text="վարկային սահմանաչափ"
-        app:layout_constraintEnd_toStartOf="@id/loan_offer_card_badge"
         app:layout_constraintStart_toEndOf="@id/loan_offer_card_amount_with_currency_top"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="16dp" />

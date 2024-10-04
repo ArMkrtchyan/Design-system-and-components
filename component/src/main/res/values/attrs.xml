@@ -512,7 +512,7 @@
 
     <declare-styleable name="PrimaryLoanCardView"></declare-styleable>
     <declare-styleable name="PrimaryLoanOfferCardView">
-
+        <attr name="offerCardTitle" format="string" />
     </declare-styleable>
     <declare-styleable name="PrimaryLoanOffersView"></declare-styleable>
     <declare-styleable name="PrimaryLoanTableView"></declare-styleable>

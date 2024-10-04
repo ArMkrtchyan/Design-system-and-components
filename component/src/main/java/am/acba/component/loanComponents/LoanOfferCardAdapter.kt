@@ -25,7 +25,6 @@ class LoanOfferCardAdapter(private val onItemClick: (LoanOfferCard) -> Unit) : L
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(loanOfferCard: LoanOfferCard, onItemClick: (LoanOfferCard) -> Unit) {
-            setIsRecyclable(false)
             binding.root.setLoanCard(loanOfferCard)
             binding.root.setOnClickListener { onItemClick.invoke(loanOfferCard) }
             binding.root.setState(isOpenedState)
