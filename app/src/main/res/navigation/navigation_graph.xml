@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loanComponentsFragment">
+    app:startDestination="@id/cardViewFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -89,8 +89,11 @@
             android:id="@+id/action_mainFragment_to_productDescriptionCardFragment"
             app:destination="@id/productDescriptionCardFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_loanComponentsFragment"
-            app:destination="@id/loanComponentsFragment" />
+            android:id="@+id/action_mainFragment_to_offersFragment"
+            app:destination="@id/offersFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_cardViewFragment"
+            app:destination="@id/cardViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -223,8 +226,13 @@
         android:label="fragment_product_description_card"
         tools:layout="@layout/fragment_product_description_card" />
     <fragment
-        android:id="@+id/loanComponentsFragment"
-        android:name="am.acba.components.LoanComponentsFragment"
+        android:id="@+id/offersFragment"
+        android:name="am.acba.components.OffersFragment"
         android:label="fragment_loan_components"
-        tools:layout="@layout/fragment_loan_components" />
+        tools:layout="@layout/fragment_offers" />
+    <fragment
+        android:id="@+id/cardViewFragment"
+        android:name="am.acba.components.CardViewFragment"
+        android:label="fragment_card_view"
+        tools:layout="@layout/fragment_card_view" />
 </navigation>

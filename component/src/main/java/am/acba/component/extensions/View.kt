@@ -7,7 +7,6 @@ import android.util.TypedValue
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
@@ -43,7 +42,6 @@ fun View.expandHeightTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATI
         this.requestLayout()
     }
     heightAnimator.duration = duration
-    heightAnimator.interpolator = AccelerateDecelerateInterpolator()
     heightAnimator.start()
 }
 
@@ -60,7 +58,6 @@ fun View.expandHeight(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION
         this.requestLayout()
     }
     heightAnimator.duration = duration
-    heightAnimator.interpolator = AccelerateDecelerateInterpolator()
     heightAnimator.start()
 }
 
@@ -84,7 +81,6 @@ fun View.collapseHeight(duration: Long = 0) {
         }
     }
     heightAnimator.duration = if (duration > 0) duration else FrameMetricsAggregator.ANIMATION_DURATION.toLong()
-    heightAnimator.interpolator = AccelerateDecelerateInterpolator()
     heightAnimator.start()
 }
 
@@ -98,7 +94,6 @@ fun View.collapseWidth(duration: Long = FrameMetricsAggregator.ANIMATION_DURATIO
         }
     }
     widthAnimator.duration = duration
-    widthAnimator.interpolator = AccelerateDecelerateInterpolator()
     widthAnimator.start()
 }
 
@@ -116,7 +111,6 @@ fun View.expandWidth(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.
         }
     }
     widthAnimator.duration = duration
-    widthAnimator.interpolator = AccelerateDecelerateInterpolator()
     widthAnimator.start()
 }
 
@@ -133,13 +127,11 @@ fun View.expandWidthTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATIO
         }
     }
     widthAnimator.duration = duration
-    widthAnimator.interpolator = AccelerateDecelerateInterpolator()
     widthAnimator.start()
 }
 
-fun View.animateHeightFromTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(), from: Float, to: Float) {
+fun View.animateHeightFromTo(duration: Long = 250, from: Float, to: Float) {
     val animator = ValueAnimator.ofFloat(from, to);
-    animator.interpolator = AccelerateDecelerateInterpolator()
     animator.setDuration(duration);
 
     animator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
@@ -147,23 +139,6 @@ fun View.animateHeightFromTo(duration: Long = FrameMetricsAggregator.ANIMATION_D
             val value = animation.getAnimatedValue().toString().toFloat()
             updateLayoutParams<ViewGroup.LayoutParams> {
                 height = value.toInt()
-                invalidate()
-            }
-        }
-    })
-    animator.start()
-}
-
-fun View.animateWidthFromTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(), from: Float, to: Float) {
-    val animator = ValueAnimator.ofFloat(from, to);
-    animator.interpolator = AccelerateDecelerateInterpolator()
-    animator.setDuration(duration);
-
-    animator.addUpdateListener(object : ValueAnimator.AnimatorUpdateListener {
-        override fun onAnimationUpdate(animation: ValueAnimator) {
-            val value = animation.getAnimatedValue().toString().toFloat()
-            updateLayoutParams<ViewGroup.LayoutParams> {
-                width = value.toInt()
                 invalidate()
             }
         }

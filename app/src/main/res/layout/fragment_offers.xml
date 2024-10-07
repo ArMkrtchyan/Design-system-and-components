@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoanComponentsFragment">
+    tools:context=".OffersFragment">
 
     <am.acba.component.toolbar.PrimaryToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:title="Loan components" />
+        app:title="Offers components" />
 
     <am.acba.component.textView.PrimaryTextView
         style="@style/Subtitle1.Light"
@@ -38,12 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp" />
-
-            <am.acba.component.loanComponents.PrimaryLoanCardView
-                android:id="@+id/loan_card"
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
