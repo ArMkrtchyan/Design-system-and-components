@@ -22,7 +22,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
     init {
         context.obtainStyledAttributes(attrs, R.styleable.SegmentedProgressBar).apply {
             try {
-                segmentCount = getInt(R.styleable.SegmentedProgressBar_segmentCount, 2)
+                segmentCount = getInt(R.styleable.SegmentedProgressBar_segmentCount, 4)
                 trackThickness = getDimensionPixelOffset(R.styleable.SegmentedProgressBar_trackThickness, -1)
             } finally {
                 recycle()

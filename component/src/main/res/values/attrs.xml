@@ -515,4 +515,10 @@
         <attr name="segmentCount" format="integer"/>
         <attr name="trackThickness" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="ShippingProgressBar">
+        <attr name="shippingStepCount" format="integer"/>
+        <attr name="shippingTrackThickness" format="dimension"/>
+    </declare-styleable>
+
 </resources>
