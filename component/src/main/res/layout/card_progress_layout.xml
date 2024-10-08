@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_2"
         android:layout_gravity="center_vertical">
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/progress"

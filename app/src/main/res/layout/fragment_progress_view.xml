@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:ProgressViewTitleText="Your Title"
-                app:ProgressViewSubTitleText="Your Subtitle" />
+                app:ProgressViewSubTitleText="Your Subtitle"
+                app:ProgressViewStepCount="5"/>
         </LinearLayout>
     </ScrollView>
 

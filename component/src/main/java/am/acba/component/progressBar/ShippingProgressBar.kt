@@ -10,6 +10,7 @@ import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.isVisible
 
 class ShippingProgressBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayoutCompat(context, attrs, 0) {
     private val binding: CardProgressLayoutBinding = CardProgressLayoutBinding.inflate(LayoutInflater.from(context), this, true)
@@ -30,7 +31,7 @@ class ShippingProgressBar @JvmOverloads constructor(context: Context, attrs: Att
 
     }
 
-    private fun addProgressBar(count: Int) {
+    fun addProgressBar(count: Int) {
         binding.progress.weightSum = segmentCount.toFloat()
         for (i in 0 until count) {
             val shippingProgressSegment = ShippingProgressSegment(context)
@@ -64,7 +65,7 @@ class ShippingProgressBar @JvmOverloads constructor(context: Context, attrs: Att
                             startProgressImageAnimation(child.x + child.width - binding.image.width / 2)
                             child.startProgress()
                             child.showLottieView()
-                            if (i == segmentCount -1) handler.postDelayed({binding.lastStep.showLottieView()}, 500)
+                            if (i == segmentCount - 1) handler.postDelayed({ binding.lastStep.showLottieView() }, 500)
                         }, i * delayBetweenAnimations)
                     } else child.startProgress(100, false)
                 }
@@ -77,5 +78,9 @@ class ShippingProgressBar @JvmOverloads constructor(context: Context, attrs: Att
             duration = 500
             start()
         }
+    }
+
+    fun progressImageVisibility(visible: Boolean) {
+        binding.image.isVisible = visible
     }
 }

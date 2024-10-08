@@ -13,8 +13,7 @@ class ProgressViewFragment : BaseViewBindingFragment<FragmentProgressViewBinding
 
     override fun FragmentProgressViewBinding.initView() {
         search.setOnClickListener {
-            mBinding.progressCardView.nextStep()
+            mBinding.progressCardView.setProgress(4, true)
         }
     }
-
 }

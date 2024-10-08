@@ -19,7 +19,8 @@ class ProgressCardView @JvmOverloads constructor(
     private val binding by lazy { ViewProgressCardBinding.inflate(context.inflater(), this, false) }
     private var title: String
     private var subTitle: String
-    private var currentStep = 1
+    private var progressViewStepCount: Int
+    private var progressImageVisibility: Boolean
 
     init {
         addView(binding.root)
@@ -27,51 +28,24 @@ class ProgressCardView @JvmOverloads constructor(
             try {
                 title = getString(R.styleable.ProgressCardView_ProgressViewTitleText) ?: ""
                 subTitle = getString(R.styleable.ProgressCardView_ProgressViewSubTitleText) ?: ""
+                progressViewStepCount = getInt(R.styleable.ProgressCardView_ProgressViewStepCount, 0)
+                progressImageVisibility = getBoolean(R.styleable.ProgressCardView_progressImageVisibility, true)
             } finally {
                 recycle()
             }
+            binding.shippingProgress.addProgressBar(progressViewStepCount)
+            binding.title.text = title
+            binding.subtitle.text = subTitle
+            progressImageVisibility(progressImageVisibility)
         }
     }
 
-    fun nextStep() {
-        if (currentStep <= 3) {
-            currentStep++
-            updateStepUI(currentStep)
-        } else {
-            currentStep = 1
-            nextStep()
-        }
+    fun setProgress(index: Int, progressWithAnimate: Boolean = true) {
+        binding.shippingProgress.setProgress(index, progressWithAnimate)
     }
 
-    private fun updateStepUI(step: Int) {
-        when (step) {
-            1 -> {
-                binding.step1.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                binding.step2.imageTintList = context.getColorStateListFromAttr(R.attr.borderBrandTonal1Disable)
-                binding.step3.imageTintList = context.getColorStateListFromAttr(R.attr.borderBrandTonal1Disable)
-                animateProgressBar(33)
-            }
-
-            2 -> {
-                binding.step1.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                binding.step2.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                binding.step3.imageTintList = context.getColorStateListFromAttr(R.attr.borderBrandTonal1Disable)
-                animateProgressBar(66)
-            }
-
-            3 -> {
-                binding.step1.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                binding.step2.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                binding.step3.imageTintList = context.getColorStateListFromAttr(R.attr.contentBrand)
-                animateProgressBar(100)
-            }
-        }
-    }
-
-    private fun animateProgressBar(progress: Int) {
-        val animator = ObjectAnimator.ofInt(binding.stepProgressBar, "progress", binding.stepProgressBar.progress, progress)
-        animator.duration = 500 // 0.5 second animation
-        animator.start()
+    private fun progressImageVisibility(visible: Boolean) {
+        binding.shippingProgress.progressImageVisibility(visible)
     }
 }
 

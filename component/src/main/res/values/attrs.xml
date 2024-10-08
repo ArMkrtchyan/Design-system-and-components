@@ -213,8 +213,10 @@
     <declare-styleable name="ProgressCardView">
         <attr name="ProgressViewTitleText" format="string"/>
         <attr name="ProgressViewSubTitleText" format="string"/>
+        <attr name="ProgressViewStepCount" format="integer"/>
         <attr name="ProgressViewEndIcon" format="reference"/>
         <attr name="ProgressView_tartIcon" format="reference"/>
+        <attr name="progressImageVisibility" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
