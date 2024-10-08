@@ -210,6 +210,12 @@
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="ProgressCardView">
+        <attr name="ProgressViewTitleText" format="string"/>
+        <attr name="ProgressViewSubTitleText" format="string"/>
+        <attr name="ProgressViewEndIcon" format="reference"/>
+        <attr name="ProgressView_tartIcon" format="reference"/>
+    </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
         <attr name="accordionViewBackground" format="reference" />
