@@ -29,7 +29,6 @@ class PrimaryProductCardView : FrameLayout {
 
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryProductCardView).apply {
-
             addView(binding.root)
             recycle()
         }
@@ -47,20 +46,46 @@ class PrimaryProductCardView : FrameLayout {
     }
 
     fun setProductCard(productCard: IProductCard) {
-        binding.paymentDayContainer.isVisible = productCard.getNextPaymentDay().isNotEmpty()
-        binding.paymentAmountContainer.isVisible = productCard.getNextPaymentAmount().isNotEmpty()
-        binding.bottomDivider.isVisible =
-            (productCard.getNextPaymentAmount().isNotEmpty() || productCard.getNextPaymentDay().isNotEmpty()) && productCard.getCardAdditionalInfo()
-                .isNotEmpty()
-        binding.description.isVisible = productCard.getDescription().isNotEmpty()
-        binding.title.text = productCard.getTitle()
-        binding.description.text = productCard.getDescription()
-        binding.paymentDay.text = productCard.getNextPaymentDay()
-        binding.paymentAmount.text = productCard.getNextPaymentAmount()
-        if (productCard.getCardAdditionalInfo().isNotEmpty()) {
-            binding.additionalInformationRecycler.adapter = adapter
-            adapter.submitList(productCard.getCardAdditionalInfo())
-        }
+        setProductCardTitle(productCard.getTitle())
+        setProductCardDescription(productCard.getDescription())
+        setProductCardPaymentDay(productCard.getNextPaymentDay())
+        setProductCardPaymentAmount(productCard.getNextPaymentAmount())
+        setProductCardPaymentDayTitle(productCard.getNextPaymentDayTitle())
+        setProductCardPaymentAmountTitle(productCard.getNextPaymentAmountTitle())
+        setProductCardStartIcon(productCard)
+        submitAdditionalInfo(productCard.getCardAdditionalInfo())
+        setProductCardBadge(productCard)
+        updateBottomDividerVisibility(productCard)
+    }
+
+    private fun setProductCardTitle(title: String) {
+        binding.title.text = title
+    }
+
+    private fun setProductCardDescription(description: String) {
+        binding.description.isVisible = description.isNotEmpty()
+        binding.description.text = description
+    }
+
+    private fun setProductCardPaymentDayTitle(paymentDayTitle: String) {
+        binding.paymentDayTitle.text = paymentDayTitle
+    }
+
+    private fun setProductCardPaymentAmountTitle(paymentAmountTitle: String) {
+        binding.paymentAmountTitle.text = paymentAmountTitle
+    }
+
+    private fun setProductCardPaymentDay(paymentDay: String) {
+        binding.paymentDayContainer.isVisible = paymentDay.isNotEmpty()
+        binding.paymentDay.text = paymentDay
+    }
+
+    private fun setProductCardPaymentAmount(paymentAmount: String) {
+        binding.paymentAmountContainer.isVisible = paymentAmount.isNotEmpty()
+        binding.paymentAmount.text = paymentAmount
+    }
+
+    private fun setProductCardStartIcon(productCard: IProductCard) {
         binding.startIconContainer.isVisible = productCard.getStartIcon() > 0
         if (productCard.getStartIcon() > 0) {
             binding.startIcon.setImageResource(productCard.getStartIcon())
@@ -69,6 +94,9 @@ class PrimaryProductCardView : FrameLayout {
             } else {
                 binding.startIconContainer.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.transparent)
             }
+            binding.startIcon.imageTintList = if (productCard.getStartIconTint() != null) {
+                context.getColorStateListFromAttr(productCard.getStartIconTint()!!)
+            } else null
         }
         ConstraintSet().apply {
             clone(binding.headerLayout)
@@ -79,6 +107,9 @@ class PrimaryProductCardView : FrameLayout {
             }
             applyTo(binding.headerLayout)
         }
+    }
+
+    private fun setProductCardBadge(productCard: IProductCard) {
         binding.productCardBadgeContainer.isVisible = productCard.getBadgeText().isNotEmpty()
         if (productCard.getBadgeText().isNotEmpty()) {
             binding.productCardBadgeText.text = productCard.getBadgeText()
@@ -86,6 +117,19 @@ class PrimaryProductCardView : FrameLayout {
             binding.productCardBadgeText.setTextColor(context.getColorStateListFromAttr(productCard.getBadgeTextAndIconColorAttr()))
             binding.productCardBadgeIcon.imageTintList = context.getColorStateListFromAttr(productCard.getBadgeTextAndIconColorAttr())
             binding.productBadge.setBackgroundColor(context.getColorFromAttr(productCard.getBadgeBackgroundColorAttr()))
+        }
+    }
+
+    private fun updateBottomDividerVisibility(productCard: IProductCard) {
+        binding.bottomDivider.isVisible =
+            (productCard.getNextPaymentAmount().isNotEmpty() || productCard.getNextPaymentDay().isNotEmpty()) && productCard.getCardAdditionalInfo()
+                .isNotEmpty()
+    }
+
+    private fun submitAdditionalInfo(cardAdditionalInfo: List<IProductAdditionalInfo>) {
+        if (cardAdditionalInfo.isNotEmpty()) {
+            binding.additionalInformationRecycler.adapter = adapter
+            adapter.submitList(cardAdditionalInfo)
         }
     }
 }

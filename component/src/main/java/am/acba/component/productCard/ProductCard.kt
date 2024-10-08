@@ -7,8 +7,11 @@ data class ProductCard(
     val productTitle: String = "",
     val productDescription: String = "",
     @DrawableRes val productStartIcon: Int = 0,
+    @AttrRes val productStartIconTint: Int? = null,
     val productNextPaymentDay: String = "",
     val productNextPaymentAmount: String = "",
+    val productNextPaymentDayTitle: String = "",
+    val productNextPaymentAmountTitle: String = "",
     val productCardAdditionalInfo: List<IProductAdditionalInfo> = emptyList(),
     @AttrRes val productBackgroundColorAttr: Int = 0,
     @AttrRes val productBadgeBackgroundColorAttr: Int = 0,
@@ -28,12 +31,23 @@ data class ProductCard(
         return productStartIcon
     }
 
+    override fun getStartIconTint(): Int? {
+        return productStartIconTint
+    }
     override fun getNextPaymentDay(): String {
         return productNextPaymentDay
     }
 
+    override fun getNextPaymentDayTitle(): String {
+        return productNextPaymentDayTitle
+    }
+
     override fun getNextPaymentAmount(): String {
         return productNextPaymentAmount
+    }
+
+    override fun getNextPaymentAmountTitle(): String {
+        return productNextPaymentAmountTitle
     }
 
     override fun getCardAdditionalInfo(): List<IProductAdditionalInfo> {

@@ -510,9 +510,7 @@
         <attr name="emptyButtonAppearance" format="reference" />
     </declare-styleable>
 
-    <declare-styleable name="PrimaryProductCardView">
-        <attr name="productCardTitle" format="string" />
-    </declare-styleable>
+    <declare-styleable name="PrimaryProductCardView" />
 
     <declare-styleable name="PrimaryLoanOfferCardView">
         <attr name="offerCardTitle" format="string" />

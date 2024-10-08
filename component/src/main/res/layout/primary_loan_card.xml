@@ -40,8 +40,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_down"
-                        android:tint="?attr/contentPrimary" />
+                        tools:src="@drawable/ic_down"
+                        tools:tint="?attr/contentPrimary" />
                 </FrameLayout>
 
                 <am.acba.component.imageView.PrimaryImageView
@@ -49,6 +49,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_right"
+                    android:tint="?attr/contentPrimaryTonal1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/title_description_container" />
 
@@ -72,7 +73,7 @@
                         android:layout_gravity="center_vertical"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="Ավանդի գրավորվ վարկային գ գրավորվ վարկային գիծ" />
+                        tools:text="Ավանդի գրավորվ վարկային գ գրավորվ վարկային գիծ" />
 
                     <am.acba.component.textView.PrimaryTextView
                         android:id="@+id/description"
@@ -82,9 +83,9 @@
                         android:layout_gravity="center_vertical"
                         android:ellipsize="end"
                         android:maxLines="3"
-                        android:text="Վերջ - 12/սեպ/2024"
-                        android:textColor="?attr/contentPrimaryTonal1"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        tools:text="Վերջ - 12/սեպ/2024"
+                        android:textColor="?attr/contentPrimaryTonal1" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -119,7 +120,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Վճարման օր"
+                    tools:text="Վճարման օր"
                     android:textColor="?attr/contentPrimaryTonal1" />
 
                 <am.acba.component.textView.PrimaryTextView
@@ -129,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="14/սեպ/2024"
+                    tools:text="14/սեպ/2024"
                     android:textColor="?attr/contentPrimaryTonal1" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -146,7 +147,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Վճարման ենթակա գումար"
+                    tools:text="Վճարման ենթակա գումար"
                     android:textColor="?attr/contentPrimaryTonal1" />
 
                 <am.acba.component.textView.PrimaryTextView
@@ -156,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="40,000.00 AMD" />
+                    tools:text="40,000.00 AMD" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -164,25 +165,25 @@
             android:id="@+id/product_badge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:background="?attr/backgroundDangerTonal1"
-            android:paddingHorizontal="16dp">
+            android:paddingHorizontal="16dp"
+            tools:background="?attr/backgroundDangerTonal1">
 
             <LinearLayout
                 android:id="@+id/product_card_badge_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
-                android:layout_gravity="center_vertical|end">
+                android:layout_gravity="center_vertical|end"
+                android:paddingVertical="5dp">
 
                 <am.acba.component.imageView.PrimaryImageView
                     android:id="@+id/product_card_badge_icon"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:layout_gravity="center_vertical|end"
-                    tools:src="@drawable/ic_warning"
-                    tools:tint="?attr/contentDangerTonal1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/title_description_container" />
+                    app:layout_constraintTop_toTopOf="@id/title_description_container"
+                    tools:src="@drawable/ic_warning"
+                    tools:tint="?attr/contentDangerTonal1" />
 
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/product_card_badge_text"

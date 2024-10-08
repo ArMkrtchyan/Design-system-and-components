@@ -22,6 +22,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
+                productNextPaymentDayTitle = "Վճարման օր",
+                productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
                     ProductCardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
@@ -33,6 +35,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                     ),
                 ),
                 productStartIcon = R.drawable.ic_add,
+                productStartIconTint = R.attr.contentPrimary,
                 productBackgroundColorAttr = R.attr.backgroundTonal2,
                 productBadgeIcon = R.drawable.ic_warning,
                 productBadgeText = "Առկա է ժամկետնանց պարտավորություն",
@@ -46,6 +49,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
+                productNextPaymentDayTitle = "Վճարման օր",
+                productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
                     ProductCardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
@@ -61,11 +66,14 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
         )
         loanCardWithoutRows.setProductCard(
             ProductCard(
-                productTitle = "5G վարկ",
+                productTitle = "Ավանդի գրավով վարկ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
+                productNextPaymentDayTitle = "Վճարման օր",
+                productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productStartIcon = R.drawable.ic_add,
+                productStartIconTint = R.attr.contentPrimary,
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
@@ -74,6 +82,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productTitle = "5G վարկ",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
+                productNextPaymentDayTitle = "Վճարման օր",
+                productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
                     ProductCardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
@@ -85,6 +95,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                     ),
                 ),
                 productStartIcon = R.drawable.ic_add,
+                productStartIconTint = R.attr.contentPrimary,
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
@@ -94,6 +105,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
+                productNextPaymentDayTitle = "Վճարման օր",
+                productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
                     ProductCardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
@@ -101,6 +114,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                     )
                 ),
                 productStartIcon = R.drawable.ic_add,
+                productStartIconTint = R.attr.contentPrimary,
                 productBackgroundColorAttr = R.attr.backgroundTonal2,
                 productBadgeIcon = R.drawable.ic_warning,
                 productBadgeText = "Վճարումը 5 օրից",
@@ -110,7 +124,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
         )
         loanCardWithoutTextContent.setProductCard(
             ProductCard(
-                productTitle = "5G վարկ",
+                productTitle = "Արագ օվերդրաֆտ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productCardAdditionalInfo = arrayListOf(
                     ProductCardAdditionalInfo(
@@ -122,8 +136,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                         additionalInfo = "1,125,432.00 AMD",
                     ),
                 ),
-                productStartIcon = R.drawable.ic_add,
-                productBackgroundColorAttr = R.attr.backgroundTonal2
+                productStartIcon = R.drawable.ic_flag_am,
             )
         )
     }
