@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_mainFragment_to_cardViewFragment"
             app:destination="@id/cardViewFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tablesFragment"
+            app:destination="@id/tablesFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -251,4 +254,9 @@
         android:name="am.acba.components.CardViewFragment"
         android:label="fragment_card_view"
         tools:layout="@layout/fragment_card_view" />
+    <fragment
+        android:id="@+id/tablesFragment"
+        android:name="am.acba.components.TablesFragment"
+        android:label="fragment_product_description_card"
+        tools:layout="@layout/fragment_product_description_card" />
 </navigation>

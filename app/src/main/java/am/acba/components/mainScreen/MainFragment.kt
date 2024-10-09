@@ -55,6 +55,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.PROGRESS_INDICATOR -> findNavController().navigate(R.id.action_mainFragment_to_progressIndicatorFragment)
             ComponentTypeEnum.OFFERS_COMPONENTS -> findNavController().navigate(R.id.action_mainFragment_to_offersFragment)
             ComponentTypeEnum.PRODUCT_CARD_VIEW -> findNavController().navigate(R.id.action_mainFragment_to_cardViewFragment)
+            ComponentTypeEnum.TABLES -> findNavController().navigate(R.id.action_mainFragment_to_tablesFragment)
         }
     }
 
@@ -87,8 +88,8 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.EMPTY_SCREEN, ComponentTypeEnum.EMPTY_SCREEN.componentName),
         Component(ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD, ComponentTypeEnum.PRODUCT_DESCRIPTION_CARD.componentName),
         Component(ComponentTypeEnum.PROGRESS_INDICATOR, ComponentTypeEnum.PROGRESS_INDICATOR.componentName),
-
         Component(ComponentTypeEnum.OFFERS_COMPONENTS, ComponentTypeEnum.OFFERS_COMPONENTS.componentName),
         Component(ComponentTypeEnum.PRODUCT_CARD_VIEW, ComponentTypeEnum.PRODUCT_CARD_VIEW.componentName),
+        Component(ComponentTypeEnum.TABLES, ComponentTypeEnum.TABLES.componentName),
     )
 }

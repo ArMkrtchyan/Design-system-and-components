@@ -520,8 +520,20 @@
     </declare-styleable>
 
     <declare-styleable name="SegmentedProgressBar">
-        <attr name="segmentCount" format="integer"/>
-        <attr name="trackThickness" format="dimension"/>
+        <attr name="segmentCount" format="integer" />
+        <attr name="trackThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryTable">
+        <attr name="primaryTableBackground" format="reference" />
+        <attr name="primaryTableBackgroundTint" format="reference" />
+        <attr name="primaryTableShowTopView" format="boolean" />
+        <attr name="primaryTableShowIcon" format="boolean" />
+        <attr name="primaryTableShowArrow" format="boolean" />
+        <attr name="primaryTableIcon" format="reference" />
+        <attr name="primaryTableTitle" format="string" />
+        <attr name="primaryTableIconTint" format="reference" />
+        <attr name="primaryTableCollapsedItemCount" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ShippingProgressBar">
