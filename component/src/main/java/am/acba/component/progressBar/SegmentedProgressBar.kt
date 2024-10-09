@@ -22,7 +22,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
     init {
         context.obtainStyledAttributes(attrs, R.styleable.SegmentedProgressBar).apply {
             try {
-                segmentCount = getInt(R.styleable.SegmentedProgressBar_segmentCount, 2)
+                segmentCount = getInt(R.styleable.SegmentedProgressBar_segmentCount, 4)
                 trackThickness = getDimensionPixelOffset(R.styleable.SegmentedProgressBar_trackThickness, -1)
             } finally {
                 recycle()
@@ -42,7 +42,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
 
     @SuppressLint("ObjectAnimatorBinding")
     fun setProgress(index: Int, progressWithAnimate: Boolean = true) {
-        val delayBetweenAnimations = 200L
+        val delayBetweenAnimations = 500L
         val handler = Handler(Looper.getMainLooper())
 
         for (i in 0 until binding.parent.childCount) {
@@ -52,7 +52,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
                     if (progressWithAnimate) {
                         handler.postDelayed({
                             val animator = ObjectAnimator.ofInt(child, "progress", child.progress, 100)
-                            animator.duration = 200
+                            animator.duration = 500
                             animator.start()
                         }, i * delayBetweenAnimations)
                     } else child.progress = 100
