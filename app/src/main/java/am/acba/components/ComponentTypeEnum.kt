@@ -29,4 +29,6 @@ enum class ComponentTypeEnum(val componentName: String) {
     EMPTY_SCREEN("Empty screen"),
     PRODUCT_DESCRIPTION_CARD("Product description card"),
     PROGRESS_INDICATOR("Progress indicator"),
+    OFFERS_COMPONENTS("Offers components"),
+    PRODUCT_CARD_VIEW("Product Card view component"),
 }

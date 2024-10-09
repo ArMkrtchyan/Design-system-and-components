@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@drawable/background_corner"
+    tools:backgroundTint="?attr/backgroundAlternative6"
+    android:paddingVertical="16dp">
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/loan_offer_card_title"
+        style="@style/XSmall.Regular"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        tools:text="վարկային սահմանաչափ վարկային սահմանաչ ափվարկային սահմանաչափ սահմանաչ ափվարկային սահմանաչափ"
+        android:textColor="?attr/contentInverse"
+        app:layout_constraintEnd_toStartOf="@id/loan_offer_card_badge"
+        app:layout_constraintStart_toEndOf="@id/loan_offer_card_amount_with_currency_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginStart="16dp" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/loan_offer_card_amount_with_currency_top"
+        style="@style/Small.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        tools:text="10,000,000.00 AMD"
+        android:textColor="?attr/contentInverse"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/loan_offer_card_amount_with_currency"
+        style="@style/Heading6.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:minHeight="32dp"
+        tools:text="10,000,000.00 AMD"
+        android:textColor="?attr/contentInverse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loan_offer_card_title" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/loan_offer_card_end_date"
+        style="@style/XSmall.Regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="Վերջնաժամկետ - 12/09/2024 Վերջնաժամկետ - 12/09/2024"
+        android:textColor="?attr/contentInverse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/loan_offer_card_badge"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <am.acba.component.badge.PrimaryBadge
+        android:id="@+id/loan_offer_card_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        tools:badgeBackgroundTint="?attr/backgroundBrand"
+        tools:badgeText="new"
+        app:badgeType="Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <am.acba.component.imageView.PrimaryImageView
+        android:id="@+id/loan_offer_card_arrow_right"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/background_rounded"
+        android:backgroundTint="?attr/backgroundInverse"
+        android:backgroundTintMode="add"
+        android:padding="5dp"
+        android:src="@drawable/ic_right"
+        android:tint="?attr/contentInverse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

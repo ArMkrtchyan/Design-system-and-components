@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="42dp"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:weightSum="2">
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/info_title"
+            style="@style/Small.Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Վճարման ենթակա գումար"
+            android:textColor="?attr/contentPrimaryTonal1" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/info"
+            style="@style/Body2.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="40,000.00 AMD" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <am.acba.component.divider.PrimaryDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+</FrameLayout>

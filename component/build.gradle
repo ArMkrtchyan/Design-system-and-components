@@ -41,6 +41,7 @@ dependencies {
     implementation libs.glide
     /*implementation libs.pageIndicatorView*/
     implementation libs.countries
+    implementation libs.live.event
     implementation libs.gson
     implementation libs.shimmer
     testImplementation libs.junit
