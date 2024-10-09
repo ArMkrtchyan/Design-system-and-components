@@ -35,6 +35,19 @@ fun View.animateRotation(
     }.start()
 }
 
+fun View.animateXRotation(
+    target: Float,
+    duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(),
+    interpolator: TimeInterpolator? = AccelerateInterpolator(),
+    startAction: (View.() -> Unit)? = null,
+    endAction: (View.() -> Unit)? = null,
+) {
+    startAction?.invoke(this)
+    animate().rotationX(target).setDuration(duration).setInterpolator(interpolator).withEndAction {
+        endAction?.invoke(this)
+    }.start()
+}
+
 fun View.expandHeightTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(), height: Int) {
     val heightAnimator = ValueAnimator.ofInt(0, height)
     heightAnimator.addUpdateListener { animation ->

@@ -2,14 +2,11 @@ package am.acba.component.loanComponents
 
 import am.acba.component.R
 import am.acba.component.databinding.PrimaryLoanOfferCardBinding
+import am.acba.component.extensions.animateAlpha
 import am.acba.component.extensions.animateHeightFromTo
-import am.acba.component.extensions.collapseHeight
 import am.acba.component.extensions.collapseWidth
 import am.acba.component.extensions.dpToPx
-import am.acba.component.extensions.expandHeight
-import am.acba.component.extensions.expandHeightTo
 import am.acba.component.extensions.expandWidth
-import am.acba.component.extensions.expandWidthTo
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import android.animation.ValueAnimator
@@ -17,11 +14,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 
-class PrimaryLoanOfferCardView : FrameLayout {
+class PrimaryOfferCardView : FrameLayout {
     private val binding by lazy { PrimaryLoanOfferCardBinding.inflate(context.inflater(), this, false) }
+    private val animationDuration = 350L
+    private var isAnimationPlayed = false
 
     constructor(context: Context) : super(context)
 
@@ -34,7 +34,7 @@ class PrimaryLoanOfferCardView : FrameLayout {
     }
 
     private fun init(attrs: AttributeSet) {
-        context.obtainStyledAttributes(attrs, R.styleable.PrimaryLoanOfferCardView).apply {
+        context.obtainStyledAttributes(attrs, R.styleable.PrimaryOfferCardView).apply {
             addView(binding.root)
             recycle()
         }
@@ -48,8 +48,6 @@ class PrimaryLoanOfferCardView : FrameLayout {
         }
     }
 
-    private val animationDuration = 350L
-    private var isAnimationPlayed = false
     private fun openCard() {
         binding.parent.animateHeightFromTo(duration = animationDuration, from = 38.dpToPx().toFloat(), to = 120.dpToPx().toFloat())
         updateTopAndBottomPadding(duration = animationDuration, from = 8.dpToPx(), to = 16.dpToPx())
@@ -59,10 +57,9 @@ class PrimaryLoanOfferCardView : FrameLayout {
             binding.loanOfferCardAmountWithCurrencyTop.isVisible = false
             isAnimationPlayed = false
         }, animationDuration - 50L)
-        binding.loanOfferCardArrowRight.expandHeightTo(duration = animationDuration, 24.dpToPx())
-        binding.loanOfferCardArrowRight.expandWidthTo(duration = animationDuration, 24.dpToPx())
-        binding.loanOfferCardEndDate.expandHeight(duration = animationDuration)
-        binding.loanOfferCardAmountWithCurrency.expandHeight(duration = animationDuration)
+        binding.loanOfferCardArrowRight.animateAlpha(1f, duration = animationDuration)
+        binding.loanOfferCardEndDate.animateAlpha(1f, duration = animationDuration)
+        binding.loanOfferCardAmountWithCurrency.animateAlpha(1f, duration = animationDuration)
         binding.loanOfferCardAmountWithCurrency.isVisible = true
         binding.loanOfferCardArrowRight.isVisible = true
     }
@@ -71,10 +68,9 @@ class PrimaryLoanOfferCardView : FrameLayout {
         binding.parent.animateHeightFromTo(duration = animationDuration, from = 120.dpToPx().toFloat(), to = 38.dpToPx().toFloat())
         updateTopAndBottomPadding(duration = animationDuration, from = 16.dpToPx(), to = 8.dpToPx())
         binding.loanOfferCardAmountWithCurrencyTop.expandWidth(duration = animationDuration)
-        binding.loanOfferCardArrowRight.collapseHeight(duration = animationDuration)
-        binding.loanOfferCardArrowRight.collapseWidth(duration = animationDuration)
-        binding.loanOfferCardEndDate.collapseHeight(duration = animationDuration)
-        binding.loanOfferCardAmountWithCurrency.collapseHeight(duration = animationDuration)
+        binding.loanOfferCardArrowRight.animateAlpha(0f, duration = animationDuration)
+        binding.loanOfferCardEndDate.animateAlpha(0f, duration = animationDuration)
+        binding.loanOfferCardAmountWithCurrency.animateAlpha(0f, duration = animationDuration)
         binding.loanOfferCardAmountWithCurrencyTop.postDelayed({
             binding.loanOfferCardAmountWithCurrency.isVisible = false
             binding.loanOfferCardEndDate.isVisible = false
@@ -101,13 +97,26 @@ class PrimaryLoanOfferCardView : FrameLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    fun setLoanCard(loanCard: LoanOfferCard) {
-        binding.loanOfferCardTitle.text = loanCard.title
-        binding.loanOfferCardAmountWithCurrency.text = loanCard.amount + " " + loanCard.currency
-        binding.loanOfferCardAmountWithCurrencyTop.text = loanCard.amount + " " + loanCard.currency
-        binding.loanOfferCardEndDate.text = loanCard.endDate
-        binding.loanOfferCardBadge.isVisible = loanCard.isNewBadgeVisible
-        binding.parent.backgroundTintList = context.getColorStateListFromAttr(loanCard.backgroundColorAttr)
+    fun setLoanCard(loanCard: IOfferCard) {
+        binding.loanOfferCardTitle.text = loanCard.getTitle()
+        binding.loanOfferCardAmountWithCurrency.text = loanCard.getOffer()
+        binding.loanOfferCardAmountWithCurrencyTop.text = loanCard.getOffer()
+        binding.loanOfferCardEndDate.text = loanCard.getDescription()
+        binding.loanOfferCardBadge.isVisible = loanCard.getBadgeVisibility()
+        binding.loanOfferCardBadge.setBadgeText(loanCard.getBadgeText())
+        binding.loanOfferCardBadge.setBadgeBackgroundTint(context.getColorStateListFromAttr(loanCard.getBadgeBackgroundColorAttr()))
+        binding.parent.backgroundTintList = context.getColorStateListFromAttr(loanCard.getCardBackgroundColorAttr())
+        ConstraintSet().apply {
+            clone(binding.parent)
+            clear(binding.loanOfferCardTitle.id, ConstraintSet.END)
+            if (loanCard.getBadgeVisibility()) {
+                connect(binding.loanOfferCardTitle.id, ConstraintSet.END, binding.loanOfferCardBadge.id, ConstraintSet.START, 8.dpToPx())
+            } else {
+                connect(binding.loanOfferCardTitle.id, ConstraintSet.END, binding.loanOfferCardArrowRight.id, ConstraintSet.START, 8.dpToPx())
+            }
+            applyTo(binding.parent)
+        }
+
     }
 
     fun setState(isOpenedState: Boolean) {
@@ -115,9 +124,16 @@ class PrimaryLoanOfferCardView : FrameLayout {
             height = if (isOpenedState) 120.dpToPx() else 38.dpToPx()
         }
         binding.parent.setPadding(0, if (isOpenedState) 16.dpToPx() else 8.dpToPx(), 0, if (isOpenedState) 16.dpToPx() else 8.dpToPx())
+        binding.loanOfferCardBadge.updateLayoutParams<MarginLayoutParams> {
+            marginEnd = if (isOpenedState) 16.dpToPx() else 8.dpToPx()
+        }
         binding.loanOfferCardAmountWithCurrencyTop.isVisible = !isOpenedState
         binding.loanOfferCardAmountWithCurrency.isVisible = isOpenedState
         binding.loanOfferCardEndDate.isVisible = isOpenedState
         binding.loanOfferCardArrowRight.isVisible = isOpenedState
+        val alpha = if (isOpenedState) 1f else 0f
+        binding.loanOfferCardAmountWithCurrency.alpha = alpha
+        binding.loanOfferCardEndDate.alpha = alpha
+        binding.loanOfferCardArrowRight.alpha = alpha
     }
 }

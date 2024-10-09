@@ -33,10 +33,12 @@
             android:orientation="vertical"
             android:paddingHorizontal="20dp">
 
-            <am.acba.component.loanComponents.PrimaryLoanOffersView
+            <am.acba.component.loanComponents.PrimaryOffersView
                 android:id="@+id/loan_offers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:offersSeeAllTitle="Տեսնել բոլոր առաջարկները"
+                app:offersTitle="Դուք ունեք նոր առաջարկներ"
                 android:layout_marginTop="20dp" />
         </LinearLayout>
     </ScrollView>

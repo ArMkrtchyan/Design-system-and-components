@@ -512,8 +512,12 @@
 
     <declare-styleable name="PrimaryProductCardView" />
 
-    <declare-styleable name="PrimaryLoanOfferCardView">
+    <declare-styleable name="PrimaryOfferCardView">
         <attr name="offerCardTitle" format="string" />
     </declare-styleable>
-    <declare-styleable name="PrimaryLoanOffersView"></declare-styleable>
+    <declare-styleable name="PrimaryOffersView">
+        <attr name="offersTitle" format="string" />
+        <attr name="offersSeeAllTitle" format="string" />
+        <attr name="offersExpanded" format="boolean" />
+    </declare-styleable>
 </resources>
