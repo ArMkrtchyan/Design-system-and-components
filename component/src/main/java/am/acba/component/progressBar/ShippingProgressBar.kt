@@ -21,13 +21,13 @@ class ShippingProgressBar @JvmOverloads constructor(context: Context, attrs: Att
     init {
         context.obtainStyledAttributes(attrs, R.styleable.ShippingProgressBar).apply {
             try {
-                segmentCount = getInt(R.styleable.ShippingProgressBar_shippingStepCount, 4)
+                segmentCount = getInt(R.styleable.ShippingProgressBar_shippingStepCount, -1)
                 trackThickness = getDimensionPixelOffset(R.styleable.ShippingProgressBar_shippingTrackThickness, -1)
             } finally {
                 recycle()
             }
         }
-        addProgressBar(segmentCount)
+        if(segmentCount > 0)addProgressBar(segmentCount)
 
     }
 
