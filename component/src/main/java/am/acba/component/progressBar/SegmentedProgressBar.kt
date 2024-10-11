@@ -42,25 +42,66 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
 
     @SuppressLint("ObjectAnimatorBinding")
     fun setProgress(index: Int, progressWithAnimate: Boolean = true) {
+        if (index <= binding.parent.childCount) {
+            val child = binding.parent.getChildAt(maxOf(0, index - 1))
+            if (child is LinearProgressIndicator) {
+                if (child.progress == 0) {
+                    forwardProgress(index, progressWithAnimate)
+                } else if (child.progress > 0) {
+                    backwardProgress(index, progressWithAnimate)
+                }
+            }
+        }
+    }
+
+    private fun forwardProgress(index: Int, progressWithAnimate: Boolean) {
         val delayBetweenAnimations = 500L
         val handler = Handler(Looper.getMainLooper())
+        var delayCount = 0
 
         for (i in 0 until binding.parent.childCount) {
             val child = binding.parent.getChildAt(i)
-            if (child is LinearProgressIndicator) {
+            if (child is LinearProgressIndicator && child.progress == 0) {
                 if (i < index) {
                     if (progressWithAnimate) {
-                        handler.postDelayed({
-                            val animator = ObjectAnimator.ofInt(child, "progress", child.progress, 100)
-                            animator.duration = 500
-                            animator.start()
-                        }, i * delayBetweenAnimations)
-                    } else child.progress = 100
-
+                        animateProgress(child, 100, delayCount++ * delayBetweenAnimations, handler)
+                    } else {
+                        child.progress = 100
+                    }
                 } else {
                     child.progress = 0
                 }
             }
         }
     }
+
+    private fun backwardProgress(index: Int, progressWithAnimate: Boolean) {
+        val delayBetweenAnimations = 500L
+        val handler = Handler(Looper.getMainLooper())
+        var delayCount = 0
+
+        for (i in binding.parent.childCount - 1 downTo 0) {
+            val child = binding.parent.getChildAt(i)
+            if (child is LinearProgressIndicator && child.progress > 0) {
+                if (i >= index) {
+                    if (progressWithAnimate) {
+                        animateProgress(child, 0, delayCount++ * delayBetweenAnimations, handler)
+                    } else {
+                        child.progress = 0
+                    }
+                } else {
+                    child.progress = 100
+                }
+            }
+        }
+    }
+
+    private fun animateProgress(child: LinearProgressIndicator, targetProgress: Int, delay: Long, handler: Handler) {
+        handler.postDelayed({
+            val animator = ObjectAnimator.ofInt(child, "progress", child.progress, targetProgress)
+            animator.duration = 500
+            animator.start()
+        }, delay)
+    }
+
 }
