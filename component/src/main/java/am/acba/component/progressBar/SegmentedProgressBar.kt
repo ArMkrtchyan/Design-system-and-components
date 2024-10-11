@@ -55,7 +55,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
     }
 
     private fun forwardProgress(index: Int, progressWithAnimate: Boolean) {
-        val delayBetweenAnimations = 500L
+        val delayBetweenAnimations = 250L
         val handler = Handler(Looper.getMainLooper())
         var delayCount = 0
 
@@ -76,7 +76,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
     }
 
     private fun backwardProgress(index: Int, progressWithAnimate: Boolean) {
-        val delayBetweenAnimations = 500L
+        val delayBetweenAnimations = 250L
         val handler = Handler(Looper.getMainLooper())
         var delayCount = 0
 
@@ -99,7 +99,7 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
     private fun animateProgress(child: LinearProgressIndicator, targetProgress: Int, delay: Long, handler: Handler) {
         handler.postDelayed({
             val animator = ObjectAnimator.ofInt(child, "progress", child.progress, targetProgress)
-            animator.duration = 500
+            animator.duration = 250
             animator.start()
         }, delay)
     }
