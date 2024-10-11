@@ -1,6 +1,6 @@
 package am.acba.component.productCard
 
-interface IProductAdditionalInfo {
+interface ICardAdditionalInfo {
     fun getTitle(): String
     fun getInfo(): String
 }

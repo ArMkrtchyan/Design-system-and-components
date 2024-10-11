@@ -530,7 +530,7 @@
     </declare-styleable>
 
 
-    <declare-styleable name="PrimaryProductCardView" />
+    <declare-styleable name="PrimaryCardView" />
 
     <declare-styleable name="PrimaryOfferCardView">
         <attr name="offerCardTitle" format="string" />

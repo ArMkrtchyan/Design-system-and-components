@@ -1,11 +1,11 @@
 package am.acba.components
 
 import am.acba.component.R
-import am.acba.component.productCard.ProductCard
-import am.acba.component.productCard.ProductCardAdditionalInfo
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.databinding.FragmentCardViewBinding
+import am.acba.components.models.CardAdditionalInfo
+import am.acba.components.models.CardInfoExample
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
@@ -16,8 +16,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
         get() = mBinding.toolbar
 
     override fun FragmentCardViewBinding.initView() {
-        loanCardFull.setProductCard(
-            ProductCard(
+        loanCardFull.setCardInfo(
+            CardInfoExample(
                 productTitle = "5G վարկ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
@@ -25,11 +25,11 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productNextPaymentDayTitle = "Վճարման օր",
                 productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
                         additionalInfo = "1,500,000.00 AMD",
                     ),
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Ընթացիկ պարտք",
                         additionalInfo = "1,125,432.00 AMD",
                     ),
@@ -43,8 +43,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBadgeColorAndIconColorAttr = R.attr.contentDangerTonal1,
             )
         )
-        loanCardWithoutIcon.setProductCard(
-            ProductCard(
+        loanCardWithoutIcon.setCardInfo(
+            CardInfoExample(
                 productTitle = "5G վարկ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
@@ -52,11 +52,11 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productNextPaymentDayTitle = "Վճարման օր",
                 productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
                         additionalInfo = "1,500,000.00 AMD",
                     ),
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Ընթացիկ պարտք",
                         additionalInfo = "1,125,432.00 AMD",
                     ),
@@ -64,8 +64,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
-        loanCardWithoutRows.setProductCard(
-            ProductCard(
+        loanCardWithoutRows.setCardInfo(
+            CardInfoExample(
                 productTitle = "Ավանդի գրավով վարկ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
@@ -77,19 +77,19 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
-        loanCardWithoutSubTitle.setProductCard(
-            ProductCard(
+        loanCardWithoutSubTitle.setCardInfo(
+            CardInfoExample(
                 productTitle = "5G վարկ",
                 productNextPaymentDay = "14/09/2024",
                 productNextPaymentAmount = "36,000.00 AMD",
                 productNextPaymentDayTitle = "Վճարման օր",
                 productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
                         additionalInfo = "1,500,000.00 AMD",
                     ),
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Ընթացիկ պարտք",
                         additionalInfo = "1,125,432.00 AMD",
                     ),
@@ -99,8 +99,8 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
-        loanCardWith1Row.setProductCard(
-            ProductCard(
+        loanCardWith1Row.setCardInfo(
+            CardInfoExample(
                 productTitle = "5G վարկ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productNextPaymentDay = "14/09/2024",
@@ -108,7 +108,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productNextPaymentDayTitle = "Վճարման օր",
                 productNextPaymentAmountTitle = "Վճարման ենթակա գումար",
                 productCardAdditionalInfo = arrayListOf(
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
                         additionalInfo = "1,500,000.00 AMD",
                     )
@@ -122,16 +122,16 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBadgeColorAndIconColorAttr = R.attr.contentAlternative6,
             )
         )
-        loanCardWithoutTextContent.setProductCard(
-            ProductCard(
+        loanCardWithoutTextContent.setCardInfo(
+            CardInfoExample(
                 productTitle = "Արագ օվերդրաֆտ",
                 productDescription = "Վերջ - 12/սեպ/2024",
                 productCardAdditionalInfo = arrayListOf(
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Սկզբնական գումար",
                         additionalInfo = "1,500,000.00 AMD",
                     ),
-                    ProductCardAdditionalInfo(
+                    CardAdditionalInfo(
                         additionalInfoTitle = "Ընթացիկ պարտք",
                         additionalInfo = "1,125,432.00 AMD",
                     ),

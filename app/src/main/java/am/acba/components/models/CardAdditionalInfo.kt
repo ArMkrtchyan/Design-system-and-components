@@ -1,9 +1,11 @@
-package am.acba.component.productCard
+package am.acba.components.models
 
-data class ProductCardAdditionalInfo(
+import am.acba.component.productCard.ICardAdditionalInfo
+
+data class CardAdditionalInfo(
     val additionalInfoTitle: String = "",
     val additionalInfo: String = "",
-) : IProductAdditionalInfo {
+) : ICardAdditionalInfo {
     override fun getTitle(): String {
         return additionalInfoTitle
     }

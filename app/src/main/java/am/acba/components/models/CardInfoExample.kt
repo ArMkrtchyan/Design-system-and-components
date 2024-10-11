@@ -1,9 +1,11 @@
-package am.acba.component.productCard
+package am.acba.components.models
 
+import am.acba.component.productCard.ICardAdditionalInfo
+import am.acba.component.productCard.ICardInfo
 import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 
-data class ProductCard(
+data class CardInfoExample(
     val productTitle: String = "",
     val productDescription: String = "",
     @DrawableRes val productStartIcon: Int = 0,
@@ -12,13 +14,13 @@ data class ProductCard(
     val productNextPaymentAmount: String = "",
     val productNextPaymentDayTitle: String = "",
     val productNextPaymentAmountTitle: String = "",
-    val productCardAdditionalInfo: List<IProductAdditionalInfo> = emptyList(),
+    val productCardAdditionalInfo: List<ICardAdditionalInfo> = emptyList(),
     @AttrRes val productBackgroundColorAttr: Int = 0,
     @AttrRes val productBadgeBackgroundColorAttr: Int = 0,
     @AttrRes val productBadgeColorAndIconColorAttr: Int = 0,
     @DrawableRes val productBadgeIcon: Int = 0,
     val productBadgeText: String = "",
-) : IProductCard {
+) : ICardInfo {
     override fun getTitle(): String {
         return productTitle
     }
@@ -50,7 +52,7 @@ data class ProductCard(
         return productNextPaymentAmountTitle
     }
 
-    override fun getCardAdditionalInfo(): List<IProductAdditionalInfo> {
+    override fun getCardAdditionalInfo(): List<ICardAdditionalInfo> {
         return productCardAdditionalInfo
     }
 

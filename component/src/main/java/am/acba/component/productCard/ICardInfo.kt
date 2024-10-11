@@ -1,6 +1,6 @@
 package am.acba.component.productCard
 
-interface IProductCard {
+interface ICardInfo {
     fun getTitle(): String
     fun getDescription(): String
     fun getStartIcon(): Int
@@ -9,7 +9,7 @@ interface IProductCard {
     fun getNextPaymentAmount(): String
     fun getNextPaymentDayTitle(): String
     fun getNextPaymentAmountTitle(): String
-    fun getCardAdditionalInfo(): List<IProductAdditionalInfo>
+    fun getCardAdditionalInfo(): List<ICardAdditionalInfo>
     fun getBackgroundColorAttr(): Int
     fun getBadgeBackgroundColorAttr(): Int
     fun getBadgeTextAndIconColorAttr(): Int
