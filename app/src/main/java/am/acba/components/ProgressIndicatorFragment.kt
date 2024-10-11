@@ -19,13 +19,10 @@ class ProgressIndicatorFragment : BaseViewBindingFragment<FragmentProgressIndica
         mBinding.btn.setOnClickListener {
             mBinding.progressBar.setProgress(3)
             mBinding.segment.startProgress()
-            mBinding.shiping.setProgress(4)
+            mBinding.shiping.setProgress(3)
         }
-        mBinding.resize1.setOnClickListener {
-            mBinding.segmentMediaView.showLottieView()
-        }
-        mBinding.resize2.setOnClickListener {
-            mBinding.segmentMediaView.resizeImageView()
+        mBinding.setProgress.setOnClickListener {
+            mBinding.progressBar.setProgress(1)
         }
     }
 }
