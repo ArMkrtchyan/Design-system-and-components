@@ -1,5 +1,6 @@
-package am.acba.component.loanComponents
+package am.acba.components.models
 
+import am.acba.component.loanComponents.IOfferCard
 import androidx.annotation.AttrRes
 
 data class OfferCard(

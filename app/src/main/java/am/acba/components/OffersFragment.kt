@@ -1,10 +1,11 @@
 package am.acba.components
 
+import am.acba.component.R
 import am.acba.component.extensions.log
-import am.acba.component.loanComponents.OfferCard
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.databinding.FragmentOffersBinding
+import am.acba.components.models.OfferCard
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
@@ -22,8 +23,8 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
                 offerCardCurrency = "AMD",
                 offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
                 newBadgeVisibility = true,
-                offerCardBackgroundColorAttr = am.acba.component.R.attr.backgroundAlternative6,
-                offerCardBadgeBackgroundColorAttr = am.acba.component.R.attr.backgroundSuccess,
+                offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
+                offerCardBadgeBackgroundColorAttr = R.attr.backgroundSuccess,
                 offerCardBadgeText = "Նոր"
             ),
             OfferCard(
@@ -32,8 +33,8 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
                 offerCardCurrency = "USD",
                 offerCardEndDate = "Վերջնաժամկետ - 20/01/2025",
                 newBadgeVisibility = true,
-                offerCardBackgroundColorAttr = am.acba.component.R.attr.backgroundAlternative3,
-                offerCardBadgeBackgroundColorAttr = am.acba.component.R.attr.backgroundSuccess,
+                offerCardBackgroundColorAttr = R.attr.backgroundAlternative3,
+                offerCardBadgeBackgroundColorAttr = R.attr.backgroundSuccess,
                 offerCardBadgeText = "Նոր"
             ),
             OfferCard(
@@ -42,7 +43,7 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
                 offerCardCurrency = "EUR",
                 offerCardEndDate = "Վերջնաժամկետ - 15/12/2024",
                 newBadgeVisibility = false,
-                offerCardBackgroundColorAttr = am.acba.component.R.attr.backgroundAlternative4
+                offerCardBackgroundColorAttr = R.attr.backgroundAlternative4
             ),
         )
         loanOffers.submitLoanOffers(list)

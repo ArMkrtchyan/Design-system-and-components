@@ -99,7 +99,7 @@ class PrimaryOffersView : FrameLayout {
         binding.seeAll.text = mSpannableString
     }
 
-    fun submitLoanOffers(list: List<OfferCard>) {
+    fun submitLoanOffers(list: List<IOfferCard>) {
         adapter.submitList(list)
     }
 }
