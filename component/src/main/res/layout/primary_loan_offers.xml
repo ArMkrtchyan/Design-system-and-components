@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_primary_input"
     android:backgroundTint="?attr/backgroundTonal1"
+    android:backgroundTintMode="add"
     android:orientation="vertical"
     android:paddingVertical="16dp">
 
