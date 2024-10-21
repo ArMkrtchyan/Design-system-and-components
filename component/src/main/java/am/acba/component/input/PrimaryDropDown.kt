@@ -52,6 +52,10 @@ class PrimaryDropDown @JvmOverloads constructor(
         binding.inputDropDown.setStartIconDrawable(drawableRes)
     }
 
+    fun loadStartIcon(url: String) {
+        binding.inputDropDown.loadStartIcon(url)
+    }
+
     fun setText(text: String) {
         binding.inputDropDown.editText?.setText(text)
     }
