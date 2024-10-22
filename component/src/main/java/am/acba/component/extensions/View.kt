@@ -31,6 +31,16 @@ fun View.animateRotation(
     }.start()
 }
 
+fun View.setRotationWithoutAnimation(
+    target: Float,
+    startAction: (View.() -> Unit)? = null,
+    endAction: (View.() -> Unit)? = null
+) {
+    startAction?.invoke(this)
+    this.rotation = target
+    endAction?.invoke(this)
+}
+
 fun View.expandHeight(duration: Long = 0) {
     this.measure(
         MeasureSpec.makeMeasureSpec(this.rootView.width, MeasureSpec.EXACTLY),

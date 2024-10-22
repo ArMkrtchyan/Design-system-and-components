@@ -8,6 +8,7 @@ import am.acba.component.extensions.collapseHeight
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.expandHeight
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.setRotationWithoutAnimation
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -15,7 +16,6 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -63,7 +63,6 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             }
 
             if (background != null) setPadding(16.dpToPx()) else setPadding(0, 16.dpToPx(), 0, 16.dpToPx())
-            if (isExpandable) setOnClickListener { expandView() }
         }
         setupUi()
     }
@@ -75,6 +74,18 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             for (i in 1 until childCount) {
                 children.elementAt(1).isVisible = isExpanded
             }
+            binding.endIcon.setRotationWithoutAnimation(if (isExpanded) 180F else 0F)
+        }
+    }
+
+    fun setOnAccordionClickListener(listener: OnClickListener) {
+        if (isExpandable) {
+            setOnClickListener {
+                expandView()
+                listener.onClick(it)
+            }
+        } else {
+            setOnClickListener(listener)
         }
     }
 
@@ -197,6 +208,10 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     fun setEndTextColor(iconTint: ColorStateList?) {
         binding.endText.setTextColor(iconTint)
+    }
+
+    fun setCurrencyTextColor(iconTint: ColorStateList?) {
+        binding.currencyText.setTextColor(iconTint)
     }
 
 }
