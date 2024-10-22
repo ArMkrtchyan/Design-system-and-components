@@ -35,6 +35,17 @@ fun View.animateRotation(
     }.start()
 }
 
+fun View.setRotationWithoutAnimation(
+    target: Float,
+    startAction: (View.() -> Unit)? = null,
+    endAction: (View.() -> Unit)? = null
+) {
+    startAction?.invoke(this)
+    this.rotation = target
+    endAction?.invoke(this)
+}
+
+fun View.expandHeight(duration: Long = 0) {
 fun View.animateXRotation(
     target: Float,
     duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong(),

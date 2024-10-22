@@ -15,5 +15,7 @@ class ExpandableViewFragment : BaseViewBindingFragment<FragmentExpandableViewBin
 
     override fun FragmentExpandableViewBinding.initView() {
         mBinding.accordionView2.setEndTextColor(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentBrand))
+        mBinding.accordionView2.setCurrencyTextColor(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentPrimaryTonal1))
+        mBinding.accordionView2.setOnAccordionClickListener { }
     }
 }
