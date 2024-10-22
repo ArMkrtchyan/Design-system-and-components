@@ -16,6 +16,7 @@ enum class ComponentTypeEnum(val componentName: String) {
     TOOLBAR("Toolbar"),
     PHONE_NUMBER_INPUT("Phone number input"),
     CURRENCY_INPUT("Currency input"),
+    PROGRESS_CARD_WIEW("Progress View"),
     EXPANDABLE_VIEW("Expandable view"),
     PRIMARY_TAB_LAYOUT("Primary Tab"),
     SEARCH_INPUT("Search input"),
@@ -27,4 +28,8 @@ enum class ComponentTypeEnum(val componentName: String) {
     BOTTOM_SHEET("Bottom sheet"),
     EMPTY_SCREEN("Empty screen"),
     PRODUCT_DESCRIPTION_CARD("Product description card"),
+    PROGRESS_INDICATOR("Progress indicator"),
+    OFFERS_COMPONENTS("Offers components"),
+    PRODUCT_CARD_VIEW("Product Card view component"),
+    TABLES("Tables"),
 }

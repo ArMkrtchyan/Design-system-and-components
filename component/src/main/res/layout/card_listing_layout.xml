@@ -211,7 +211,7 @@
                 android:gravity="center_vertical"
                 android:textColor="?attr/contentPrimaryTonal1"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Բլոկավորված է"
+                tools:text="Բլոկավորված էԲլոկավորված էԲլոկավորված էԲլոկավորված է"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

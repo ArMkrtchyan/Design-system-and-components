@@ -47,8 +47,16 @@ class PrimaryListItem : FrameLayout {
     val description by lazy { PrimaryTextView(context) }
     val secondaryDescription by lazy { PrimaryTextView(context) }
 
-    private var startComponentType = ListStartComponentType.NONE
-    private var endComponentType = ListEndComponentType.NONE
+    var startComponentType = ListStartComponentType.NONE
+        set(value) {
+            field = value
+            setStartComponent()
+        }
+    var endComponentType = ListEndComponentType.NONE
+        set(value) {
+            field = value
+            setEndComponent()
+        }
     private var startComponentGravity = ListStartAndEndComponentGravity.TOP
     private var endComponentGravity = ListStartAndEndComponentGravity.CENTER
     private var titleComponentType = ListTextComponentType.NONE
@@ -130,8 +138,6 @@ class PrimaryListItem : FrameLayout {
                 secondaryDescriptionText = getString(R.styleable.PrimaryListItem_listSecondaryDescriptionText)
                 secondaryDescriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listSecondaryDescriptionTextAppearance, R.style.Body2_Regular)
 
-                setStartComponent()
-                setEndComponent()
                 setDescription(binding.listDescriptionComponentContainer, descriptionComponentType, description, descriptionTextStyle, descriptionText)
                 setDescription(
                     binding.listSecondaryDescriptionComponentContainer,
@@ -245,7 +251,7 @@ class PrimaryListItem : FrameLayout {
         return isChecked
     }
 
-    fun setStartComponent() {
+    private fun setStartComponent() {
         binding.listStartComponentContainer.removeAllViews()
         binding.listStartComponentContainer.isVisible = startComponentType != ListStartComponentType.NONE
         when (startComponentType) {
@@ -261,7 +267,7 @@ class PrimaryListItem : FrameLayout {
         }
     }
 
-    fun setEndComponent() {
+    private fun setEndComponent() {
         binding.listEndComponentContainer.removeAllViews()
         binding.listEndComponentContainer.isVisible = endComponentType != ListEndComponentType.NONE
         when (endComponentType) {

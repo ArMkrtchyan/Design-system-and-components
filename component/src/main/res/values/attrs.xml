@@ -210,6 +210,14 @@
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="ProgressCardView">
+        <attr name="ProgressViewTitleText" format="string"/>
+        <attr name="ProgressViewSubTitleText" format="string"/>
+        <attr name="ProgressViewStepCount" format="integer"/>
+        <attr name="ProgressViewEndIcon" format="reference"/>
+        <attr name="ProgressView_tartIcon" format="reference"/>
+        <attr name="progressImageVisibility" format="boolean"/>
+    </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
         <attr name="accordionViewBackground" format="reference" />
@@ -509,5 +517,39 @@
         <attr name="emptyButtonTitle" format="string" />
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentedProgressBar">
+        <attr name="segmentCount" format="integer" />
+        <attr name="trackThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryTable">
+        <attr name="primaryTableBackground" format="reference" />
+        <attr name="primaryTableBackgroundTint" format="reference" />
+        <attr name="primaryTableShowTopView" format="boolean" />
+        <attr name="primaryTableShowIcon" format="boolean" />
+        <attr name="primaryTableShowArrow" format="boolean" />
+        <attr name="primaryTableIcon" format="reference" />
+        <attr name="primaryTableTitle" format="string" />
+        <attr name="primaryTableIconTint" format="reference" />
+        <attr name="primaryTableCollapsedItemCount" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ShippingProgressBar">
+        <attr name="shippingStepCount" format="integer"/>
+        <attr name="shippingTrackThickness" format="dimension"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="PrimaryCardView" />
+
+    <declare-styleable name="PrimaryOfferCardView">
+        <attr name="offerCardTitle" format="string" />
+    </declare-styleable>
+    <declare-styleable name="PrimaryOffersView">
+        <attr name="offersTitle" format="string" />
+        <attr name="offersSeeAllTitle" format="string" />
+        <attr name="offersExpanded" format="boolean" />
     </declare-styleable>
 </resources>

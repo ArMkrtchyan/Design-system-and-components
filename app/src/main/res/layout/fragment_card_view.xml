@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CardViewFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Product cards" />
+
+    <am.acba.component.textView.PrimaryTextView
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:paddingHorizontal="20dp"
+        android:text="" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/items_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="40dp"
+            android:paddingHorizontal="16dp">
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card with full content" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card without icon" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_without_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card without rows" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_without_rows"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card with 1 row" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_with_1_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card without subtitle" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_without_sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:text="Product Card without text content" />
+
+            <am.acba.component.productCard.PrimaryCardView
+                android:id="@+id/loan_card_without_text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

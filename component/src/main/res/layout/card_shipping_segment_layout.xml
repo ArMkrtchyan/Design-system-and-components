@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="14dp">
+
+    <am.acba.component.progressBar.SegmentMediaView
+        android:id="@+id/segmentMediaView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_2"
+        tools:progress="50"
+        app:indicatorColor="?attr/backgroundBrand"
+        android:layout_gravity="center_vertical"
+        app:indicatorTrackGapSize="0dp"
+        app:trackColor="?attr/backgroundTonal3"
+        app:trackCornerRadius="10dp"
+        app:trackStopIndicatorSize="0dp"
+        app:trackThickness="1dp"
+        tools:trackThickness="5dp" />
+</androidx.appcompat.widget.LinearLayoutCompat>
