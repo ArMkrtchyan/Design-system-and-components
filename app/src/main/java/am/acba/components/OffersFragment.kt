@@ -22,29 +22,10 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
                 offerCardAmount = "200,000.00",
                 offerCardCurrency = "AMD",
                 offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
-                newBadgeVisibility = true,
                 offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
                 offerCardBadgeBackgroundColorAttr = R.attr.backgroundSuccess,
                 offerCardBadgeText = "Նոր"
-            ),
-            OfferCard(
-                offerCardTitle = "5G վարկ",
-                offerCardAmount = "5,000.00",
-                offerCardCurrency = "USD",
-                offerCardEndDate = "Վերջնաժամկետ - 20/01/2025",
-                newBadgeVisibility = true,
-                offerCardBackgroundColorAttr = R.attr.backgroundAlternative3,
-                offerCardBadgeBackgroundColorAttr = R.attr.backgroundSuccess,
-                offerCardBadgeText = "Նոր"
-            ),
-            OfferCard(
-                offerCardTitle = "5G վարկ",
-                offerCardAmount = "3,000.00",
-                offerCardCurrency = "EUR",
-                offerCardEndDate = "Վերջնաժամկետ - 15/12/2024",
-                newBadgeVisibility = false,
-                offerCardBackgroundColorAttr = R.attr.backgroundAlternative4
-            ),
+            )
         )
         loanOffers.submitLoanOffers(list)
         loanOffers.setNewBadgeCount(list.count { it.newBadgeVisibility })

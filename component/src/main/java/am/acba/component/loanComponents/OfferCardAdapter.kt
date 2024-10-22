@@ -41,7 +41,7 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
                 binding.root.setOpenedOrClosedState(isOpenedState)
             }
             binding.root.updateLayoutParams<ViewGroup.LayoutParams> {
-                width = (binding.root.context.getDisplayWidth() * 0.72).toInt()
+                width = if (itemCount == 1) ViewGroup.LayoutParams.MATCH_PARENT else (binding.root.context.getDisplayWidth() * 0.72).toInt()
             }
         }
     }

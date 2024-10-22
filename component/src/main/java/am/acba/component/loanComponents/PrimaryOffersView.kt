@@ -55,11 +55,13 @@ class PrimaryOffersView : FrameLayout {
     private fun updateOffersState() {
         adapter.updateCardState()
         if (isExpanded) {
-            binding.seeAll.collapseHeight()
+            if (!binding.seeAll.text.isNullOrEmpty()) binding.seeAll.collapseHeight()
             binding.arrow.animateXRotation(0f, duration = 350, endAction = { isAnimationPlayed = false })
         } else {
-            binding.seeAll.expandHeight()
-            binding.seeAll.isVisible = true
+            if (!binding.seeAll.text.isNullOrEmpty()) {
+                binding.seeAll.expandHeight()
+                binding.seeAll.isVisible = true
+            }
             binding.arrow.animateXRotation(180f, duration = 350, endAction = { isAnimationPlayed = false })
         }
         isExpanded = !isExpanded
@@ -67,11 +69,13 @@ class PrimaryOffersView : FrameLayout {
 
     private fun setOfferInitialState() {
         if (isExpanded) {
-            binding.seeAll.collapseHeight(0)
+            if (!binding.seeAll.text.isNullOrEmpty()) binding.seeAll.collapseHeight(0)
             binding.arrow.animateXRotation(180f, duration = 0)
         } else {
-            binding.seeAll.expandHeight(0)
-            binding.seeAll.isVisible = true
+            if (!binding.seeAll.text.isNullOrEmpty()) {
+                binding.seeAll.expandHeight(0)
+                binding.seeAll.isVisible = true
+            }
             binding.arrow.animateXRotation(0f, duration = 0)
         }
     }
@@ -94,9 +98,12 @@ class PrimaryOffersView : FrameLayout {
     }
 
     fun setSeeAllText(text: String?) {
-        val mSpannableString = SpannableString(text)
-        mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
-        binding.seeAll.text = mSpannableString
+        if (!text.isNullOrEmpty()) {
+            val mSpannableString = SpannableString(text)
+            mSpannableString.setSpan(UnderlineSpan(), 0, mSpannableString.length, 0)
+            binding.seeAll.text = mSpannableString
+        }
+        binding.seeAll.isVisible = !text.isNullOrEmpty()
     }
 
     fun submitLoanOffers(list: List<IOfferCard>) {
