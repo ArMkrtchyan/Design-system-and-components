@@ -34,7 +34,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var endTextColor: Int = 0
     private var currencyText: String
     private var currencyTextColor: Int = 0
-    public var isExpanded = false
+    var isExpanded = false
     private var isExpandable = true
 
     init {
@@ -78,18 +78,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
     }
 
-    fun setOnAccordionClickListener(listener: OnClickListener) {
-        if (isExpandable) {
-            setOnClickListener {
-                expandView()
-                listener.onClick(it)
-            }
-        } else {
-            setOnClickListener(listener)
-        }
-    }
-
-    private fun expandView() {
+     fun expandView() {
         if (childCount > 1) {
             val child = children.elementAt(1)
             if (isExpanded) {
