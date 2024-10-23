@@ -8,7 +8,6 @@ import am.acba.component.extensions.collapseHeight
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.expandHeight
 import am.acba.component.extensions.inflater
-import am.acba.component.extensions.setRotationWithoutAnimation
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -34,9 +33,9 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var endTextColor: Int = 0
     private var currencyText: String
     private var currencyTextColor: Int = 0
+    var animationDuration: Long = 0
     var isExpanded = false
     private var isExpandable = true
-    private var isExpandFunIsUpdate = false
 
     init {
         addView(binding.root)
@@ -70,32 +69,26 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (isExpandFunIsUpdate) {
-            isExpandFunIsUpdate = false
-            return
-        }
         expandableViewValidationException()
         if (childCount > 1) {
             for (i in 1 until childCount) {
                 children.elementAt(1).isVisible = isExpanded
             }
-            binding.endIcon.setRotationWithoutAnimation(if (isExpanded) 180F else 0F)
+            binding.endIcon.animateRotation(if (isExpanded) 180f else 0F, duration = animationDuration)
         }
     }
 
     fun expandView() {
-        isExpandFunIsUpdate = true
         if (childCount > 1) {
             val child = children.elementAt(1)
             if (isExpanded) {
                 child.collapseHeight(300)
-                isExpanded = false
             } else {
-                isExpanded = true
                 child.isVisible = true
                 child.expandHeight(300)
             }
-            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F, duration = 300)
+            binding.endIcon.animateRotation(if (isExpanded) 0F else 180F, duration = 300)
+            isExpanded = !isExpanded
         }
     }
 
