@@ -58,15 +58,6 @@ fun View.expandHeightTo(duration: Long = FrameMetricsAggregator.ANIMATION_DURATI
     heightAnimator.start()
 }
 
-fun View.setRotationWithoutAnimation(
-    target: Float,
-    startAction: (View.() -> Unit)? = null,
-    endAction: (View.() -> Unit)? = null
-) {
-    startAction?.invoke(this)
-    this.rotation = target
-    endAction?.invoke(this)
-}
 
 fun View.expandHeight(duration: Long = FrameMetricsAggregator.ANIMATION_DURATION.toLong()) {
     this.measure(
