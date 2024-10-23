@@ -36,6 +36,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var currencyTextColor: Int = 0
     var isExpanded = false
     private var isExpandable = true
+    private var isExpandFunIsUpdate = false
 
     init {
         addView(binding.root)
@@ -69,6 +70,10 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        if (isExpandFunIsUpdate) {
+            isExpandFunIsUpdate = false
+            return
+        }
         expandableViewValidationException()
         if (childCount > 1) {
             for (i in 1 until childCount) {
@@ -78,7 +83,8 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
     }
 
-     fun expandView() {
+    fun expandView() {
+        isExpandFunIsUpdate = true
         if (childCount > 1) {
             val child = children.elementAt(1)
             if (isExpanded) {
