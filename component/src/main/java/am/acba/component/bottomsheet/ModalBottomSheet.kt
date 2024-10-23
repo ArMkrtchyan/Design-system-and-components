@@ -1,14 +1,12 @@
 package am.acba.component.bottomsheet
 
 import am.acba.component.databinding.ModalBottomSheetBinding
-import am.acba.component.extensions.dpToPx
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.updatePadding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -50,11 +48,10 @@ class ModalBottomSheet(
 
     private fun initDialog(dialog: BottomSheetDialog) {
         val screenHeight = requireActivity().window.decorView.height.toFloat()
-        val dialogHeight = resources.displayMetrics.heightPixels
-        val maxPeekPercentage = 0.70
-        if (dialogHeight / screenHeight >= maxPeekPercentage) {
-            dialog.setOnShowListener { _ ->
-                binding.root.updatePadding(bottom = (screenHeight - dialogHeight).toInt().dpToPx())
+        binding.root.post {
+            val dialogHeight = binding.root.height
+            val maxPeekPercentage = 0.70
+            if (dialogHeight / screenHeight >= maxPeekPercentage) {
                 dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
