@@ -20,6 +20,7 @@ class PrimaryAlertDialog(
     private val content: View? = null,
     private val positiveButtonText: String = "",
     private val positiveButtonTextColor: ColorStateList? = null,
+    private val iconColor: ColorStateList? = null,
     private val negativeButtonText: String = "",
     private val negativeButtonTextColor: ColorStateList? = null,
     private var mOnNegativeButtonClick: (() -> Unit)?,
@@ -38,6 +39,7 @@ class PrimaryAlertDialog(
         builder.content,
         builder.positiveButtonText,
         builder.positiveButtonTextColor,
+        builder.iconColor,
         builder.negativeButtonText,
         builder.negativeButtonTextColor,
         builder.mOnNegativeButtonClick,
@@ -61,6 +63,7 @@ class PrimaryAlertDialog(
         var content: View? = null,
         var positiveButtonText: String = "",
         var positiveButtonTextColor: ColorStateList? = null,
+        var iconColor: ColorStateList? = null,
         var negativeButtonText: String = "",
         var negativeButtonTextColor: ColorStateList? = null,
         var mOnNegativeButtonClick: (() -> Unit)? = null,
@@ -99,6 +102,9 @@ class PrimaryAlertDialog(
 
         fun positiveButtonTextColor(positiveButtonTextColor: ColorStateList) =
             apply { this.positiveButtonTextColor = positiveButtonTextColor }
+
+        fun iconColor(iconColor: ColorStateList) =
+            apply { this.iconColor = iconColor }
 
         fun negativeButtonText(negativeButtonText: String) =
             apply { this.negativeButtonText = negativeButtonText }
@@ -140,6 +146,7 @@ class PrimaryAlertDialog(
         mBinding.buttonPrimary.isVisible = positiveButtonText.isNotEmpty()
         mBinding.buttonPrimary.text = positiveButtonText
         positiveButtonTextColor?.let { mBinding.buttonPrimary.setTextColor(positiveButtonTextColor) }
+        iconColor?.let { mBinding.topIcon.imageTintList = iconColor }
         mBinding.topDivider.isVisible = positiveButtonText.isNotEmpty()
         mBinding.buttonSecondary.isVisible = negativeButtonText.isNotEmpty()
         mBinding.buttonSecondary.text = negativeButtonText

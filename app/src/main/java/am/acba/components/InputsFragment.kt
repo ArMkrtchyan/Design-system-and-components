@@ -8,6 +8,11 @@ import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentInputsBinding
 import android.content.Context
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StyleSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 
@@ -41,12 +46,15 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
         val negativeButtonTextColor =
             context.getColorStateListFromAttr(am.acba.component.R.attr.contentDangerTonal1)
         val dialogLayoutBinding = DialogContentTestBinding.inflate(inflater)
+        dialogLayoutBinding.infoPhoto.setOnClickListener {
+            Log.v("sd", "")
+        }
         PrimaryAlertDialog.Builder(context)
-            .icon(am.acba.component.R.drawable.checkbox_button_icon)
+            .icon(am.acba.component.R.drawable.ic_lock)
             .title("Օգտատերը բլոկավորված է")
             .description("Դուք կարող եք ապաբլոկավորել սեղմելով ապաբլոկավորման կոճակը:")
-            .positiveButtonText("Ok")
             .positiveButtonTextColor(positiveButtonTextColor)
+            .iconColor(context.getColorStateListFromAttr(am.acba.component.R.attr.contentBrandTonal1))
             .negativeButtonText("Cancel")
             .negativeButtonTextColor(negativeButtonTextColor)
             .content(dialogLayoutBinding.root)
