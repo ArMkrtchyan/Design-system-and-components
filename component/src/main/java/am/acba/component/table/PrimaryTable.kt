@@ -10,6 +10,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -123,12 +124,26 @@ class PrimaryTable : FrameLayout {
         binding.listItem.setTitleText(title)
     }
 
+    fun setIconLayoutParams(height: Int?, width: Int?) {
+        binding.listItem.startIcon.layoutParams = LayoutParams(
+            height ?: WRAP_CONTENT,
+            width ?: WRAP_CONTENT
+        )
+    }
+
     fun setIcon(icon: Drawable?) {
         icon?.let { binding.listItem.startIcon.setImageDrawable(it) }
     }
 
     fun setIconTint(colorStateList: ColorStateList?) {
         binding.listItem.startIcon.imageTintList = colorStateList
+    }
+
+    fun setIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {
+        binding.listItem.startIcon.apply {
+            this.clipToOutline = clipToOutline
+            backgroundRes?.let { background = it }
+        }
     }
 
     fun submitList(items: List<TableItem>) {
