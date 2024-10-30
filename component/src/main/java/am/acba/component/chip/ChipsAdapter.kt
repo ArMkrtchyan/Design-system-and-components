@@ -4,6 +4,7 @@ import am.acba.acbamobile.ui.kotlin.screens.loan.IChipModel
 import am.acba.component.databinding.ItemChipBinding
 import am.acba.component.extensions.inflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -23,6 +24,8 @@ class ChipsAdapter<T : IChipModel> :
         val binding = holder.binding
         val item = getItem(position)
         binding.chip.setChipText(item.getTitle())
+        binding.chip.setChipStartIconType(PrimaryChip.ChipStartIconType.ICON)
+        binding.chip.setStartIcon(getDrawable(holder.binding.root.context, item.getResId()))
         binding.root.setOnClickListener {
             onChipClick?.invoke(item)
             selectedChip.postValue(position)
