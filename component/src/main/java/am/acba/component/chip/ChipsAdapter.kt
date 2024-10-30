@@ -24,7 +24,7 @@ class ChipsAdapter<T : IChipModel> :
         val binding = holder.binding
         val item = getItem(position)
         binding.chip.setChipText(item.getTitle())
-        binding.chip.setChipStartIconType(PrimaryChip.ChipStartIconType.ICON)
+        binding.chip.setChipStartIconType(item.getChipIconType())
         binding.chip.setStartIcon(getDrawable(holder.binding.root.context, item.getResId()))
         binding.root.setOnClickListener {
             onChipClick?.invoke(item)
