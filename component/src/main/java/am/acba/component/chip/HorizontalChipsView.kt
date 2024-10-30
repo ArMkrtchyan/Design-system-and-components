@@ -39,6 +39,7 @@ class HorizontalChipsView @JvmOverloads constructor(
         } else {
             chipsAdapter = binding.chipsRecycler.adapter as ChipsAdapter<T>
         }
+        chipsAdapter.setOnChipClick(onChipClick)
         chipsAdapter.submitList(chips)
     }
 }
