@@ -12,4 +12,20 @@
     <style name="TextView.Primary" parent="BasePrimaryTextView" />
 
     <style name="ImageView.Primary" parent="BasePrimaryImageView" />
+
+    <style name="BasePrimarySlider" parent="Widget.Material3.Slider" />
+
+    <style name="PrimarySlider" parent="BasePrimarySlider">
+        <item name="thumbColor">?attr/backgroundTonal1</item>
+        <item name="thumbElevation">3dp</item>
+        <item name="thumbHeight">22dp</item>
+        <item name="thumbStrokeColor">?attr/backgroundBrand</item>
+        <item name="thumbStrokeWidth">2dp</item>
+        <item name="thumbTrackGapSize">0dp</item>
+        <item name="thumbWidth">22dp</item>
+        <item name="trackColorActive">?attr/backgroundBrand</item>
+        <item name="trackColorInactive">?attr/backgroundTonal2</item>
+        <item name="trackHeight">7dp</item>
+        <item name="trackStopIndicatorSize">0dp</item>
+    </style>
 </resources>

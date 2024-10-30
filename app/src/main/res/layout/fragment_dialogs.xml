@@ -41,6 +41,25 @@
                 android:layout_marginTop="20dp"
                 android:enabled="true"
                 android:text="Show Alert Dialog" />
+
+            <am.acba.component.slider.PrimarySlider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:stepSize="6"
+                android:value="36"
+                android:valueFrom="6"
+                android:valueTo="36"
+                app:sliderEndText="36 ամիս"
+                app:sliderStartText="6 ամիս" />
+
+            <am.acba.component.chip.HorizontalChipsView
+                android:id="@+id/chips_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:horizontalChipsTitle="Chips title" />
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

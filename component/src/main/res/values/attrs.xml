@@ -554,4 +554,16 @@
         <attr name="offersSeeAllTitle" format="string" />
         <attr name="offersExpanded" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="PrimarySlider">
+        <attr name="android:valueTo" />
+        <attr name="android:valueFrom" />
+        <attr name="android:value" />
+        <attr name="android:stepSize" />
+        <attr name="sliderStartText" format="string" />
+        <attr name="sliderEndText" format="string" />
+    </declare-styleable>
+    <declare-styleable name="HorizontalChipsView">
+        <attr name="horizontalChipsTitle" format="string" />
+    </declare-styleable>
 </resources>
