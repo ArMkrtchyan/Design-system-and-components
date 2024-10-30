@@ -1,5 +1,6 @@
 package am.acba.components
 
+import am.acba.component.chip.PrimaryChip
 import am.acba.component.databinding.DialogContentTestBinding
 import am.acba.component.dialog.PrimaryAlertDialog
 import am.acba.component.extensions.getColorStateListFromAttr
@@ -29,7 +30,9 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
             if (slider.isPressed)
                 value.log()
         }
-        chipsView.submitChips(arrayListOf(RepaymentFrequency(1, "Ամեն ամիս"), RepaymentFrequency(1, "3 ամիսը մեկ"), RepaymentFrequency(1, "6 ամիսը մեկ"))) {
+        chipsView.submitChips(arrayListOf(RepaymentFrequency(1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON),
+            RepaymentFrequency(1, "3 ամիսը մեկ",am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON),
+            RepaymentFrequency(1, "6 ամիսը մեկ",am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON))) {
             it.log()
         }
     }
