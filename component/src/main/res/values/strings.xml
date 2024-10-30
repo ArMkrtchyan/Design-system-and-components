@@ -4,4 +4,5 @@
     <string name="frequendly_search">ՀԱՃԱԽ ՈՐՈՆՎՈՂ</string>
     <string name="acba_cantact_tel">Phone Number</string>
     <string name="phone_input_error_text">Phone number is not valid</string>
+    <string name="date_picker_title_text">Select date</string>
 </resources>

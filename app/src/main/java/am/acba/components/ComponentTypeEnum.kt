@@ -7,6 +7,7 @@ enum class ComponentTypeEnum(val componentName: String) {
     BANNERS("Banners"),
     CHIPS("Chips"),
     CONTROLS("Controls"),
+    DATE_PICKER("Date picker and Calendar"),
     DIALOGS("Dialogs"),
     DIVIDER("Dividers"),
     DROP_DOWN("Drop downs"),

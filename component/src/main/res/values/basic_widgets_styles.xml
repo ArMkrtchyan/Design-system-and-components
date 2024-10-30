@@ -28,4 +28,6 @@
         <item name="trackHeight">7dp</item>
         <item name="trackStopIndicatorSize">0dp</item>
     </style>
+
+
 </resources>

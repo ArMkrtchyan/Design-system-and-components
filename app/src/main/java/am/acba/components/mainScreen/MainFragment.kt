@@ -32,6 +32,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.BANNERS -> findNavController().navigate(R.id.action_mainFragment_to_bannersFragment)
             ComponentTypeEnum.CHIPS -> findNavController().navigate(R.id.action_mainFragment_to_chipsFragment)
             ComponentTypeEnum.CONTROLS -> findNavController().navigate(R.id.action_mainFragment_to_controlsFragment)
+            ComponentTypeEnum.DATE_PICKER -> findNavController().navigate(R.id.action_mainFragment_to_datePickerFragment)
             ComponentTypeEnum.DIALOGS -> findNavController().navigate(R.id.action_mainFragment_to_dialogsFragment)
             ComponentTypeEnum.DIVIDER -> findNavController().navigate(R.id.action_mainFragment_to_dividerFragment)
             ComponentTypeEnum.DROP_DOWN -> findNavController().navigate(R.id.action_mainFragment_to_dropDownFragment)
@@ -70,6 +71,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.SEARCH_INPUT, ComponentTypeEnum.SEARCH_INPUT.componentName),
         Component(ComponentTypeEnum.PIN_INPUT, ComponentTypeEnum.PIN_INPUT.componentName),
         Component(ComponentTypeEnum.CONTROLS, ComponentTypeEnum.CONTROLS.componentName),
+        Component(ComponentTypeEnum.DATE_PICKER, ComponentTypeEnum.DATE_PICKER.componentName),
         Component(ComponentTypeEnum.EXCHANGE, ComponentTypeEnum.EXCHANGE.componentName),
         Component(ComponentTypeEnum.QUICK_ACTION_AVATAR, ComponentTypeEnum.QUICK_ACTION_AVATAR.componentName),
         Component(ComponentTypeEnum.BADGES, ComponentTypeEnum.BADGES.componentName),

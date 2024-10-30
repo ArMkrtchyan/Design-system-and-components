@@ -32,6 +32,9 @@
             android:id="@+id/action_mainFragment_to_tabLayoutFragment"
             app:destination="@id/tabLayoutFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_datePickerFragment"
+            app:destination="@id/datePickerFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_pinInputFragment"
             app:destination="@id/pinInputFragment" />
         <action
@@ -259,4 +262,9 @@
         android:name="am.acba.components.TablesFragment"
         android:label="fragment_product_description_card"
         tools:layout="@layout/fragment_product_description_card" />
+    <fragment
+        android:id="@+id/datePickerFragment"
+        android:name="am.acba.components.DatePickerFragment"
+        android:label="fragment_date_picker"
+        tools:layout="@layout/fragment_date_picker" />
 </navigation>
