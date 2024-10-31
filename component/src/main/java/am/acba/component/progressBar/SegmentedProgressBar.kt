@@ -32,7 +32,14 @@ class SegmentedProgressBar @JvmOverloads constructor(context: Context, attrs: At
         addProgressBar(segmentCount, trackThickness)
     }
 
+    fun setSegmentCount(count: Int) {
+        segmentCount = count
+        binding.parent.weightSum = segmentCount.toFloat()
+        addProgressBar(segmentCount, trackThickness)
+    }
+
     private fun addProgressBar(count: Int, trackThickness: Int) {
+        binding.parent.removeAllViews()
         for (i in 0 until count) {
             val progressLayout = ProgressIndicatorBinding.inflate(LayoutInflater.from(context), binding.parent, false)
             if (trackThickness > 0) progressLayout.lpLimitProgressBar.trackThickness = trackThickness
