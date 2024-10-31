@@ -30,9 +30,17 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
             if (slider.isPressed)
                 value.log()
         }
-        chipsView.submitChips(arrayListOf(RepaymentFrequency(1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON),
-            RepaymentFrequency(1, "3 ամիսը մեկ",am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON),
-            RepaymentFrequency(1, "6 ամիսը մեկ",am.acba.component.R.drawable.ic_sort,PrimaryChip.ChipStartIconType.ICON))) {
+        chipsView.submitChips(
+            arrayListOf(
+                RepaymentFrequency(
+                    1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,true),
+                RepaymentFrequency(1, "3 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,false),
+                RepaymentFrequency(1, "6 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,false)
+            )
+        ) {
             it.log()
         }
     }

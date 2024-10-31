@@ -23,9 +23,10 @@ class ChipsAdapter<T : IChipModel> :
     override fun onBindViewHolder(holder: ChipsAdapter<T>.ViewHolder<T>, position: Int) {
         val binding = holder.binding
         val item = getItem(position)
+        if (item.getSelected()) selectedChip.postValue(position)
         binding.chip.setChipText(item.getTitle())
         binding.chip.setChipStartIconType(item.getChipIconType())
-        binding.chip.setStartIcon(getDrawable(holder.binding.root.context, item.getStartIcon2()))
+        binding.chip.setStartIcon(getDrawable(holder.binding.root.context, item.getStartIcon()))
         binding.root.setOnClickListener {
             onChipClick?.invoke(item)
             selectedChip.postValue(position)
