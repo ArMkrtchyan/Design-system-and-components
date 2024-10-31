@@ -84,7 +84,10 @@ class MaterialDatePickerDialog(
             calendarConstraintBuilder.setValidator(object : CalendarConstraints.DateValidator {
                 override fun isValid(date: Long): Boolean {
                     val calendar = Calendar.getInstance().apply { timeInMillis = date }
-                    return calendar[Calendar.DAY_OF_MONTH] !in disabledDays
+                    val isDayIsNotInDisables = calendar[Calendar.DAY_OF_MONTH] !in disabledDays
+                    val isDisableBeforeMinDate = minDate == null || date >= minDate
+                    val isDisableAfterMaxDate = maxDate == null || date <= maxDate
+                    return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate
                 }
 
                 override fun describeContents(): Int {
