@@ -25,6 +25,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var startIcon: Drawable?
     private var startIconBackground: Drawable?
     private var startIconTint: ColorStateList? = null
+    private var endIconTint: ColorStateList? = null
     private var startIconPadding = -1f
     private var endIcon: Drawable?
     private var startText: String
@@ -48,6 +49,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
                 startIconTint = getColorStateList(R.styleable.AccordionView_accordionStartIconTint)
                 startIconPadding = getDimension(R.styleable.AccordionView_accordionStartIconPadding, -1F)
                 endIcon = getDrawable(R.styleable.AccordionView_accordionEndIcon)
+                endIconTint = getColorStateList(R.styleable.AccordionView_accordionEndIconTint)
                 startText = getString(R.styleable.AccordionView_accordionStartText) ?: ""
                 startTextColor = getColor(R.styleable.AccordionView_accordionStartTextColor, 0)
                 endText = getString(R.styleable.AccordionView_accordionEndText) ?: ""
@@ -108,6 +110,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         binding.startIcon.setPadding(startIconPadding.toInt())
         binding.endIcon.isVisible = endIcon != null
         binding.endIcon.setImageDrawable(endIcon)
+        binding.endIcon.imageTintList = endIconTint
         binding.startText.isVisible = startText.isNotEmpty()
         binding.startText.text = startText
         if (startTextColor != 0) binding.startText.setTextColor(startTextColor)

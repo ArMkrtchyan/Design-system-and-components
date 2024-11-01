@@ -225,6 +225,7 @@
         <attr name="accordionStartIconTint" format="color" />
         <attr name="accordionStartIconPadding" format="dimension" />
         <attr name="accordionEndIcon" format="reference" />
+        <attr name="accordionEndIconTint" format="color" />
         <attr name="accordionStartText" format="string" />
         <attr name="accordionStartTextColor" format="color" />
         <attr name="accordionEndText" format="string" />
