@@ -218,6 +218,14 @@
         <attr name="ProgressView_tartIcon" format="reference"/>
         <attr name="progressImageVisibility" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="PrimaryProgressView">
+        <attr name="topLeftText" format="string"/>
+        <attr name="topRightText" format="string"/>
+        <attr name="bottomLeftText" format="string"/>
+        <attr name="bottomRightText" format="string"/>
+        <attr name="progress_maxValue" format="integer"/>
+    </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
         <attr name="accordionViewBackground" format="reference" />
