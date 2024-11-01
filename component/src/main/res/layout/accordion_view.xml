@@ -25,6 +25,7 @@
         android:singleLine="true"
         android:ellipsize="end"
         android:paddingEnd="5dp"
+        app:layout_goneMarginStart="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/endText"
         app:layout_constraintStart_toEndOf="@id/startIcon"
