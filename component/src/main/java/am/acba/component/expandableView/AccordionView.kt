@@ -15,7 +15,6 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -26,6 +25,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var startIcon: Drawable?
     private var startIconBackground: Drawable?
     private var startIconTint: ColorStateList? = null
+    private var endIconTint: ColorStateList? = null
     private var startIconPadding = -1f
     private var endIcon: Drawable?
     private var startText: String
@@ -34,7 +34,8 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private var endTextColor: Int = 0
     private var currencyText: String
     private var currencyTextColor: Int = 0
-    public var isExpanded = false
+    var animationDuration: Long = 0
+    var isExpanded = false
     private var isExpandable = true
 
     init {
@@ -48,6 +49,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
                 startIconTint = getColorStateList(R.styleable.AccordionView_accordionStartIconTint)
                 startIconPadding = getDimension(R.styleable.AccordionView_accordionStartIconPadding, -1F)
                 endIcon = getDrawable(R.styleable.AccordionView_accordionEndIcon)
+                endIconTint = getColorStateList(R.styleable.AccordionView_accordionEndIconTint)
                 startText = getString(R.styleable.AccordionView_accordionStartText) ?: ""
                 startTextColor = getColor(R.styleable.AccordionView_accordionStartTextColor, 0)
                 endText = getString(R.styleable.AccordionView_accordionEndText) ?: ""
@@ -63,7 +65,6 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             }
 
             if (background != null) setPadding(16.dpToPx()) else setPadding(0, 16.dpToPx(), 0, 16.dpToPx())
-            if (isExpandable) setOnClickListener { expandView() }
         }
         setupUi()
     }
@@ -75,21 +76,21 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             for (i in 1 until childCount) {
                 children.elementAt(1).isVisible = isExpanded
             }
+            binding.endIcon.animateRotation(if (isExpanded) 180f else 0F, duration = animationDuration)
         }
     }
 
-    private fun expandView() {
+    fun expandView() {
         if (childCount > 1) {
             val child = children.elementAt(1)
             if (isExpanded) {
                 child.collapseHeight(300)
-                isExpanded = false
             } else {
-                isExpanded = true
                 child.isVisible = true
                 child.expandHeight(300)
             }
-            binding.endIcon.animateRotation(if (isExpanded) 180F else 0F, duration = 300)
+            binding.endIcon.animateRotation(if (isExpanded) 0F else 180F, duration = 300)
+            isExpanded = !isExpanded
         }
     }
 
@@ -109,6 +110,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         binding.startIcon.setPadding(startIconPadding.toInt())
         binding.endIcon.isVisible = endIcon != null
         binding.endIcon.setImageDrawable(endIcon)
+        binding.endIcon.imageTintList = endIconTint
         binding.startText.isVisible = startText.isNotEmpty()
         binding.startText.text = startText
         if (startTextColor != 0) binding.startText.setTextColor(startTextColor)
@@ -197,6 +199,10 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     fun setEndTextColor(iconTint: ColorStateList?) {
         binding.endText.setTextColor(iconTint)
+    }
+
+    fun setCurrencyTextColor(iconTint: ColorStateList?) {
+        binding.currencyText.setTextColor(iconTint)
     }
 
 }

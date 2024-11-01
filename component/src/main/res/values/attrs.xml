@@ -211,12 +211,12 @@
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ProgressCardView">
-        <attr name="ProgressViewTitleText" format="string"/>
-        <attr name="ProgressViewSubTitleText" format="string"/>
-        <attr name="ProgressViewStepCount" format="integer"/>
-        <attr name="ProgressViewEndIcon" format="reference"/>
-        <attr name="ProgressView_tartIcon" format="reference"/>
-        <attr name="progressImageVisibility" format="boolean"/>
+        <attr name="ProgressViewTitleText" format="string" />
+        <attr name="ProgressViewSubTitleText" format="string" />
+        <attr name="ProgressViewStepCount" format="integer" />
+        <attr name="ProgressViewEndIcon" format="reference" />
+        <attr name="ProgressView_tartIcon" format="reference" />
+        <attr name="progressImageVisibility" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="PrimaryProgressView">
@@ -233,6 +233,7 @@
         <attr name="accordionStartIconTint" format="color" />
         <attr name="accordionStartIconPadding" format="dimension" />
         <attr name="accordionEndIcon" format="reference" />
+        <attr name="accordionEndIconTint" format="color" />
         <attr name="accordionStartText" format="string" />
         <attr name="accordionStartTextColor" format="color" />
         <attr name="accordionEndText" format="string" />
@@ -528,13 +529,50 @@
     </declare-styleable>
 
     <declare-styleable name="SegmentedProgressBar">
-        <attr name="segmentCount" format="integer"/>
-        <attr name="trackThickness" format="dimension"/>
+        <attr name="segmentCount" format="integer" />
+        <attr name="trackThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryTable">
+        <attr name="primaryTableBackground" format="reference" />
+        <attr name="primaryTableBackgroundTint" format="reference" />
+        <attr name="primaryTableShowTopView" format="boolean" />
+        <attr name="primaryTableShowIcon" format="boolean" />
+        <attr name="primaryTableShowArrow" format="boolean" />
+        <attr name="primaryTableIcon" format="reference" />
+        <attr name="primaryTableTitle" format="string" />
+        <attr name="primaryTableIconTint" format="reference" />
+        <attr name="primaryTableCollapsedItemCount" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="ShippingProgressBar">
-        <attr name="shippingStepCount" format="integer"/>
-        <attr name="shippingTrackThickness" format="dimension"/>
+        <attr name="shippingStepCount" format="integer" />
+        <attr name="shippingTrackThickness" format="dimension" />
     </declare-styleable>
 
+
+    <declare-styleable name="PrimaryCardView" />
+
+    <declare-styleable name="PrimaryBanners" />
+
+    <declare-styleable name="PrimaryOfferCardView">
+        <attr name="offerCardTitle" format="string" />
+    </declare-styleable>
+    <declare-styleable name="PrimaryOffersView">
+        <attr name="offersTitle" format="string" />
+        <attr name="offersSeeAllTitle" format="string" />
+        <attr name="offersExpanded" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimarySlider">
+        <attr name="android:valueTo" />
+        <attr name="android:valueFrom" />
+        <attr name="android:value" />
+        <attr name="android:stepSize" />
+        <attr name="sliderStartText" format="string" />
+        <attr name="sliderEndText" format="string" />
+    </declare-styleable>
+    <declare-styleable name="HorizontalChipsView">
+        <attr name="horizontalChipsTitle" format="string" />
+    </declare-styleable>
 </resources>

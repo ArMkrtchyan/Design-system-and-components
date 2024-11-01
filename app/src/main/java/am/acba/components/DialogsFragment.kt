@@ -1,12 +1,15 @@
 package am.acba.components
 
+import am.acba.component.chip.PrimaryChip
 import am.acba.component.databinding.DialogContentTestBinding
 import am.acba.component.dialog.PrimaryAlertDialog
 import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.extensions.log
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentDialogsBinding
+import am.acba.components.models.RepaymentFrequency
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -22,6 +25,23 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
             setOnClickListener {
                 showPrimaryAlertDialog(requireContext(), layoutInflater)
             }
+        }
+        slider.addOnSliderChangeListener { slider, value, _ ->
+            if (slider.isPressed)
+                value.log()
+        }
+        chipsView.submitChips(
+            arrayListOf(
+                RepaymentFrequency(
+                    1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,true),
+                RepaymentFrequency(1, "3 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,false),
+                RepaymentFrequency(1, "6 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                    PrimaryChip.ChipStartIconType.ICON,false)
+            )
+        ) {
+            it.log()
         }
     }
 

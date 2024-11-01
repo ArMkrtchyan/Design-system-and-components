@@ -5,6 +5,7 @@ import am.acba.component.extensions.addKeyboardVisibilityListener
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.hideSoftInput
+import am.acba.component.extensions.load
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
@@ -194,5 +195,11 @@ open class PrimaryInput : TextInputLayout {
 
     fun setInputExpandedHintEnabled(isExpandedHintEnabled: Boolean) {
         this.isExpandedHintEnabled = isExpandedHintEnabled
+    }
+
+    fun loadStartIcon(url: String) {
+        val startIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
+        setStartIconDrawable(R.drawable.empty_resource)
+        startIcon.load(url)
     }
 }

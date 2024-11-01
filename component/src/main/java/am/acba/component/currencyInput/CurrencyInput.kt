@@ -16,12 +16,15 @@ import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
@@ -69,6 +72,48 @@ class CurrencyInput @JvmOverloads constructor(
         setupBackgroundsByFocusChange()
         binding.amount.editText?.hideSoftInput()
         binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
+    }
+
+    fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {
+        binding.currencyLayout.setOnClickListener(onClickListener)
+    }
+
+    fun loadCurrencyIcon(@DrawableRes resId: Int) {
+        Glide.with(context).asBitmap()
+            .load(resId)
+            .apply(
+                RequestOptions.circleCropTransform()
+                    .override(22.dpToPx(), 22.dpToPx())
+            )
+            .into(binding.currencyFlag)
+    }
+
+    fun loadCurrencyIcon(drawable: Drawable) {
+        Glide.with(context).asBitmap()
+            .load(drawable)
+            .apply(
+                RequestOptions.circleCropTransform()
+                    .override(22.dpToPx(), 22.dpToPx())
+            )
+            .into(binding.currencyFlag)
+    }
+
+    fun loadCurrencyIcon(iconUrl: String) {
+        Glide.with(context).asBitmap()
+            .load(iconUrl)
+            .apply(
+                RequestOptions.circleCropTransform()
+                    .override(22.dpToPx(), 22.dpToPx())
+            )
+            .into(binding.currencyFlag)
+    }
+
+    fun setCurrencyText(title: String) {
+        binding.currency.text = title
+    }
+
+    fun setCurrencyArrowVisibility(isVisible: Boolean) {
+        binding.icArrow.isVisible = isVisible
     }
 
     private fun onKeyboardHidden() {

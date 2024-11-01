@@ -6,6 +6,7 @@ import am.acba.component.databinding.BadgeIconBinding
 import am.acba.component.databinding.BadgeTextBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -65,14 +66,16 @@ class PrimaryBadge : FrameLayout {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun setBadgeText(text: String?) {
         this.text = text
         if (type == BadgeType.NUMBER) {
             try {
-                val number = text?.toInt() ?: -1
+                val plus = if (text?.contains("+") == true) "+" else ""
+                val number = text?.replace("+", "")?.toInt() ?: -1
                 if (number == -1) textBinding.text.text = ""
                 else if (number >= 100) textBinding.text.text = "99+"
-                else textBinding.text.text = "$number"
+                else textBinding.text.text = "$plus$number"
             } catch (e: Exception) {
 
             }
