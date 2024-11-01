@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/tvTopLeft"
+        style="@style/Body2.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Top Left" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/tvTopRight"
+        style="@style/Body2.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Top Right" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/lpLimitProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="@dimen/radius_8"
+        android:progress="50"
+        app:indicatorColor="?attr/backgroundBrand"
+        app:indicatorTrackGapSize="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTopLeft"
+        app:trackColor="?attr/backgroundTonal3"
+        app:trackCornerRadius="10dp"
+        app:trackStopIndicatorSize="0dp"
+        app:trackThickness="6dp" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/tvBottomLeft"
+        style="@style/Small.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_4"
+        android:textColor="?attr/contentPrimaryTonal1"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lpLimitProgressBar"
+        tools:text="Bottom Left" />
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/tvBottomRight"
+        style="@style/Small.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_4"
+        android:textColor="?attr/contentPrimaryTonal1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lpLimitProgressBar"
+        tools:text="Bottom Right" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

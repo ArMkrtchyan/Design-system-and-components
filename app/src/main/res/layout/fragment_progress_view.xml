@@ -37,9 +37,19 @@
                 android:id="@+id/progressCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ProgressViewTitleText="Your Title"
+                app:ProgressViewStepCount="2"
                 app:ProgressViewSubTitleText="Your Subtitle"
-                app:ProgressViewStepCount="2"/>
+                app:ProgressViewTitleText="Your Title" />
+
+            <am.acba.component.progressView.PrimaryProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_14"
+                app:bottomLeftText="bottomLeftText"
+                app:bottomRightText="bottomRightText"
+                app:progress_maxValue="15000"
+                app:topLeftText="topLeftText"
+                app:topRightText="topRightText" />
         </LinearLayout>
     </ScrollView>
 
