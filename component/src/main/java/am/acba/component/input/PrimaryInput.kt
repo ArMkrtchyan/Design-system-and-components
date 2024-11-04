@@ -11,6 +11,8 @@ import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -19,7 +21,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -32,20 +33,28 @@ import androidx.core.view.updateMarginsRelative
 import com.google.android.material.textfield.TextInputLayout
 
 open class PrimaryInput : TextInputLayout {
+
     private var textMaxLength = -1
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
     private var formattingWithDot = false
 
-
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs, R.attr.primaryInputStyle) {
+    constructor(context: Context, attrs: AttributeSet) : super(
+        context,
+        attrs,
+        R.attr.primaryInputStyle
+    ) {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(attrs)
     }
 
@@ -61,15 +70,18 @@ open class PrimaryInput : TextInputLayout {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            val layoutStyle = if (cornerStyle == 1) R.layout.text_input_edittext_left_corner_layout else R.layout.text_input_edittext_layout
+            val layoutStyle =
+                if (cornerStyle == 1) R.layout.text_input_edittext_left_corner_layout else R.layout.text_input_edittext_layout
             addView(LayoutInflater.from(context).inflate(layoutStyle, this@PrimaryInput, false))
             setText(getString(R.styleable.PrimaryInput_android_text))
             if (textMaxLength != -1) setMaxLength(textMaxLength)
             if (hasDropDown) {
-                val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
+                val endIcon =
+                    findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
                 editText?.isEnabled = false
                 endIcon.setImageResource(R.drawable.ic_down)
-                endIcon.imageTintList = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                endIcon.imageTintList =
+                    context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
             }
             when (inputType) {
                 0 -> setInputTypeForAmount()
@@ -80,8 +92,8 @@ open class PrimaryInput : TextInputLayout {
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             suffixTextView.translationY = -8.dpToPx().toFloat()
-            suffixTextView.updateLayoutParams<ViewGroup.LayoutParams> {
-                height = ViewGroup.LayoutParams.MATCH_PARENT
+            suffixTextView.updateLayoutParams<LayoutParams> {
+                height = LayoutParams.MATCH_PARENT
 
             }
             suffixTextView.gravity = Gravity.CENTER_VERTICAL
@@ -138,18 +150,29 @@ open class PrimaryInput : TextInputLayout {
     @SuppressLint("UseCompatTextViewDrawableApis")
     override fun setErrorEnabled(enabled: Boolean) {
         super.setErrorEnabled(enabled)
+
+        val tvError: TextView? = findViewById(com.google.android.material.R.id.textinput_error)
+        val backgroundRes: Int
+        var errorIcon: Drawable? = null
+        val errorTextColorRes: ColorStateList
+
         if (enabled) {
-            editText?.background = ContextCompat.getDrawable(context, R.drawable.background_error_input)
-            val errorTextView: TextView? = findViewById(com.google.android.material.R.id.textinput_error)
-            val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
-            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(errorIcon, null, null, null)
-            errorTextView?.compoundDrawablePadding = 4.dpToPx()
-            errorTextView?.compoundDrawableTintList = context.getColorStateListFromAttr(R.attr.borderDanger)
+            backgroundRes = R.drawable.background_error_input
+            errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
+            errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+
+            val errorTint = R.attr.borderDanger
+            tvError?.compoundDrawableTintList = context.getColorStateListFromAttr(errorTint)
+            tvError?.compoundDrawablePadding = 4.dpToPx()
         } else {
-            editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input)
-            val errorTextView: TextView? = findViewById(com.google.android.material.R.id.textinput_error)
-            errorTextView?.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
+            backgroundRes = R.drawable.background_primary_input
+            errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         }
+        editText?.background = ContextCompat.getDrawable(context, backgroundRes)
+        tvError?.setCompoundDrawablesRelativeWithIntrinsicBounds(errorIcon, null, null, null)
+
+        hintTextColor = errorTextColorRes
+        defaultHintTextColor = errorTextColorRes
     }
 
     fun setMaxLength(maxLength: Int) {
@@ -160,8 +183,10 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun updateEndIconBackgroundState() {
-        val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
-        endIcon.background = ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
+        val endIcon =
+            findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
+        endIcon.background =
+            ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
         endIcon.updateLayoutParams<FrameLayout.LayoutParams> {
             updateMarginsRelative(0, 0, 0, 0)
             updateMargins(0, 0, 0, 0)
@@ -169,8 +194,10 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun updateStartIconBackgroundState() {
-        val startIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
-        startIcon.background = ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
+        val startIcon =
+            findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
+        startIcon.background =
+            ContextCompat.getDrawable(context, R.drawable.background_ghost_brand_cycle)
         startIcon.updateLayoutParams<LayoutParams> {
             updateMarginsRelative(0, 0, 0, 0)
             updateMargins(0, 0, 0, 0)
@@ -198,7 +225,8 @@ open class PrimaryInput : TextInputLayout {
     }
 
     fun loadStartIcon(url: String) {
-        val startIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
+        val startIcon =
+            findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
         setStartIconDrawable(R.drawable.empty_resource)
         startIcon.load(url)
     }

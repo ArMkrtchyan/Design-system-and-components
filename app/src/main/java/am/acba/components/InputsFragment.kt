@@ -8,12 +8,9 @@ import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentInputsBinding
 import android.content.Context
-import android.graphics.Typeface
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View.OnFocusChangeListener
 import android.widget.Toast
 
 class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
@@ -24,9 +21,15 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
 
     override fun FragmentInputsBinding.initView() {
         input.apply {
-            suffixText = "AMD"
-            setOnFocusChangeListener { _, _ ->
-
+            editText?.isSingleLine = true
+            helperText = "Min amount"
+            hint = "Amount"
+            editText?.onFocusChangeListener = OnFocusChangeListener { _, _ ->
+                isErrorEnabled =
+                    ((!editText?.text.isNullOrEmpty() && (editText?.text?.length ?: 0) < 4))
+                if (isErrorEnabled) {
+                    error = "Amount is too short"
+                }
             }
         }
 
