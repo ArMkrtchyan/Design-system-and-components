@@ -22,12 +22,14 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.telephony.TelephonyManager
+import android.text.Editable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -51,18 +53,31 @@ class PhoneNumberInput @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, 0) {
 
     private val binding by lazy { PhoneNumberInputBinding.inflate(context.inflater(), this, false) }
-    private val ccpBinding by lazy { CountryPickerLayoutBinding.inflate(context.inflater(), this, false) }
+    private val ccpBinding by lazy {
+        CountryPickerLayoutBinding.inflate(
+            context.inflater(),
+            this,
+            false
+        )
+    }
     private lateinit var countriesList: List<CountryModel>
     private var topCountryChipList: MutableList<CountryModel> = mutableListOf()
     private var isFocusable = false
     private var isValidNumber = true
-    private var errorText: String? = null
-    private var helpText: String? = null
     private var countryTopShips: String? = null
     private val CONTACT_PERMISSION_REQUEST = 100
     private val PICK_CONTACT_REQUEST = 101
     lateinit var fragment: Fragment
     private var onAcbaContactClick: (() -> Unit)? = null
+
+    var errorText: String? = null
+    var helpText: String? = null
+
+    var doAfterTextChanged: ((text: Editable?) -> Unit)? = null
+        set(value) {
+            field = value
+            binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
+        }
 
     init {
         addView(binding.root)
@@ -75,6 +90,8 @@ class PhoneNumberInput @JvmOverloads constructor(
                 recycle()
             }
         }
+        binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
+
         if (!isInEditMode) {
             ccpBinding.countryCodeLib.registerCarrierNumberEditText(binding.phoneNumber)
             ccpBinding.countryCodeLib.setNumberAutoFormattingEnabled(true)
@@ -106,7 +123,8 @@ class PhoneNumberInput @JvmOverloads constructor(
 
     @SuppressLint("SetTextI18n")
     private fun pastTextWithClipBoard() {
-        val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboardManager =
+            context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (clipboardManager.hasPrimaryClip()) {
             val clip = clipboardManager.primaryClip
             if (clip != null && clip.itemCount > 0) {
@@ -160,21 +178,22 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun countriesMapping() {
-        val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val telephonyManager =
+            context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         val simCountryISO = telephonyManager.simCountryIso.ifEmpty { "am" }
 
         Log.i("simCountry", simCountryISO)
         countriesList = ArrayList<CountryModel>().let {
-            CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.ENGLISH).map { country ->
-                CountryModel(
-                    englishName = country.englishName,
-                    flagResId = country.flagID,
-                    name = country.name,
-                    nameCode = country.nameCode,
-                    phoneCode = country.phoneCode
-                )
-            }
-
+            CCPCountry.getLibraryMasterCountryList(context, CountryCodePicker.Language.ENGLISH)
+                .map { country ->
+                    CountryModel(
+                        englishName = country.englishName,
+                        flagResId = country.flagID,
+                        name = country.name,
+                        nameCode = country.nameCode,
+                        phoneCode = country.phoneCode
+                    )
+                }
         }.onEach {   //Default country
             if (it.nameCode?.lowercase() == simCountryISO) {
                 selectCountry(it)
@@ -209,16 +228,24 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun setErrorBackground() {
-        binding.countryCodeLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
-        binding.phoneNumberLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_right_border)
+        binding.countryCodeLayout.background = ContextCompat.getDrawable(
+            context,
+            R.drawable.background_primary_input_error_left_border
+        )
+        binding.phoneNumberLayout.background = ContextCompat.getDrawable(
+            context,
+            R.drawable.background_primary_input_error_right_border
+        )
     }
 
     private fun setupBackgroundByFocusable() {
         binding.phoneNumberLayout.background = ContextCompat.getDrawable(
-            context, if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
+            context,
+            if (isFocusable) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_right_corner
         )
         binding.countryCodeLayout.background = ContextCompat.getDrawable(
-            context, if (isFocusable) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_left_corner
+            context,
+            if (isFocusable) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_left_corner
         )
     }
 
@@ -226,7 +253,8 @@ class PhoneNumberInput @JvmOverloads constructor(
     private fun selectCountry(countryModel: CountryModel) {
         binding.countryCode.text = "+${countryModel.phoneCode}"
         ccpBinding.countryCodeLib.setCountryForNameCode(countryModel.nameCode)
-        Glide.with(context).asBitmap().load(countryModel.flagResId).apply(RequestOptions.circleCropTransform().override(22.dpToPx(), 22.dpToPx()))
+        Glide.with(context).asBitmap().load(countryModel.flagResId)
+            .apply(RequestOptions.circleCropTransform().override(22.dpToPx(), 22.dpToPx()))
             .into(binding.countryFlag)
     }
 
@@ -256,11 +284,17 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun checkContactPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.READ_CONTACTS
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestContactPermission() {
-        fragment.requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), CONTACT_PERMISSION_REQUEST)
+        fragment.requestPermissions(
+            arrayOf(Manifest.permission.READ_CONTACTS),
+            CONTACT_PERMISSION_REQUEST
+        )
     }
 
     fun onRequestPermissionsResult(requestCode: Int, grantResults: IntArray) {
@@ -288,7 +322,8 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     override fun setEnabled(isEnable: Boolean) {
-        binding.clear.isVisible = if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
+        binding.clear.isVisible =
+            if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
         binding.countryCodeLayout.isEnabled = isEnable
         binding.phoneNumberLayout.isEnabled = isEnable
         binding.icPhoneBook.isEnabled = isEnable
@@ -304,6 +339,10 @@ class PhoneNumberInput @JvmOverloads constructor(
         binding.helpText.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
     }
 
+    fun fixCountyCode() {
+        binding.icArrow.isVisible = false
+        binding.countryCodeLayout.isClickable = false
+    }
 
     private fun openCountryDialog() {
         val bundle = Bundle()
@@ -311,7 +350,12 @@ class PhoneNumberInput @JvmOverloads constructor(
         bundle.putBoolean("isSearchInputVisible", true)
         bundle.putString("bottomSheetTitle", "Phone Number")
         bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
-        CountryBottomSheetDialog.show(getFragmentManager(), bundle, ::selectCountry, topCountryChipList)
+        CountryBottomSheetDialog.show(
+            getFragmentManager(),
+            bundle,
+            ::selectCountry,
+            topCountryChipList
+        )
     }
 
     private fun getFragmentManager(): FragmentManager {
@@ -388,6 +432,5 @@ class PhoneNumberInput @JvmOverloads constructor(
             }
         }
     }
-
 }
 
