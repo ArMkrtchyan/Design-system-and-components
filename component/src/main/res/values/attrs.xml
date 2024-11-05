@@ -206,8 +206,9 @@
         <attr name="currencyInputErrorText" format="string" />
         <attr name="currencyInputHintText" format="string" />
         <attr name="currencyInputHelpText" format="string" />
-        <attr name="currencyInputMaxAmount" format="integer" />
-        <attr name="currencyInputMinAmount" format="integer" />
+        <attr name="currencyInputMaxAmount" format="float" />
+        <attr name="currencyInputMaxLength" format="integer" />
+        <attr name="currencyInputMinAmount" format="float" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ProgressCardView">

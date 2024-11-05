@@ -41,8 +41,9 @@ class CurrencyInput @JvmOverloads constructor(
     private var errorText: String
     private var hintText: String
     private var helpText: String
-    private var maxAmount: Int
-    private var minAmount: Int
+    private var maxLength: Int
+    private var maxAmount: Double
+    private var minAmount: Double
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
     private var currency: String = ""
@@ -57,13 +58,15 @@ class CurrencyInput @JvmOverloads constructor(
                 errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
                 hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
-                maxAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0)
-                minAmount = getInt(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0)
+                maxLength = getInt(R.styleable.CurrencyInputInput_currencyInputMaxLength, 15)
+                maxAmount = getFloat(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0f).toDouble()
+                minAmount = getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot = getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
             } finally {
                 recycle()
             }
         }
+        binding.amount.setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
@@ -162,23 +165,23 @@ class CurrencyInput @JvmOverloads constructor(
     private fun amountTextFormatting(isFocusable: Boolean) {
         if (isFocusable) {
             binding.amount.editText?.setText(getDeFormatedStringAmount())
+            binding.amount.setMaxLength(maxLength)
         } else {
             val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
-            binding.amount.editText?.setText(
-                if (text.length >= 15) text else
-                    (if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting())
-            )
+            val formattedText = if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting()
+            binding.amount.setMaxLength(formattedText.length)
+            binding.amount.editText?.setText(formattedText)
         }
     }
 
     private fun validateAmount() {
         when {
-            minAmount != 0 && getFloatAmount() < minAmount -> {
+            minAmount != 0.0 && getFloatAmount() < minAmount -> {
                 setErrorState()
                 isValidAmount = false
             }
 
-            maxAmount != 0 && getFloatAmount() > maxAmount -> {
+            maxAmount != 0.0 && getFloatAmount() > maxAmount -> {
                 setErrorState()
                 isValidAmount = false
             }
@@ -320,11 +323,11 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.hint = hintText
     }
 
-    fun setMaxAmount(amount: Int) {
+    fun setMaxAmount(amount: Double) {
         maxAmount = amount
     }
 
-    fun setMinAmount(amount: Int) {
+    fun setMinAmount(amount: Double) {
         minAmount = amount
     }
 

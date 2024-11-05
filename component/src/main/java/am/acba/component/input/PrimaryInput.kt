@@ -131,19 +131,18 @@ open class PrimaryInput : TextInputLayout {
     private fun amountTextFormatting(isFocusable: Boolean) {
         if (isFocusable) {
             editText?.setText(getDeFormatedStringAmount())
+            setMaxLength(textMaxLength)
         } else {
             val text = editText?.text?.toString()?.trim() ?: ""
-            editText?.setText(
-                if (text.length >= 15) text else
-                    (if (formattingWithDot) text.numberFormatting() else text.numberFormattingWithOutDot())
-            )
+            val formattedText = if (!formattingWithDot) text.numberFormattingWithOutDot() else text.numberFormatting()
+            setMaxLength(formattedText.length)
+            editText?.setText(formattedText)
         }
     }
 
     fun getDeFormatedStringAmount(): String {
         val amountText = editText?.text?.toString()?.trim() ?: ""
         return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
-
     }
 
 
@@ -191,6 +190,13 @@ open class PrimaryInput : TextInputLayout {
             updateMarginsRelative(0, 0, 0, 0)
             updateMargins(0, 0, 0, 0)
         }
+        endIcon.isVisible = endIconDrawable != null
+        editText?.setPadding(
+            editText?.paddingLeft ?: 0,
+            editText?.paddingTop ?: 0,
+            if (endIconDrawable != null) 48.dpToPx() else editText?.paddingRight ?: 0,
+            editText?.paddingBottom ?: 0
+        )
     }
 
     private fun updateStartIconBackgroundState() {

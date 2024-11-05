@@ -18,8 +18,8 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
         amount.setHintText("Fill the amount")
-        amount.setMaxAmount(10000)
-        amount.setMinAmount(100)
+        amount.setMaxAmount(999999999999999.0)
+        amount.setMinAmount(100.0)
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
