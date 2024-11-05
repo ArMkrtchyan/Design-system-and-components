@@ -57,9 +57,12 @@ class CurrencyInput @JvmOverloads constructor(
                 hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
                 maxLength = getInt(R.styleable.CurrencyInputInput_currencyInputMaxLength, 15)
-                maxAmount = getFloat(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0f).toDouble()
-                minAmount = getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
-                formattingWithOutDot = getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
+                maxAmount =
+                    getFloat(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0f).toDouble()
+                minAmount =
+                    getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
+                formattingWithOutDot =
+                    getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
             } finally {
                 recycle()
             }
@@ -113,8 +116,9 @@ class CurrencyInput @JvmOverloads constructor(
         binding.currency.text = title
     }
 
-    fun setCurrencyArrowVisibility(isVisible: Boolean) {
-        binding.icArrow.isVisible = isVisible
+    fun fixCurrency() {
+        binding.icArrow.isVisible = false
+        binding.currencyLayout.isClickable = false
     }
 
     private fun onKeyboardHidden() {
@@ -139,8 +143,10 @@ class CurrencyInput @JvmOverloads constructor(
         binding.helpText.text = helpText
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hint = hintText
-        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
-        binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        binding.amount.hintTextColor =
+            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.editText?.inputType =
+            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
     }
 
     private fun setupBackgroundsByFocusChange() {
@@ -166,7 +172,8 @@ class CurrencyInput @JvmOverloads constructor(
             binding.amount.setMaxLength(maxLength)
         } else {
             val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
-            val formattedText = if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting()
+            val formattedText =
+                if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting()
             binding.amount.setMaxLength(formattedText.length)
             binding.amount.editText?.setText(formattedText)
         }
@@ -193,13 +200,55 @@ class CurrencyInput @JvmOverloads constructor(
 
     private fun setupCurrenciesList() {
         currencyList = arrayListOf()
-        currencyList.add(CountryModel(currency = "AMD", name = "AMD", flagResId = R.drawable.ic_flag_am))
-        currencyList.add(CountryModel(currency = "USD", name = "USD", flagResId = R.drawable.ic_flag_usa))
-        currencyList.add(CountryModel(currency = "EUR", name = "EUR", flagResId = R.drawable.ic_flag_eur))
-        currencyList.add(CountryModel(currency = "RUB", name = "RUB", flagResId = R.drawable.ic_flag_rus))
-        currencyList.add(CountryModel(currency = "GBP", name = "GBP", flagResId = R.drawable.ic_flag_gb))
-        currencyList.add(CountryModel(currency = "CHF", name = "CHF", flagResId = R.drawable.ic_flag_sw))
-        currencyList.add(CountryModel(currency = "GEL", name = "GEL", flagResId = R.drawable.ic_flag_gel))
+        currencyList.add(
+            CountryModel(
+                currency = "AMD",
+                name = "AMD",
+                flagResId = R.drawable.ic_flag_am
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "USD",
+                name = "USD",
+                flagResId = R.drawable.ic_flag_usa
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "EUR",
+                name = "EUR",
+                flagResId = R.drawable.ic_flag_eur
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "RUB",
+                name = "RUB",
+                flagResId = R.drawable.ic_flag_rus
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "GBP",
+                name = "GBP",
+                flagResId = R.drawable.ic_flag_gb
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "CHF",
+                name = "CHF",
+                flagResId = R.drawable.ic_flag_sw
+            )
+        )
+        currencyList.add(
+            CountryModel(
+                currency = "GEL",
+                name = "GEL",
+                flagResId = R.drawable.ic_flag_gel
+            )
+        )
     }
 
     private fun currencyIconClick() {
@@ -226,12 +275,15 @@ class CurrencyInput @JvmOverloads constructor(
 
     private fun setValidState() {
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
-        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
-        binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.hintTextColor =
+            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.defaultHintTextColor =
+            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.helpText.text = helpText
         binding.icError.isVisible = false
         binding.helpText.isVisible = helpText.isNotEmpty()
-        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.hintTextColor =
+            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.currencyLayout.background = ContextCompat.getDrawable(
             context, if (isFocusable) R.drawable.background_primary_input_right_border
             else R.drawable.background_primary_input_right_corner
@@ -245,12 +297,19 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setErrorState() {
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
-        binding.amount.defaultHintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
+        binding.amount.defaultHintTextColor =
+            context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.helpText.isVisible = errorText.isNotEmpty()
         binding.helpText.text = errorText
         binding.icError.isVisible = true
-        binding.amount.editText?.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_left_border)
-        binding.currencyLayout.background = ContextCompat.getDrawable(context, R.drawable.background_primary_input_error_right_border)
+        binding.amount.editText?.background = ContextCompat.getDrawable(
+            context,
+            R.drawable.background_primary_input_error_left_border
+        )
+        binding.currencyLayout.background = ContextCompat.getDrawable(
+            context,
+            R.drawable.background_primary_input_error_right_border
+        )
     }
 
     private fun setupBackgroundByFocusable() {
@@ -259,7 +318,8 @@ class CurrencyInput @JvmOverloads constructor(
             if (isValidAmount) R.drawable.background_primary_input_right_border else R.drawable.background_primary_input_error_right_border
         )
         binding.amount.editText?.background = ContextCompat.getDrawable(
-            context, if (isValidAmount) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_error_left_border
+            context,
+            if (isValidAmount) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_error_left_border
         )
     }
 
@@ -352,7 +412,11 @@ class CurrencyInput @JvmOverloads constructor(
             currencyList.addAll(filteredCurrencyList)
 
             binding.icArrow.visibility = if (filteredCurrencyList.size > 1) VISIBLE else INVISIBLE
-            binding.currencyLayout.setOnClickListener { if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(null) }
+            binding.currencyLayout.setOnClickListener {
+                if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(
+                    null
+                )
+            }
             selectCurrency(filteredCurrencyList[0])
 
         }

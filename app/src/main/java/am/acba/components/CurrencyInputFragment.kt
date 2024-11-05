@@ -20,6 +20,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         amount.setHintText("Fill the amount")
         amount.setMaxAmount(999999999999999.0)
         amount.setMinAmount(100.0)
+        amount.fixCurrency()
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
