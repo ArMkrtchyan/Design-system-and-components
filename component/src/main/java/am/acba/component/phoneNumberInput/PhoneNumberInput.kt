@@ -73,11 +73,8 @@ class PhoneNumberInput @JvmOverloads constructor(
     var errorText: String? = null
     var helpText: String? = null
 
+    var onFocusChanged: ((isFocusable: Boolean) -> Unit)? = null
     var doAfterTextChanged: ((text: Editable?) -> Unit)? = null
-        set(value) {
-            field = value
-            binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
-        }
 
     init {
         addView(binding.root)
@@ -90,7 +87,6 @@ class PhoneNumberInput @JvmOverloads constructor(
                 recycle()
             }
         }
-        binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
 
         if (!isInEditMode) {
             ccpBinding.countryCodeLib.registerCarrierNumberEditText(binding.phoneNumber)
@@ -104,8 +100,8 @@ class PhoneNumberInput @JvmOverloads constructor(
 
         binding.phoneNumber.doOnTextChanged { text, _, _, _ ->
             clearText(text ?: "")
-
         }
+        binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
 
         binding.countryCodeLayout.setOnClickListener { openCountryDialog() }
         binding.icPhoneBook.setOnClickListener { contactIconClick() }
@@ -139,6 +135,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     private fun setupBackgrounds() {
         binding.phoneNumber.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
+
             if (!isFocusable) {
                 isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
             }
@@ -147,6 +144,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             } else {
                 setErrorBackground()
             }
+            onFocusChanged?.invoke(isFocusable)
         }
     }
 
@@ -339,7 +337,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         binding.helpText.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
     }
 
-    fun fixCountyCode() {
+    fun fixCountryCode() {
         binding.icArrow.isVisible = false
         binding.countryCodeLayout.isClickable = false
     }

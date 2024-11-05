@@ -20,7 +20,7 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
         }
         phoneNumber.helpText = "Min 25 symbol"
         phoneNumber.errorText = "Something wrong happened"
-        phoneNumber.fixCountyCode()
+        phoneNumber.fixCountryCode()
         search.setOnClickListener {
             phoneNumber.getFormattedFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumber().log("PhoneNumber")
