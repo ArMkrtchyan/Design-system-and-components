@@ -3,11 +3,9 @@ package am.acba.component.currencyInput
 import am.acba.component.R
 import am.acba.component.databinding.CurrencyInputBinding
 import am.acba.component.dialog.CountryBottomSheetDialog
-import am.acba.component.extensions.addKeyboardVisibilityListener
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
-import am.acba.component.extensions.hideSoftInput
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
@@ -73,8 +71,8 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
-        binding.amount.editText?.hideSoftInput()
-        binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
+//        binding.amount.editText?.hideSoftInput()
+//        binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
     }
 
     fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {

@@ -26,7 +26,7 @@ class DatePickerFragment : BaseViewBindingFragment<FragmentDatePickerBinding>() 
         val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(calendar.time) ?: ""
         datePicker.setText(date)
         datePicker.currentDate = calendar.timeInMillis
-        setFirstRepaymentDayRestrictions(2)
+        setFirstRepaymentDayRestrictions(1)
         datePicker.setOnDateSetListener { dateFormatted, date ->
             date?.log()
             dateFormatted?.log()

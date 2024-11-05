@@ -1,10 +1,8 @@
 package am.acba.component.input
 
 import am.acba.component.R
-import am.acba.component.extensions.addKeyboardVisibilityListener
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
-import am.acba.component.extensions.hideSoftInput
 import am.acba.component.extensions.load
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
@@ -87,8 +85,8 @@ open class PrimaryInput : TextInputLayout {
                 0 -> setInputTypeForAmount()
                 1 -> setInputTypeForNumber()
             }
-            editText?.hideSoftInput()
-            editText?.let { rootView.addKeyboardVisibilityListener(it) }
+//            editText?.hideSoftInput()
+//            editText?.let { rootView.addKeyboardVisibilityListener(it) }
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             suffixTextView.translationY = -8.dpToPx().toFloat()
