@@ -106,12 +106,12 @@
                     android:layout_gravity="center_vertical">
 
                     <am.acba.component.button.PrimaryActionTextButton
+                        android:id="@+id/quickAction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Աննա Հովսեփյան"
-                        app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
-                        app:actionIconSize="XLarge"
+                        app:actionIconSize="XXLarge"
                         app:badgeChecked="true"
                         app:checkable="true" />
 
