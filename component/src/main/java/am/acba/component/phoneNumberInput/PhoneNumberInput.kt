@@ -11,6 +11,10 @@ import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
 import am.acba.component.extensions.saveCountryLastAction
+import am.acba.component.extensions.shakeViewHorizontally
+import am.acba.component.extensions.vibrate
+import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
+import am.acba.component.input.PrimaryInput.Companion.VIBRATION_AMPLITUDE
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -52,6 +56,8 @@ class PhoneNumberInput @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null,
 ) : LinearLayout(context, attrs, 0) {
 
+    var enableErrorAnimation = false
+
     private val binding by lazy { PhoneNumberInputBinding.inflate(context.inflater(), this, false) }
     private val ccpBinding by lazy {
         CountryPickerLayoutBinding.inflate(
@@ -83,6 +89,7 @@ class PhoneNumberInput @JvmOverloads constructor(
                 errorText = getString(R.styleable.PhoneNumberInput_phoneInputErrorText)
                 helpText = getString(R.styleable.PhoneNumberInput_phoneInputHelpText)
                 countryTopShips = getString(R.styleable.PhoneNumberInput_countryTopChips)
+                enableErrorAnimation = getBoolean(R.styleable.PhoneNumberInput_enableErrorAnimation, false)
             } finally {
                 recycle()
             }
@@ -320,8 +327,9 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     override fun setEnabled(isEnable: Boolean) {
-        binding.clear.isVisible =
-            if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
+        if (isEnable) setErrorAnimation()
+
+        binding.clear.isVisible = if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
         binding.countryCodeLayout.isEnabled = isEnable
         binding.phoneNumberLayout.isEnabled = isEnable
         binding.icPhoneBook.isEnabled = isEnable
@@ -428,6 +436,13 @@ class PhoneNumberInput @JvmOverloads constructor(
                 context.saveCountryLastAction(it)
                 selectCountry(it)
             }
+        }
+    }
+
+    private fun setErrorAnimation() {
+        if (enableErrorAnimation) {
+            context.vibrate(VIBRATION_AMPLITUDE)
+            shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
     }
 }

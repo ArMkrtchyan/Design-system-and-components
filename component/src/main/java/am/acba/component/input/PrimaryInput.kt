@@ -7,6 +7,8 @@ import am.acba.component.extensions.load
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
+import am.acba.component.extensions.shakeViewHorizontally
+import am.acba.component.extensions.vibrate
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
@@ -41,6 +43,8 @@ open class PrimaryInput : TextInputLayout {
     private var hasDropDown = false
     private var inputType = -1
     private var formattingWithDot = false
+    var enableErrorAnimation = false
+
     private var onDoneButtonClick: (() -> Unit)? = null
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
@@ -70,6 +74,7 @@ open class PrimaryInput : TextInputLayout {
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
                 inputType = getInt(R.styleable.PrimaryInput_inputType, -1)
                 formattingWithDot = getBoolean(R.styleable.PrimaryInput_formattingWithDots, false)
+                enableErrorAnimation = getBoolean(R.styleable.PrimaryInput_enableErrorAnimation, false)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -188,6 +193,7 @@ open class PrimaryInput : TextInputLayout {
             val errorTint = R.attr.borderDanger
             tvError?.compoundDrawableTintList = context.getColorStateListFromAttr(errorTint)
             tvError?.compoundDrawablePadding = 4.dpToPx()
+            setErrorAnimation()
         } else {
             backgroundRes = R.drawable.background_primary_input
             errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
@@ -263,5 +269,17 @@ open class PrimaryInput : TextInputLayout {
             findViewById<ImageButton>(com.google.android.material.R.id.text_input_start_icon)
         setStartIconDrawable(R.drawable.empty_resource)
         startIcon.load(url)
+    }
+
+    private fun setErrorAnimation() {
+        if (enableErrorAnimation) {
+            context.vibrate(VIBRATION_AMPLITUDE)
+            shakeViewHorizontally(SHAKE_AMPLITUDE)
+        }
+    }
+
+    companion object {
+        const val SHAKE_AMPLITUDE = 500L
+        const val VIBRATION_AMPLITUDE = 80L
     }
 }

@@ -10,6 +10,10 @@ import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
+import am.acba.component.extensions.shakeViewHorizontally
+import am.acba.component.extensions.vibrate
+import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
+import am.acba.component.input.PrimaryInput.Companion.VIBRATION_AMPLITUDE
 import am.acba.component.phoneNumberInput.CountryModel
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
@@ -49,6 +53,8 @@ class CurrencyInput @JvmOverloads constructor(
 
     private lateinit var currencyList: MutableList<CountryModel>
 
+    var enableErrorAnimation = false
+
     init {
         addView(binding.root)
         context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
@@ -63,6 +69,7 @@ class CurrencyInput @JvmOverloads constructor(
                     getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot =
                     getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
+                enableErrorAnimation = getBoolean(R.styleable.CurrencyInputInput_enableErrorAnimation, false)
             } finally {
                 recycle()
             }
@@ -295,6 +302,8 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     private fun setErrorState() {
+        setErrorAnimation()
+
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor =
@@ -419,6 +428,13 @@ class CurrencyInput @JvmOverloads constructor(
             }
             selectCurrency(filteredCurrencyList[0])
 
+        }
+    }
+
+    private fun setErrorAnimation() {
+        if (enableErrorAnimation) {
+            context.vibrate(VIBRATION_AMPLITUDE)
+            shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
     }
 }

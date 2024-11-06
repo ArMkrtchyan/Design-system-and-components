@@ -1,5 +1,6 @@
 package am.acba.component.extensions
 
+import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.graphics.drawable.Drawable
@@ -188,6 +189,12 @@ fun TextView.animateTextSize(
         }
     })
     animator.start()
+}
+
+fun View.shakeViewHorizontally(duration: Long) {
+    val shakeXAnimator = ObjectAnimator.ofFloat(this, "translationX", 0f, 10f, -10f, 8f, -8f, 5f, -5f, 0f)
+    shakeXAnimator.duration = duration
+    shakeXAnimator.start()
 }
 
 fun ImageView.load(

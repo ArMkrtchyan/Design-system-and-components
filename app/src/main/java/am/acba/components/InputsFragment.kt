@@ -21,6 +21,7 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
 
     override fun FragmentInputsBinding.initView() {
         input.apply {
+            enableErrorAnimation = true
             editText?.isSingleLine = true
             helperText = "Min amount"
             hint = "Amount"
