@@ -16,14 +16,18 @@ import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
@@ -37,6 +41,7 @@ open class PrimaryInput : TextInputLayout {
     private var hasDropDown = false
     private var inputType = -1
     private var formattingWithDot = false
+    private var onDoneButtonClick: (() -> Unit)? = null
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
@@ -71,7 +76,13 @@ open class PrimaryInput : TextInputLayout {
             val layoutStyle =
                 if (cornerStyle == 1) R.layout.text_input_edittext_left_corner_layout else R.layout.text_input_edittext_layout
             addView(LayoutInflater.from(context).inflate(layoutStyle, this@PrimaryInput, false))
-            setText(getString(R.styleable.PrimaryInput_android_text))
+            val text = getString(R.styleable.PrimaryInput_android_text)
+            if (!text.isNullOrEmpty()) {
+                isHintAnimationEnabled = false
+                postDelayed({ isHintAnimationEnabled = true }, 800)
+            }
+            setText(text)
+            isHintAnimationEnabled = true
             if (textMaxLength != -1) setMaxLength(textMaxLength)
             if (hasDropDown) {
                 val endIcon =
@@ -102,8 +113,24 @@ open class PrimaryInput : TextInputLayout {
                     suffixTextView.isVisible = true
                 }
             }
+            editText?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+                override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        val imm = getSystemService(context, InputMethodManager::class.java)
+                        imm?.hideSoftInputFromWindow(editText?.windowToken, 0)
+                        editText?.clearFocus()
+                        onDoneButtonClick?.invoke()
+                        return true
+                    }
+                    return false
+                }
+            })
             recycle()
         }
+    }
+
+    fun onKeyboardDoneButtonClick(onDoneButtonClick: () -> Unit) {
+        this.onDoneButtonClick = onDoneButtonClick
     }
 
     fun setInputTypeForAmount() {
@@ -218,6 +245,9 @@ open class PrimaryInput : TextInputLayout {
 
     fun setText(text: String?) {
         editText?.setText(text)
+        if (isInEditMode) {
+            isHintAnimationEnabled = false
+        }
     }
 
     fun setText(@StringRes resId: Int) {

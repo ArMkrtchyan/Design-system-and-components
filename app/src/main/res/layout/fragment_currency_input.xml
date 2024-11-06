@@ -47,10 +47,13 @@
                 app:currencyInputMinAmount="100" />
 
             <am.acba.component.input.PrimaryInput
+                android:id="@+id/duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="123456787912345678912345678913456789" />
+                app:inputType="quantity"
+                android:hint="Duration"
+                android:text="10" />
         </LinearLayout>
     </ScrollView>
 
