@@ -26,7 +26,7 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
                 showPrimaryAlertDialog(requireContext(), layoutInflater)
             }
         }
-        slider.addOnSliderChangeListener { slider, value, _ ->
+        slider.onSlideChanged = { slider, value, _ ->
             if (slider.isPressed)
                 value.log()
         }
