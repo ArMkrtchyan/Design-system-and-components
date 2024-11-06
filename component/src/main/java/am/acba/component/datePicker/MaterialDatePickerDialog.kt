@@ -93,11 +93,13 @@ class MaterialDatePickerDialog(
                 minDateCalendar[Calendar.HOUR] = 0
                 minDateCalendar[Calendar.MINUTE] = 0
                 minDateCalendar[Calendar.SECOND] = 0
+                minDateCalendar[Calendar.MILLISECOND] = 0
                 val isDisableBeforeMinDate = minDate == null || calendar.timeInMillis >= minDateCalendar.timeInMillis
                 val maxDateCalendar = Calendar.getInstance().apply { timeInMillis = maxDate ?: 0L }
                 maxDateCalendar[Calendar.HOUR] = 0
                 maxDateCalendar[Calendar.MINUTE] = 0
                 maxDateCalendar[Calendar.SECOND] = 0
+                maxDateCalendar[Calendar.MILLISECOND] = 0
                 val isDisableAfterMaxDate = maxDate == null || calendar.timeInMillis <= maxDateCalendar.timeInMillis
                 return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate
             }
