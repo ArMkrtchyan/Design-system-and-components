@@ -6,12 +6,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.util.AttributeSet
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat.getSystemService
 
 
 @SuppressLint("UseCompatLoadingForDrawables")
 class CutCopyPasteEditText : AppCompatEditText {
+
+    private var onDoneButtonClick: (() -> Unit)? = null
 
     fun setOnCutCopyPasteListener(action: ((Int) -> Unit)? = null) {
         mAction = action
@@ -26,6 +33,22 @@ class CutCopyPasteEditText : AppCompatEditText {
     init {
         @RequiresApi(Build.VERSION_CODES.Q)
         this.textCursorDrawable = context.getDrawable(am.acba.component.R.drawable.cursor_drawable)
+
+        setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = getSystemService(context, InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(windowToken, 0)
+                clearFocus()
+
+                onDoneButtonClick?.invoke()
+                true
+            }
+            false
+        }
+    }
+
+    fun onKeyboardDoneButtonClick(onDoneButtonClick: () -> Unit) {
+        this.onDoneButtonClick = onDoneButtonClick
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {
