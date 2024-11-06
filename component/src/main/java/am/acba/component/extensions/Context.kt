@@ -3,6 +3,10 @@ package am.acba.component.extensions
 import am.acba.component.phoneNumberInput.CountryModel
 import android.content.Context
 import android.content.res.ColorStateList
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -85,4 +89,34 @@ fun Context.getDisplayHeight(): Int {
     val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     return displayMetrics.heightPixels
+}
+
+private var lastVibrationTime: Long = 0
+private const val vibrationInterval = 100
+private var vibrator: Vibrator? = null
+
+fun Context.vibrate(duration: Long) {
+    if (vibrator == null) vibrator = getVibrator()
+
+    val currentTime = System.currentTimeMillis()
+    if (currentTime - lastVibrationTime >= vibrationInterval
+        && vibrator?.hasVibrator() == true
+    ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val effect = VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator?.vibrate(effect)
+        } else {
+            vibrator?.vibrate(duration)
+        }
+
+        lastVibrationTime = currentTime
+    }
+}
+
+private fun Context.getVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        (getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager).getDefaultVibrator()
+    } else {
+        getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+    }
 }
