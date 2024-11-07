@@ -110,9 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Աննա Հովսեփյան"
-                        app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XXLarge"
-                        app:badgeChecked="true"
                         app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton

@@ -34,7 +34,7 @@ class PrimaryListItem : FrameLayout {
     val avatar by lazy {
         PrimaryActionTextButton(context).apply {
             setType(am.acba.component.button.PrimaryActionTextButton.ActionButtonType.AVATAR)
-            setActionIconSize(PrimaryActionTextButton.ActionIconSize.LAGRE)
+            setActionImageSize(PrimaryActionTextButton.ActionIconSize.LARGE)
             showActionText(false)
         }
     }
