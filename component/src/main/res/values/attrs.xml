@@ -175,11 +175,12 @@
         <attr name="badgePaddingEnd" />
         <attr name="actionIcon" format="reference" />
         <attr name="actionIconSize" format="enum">
-            <enum name="XLarge" value="0" />
-            <enum name="Large" value="1" />
-            <enum name="Medium" value="2" />
-            <enum name="Small" value="3" />
-            <enum name="XSmall" value="4" />
+            <enum name="XXLarge" value="0" />
+            <enum name="XLarge" value="1" />
+            <enum name="Large" value="2" />
+            <enum name="Medium" value="3" />
+            <enum name="Small" value="4" />
+            <enum name="XSmall" value="5" />
         </attr>
         <attr name="actionIconBackground" format="reference" />
         <attr name="actionIconTint" format="color" />
