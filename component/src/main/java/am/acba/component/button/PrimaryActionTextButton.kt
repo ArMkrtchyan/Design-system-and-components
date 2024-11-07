@@ -23,12 +23,10 @@ import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
-import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.SimpleColorFilter
 
 class PrimaryActionTextButton : FrameLayout {
@@ -193,7 +191,7 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionImage.setImageDrawable(iconDrawable)
     }
 
-    fun setAnimation(animation: String?, color:Int) {
+    fun setAnimation(animation: String?, color: Int) {
         binding.actionImage.visibility = View.GONE
         binding.actionAnimation.visibility = View.VISIBLE
         binding.actionAnimation.setAnimation(animation)
@@ -245,13 +243,24 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    fun setActionBudgeImage(@DrawableRes iconRes: Int) {
-        binding.actionBadge.setImageResource(iconRes)
+    fun setActionBadgeImage(iconRes: Drawable?) {
+        binding.actionBadge.setImageDrawable(iconRes)
     }
 
     fun setOnActionBadgeClickListener(listener: OnClickListener?) {
         binding.actionBadge.setOnClickListener(listener)
     }
+
+    fun setActionBadgeBackground(@DrawableRes background: Int) {
+        binding.actionBadge.setBackgroundResource(background)
+    }
+
+
+    fun setActionBadgeImageTint(colorStateList: ColorStateList?) {
+        binding.actionBadge.imageTintList = colorStateList
+    }
+
+
 
     fun setText(@StringRes stringRes: Int) {
         binding.actionText.setText(stringRes)
