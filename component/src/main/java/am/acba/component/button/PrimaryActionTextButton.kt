@@ -17,6 +17,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
@@ -26,6 +27,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
+import com.airbnb.lottie.SimpleColorFilter
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -117,9 +119,10 @@ class PrimaryActionTextButton : FrameLayout {
                 val tint =
                     getColorStateList(R.styleable.PrimaryActionTextButton_actionIconTint)
                 if (tint != null) setIconTint(tint)
-                val iconSizeEnum = getInt(R.styleable.PrimaryActionTextButton_actionIconSize, 0).findSizeByOrdinal() ?: ActionIconSize.XLAGRE
+                val iconSizeEnum = getInt(R.styleable.PrimaryActionTextButton_actionIconSize, 0).findSizeByOrdinal() ?: ActionIconSize.XLARGE
                 setIconPadding(getDimension(R.styleable.PrimaryActionTextButton_actionIconPadding, iconSizeEnum.padding.dpToPx().toFloat()).toInt())
-                setActionIconSize(iconSizeEnum)
+                setActionImageSize(iconSizeEnum)
+                setActionBadgeSize(iconSizeEnum)
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
@@ -137,7 +140,7 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun getActionIcon(): PrimaryImageView {
-        return binding.actionIcon
+        return binding.actionImage
     }
 
     fun getActionText(): PrimaryTextView {
@@ -181,11 +184,19 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setIcon(@DrawableRes iconRes: Int) {
-        binding.actionIcon.setImageResource(iconRes)
+        binding.actionImage.setImageResource(iconRes)
     }
 
     fun setIcon(iconDrawable: Drawable?) {
-        binding.actionIcon.setImageDrawable(iconDrawable)
+        binding.actionImage.setImageDrawable(iconDrawable)
+    }
+
+    fun setAnimation(animation: String?, color: Int) {
+        binding.actionImage.visibility = View.GONE
+        binding.actionAnimation.visibility = View.VISIBLE
+        binding.actionAnimation.setAnimation(animation)
+        binding.actionAnimation.colorFilter = SimpleColorFilter(color)
+        binding.actionAnimation.playAnimation()
     }
 
     fun setIconBackground(@DrawableRes iconRes: Int) {
@@ -193,15 +204,15 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setIconBackground(iconDrawable: Drawable?) {
-        binding.actionIcon.background = iconDrawable
+        binding.actionImage.background = iconDrawable
     }
 
     fun setIconTint(colorStateList: ColorStateList?) {
-        binding.actionIcon.imageTintList = colorStateList
+        binding.actionImage.imageTintList = colorStateList
     }
 
     fun setIconPadding(padding: Int) {
-        binding.actionIcon.setPadding(padding)
+        binding.actionImage.setPadding(padding)
     }
 
     fun showActionText(showText: Boolean) {
@@ -209,19 +220,54 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
     }
 
-    fun setActionIconSize(iconSize: ActionIconSize) {
-        binding.actionIcon.updateLayoutParams<LayoutParams> {
+    fun setActionImageSize(iconSize: ActionIconSize) {
+        binding.actionImage.updateLayoutParams<LayoutParams> {
+            width = iconSize.size.dpToPx()
+            height = iconSize.size.dpToPx()
+        }
+        binding.actionAnimation.updateLayoutParams<LayoutParams> {
             width = iconSize.size.dpToPx()
             height = iconSize.size.dpToPx()
         }
     }
+
+    fun setActionBadgeSize(iconSize: ActionIconSize) {
+        if (iconSize.size == ActionIconSize.SMALL.size) {
+            binding.badgeIcon.visibility = View.VISIBLE
+            binding.actionBadge.visibility = View.GONE
+        } else {
+            binding.actionBadge.updateLayoutParams<LayoutParams> {
+                width = iconSize.badgeSize.dpToPx()
+                height = iconSize.badgeSize.dpToPx()
+            }
+        }
+    }
+
+    fun setActionBadgeImage(iconRes: Drawable?) {
+        binding.actionBadge.setImageDrawable(iconRes)
+    }
+
+    fun setOnActionBadgeClickListener(listener: OnClickListener?) {
+        binding.actionBadge.setOnClickListener(listener)
+    }
+
+    fun setActionBadgeBackground(@DrawableRes background: Int) {
+        binding.actionBadge.setBackgroundResource(background)
+    }
+
+
+    fun setActionBadgeImageTint(colorStateList: ColorStateList?) {
+        binding.actionBadge.imageTintList = colorStateList
+    }
+
+
 
     fun setText(@StringRes stringRes: Int) {
         binding.actionText.setText(stringRes)
         if (type == ActionButtonType.TEXT) {
             MaterialTextDrawable.with(context)
                 .text(binding.actionText.text.toString())
-                .into(binding.actionIcon)
+                .into(binding.actionImage)
         }
     }
 
@@ -232,7 +278,7 @@ class PrimaryActionTextButton : FrameLayout {
                 .textColor(textDrawableColor)
                 .textBackgroundColor(textDrawableBackgroundColor)
                 .text(binding.actionText.text.toString())
-                .into(binding.actionIcon)
+                .into(binding.actionImage)
         }
     }
 
@@ -244,33 +290,34 @@ class PrimaryActionTextButton : FrameLayout {
             }
 
             ActionButtonType.AVATAR -> {
-                binding.actionIcon.imageTintList = null
-                binding.actionIcon.setPadding(0)
+                binding.actionImage.imageTintList = null
+                binding.actionImage.setPadding(0)
                 binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
             }
 
             else -> {
                 binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
-                binding.actionIcon.setBackgroundColor(ContextCompat.getColor(context, R.color.Transparent))
-                binding.actionIcon.imageTintList = null
-                binding.actionIcon.setPadding(0)
+                binding.actionImage.setBackgroundColor(ContextCompat.getColor(context, R.color.Transparent))
+                binding.actionImage.imageTintList = null
+                binding.actionImage.setPadding(0)
                 if (type == ActionButtonType.TEXT) {
                     MaterialTextDrawable.with(context)
                         .textColor(textDrawableColor)
                         .textBackgroundColor(textDrawableBackgroundColor)
                         .text(binding.actionText.text.toString())
-                        .into(binding.actionIcon)
+                        .into(binding.actionImage)
                 }
             }
         }
     }
 
     enum class ActionIconSize(val size: Int, val badgeSize: Int, val padding: Int) {
-        XLAGRE(56, 16, 16),
-        LAGRE(40, 16, 10),
-        MEDIUM(36, 16, 8),
-        SMALE(32, 14, 6),
-        XSMALE(24, 0, 4);
+        XXLARGE(80, 32, 16),
+        XLARGE(56, 20, 16),
+        LARGE(40, 14, 10),
+        MEDIUM(36, 14, 8),
+        SMALL(32, 8, 6),
+        XSMALL(24, 0, 4);
 
         companion object {
             fun Int.findSizeByOrdinal(): ActionIconSize? {

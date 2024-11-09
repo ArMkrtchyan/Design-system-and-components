@@ -13,7 +13,7 @@
         android:layout_gravity="center">
 
         <am.acba.component.imageView.PrimaryImageView
-            android:id="@+id/action_icon"
+            android:id="@+id/action_image"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_gravity="center"
@@ -24,6 +24,16 @@
             tools:background="@drawable/background_rounded"
             tools:src="@drawable/ic_contacts" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/action_animation"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <am.acba.component.badge.PrimaryBadge
             android:id="@+id/badge_icon"
             android:layout_width="wrap_content"
@@ -33,6 +43,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/action_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/background_rounded" />
     </FrameLayout>
 
     <am.acba.component.textView.PrimaryTextView
@@ -46,6 +67,6 @@
         android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_icon"
+        app:layout_constraintTop_toBottomOf="@id/action_image"
         tools:text="action text" />
 </LinearLayout>

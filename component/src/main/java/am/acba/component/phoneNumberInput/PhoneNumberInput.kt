@@ -315,6 +315,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         isValidNumber = if (binding.phoneNumber.text?.isNotEmpty() == true) isValid else true
         if (!isValid && binding.phoneNumber.text?.isNotEmpty() == true) {
             setErrorBackground()
+            setErrorAnimation()
         } else {
             setupBackgroundByFocusable()
         }
@@ -327,8 +328,6 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     override fun setEnabled(isEnable: Boolean) {
-        if (isEnable) setErrorAnimation()
-
         binding.clear.isVisible = if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
         binding.countryCodeLayout.isEnabled = isEnable
         binding.phoneNumberLayout.isEnabled = isEnable
