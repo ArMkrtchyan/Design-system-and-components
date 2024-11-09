@@ -94,6 +94,10 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.setMaxLength(maxLength)
     }
 
+    fun setImeOptions(imeOptions: Int) {
+        binding.amount.editText.imeOptions = imeOptions
+    }
+
     fun loadCurrencyIcon(@DrawableRes resId: Int) {
         Glide.with(context).asBitmap()
             .load(resId)
