@@ -95,7 +95,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setImeOptions(imeOptions: Int) {
-        binding.amount.editText.imeOptions = imeOptions
+        binding.amount.editText?.imeOptions = imeOptions
     }
 
     fun loadCurrencyIcon(@DrawableRes resId: Int) {
