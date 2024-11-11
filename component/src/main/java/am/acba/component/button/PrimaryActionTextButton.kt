@@ -14,7 +14,9 @@ import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -28,6 +30,9 @@ import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
 import com.airbnb.lottie.SimpleColorFilter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -191,6 +196,11 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionImage.setImageDrawable(iconDrawable)
     }
 
+    fun setImageUri(uri: Uri) {
+        Glide.with(context).asBitmap().load(uri.path).apply(RequestOptions.circleCropTransform())
+            .into(binding.actionImage)
+    }
+
     fun setAnimation(animation: String?, color: Int) {
         binding.actionImage.visibility = View.GONE
         binding.actionAnimation.visibility = View.VISIBLE
@@ -313,7 +323,7 @@ class PrimaryActionTextButton : FrameLayout {
 
     enum class ActionIconSize(val size: Int, val badgeSize: Int, val padding: Int) {
         XXLARGE(80, 32, 16),
-        XLARGE(56, 20, 16),
+        XLARGE(56, 24, 16),
         LARGE(40, 14, 10),
         MEDIUM(36, 14, 8),
         SMALL(32, 8, 6),
