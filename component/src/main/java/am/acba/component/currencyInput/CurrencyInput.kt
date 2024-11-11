@@ -197,12 +197,12 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun validateAmount() {
         when {
-            minAmount != 0.0 && getFloatAmount() < minAmount -> {
+            minAmount != 0.0 && getFloatAmount() < minAmount.toFloat() -> {
                 setErrorState()
                 isValidAmount = false
             }
 
-            maxAmount != 0.0 && getFloatAmount() > maxAmount -> {
+            maxAmount != 0.0 && getFloatAmount() > maxAmount.toFloat() -> {
                 setErrorState()
                 isValidAmount = false
             }
