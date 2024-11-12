@@ -69,12 +69,13 @@ class CurrencyInput @JvmOverloads constructor(
                     getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot =
                     getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
-                enableErrorAnimation = getBoolean(R.styleable.CurrencyInputInput_enableErrorAnimation, false)
+                enableErrorAnimation =
+                    getBoolean(R.styleable.CurrencyInputInput_enableErrorAnimation, false)
             } finally {
                 recycle()
             }
         }
-        binding.amount.setMaxLength(maxLength)
+        setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
@@ -87,6 +88,14 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {
         binding.currencyLayout.setOnClickListener(onClickListener)
+    }
+
+    fun setMaxLength(maxLength: Int) {
+        binding.amount.setMaxLength(maxLength)
+    }
+
+    fun setImeOptions(imeOptions: Int) {
+        binding.amount.editText?.imeOptions = imeOptions
     }
 
     fun loadCurrencyIcon(@DrawableRes resId: Int) {
@@ -186,14 +195,14 @@ class CurrencyInput @JvmOverloads constructor(
         }
     }
 
-    private fun validateAmount() {
+    fun validateAmount() {
         when {
-            minAmount != 0.0 && getFloatAmount() < minAmount -> {
+            minAmount != 0.0 && getFloatAmount() < minAmount.toFloat() -> {
                 setErrorState()
                 isValidAmount = false
             }
 
-            maxAmount != 0.0 && getFloatAmount() > maxAmount -> {
+            maxAmount != 0.0 && getFloatAmount() > maxAmount.toFloat() -> {
                 setErrorState()
                 isValidAmount = false
             }
@@ -280,7 +289,7 @@ class CurrencyInput @JvmOverloads constructor(
         return getFragmentManager()
     }
 
-    private fun setValidState() {
+    fun setValidState() {
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hintTextColor =
             context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
@@ -301,7 +310,7 @@ class CurrencyInput @JvmOverloads constructor(
         )
     }
 
-    private fun setErrorState() {
+    fun setErrorState() {
         setErrorAnimation()
 
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
