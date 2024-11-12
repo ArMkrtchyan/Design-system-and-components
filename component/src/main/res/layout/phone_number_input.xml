@@ -13,14 +13,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/country_code_layout"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_marginEnd="1dp"
             android:background="@drawable/background_primary_input_left_corner"
-            android:orientation="horizontal"
-            android:paddingEnd="4dp">
+            android:orientation="horizontal">
 
             <am.acba.component.imageView.PrimaryImageView
                 android:id="@+id/country_flag"
@@ -29,6 +28,9 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:tint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_flag_am" />
 
             <am.acba.component.textView.PrimaryTextView
@@ -37,6 +39,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ic_arrow"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/country_flag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginEnd="12dp"
                 tools:text="+374" />
 
             <am.acba.component.imageView.PrimaryImageView
@@ -45,10 +53,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="2dp"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_down" />
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_down"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/country_code"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/phone_number_layout"
