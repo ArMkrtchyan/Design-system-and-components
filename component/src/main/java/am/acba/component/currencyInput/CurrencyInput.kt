@@ -159,7 +159,6 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setupBackgroundsByFocusChange() {
         binding.amount.editText?.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
-            mAction?.invoke(isFocusable)
             amountTextFormatting(isFocusable)
             val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
@@ -170,6 +169,7 @@ class CurrencyInput @JvmOverloads constructor(
             } else {
                 validateAmount()
             }
+            mAction?.invoke(isFocusable,isValidAmount)
         }
     }
 
@@ -372,11 +372,11 @@ class CurrencyInput @JvmOverloads constructor(
 
     }
 
-    fun onFocusChangeListener(action: ((Boolean) -> Unit)? = null) {
+    fun onFocusChangeListener(action: ((Boolean,Boolean) -> Unit)? = null) {
         mAction = action
     }
 
-    private var mAction: ((Boolean) -> Unit?)? = null
+    private var mAction: ((Boolean,Boolean) -> Unit?)? = null
     fun isValidAmount(): Boolean = isValidAmount
     fun getEditText(): EditText? = binding.amount.editText
 
@@ -400,6 +400,8 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setErrorText(text: String) {
         errorText = text
+        binding.helpText.isVisible = errorText.isNotEmpty()
+        binding.helpText.text = errorText
     }
 
     fun setHelpText(text: String) {

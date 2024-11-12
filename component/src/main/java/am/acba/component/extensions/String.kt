@@ -24,8 +24,9 @@ fun String.numberDeFormatting(): String {
 fun String.numberFormatting(): String {
     return try {
         val value = this.toDoubleOrNull()
+        if (value != null && value > 0 && value < 1) return this
         val decimalFormat = DecimalFormat("#,###.00", DecimalFormatSymbols(Locale.US))
-        if (value != null) decimalFormat.format(value) else ""
+        if (value != null && value > 0) decimalFormat.format(value) else ""
     } catch (e: NumberFormatException) {
         e.stackTrace
         ""
