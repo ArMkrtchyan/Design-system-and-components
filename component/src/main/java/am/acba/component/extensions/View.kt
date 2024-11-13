@@ -3,12 +3,15 @@ package am.acba.component.extensions
 import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
 import android.view.View.MeasureSpec
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -260,4 +263,12 @@ fun ImageView.load(
             }
         })
         .into(this)
+}
+
+fun EditText.openKeyboard(context: Context) {
+    requestFocus()
+    post {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }
 }

@@ -10,6 +10,7 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
+import am.acba.component.extensions.openKeyboard
 import am.acba.component.extensions.saveCountryLastAction
 import am.acba.component.extensions.shakeViewHorizontally
 import am.acba.component.extensions.vibrate
@@ -443,6 +444,10 @@ class PhoneNumberInput @JvmOverloads constructor(
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
+    }
+
+    fun openKeyboard() {
+        binding.phoneNumber.openKeyboard(context)
     }
 }
 
