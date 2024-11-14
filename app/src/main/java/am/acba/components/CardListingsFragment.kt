@@ -30,7 +30,7 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
 
             setStartIconType(PrimaryCardListing.IconTypes.LARGE)
 
-            setStartIconBackgroundColor(requireContext().getColorStateListFromAttr(R.attr.backgroundAlternative))
+            setStartIconBackgroundTint(requireContext().getColorStateListFromAttr(R.attr.backgroundAlternative))
             setStartIconTint(requireContext().getColorStateListFromAttr(R.attr.contentAlternative))
             setStartIcon("https://bcw-media.s3.ap-northeast-1.amazonaws.com/text_to_image_topbanner_mb_1_f66b5f345b.jpg")
             setEndIcon(getDrawable(context, am.acba.component.R.drawable.ic_right))
