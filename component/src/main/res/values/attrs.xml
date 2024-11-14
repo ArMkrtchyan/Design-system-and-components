@@ -455,6 +455,12 @@
         <attr name="endBodyText" format="string" />
         <attr name="cardCurrencyText" format="string" />
 
+        <attr name="startTitleTextColor" format="color" />
+        <attr name="startBodyTextColor" format="color" />
+        <attr name="endTitleTextColor" format="color" />
+        <attr name="endBodyTextColor" format="color" />
+        <attr name="cardCurrencyTextColor" format="color" />
+
         <attr name="cardListingStartIconType" format="enum">
             <enum name="Large" value="0" />
             <enum name="Small" value="1" />

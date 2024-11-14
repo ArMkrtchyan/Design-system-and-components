@@ -178,7 +178,7 @@ class CurrencyInput @JvmOverloads constructor(
             } else {
                 validateAmount()
             }
-            mAction?.invoke(isFocusable,isValidAmount)
+            mAction?.invoke(isFocusable)
         }
     }
 
@@ -381,11 +381,11 @@ class CurrencyInput @JvmOverloads constructor(
 
     }
 
-    fun onFocusChangeListener(action: ((Boolean,Boolean) -> Unit)? = null) {
+    fun onFocusChangeListener(action: ((Boolean) -> Unit)? = null) {
         mAction = action
     }
 
-    private var mAction: ((Boolean,Boolean) -> Unit?)? = null
+    private var mAction: ((Boolean) -> Unit?)? = null
     fun isValidAmount(): Boolean = isValidAmount
     fun getEditText(): EditText? = binding.amount.editText
 
