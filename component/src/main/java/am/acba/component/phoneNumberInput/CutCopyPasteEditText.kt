@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat.getSystemService
 class CutCopyPasteEditText : AppCompatEditText {
 
     private var onDoneButtonClick: (() -> Unit)? = null
+    private var onActionButtonClick: ((Int) -> Unit)? = null
 
     fun setOnCutCopyPasteListener(action: ((Int) -> Unit)? = null) {
         mAction = action
@@ -42,6 +43,8 @@ class CutCopyPasteEditText : AppCompatEditText {
 
                 onDoneButtonClick?.invoke()
                 true
+            } else {
+                onActionButtonClick?.invoke(actionId)
             }
             false
         }
@@ -49,6 +52,10 @@ class CutCopyPasteEditText : AppCompatEditText {
 
     fun onKeyboardDoneButtonClick(onDoneButtonClick: () -> Unit) {
         this.onDoneButtonClick = onDoneButtonClick
+    }
+
+    fun onKeyboardActionButtonClick(onActionButtonClick: (Int) -> Unit) {
+        this.onActionButtonClick = onActionButtonClick
     }
 
     override fun onTextContextMenuItem(id: Int): Boolean {

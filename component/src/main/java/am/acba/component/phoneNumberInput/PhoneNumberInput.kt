@@ -31,6 +31,7 @@ import android.text.Editable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -58,8 +59,8 @@ class PhoneNumberInput @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, 0) {
 
     var enableErrorAnimation = false
-
     private val binding by lazy { PhoneNumberInputBinding.inflate(context.inflater(), this, false) }
+
     private val ccpBinding by lazy {
         CountryPickerLayoutBinding.inflate(
             context.inflater(),
@@ -70,6 +71,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     private lateinit var countriesList: List<CountryModel>
     private var topCountryChipList: MutableList<CountryModel> = mutableListOf()
     private var isFocusable = false
+    private var isKeyboardActionClicked = false
     private var isValidNumber = true
     private var countryTopShips: String? = null
     private val CONTACT_PERMISSION_REQUEST = 100
@@ -105,16 +107,23 @@ class PhoneNumberInput @JvmOverloads constructor(
         }
         setupHelpErrorText()
         setupBackgrounds()
-
-        binding.phoneNumber.doOnTextChanged { text, _, _, _ ->
-            clearText(text ?: "")
-        }
-        binding.phoneNumber.doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
-
+        binding.phoneNumber.initListeners()
         binding.countryCodeLayout.setOnClickListener { openCountryDialog() }
         binding.icPhoneBook.setOnClickListener { contactIconClick() }
         setCountryChipsFromDigital()
         copyPaste()
+    }
+
+    private fun CutCopyPasteEditText.initListeners() {
+        doOnTextChanged { text, _, _, _ -> clearText(text ?: "") }
+        doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
+        onKeyboardDoneButtonClick { setErrorAnimation() }
+        onKeyboardActionButtonClick { actionId ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                isKeyboardActionClicked = true
+                setErrorAnimation()
+            }
+        }
     }
 
     private fun copyPaste() {
@@ -150,6 +159,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             if (isValidNumber) {
                 setupBackgroundByFocusable()
             } else {
+                if (isKeyboardActionClicked) setErrorAnimation()
                 setErrorBackground()
             }
             onFocusChanged?.invoke(isFocusable)
@@ -316,7 +326,6 @@ class PhoneNumberInput @JvmOverloads constructor(
         isValidNumber = if (binding.phoneNumber.text?.isNotEmpty() == true) isValid else true
         if (!isValid && binding.phoneNumber.text?.isNotEmpty() == true) {
             setErrorBackground()
-            setErrorAnimation()
         } else {
             setupBackgroundByFocusable()
         }
@@ -440,7 +449,8 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun setErrorAnimation() {
-        if (enableErrorAnimation) {
+        if (enableErrorAnimation && !isValidNumber) {
+            isKeyboardActionClicked = false
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
