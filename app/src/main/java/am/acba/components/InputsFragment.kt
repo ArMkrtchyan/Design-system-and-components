@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 
 class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
     override val inflate: Inflater<FragmentInputsBinding>
@@ -21,26 +22,31 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
 
     override fun FragmentInputsBinding.initView() {
         input.apply {
-            enableErrorAnimation = true
             editText?.isSingleLine = true
             helperText = "Min amount"
             hint = "Amount"
-            editText?.onFocusChangeListener = OnFocusChangeListener { _, _ ->
-                isErrorEnabled =
-                    ((!editText?.text.isNullOrEmpty() && (editText?.text?.length ?: 0) < 4))
-                if (isErrorEnabled) {
-                    error = "Amount is too short"
-                }
+            val errorText = "Amount is too short"
+            editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+                validateAfterFocusChange(
+                    errorMessage = errorText,
+                    isValid = editText?.text?.length ?: 0 < 4
+                )
+            }
+            editText?.doAfterTextChanged {
+                validateAfterTextChange(
+                    errorMessage = errorText,
+                    isValid = editText?.text?.length ?: 0 < 4
+                )
             }
         }
 
         datePicker.apply {
-           this.setOnClickListener{
-               showPrimaryAlertDialog(requireContext(), layoutInflater)
-               //Use this function if you want to have in input both text and hint(You MUST set text in input by code or XML)
-               this.setInputExpandedHintEnabled(false)
-               this.setText("Text")
-           }
+            this.setOnClickListener {
+                showPrimaryAlertDialog(requireContext(), layoutInflater)
+                //Use this function if you want to have in input both text and hint(You MUST set text in input by code or XML)
+                this.setInputExpandedHintEnabled(false)
+                this.setText("Text")
+            }
         }
     }
 

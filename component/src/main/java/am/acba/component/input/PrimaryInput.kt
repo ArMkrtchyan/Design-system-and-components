@@ -38,12 +38,15 @@ import com.google.android.material.textfield.TextInputLayout
 
 open class PrimaryInput : TextInputLayout {
 
+    var enableErrorAnimation = false
+
     private var textMaxLength = -1
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
     private var formattingWithDot = false
-    var enableErrorAnimation = false
+    private var validateAfterInput = false
+    private var isKeyboardActionClicked = false
 
     private var onDoneButtonClick: (() -> Unit)? = null
 
@@ -124,8 +127,13 @@ open class PrimaryInput : TextInputLayout {
                         val imm = getSystemService(context, InputMethodManager::class.java)
                         imm?.hideSoftInputFromWindow(editText?.windowToken, 0)
                         editText?.clearFocus()
+                        setErrorAnimation()
+
                         onDoneButtonClick?.invoke()
                         return true
+                    } else if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                        isKeyboardActionClicked = true
+                        setErrorAnimation()
                     }
                     return false
                 }
@@ -175,7 +183,6 @@ open class PrimaryInput : TextInputLayout {
         return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
     }
 
-
     @SuppressLint("UseCompatTextViewDrawableApis")
     override fun setErrorEnabled(enabled: Boolean) {
         super.setErrorEnabled(enabled)
@@ -193,7 +200,6 @@ open class PrimaryInput : TextInputLayout {
             val errorTint = R.attr.borderDanger
             tvError?.compoundDrawableTintList = context.getColorStateListFromAttr(errorTint)
             tvError?.compoundDrawablePadding = 4.dpToPx()
-            setErrorAnimation()
         } else {
             backgroundRes = R.drawable.background_primary_input
             errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
@@ -203,6 +209,29 @@ open class PrimaryInput : TextInputLayout {
 
         hintTextColor = errorTextColorRes
         defaultHintTextColor = errorTextColorRes
+    }
+
+    fun validateAfterFocusChange(errorMessage: String?, isValid: Boolean = true) {
+        if (editText?.hasFocus() == false) {
+            isErrorEnabled = !isValid && editText?.text?.isNotEmpty() == true
+            validateAfterInput = true
+            if (isErrorEnabled) {
+                if (isKeyboardActionClicked) setErrorAnimation()
+                error = errorMessage
+            }
+        }
+    }
+
+    fun validateAfterTextChange(errorMessage: String?, isValid: Boolean = true) {
+        if (validateAfterInput) {
+            if (editText?.text?.isEmpty() == true) {
+                validateAfterInput = false
+                return
+            }
+            isErrorEnabled = !isValid && editText?.text?.isNotEmpty() == true
+
+            if (isErrorEnabled) error = errorMessage
+        }
     }
 
     fun setMaxLength(maxLength: Int) {
@@ -272,7 +301,7 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun setErrorAnimation() {
-        if (enableErrorAnimation) {
+        if (enableErrorAnimation && isErrorEnabled) {
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
