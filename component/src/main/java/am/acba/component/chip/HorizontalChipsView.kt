@@ -32,13 +32,14 @@ class HorizontalChipsView @JvmOverloads constructor(
     }
 
     fun <T : IChipModel> submitChips(chips: List<T>, onChipClick: (T) -> Unit) {
-        val chipsAdapter: ChipsAdapter<T>
-        if (binding.chipsRecycler.adapter == null) {
-            chipsAdapter = ChipsAdapter<T>()
-            binding.chipsRecycler.adapter = chipsAdapter
-        } else {
-            chipsAdapter = binding.chipsRecycler.adapter as ChipsAdapter<T>
-        }
+        val chipsAdapter: ChipsAdapter<T> = ChipsAdapter()
+        binding.chipsRecycler.adapter = chipsAdapter
+//        if (binding.chipsRecycler.adapter == null) {
+//            chipsAdapter = ChipsAdapter<T>()
+//            binding.chipsRecycler.adapter = chipsAdapter
+//        } else {
+//            chipsAdapter = binding.chipsRecycler.adapter as ChipsAdapter<T>
+//        }
         chipsAdapter.setOnChipClick(onChipClick)
         chipsAdapter.submitList(chips)
     }
