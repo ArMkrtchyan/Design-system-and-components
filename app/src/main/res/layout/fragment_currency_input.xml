@@ -41,7 +41,7 @@
                 app:countryTopChips="am,us"
                 app:currencyInputErrorText="amount is not valid"
                 app:currencyInputHintText="Fill the amount"
-                app:currencyInputHelpText="Amount"
+                app:currencyInputBottomSheetTitle="Select currency"
                 app:formattingWithOutDot="false"
                 app:currencyInputMaxAmount="10000"
                 app:currencyInputMinAmount="100" />

@@ -202,11 +202,14 @@
         <attr name="phoneInputErrorText" format="string" />
         <attr name="phoneInputHelpText" format="string" />
         <attr name="countryTopChips" format="string" />
+        <attr name="phoneNumberInputBottomSheetTitle" format="string" />
+        <attr name="phoneBookBottomSheetTitle" format="string" />
     </declare-styleable>
     <declare-styleable name="CurrencyInputInput">
         <attr name="currencyInputErrorText" format="string" />
         <attr name="currencyInputHintText" format="string" />
         <attr name="currencyInputHelpText" format="string" />
+        <attr name="currencyInputBottomSheetTitle" format="string" />
         <attr name="currencyInputMaxAmount" format="integer" />
         <attr name="currencyInputMinAmount" format="integer" />
         <attr name="formattingWithOutDot" format="boolean" />

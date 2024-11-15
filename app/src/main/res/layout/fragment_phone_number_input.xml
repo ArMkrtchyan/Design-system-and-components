@@ -38,6 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:countryTopChips="am,us"
+                app:phoneNumberInputBottomSheetTitle="Select country"
+                app:phoneBookBottomSheetTitle="Select"
                 app:phoneInputErrorText="Phone number is not valid"
                 app:phoneInputHelpText="Phone number is" />
         </LinearLayout>

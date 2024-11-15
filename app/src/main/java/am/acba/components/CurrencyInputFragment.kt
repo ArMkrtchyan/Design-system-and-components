@@ -13,8 +13,8 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {
-        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
-        amount.onFocusChangeListener { fosus-> }
+        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR", "GBP", "GEL", "RUB", "CHF"))
+        amount.onFocusChangeListener { focus-> }
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
         amount.setHintText("Fill the amount")
