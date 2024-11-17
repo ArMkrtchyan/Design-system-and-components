@@ -119,11 +119,10 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun loadCurrencyIcon(iconUrl: String) {
-        Glide.with(context).asBitmap()
+        Glide.with(context)
             .load(iconUrl)
             .apply(
                 RequestOptions.circleCropTransform()
-                    .override(22.dpToPx(), 22.dpToPx())
             )
             .into(binding.currencyFlag)
     }

@@ -22,6 +22,8 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         amount.setMaxAmount(999999999999999.0)
         amount.setMinAmount(100.0)
         amount.fixCurrency()
+        amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Currencies/EUR.svg")
+        //  amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Banner/Amex%20cashback/Mobile/hy/amexcashback_06.2024.png")
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")

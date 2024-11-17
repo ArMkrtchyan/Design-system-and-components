@@ -36,10 +36,11 @@
 
             <am.acba.component.imageView.PrimaryImageView
                 android:id="@+id/currency_flag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="12dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_flag_am"
                 android:tint="@null" />
 
