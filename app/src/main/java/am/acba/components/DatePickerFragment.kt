@@ -40,7 +40,7 @@ class DatePickerFragment : BaseViewBindingFragment<FragmentDatePickerBinding>() 
             val minDateCalendar = Calendar.getInstance()
             minDateCalendar[Calendar.DAY_OF_MONTH] = minDateCalendar[Calendar.DAY_OF_MONTH] + nextMinAvailableDay
             val maxDateCalendar = Calendar.getInstance()
-            maxDateCalendar[Calendar.DAY_OF_MONTH] = minDateCalendar[Calendar.DAY_OF_MONTH] + nextMaxAvailableDay
+            maxDateCalendar[Calendar.DAY_OF_MONTH] = maxDateCalendar[Calendar.DAY_OF_MONTH] + nextMaxAvailableDay
             datePicker.minDate = minDateCalendar.timeInMillis
             datePicker.maxDate = maxDateCalendar.timeInMillis
         }

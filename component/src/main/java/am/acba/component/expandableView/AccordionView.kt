@@ -125,10 +125,7 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     private fun setStartStartIconType(startIconSize: StartIconSize) {
         when (startIconSize) {
             StartIconSize.WRAP -> {
-                binding.startIcon.layoutParams = LayoutParams(
-                    LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT
-                )
+                binding.startIcon.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             }
 
             StartIconSize.SMALL, StartIconSize.MEDIUM, StartIconSize.LARGE -> {

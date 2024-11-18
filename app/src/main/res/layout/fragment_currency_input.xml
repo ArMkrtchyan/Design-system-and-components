@@ -40,11 +40,20 @@
                 android:layout_marginTop="@dimen/spacing_20"
                 app:countryTopChips="am,us"
                 app:currencyInputErrorText="amount is not valid"
-                app:currencyInputHintText="Fill the amount"
                 app:currencyInputBottomSheetTitle="Select currency"
-                app:formattingWithOutDot="false"
+                app:currencyInputHintText="Fill the amount"
                 app:currencyInputMaxAmount="10000"
+                app:currencyInputMaxLength="30"
                 app:currencyInputMinAmount="100" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:inputType="quantity"
+                android:hint="Duration"
+                android:text="10" />
         </LinearLayout>
     </ScrollView>
 

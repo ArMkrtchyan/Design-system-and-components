@@ -24,9 +24,7 @@ import androidx.core.view.setPadding
 class PrimaryCardListing : FrameLayout {
     private val binding by lazy {
         CardListingLayoutBinding.inflate(
-            context.inflater(),
-            this,
-            false
+            context.inflater(), this, false
         )
     }
 
@@ -39,8 +37,7 @@ class PrimaryCardListing : FrameLayout {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
-            : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
 
@@ -49,12 +46,10 @@ class PrimaryCardListing : FrameLayout {
             addView(binding.root)
             try {
                 val layoutBackgroundColor = getInt(
-                    R.styleable.PrimaryCardListing_cardListingLayoutBackgroundColor,
-                    context.getColor(R.color.Transparent)
+                    R.styleable.PrimaryCardListing_cardListingLayoutBackgroundColor, context.getColor(R.color.Transparent)
                 )
                 val layoutBorderColor = getColor(
-                    R.styleable.PrimaryCardListing_cardListingLayoutBorderColor,
-                    0
+                    R.styleable.PrimaryCardListing_cardListingLayoutBorderColor, 0
                 )
 
                 val startTitle = getString(R.styleable.PrimaryCardListing_startTitleText)
@@ -63,31 +58,33 @@ class PrimaryCardListing : FrameLayout {
                 val endBody = getString(R.styleable.PrimaryCardListing_endBodyText)
                 val cardCurrency = getString(R.styleable.PrimaryCardListing_cardCurrencyText)
 
+                val startTitleColor = getColorStateList(R.styleable.PrimaryCardListing_startTitleTextColor)
+                val startBodyColor = getColorStateList(R.styleable.PrimaryCardListing_startBodyTextColor)
+                val endTitleColor = getColorStateList(R.styleable.PrimaryCardListing_endTitleTextColor)
+                val endBodyColor = getColorStateList(R.styleable.PrimaryCardListing_endBodyTextColor)
+                val cardCurrencyColor = getColorStateList(R.styleable.PrimaryCardListing_cardCurrencyTextColor)
+                setStartTitleTextColor(startTitleColor)
+                setStartBodyTextColor(startBodyColor)
+                setEndTitleTextColor(endTitleColor)
+                setEndBodyTextColor(endBodyColor)
+                setCardCurrencyTextColor(cardCurrencyColor)
+
                 val startIconType = getInt(
-                    R.styleable.PrimaryCardListing_cardListingStartIconType,
-                    0
+                    R.styleable.PrimaryCardListing_cardListingStartIconType, 0
                 ).findIconTypeByOrdinal() ?: IconTypes.LARGE
 
-                val startIconBackgroundColor = getColorStateList(
-                    R.styleable.PrimaryCardListing_cardListingStartIconBackgroundColor
-                )
+                val startIconBackgroundColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStartIconBackgroundTint)
+                val startIconBackground = getDrawable(R.styleable.PrimaryCardListing_cardListingStartIconBackground)
                 val startIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStartIconTint)
                 val startIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingStartIcon)
                 val endIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingEndIcon)
 
                 showStatus = getBoolean(R.styleable.PrimaryCardListing_showCardStatus, false)
-                val statusBackgroundColor = getColor(
-                    R.styleable.PrimaryCardListing_cardListingStatusBackgroundColor,
-                    context.getColorFromAttr(
-                        R.attr.borderNeutral
-                    )
-                )
+                val statusBackgroundColor = getColor(R.styleable.PrimaryCardListing_cardListingStatusBackgroundColor, context.getColorFromAttr(R.attr.borderNeutral))
                 val statusText = getString(R.styleable.PrimaryCardListing_cardListingStatusText)
-                val statusTextColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusTextColor)
-                    ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                val statusTextColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusTextColor) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
                 val statusIcon = getDrawable(R.styleable.PrimaryCardListing_cardListingStatusIcon)
-                val statusIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusIconTint)
-                    ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                val statusIconTint = getColorStateList(R.styleable.PrimaryCardListing_cardListingStatusIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
 
                 setLayoutBackgroundColor(layoutBackgroundColor)
                 setLayoutBorderColor(layoutBorderColor)
@@ -97,10 +94,11 @@ class PrimaryCardListing : FrameLayout {
                 setEndBodyText(endBody)
                 setCardCurrencyText(cardCurrency)
 
+                setStartIconBackground(startIconBackground)
                 setStartIconType(startIconType)
                 setStartIcon(startIcon)
                 setStartIconTint(startIconTint)
-                setStartIconBackgroundColor(startIconBackgroundColor)
+                setStartIconBackgroundTint(startIconBackgroundColor)
                 setEndIcon(endIcon)
 
                 showStatus(showStatus)
@@ -164,14 +162,38 @@ class PrimaryCardListing : FrameLayout {
         binding.tvCurrency.updateTextView(text)
     }
 
+    fun setStartTitleTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvStartTitle.setTextColor(colorStateList) }
+    }
+
+    fun setStartBodyTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvStartBody.setTextColor(colorStateList) }
+    }
+
+    fun setEndTitleTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvEndTitle.setTextColor(colorStateList) }
+    }
+
+    fun setEndBodyTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvEndBody.setTextColor(colorStateList) }
+    }
+
+    fun setCardCurrencyTextColor(colorStateList: ColorStateList?) {
+        colorStateList?.let { binding.tvCurrency.setTextColor(colorStateList) }
+    }
+
     fun setStartIconType(iconType: IconTypes) {
         binding.ivStartIcon.setPadding(
             iconType.padding.dpToPx()
         )
     }
 
-    fun setStartIconBackgroundColor(colorStateList: ColorStateList?) {
+    fun setStartIconBackgroundTint(colorStateList: ColorStateList?) {
         binding.ivStartIcon.backgroundTintList = colorStateList
+    }
+
+    fun setStartIconBackground(drawable: Drawable?) {
+        drawable?.let { binding.ivStartIcon.background = it }
     }
 
     fun setStartIcon(icon: Drawable?) {
@@ -229,8 +251,7 @@ class PrimaryCardListing : FrameLayout {
             if (isVisible && onClickListener != null) {
                 setOnClickListener(
                     PreventDoubleClickListener(
-                        onClickListener,
-                        clickInterval
+                        onClickListener, clickInterval
                     )
                 )
             } else {
@@ -240,8 +261,7 @@ class PrimaryCardListing : FrameLayout {
     }
 
     enum class IconTypes(var padding: Int) {
-        LARGE(0),
-        SMALL(6);
+        LARGE(0), SMALL(6);
 
         companion object {
             fun Int.findIconTypeByOrdinal() = entries.find { it.ordinal == this }

@@ -139,6 +139,10 @@ class PrimaryTable : FrameLayout {
         binding.listItem.startIcon.imageTintList = colorStateList
     }
 
+    fun setIconBackgroundTint(colorStateList: ColorStateList?) {
+        binding.listItem.startIcon.backgroundTintList = colorStateList
+    }
+
     fun setIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {
         binding.listItem.startIcon.apply {
             this.clipToOutline = clipToOutline

@@ -1,18 +1,27 @@
 package am.acba.component.slider
 
-import  am.acba.component.R
+import am.acba.component.R
 import am.acba.component.databinding.LayoutPrimarySliderBinding
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.vibrate
 import android.widget.FrameLayout
 import android.widget.FrameLayout.LayoutParams
 import androidx.core.view.isVisible
+import com.google.android.material.slider.Slider
 import kotlin.apply
 import kotlin.text.isNullOrEmpty
 
 class PrimarySlider @JvmOverloads constructor(
-    context: android.content.Context, attrs: android.util.AttributeSet? = null, defStyleAttr: Int = 0
+    context: android.content.Context,
+    attrs: android.util.AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
-    private val binding by lazy { LayoutPrimarySliderBinding.inflate(context.inflater(), this, false) }
+
+    private val binding by lazy {
+        LayoutPrimarySliderBinding.inflate(context.inflater(), this, false)
+    }
+
+    var onSlideChanged: ((slider: Slider, value: Float, fromUser: Boolean) -> Unit)? = null
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.PrimarySlider).apply {
@@ -21,6 +30,7 @@ class PrimarySlider @JvmOverloads constructor(
                 FrameLayout.LayoutParams.WRAP_CONTENT
             )
             addView(binding.root, layoutParams)
+            initListeners()
             val sliderStartText = getString(R.styleable.PrimarySlider_sliderStartText)
             val sliderEndText = getString(R.styleable.PrimarySlider_sliderEndText)
             val value = getFloat(R.styleable.PrimarySlider_android_value, 1f)
@@ -33,8 +43,16 @@ class PrimarySlider @JvmOverloads constructor(
             setMaxValue(valueTo)
             setValue(value)
             setStepSize(stepSize)
+
             recycle()
             invalidate()
+        }
+    }
+
+    private fun initListeners() {
+        binding.slider.addOnChangeListener { slider, value, fromUser ->
+            context.vibrate(20)
+            onSlideChanged?.invoke(slider, value, fromUser)
         }
     }
 
@@ -64,19 +82,15 @@ class PrimarySlider @JvmOverloads constructor(
         binding.slider.stepSize = stepSize
     }
 
-    fun addOnSliderChangeListener(listener: com.google.android.material.slider.Slider.OnChangeListener) {
-        binding.slider.addOnChangeListener(listener)
-    }
-
-    fun removeOnSliderChangeListener(listener: com.google.android.material.slider.Slider.OnChangeListener) {
+    fun removeOnSliderChangeListener(listener: Slider.OnChangeListener) {
         binding.slider.removeOnChangeListener(listener)
     }
 
-    fun addOnSliderChangeListener(listener: com.google.android.material.slider.Slider.OnSliderTouchListener) {
+    fun addOnSliderChangeListener(listener: Slider.OnSliderTouchListener) {
         binding.slider.addOnSliderTouchListener(listener)
     }
 
-    fun removeOnSliderChangeListener(listener: com.google.android.material.slider.Slider.OnSliderTouchListener) {
+    fun removeOnSliderChangeListener(listener: Slider.OnSliderTouchListener) {
         binding.slider.removeOnSliderTouchListener(listener)
     }
 }

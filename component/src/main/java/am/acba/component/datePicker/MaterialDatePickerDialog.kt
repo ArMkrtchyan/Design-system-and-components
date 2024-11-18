@@ -80,26 +80,39 @@ class MaterialDatePickerDialog(
         minDate?.let { calendarConstraintBuilder.setStart(it) }
         maxDate?.let { calendarConstraintBuilder.setEnd(it) }
         calendarConstraintBuilder.setFirstDayOfWeek(Calendar.MONDAY)
-        if (disabledDays.isNotEmpty()) {
-            calendarConstraintBuilder.setValidator(object : CalendarConstraints.DateValidator {
-                override fun isValid(date: Long): Boolean {
-                    val calendar = Calendar.getInstance().apply { timeInMillis = date }
-                    val isDayIsNotInDisables = calendar[Calendar.DAY_OF_MONTH] !in disabledDays
-                    val isDisableBeforeMinDate = minDate == null || date >= minDate
-                    val isDisableAfterMaxDate = maxDate == null || date <= maxDate
-                    return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate
-                }
+        calendarConstraintBuilder.setValidator(object : CalendarConstraints.DateValidator {
+            override fun isValid(date: Long): Boolean {
+                val calendar = Calendar.getInstance().apply { timeInMillis = date }
+                calendar[Calendar.HOUR] = 0
+                calendar[Calendar.MINUTE] = 0
+                calendar[Calendar.SECOND] = 0
+                val isDayIsNotInDisables = if (disabledDays.isNotEmpty()) {
+                    calendar[Calendar.DAY_OF_MONTH] !in disabledDays
+                } else true
+                val minDateCalendar = Calendar.getInstance().apply { timeInMillis = minDate ?: 0L }
+                minDateCalendar[Calendar.HOUR] = 0
+                minDateCalendar[Calendar.MINUTE] = 0
+                minDateCalendar[Calendar.SECOND] = 0
+                minDateCalendar[Calendar.MILLISECOND] = 0
+                val isDisableBeforeMinDate = minDate == null || calendar.timeInMillis >= minDateCalendar.timeInMillis
+                val maxDateCalendar = Calendar.getInstance().apply { timeInMillis = maxDate ?: 0L }
+                maxDateCalendar[Calendar.HOUR] = 0
+                maxDateCalendar[Calendar.MINUTE] = 0
+                maxDateCalendar[Calendar.SECOND] = 0
+                maxDateCalendar[Calendar.MILLISECOND] = 0
+                val isDisableAfterMaxDate = maxDate == null || calendar.timeInMillis <= maxDateCalendar.timeInMillis
+                return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate
+            }
 
-                override fun describeContents(): Int {
-                    return 0
-                }
+            override fun describeContents(): Int {
+                return 0
+            }
 
-                override fun writeToParcel(dest: Parcel, flags: Int) {
+            override fun writeToParcel(dest: Parcel, flags: Int) {
 
-                }
+            }
 
-            })
-        }
+        })
         datePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(context?.getString(am.acba.component.R.string.date_picker_title_text))
             .setCalendarConstraints(calendarConstraintBuilder.build())

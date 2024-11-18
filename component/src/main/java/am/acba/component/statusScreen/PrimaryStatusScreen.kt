@@ -156,7 +156,7 @@ class PrimaryStatusScreen : FrameLayout {
                     setCentreMediaType(mediaType)
                     setCentreImage(centreImage)
                     setCentreImageBackgroundColor(centreImageBackgroundColor)
-                    setCentreImageBackgroundTint(centreImageBackgroundTint)
+                    setCentreImageTint(centreImageBackgroundTint)
                     setCentreMediaAnimation(centreMediaAnimationFileName)
                 }
                 setTitle(title)
@@ -248,14 +248,14 @@ class PrimaryStatusScreen : FrameLayout {
 
     fun setCentreImage(icon: Drawable?) {
         addCentreImage()
-        binding.centreMedia.background = icon
+        (binding.centreMedia.children.first() as? PrimaryImageView)?.setImageDrawable(icon)
     }
 
     fun setCentreImageBackgroundColor(colorStateList: ColorStateList?) {
         binding.centreMedia.backgroundTintList = colorStateList
     }
 
-    fun setCentreImageBackgroundTint(colorStateList: ColorStateList?) {
+    fun setCentreImageTint(colorStateList: ColorStateList?) {
         (binding.centreMedia.children.first() as? PrimaryImageView)?.imageTintList = colorStateList
     }
 
