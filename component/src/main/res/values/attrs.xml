@@ -198,6 +198,7 @@
         <attr name="inputType" format="enum">
             <enum name="amountFormatting" value="0" />
             <enum name="quantity" value="1" />
+            <enum name="amountFormattingWhileTyping" value="2" />
         </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">

@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:enabled="true"
             android:hint="Amount"
-            android:inputType="numberDecimal"
+            app:inputType="amountFormattingWhileTyping"
             app:cornerStyle="1"
             app:textMaxLength="15" />
 
