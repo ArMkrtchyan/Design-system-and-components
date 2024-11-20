@@ -17,7 +17,6 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val CONTACT_PERMISSION_REQUEST = 100
 
     companion object {
         var darkTheme = true

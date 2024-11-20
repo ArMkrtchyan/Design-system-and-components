@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:id="@+id/card_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginEnd="1dp"
+        android:background="@drawable/background_primary_input_corner"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/system_logo_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginStart="@dimen/spacing_16"
+            android:layout_marginEnd="@dimen/spacing_8"
+            tools:background="@drawable/logo_back">
+
+
+            <am.acba.component.imageView.PrimaryImageView
+                android:id="@+id/ic_card_system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="?attr/emptyLogo"
+                android:tintMode="multiply"
+                android:tint="?attr/backgroundPendingTonal1" />
+
+        </FrameLayout>
+
+        <am.acba.component.phoneNumberInput.CutCopyPasteEditText
+            android:id="@+id/card_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_weight="0.9"
+            android:background="@color/Transparent"
+            android:hint="Card number"
+            android:inputType="number"
+            android:maxLength="20"
+            android:padding="5dp"
+            android:textColor="?attr/contentPrimary"
+            android:textColorHint="?attr/contentPrimaryTonal1"
+            android:textSize="@dimen/text_size_16" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:padding="8dp"
+            android:src="@drawable/ic_close_small"
+            android:tint="?attr/contentPrimary"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/end_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:layout_marginStart="@dimen/spacing_4"
+            android:layout_marginEnd="@dimen/spacing_16"
+            android:layout_weight="0.1"
+            tools:src="@drawable/ic_scan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/root_linear">
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/ic_error"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/help_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="6dp"
+            android:textColor="?attr/contentPrimaryTonal1"
+            android:textSize="@dimen/text_size_12"
+            tools:text="Wrong"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

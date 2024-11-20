@@ -57,20 +57,20 @@ class CurrencyInput @JvmOverloads constructor(
 
     init {
         addView(binding.root)
-        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
+        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInput).apply {
             try {
-                errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
-                hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
-                helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
-                maxLength = getInt(R.styleable.CurrencyInputInput_currencyInputMaxLength, 15)
+                errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
+                hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
+                helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
+                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 15)
                 maxAmount =
-                    getFloat(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0f).toDouble()
+                    getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
                 minAmount =
-                    getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
+                    getFloat(R.styleable.CurrencyInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot =
-                    getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
+                    getBoolean(R.styleable.CurrencyInput_formattingWithOutDot, false)
                 enableErrorAnimation =
-                    getBoolean(R.styleable.CurrencyInputInput_enableErrorAnimation, false)
+                    getBoolean(R.styleable.CurrencyInput_enableErrorAnimation, false)
             } finally {
                 recycle()
             }
