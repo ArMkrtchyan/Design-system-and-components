@@ -14,22 +14,45 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
         get() = FragmentOffersBinding::inflate
     override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
+    private var isOneItem = true
+    private val items = arrayListOf(
+        OfferCard(
+            offerCardTitle = "Գյուղ. վարկ",
+            offerCardAmount = "200,000.00",
+            offerCardCurrency = "AMD",
+            offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
+            offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
+        )
+    )
+
+    private val items2 = arrayListOf(
+        OfferCard(
+            offerCardTitle = "Գյուղ. վարկ",
+            offerCardAmount = "200,000.00",
+            offerCardCurrency = "AMD",
+            offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
+            offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
+        ),
+        OfferCard(
+            offerCardTitle = "5G. վարկ",
+            offerCardAmount = "400,000.00",
+            offerCardCurrency = "AMD",
+            offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
+            offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
+        )
+    )
 
     override fun FragmentOffersBinding.initView() {
-        val list = arrayListOf(
-            OfferCard(
-                offerCardTitle = "Գյուղ. վարկ",
-                offerCardAmount = "200,000.00",
-                offerCardCurrency = "AMD",
-                offerCardEndDate = "Վերջնաժամկետ - 12/09/2024",
-                offerCardBackgroundColorAttr = R.attr.backgroundAlternative6,
-                offerCardBadgeBackgroundColorAttr = R.attr.backgroundSuccess,
-                offerCardBadgeText = "Նոր"
-            )
-        )
-        loanOffers.submitLoanOffers(list)
-        loanOffers.setNewBadgeCount(list.count { it.newBadgeVisibility })
+        loanOffers.submitLoanOffers(items)
         loanOffers.setOnOfferClick { it.log() }
         loanOffers.setOnSeeAllOfferClick { "See all".log() }
+        refresh.setOnClickListener {
+            if (isOneItem) {
+                loanOffers.submitLoanOffers(items2)
+            } else {
+                loanOffers.submitLoanOffers(items)
+            }
+            isOneItem = !isOneItem
+        }
     }
 }
