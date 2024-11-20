@@ -51,7 +51,8 @@ class PrimaryAlertDialog(
         inline fun build(required: Context, block: Builder.() -> Unit) =
             Builder(required).apply(block)
                 .build()
-          var needToDismissOnPositive = false
+
+        var needToDismissOnPositive = false
     }
 
     data class Builder(
@@ -129,11 +130,12 @@ class PrimaryAlertDialog(
         mBinding = DialogLayoutBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        setCancelable(mCancelable)
 
-        mBinding.apply {
-            setCancelable(mCancelable)
-            content?.let { contentContainer.addView(it) }
+        content?.let {
+            mBinding.contentContainer.addView(it)
         }
+        mBinding.contentContainer.isVisible = content != null
 
         mBinding.topIcon.isVisible = icon != 0
         icon?.let { mBinding.topIcon.setImageResource(it) }
@@ -156,14 +158,11 @@ class PrimaryAlertDialog(
         mBinding.buttonPrimary.setOnClickListener {
             mOnPositiveButtonClick?.invoke()
             if (mNeedToDismissOnPositiveButtonClick == null || needToDismissOnPositive) {
-                run {
-                    dismiss()
-                }
+                dismiss()
             }
         }
         mBinding.buttonSecondary.setOnClickListener {
             mOnNegativeButtonClick?.invoke() ?: run { dismiss() }
         }
     }
-
 }

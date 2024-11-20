@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="16dp">
 
     <LinearLayout
         android:id="@+id/linearContainer"
@@ -15,11 +15,10 @@
 
         <am.acba.component.imageView.PrimaryImageView
             android:id="@+id/topIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:padding="6dp"
+            android:layout_marginTop="16dp"
             android:tint="?attr/contentPrimary"
             android:visibility="gone"
             tools:src="@drawable/ic_block"
@@ -31,14 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="18dp"
             android:ellipsize="end"
-            android:fontFamily="@font/bold"
             android:gravity="center"
             android:maxLines="2"
-            android:textColor="?attr/contentPrimary"
-            android:textSize="@dimen/text_size_18"
+            style="@style/Heading7.Bold"
             android:visibility="gone"
             tools:text="Title"
             tools:visibility="visible" />
@@ -50,13 +47,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="18dp"
             android:layout_marginTop="8dp"
+            style="@style/Subtitle2.Regular"
             android:layout_marginEnd="18dp"
             android:ellipsize="end"
-            android:fontFamily="@font/regular"
             android:gravity="center"
             android:maxLines="3"
-            android:textColor="?attr/contentPrimary"
-            android:textSize="@dimen/text_size_14"
             android:visibility="gone"
             tools:text="User is blocked because of too many attemts to log in"
             tools:visibility="visible" />
@@ -64,14 +59,15 @@
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="24dp" />
 
         <am.acba.component.divider.PrimaryDivider
             android:id="@+id/topDivider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp" />
+            android:layout_marginTop="24dp" />
 
         <am.acba.component.button.PrimaryButton
             android:id="@+id/buttonPrimary"
