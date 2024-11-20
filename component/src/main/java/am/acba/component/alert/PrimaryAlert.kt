@@ -48,6 +48,9 @@ class PrimaryAlert : FrameLayout {
 
                 isFilledBackground = getBoolean(R.styleable.PrimaryAlert_isFilledBackground, false)
                 val title = getString(R.styleable.PrimaryAlert_alertTitle)
+                val titleSingleLine = getBoolean(
+                    R.styleable.PrimaryAlert_alertTitleSingleLine, true
+                )
                 val body = getString(R.styleable.PrimaryAlert_alertBody)
                 val bodyMaxLines = getInt(R.styleable.PrimaryAlert_alertBodyMaxLines, 0)
                 val link = getString(R.styleable.PrimaryAlert_alertLink)
@@ -56,6 +59,7 @@ class PrimaryAlert : FrameLayout {
                 updateCloseIconVisibility()
                 setType(type)
                 setTitle(title)
+                setTitleSingleLine(titleSingleLine)
                 setBody(body)
                 setBodyMaxLines(bodyMaxLines)
                 setLink(link)
@@ -74,6 +78,10 @@ class PrimaryAlert : FrameLayout {
 
     fun setTitle(title: String?) {
         binding.tvTitle.updateTextView(title)
+    }
+
+    fun setTitleSingleLine(isSingleLine: Boolean) {
+        binding.tvTitle.isSingleLine = isSingleLine
     }
 
     fun setBody(body: String?) {

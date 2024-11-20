@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseMaterialCalendar" parent="ThemeOverlay.Material3.MaterialCalendar" />
+
+    <style name="MaterialCalendar" parent="BaseMaterialCalendar">
+        <item name="materialCalendarHeaderTitle">@style/MaterialCalendarHeaderTitle</item>
+        <item name="materialCalendarStyle">@style/MaterialCalendarStyle</item>
+
+        <item name="materialCalendarHeaderDivider">@style/HeaderDivider</item>
+        <item name="materialCalendarHeaderSelection">@style/HeaderSelection</item>
+        <item name="materialCalendarHeaderCancelButton">@style/Widget.Material3.MaterialCalendar.HeaderCancelButton</item>
+        <item name="materialCalendarHeaderConfirmButton">@style/Widget.Material3.Button.TextButton</item>
+        <item name="materialCalendarHeaderToggleButton">@style/HeaderToggleButton</item>
+
+
+        <item name="materialCalendarYearNavigationButton">@style/YearNavigationButton</item>
+        <item name="materialCalendarMonthNavigationButton">@style/MonthNavigationButton</item>
+
+
+        <item name="materialCalendarDayOfWeekLabel">@style/DayOfWeekLabel</item>
+        <item name="materialCalendarDay">@style/DayTextView</item>
+        <item name="materialCalendarMonth">@style/MonthTextView</item>
+
+
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Material3.Button.TextButton.Dialog</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Material3.Button.TextButton.Dialog</item>
+    </style>
+
+    <style name="HeaderToggleButton" parent="Widget.Material3.MaterialCalendar.HeaderToggleButton">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/contentBrand</item>
+    </style>
+
+    <style name="DayOfWeekLabel" parent="Widget.Material3.MaterialCalendar.DayOfWeekLabel">
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="DayTextView" parent="Widget.Material3.MaterialCalendar.DayTextView">
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="MonthTextView" parent="Widget.Material3.MaterialCalendar.MonthTextView">
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="YearNavigationButton" parent="Widget.Material3.MaterialCalendar.YearNavigationButton">
+        <item name="android:textColor">?attr/contentPrimary</item>
+        <item name="iconTint">?attr/contentPrimary</item>
+    </style>
+
+    <style name="MonthNavigationButton" parent="Widget.Material3.MaterialCalendar.MonthNavigationButton">
+        <item name="android:textColor">?attr/contentPrimary</item>
+        <item name="iconTint">?attr/contentPrimary</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="MaterialCalendarHeaderTitle" parent="@style/Widget.Material3.MaterialCalendar.HeaderTitle">
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="MaterialCalendarStyle" parent="Widget.Material3.MaterialCalendar">
+        <item name="android:windowFullscreen">false</item>
+        <item name="backgroundTint">?attr/backgroundTonal1</item>
+        <item name="dayStyle">@style/DayStyle</item>
+        <item name="dayInvalidStyle">@style/DayStyle.Invalid</item>
+        <item name="daySelectedStyle">@style/Widget.Material3.MaterialCalendar.Day.Selected</item>
+        <item name="dayTodayStyle">@style/Widget.Material3.MaterialCalendar.Day.Today</item>
+        <item name="yearStyle">@style/YearStyle</item>
+        <item name="yearSelectedStyle">@style/Widget.Material3.MaterialCalendar.Year.Selected</item>
+        <item name="yearTodayStyle">@style/Widget.Material3.MaterialCalendar.Year.Today</item>
+        <item name="rangeFillColor">@macro/m3_comp_date_picker_modal_range_selection_active_indicator_container_color</item>
+        <item name="shapeAppearance">@macro/m3_comp_date_picker_modal_container_shape</item>
+    </style>
+
+    <style name="DayStyle" parent="Widget.Material3.MaterialCalendar.Day">
+        <item name="itemTextColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="DayStyle.Invalid" parent="Widget.Material3.MaterialCalendar.Day">
+        <item name="itemTextColor">?attr/contentPrimaryDisable</item>
+    </style>
+
+    <style name="Widget.Material3.MaterialCalendar.Day.Selected">
+        <item name="itemFillColor">?attr/backgroundBrand</item>
+        <item name="itemTextColor">?attr/contentSecondary</item>
+        <item name="itemStrokeWidth">0dp</item>
+    </style>
+
+    <style name="Widget.Material3.MaterialCalendar.Day.Today">
+        <item name="itemTextColor">?attr/contentPrimary</item>
+        <item name="itemStrokeColor">?attr/backgroundBrand</item>
+        <item name="itemStrokeWidth">@dimen/m3_comp_date_picker_modal_date_today_container_outline_width</item>
+    </style>
+
+    <style name="YearStyle" parent="Widget.Material3.MaterialCalendar.Year">
+        <item name="itemTextColor">?attr/contentPrimary</item>
+    </style>
+
+    <style name="Widget.Material3.MaterialCalendar.Year.Selected">
+        <item name="itemFillColor">?attr/backgroundBrand</item>
+        <item name="itemTextColor">?attr/contentSecondary</item>
+        <item name="itemStrokeWidth">0dp</item>
+    </style>
+
+    <style name="Widget.Material3.MaterialCalendar.Year.Today">
+        <item name="itemTextColor">?attr/contentSecondary</item>
+        <item name="itemStrokeColor">?attr/backgroundBrand</item>
+        <item name="itemStrokeWidth">@dimen/mtrl_calendar_day_today_stroke</item>
+    </style>
+
+    <style name="HeaderDivider" parent="Widget.Material3.MaterialCalendar.HeaderDivider">
+        <item name="android:visibility">visible</item>
+        <item name="android:background">?attr/borderPrimaryTonal1</item>
+    </style>
+
+    <style name="HeaderSelection" parent="Widget.Material3.MaterialCalendar.HeaderSelection">
+        <item name="android:textAppearance">@macro/m3_comp_date_picker_modal_header_headline_type</item>
+        <item name="android:textColor">?attr/contentPrimary</item>
+    </style>
+</resources>

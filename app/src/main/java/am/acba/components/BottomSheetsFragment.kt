@@ -1,12 +1,12 @@
 package am.acba.components
 
 import am.acba.component.bottomsheet.ModalBottomSheet
+import am.acba.component.textView.PrimaryTextView
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentAlertsBinding
 import am.acba.components.databinding.FragmentBottomSheetsBinding
-import am.acba.components.databinding.FragmentInputsBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class BottomSheetsFragment : BaseViewBindingFragment<FragmentBottomSheetsBinding>() {
@@ -24,7 +24,9 @@ class BottomSheetsFragment : BaseViewBindingFragment<FragmentBottomSheetsBinding
         }
 
         btnModal.setOnClickListener {
-            val dynamicContainer = FragmentInputsBinding.inflate(layoutInflater).root
+            val dynamicContainer = PrimaryTextView(requireContext()).apply {
+                text = "text"
+            }
             val bottomSheet = ModalBottomSheet("Bottom Sheet title", dynamicContainer)
             bottomSheet.show(childFragmentManager, ModalBottomSheet.TAG)
         }

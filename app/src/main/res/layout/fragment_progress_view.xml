@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ButtonsFragment">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="Progress view" />
+
+    <am.acba.component.textView.PrimaryTextView
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Progress view allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <am.acba.component.progressView.ProgressCardView
+                android:id="@+id/progressCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ProgressViewStepCount="2"
+                app:ProgressViewSubTitleText="Your Subtitle"
+                app:ProgressViewTitleText="Your Title" />
+
+            <am.acba.component.progressView.PrimaryProgressView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_14"
+                app:bottomLeftText="bottomLeftText"
+                app:bottomRightText="bottomRightText"
+                app:progress_maxValue="15000"
+                app:topLeftText="topLeftText"
+                app:topRightText="topRightText" />
+        </LinearLayout>
+    </ScrollView>
+
+    <am.acba.component.button.PrimaryButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_16"
+        android:layout_marginBottom="@dimen/spacing_20"
+        android:text="Serach" />
+</androidx.appcompat.widget.LinearLayoutCompat>

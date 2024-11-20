@@ -24,6 +24,7 @@
     <attr name="title" format="string" />
     <attr name="body" format="string" />
     <attr name="showCloseIcon" format="boolean" />
+    <attr name="enableErrorAnimation" format="boolean" />
 
     <declare-styleable name="ds">
         <attr name="homeShadowGradientStartColor" format="color" />
@@ -182,11 +183,12 @@
         <attr name="badgePaddingEnd" />
         <attr name="actionIcon" format="reference" />
         <attr name="actionIconSize" format="enum">
-            <enum name="XLarge" value="0" />
-            <enum name="Large" value="1" />
-            <enum name="Medium" value="2" />
-            <enum name="Small" value="3" />
-            <enum name="XSmall" value="4" />
+            <enum name="XXLarge" value="0" />
+            <enum name="XLarge" value="1" />
+            <enum name="Large" value="2" />
+            <enum name="Medium" value="3" />
+            <enum name="Small" value="4" />
+            <enum name="XSmall" value="5" />
         </attr>
         <attr name="actionIconBackground" format="reference" />
         <attr name="actionIconTint" format="color" />
@@ -200,6 +202,7 @@
         <attr name="hasDropDown" format="boolean" />
         <attr name="android:text" />
         <attr name="formattingWithDots" format="boolean" />
+        <attr name="enableErrorAnimation" />
         <attr name="inputType" format="enum">
             <enum name="amountFormatting" value="0" />
             <enum name="quantity" value="1" />
@@ -209,13 +212,15 @@
         <attr name="phoneInputErrorText" format="string" />
         <attr name="phoneInputHelpText" format="string" />
         <attr name="countryTopChips" format="string" />
+        <attr name="enableErrorAnimation" />
     </declare-styleable>
     <declare-styleable name="CurrencyInput">
         <attr name="currencyInputErrorText" format="string" />
         <attr name="currencyInputHintText" format="string" />
         <attr name="currencyInputHelpText" format="string" />
-        <attr name="currencyInputMaxAmount" format="integer" />
-        <attr name="currencyInputMinAmount" format="integer" />
+        <attr name="currencyInputMaxAmount" format="float" />
+        <attr name="currencyInputMaxLength" format="integer" />
+        <attr name="currencyInputMinAmount" format="float" />
         <attr name="formattingWithOutDot" format="boolean" />
     </declare-styleable>
     <declare-styleable name="CardInput">
@@ -233,6 +238,23 @@
             <enum name="CardScanner" value="0" />
             <enum name="DropDown" value="1" />
         </attr>
+        <attr name="enableErrorAnimation" />
+    </declare-styleable>
+    <declare-styleable name="ProgressCardView">
+        <attr name="ProgressViewTitleText" format="string" />
+        <attr name="ProgressViewSubTitleText" format="string" />
+        <attr name="ProgressViewStepCount" format="integer" />
+        <attr name="ProgressViewEndIcon" format="reference" />
+        <attr name="ProgressView_tartIcon" format="reference" />
+        <attr name="progressImageVisibility" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryProgressView">
+        <attr name="topLeftText" format="string" />
+        <attr name="topRightText" format="string" />
+        <attr name="bottomLeftText" format="string" />
+        <attr name="bottomRightText" format="string" />
+        <attr name="progress_maxValue" format="integer" />
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
@@ -241,6 +263,7 @@
         <attr name="accordionStartIconTint" format="color" />
         <attr name="accordionStartIconPadding" format="dimension" />
         <attr name="accordionEndIcon" format="reference" />
+        <attr name="accordionEndIconTint" format="color" />
         <attr name="accordionStartText" format="string" />
         <attr name="accordionStartTextColor" format="color" />
         <attr name="accordionEndText" format="string" />
@@ -438,6 +461,7 @@
         </attr>
         <attr name="isFilledBackground" format="boolean" />
         <attr name="alertTitle" format="string" />
+        <attr name="alertTitleSingleLine" format="boolean" />
         <attr name="alertBody" format="string" />
         <attr name="alertBodyMaxLines" format="integer" />
         <attr name="alertLink" format="string" />
@@ -455,12 +479,18 @@
         <attr name="endBodyText" format="string" />
         <attr name="cardCurrencyText" format="string" />
 
+        <attr name="startTitleTextColor" format="color" />
+        <attr name="startBodyTextColor" format="color" />
+        <attr name="endTitleTextColor" format="color" />
+        <attr name="endBodyTextColor" format="color" />
+        <attr name="cardCurrencyTextColor" format="color" />
+
         <attr name="cardListingStartIconType" format="enum">
             <enum name="Large" value="0" />
             <enum name="Small" value="1" />
         </attr>
-        <attr name="cardListingStartIconBackgroundColor" format="color" />
         <attr name="cardListingStartIconBackgroundTint" format="color" />
+        <attr name="cardListingStartIconBackground" format="reference" />
         <attr name="cardListingStartIcon" format="reference" />
         <attr name="cardListingStartIconTint" format="reference" />
         <attr name="cardListingEndIcon" format="reference" />
@@ -532,6 +562,54 @@
         <attr name="emptyButtonTitle" format="string" />
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentedProgressBar">
+        <attr name="segmentCount" format="integer" />
+        <attr name="trackThickness" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimaryTable">
+        <attr name="primaryTableBackground" format="reference" />
+        <attr name="primaryTableBackgroundTint" format="reference" />
+        <attr name="primaryTableShowTopView" format="boolean" />
+        <attr name="primaryTableShowIcon" format="boolean" />
+        <attr name="primaryTableShowArrow" format="boolean" />
+        <attr name="primaryTableIcon" format="reference" />
+        <attr name="primaryTableTitle" format="string" />
+        <attr name="primaryTableIconTint" format="reference" />
+        <attr name="primaryTableCollapsedItemCount" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ShippingProgressBar">
+        <attr name="shippingStepCount" format="integer" />
+        <attr name="shippingTrackThickness" format="dimension" />
+    </declare-styleable>
+
+
+    <declare-styleable name="PrimaryCardView" />
+
+    <declare-styleable name="PrimaryBanners" />
+
+    <declare-styleable name="PrimaryOfferCardView">
+        <attr name="offerCardTitle" format="string" />
+    </declare-styleable>
+    <declare-styleable name="PrimaryOffersView">
+        <attr name="offersTitle" format="string" />
+        <attr name="offersSeeAllTitle" format="string" />
+        <attr name="offersExpanded" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PrimarySlider">
+        <attr name="android:valueTo" />
+        <attr name="android:valueFrom" />
+        <attr name="android:value" />
+        <attr name="android:stepSize" />
+        <attr name="sliderStartText" format="string" />
+        <attr name="sliderEndText" format="string" />
+    </declare-styleable>
+    <declare-styleable name="HorizontalChipsView">
+        <attr name="horizontalChipsTitle" format="string" />
     </declare-styleable>
 
 </resources>

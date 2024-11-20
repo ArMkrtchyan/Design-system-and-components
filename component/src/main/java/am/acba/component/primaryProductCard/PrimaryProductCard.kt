@@ -6,6 +6,7 @@ import am.acba.component.databinding.LayoutBulletsBinding
 import am.acba.component.databinding.PrimaryProductCardBinding
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.load
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
@@ -99,6 +100,15 @@ class PrimaryProductCard : FrameLayout {
         this.image = image
         binding.image.setImageDrawable(image)
         invalidate()
+    }
+
+
+    fun setImage(imageUrl: String) {
+        binding.imageBackground.visibility = View.INVISIBLE
+        binding.image.load(imageUrl, binding.shimmerLayout) { drawable, _ ->
+            this.image = drawable
+            binding.imageBackground.isVisible = true
+        }
     }
 
     fun setBadgesGroup(badgesGroup: List<Pair<Drawable?, String>>) {

@@ -35,7 +35,7 @@ class PrimaryChip : FrameLayout {
     val avatar by lazy {
         PrimaryActionTextButton(context).apply {
             setType(am.acba.component.button.PrimaryActionTextButton.ActionButtonType.AVATAR)
-            setActionIconSize(PrimaryActionTextButton.ActionIconSize.MEDIUM)
+            setActionImageSize(PrimaryActionTextButton.ActionIconSize.MEDIUM)
             showActionText(false)
             setIcon(R.drawable.default_avatar)
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -126,7 +126,7 @@ class PrimaryChip : FrameLayout {
                         width = 24.dpToPx()
                         height = 24.dpToPx()
                     }
-                    avatar.setActionIconSize(PrimaryActionTextButton.ActionIconSize.XSMALE)
+                    avatar.setActionImageSize(PrimaryActionTextButton.ActionIconSize.XSMALL)
                 }
                 binding.parentLayout.setPadding(startPadding.dpToPx(), verticalPAdding.dpToPx(), endPAdding.dpToPx(), verticalPAdding.dpToPx())
             }
@@ -156,7 +156,7 @@ class PrimaryChip : FrameLayout {
                         width = 32.dpToPx()
                         height = 32.dpToPx()
                     }
-                    avatar.setActionIconSize(PrimaryActionTextButton.ActionIconSize.SMALE)
+                    avatar.setActionImageSize(PrimaryActionTextButton.ActionIconSize.SMALL)
                 }
                 binding.parentLayout.setPadding(startPadding.dpToPx(), verticalPAdding.dpToPx(), endPAdding.dpToPx(), verticalPAdding.dpToPx())
             }

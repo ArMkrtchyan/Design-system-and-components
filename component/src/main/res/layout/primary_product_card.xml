@@ -83,7 +83,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
-                    app:layout_goneMarginTop="12dp"
                     app:flow_horizontalAlign="start"
                     app:flow_horizontalBias="0"
                     app:flow_horizontalGap="8dp"
@@ -93,7 +92,8 @@
                     app:flow_wrapMode="chain"
                     app:layout_constraintEnd_toStartOf="@id/image_container"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sub_title" />
+                    app:layout_constraintTop_toBottomOf="@id/sub_title"
+                    app:layout_goneMarginTop="12dp" />
 
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/sub_description"
@@ -101,25 +101,26 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:layout_goneMarginTop="12dp"
                     android:text="Հասանելի 7 արժույթagxyagxgaxgaxajhcahjcahjgxahjgcahjchajcahach svcavchjsvhjcshcbshjcbshjcbshjbcsjkbcksbs"
                     android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@id/image_container"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/flow" />
+                    app:layout_constraintTop_toBottomOf="@id/flow"
+                    app:layout_goneMarginTop="12dp" />
 
                 <LinearLayout
                     android:id="@+id/bullets"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:paddingBottom="16dp"
                     android:orientation="vertical"
-                    app:layout_goneMarginTop="12dp"
+                    android:paddingBottom="16dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@id/image_container"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sub_description" />
+                    app:layout_constraintTop_toBottomOf="@id/sub_description"
+                    app:layout_goneMarginTop="12dp" />
+
 
                 <View
                     android:id="@+id/image_background"
@@ -134,6 +135,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/image_container"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="2dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/image_container"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shimmer_duration="800"
+                    app:shimmer_fixed_width="100dp"
+                    app:shimmer_highlight_color="?attr/overlayTonal2"
+                    app:shimmer_shape="linear"
+                    app:shimmer_tilt="0">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTintMode="src_atop"
+                        android:backgroundTint="?attr/backgroundTonal2"
+                        android:background="@drawable/background_primary_input" />
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <FrameLayout
                     android:id="@+id/image_container"

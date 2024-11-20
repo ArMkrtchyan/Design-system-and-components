@@ -43,8 +43,7 @@
                 app:cardListingEndIcon="@drawable/ic_right"
                 app:cardListingLayoutBackgroundColor="?attr/backgroundTonal1"
                 app:cardListingStartIcon="@drawable/ic_symbol_amd"
-                app:cardListingStartIconBackgroundColor="?attr/backgroundAlternative"
-                app:cardListingStartIconBackgroundTint="@color/Black_70"
+                app:cardListingStartIconBackgroundTint="?attr/backgroundAlternative"
                 app:cardListingStartIconTint="?attr/contentAlternative"
                 app:cardListingStartIconType="Small"
                 app:cardListingStatusIcon="@drawable/ic_add"
@@ -61,13 +60,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardCurrencyText="AMD"
-                app:cardListingStartIcon="@drawable/ic_success"
-                app:cardListingStatusIcon="@drawable/ic_add"
-                app:cardListingStatusText="Բլոկավորված է"
+                app:cardListingStartIconType="Small"
+                app:cardListingStartIcon="@drawable/ic_income"
+                app:cardListingStartIconBackground="@drawable/icon_background_corenr"
+                app:cardListingStartIconTint="?attr/contentBrand"
                 app:endBodyText="400.000"
-                app:endTitleText="հասանելի"
-                app:showCardStatus="true"
                 app:startBodyText="****0345"
+                app:startBodyTextColor="?attr/contentPrimaryTonal1"
                 app:startTitleText="Դրամային" />
 
             <am.acba.component.cardListing.PrimaryCardListing

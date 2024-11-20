@@ -5,6 +5,7 @@ import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentCurrencyInputBinding
+import androidx.core.widget.doAfterTextChanged
 
 class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBinding>() {
     override val inflate: Inflater<FragmentCurrencyInputBinding>
@@ -14,12 +15,15 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
 
     override fun FragmentCurrencyInputBinding.initView() {
         amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
-        amount.onFocusChangeListener { fosus-> }
+        amount.onFocusChangeListener { fosus -> }
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
         amount.setHintText("Fill the amount")
-        amount.setMaxAmount(10000)
-        amount.setMinAmount(100)
+        amount.setMaxAmount(999999999999999.0)
+        amount.setMinAmount(100.0)
+        amount.fixCurrency()
+        amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Currencies/EUR.svg")
+        //  amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Banner/Amex%20cashback/Mobile/hy/amexcashback_06.2024.png")
         search.setOnClickListener {
             amount.getDeFormatedStringAmount().log("amountCurrency")
             amount.getFormatedStringAmount().log("amountCurrency")
@@ -27,6 +31,16 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.setCurrency("USD")
             amount.setAmountText("5555")
             amount.setHintText("5555")
+        }
+        val duration = mBinding.duration
+        duration.setMaxLength(2)
+        duration.setInputTypeForNumber()
+        duration.editText?.maxLines = 1
+        duration.editText?.doAfterTextChanged {
+
+        }
+        duration.editText?.setOnFocusChangeListener { _, hasFocus ->
+
         }
     }
 }

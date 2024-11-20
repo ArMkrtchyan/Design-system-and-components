@@ -10,10 +10,10 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 
-class PrimaryDropDown @JvmOverloads constructor(
+open class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs, 0) {
-    private val binding by lazy { PrimaryDropdownBinding.inflate(context.inflater(), this, false) }
+    protected val binding by lazy { PrimaryDropdownBinding.inflate(context.inflater(), this, false) }
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryDropDown).apply {
@@ -50,6 +50,10 @@ class PrimaryDropDown @JvmOverloads constructor(
 
     fun setStartIcon(@DrawableRes drawableRes: Int) {
         binding.inputDropDown.setStartIconDrawable(drawableRes)
+    }
+
+    fun loadStartIcon(url: String) {
+        binding.inputDropDown.loadStartIcon(url)
     }
 
     fun setText(text: String) {

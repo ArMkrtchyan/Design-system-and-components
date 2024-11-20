@@ -12,7 +12,7 @@ class DropDownFragment : BaseViewBindingFragment<FragmentDropDownBinding>() {
         get() = mBinding.toolbar
 
     override fun FragmentDropDownBinding.initView() {
-        dropDown.setStartIcon(am.acba.component.R.drawable.ic_flag_am)
+        dropDown.loadStartIcon("https://online1-test.acba.am/Shared/Currencies/EUR.png")
         dropDown.setOnClickListener {
             dropDown.addFocus()
         }

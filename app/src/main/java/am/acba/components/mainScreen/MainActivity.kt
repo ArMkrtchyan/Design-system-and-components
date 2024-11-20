@@ -13,6 +13,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(if (darkTheme) am.acba.component.R.style.ACBA_Theme_Dark else am.acba.component.R.style.ACBA_Theme_Light)
+        val locale = Locale("hy")
+        Locale.setDefault(locale)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)

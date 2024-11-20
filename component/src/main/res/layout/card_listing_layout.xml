@@ -27,8 +27,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginBottom="16dp"
-            tools:src="@drawable/ic_info"
+            tools:backgroundTint="?attr/backgroundAlternative4"
+            tools:src="@drawable/ic_symbol_chf"
+            tools:tint="?attr/contentAlternative4"
             tools:visibility="visible" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/iv_start_icon"
+            app:layout_constraintEnd_toEndOf="@id/iv_start_icon"
+            app:layout_constraintStart_toStartOf="@id/iv_start_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_start_icon"
+            app:shimmer_duration="900"
+            app:shimmer_fixed_width="60dp"
+            app:shimmer_shape="linear"
+            app:shimmer_tilt="0">
+
+            <View
+                android:id="@+id/shimmer_inner_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_with_border_4" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_card_details"
@@ -48,12 +71,14 @@
             <LinearLayout
                 android:id="@+id/layout_start"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:minWidth="50dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/layout_end"
                 app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/tv_start_title"
@@ -71,8 +96,8 @@
                     style="@style/Body2.Regular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
                     android:layout_marginTop="2dp"
+                    android:ellipsize="end"
                     android:lines="1"
                     android:visibility="gone"
                     tools:text="*************0346"
@@ -82,15 +107,17 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_end"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/layout_start">
+                app:layout_constraintStart_toEndOf="@id/layout_start"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/tv_end_title"
                     style="@style/XSmall.Regular"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:gravity="end"
@@ -99,27 +126,28 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/tv_end_body"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="հասանելի մնացորդի մասին ինչ"
+                    tools:text="հասանելի"
                     tools:visibility="visible" />
 
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/tv_end_body"
                     style="@style/Body2.Bold"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
                     android:ellipsize="end"
                     android:gravity="end"
                     android:lines="1"
                     android:visibility="gone"
-                    android:layout_marginTop="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_currency"
                     app:layout_constraintTop_toBottomOf="@id/tv_end_title"
                     app:layout_goneMarginEnd="8dp"
-                    tools:text="40.000.000.000.000000"
+                    app:layout_goneMarginTop="0dp"
+                    tools:text="2,000,000,000.00"
                     tools:visibility="visible" />
 
                 <am.acba.component.textView.PrimaryTextView
@@ -132,7 +160,6 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/tv_end_body"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_end_body"
                     app:layout_constraintTop_toTopOf="@id/tv_end_body"
                     tools:text="AMD"
                     tools:visibility="visible" />
@@ -172,12 +199,12 @@
                 android:layout_width="14dp"
                 android:layout_height="14dp"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_close"
                 android:tint="?attr/contentPrimaryTonal1"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_status"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_close"
                 tools:visibility="visible" />
 
             <am.acba.component.textView.PrimaryTextView
@@ -188,7 +215,7 @@
                 android:gravity="center_vertical"
                 android:textColor="?attr/contentPrimaryTonal1"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Բլոկավորված է"
+                tools:text="Բլոկավորված էԲլոկավորված էԲլոկավորված էԲլոկավորված է"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
