@@ -18,6 +18,7 @@ enum class ComponentTypeEnum(val componentName: String) {
     PHONE_NUMBER_INPUT("Phone number input"),
     CURRENCY_INPUT("Currency input"),
     PROGRESS_CARD_WIEW("Progress View"),
+    CARD_INPUT("Card input"),
     EXPANDABLE_VIEW("Expandable view"),
     PRIMARY_TAB_LAYOUT("Primary Tab"),
     SEARCH_INPUT("Search input"),

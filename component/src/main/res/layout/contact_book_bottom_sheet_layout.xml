@@ -12,10 +12,11 @@
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="@dimen/spacing_20"
         android:layout_marginEnd="@dimen/spacing_16"
-        android:drawableEnd="@drawable/ic_contacts"
-        android:drawableTint="?attr/contentPrimary"
-        android:text="acba contacts"
         app:drawableTint="?attr/contentPrimary"
+            android:drawableEnd="@drawable/ic_contacts"
+            android:drawableTint="?attr/contentPrimary"
+        android:text="acba contacts"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <am.acba.component.divider.PrimaryDivider
@@ -32,10 +33,11 @@
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="@dimen/spacing_20"
         android:layout_marginEnd="@dimen/spacing_16"
-        android:drawableEnd="@drawable/ic_phonebook"
-        android:drawableTint="?attr/contentPrimary"
-        android:text="phone contacts"
         app:drawableTint="?attr/contentPrimary"
+            android:drawableEnd="@drawable/ic_phonebook"
+            android:drawableTint="?attr/contentPrimary"
+        android:text="phone contacts"
+
         app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

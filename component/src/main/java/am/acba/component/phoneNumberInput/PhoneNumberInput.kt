@@ -231,7 +231,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         } else {
             binding.helpText.text = errorText
             binding.helpText.setTextColor(context.getColorFromAttr(R.attr.contentDangerTonal1))
-            binding.icError.visibility = VISIBLE
+            binding.icError.isVisible = !errorText.isNullOrEmpty()
         }
     }
 
@@ -299,9 +299,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             pickContact()
         } else {
             requestContactPermission()
-
         }
-
     }
 
     private fun checkContactPermission(): Boolean {
@@ -468,4 +466,3 @@ class PhoneNumberInput @JvmOverloads constructor(
         binding.phoneNumber.openKeyboard(context)
     }
 }
-

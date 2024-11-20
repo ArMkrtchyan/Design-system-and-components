@@ -123,5 +123,11 @@
         <item name="contentAlternative4">@color/Orchid_700</item>
         <item name="contentAlternative5">@color/BrandGreen_550</item>
         <item name="contentAlternative6">@color/Blue_700</item>
+        <item name="visaLogo">@drawable/logo_visa_light</item>
+        <item name="masterLogo">@drawable/logo_master_light</item>
+        <item name="amexLogo">@drawable/logo_amex_light</item>
+        <item name="unionLogo">@drawable/logo_union_light</item>
+        <item name="arcaLogo">@drawable/logo_arca_light</item>
+        <item name="emptyLogo">@drawable/media_empty</item>
     </style>
 </resources>

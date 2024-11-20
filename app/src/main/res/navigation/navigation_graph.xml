@@ -23,6 +23,9 @@
             android:id="@+id/action_mainFragment_to_currencyInputFragment"
             app:destination="@id/currencyInputFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_cardInputFragment"
+            app:destination="@id/cardInputFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_progressViewFragment"
             app:destination="@id/progressCardViewFragment" />
         <action
@@ -187,6 +190,11 @@
         android:name="am.acba.components.ExpandableViewFragment"
         android:label="ExpandableViewFragment"
         tools:layout="@layout/fragment_expandable_view" />
+    <fragment
+        android:id="@+id/cardInputFragment"
+        android:name="am.acba.components.CardInputFragment"
+        android:label="ExpandableViewFragment"
+        tools:layout="@layout/fragment_card_input" />
     <fragment
         android:id="@+id/tabLayoutFragment"
         android:name="am.acba.components.TabLayoutFragment"

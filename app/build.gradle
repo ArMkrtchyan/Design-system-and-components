@@ -37,6 +37,7 @@ android {
 }
 
 dependencies {
+
     implementation libs.glide
     implementation libs.lottie
     implementation project(":component")

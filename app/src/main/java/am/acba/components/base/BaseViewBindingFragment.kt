@@ -1,5 +1,6 @@
 package am.acba.components.base
 
+import am.acba.component.cardInput.PrimaryCardInput
 import am.acba.component.phoneNumberInput.PhoneNumberInput
 import am.acba.component.toolbar.PrimaryToolbar
 import android.os.Bundle
@@ -41,6 +42,7 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.i("PermissionsResult", "$requestCode")
         findPhoneNumberInputRecursively(view)?.onRequestPermissionsResult(requestCode, grantResults)
+        findCreditCardInputRecursively(view)?.onRequestPermissionsResult(requestCode, grantResults)
     }
 
     private fun findPhoneNumberInputRecursively(rootView: View?): PhoneNumberInput? {
@@ -53,6 +55,22 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
                     val phoneNumberInput = findPhoneNumberInputRecursively(child)
                     if (phoneNumberInput != null) {
                         return phoneNumberInput
+                    }
+                }
+            }
+        }
+        return null
+    }
+    private fun findCreditCardInputRecursively(rootView: View?): PrimaryCardInput? {
+        if (rootView is ViewGroup) {
+            for (i in 0 until rootView.childCount) {
+                val child = rootView.getChildAt(i)
+                if (child is PrimaryCardInput) {
+                    return child
+                }else if(child is ViewGroup) {
+                    val cardInput = findCreditCardInputRecursively(child)
+                    if (cardInput != null) {
+                        return cardInput
                     }
                 }
             }

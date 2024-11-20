@@ -34,14 +34,32 @@ class DialogsFragment : BaseViewBindingFragment<FragmentDialogsBinding>() {
             arrayListOf(
                 RepaymentFrequency(
                     1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,
-                    PrimaryChip.ChipStartIconType.ICON,true),
+                    PrimaryChip.ChipStartIconType.ICON, false
+                ),
                 RepaymentFrequency(1, "3 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
                     PrimaryChip.ChipStartIconType.ICON,false),
                 RepaymentFrequency(1, "6 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
                     PrimaryChip.ChipStartIconType.ICON,false)
             )
         ) {
-            it.log()
+            chipsView.submitChips(
+                arrayListOf(
+                    RepaymentFrequency(
+                        1, "Ամեն ամիս", am.acba.component.R.drawable.ic_sort,
+                        PrimaryChip.ChipStartIconType.ICON, false
+                    ),
+                    RepaymentFrequency(
+                        1, "3 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                        PrimaryChip.ChipStartIconType.ICON, false
+                    ),
+                    RepaymentFrequency(
+                        1, "6 ամիսը մեկ", am.acba.component.R.drawable.ic_sort,
+                        PrimaryChip.ChipStartIconType.ICON, true
+                    )
+                )
+            ) {
+                it.log()
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ChipsAdapter<T : IChipModel> :
     ListAdapter<T, ChipsAdapter<T>.ViewHolder<T>>(ChipsDiffCallBack()) {
-    var selectedChip: MutableLiveData<Int> = MutableLiveData(0)
+    var selectedChip: MutableLiveData<Int> = MutableLiveData(-1)
     private var onChipClick: ((T) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChipsAdapter<T>.ViewHolder<T> {
