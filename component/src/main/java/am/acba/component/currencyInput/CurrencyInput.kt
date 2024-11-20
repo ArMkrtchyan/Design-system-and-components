@@ -72,7 +72,7 @@ class CurrencyInput @JvmOverloads constructor(
                     getBoolean(R.styleable.CurrencyInput_formattingWithOutDot, false)
                 enableErrorAnimation =
                     getBoolean(R.styleable.CurrencyInput_enableErrorAnimation, false)
-                bottomSheetTitle = getString(R.styleable.CurrencyInputInput_currencyInputBottomSheetTitle) ?: "Select currency"
+                bottomSheetTitle = getString(R.styleable.CurrencyInput_currencyInputBottomSheetTitle) ?: "Select currency"
             } finally {
                 recycle()
             }
