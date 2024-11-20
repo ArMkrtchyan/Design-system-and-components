@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <attr name="isPreventClick" format="boolean" />
     <attr name="clickInterval" format="integer" />
     <attr name="showBadge" format="boolean" />
@@ -25,7 +24,6 @@
     <attr name="body" format="string" />
     <attr name="showCloseIcon" format="boolean" />
     <attr name="enableErrorAnimation" format="boolean" />
-
     <declare-styleable name="ds">
         <attr name="homeShadowGradientStartColor" format="color" />
         <attr name="primaryButtonStyle" format="reference" />
@@ -42,7 +40,6 @@
         <attr name="primaryRadioButtonStyle" format="reference" />
         <attr name="primaryTextViewStyle" format="reference" />
         <attr name="primaryCollapsingToolbarStyle" format="reference" />
-
         <!-- Backgrounds -->
         <attr name="backgroundBase" format="color" />
         <attr name="backgroundBrand" format="color" />
@@ -78,7 +75,6 @@
         <attr name="backgroundInverse" format="color" />
         <attr name="backgroundInverse2" format="color" />
         <attr name="backgroundNavBar" format="color" />
-
         <!-- Borders -->
         <attr name="borderBase" format="color" />
         <attr name="borderPrimary" format="color" />
@@ -94,7 +90,6 @@
         <attr name="borderInfoTonal1" format="color" />
         <attr name="borderWarning" format="color" />
         <attr name="borderSuccess" format="color" />
-
         <!-- Overlay -->
         <attr name="overlayTonal1" format="color" />
         <attr name="overlayTonal2" format="color" />
@@ -109,7 +104,6 @@
         <attr name="overlayBackgroundTonal8" format="color" />
         <attr name="overlayBackgroundTonal9" format="color" />
         <attr name="overlayBackgroundTonal10" format="color" />
-
         <!-- Content -->
         <attr name="contentBrand" format="color" />
         <attr name="contentBrandTonal1" format="color" />
@@ -146,12 +140,10 @@
         <attr name="arcaLogo" format="reference" />
         <attr name="emptyLogo" format="reference" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryButton">
         <attr name="clickInterval" />
         <attr name="isPreventClick" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryActionTextButton">
         <attr name="clickInterval" />
         <attr name="isPreventClick" />
@@ -222,22 +214,6 @@
         <attr name="currencyInputMaxLength" format="integer" />
         <attr name="currencyInputMinAmount" format="float" />
         <attr name="formattingWithOutDot" format="boolean" />
-    </declare-styleable>
-    <declare-styleable name="CardInput">
-        <attr name="cardInputErrorText" format="string" />
-        <attr name="cardInputHintText" format="string" />
-        <attr name="cardInputHelpText" format="string" />
-        <attr name="cardInputMaxLength" format="integer" />
-        <attr name="cardInputMinLength" format="integer" />
-        <attr name="cardInputLogoDetectCount" format="integer" />
-        <attr name="cardInputLogoBackground" format="reference" />
-        <attr name="cardInputErrorIcon" format="reference" />
-        <attr name="cardInputEndIcon" format="reference" />
-        <attr name="cardInputErrorIconTint" format="reference" />
-        <attr name="cardInputEndIconAction" format="enum">
-            <enum name="CardScanner" value="0" />
-            <enum name="DropDown" value="1" />
-        </attr>
         <attr name="enableErrorAnimation" />
     </declare-styleable>
     <declare-styleable name="ProgressCardView">
@@ -255,6 +231,23 @@
         <attr name="bottomLeftText" format="string" />
         <attr name="bottomRightText" format="string" />
         <attr name="progress_maxValue" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="CardInput">
+        <attr name="cardInputErrorText" format="string" />
+        <attr name="cardInputHintText" format="string" />
+        <attr name="cardInputHelpText" format="string" />
+        <attr name="cardInputMaxLength" format="integer" />
+        <attr name="cardInputMinLength" format="integer" />
+        <attr name="cardInputLogoDetectCount" format="integer" />
+        <attr name="cardInputLogoBackground" format="reference" />
+        <attr name="cardInputErrorIcon" format="reference" />
+        <attr name="cardInputEndIcon" format="reference" />
+        <attr name="cardInputErrorIconTint" format="reference" />
+        <attr name="cardInputEndIconAction" format="enum">
+            <enum name="CardScanner" value="0" />
+            <enum name="DropDown" value="1" />
+        </attr>
+        <attr name="enableErrorAnimation" />
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
@@ -288,9 +281,7 @@
         <attr name="android:text" />
     </declare-styleable>
     <declare-styleable name="PrimaryEditText">
-
     </declare-styleable>
-
     <declare-styleable name="PrimaryDropDown">
         <attr name="android:text" />
         <attr name="android:hint" />
@@ -301,11 +292,8 @@
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryCheckbox">
-
     </declare-styleable>
-
     <declare-styleable name="PrimaryChip">
         <attr name="chipBackground" format="reference" />
         <attr name="chipText" format="string" />
@@ -325,27 +313,19 @@
             <enum name="Custom" value="2" />l
         </attr>
     </declare-styleable>
-
     <declare-styleable name="PrimaryRadioButton">
-
     </declare-styleable>
-
     <declare-styleable name="PrimarySwitcher">
-
     </declare-styleable>
-
     <declare-styleable name="PrimaryToolbar">
         <attr name="collapseStatusBarHeight" format="boolean" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryTextView">
         <attr name="isPreventClick" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryImageView">
         <attr name="isPreventClick" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryBadge">
         <attr name="badgeTextAppearance" />
         <attr name="badgeText" />
@@ -359,7 +339,6 @@
         <attr name="badgePaddingStart" />
         <attr name="badgePaddingEnd" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryDivider">
         <attr name="android:text" />
         <attr name="dividerThickness" format="dimension" />
@@ -370,8 +349,6 @@
         <attr name="dividerTextBackground" format="reference" />
         <attr name="dividerTextMaxWidth" format="float" />
     </declare-styleable>
-
-
     <declare-styleable name="PrimaryListItem">
         <attr name="clickInterval" />
         <attr name="isPreventClick" />
@@ -380,7 +357,8 @@
         <attr name="listTitleText" format="string" />
         <attr name="listDescriptionTextAppearance" format="reference" />
         <attr name="listDescriptionText" format="string" />
-        <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
+        <attr name="listSecondaryDescriptionTextAppearance"
+            format="reference" />
         <attr name="listSecondaryDescriptionText" format="string" />
         <attr name="listStartIcon" format="reference" />
         <attr name="listStartIconGravity" format="enum">
@@ -441,16 +419,12 @@
         <attr name="badgePaddingEnd" />
         <attr name="showBadge" />
     </declare-styleable>
-
     <declare-styleable name="PinInput">
-
     </declare-styleable>
-
     <declare-styleable name="PrimaryCollapsingToolbar">
         <attr name="toolbarTitle" format="string" />
         <attr name="toolbarTitleMaxLines" format="integer" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryAlert">
         <attr name="alertType" format="enum">
             <enum name="Info" value="0" />
@@ -468,23 +442,19 @@
         <attr name="showAlertCloseIcon" format="boolean" />
         <attr name="alertNeutralIcon" format="reference" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryCardListing">
         <attr name="cardListingLayoutBackgroundColor" format="color" />
         <attr name="cardListingLayoutBorderColor" format="color" />
-
         <attr name="startTitleText" format="string" />
         <attr name="startBodyText" format="string" />
         <attr name="endTitleText" format="string" />
         <attr name="endBodyText" format="string" />
         <attr name="cardCurrencyText" format="string" />
-
         <attr name="startTitleTextColor" format="color" />
         <attr name="startBodyTextColor" format="color" />
         <attr name="endTitleTextColor" format="color" />
         <attr name="endBodyTextColor" format="color" />
         <attr name="cardCurrencyTextColor" format="color" />
-
         <attr name="cardListingStartIconType" format="enum">
             <enum name="Large" value="0" />
             <enum name="Small" value="1" />
@@ -494,7 +464,6 @@
         <attr name="cardListingStartIcon" format="reference" />
         <attr name="cardListingStartIconTint" format="reference" />
         <attr name="cardListingEndIcon" format="reference" />
-
         <attr name="showCardStatus" format="boolean" />
         <attr name="cardListingStatusBackgroundColor" format="color" />
         <attr name="cardListingStatusText" format="string" />
@@ -502,36 +471,32 @@
         <attr name="cardListingStatusIcon" format="reference" />
         <attr name="cardListingStatusIconTint" format="color" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryStatusScreen">
         <attr name="showStatusScreenCloseIcon" format="boolean" />
         <attr name="showStatusScreenTitle" format="boolean" />
         <attr name="showStatusScreenBody" format="boolean" />
         <attr name="showStatusScreenPrimaryButton" format="boolean" />
         <attr name="showStatusScreenGhostButton" format="boolean" />
-
         <attr name="statusScreenMediaType" format="enum">
             <enum name="Small" value="0" />
             <enum name="Large" value="1" />
         </attr>
-
         <attr name="statusScreenCentreImage" format="reference" />
-        <attr name="statusScreenCentreImageBackgroundColor" format="color" />
-        <attr name="statusScreenCentreImageBackgroundTint" format="color" />
-        <attr name="statusScreenCentreMediaAnimationFileName" format="string" />
+        <attr name="statusScreenCentreImageBackgroundColor" format="color"
+            />
+        <attr name="statusScreenCentreImageBackgroundTint" format="color"
+            />
+        <attr name="statusScreenCentreMediaAnimationFileName"
+            format="string" />
         <attr name="statusScreenTitleText" format="string" />
         <attr name="statusScreenBodyText" format="string" />
-
         <attr name="statusScreenPrimaryButtonText" format="string" />
         <attr name="statusScreenGhostButtonText" format="string" />
-
         <attr name="statusScreenAnimationFileName" format="string" />
     </declare-styleable>
-
     <declare-styleable name="PersistentBottomSheet">
         <attr name="title" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryProductCard">
         <attr name="productCardTitle" format="string" />
         <attr name="productCardDescription" format="string" />
@@ -541,7 +506,6 @@
         <attr name="productCardHeight" format="dimension" />
         <attr name="productCardBackgroundColor" format="color" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryEmptyView">
         <attr name="emptyIcon" format="reference" />
         <attr name="emptyIconWidth" format="dimension" />
@@ -563,12 +527,10 @@
         <attr name="emptyButtonIcon" format="reference" />
         <attr name="emptyButtonAppearance" format="reference" />
     </declare-styleable>
-
     <declare-styleable name="SegmentedProgressBar">
         <attr name="segmentCount" format="integer" />
         <attr name="trackThickness" format="dimension" />
     </declare-styleable>
-
     <declare-styleable name="PrimaryTable">
         <attr name="primaryTableBackground" format="reference" />
         <attr name="primaryTableBackgroundTint" format="reference" />
@@ -580,17 +542,12 @@
         <attr name="primaryTableIconTint" format="reference" />
         <attr name="primaryTableCollapsedItemCount" format="integer" />
     </declare-styleable>
-
     <declare-styleable name="ShippingProgressBar">
         <attr name="shippingStepCount" format="integer" />
         <attr name="shippingTrackThickness" format="dimension" />
     </declare-styleable>
-
-
     <declare-styleable name="PrimaryCardView" />
-
     <declare-styleable name="PrimaryBanners" />
-
     <declare-styleable name="PrimaryOfferCardView">
         <attr name="offerCardTitle" format="string" />
     </declare-styleable>
@@ -599,7 +556,6 @@
         <attr name="offersSeeAllTitle" format="string" />
         <attr name="offersExpanded" format="boolean" />
     </declare-styleable>
-
     <declare-styleable name="PrimarySlider">
         <attr name="android:valueTo" />
         <attr name="android:valueFrom" />
@@ -611,5 +567,4 @@
     <declare-styleable name="HorizontalChipsView">
         <attr name="horizontalChipsTitle" format="string" />
     </declare-styleable>
-
 </resources>
