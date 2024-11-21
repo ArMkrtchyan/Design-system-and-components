@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 class PrimaryOffersView : FrameLayout {
     private val binding by lazy { PrimaryLoanOffersBinding.inflate(context.inflater(), this, false) }
     private var isExpanded = false
-    private val adapter by lazy { OfferCardAdapter(isExpanded) }
+    private var adapter = OfferCardAdapter(isExpanded)
     private var isAnimationPlayed = false
 
     constructor(context: Context) : super(context)
@@ -107,6 +107,8 @@ class PrimaryOffersView : FrameLayout {
     }
 
     fun submitLoanOffers(list: List<IOfferCard>) {
+        adapter = OfferCardAdapter(isExpanded)
+        binding.offersRecycler.adapter = adapter
         adapter.submitList(list)
     }
 }

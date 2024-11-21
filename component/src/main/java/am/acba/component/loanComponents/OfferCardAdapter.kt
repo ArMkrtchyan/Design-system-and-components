@@ -55,10 +55,8 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
     }
 
     private class OfferCardDiffCallBack : DiffUtil.ItemCallback<IOfferCard>() {
-        override fun areItemsTheSame(oldItem: IOfferCard, newItem: IOfferCard) =
-            oldItem == newItem
+        override fun areItemsTheSame(oldItem: IOfferCard, newItem: IOfferCard) = false
 
-        override fun areContentsTheSame(oldItem: IOfferCard, newItem: IOfferCard) =
-            oldItem == newItem
+        override fun areContentsTheSame(oldItem: IOfferCard, newItem: IOfferCard) = false
     }
 }
