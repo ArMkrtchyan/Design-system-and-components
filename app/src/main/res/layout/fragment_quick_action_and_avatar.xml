@@ -50,13 +50,14 @@
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconTint="?attr/contentBrand"
                         app:badgeChecked="true"
-                        app:checkable="true" />
+                        app:checkable="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:actionIcon="@drawable/ic_contacts"
-                        app:checkable="true"
+                        app:checkable="false"
+                        app:actionIconSize="XLarge"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -65,6 +66,7 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Large"
+                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -73,6 +75,7 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Medium"
+                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -81,6 +84,7 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Small"
+                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -89,6 +93,7 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="XSmall"
+                        app:checkable="true"
                         app:showActionText="false" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -110,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Աննա Հովսեփյան"
-                        app:checkable="true" />
+                        app:checkable="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -119,7 +124,7 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XLarge"
-                        app:checkable="true"
+                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -129,6 +134,7 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Large"
+                        app:checkable="false"
                         app:badgeIcon="@drawable/ic_success_filled" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -136,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
+                        app:checkable="false"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Medium"
                         app:badgeIcon="@drawable/ic_success_filled" />
@@ -145,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
+                        app:checkable="false"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Small"
                         app:badgeIcon="@drawable/ic_success_filled" />
@@ -155,6 +163,7 @@
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
+                        app:checkable="true"
                         app:actionIconSize="XSmall"
                         app:badgeIcon="@drawable/ic_success_filled" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -177,7 +186,7 @@
                         android:text="Աննա Հովսեփյան"
                         app:actionButtonType="Text"
                         app:actionIcon="@drawable/default_avatar"
-                        app:actionIconSize="XLarge" />
+                        app:actionIconSize="XXLarge" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
