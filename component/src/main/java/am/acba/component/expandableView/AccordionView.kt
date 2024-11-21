@@ -37,6 +37,9 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
     var animationDuration: Long = 0
     var isExpanded = false
     private var isExpandable = true
+    private var lastClickTime: Long = 0
+    private var debounceInterval: Long = 300
+    private var externalClickListener: OnClickListener? = null
 
     init {
         addView(binding.root)
@@ -63,8 +66,13 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
             } finally {
                 recycle()
             }
-
             if (background != null) setPadding(16.dpToPx()) else setPadding(0, 16.dpToPx(), 0, 16.dpToPx())
+        }
+        super.setOnClickListener {
+            if (System.currentTimeMillis() - lastClickTime >= debounceInterval) {
+                lastClickTime = System.currentTimeMillis()
+                externalClickListener?.onClick(this)
+            }
         }
         setupUi()
     }
@@ -202,4 +210,11 @@ class AccordionView @JvmOverloads constructor(context: Context, attrs: Attribute
         binding.currencyText.setTextColor(iconTint)
     }
 
+    override fun setOnClickListener(listener: OnClickListener?) {
+        externalClickListener = listener
+    }
+
+    fun setDebounceInterval(interval: Long) {
+        debounceInterval = interval
+    }
 }
