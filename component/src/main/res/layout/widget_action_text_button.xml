@@ -12,6 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
+        <FrameLayout
+            android:id="@+id/action_icon_checked_background"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/background_avatar_checked"
+            android:elevation="2dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <am.acba.component.imageView.PrimaryImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_success_small"
+                app:tint="?attr/contentSecondary" />
+        </FrameLayout>
+
         <am.acba.component.imageView.PrimaryImageView
             android:id="@+id/action_image"
             android:layout_width="56dp"
@@ -39,7 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,11 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:elevation="2dp"
             android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@drawable/background_rounded" />
+            app:layout_constraintTop_toTopOf="parent"/>
     </FrameLayout>
 
     <am.acba.component.textView.PrimaryTextView

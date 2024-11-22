@@ -175,10 +175,14 @@ class PrimaryActionTextButton : FrameLayout {
     fun setBadgeCheckable(isCheckable: Boolean) {
         checkable = isCheckable
         if (checkable) {
-            binding.badgeIcon.setBadgeIcon(ContextCompat.getDrawable(context, R.drawable.ic_success_filled))
+            binding.badgeIcon.setBadgeIcon(ContextCompat.getDrawable(context, R.drawable.ic_circle_filled))
             setOnClickListener(null)
             binding.badgeIcon.isVisible = isChecked
         }
+    }
+
+    fun setAvatarChecked(){
+        binding.actionIconCheckedBackground.isVisible = true
     }
 
     fun setBadgeChecked(isChecked: Boolean) {
@@ -236,6 +240,10 @@ class PrimaryActionTextButton : FrameLayout {
             height = iconSize.size.dpToPx()
         }
         binding.actionAnimation.updateLayoutParams<LayoutParams> {
+            width = iconSize.size.dpToPx()
+            height = iconSize.size.dpToPx()
+        }
+        binding.actionIconCheckedBackground.updateLayoutParams<LayoutParams> {
             width = iconSize.size.dpToPx()
             height = iconSize.size.dpToPx()
         }

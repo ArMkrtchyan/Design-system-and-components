@@ -88,13 +88,6 @@ class PrimaryCardInput @JvmOverloads constructor(
         setupHelpErrorText(true)
         onCardNumberTextChange()
         binding.clear.setOnClickListener { binding.cardNumber.setText("") }
-        binding.endIcon.setOnClickListener {
-            if (cardInputEndIconAction == 0)
-                initiateCardScan()
-            else {
-
-            }
-        }
     }
 
     override fun setEnabled(isEnable: Boolean) {
@@ -107,8 +100,10 @@ class PrimaryCardInput @JvmOverloads constructor(
         binding.helpText.setTextColor(context.getColorFromAttr(if (isEnable) R.attr.contentPrimaryTonal1 else R.attr.contentPrimaryTonal1Disable))
     }
 
-    fun setDropDownActionsList(list: MutableList<Triple<Drawable, String, Int>>){
-
+    fun setEndIconClickListener(onClickListener: OnClickListener) {
+        binding.endIcon.setOnClickListener {
+            if (binding.endIcon.drawable != null) onClickListener.onClick(it)
+        }
     }
 
     private fun setupUi() {

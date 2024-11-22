@@ -53,6 +53,7 @@
                         app:checkable="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
+                        android:id="@+id/second"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:actionIcon="@drawable/ic_contacts"
@@ -152,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
-                        app:checkable="false"
+                        app:checkable="true"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Small"
                         app:badgeIcon="@drawable/ic_success_filled" />
