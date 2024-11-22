@@ -59,7 +59,7 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
 
     override fun submitList(list: MutableList<IOfferCard>?) {
         holders.forEach { holder ->
-            holder.setIsRecyclable(list?.any { it.getUniqueId() == holder.binding.root.getTag(R.id.offer_title).toString().toInt() } == false)
+            holder.setIsRecyclable(list?.any { it.getUniqueId() == holder.binding.root.getTag(R.id.offer_title).toString().toLong() } == false)
         }
         super.submitList(list)
     }
