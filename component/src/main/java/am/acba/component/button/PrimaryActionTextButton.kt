@@ -14,7 +14,6 @@ import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
@@ -32,7 +31,6 @@ import androidx.core.widget.TextViewCompat
 import com.airbnb.lottie.SimpleColorFilter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -181,8 +179,8 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    fun setAvatarChecked(){
-        binding.actionIconCheckedBackground.isVisible = true
+    fun setAvatarCheckedStatus(isChecked: Boolean){
+        binding.actionIconCheckedBackground.isVisible = isChecked
     }
 
     fun setBadgeChecked(isChecked: Boolean) {
