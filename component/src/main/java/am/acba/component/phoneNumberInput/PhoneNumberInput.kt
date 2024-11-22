@@ -77,6 +77,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     private val CONTACT_PERMISSION_REQUEST = 100
     private val PICK_CONTACT_REQUEST = 101
     lateinit var fragment: Fragment
+    var onSelectedContactSet: (() -> Unit)? = null
     private var onAcbaContactClick: (() -> Unit)? = null
 
     var errorText: String? = null
@@ -427,6 +428,7 @@ class PhoneNumberInput @JvmOverloads constructor(
                             contact.name.log("ContactTag", "Success -> ")
                             contact.email.log("ContactTag", "Success -> ")
                             setPhoneNumber(contact.phoneNumber ?: "")
+                            onSelectedContactSet?.invoke()
                         }
                     }
                 }
