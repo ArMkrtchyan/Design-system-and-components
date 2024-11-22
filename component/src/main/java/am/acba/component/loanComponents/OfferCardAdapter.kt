@@ -38,12 +38,9 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
             binding.root.setOnClickListener {
                 onItemClick?.invoke(offerCard)
             }
-            offerCard.getTitle().log("LoanItemTag")
             binding.root.setState(isOpenedState.log())
             openCloseLiveEvent.observeForever {
                 isOpenedState = it
-                offerCard.setOpened(it)
-                offerCard.getTitle().log("LoanItemTag", "change state ->")
                 binding.root.setOpenedOrClosedState(isOpenedState)
             }
             binding.root.updateLayoutParams<ViewGroup.LayoutParams> {
@@ -77,7 +74,6 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
                     && oldItem.getDescription() == newItem.getDescription()
                     && oldItem.getOffer() == newItem.getOffer()
                     && oldItem.getBadgeVisibility() == newItem.getBadgeVisibility()
-
         }
     }
 }

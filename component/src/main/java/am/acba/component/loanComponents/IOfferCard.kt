@@ -1,7 +1,7 @@
 package am.acba.component.loanComponents
 
 interface IOfferCard {
-    fun getUniqueId(): Int
+    fun getUniqueId(): Long
     fun getTitle(): String
     fun getOffer(): String
     fun getDescription(): String
@@ -9,9 +9,4 @@ interface IOfferCard {
     fun getCardBackgroundColorAttr(): Int
     fun getBadgeText(): String
     fun getBadgeBackgroundColorAttr(): Int
-    fun isOpened(): Boolean {
-        return false
-    }
-
-    fun setOpened(openedState: Boolean)
 }
