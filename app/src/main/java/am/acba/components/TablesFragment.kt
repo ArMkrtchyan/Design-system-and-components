@@ -33,6 +33,7 @@ class TablesFragment : BaseViewBindingFragment<FragmentTablesBinding>() {
                     TableItem("Անուն Ազգանուն0", "Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն10", "Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն11", "Աննա Հովսեփյան"),
+                    TableItem("Անուն Ազգանուն11", "Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն-", "Աննա Հովսեփյան")
                 )
             )
