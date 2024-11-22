@@ -4,6 +4,7 @@ import am.acba.component.loanComponents.IOfferCard
 import androidx.annotation.AttrRes
 
 data class OfferCard(
+    val offerCardId: Int = -1,
     val offerCardTitle: String = "",
     val offerCardAmount: String = "",
     val offerCardCurrency: String = "",
@@ -11,8 +12,17 @@ data class OfferCard(
     val offerCardBadgeText: String = "",
     @AttrRes val offerCardBadgeBackgroundColorAttr: Int = 0,
     val newBadgeVisibility: Boolean = false,
+    var isOfferCardOpened: Boolean = false,
     @AttrRes val offerCardBackgroundColorAttr: Int = 0
 ) : IOfferCard {
+    override fun setOpened(openedState: Boolean) {
+        isOfferCardOpened = openedState
+    }
+
+    override fun getUniqueId(): Int {
+        return offerCardId
+    }
+
     override fun getTitle(): String {
         return offerCardTitle
     }
@@ -39,5 +49,9 @@ data class OfferCard(
 
     override fun getBadgeBackgroundColorAttr(): Int {
         return offerCardBadgeBackgroundColorAttr
+    }
+
+    override fun isOpened(): Boolean {
+        return isOfferCardOpened
     }
 }
