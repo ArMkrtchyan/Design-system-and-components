@@ -1,6 +1,7 @@
 package am.acba.components
 
 import am.acba.component.R
+import am.acba.component.extensions.log
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.databinding.FragmentCardViewBinding
@@ -61,6 +62,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                         additionalInfo = "1,125,432.00 AMD",
                     ),
                 ),
+                productIconUrl = "https://letsenhance.io/static/a31ab775f44858f1d1b80ee51738f4f3/11499/EnhanceAfter.jpg",
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
@@ -139,5 +141,6 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productStartIcon = R.drawable.ic_flag_am,
             )
         )
+        loanCardFull.setOnClickListener { "Click".log() }
     }
 }

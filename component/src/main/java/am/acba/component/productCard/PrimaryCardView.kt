@@ -1,21 +1,26 @@
 package am.acba.component.productCard
 
+import am.acba.component.PreventDoubleClickListener
 import am.acba.component.R
 import am.acba.component.databinding.PrimaryLoanCardBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.load
+import am.acba.component.imageView.PrimaryImageView
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.setPadding
 
 class PrimaryCardView : FrameLayout {
     private val binding by lazy { PrimaryLoanCardBinding.inflate(context.inflater(), this, false) }
     private val adapter by lazy { CardAdditionalInfoAdapter() }
+    private var mIsPreventDoubleClick = true
 
     constructor(context: Context) : super(context)
 
@@ -29,6 +34,7 @@ class PrimaryCardView : FrameLayout {
 
     private fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryCardView).apply {
+            mIsPreventDoubleClick = getBoolean(R.styleable.PrimaryCardView_isPreventClick, true)
             addView(binding.root)
             recycle()
         }
@@ -56,6 +62,19 @@ class PrimaryCardView : FrameLayout {
         submitAdditionalInfo(productCard.getCardAdditionalInfo())
         setProductCardBadge(productCard)
         updateBottomDividerVisibility(productCard)
+    }
+
+    override fun setOnClickListener(onClickListener: OnClickListener?) {
+        if (mIsPreventDoubleClick) binding.foregroundView.setOnClickListener(PreventDoubleClickListener(onClickListener))
+        else binding.foregroundView.setOnClickListener(onClickListener)
+    }
+
+    fun startIconBackgroundContainer(): FrameLayout {
+        return binding.startIconContainer
+    }
+
+    fun startIcon(): PrimaryImageView {
+        return binding.startIcon
     }
 
     private fun setProductCardTitle(title: String) {
@@ -86,8 +105,13 @@ class PrimaryCardView : FrameLayout {
     }
 
     private fun setProductCardStartIcon(productCard: ICardInfo) {
-        binding.startIconContainer.isVisible = productCard.getStartIcon() > 0
-        if (productCard.getStartIcon() > 0) {
+        binding.startIconContainer.isVisible = productCard.getStartIcon() > 0 || productCard.getStartIconUrl().isNotEmpty()
+        if (productCard.getStartIconUrl().isNotEmpty()) {
+            binding.startIcon.load(productCard.getStartIconUrl(), binding.shimmerLayout)
+            binding.startIconContainer.background = null
+            binding.startIcon.setPadding(0)
+            binding.startIcon.imageTintList = null
+        } else if (productCard.getStartIcon() > 0) {
             binding.startIcon.setImageResource(productCard.getStartIcon())
             if (productCard.getBackgroundColorAttr() > 0) {
                 binding.startIconContainer.backgroundTintList = context.getColorStateListFromAttr(productCard.getBackgroundColorAttr())
@@ -97,6 +121,8 @@ class PrimaryCardView : FrameLayout {
             binding.startIcon.imageTintList = if (productCard.getStartIconTint() != null) {
                 context.getColorStateListFromAttr(productCard.getStartIconTint()!!)
             } else null
+            binding.startIconContainer.background = ContextCompat.getDrawable(context, R.drawable.background_radius_8)
+            binding.startIcon.setPadding(8.dpToPx(), 8.dpToPx(), 8.dpToPx(), 8.dpToPx())
         }
         ConstraintSet().apply {
             clone(binding.headerLayout)

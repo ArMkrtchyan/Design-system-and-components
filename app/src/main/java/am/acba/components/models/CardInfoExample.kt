@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes
 data class CardInfoExample(
     val productTitle: String = "",
     val productDescription: String = "",
+    val productIconUrl: String = "",
     @DrawableRes val productStartIcon: Int = 0,
     @AttrRes val productStartIconTint: Int? = null,
     val productNextPaymentDay: String = "",
@@ -33,9 +34,14 @@ data class CardInfoExample(
         return productStartIcon
     }
 
+    override fun getStartIconUrl(): String {
+        return productIconUrl
+    }
+
     override fun getStartIconTint(): Int? {
         return productStartIconTint
     }
+
     override fun getNextPaymentDay(): String {
         return productNextPaymentDay
     }
