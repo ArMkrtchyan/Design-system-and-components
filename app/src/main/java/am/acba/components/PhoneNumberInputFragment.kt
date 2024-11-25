@@ -21,7 +21,6 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
         phoneNumber.openKeyboard()
         phoneNumber.helpText = "Min 25 symbol"
         phoneNumber.errorText = "Something wrong happened"
-        phoneNumber.fixCountryCode()
         search.setOnClickListener {
             phoneNumber.getFormattedFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumber().log("PhoneNumber")
