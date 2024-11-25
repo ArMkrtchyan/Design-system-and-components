@@ -6,14 +6,10 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity.RESULT_OK
 import android.content.ClipboardManager
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.Editable
@@ -29,9 +25,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
-import cards.pay.paycardsrecognizer.sdk.Card
-import cards.pay.paycardsrecognizer.sdk.ScanCardIntent
-import java.net.IDN
 
 
 @SuppressLint("CustomViewStyleable")
@@ -56,9 +49,6 @@ class PrimaryCardInput @JvmOverloads constructor(
     private var isValidNumber = true
     private var isFocusable = false
     private var cardInputEndIconAction: Int
-
-    private val SCAN_REQUEST_CODE = 1
-    private val CAMERA_PERMISSION_CODE = 1002
 
     private var onCardScanDataAction: ((CardDataModel) -> Unit)? = null
     lateinit var fragment: Fragment
@@ -319,8 +309,10 @@ class PrimaryCardInput @JvmOverloads constructor(
         onCardScanDataAction = cardData
     }
 
+    /*private val SCAN_REQUEST_CODE = 1
+        private val CAMERA_PERMISSION_CODE = 1002*/
 
-    fun initiateCardScan() {
+    /*fun initiateCardScan() {
         if (checkCameraPermission()) {
             startCardScan()
         } else {
@@ -347,30 +339,28 @@ class PrimaryCardInput @JvmOverloads constructor(
                 startCardScan()
             }
         }
-    }
+    }*/
 
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
-            val card = data?.getParcelableExtra<Card>(ScanCardIntent.RESULT_PAYCARDS_CARD)
+    /* fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         if (requestCode == SCAN_REQUEST_CODE && resultCode == RESULT_OK) {
+             val card = data?.getParcelableExtra<Card>(ScanCardIntent.RESULT_PAYCARDS_CARD)
 
-            if (card != null) {
-                binding.cardNumber.setText(card.cardNumber)
+             if (card != null) {
+                 binding.cardNumber.setText(card.cardNumber)
 
-                val expirationDate = card.expirationDate
-                val cardHolderName = card.cardHolderName
+                 val expirationDate = card.expirationDate
+                 val cardHolderName = card.cardHolderName
 
-                if (expirationDate != null && cardHolderName != null) {
-                    val cardData = CardDataModel(
-                        cardNumber = card.cardNumber,
-                        cardCVV = "",
-                        cardOwner = cardHolderName,
-                        cardExDate = expirationDate
-                    )
-                    onCardScanDataAction?.invoke(cardData)
-                }
-            }
-        }
-    }
-
-
+                 if (expirationDate != null && cardHolderName != null) {
+                     val cardData = CardDataModel(
+                         cardNumber = card.cardNumber,
+                         cardCVV = "",
+                         cardOwner = cardHolderName,
+                         cardExDate = expirationDate
+                     )
+                     onCardScanDataAction?.invoke(cardData)
+                 }
+             }
+         }
+     }*/
 }
