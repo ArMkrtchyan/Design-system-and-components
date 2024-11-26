@@ -16,12 +16,16 @@ class TablesFragment : BaseViewBindingFragment<FragmentTablesBinding>() {
 
     override fun FragmentTablesBinding.initView() {
         table.apply {
-            setTitle("Acba")
-            setIconTint(requireContext().getColorStateListFromAttr(am.acba.component.R.attr.contentPrimaryTonal1))
+            setTitle("Ավանդի գրավով վարակային գիծ")
+            val roundedBackground = getDrawable(requireContext(), am.acba.component.R.drawable.background_rounded)
             setIcon(getDrawable(requireContext(), am.acba.component.R.drawable.ic_close_round))
+            setIconTint(requireContext().getColorStateListFromAttr(am.acba.component.R.attr.contentPrimaryTonal1))
+            setIconBackgroundTint(requireContext().getColorStateListFromAttr(am.acba.component.R.attr.backgroundTonal1))
+            setIconBackground(true, roundedBackground)
+
             submitList(
                 listOf(
-                    TableItem("Անուն Ազգանուն1", "Աննա Հովսեփյան"),
+                    TableItem("Անուն Ազգանուն1", "Աննա Հովսեփյան Աննա Հովսեփյան Աննա Հովսեփյան Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն2", "Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն3", "Աննա Հովսեփյան"),
                     TableItem("Անուն Ազգանուն4", "Աննա Հովսեփյան"),
