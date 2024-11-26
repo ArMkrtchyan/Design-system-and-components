@@ -432,7 +432,7 @@ class CurrencyInput @JvmOverloads constructor(
             currencyList.clear()
             currencyList.addAll(filteredCurrencyList)
 
-            binding.icArrow.visibility = if (filteredCurrencyList.size > 1) VISIBLE else INVISIBLE
+            binding.icArrow.isVisible = filteredCurrencyList.size > 1
             binding.currencyLayout.setOnClickListener {
                 if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(
                     null
