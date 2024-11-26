@@ -8,18 +8,36 @@
     android:backgroundTint="?attr/borderNeutral"
     android:orientation="vertical">
 
-    <am.acba.component.listItem.PrimaryListItem
-        android:id="@+id/listItem"
+    <LinearLayout
+        android:id="@+id/layoutTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:startComponentType="Icon"
-        tools:listStartIcon="@drawable/ic_account"
-        tools:listTitleText="5G վարկ" />
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/layoutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp" />
+
+        <am.acba.component.textView.PrimaryTextView
+            android:id="@+id/tvTitle"
+            style="@style/Body2.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            tools:text="List Item" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_table" />
 
@@ -34,5 +52,4 @@
         android:visibility="gone"
         app:tint="?attr/contentPrimary"
         tools:visibility="visible" />
-
 </LinearLayout>
