@@ -98,14 +98,14 @@ class PrimaryActionTextButton : FrameLayout {
                 badgeTextPaddingStart = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
                 badgeTextStyle = getResourceId(R.styleable.PrimaryActionTextButton_badgeTextAppearance, R.style.Small_Regular)
                 binding.badgeIcon.isVisible = getBoolean(R.styleable.PrimaryActionTextButton_showBadge, false)
-                binding.badgeIcon.setBadgeIcon(icon)
+                /*binding.badgeIcon.setBadgeIcon(icon)
                 binding.badgeIcon.setBadgeText(text)
                 binding.badgeIcon.setBadgeTextColor(textColor)
                 binding.badgeIcon.setBadgeIconTint(iconTint)
                 binding.badgeIcon.setBadgeBackgroundTint(backgroundTint)
                 binding.badgeIcon.setPaddings(badgeTextPaddingStart, badgeTextPaddingEnd, badgeTextPaddingTop, badgeTextPaddingBottom)
                 binding.badgeIcon.setTextAppearance(badgeTextStyle)
-                binding.badgeIcon.setBadgeType(badgeType)
+                binding.badgeIcon.setBadgeType(badgeType)*/
 
 
                 textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
@@ -124,8 +124,11 @@ class PrimaryActionTextButton : FrameLayout {
                 if (tint != null) setIconTint(tint)
                 val iconSizeEnum = getInt(R.styleable.PrimaryActionTextButton_actionIconSize, 0).findSizeByOrdinal() ?: ActionIconSize.XLARGE
                 setIconPadding(getDimension(R.styleable.PrimaryActionTextButton_actionIconPadding, iconSizeEnum.padding.dpToPx().toFloat()).toInt())
+                setBadgeIconVisibility(getBoolean(R.styleable.PrimaryActionTextButton_badgeVisibility, false), iconSizeEnum)
                 setActionImageSize(iconSizeEnum)
                 setActionBadgeSize(iconSizeEnum)
+                setBadgeSize(iconSizeEnum)
+                setBadgeBackgroundTint(backgroundTint)
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
@@ -136,10 +139,6 @@ class PrimaryActionTextButton : FrameLayout {
             recycle()
             invalidate()
         }
-    }
-
-    fun getBadge(): PrimaryBadge {
-        return binding.badgeIcon
     }
 
     fun getActionIcon(): PrimaryImageView {
@@ -173,13 +172,14 @@ class PrimaryActionTextButton : FrameLayout {
     fun setBadgeCheckable(isCheckable: Boolean) {
         checkable = isCheckable
         if (checkable) {
-            binding.badgeIcon.setBadgeIcon(ContextCompat.getDrawable(context, R.drawable.ic_circle_filled))
+            binding.ivBadgeIcon.background = ContextCompat.getDrawable(context, R.drawable.ic_circle_filled)
+            binding.badgeIcon.background = ContextCompat.getDrawable(context, R.drawable.background_rounded)
             setOnClickListener(null)
             binding.badgeIcon.isVisible = isChecked
         }
     }
 
-    fun setAvatarCheckedStatus(isChecked: Boolean){
+    fun setAvatarCheckedStatus(isChecked: Boolean) {
         binding.actionIconCheckedBackground.isVisible = isChecked
     }
 
@@ -248,15 +248,31 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setActionBadgeSize(iconSize: ActionIconSize) {
-        if (iconSize.size == ActionIconSize.SMALL.size) {
-            binding.badgeIcon.visibility = View.VISIBLE
-            binding.actionBadge.visibility = View.GONE
-        } else {
-            binding.actionBadge.updateLayoutParams<LayoutParams> {
-                width = iconSize.badgeSize.dpToPx()
-                height = iconSize.badgeSize.dpToPx()
-            }
+        binding.actionBadge.updateLayoutParams<LayoutParams> {
+            width = iconSize.actionButtonSize.dpToPx()
+            height = iconSize.actionButtonSize.dpToPx()
         }
+    }
+
+    fun setBadgeSize(iconSize:ActionIconSize) {
+        binding.badgeIcon.updateLayoutParams<LayoutParams> {
+            width = iconSize.badgeSize.dpToPx()
+            height = iconSize.badgeSize.dpToPx()
+        }
+    }
+
+    fun setBadgeIconVisibility(isVisible: Boolean, iconSize: ActionIconSize) {
+        if (iconSize.size != ActionIconSize.XSMALL.size || iconSize.size != ActionIconSize.XXLARGE.size) {
+            binding.ivBadgeIcon.background = ContextCompat.getDrawable(context, R.drawable.ic_circle_filled)
+            binding.badgeIcon.background = ContextCompat.getDrawable(context, R.drawable.background_rounded)
+            binding.badgeIcon.isVisible = isVisible
+            binding.actionBadge.isVisible = !isVisible
+        }
+    }
+
+    fun setBadgeBackgroundTint(colorStateList: ColorStateList?) {
+        binding.badgeIcon.backgroundTintList = colorStateList
+
     }
 
     fun setActionBadgeImage(iconRes: Drawable?) {
@@ -268,6 +284,7 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setActionBadgeBackground(@DrawableRes background: Int) {
+        binding.actionBadge.visibility = VISIBLE
         binding.actionBadge.setBackgroundResource(background)
     }
 
@@ -275,7 +292,6 @@ class PrimaryActionTextButton : FrameLayout {
     fun setActionBadgeImageTint(colorStateList: ColorStateList?) {
         binding.actionBadge.imageTintList = colorStateList
     }
-
 
 
     fun setText(@StringRes stringRes: Int) {
@@ -327,13 +343,13 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    enum class ActionIconSize(val size: Int, val badgeSize: Int, val padding: Int) {
-        XXLARGE(80, 32, 16),
-        XLARGE(56, 24, 16),
-        LARGE(40, 14, 10),
-        MEDIUM(36, 14, 8),
-        SMALL(32, 8, 6),
-        XSMALL(24, 0, 4);
+    enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val padding: Int, val badgeSize: Int) {
+        XXLARGE(80, 32, 16, 20),
+        XLARGE(56, 24, 16, 14),
+        LARGE(40, 14, 10, 10),
+        MEDIUM(36, 14, 8, 9),
+        SMALL(32, 8, 6, 8),
+        XSMALL(24, 0, 4, 6);
 
         companion object {
             fun Int.findSizeByOrdinal(): ActionIconSize? {

@@ -185,6 +185,7 @@
         <attr name="actionIconBackground" format="reference" />
         <attr name="actionIconTint" format="color" />
         <attr name="actionIconPadding" format="dimension" />
+        <attr name="badgeVisibility" format="boolean" />
         <attr name="textDrawableColor" format="color" />
         <attr name="textDrawableBackgroundColor" format="color" />
     </declare-styleable>

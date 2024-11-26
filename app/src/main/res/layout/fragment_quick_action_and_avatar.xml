@@ -23,8 +23,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -57,8 +57,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:actionIcon="@drawable/ic_contacts"
-                        app:checkable="false"
                         app:actionIconSize="XLarge"
+                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -115,8 +115,8 @@
                         android:id="@+id/quickAction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Աննա Հովսեփյան"
-                        app:checkable="false" />
+                        app:actionIconSize="XXLarge"
+                        app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -125,38 +125,40 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XLarge"
-                        app:checkable="false"
+                        app:badgeVisibility="true"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
+                        android:id="@+id/third"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Large"
-                        app:checkable="false"
-                        app:badgeIcon="@drawable/ic_success_filled" />
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:badgeVisibility="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
-                        app:checkable="false"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Medium"
-                        app:badgeIcon="@drawable/ic_success_filled" />
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:badgeVisibility="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
-                        app:checkable="true"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Small"
-                        app:badgeIcon="@drawable/ic_success_filled" />
+                        app:badgeVisibility="true"
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -164,8 +166,8 @@
                         android:layout_marginStart="10dp"
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
-                        app:checkable="true"
                         app:actionIconSize="XSmall"
+                        app:checkable="true"
                         app:badgeIcon="@drawable/ic_success_filled" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </HorizontalScrollView>
@@ -246,7 +248,6 @@
                         app:showActionText="false" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </HorizontalScrollView>
-
 
         </LinearLayout>
     </ScrollView>

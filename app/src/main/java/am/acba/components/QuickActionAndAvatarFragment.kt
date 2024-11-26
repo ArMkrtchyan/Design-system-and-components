@@ -25,5 +25,6 @@ class QuickActionAndAvatarFragment : BaseViewBindingFragment<FragmentQuickAction
         mBinding.quickAction.setActionBadgeImageTint(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentBrand))
         mBinding.quickAction.setActionBadgeImage(getDrawable(requireContext(), am.acba.component.R.drawable.ic_right))
         mBinding.second.setAvatarCheckedStatus(true)
+        mBinding.third.setAvatarCheckedStatus(true)
     }
 }
