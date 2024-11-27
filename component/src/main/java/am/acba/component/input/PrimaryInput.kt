@@ -54,6 +54,7 @@ open class PrimaryInput : TextInputLayout {
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
     private var isFirstFocusable = true
+    private var isDotDisabled = false
 
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
@@ -84,6 +85,7 @@ open class PrimaryInput : TextInputLayout {
                     textMaxLength = getInt(R.styleable.PrimaryInput_textMaxLength, -1)
                 cornerStyle = getInt(R.styleable.PrimaryInput_cornerStyle, -1)
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
+                isDotDisabled = getBoolean(R.styleable.PrimaryInput_isDotDisabledInMiddleOfText, false)
                 inputType = getInt(R.styleable.PrimaryInput_inputType, -1)
                 formattingWithDot = getBoolean(R.styleable.PrimaryInput_formattingWithDots, false)
                 enableErrorAnimation = getBoolean(R.styleable.PrimaryInput_enableErrorAnimation, false)
@@ -93,6 +95,8 @@ open class PrimaryInput : TextInputLayout {
             val layoutStyle =
                 if (cornerStyle == 1) R.layout.text_input_edittext_left_corner_layout else R.layout.text_input_edittext_layout
             addView(LayoutInflater.from(context).inflate(layoutStyle, this@PrimaryInput, false))
+            val primaryEditText = findViewById<PrimaryEditText>(R.id.primaryEditText)
+            primaryEditText.setDisableDot(isDotDisabled = isDotDisabled)
             val text = getString(R.styleable.PrimaryInput_android_text)
             if (!text.isNullOrEmpty()) {
                 isHintAnimationEnabled = false

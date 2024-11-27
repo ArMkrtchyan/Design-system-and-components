@@ -7,7 +7,7 @@ import android.util.Log
 import com.google.android.material.textfield.TextInputEditText
 
 class PrimaryEditText : TextInputEditText {
-    var disableDot = false
+    private var disableDot = false
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
@@ -22,5 +22,9 @@ class PrimaryEditText : TextInputEditText {
         }
         Log.d("SelectionChanged", "selStart: $selStart, selEnd: $selEnd")
         super.onSelectionChanged(selStart, selEnd)
+    }
+
+    fun setDisableDot(isDotDisabled: Boolean) {
+        disableDot = isDotDisabled
     }
 }
