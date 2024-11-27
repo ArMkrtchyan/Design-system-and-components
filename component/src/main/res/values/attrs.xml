@@ -192,6 +192,7 @@
         <attr name="textMaxLength" format="integer" />
         <attr name="cornerStyle" format="integer" />
         <attr name="hasDropDown" format="boolean" />
+        <attr name="isDotDisabledInMiddleOfText" format="boolean" />
         <attr name="android:text" />
         <attr name="formattingWithDots" format="boolean" />
         <attr name="enableErrorAnimation" />
