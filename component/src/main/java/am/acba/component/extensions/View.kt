@@ -21,6 +21,7 @@ import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
@@ -233,6 +234,7 @@ fun ImageView.load(
     @DrawableRes errorIcon: Int = 0,
     isCircle: Boolean = false,
     timeout: Int = 60000,
+    cornerRadius: Int = 0,
     onResourceReady: ((drawable: Drawable?, exception: GlideException?) -> Unit)? = null
 ) {
     shimmer?.isVisible = true
@@ -240,7 +242,7 @@ fun ImageView.load(
     Glide.with(context)
         .load(url)
         .timeout(timeout)
-        .apply(if (isCircle) RequestOptions().circleCrop() else RequestOptions().dontTransform())
+        .apply(if (isCircle) RequestOptions().circleCrop() else if (cornerRadius > 0) RequestOptions.bitmapTransform(RoundedCorners(cornerRadius)) else RequestOptions().dontTransform())
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
                 e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean

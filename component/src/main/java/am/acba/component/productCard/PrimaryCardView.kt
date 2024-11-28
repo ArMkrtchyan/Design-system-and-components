@@ -21,6 +21,7 @@ class PrimaryCardView : FrameLayout {
     private val binding by lazy { PrimaryLoanCardBinding.inflate(context.inflater(), this, false) }
     private val adapter by lazy { CardAdditionalInfoAdapter() }
     private var mIsPreventDoubleClick = true
+    var iconCornerRadius = 0
 
     constructor(context: Context) : super(context)
 
@@ -107,7 +108,7 @@ class PrimaryCardView : FrameLayout {
     private fun setProductCardStartIcon(productCard: ICardInfo) {
         binding.startIconContainer.isVisible = productCard.getStartIcon() > 0 || productCard.getStartIconUrl().isNotEmpty()
         if (productCard.getStartIconUrl().isNotEmpty()) {
-            binding.startIcon.load(productCard.getStartIconUrl(), binding.shimmerLayout)
+            binding.startIcon.load(productCard.getStartIconUrl(), binding.shimmerLayout, cornerRadius = iconCornerRadius)
             binding.startIconContainer.background = null
             binding.startIcon.setPadding(0)
             binding.startIcon.imageTintList = null

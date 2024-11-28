@@ -1,6 +1,7 @@
 package am.acba.components
 
 import am.acba.component.R
+import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.log
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
@@ -37,13 +38,14 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 ),
                 productStartIcon = R.drawable.ic_add,
                 productStartIconTint = R.attr.contentPrimary,
-                productBackgroundColorAttr = R.attr.backgroundTonal2,
+                productBackgroundColorAttr = R.attr.backgroundBase,
                 productBadgeIcon = R.drawable.ic_warning,
                 productBadgeText = "Առկա է ժամկետնանց պարտավորություն",
                 productBadgeBackgroundColorAttr = R.attr.backgroundDangerTonal1,
                 productBadgeColorAndIconColorAttr = R.attr.contentDangerTonal1,
             )
         )
+        loanCardWithoutIcon.iconCornerRadius = 100.dpToPx()
         loanCardWithoutIcon.setCardInfo(
             CardInfoExample(
                 productTitle = "5G վարկ",
@@ -62,7 +64,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                         additionalInfo = "1,125,432.00 AMD",
                     ),
                 ),
-                productIconUrl = "https://letsenhance.io/static/a31ab775f44858f1d1b80ee51738f4f3/11499/EnhanceAfter.jpg",
+                productIconUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType47_1_1.png",
                 productBackgroundColorAttr = R.attr.backgroundTonal2
             )
         )
