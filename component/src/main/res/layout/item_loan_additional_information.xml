@@ -22,7 +22,7 @@
 
         <am.acba.component.textView.PrimaryTextView
             android:id="@+id/info"
-            style="@style/Body2.Bold"
+            style="@style/Small.Bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
