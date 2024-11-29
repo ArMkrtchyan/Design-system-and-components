@@ -17,6 +17,19 @@ class DatePickerFragment : BaseViewBindingFragment<FragmentDatePickerBinding>() 
 
     override fun FragmentDatePickerBinding.initView() {
         datePicker.disabledDays = arrayListOf(25, 26, 27, 28, 29, 30, 31)
+        datePicker.disabledDaysOfWeek = arrayListOf(Calendar.SUNDAY, Calendar.SATURDAY)
+        datePicker.disabledDaysOfMoths = arrayListOf(
+            Pair(31, Calendar.DECEMBER),
+            Pair(1, Calendar.JANUARY),
+            Pair(2, Calendar.JANUARY),
+            Pair(28, Calendar.JANUARY),
+            Pair(8, Calendar.MARCH),
+            Pair(1, Calendar.MAY),
+            Pair(9, Calendar.MAY),
+            Pair(28, Calendar.MAY),
+            Pair(5, Calendar.JULY),
+            Pair(21, Calendar.SEPTEMBER),
+        )
         val calendar = Calendar.getInstance()
         calendar[Calendar.DAY_OF_MONTH] = calendar[Calendar.DAY_OF_MONTH] + 30
         if (calendar[Calendar.DAY_OF_MONTH] in 25..31) {
