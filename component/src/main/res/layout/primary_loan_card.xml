@@ -129,6 +129,7 @@
                     android:id="@+id/bottom_divider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:dividerTint="?attr/borderNeutral"
                     android:layout_gravity="bottom"
                     android:layout_marginBottom="8dp" />
 

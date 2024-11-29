@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_weight="1"
+        android:backgroundTintMode="src_over"
         android:layout_gravity="center_vertical"
         android:background="@drawable/divider_background" />
 
@@ -32,6 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_weight="1"
+        android:backgroundTintMode="src_over"
         android:layout_gravity="center_vertical"
         android:background="@drawable/divider_background" />
 </LinearLayout>
