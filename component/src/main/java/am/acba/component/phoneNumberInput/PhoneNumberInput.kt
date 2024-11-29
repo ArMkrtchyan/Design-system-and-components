@@ -3,7 +3,7 @@ package am.acba.component.phoneNumberInput
 import am.acba.component.R
 import am.acba.component.databinding.CountryPickerLayoutBinding
 import am.acba.component.databinding.PhoneNumberInputBinding
-import am.acba.component.dialog.ListBottomSheetDialog
+import am.acba.component.dialog.ContactBooksBottomSheetDialog
 import am.acba.component.dialog.CountryBottomSheetDialog
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
@@ -79,6 +79,9 @@ class PhoneNumberInput @JvmOverloads constructor(
     lateinit var fragment: Fragment
     var onSelectedContactSet: (() -> Unit)? = null
     private var onAcbaContactClick: (() -> Unit)? = null
+    private var bottomSheetTitle = ""
+    private var phoneBookBottomSheetTitle = ""
+
 
     var errorText: String? = null
     var helpText: String? = null
@@ -94,6 +97,8 @@ class PhoneNumberInput @JvmOverloads constructor(
                 helpText = getString(R.styleable.PhoneNumberInput_phoneInputHelpText)
                 countryTopShips = getString(R.styleable.PhoneNumberInput_countryTopChips)
                 enableErrorAnimation = getBoolean(R.styleable.PhoneNumberInput_enableErrorAnimation, false)
+                bottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneNumberInputBottomSheetTitle) ?: ""
+                phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle) ?: ""
             } finally {
                 recycle()
             }
@@ -333,7 +338,9 @@ class PhoneNumberInput @JvmOverloads constructor(
 
 
     private fun contactIconClick() {
-        ListBottomSheetDialog.show(getFragmentManager(), ::handleBookClickActions)
+        val bundle = Bundle()
+        bundle.putString("title", phoneBookBottomSheetTitle)
+        ContactBooksBottomSheetDialog.show(getFragmentManager(), bundle, ::handleBookClickActions)
     }
 
     override fun setEnabled(isEnable: Boolean) {
@@ -363,6 +370,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         bundle.putBoolean("needToSavActionsOnDB", true)
         bundle.putBoolean("isSearchInputVisible", true)
         bundle.putString("bottomSheetTitle", "Phone Number")
+        bundle.putString("title", bottomSheetTitle)
         bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
         CountryBottomSheetDialog.show(
             getFragmentManager(),

@@ -1,12 +1,12 @@
 package am.acba.component.dialog
 
 import am.acba.component.R
+import am.acba.component.bottomsheet.PrimaryBottomSheetDialog
 import am.acba.component.databinding.CountryBottomSheetBinding
-import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.Inflater
 import am.acba.component.extensions.getCountryLastActions
 import am.acba.component.extensions.log
 import am.acba.component.extensions.parcelableArrayList
-import am.acba.component.extensions.pxToDp
 import am.acba.component.extensions.saveCountryLastAction
 import am.acba.component.phoneNumberInput.CountryModel
 import am.acba.component.phoneNumberInput.adapter.CountriesChipsAdapter
@@ -14,53 +14,34 @@ import am.acba.component.phoneNumberInput.adapter.CountriesListAdapter
 import am.acba.component.phoneNumberInput.adapter.TitleAdapter
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class CountryBottomSheetDialog : BottomSheetDialogFragment() {
-    private lateinit var _binding: CountryBottomSheetBinding
-    private val binding get() = _binding
+class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBinding>() {
+    override val inflate: Inflater<CountryBottomSheetBinding>
+        get() = CountryBottomSheetBinding::inflate
+
+    override val state: Int
+        get() = BottomSheetBehavior.STATE_EXPANDED
     private var dBActionsList: MutableList<CountryModel> = mutableListOf()
     private var topChipsListByDigital: MutableList<CountryModel> = mutableListOf()
     private lateinit var countriesAdapter: CountriesListAdapter
     private var needToSaveActions: Boolean = true
     private var isSearchInputVisible: Boolean = true
-    private var title: String = ""
 
+    override val contentPaddingStart: Int
+        get() = 0
+    override val contentPaddingEnd: Int
+        get() = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = CountryBottomSheetBinding.inflate(inflater, container, false)
-        binding.btnClose.setOnClickListener { dismiss() }
+    override fun CountryBottomSheetBinding.initView() {
         getBundleVariablesAndSetupUi()
         setUpShadow()
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.post {
-            val parent = view.parent as View
-            val params = parent.layoutParams
-            val behavior = (params as ViewGroup.LayoutParams).apply {
-                height = setupBottomSheetHeightByViewHeight()
-            }
-            parent.layoutParams = behavior
-        }
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog = BottomSheetDialog(requireContext(), theme).apply {
-        behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        behavior.isDraggable = true
     }
 
 
@@ -80,29 +61,12 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setupBottomSheetHeightByViewHeight(): Int {
-        var height = 0
-        if (dBActionsList.isNotEmpty()) {
-            height = resources.displayMetrics.heightPixels
-        } else {
-            binding.rvCountries.measure(
-                View.MeasureSpec.makeMeasureSpec(binding.rvCountries.width, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-            )
-            val allHeight = binding.btnClose.height + binding.shadow.height + binding.search.height
-            height = allHeight + binding.rvCountries.measuredHeight + 100
-        }
-        return height
-    }
-
-    private fun getBundleVariablesAndSetupUi() {
+    private fun CountryBottomSheetBinding.getBundleVariablesAndSetupUi() {
         val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
         needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") ?: false
         isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") ?: false
-        title = arguments?.getString("bottomSheetTitle") ?: ""
         if (needToSaveActions) getCountryChipListFromDb()
-        binding.search.isVisible = isSearchInputVisible
-        binding.title.text = title
+        search.isVisible = isSearchInputVisible
         setupAdapter(countriesList as ArrayList)
         searchCountry(countriesList)
     }
@@ -115,24 +79,23 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
                 context?.saveCountryLastAction(it)
             }
         }
-
     }
 
-    private fun setUpShadow() {
-        binding.rvCountries.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+    private fun CountryBottomSheetBinding.setUpShadow() {
+        rvCountries.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val scrollY = recyclerView.computeVerticalScrollOffset()
                 if (scrollY in 0..350) {
                     scrollY.log()
                     val alpha: Double = (scrollY / 350.0).log()
-                    binding.shadow.alpha = alpha.toFloat()
-                } else if (scrollY > 350) binding.shadow.alpha = 1f
+                    shadow.alpha = alpha.toFloat()
+                } else if (scrollY > 350) shadow.alpha = 1f
             }
         })
     }
 
-    private fun setupAdapter(countriesList: List<CountryModel>) {
-        if (binding.rvCountries.adapter == null) {
+    private fun CountryBottomSheetBinding.setupAdapter(countriesList: List<CountryModel>) {
+        if (rvCountries.adapter == null) {
             countriesAdapter = CountriesListAdapter(::selectCountry, countriesList)
             val titleAdapter = TitleAdapter(getString(R.string.frequendly_search))
             val countriesTitleAdapter = TitleAdapter(getString(R.string.history_filter_button_all))
@@ -143,14 +106,14 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
             } else {
                 ConcatAdapter(countriesAdapter)
             }
-            binding.rvCountries.adapter = concatAdapter
+            rvCountries.adapter = concatAdapter
         } else {
             countriesAdapter.replaceList(countriesList)
         }
     }
 
-    private fun searchCountry(countriesList: List<CountryModel>) {
-        binding.search.editText?.doAfterTextChanged { text ->
+    private fun CountryBottomSheetBinding.searchCountry(countriesList: List<CountryModel>) {
+        search.editText?.doAfterTextChanged { text ->
             val searchText = text?.toString().orEmpty()
             if (searchText.isNotEmpty()) {
                 filterAction(countriesList, searchText)
@@ -158,10 +121,9 @@ class CountryBottomSheetDialog : BottomSheetDialogFragment() {
                 setupAdapter(countriesList)
             }
         }
-
     }
 
-    private fun filterAction(countriesList: List<CountryModel>, char: CharSequence) {
+    private fun CountryBottomSheetBinding.filterAction(countriesList: List<CountryModel>, char: CharSequence) {
         val filterList = countriesList.filter { country ->
             country.name?.lowercase()?.startsWith(char) == true ||
                     country.englishName?.startsWith(char) == true ||

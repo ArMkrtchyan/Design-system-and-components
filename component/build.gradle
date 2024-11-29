@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    compileOnly fileTree(dir: "$projectDir/libs", include: ['pay-card-release.aar'])
     implementation libs.lottie
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
