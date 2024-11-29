@@ -9,6 +9,7 @@ import am.acba.component.button.PrimaryActionTextButton.ActionIconSize.Companion
 import am.acba.component.databinding.WidgetActionTextButtonBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.pxToDp
 import am.acba.component.imageView.MaterialTextDrawable
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
@@ -251,6 +252,7 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionBadge.updateLayoutParams<LayoutParams> {
             width = iconSize.actionButtonSize.dpToPx()
             height = iconSize.actionButtonSize.dpToPx()
+            binding.actionBadge.setPadding(iconSize.padding.dpToPx())
         }
     }
 
@@ -344,11 +346,11 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val padding: Int, val badgeSize: Int) {
-        XXLARGE(80, 32, 16, 20),
-        XLARGE(56, 24, 16, 14),
-        LARGE(40, 14, 10, 10),
-        MEDIUM(36, 14, 8, 9),
-        SMALL(32, 8, 6, 8),
+        XXLARGE(80, 32, 8, 20),
+        XLARGE(56, 24, 7, 14),
+        LARGE(40, 16, 1, 10),
+        MEDIUM(36, 14, 1, 9),
+        SMALL(32, 8, 1, 8),
         XSMALL(24, 0, 4, 6);
 
         companion object {
