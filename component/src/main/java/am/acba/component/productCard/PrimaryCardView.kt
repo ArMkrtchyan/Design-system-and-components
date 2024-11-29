@@ -115,9 +115,9 @@ class PrimaryCardView : FrameLayout {
         } else if (productCard.getStartIcon() > 0) {
             binding.startIcon.setImageResource(productCard.getStartIcon())
             if (productCard.getBackgroundColorAttr() > 0) {
-                binding.startIconContainer.backgroundTintList = context.getColorStateListFromAttr(productCard.getBackgroundColorAttr())
+                binding.startIconContainer.setCardBackgroundColor(context.getColorStateListFromAttr(productCard.getBackgroundColorAttr()))
             } else {
-                binding.startIconContainer.backgroundTintList = ContextCompat.getColorStateList(context, android.R.color.transparent)
+                binding.startIconContainer.setCardBackgroundColor(ContextCompat.getColorStateList(context, android.R.color.transparent))
             }
             binding.startIcon.imageTintList = if (productCard.getStartIconTint() != null) {
                 context.getColorStateListFromAttr(productCard.getStartIconTint()!!)

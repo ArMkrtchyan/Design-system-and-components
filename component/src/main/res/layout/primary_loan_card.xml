@@ -31,12 +31,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <FrameLayout
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/start_icon_container"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:background="@drawable/background_radius_8"
-                        android:backgroundTint="?attr/backgroundTonal2"
+                        app:cardBackgroundColor="?attr/backgroundTonal2"
+                        app:cardCornerRadius="@dimen/radius_8"
+                        app:cardElevation="0dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
@@ -68,7 +69,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@drawable/background_radius_8" />
                         </com.facebook.shimmer.ShimmerFrameLayout>
-                    </FrameLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <am.acba.component.imageView.PrimaryImageView
                         android:id="@+id/end_icon"
