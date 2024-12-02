@@ -535,12 +535,16 @@
         <attr name="primaryTableBackground" format="reference" />
         <attr name="primaryTableBackgroundTint" format="reference" />
         <attr name="primaryTableShowTopView" format="boolean" />
-        <attr name="primaryTableShowIcon" format="boolean" />
         <attr name="primaryTableShowArrow" format="boolean" />
         <attr name="primaryTableIcon" format="reference" />
         <attr name="primaryTableTitle" format="string" />
         <attr name="primaryTableIconTint" format="reference" />
         <attr name="primaryTableCollapsedItemCount" format="integer" />
+        <attr name="startImageComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Avatar" value="1" />
+            <enum name="Icon" value="2" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="ShippingProgressBar">
         <attr name="shippingStepCount" format="integer" />

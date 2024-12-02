@@ -1,16 +1,18 @@
 package am.acba.component.table
 
 import am.acba.component.R
+import am.acba.component.button.PrimaryActionTextButton
 import am.acba.component.databinding.TableLayoutBinding
+import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.PrimaryImageView
-import am.acba.component.listItem.PrimaryListItem.ListStartComponentType
+import am.acba.component.table.ListStartComponentType.Companion.findStartComponentTypeByOrdinal
+import am.acba.component.textView.PrimaryTextView
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,6 +25,26 @@ class PrimaryTable : FrameLayout {
     private var adapter: TableItemAdapter? = null
     private var isCollapsed = true
     private var collapsedItemCount: Int = DEFAULT_COLLAPSED_ITEM_COUNT
+
+    val avatar by lazy {
+        PrimaryActionTextButton(context).apply {
+            setType(PrimaryActionTextButton.ActionButtonType.AVATAR)
+            setActionImageSize(PrimaryActionTextButton.ActionIconSize.LARGE)
+            showActionText(false)
+        }
+    }
+
+    val startIcon by lazy {
+        PrimaryImageView(context).apply {
+            layoutParams = LayoutParams(36.dpToPx(), 36.dpToPx())
+        }
+    }
+
+    var startComponentType = ListStartComponentType.NONE
+        set(value) {
+            field = value
+            setStartComponent()
+        }
 
     var showArrow = true
         set(value) {
@@ -46,16 +68,18 @@ class PrimaryTable : FrameLayout {
             addView(binding.root)
             try {
                 initRecyclerView()
+                binding.tvTitle.initViews()
 
                 val background = getDrawable(R.styleable.PrimaryTable_primaryTableBackground)
                 val backgroundTint =
                     getColorStateList(R.styleable.PrimaryTable_primaryTableBackgroundTint)
 
                 val showTopView = getBoolean(R.styleable.PrimaryTable_primaryTableShowTopView, true)
-                val showIcon = getBoolean(R.styleable.PrimaryTable_primaryTableShowIcon, true)
                 showArrow = getBoolean(R.styleable.PrimaryTable_primaryTableShowArrow, true)
 
                 val title = getString(R.styleable.PrimaryTable_primaryTableTitle)
+                startComponentType = getInt(R.styleable.PrimaryTable_startImageComponentType, 0).findStartComponentTypeByOrdinal()
+
                 val icon = getDrawable(R.styleable.PrimaryTable_primaryTableIcon)
                 val iconTint = getColorStateList(R.styleable.PrimaryTable_primaryTableIconTint)
 
@@ -68,7 +92,6 @@ class PrimaryTable : FrameLayout {
                 backgroundTint?.let { setLayoutBackgroundTint(backgroundTint) }
 
                 setTopViewVisibility(showTopView)
-                setIconVisibility(showIcon)
 
                 setTitle(title)
                 setIcon(icon)
@@ -86,6 +109,11 @@ class PrimaryTable : FrameLayout {
         setOnClickListener { onArrowClick(items) }
     }
 
+    private fun PrimaryTextView.initViews() {
+        isSingleLine = false
+        maxLines = 2
+    }
+
     private fun initRecyclerView() {
         adapter = TableItemAdapter()
         binding.rvItems.adapter = adapter
@@ -99,6 +127,19 @@ class PrimaryTable : FrameLayout {
         binding.rvItems.setItemAnimator(animator)
     }
 
+    private fun setStartComponent() {
+        binding.layoutImage.apply {
+            removeAllViews()
+            isVisible = startComponentType != ListStartComponentType.NONE
+
+            when (startComponentType) {
+                ListStartComponentType.NONE -> Unit
+                ListStartComponentType.AVATAR -> addView(avatar)
+                ListStartComponentType.ICON -> addView(startIcon)
+            }
+        }
+    }
+
     fun setLayoutBackground(background: Drawable?) {
         binding.root.background = background
     }
@@ -108,12 +149,7 @@ class PrimaryTable : FrameLayout {
     }
 
     fun setTopViewVisibility(isVisible: Boolean) {
-        binding.listItem.isVisible = isVisible
-    }
-
-    fun setIconVisibility(isVisible: Boolean) {
-        val iconType = if (isVisible) ListStartComponentType.ICON else ListStartComponentType.NONE
-        binding.listItem.startComponentType = iconType
+        binding.layoutTop.isVisible = isVisible
     }
 
     fun setArrowVisibility(isVisible: Boolean) {
@@ -121,32 +157,37 @@ class PrimaryTable : FrameLayout {
     }
 
     fun setTitle(title: String?) {
-        binding.listItem.setTitleText(title)
-    }
-
-    fun setIconLayoutParams(height: Int?, width: Int?) {
-        binding.listItem.startIcon.layoutParams = LayoutParams(
-            height ?: WRAP_CONTENT,
-            width ?: WRAP_CONTENT
-        )
+        binding.tvTitle.setText(title)
     }
 
     fun setIcon(icon: Drawable?) {
-        icon?.let { binding.listItem.startIcon.setImageDrawable(it) }
+        if (icon == null) return
+
+        when (startComponentType) {
+            ListStartComponentType.ICON -> startIcon.setImageDrawable(icon)
+            ListStartComponentType.AVATAR -> avatar.setIcon(icon)
+            else -> return
+        }
     }
 
     fun setIconTint(colorStateList: ColorStateList?) {
-        binding.listItem.startIcon.imageTintList = colorStateList
+        if (startComponentType == ListStartComponentType.ICON) {
+            startIcon.imageTintList = colorStateList
+        }
     }
 
     fun setIconBackgroundTint(colorStateList: ColorStateList?) {
-        binding.listItem.startIcon.backgroundTintList = colorStateList
+        if (startComponentType == ListStartComponentType.ICON) {
+            startIcon.backgroundTintList = colorStateList
+        }
     }
 
     fun setIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {
-        binding.listItem.startIcon.apply {
-            this.clipToOutline = clipToOutline
-            backgroundRes?.let { background = it }
+        if (startComponentType == ListStartComponentType.ICON) {
+            startIcon.apply {
+                this.clipToOutline = clipToOutline
+                backgroundRes?.let { background = it }
+            }
         }
     }
 
@@ -193,5 +234,15 @@ class PrimaryTable : FrameLayout {
     companion object {
         private const val DEFAULT_COLLAPSED_ITEM_COUNT = 6
         private const val ANIMATION_DURATION = 500L
+    }
+}
+
+enum class ListStartComponentType {
+    NONE,
+    AVATAR,
+    ICON;
+
+    companion object {
+        fun Int.findStartComponentTypeByOrdinal() = entries.find { it.ordinal == this } ?: NONE
     }
 }
