@@ -129,6 +129,10 @@ class PrimaryCardView : FrameLayout {
         } else if (productCard.getStartIcon() > 0) {
             binding.startIconCardView.radius = 0f
             binding.startIcon.setImageResource(productCard.getStartIcon())
+            binding.startIcon.updateLayoutParams<LayoutParams> {
+                width = LayoutParams.WRAP_CONTENT
+                height = LayoutParams.WRAP_CONTENT
+            }
             if (productCard.getBackgroundColorAttr() > 0) {
                 binding.startIconContainer.setCardBackgroundColor(context.getColorStateListFromAttr(productCard.getBackgroundColorAttr()))
             } else {
