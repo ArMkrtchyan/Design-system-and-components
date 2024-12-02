@@ -41,34 +41,42 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <am.acba.component.imageView.PrimaryImageView
-                            android:id="@+id/start_icon"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/start_icon_card_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            tools:src="@drawable/ic_down"
-                            tools:tint="?attr/contentPrimary" />
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardElevation="0dp">
 
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/shimmer_layout"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@id/iv_start_icon"
-                            app:layout_constraintEnd_toEndOf="@id/iv_start_icon"
-                            app:layout_constraintStart_toStartOf="@id/iv_start_icon"
-                            app:layout_constraintTop_toTopOf="@id/iv_start_icon"
-                            app:shimmer_duration="900"
-                            app:shimmer_fixed_width="60dp"
-                            app:shimmer_shape="linear"
-                            app:shimmer_tilt="0">
+                            <am.acba.component.imageView.PrimaryImageView
+                                android:id="@+id/start_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:src="@drawable/ic_success"
+                                tools:tint="?attr/contentPrimary" />
 
-                            <View
-                                android:id="@+id/shimmer_inner_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/background_radius_8" />
-                        </com.facebook.shimmer.ShimmerFrameLayout>
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmer_layout"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@id/iv_start_icon"
+                                app:layout_constraintEnd_toEndOf="@id/iv_start_icon"
+                                app:layout_constraintStart_toStartOf="@id/iv_start_icon"
+                                app:layout_constraintTop_toTopOf="@id/iv_start_icon"
+                                app:shimmer_duration="900"
+                                app:shimmer_fixed_width="60dp"
+                                app:shimmer_shape="linear"
+                                app:shimmer_tilt="0">
+
+                                <View
+                                    android:id="@+id/shimmer_inner_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/background_radius_8" />
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                        </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
                     <am.acba.component.imageView.PrimaryImageView
@@ -129,9 +137,9 @@
                     android:id="@+id/bottom_divider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerTint="?attr/borderNeutral"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="8dp" />
+                    android:layout_marginBottom="8dp"
+                    app:dividerTint="?attr/borderNeutral" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/payment_day_container"
@@ -172,8 +180,8 @@
                         style="@style/Small.Regular"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
                         android:textColor="?attr/contentPrimaryTonal1"
                         tools:text="Վճարման ենթակա գումար" />
 
@@ -181,8 +189,8 @@
                         android:id="@+id/payment_amount"
                         style="@style/Body2.Bold"
                         android:layout_width="0dp"
-                        android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:layout_weight="1"
                         android:gravity="end"
                         tools:text="40,000.00 AMD" />

@@ -242,7 +242,6 @@ fun ImageView.load(
     Glide.with(context)
         .load(url)
         .timeout(timeout)
-        .apply(if (isCircle) RequestOptions().circleCrop() else if (cornerRadius > 0) RequestOptions.bitmapTransform(RoundedCorners(cornerRadius)) else RequestOptions().dontTransform())
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
                 e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
@@ -259,11 +258,12 @@ fun ImageView.load(
             ): Boolean {
                 shimmer?.stopShimmer()
                 shimmer?.isVisible = false
-                setImageDrawable(resource)
+                //  setImageDrawable(resource)
                 onResourceReady?.invoke(resource, null)
                 return false
             }
         })
+        .apply(if (isCircle) RequestOptions().circleCrop() else if (cornerRadius > 0) RequestOptions.bitmapTransform(RoundedCorners(cornerRadius)) else RequestOptions().dontTransform())
         .into(this)
 }
 

@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 
 class PrimaryCardView : FrameLayout {
     private val binding by lazy { PrimaryLoanCardBinding.inflate(context.inflater(), this, false) }
@@ -108,11 +109,25 @@ class PrimaryCardView : FrameLayout {
     private fun setProductCardStartIcon(productCard: ICardInfo) {
         binding.startIconContainer.isVisible = productCard.getStartIcon() > 0 || productCard.getStartIconUrl().isNotEmpty()
         if (productCard.getStartIconUrl().isNotEmpty()) {
-            binding.startIcon.load(productCard.getStartIconUrl(), binding.shimmerLayout, cornerRadius = iconCornerRadius)
+            binding.startIcon.load(productCard.getStartIconUrl(), binding.shimmerLayout) { drawable, exception ->
+                binding.startIcon.updateLayoutParams<LayoutParams> {
+                    drawable?.let {
+                        if (it.intrinsicHeight < it.intrinsicWidth) {
+                            height = 36.dpToPx() * it.intrinsicHeight / it.intrinsicWidth
+                            width = 36.dpToPx()
+                        } else {
+                            width = 36.dpToPx() * it.intrinsicWidth / it.intrinsicHeight
+                            height = 36.dpToPx()
+                        }
+                    }
+                }
+            }
+            binding.startIconCardView.radius = iconCornerRadius.toFloat()
             binding.startIconContainer.background = null
             binding.startIcon.setPadding(0)
             binding.startIcon.imageTintList = null
         } else if (productCard.getStartIcon() > 0) {
+            binding.startIconCardView.radius = 0f
             binding.startIcon.setImageResource(productCard.getStartIcon())
             if (productCard.getBackgroundColorAttr() > 0) {
                 binding.startIconContainer.setCardBackgroundColor(context.getColorStateListFromAttr(productCard.getBackgroundColorAttr()))
@@ -154,9 +169,8 @@ class PrimaryCardView : FrameLayout {
     }
 
     private fun submitAdditionalInfo(cardAdditionalInfo: List<ICardAdditionalInfo>) {
-        if (cardAdditionalInfo.isNotEmpty()) {
-            binding.additionalInformationRecycler.adapter = adapter
-            adapter.submitList(cardAdditionalInfo)
-        }
+        binding.additionalInformationRecycler.isVisible = cardAdditionalInfo.isNotEmpty()
+        binding.additionalInformationRecycler.adapter = adapter
+        adapter.submitList(cardAdditionalInfo)
     }
 }

@@ -45,7 +45,7 @@ class CardViewFragment : BaseViewBindingFragment<FragmentCardViewBinding>() {
                 productBadgeColorAndIconColorAttr = R.attr.contentDangerTonal1,
             )
         )
-        loanCardWithoutIcon.iconCornerRadius = 100.dpToPx()
+        loanCardWithoutIcon.iconCornerRadius = 3.dpToPx()
         loanCardWithoutIcon.setCardInfo(
             CardInfoExample(
                 productTitle = "5G վարկ",
