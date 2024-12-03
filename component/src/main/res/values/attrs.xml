@@ -550,7 +550,9 @@
         <attr name="shippingStepCount" format="integer" />
         <attr name="shippingTrackThickness" format="dimension" />
     </declare-styleable>
-    <declare-styleable name="PrimaryCardView" />
+    <declare-styleable name="PrimaryCardView">
+        <attr name="isPreventClick" />
+    </declare-styleable>
     <declare-styleable name="PrimaryBanners" />
     <declare-styleable name="PrimaryOfferCardView">
         <attr name="offerCardTitle" format="string" />
