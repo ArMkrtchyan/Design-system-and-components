@@ -15,6 +15,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
 
     override fun FragmentCurrencyInputBinding.initView() {
         amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
+        amount.enableErrorAnimation = true
         amount.onFocusChangeListener { fosus -> }
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
