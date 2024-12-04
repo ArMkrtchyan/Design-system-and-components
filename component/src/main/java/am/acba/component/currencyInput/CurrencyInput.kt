@@ -24,6 +24,7 @@ import android.text.InputType
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
@@ -46,6 +47,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var maxLength: Int
     private var maxAmount: Double
     private var minAmount: Double
+    private var isKeyboardActionClicked = false
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
     private var bottomSheetTitle = ""
@@ -80,11 +82,23 @@ class CurrencyInput @JvmOverloads constructor(
         setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
+        initKeyboardListeners()
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
         binding.amount.amountFormattingWhileTyping()
+    }
+
+    private fun initKeyboardListeners() {
+        binding.amount.apply {
+            onKeyboardDoneButtonClick { setErrorAnimation() }
+            onKeyboardOtherActionButtonClick { actionId ->
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    isKeyboardActionClicked = true
+                }
+            }
+        }
     }
 
     fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {
@@ -198,6 +212,7 @@ class CurrencyInput @JvmOverloads constructor(
                 setValidState()
             }
         }
+        if (isKeyboardActionClicked) setErrorAnimation()
     }
 
     private fun setupCurrenciesList() {
@@ -297,8 +312,6 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setErrorState() {
-        setErrorAnimation()
-
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor =
@@ -426,12 +439,12 @@ class CurrencyInput @JvmOverloads constructor(
                 )
             }
             selectCurrency(filteredCurrencyList[0])
-
         }
     }
 
     private fun setErrorAnimation() {
-        if (enableErrorAnimation) {
+        if (enableErrorAnimation && !isValidAmount) {
+            isKeyboardActionClicked = false
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
