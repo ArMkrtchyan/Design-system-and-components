@@ -214,7 +214,7 @@ class PrimaryTable : FrameLayout {
         items: List<TableItem>,
         isCollapsed: Boolean
     ) {
-        val visibleItems = if (isCollapsed) items.subList(0, collapsedItemCount - 1) else items
+        val visibleItems = if (isCollapsed) items.subList(0, collapsedItemCount) else items
         adapter?.submitList(visibleItems)
     }
 
