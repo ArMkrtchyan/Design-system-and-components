@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import java.util.Date
-import kotlin.let
 
 class PrimaryDatePicker @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -19,6 +18,8 @@ class PrimaryDatePicker @JvmOverloads constructor(
     var minDate: Long? = null
     var maxDate: Long? = null
     var disabledDays: List<Int> = emptyList()
+    var disabledDaysOfWeek: List<Int> = emptyList()
+    var disabledDaysOfMoths: List<Pair<Int, Int>> = emptyList()
     var formattingPattern: String = "dd/MM/yyyy"
     private var onDateSet: ((dateFormatted: String?, date: Long?) -> Unit)? = null
 
@@ -32,6 +33,8 @@ class PrimaryDatePicker @JvmOverloads constructor(
                 minDate = this@PrimaryDatePicker.minDate
                 maxDate = this@PrimaryDatePicker.maxDate
                 disabledDays = this@PrimaryDatePicker.disabledDays
+                disabledDaysOfWeek = this@PrimaryDatePicker.disabledDaysOfWeek
+                disabledDaysOfMoths = this@PrimaryDatePicker.disabledDaysOfMoths
                 formattingPattern = this@PrimaryDatePicker.formattingPattern
                 onDateSet = { dateFormatted, date ->
                     binding.inputDropDown.setText(dateFormatted)

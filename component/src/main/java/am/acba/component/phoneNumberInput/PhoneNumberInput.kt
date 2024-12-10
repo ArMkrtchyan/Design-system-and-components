@@ -71,6 +71,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     private lateinit var countriesList: List<CountryModel>
     private var topCountryChipList: MutableList<CountryModel> = mutableListOf()
     private var isFocusable = false
+    private var isFirstFocusable = true
     private var isKeyboardActionClicked = false
     private var isValidNumber = true
     private var countryTopShips: String? = null
@@ -108,7 +109,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             ccpBinding.countryCodeLib.registerCarrierNumberEditText(binding.phoneNumber)
             ccpBinding.countryCodeLib.setNumberAutoFormattingEnabled(true)
             countriesMapping()
-            ccpBinding.countryCodeLib.setPhoneNumberValidityChangeListener { isValidNumber(it) }
+            ccpBinding.countryCodeLib.setPhoneNumberValidityChangeListener { if (!isFirstFocusable) isValidNumber(it) }
             ccpBinding.countryCodeLib.changeDefaultLanguage(CountryCodePicker.Language.RUSSIAN)
         }
         setupHelpErrorText()
@@ -160,6 +161,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             this.isFocusable = isFocusable
 
             if (!isFocusable) {
+                isFirstFocusable = false
                 isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
             }
             if (isValidNumber) {

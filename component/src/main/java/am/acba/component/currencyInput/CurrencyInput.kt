@@ -359,7 +359,9 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setAmountText(amount: String) {
         this.currency = currency
-        binding.amount.editText?.setText((if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()))
+        val amountFormatting = if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()
+        setMaxLength(amountFormatting.length)
+        binding.amount.editText?.setText(amountFormatting)
         validateAmount()
     }
 
@@ -432,7 +434,7 @@ class CurrencyInput @JvmOverloads constructor(
             currencyList.clear()
             currencyList.addAll(filteredCurrencyList)
 
-            binding.icArrow.visibility = if (filteredCurrencyList.size > 1) VISIBLE else INVISIBLE
+            binding.icArrow.isVisible = filteredCurrencyList.size > 1
             binding.currencyLayout.setOnClickListener {
                 if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(
                     null

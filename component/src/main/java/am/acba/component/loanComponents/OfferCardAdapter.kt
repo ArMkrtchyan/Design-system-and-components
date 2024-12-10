@@ -1,5 +1,6 @@
 package am.acba.component.loanComponents
 
+import am.acba.component.R
 import am.acba.component.databinding.ItemLoanOfferCardBinding
 import am.acba.component.extensions.getDisplayWidth
 import am.acba.component.extensions.inflater
@@ -16,21 +17,23 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
     ListAdapter<IOfferCard, ViewHolder>(OfferCardDiffCallBack()) {
     private val openCloseLiveEvent = LiveEvent<Boolean>()
     private var onItemClick: ((IOfferCard) -> Unit)? = null
+    private val holders = arrayListOf<ViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemLoanOfferCardBinding.inflate(parent.context.inflater(), parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding).also { holders.add(it) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(getItem(position), onItemClick)
     }
 
-    inner class ViewHolder(private val binding: ItemLoanOfferCardBinding) :
+    inner class ViewHolder(val binding: ItemLoanOfferCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(offerCard: IOfferCard, onItemClick: ((IOfferCard) -> Unit)?) {
             setIsRecyclable(false)
+            binding.root.setTag(R.id.offer_title, offerCard.getUniqueId())
             binding.root.setLoanCard(offerCard)
             binding.root.setOnClickListener {
                 onItemClick?.invoke(offerCard)
@@ -54,9 +57,23 @@ class OfferCardAdapter(private var isOpenedState: Boolean = false) :
         openCloseLiveEvent.value = !isOpenedState
     }
 
-    private class OfferCardDiffCallBack : DiffUtil.ItemCallback<IOfferCard>() {
-        override fun areItemsTheSame(oldItem: IOfferCard, newItem: IOfferCard) = false
+    override fun submitList(list: MutableList<IOfferCard>?) {
+        holders.forEach { holder ->
+            holder.setIsRecyclable(list?.any { it.getUniqueId() == holder.binding.root.getTag(R.id.offer_title).toString().toLong() } == false)
+        }
+        super.submitList(list)
+    }
 
-        override fun areContentsTheSame(oldItem: IOfferCard, newItem: IOfferCard) = false
+    class OfferCardDiffCallBack : DiffUtil.ItemCallback<IOfferCard>() {
+        override fun areItemsTheSame(oldItem: IOfferCard, newItem: IOfferCard): Boolean {
+            return oldItem.getUniqueId() == newItem.getUniqueId()
+        }
+
+        override fun areContentsTheSame(oldItem: IOfferCard, newItem: IOfferCard): Boolean {
+            return oldItem.getTitle() == newItem.getTitle()
+                    && oldItem.getDescription() == newItem.getDescription()
+                    && oldItem.getOffer() == newItem.getOffer()
+                    && oldItem.getBadgeVisibility() == newItem.getBadgeVisibility()
+        }
     }
 }

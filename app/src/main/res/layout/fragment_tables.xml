@@ -37,6 +37,7 @@
                 android:id="@+id/table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:startImageComponentType="Icon"
                 app:primaryTableCollapsedItemCount="9" />
 
         </LinearLayout>

@@ -37,7 +37,7 @@ class PrimaryOffersView : FrameLayout {
             isExpanded = getBoolean(R.styleable.PrimaryOffersView_offersExpanded, false)
             setOffersTitle(title)
             val snapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(binding.offersRecycler);
+            snapHelper.attachToRecyclerView(binding.offersRecycler)
             binding.offersRecycler.adapter = adapter
             setSeeAllText(seeAllTitle)
             binding.headerContainer.setOnClickListener {
@@ -107,8 +107,7 @@ class PrimaryOffersView : FrameLayout {
     }
 
     fun submitLoanOffers(list: List<IOfferCard>) {
-        adapter = OfferCardAdapter(isExpanded)
-        binding.offersRecycler.adapter = adapter
-        adapter.submitList(list)
+        adapter.submitList(list.toMutableList())
+        setNewBadgeCount(list.count { it.getBadgeVisibility() })
     }
 }

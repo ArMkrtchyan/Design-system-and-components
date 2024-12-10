@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.apply
 
 class MaterialDatePickerDialog(
     private val context: Context? = null,
@@ -19,6 +18,8 @@ class MaterialDatePickerDialog(
     private val minDate: Long? = null,
     private val maxDate: Long? = null,
     private val disabledDays: List<Int> = emptyList(),
+    private val disabledDaysOfWeek: List<Int> = emptyList(),
+    private val disabledDaysOfMoths: List<Pair<Int, Int>> = emptyList(),
     private val formattingPattern: String = "dd/MM/yyyy",
     private val onDateSet: ((dateFormatted: String?, date: Long?) -> Unit)? = null,
 ) {
@@ -36,6 +37,8 @@ class MaterialDatePickerDialog(
         builder.minDate,
         builder.maxDate,
         builder.disabledDays,
+        builder.disabledDaysOfWeek,
+        builder.disabledDaysOfMoths,
         builder.formattingPattern,
         builder.onDateSet,
     )
@@ -53,6 +56,8 @@ class MaterialDatePickerDialog(
         var minDate: Long? = null,
         var maxDate: Long? = null,
         var disabledDays: List<Int> = emptyList(),
+        var disabledDaysOfWeek: List<Int> = emptyList(),
+        var disabledDaysOfMoths: List<Pair<Int, Int>> = emptyList(),
         var formattingPattern: String = "dd/MM/yyyy",
         var onDateSet: ((dateFormatted: String?, date: Long?) -> Unit)? = null,
     ) {
@@ -65,6 +70,8 @@ class MaterialDatePickerDialog(
         fun setMaxDate(maxDate: Long) = apply { this.maxDate = maxDate }
         fun setFormattingPattern(formattingPattern: String) = apply { this.formattingPattern = formattingPattern }
         fun setDisabledDays(disabledDays: List<Int>) = apply { this.disabledDays = disabledDays }
+        fun setDisabledDaysOfWeek(disabledDaysOfWeek: List<Int>) = apply { this.disabledDaysOfWeek = disabledDaysOfWeek }
+        fun setDisabledDaysOfMoths(disabledDaysOfMoths: List<Pair<Int, Int>>) = apply { this.disabledDaysOfMoths = disabledDaysOfMoths }
         fun onDateSet(onDateSet: (dateFormatted: String?, date: Long?) -> Unit) = apply { this.onDateSet = onDateSet }
 
         fun build(): MaterialDatePickerDialog {
@@ -101,7 +108,13 @@ class MaterialDatePickerDialog(
                 maxDateCalendar[Calendar.SECOND] = 0
                 maxDateCalendar[Calendar.MILLISECOND] = 0
                 val isDisableAfterMaxDate = maxDate == null || calendar.timeInMillis <= maxDateCalendar.timeInMillis
-                return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate
+                val isDayInDisableDaysOfWeek = if (disabledDaysOfWeek.isNotEmpty()) {
+                    calendar[Calendar.DAY_OF_WEEK] !in disabledDaysOfWeek
+                } else true
+                val isDayInDisableDaysOfMonth = if (disabledDaysOfMoths.isNotEmpty()) {
+                    !disabledDaysOfMoths.any { it.first == calendar[Calendar.DAY_OF_MONTH] && it.second == calendar[Calendar.MONTH] }
+                } else true
+                return isDayIsNotInDisables && isDisableBeforeMinDate && isDisableAfterMaxDate && isDayInDisableDaysOfWeek && isDayInDisableDaysOfMonth
             }
 
             override fun describeContents(): Int {
