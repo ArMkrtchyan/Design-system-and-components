@@ -17,11 +17,13 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 
 class PrimaryCardListing : FrameLayout {
+
     private val binding by lazy {
         CardListingLayoutBinding.inflate(
             context.inflater(), this, false
@@ -144,6 +146,10 @@ class PrimaryCardListing : FrameLayout {
 
     fun setStartTitleText(text: String?) {
         binding.tvStartTitle.updateTextView(text)
+    }
+
+    fun setStartTitleTextAppearance(@StyleRes resId: Int?) {
+        resId?.let { binding.tvStartTitle.setTextAppearance(it) }
     }
 
     fun setStartBodyText(text: String?) {

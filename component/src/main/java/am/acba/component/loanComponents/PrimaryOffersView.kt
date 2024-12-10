@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 class PrimaryOffersView : FrameLayout {
     private val binding by lazy { PrimaryLoanOffersBinding.inflate(context.inflater(), this, false) }
     private var isExpanded = false
-    private val adapter by lazy { OfferCardAdapter(isExpanded) }
+    private var adapter = OfferCardAdapter(isExpanded)
     private var isAnimationPlayed = false
 
     constructor(context: Context) : super(context)
@@ -37,7 +37,7 @@ class PrimaryOffersView : FrameLayout {
             isExpanded = getBoolean(R.styleable.PrimaryOffersView_offersExpanded, false)
             setOffersTitle(title)
             val snapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(binding.offersRecycler);
+            snapHelper.attachToRecyclerView(binding.offersRecycler)
             binding.offersRecycler.adapter = adapter
             setSeeAllText(seeAllTitle)
             binding.headerContainer.setOnClickListener {
@@ -107,6 +107,7 @@ class PrimaryOffersView : FrameLayout {
     }
 
     fun submitLoanOffers(list: List<IOfferCard>) {
-        adapter.submitList(list)
+        adapter.submitList(list.toMutableList())
+        setNewBadgeCount(list.count { it.getBadgeVisibility() })
     }
 }

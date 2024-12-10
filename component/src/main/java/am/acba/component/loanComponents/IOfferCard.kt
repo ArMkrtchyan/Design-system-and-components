@@ -1,6 +1,7 @@
 package am.acba.component.loanComponents
 
 interface IOfferCard {
+    fun getUniqueId(): Long
     fun getTitle(): String
     fun getOffer(): String
     fun getDescription(): String

@@ -120,20 +120,22 @@ class PrimaryOfferCardView : FrameLayout {
     }
 
     fun setState(isOpenedState: Boolean) {
-        binding.parent.updateLayoutParams<LayoutParams> {
-            height = if (isOpenedState) 120.dpToPx() else 38.dpToPx()
+        if (!isAnimationPlayed) {
+            binding.parent.updateLayoutParams<LayoutParams> {
+                height = if (isOpenedState) 120.dpToPx() else 38.dpToPx()
+            }
+            binding.parent.setPadding(0, if (isOpenedState) 16.dpToPx() else 8.dpToPx(), 0, if (isOpenedState) 16.dpToPx() else 8.dpToPx())
+            binding.loanOfferCardBadge.updateLayoutParams<MarginLayoutParams> {
+                marginEnd = if (isOpenedState) 16.dpToPx() else 8.dpToPx()
+            }
+            binding.loanOfferCardAmountWithCurrencyTop.isVisible = !isOpenedState
+            binding.loanOfferCardAmountWithCurrency.isVisible = isOpenedState
+            binding.loanOfferCardEndDate.isVisible = isOpenedState
+            binding.loanOfferCardArrowRight.isVisible = isOpenedState
+            val alpha = if (isOpenedState) 1f else 0f
+            binding.loanOfferCardAmountWithCurrency.alpha = alpha
+            binding.loanOfferCardEndDate.alpha = alpha
+            binding.loanOfferCardArrowRight.alpha = alpha
         }
-        binding.parent.setPadding(0, if (isOpenedState) 16.dpToPx() else 8.dpToPx(), 0, if (isOpenedState) 16.dpToPx() else 8.dpToPx())
-        binding.loanOfferCardBadge.updateLayoutParams<MarginLayoutParams> {
-            marginEnd = if (isOpenedState) 16.dpToPx() else 8.dpToPx()
-        }
-        binding.loanOfferCardAmountWithCurrencyTop.isVisible = !isOpenedState
-        binding.loanOfferCardAmountWithCurrency.isVisible = isOpenedState
-        binding.loanOfferCardEndDate.isVisible = isOpenedState
-        binding.loanOfferCardArrowRight.isVisible = isOpenedState
-        val alpha = if (isOpenedState) 1f else 0f
-        binding.loanOfferCardAmountWithCurrency.alpha = alpha
-        binding.loanOfferCardEndDate.alpha = alpha
-        binding.loanOfferCardArrowRight.alpha = alpha
     }
 }

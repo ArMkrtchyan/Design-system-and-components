@@ -32,11 +32,11 @@ class CardAdditionalInfoAdapter() :
 
     private class LoanCardAdditionalInfoDiffCallBack<T : ICardAdditionalInfo> : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem == newItem
+            return oldItem.getTitle() == newItem.getTitle() && oldItem.getInfo() == newItem.getInfo()
         }
 
         override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-            return oldItem == newItem
+            return oldItem.getTitle() == newItem.getTitle() && oldItem.getInfo() == newItem.getInfo()
         }
     }
 }

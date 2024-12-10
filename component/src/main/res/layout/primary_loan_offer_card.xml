@@ -88,11 +88,11 @@
         android:layout_height="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/background_rounded"
-        android:backgroundTint="?attr/backgroundTonal1"
+        android:backgroundTint="?attr/contentSecondary"
         android:backgroundTintMode="add"
         android:padding="5dp"
         android:src="@drawable/ic_right"
-        android:tint="?attr/contentPrimary"
+        android:tint="?attr/contentInverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,20 +57,20 @@ class CurrencyInput @JvmOverloads constructor(
 
     init {
         addView(binding.root)
-        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInputInput).apply {
+        context.obtainStyledAttributes(attrs, R.styleable.CurrencyInput).apply {
             try {
-                errorText = getString(R.styleable.CurrencyInputInput_currencyInputErrorText) ?: ""
-                hintText = getString(R.styleable.CurrencyInputInput_currencyInputHintText) ?: ""
-                helpText = getString(R.styleable.CurrencyInputInput_currencyInputHelpText) ?: ""
-                maxLength = getInt(R.styleable.CurrencyInputInput_currencyInputMaxLength, 15)
+                errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
+                hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
+                helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
+                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 15)
                 maxAmount =
-                    getFloat(R.styleable.CurrencyInputInput_currencyInputMaxAmount, 0f).toDouble()
+                    getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
                 minAmount =
-                    getFloat(R.styleable.CurrencyInputInput_currencyInputMinAmount, 0F).toDouble()
+                    getFloat(R.styleable.CurrencyInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot =
-                    getBoolean(R.styleable.CurrencyInputInput_formattingWithOutDot, false)
+                    getBoolean(R.styleable.CurrencyInput_formattingWithOutDot, false)
                 enableErrorAnimation =
-                    getBoolean(R.styleable.CurrencyInputInput_enableErrorAnimation, false)
+                    getBoolean(R.styleable.CurrencyInput_enableErrorAnimation, false)
             } finally {
                 recycle()
             }
@@ -344,7 +344,9 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setAmountText(amount: String) {
         this.currency = currency
-        binding.amount.editText?.setText((if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()))
+        val amountFormatting = if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()
+        setMaxLength(amountFormatting.length)
+        binding.amount.editText?.setText(amountFormatting)
         validateAmount()
     }
 
@@ -417,7 +419,7 @@ class CurrencyInput @JvmOverloads constructor(
             currencyList.clear()
             currencyList.addAll(filteredCurrencyList)
 
-            binding.icArrow.visibility = if (filteredCurrencyList.size > 1) VISIBLE else INVISIBLE
+            binding.icArrow.isVisible = filteredCurrencyList.size > 1
             binding.currencyLayout.setOnClickListener {
                 if (filteredCurrencyList.size > 1) currencyIconClick() else it.setOnClickListener(
                     null
