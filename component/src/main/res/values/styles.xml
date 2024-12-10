@@ -2,4 +2,20 @@
 <resources>
 
     <style name="ACBA.Theme.Light" parent="BasePrimaryThemeLight" />
+    <style name="BaseBottomSheetDialogTheme" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="bottomSheetStyle">@style/BottomSheetLight</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateHidden</item>
+    </style>
+
+    <style name="BaseBottomSheetLight" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_bottom_sheet_dialog</item>
+    </style>
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialogTheme" />
+
+
+
+    <style name="BottomSheetLight" parent="BaseBottomSheetLight" />
 </resources>

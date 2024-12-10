@@ -40,7 +40,7 @@
                 android:layout_marginTop="@dimen/spacing_20"
                 app:countryTopChips="am,us"
                 app:currencyInputErrorText="amount is not valid"
-                app:currencyInputHelpText="Amount"
+                app:currencyInputBottomSheetTitle="Select currency"
                 app:currencyInputHintText="Fill the amount"
                 app:currencyInputMaxAmount="10000"
                 app:currencyInputMaxLength="30"

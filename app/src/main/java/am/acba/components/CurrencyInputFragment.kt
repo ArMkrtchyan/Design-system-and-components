@@ -14,14 +14,13 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {
-        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
-        amount.onFocusChangeListener { fosus -> }
+        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR", "GBP", "GEL", "RUB", "CHF"))
+        amount.onFocusChangeListener { focus -> }
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
         amount.setHintText("Fill the amount")
         amount.setMaxAmount(999999999999999.0)
         amount.setMinAmount(100.0)
-        amount.fixCurrency()
         amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Currencies/EUR.svg")
         //  amount.loadCurrencyIcon("https://online1-test.acba.am/Shared/Banner/Amex%20cashback/Mobile/hy/amexcashback_06.2024.png")
         search.setOnClickListener {
