@@ -83,8 +83,6 @@ class CurrencyInput @JvmOverloads constructor(
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
         binding.amount.amountFormattingWhileTyping()
-//        binding.amount.editText?.hideSoftInput()
-//        binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
     }
 
     fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {

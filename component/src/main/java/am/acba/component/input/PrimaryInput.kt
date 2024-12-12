@@ -114,8 +114,7 @@ open class PrimaryInput : TextInputLayout {
                 1 -> setInputTypeForNumber()
                 2 -> amountFormattingWhileTyping()
             }
-//            editText?.hideSoftInput()
-//            editText?.let { rootView.addKeyboardVisibilityListener(it) }
+
             updateEndIconBackgroundState()
             updateStartIconBackgroundState()
             suffixTextView.translationY = -8.dpToPx().toFloat()
@@ -225,13 +224,11 @@ open class PrimaryInput : TextInputLayout {
 
                 editText?.removeTextChangedListener(this)
                 val amount = s.toString()
-
                 val cleanString = amount.replace(",", "")
 
                 if (amount.contains(".")) {
                     when (amount.split(".")[1].length) {
                         0 -> {
-
                         }
 
                         1 -> {
