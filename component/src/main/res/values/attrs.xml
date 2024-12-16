@@ -193,12 +193,14 @@
         <attr name="textMaxLength" format="integer" />
         <attr name="cornerStyle" format="integer" />
         <attr name="hasDropDown" format="boolean" />
+        <attr name="isDotDisabledInMiddleOfText" format="boolean" />
         <attr name="android:text" />
         <attr name="formattingWithDots" format="boolean" />
         <attr name="enableErrorAnimation" />
         <attr name="inputType" format="enum">
             <enum name="amountFormatting" value="0" />
             <enum name="quantity" value="1" />
+            <enum name="amountFormattingWhileTyping" value="2" />
         </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">

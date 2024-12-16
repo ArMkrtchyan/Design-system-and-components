@@ -1,20 +1,30 @@
 package am.acba.component.input
 
-import am.acba.component.R
 import android.content.Context
+import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
+import android.util.Log
+import com.google.android.material.textfield.TextInputEditText
 
-class PrimaryEditText : AppCompatEditText {
-    constructor(context: Context) : super(context, null, R.attr.inputEditTextStyle)
+class PrimaryEditText : TextInputEditText {
+    private var disableDot = false
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs, R.attr.inputEditTextStyle)
+    override fun onSelectionChanged(selStart: Int, selEnd: Int) {
+        if (disableDot && selStart == selEnd) {
+            if (selStart < (text?.length ?: 1)) {
+                keyListener = DigitsKeyListener.getInstance("0123456789")
+            } else {
+                keyListener = DigitsKeyListener.getInstance("0123456789.")
+            }
+        }
+        Log.d("SelectionChanged", "selStart: $selStart, selEnd: $selEnd")
+        super.onSelectionChanged(selStart, selEnd)
+    }
 
-    constructor(
-        context: Context,
-        attrs: AttributeSet,
-        defStyleAttr: Int
-    ) : super(context, attrs, R.attr.inputEditTextStyle) {
-
+    fun setDisableDot(isDotDisabled: Boolean) {
+        disableDot = isDotDisabled
     }
 }
