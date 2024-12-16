@@ -179,7 +179,7 @@ open class PrimaryInput : TextInputLayout {
     private fun amountTextFormattingWhileTyping(isFocusable: Boolean, currencyTextWatcher: TextWatcher? = null) {
         val text = editText?.text?.toString()?.trim() ?: ""
         if (isFocusable) {
-            setMaxLength(13)
+            setMaxLength(textMaxLength)
             if (text.contains(".") && text.split(".")[1].toDouble() == 0.00) {
                 editText?.setText(getDeFormatedStringAmount().split("\\.")[0])
             }
@@ -228,8 +228,6 @@ open class PrimaryInput : TextInputLayout {
 
                 if (amount.contains(".")) {
                     when (amount.split(".")[1].length) {
-                        0 -> {
-                        }
 
                         1 -> {
                             val parsed = cleanString.toDoubleOrNull() ?: 0.0
@@ -256,18 +254,20 @@ open class PrimaryInput : TextInputLayout {
                         }
 
                         else -> {
-                            val parts = amount.split(".")
-                            val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
+                            if(amount.split(".")[1].isNotEmpty()) {
+                                val parts = amount.split(".")
+                                val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
 
-                            val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
-                            val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
-                                maximumFractionDigits = 2
-                                minimumFractionDigits = 0
+                                val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
+                                val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
+                                    maximumFractionDigits = 2
+                                    minimumFractionDigits = 0
+                                }
+
+                                current = formatter.format(parsed)
+                                editText?.setText(current)
+                                editText?.setSelection(current.length)
                             }
-
-                            current = formatter.format(parsed)
-                            editText?.setText(current)
-                            editText?.setSelection(current.length)
                         }
                     }
                 } else {

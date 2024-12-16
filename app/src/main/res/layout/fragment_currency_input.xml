@@ -43,7 +43,6 @@
                 app:currencyInputHelpText="Amount"
                 app:currencyInputHintText="Fill the amount"
                 app:currencyInputMaxAmount="10000"
-                app:currencyInputMaxLength="30"
                 app:currencyInputMinAmount="100" />
 
             <am.acba.component.input.PrimaryInput

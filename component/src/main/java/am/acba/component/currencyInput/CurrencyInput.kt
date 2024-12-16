@@ -62,7 +62,7 @@ class CurrencyInput @JvmOverloads constructor(
                 errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
                 hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
-                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 15)
+                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 13)
                 maxAmount =
                     getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
                 minAmount =
