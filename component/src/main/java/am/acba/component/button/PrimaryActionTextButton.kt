@@ -255,7 +255,7 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionBadge.updateLayoutParams<LayoutParams> {
             width = iconSize.actionButtonSize.dpToPx()
             height = iconSize.actionButtonSize.dpToPx()
-            binding.actionBadge.setPadding(iconSize.padding.dpToPx())
+            binding.actionBadge.setPadding(iconSize.actionIconPadding.dpToPx())
         }
     }
 
@@ -348,13 +348,13 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val padding: Int, val badgeSize: Int) {
-        XXLARGE(80, 32, 8, 20),
-        XLARGE(56, 24, 7, 14),
-        LARGE(40, 16, 1, 10),
-        MEDIUM(36, 14, 1, 9),
-        SMALL(32, 8, 1, 8),
-        XSMALL(24, 0, 4, 6);
+    enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val actionIconPadding: Int, val padding: Int, val badgeSize: Int) {
+        XXLARGE(80, 32, 8,16, 20),
+        XLARGE(56, 24, 7,16, 14),
+        LARGE(40, 16, 1,10, 10),
+        MEDIUM(36, 14, 1,8, 9),
+        SMALL(32, 8, 1,8, 8),
+        XSMALL(24, 0, 4, 4,6);
 
         companion object {
             fun Int.findSizeByOrdinal(): ActionIconSize? {
