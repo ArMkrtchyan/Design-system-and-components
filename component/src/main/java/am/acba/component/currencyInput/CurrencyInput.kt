@@ -48,6 +48,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var minAmount: Double
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
+    private var bottomSheetTitle = ""
     private var currency: String = ""
         get() = binding.currency.text.toString()
 
@@ -71,6 +72,7 @@ class CurrencyInput @JvmOverloads constructor(
                     getBoolean(R.styleable.CurrencyInput_formattingWithOutDot, false)
                 enableErrorAnimation =
                     getBoolean(R.styleable.CurrencyInput_enableErrorAnimation, false)
+                bottomSheetTitle = getString(R.styleable.CurrencyInput_currencyInputBottomSheetTitle) ?: "Select currency"
             } finally {
                 recycle()
             }
@@ -270,7 +272,7 @@ class CurrencyInput @JvmOverloads constructor(
         val bundle = Bundle()
         bundle.putBoolean("needToSavActionsOnDB", false)
         bundle.putBoolean("isSearchInputVisible", false)
-        bundle.putString("bottomSheetTitle", "Currency")
+        bundle.putString("title", bottomSheetTitle)
         bundle.putParcelableArrayList("CountriesList", currencyList as ArrayList)
         CountryBottomSheetDialog.show(getFragmentManager(), bundle, ::selectCurrency, arrayListOf())
     }

@@ -1,6 +1,9 @@
 package am.acba.component.dialog
 
+import am.acba.component.bottomsheet.PrimaryBottomSheetDialog
 import am.acba.component.databinding.ContactBookBottomSheetLayoutBinding
+import am.acba.component.databinding.CountryBottomSheetBinding
+import am.acba.component.extensions.Inflater
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,17 +14,24 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class ListBottomSheetDialog : BottomSheetDialogFragment() {
+class ContactBooksBottomSheetDialog : PrimaryBottomSheetDialog<ContactBookBottomSheetLayoutBinding>() {
 
-    private lateinit var _binding: ContactBookBottomSheetLayoutBinding
-    private val binding get() = _binding
+    override val inflate: Inflater<ContactBookBottomSheetLayoutBinding>
+        get() = ContactBookBottomSheetLayoutBinding::inflate
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = ContactBookBottomSheetLayoutBinding.inflate(inflater, container, false)
-        binding.btnClose.setOnClickListener { dismiss() }
-        binding.acbaContacts.setOnClickListener { handleActions(1) }
-        binding.phoneContacts.setOnClickListener { handleActions(2) }
-        return binding.root
+    override val state: Int
+        get() = BottomSheetBehavior.STATE_EXPANDED
+
+    override val contentPaddingStart: Int
+        get() = 0
+    override val contentPaddingEnd: Int
+        get() = 0
+    override val contentPaddingBottom: Int
+        get() = 0
+
+    override fun ContactBookBottomSheetLayoutBinding.initView() {
+        acbaContacts.setOnClickListener { handleActions(1) }
+        phoneContacts.setOnClickListener { handleActions(2) }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): BottomSheetDialog = BottomSheetDialog(requireContext(), theme).apply {
@@ -35,16 +45,17 @@ class ListBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     companion object {
-        private var instance: ListBottomSheetDialog? = null
+        private var instance: ContactBooksBottomSheetDialog? = null
         fun show(
             fragmentManager: FragmentManager,
+            bundle: Bundle? = null,
             action: ((Int) -> Unit)? = null,
-        ): ListBottomSheetDialog {
+        ): ContactBooksBottomSheetDialog {
             if (instance == null) {
-                instance = ListBottomSheetDialog().apply { mAction = action }
-                instance?.show(fragmentManager, ListBottomSheetDialog::class.java.simpleName)
+                instance = ContactBooksBottomSheetDialog().apply {arguments = bundle; mAction = action }
+                instance?.show(fragmentManager, ContactBooksBottomSheetDialog::class.java.simpleName)
             }
-            return instance as ListBottomSheetDialog
+            return instance as ContactBooksBottomSheetDialog
         }
     }
 

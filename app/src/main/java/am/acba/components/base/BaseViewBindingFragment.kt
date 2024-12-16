@@ -42,7 +42,6 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         Log.i("PermissionsResult", "$requestCode")
         findPhoneNumberInputRecursively(view)?.onRequestPermissionsResult(requestCode, grantResults)
-        findCreditCardInputRecursively(view)?.onRequestPermissionsResult(requestCode, grantResults)
     }
 
     private fun findPhoneNumberInputRecursively(rootView: View?): PhoneNumberInput? {
