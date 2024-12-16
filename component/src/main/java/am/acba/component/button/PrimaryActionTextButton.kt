@@ -9,7 +9,6 @@ import am.acba.component.button.PrimaryActionTextButton.ActionIconSize.Companion
 import am.acba.component.databinding.WidgetActionTextButtonBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
-import am.acba.component.extensions.pxToDp
 import am.acba.component.imageView.MaterialTextDrawable
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
@@ -142,6 +141,10 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
+    fun getBadge(): FrameLayout {
+        return binding.badgeIcon
+    }
+
     fun getActionIcon(): PrimaryImageView {
         return binding.actionImage
     }
@@ -256,7 +259,7 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    fun setBadgeSize(iconSize:ActionIconSize) {
+    fun setBadgeSize(iconSize: ActionIconSize) {
         binding.badgeIcon.updateLayoutParams<LayoutParams> {
             width = iconSize.badgeSize.dpToPx()
             height = iconSize.badgeSize.dpToPx()
