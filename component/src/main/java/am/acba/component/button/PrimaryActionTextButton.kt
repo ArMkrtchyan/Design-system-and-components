@@ -8,8 +8,8 @@ import am.acba.component.button.PrimaryActionTextButton.ActionButtonType.Compani
 import am.acba.component.button.PrimaryActionTextButton.ActionIconSize.Companion.findSizeByOrdinal
 import am.acba.component.databinding.WidgetActionTextButtonBinding
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
-import am.acba.component.extensions.pxToDp
 import am.acba.component.imageView.MaterialTextDrawable
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
@@ -99,14 +99,6 @@ class PrimaryActionTextButton : FrameLayout {
                 badgeTextPaddingStart = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
                 badgeTextStyle = getResourceId(R.styleable.PrimaryActionTextButton_badgeTextAppearance, R.style.Small_Regular)
                 binding.badgeIcon.isVisible = getBoolean(R.styleable.PrimaryActionTextButton_showBadge, false)
-                /*binding.badgeIcon.setBadgeIcon(icon)
-                binding.badgeIcon.setBadgeText(text)
-                binding.badgeIcon.setBadgeTextColor(textColor)
-                binding.badgeIcon.setBadgeIconTint(iconTint)
-                binding.badgeIcon.setBadgeBackgroundTint(backgroundTint)
-                binding.badgeIcon.setPaddings(badgeTextPaddingStart, badgeTextPaddingEnd, badgeTextPaddingTop, badgeTextPaddingBottom)
-                binding.badgeIcon.setTextAppearance(badgeTextStyle)
-                binding.badgeIcon.setBadgeType(badgeType)*/
 
 
                 textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
@@ -140,6 +132,10 @@ class PrimaryActionTextButton : FrameLayout {
             recycle()
             invalidate()
         }
+    }
+
+    fun getBadge(): FrameLayout {
+        return binding.badgeIcon
     }
 
     fun getActionIcon(): PrimaryImageView {
@@ -252,11 +248,11 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionBadge.updateLayoutParams<LayoutParams> {
             width = iconSize.actionButtonSize.dpToPx()
             height = iconSize.actionButtonSize.dpToPx()
-            binding.actionBadge.setPadding(iconSize.padding.dpToPx())
+            binding.actionBadge.setPadding(iconSize.actionIconPadding.dpToPx())
         }
     }
 
-    fun setBadgeSize(iconSize:ActionIconSize) {
+    fun setBadgeSize(iconSize: ActionIconSize) {
         binding.badgeIcon.updateLayoutParams<LayoutParams> {
             width = iconSize.badgeSize.dpToPx()
             height = iconSize.badgeSize.dpToPx()
@@ -274,7 +270,10 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setBadgeBackgroundTint(colorStateList: ColorStateList?) {
         binding.badgeIcon.backgroundTintList = colorStateList
+    }
 
+    fun setBadgeIconTint(colorStateList: ColorStateList?) {
+        binding.ivBadgeIcon.backgroundTintList = colorStateList
     }
 
     fun setActionBadgeImage(iconRes: Drawable?) {
@@ -345,13 +344,13 @@ class PrimaryActionTextButton : FrameLayout {
         }
     }
 
-    enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val padding: Int, val badgeSize: Int) {
-        XXLARGE(80, 32, 8, 20),
-        XLARGE(56, 24, 7, 14),
-        LARGE(40, 16, 1, 10),
-        MEDIUM(36, 14, 1, 9),
-        SMALL(32, 8, 1, 8),
-        XSMALL(24, 0, 4, 6);
+    enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val actionIconPadding: Int, val padding: Int, val badgeSize: Int) {
+        XXLARGE(80, 32, 8,16, 20),
+        XLARGE(56, 24, 7,16, 14),
+        LARGE(40, 16, 1,10, 10),
+        MEDIUM(36, 14, 1,8, 9),
+        SMALL(32, 8, 1,8, 8),
+        XSMALL(24, 0, 4, 4,6);
 
         companion object {
             fun Int.findSizeByOrdinal(): ActionIconSize? {
