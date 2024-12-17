@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_20"
                 app:countryTopChips="am,us"
+                app:formattingWithOutDot="false"
                 app:currencyInputErrorText="amount is not valid"
                 app:currencyInputBottomSheetTitle="Select currency"
                 app:currencyInputHintText="Fill the amount"

@@ -21,9 +21,8 @@
             android:layout_marginEnd="1dp"
             android:layout_weight="1"
             android:enabled="true"
-            app:isDotDisabledInMiddleOfText="true"
             android:hint="Amount"
-            app:inputType="amountFormattingWhileTyping"
+            android:inputType="numberDecimal"
             app:cornerStyle="1"
             app:textMaxLength="15" />
 
