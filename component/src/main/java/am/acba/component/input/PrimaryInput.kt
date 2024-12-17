@@ -48,6 +48,7 @@ open class PrimaryInput : TextInputLayout {
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
 
+    private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
@@ -131,9 +132,12 @@ open class PrimaryInput : TextInputLayout {
 
                         onDoneButtonClick?.invoke()
                         return true
-                    } else if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                        isKeyboardActionClicked = true
-                        setErrorAnimation()
+                    } else {
+                        onOtherActionButtonClick?.invoke(actionId)
+                        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                            isKeyboardActionClicked = true
+                            setErrorAnimation()
+                        }
                     }
                     return false
                 }
@@ -144,6 +148,10 @@ open class PrimaryInput : TextInputLayout {
 
     fun onKeyboardDoneButtonClick(onDoneButtonClick: () -> Unit) {
         this.onDoneButtonClick = onDoneButtonClick
+    }
+
+    fun onKeyboardOtherActionButtonClick(onActionButtonClick: (Int) -> Unit) {
+        this.onOtherActionButtonClick = onActionButtonClick
     }
 
     fun setInputTypeForAmount() {
