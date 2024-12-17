@@ -45,6 +45,7 @@ open class PrimaryInput : TextInputLayout {
     var enableErrorAnimation = false
 
     private var textMaxLength = -1
+    private var textMaxLengthWhileTyping = -1
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
@@ -155,6 +156,10 @@ open class PrimaryInput : TextInputLayout {
         this.onDoneButtonClick = onDoneButtonClick
     }
 
+    fun setFormattingWithDots(isFormattingWithDots: Boolean) {
+        formattingWithDot = isFormattingWithDots
+    }
+
     fun setInputTypeForAmount(enableFormattingWithDots: Boolean = false) {
         formattingWithDot = enableFormattingWithDots
         editText?.inputType = InputType.TYPE_CLASS_NUMBER
@@ -179,12 +184,12 @@ open class PrimaryInput : TextInputLayout {
     private fun amountTextFormattingWhileTyping(isFocusable: Boolean, currencyTextWatcher: TextWatcher? = null) {
         val text = editText?.text?.toString()?.trim() ?: ""
         if (isFocusable) {
-            setMaxLength(textMaxLength)
+            setMaxLength(textMaxLengthWhileTyping)
             if (text.contains(".") && text.split(".")[1].toDouble() == 0.00) {
                 editText?.setText(getDeFormatedStringAmount().split("\\.")[0])
             }
         } else {
-            val formattedText = text.replace(",", "").numberFormatting()
+            val formattedText = reformatAmount(text.replace(",", ""))
             setMaxLength(formattedText.length)
             editText?.setText(formattedText)
         }
@@ -254,7 +259,7 @@ open class PrimaryInput : TextInputLayout {
                         }
 
                         else -> {
-                            if(amount.split(".")[1].isNotEmpty()) {
+                            if (amount.split(".")[1].isNotEmpty()) {
                                 val parts = amount.split(".")
                                 val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
 
@@ -359,6 +364,10 @@ open class PrimaryInput : TextInputLayout {
         val fArray = arrayOfNulls<InputFilter>(1)
         fArray[0] = LengthFilter(maxLength)
         editText?.filters = fArray
+    }
+
+    fun setMaxLengthWhileTyping(maxLength: Int) {
+        textMaxLengthWhileTyping = maxLength
     }
 
     private fun updateEndIconBackgroundState() {

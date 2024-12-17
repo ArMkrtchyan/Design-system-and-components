@@ -14,10 +14,11 @@ class PrimaryEditText : TextInputEditText {
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
         if (disableDot && selStart == selEnd) {
-            if (selStart < (text?.length ?: 1)) {
-                keyListener = DigitsKeyListener.getInstance("0123456789")
+            val unformattedText = text?.toString()?.replace(",", "") ?: ""
+            keyListener = if (selStart < (unformattedText.length)) {
+                DigitsKeyListener.getInstance("0123456789")
             } else {
-                keyListener = DigitsKeyListener.getInstance("0123456789.")
+                DigitsKeyListener.getInstance("0123456789.")
             }
         }
         Log.d("SelectionChanged", "selStart: $selStart, selEnd: $selEnd")

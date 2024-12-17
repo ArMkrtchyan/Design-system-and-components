@@ -77,6 +77,7 @@ class CurrencyInput @JvmOverloads constructor(
                 recycle()
             }
         }
+        binding.amount.setFormattingWithDots(!formattingWithOutDot)
         setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
@@ -93,6 +94,7 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setMaxLength(maxLength: Int) {
         binding.amount.setMaxLength(maxLength)
+        binding.amount.setMaxLengthWhileTyping(maxLength)
     }
 
     fun setImeOptions(imeOptions: Int) {
