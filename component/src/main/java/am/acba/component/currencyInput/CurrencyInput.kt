@@ -63,7 +63,7 @@ class CurrencyInput @JvmOverloads constructor(
                 errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
                 hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
-                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 13)
+                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 15)
                 maxAmount =
                     getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
                 minAmount =
@@ -77,7 +77,6 @@ class CurrencyInput @JvmOverloads constructor(
                 recycle()
             }
         }
-        binding.amount.setFormattingWithDots(!formattingWithOutDot)
         setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
@@ -85,7 +84,8 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
-        binding.amount.amountFormattingWhileTyping()
+//        binding.amount.editText?.hideSoftInput()
+//        binding.amount.editText?.let { rootView.addKeyboardVisibilityListener(it) }
     }
 
     fun setOnCurrencyClickListener(onClickListener: View.OnClickListener?) {
@@ -94,7 +94,6 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun setMaxLength(maxLength: Int) {
         binding.amount.setMaxLength(maxLength)
-        binding.amount.setMaxLengthWhileTyping(maxLength)
     }
 
     fun setImeOptions(imeOptions: Int) {
@@ -168,8 +167,9 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     private fun setupBackgroundsByFocusChange() {
-        binding.amount.onFocusChangeListener {isFocusable ->
+        binding.amount.editText?.setOnFocusChangeListener { _, isFocusable ->
             this.isFocusable = isFocusable
+            amountTextFormatting(isFocusable)
             val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
                 setupBackgroundByFocusable()
@@ -180,6 +180,19 @@ class CurrencyInput @JvmOverloads constructor(
                 validateAmount()
             }
             mAction?.invoke(isFocusable)
+        }
+    }
+
+    private fun amountTextFormatting(isFocusable: Boolean) {
+        if (isFocusable) {
+            binding.amount.editText?.setText(getDeFormatedStringAmount())
+            binding.amount.setMaxLength(maxLength)
+        } else {
+            val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
+            val formattedText =
+                if (formattingWithOutDot) text.numberFormattingWithOutDot() else text.numberFormatting()
+            binding.amount.setMaxLength(formattedText.length)
+            binding.amount.editText?.setText(formattedText)
         }
     }
 
