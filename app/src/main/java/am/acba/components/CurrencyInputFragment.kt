@@ -5,7 +5,6 @@ import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentCurrencyInputBinding
-import androidx.core.widget.doAfterTextChanged
 
 class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBinding>() {
     override val inflate: Inflater<FragmentCurrencyInputBinding>
@@ -14,7 +13,9 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         get() = mBinding.toolbar
 
     override fun FragmentCurrencyInputBinding.initView() {
-        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR", "GBP", "GEL", "RUB", "CHF"))
+        amount.setCurrencyList(arrayListOf("AMD", "USD", "EUR"))
+        amount.enableErrorAnimation = true
+        amount.onFocusChangeListener { fosus -> }
         amount.onFocusChangeListener { focus -> }
         amount.setHelpText("Amount")
         amount.setErrorText("amount is not valid amount is not valid amount is not valid")
@@ -35,9 +36,7 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
         duration.setMaxLength(2)
         duration.setInputTypeForNumber()
         duration.editText?.maxLines = 1
-        duration.editText?.doAfterTextChanged {
 
-        }
         duration.editText?.setOnFocusChangeListener { _, hasFocus ->
 
         }
