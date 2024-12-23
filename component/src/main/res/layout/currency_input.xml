@@ -24,8 +24,7 @@
             app:isDotDisabledInMiddleOfText="true"
             android:hint="Amount"
             app:inputType="amountFormattingWhileTyping"
-            app:cornerStyle="1"
-            app:textMaxLength="15" />
+            app:cornerStyle="1"/>
 
         <LinearLayout
             android:id="@+id/currency_layout"

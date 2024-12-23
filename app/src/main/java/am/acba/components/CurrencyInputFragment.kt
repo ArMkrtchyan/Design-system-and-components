@@ -33,7 +33,6 @@ class CurrencyInputFragment : BaseViewBindingFragment<FragmentCurrencyInputBindi
             amount.setHintText("5555")
         }
         val duration = mBinding.duration
-        duration.setMaxLength(2)
         duration.setInputTypeForNumber()
         duration.editText?.maxLines = 1
 

@@ -87,7 +87,6 @@ class CurrencyInput @JvmOverloads constructor(
         setupFirstUi()
         setupCurrenciesList()
         setupBackgroundsByFocusChange()
-        binding.amount.amountFormattingWhileTyping()
     }
 
     private fun initKeyboardListeners() {
@@ -106,7 +105,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setMaxLength(maxLength: Int) {
-        binding.amount.setMaxLength(maxLength)
+        binding.amount.setMaxLengthForFormattedText(maxLength)
     }
 
     fun setImeOptions(imeOptions: Int) {
@@ -358,7 +357,6 @@ class CurrencyInput @JvmOverloads constructor(
     fun setAmountText(amount: String) {
         this.currency = currency
         val amountFormatting = if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()
-        setMaxLength(amountFormatting.length)
         binding.amount.editText?.setText(amountFormatting)
         validateAmount()
     }
