@@ -230,6 +230,7 @@ class PrimaryCardListing : FrameLayout {
     }
 
     fun getStartIcon() = binding.ivStartIcon
+
     fun getEndIcon() = binding.ivEndIcon
 
     fun setStartIconTint(colorStateList: ColorStateList?) {
@@ -277,14 +278,6 @@ class PrimaryCardListing : FrameLayout {
             } else {
                 setOnClickListener(onClickListener)
             }
-        }
-    }
-
-    enum class IconTypes(var padding: Int) {
-        LARGE(0), SMALL(6);
-
-        companion object {
-            fun Int.findIconTypeByOrdinal() = entries.find { it.ordinal == this }
         }
     }
 }
