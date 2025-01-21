@@ -2,7 +2,6 @@ package am.acba.component.cardListing
 
 import am.acba.component.PreventDoubleClickListener
 import am.acba.component.R
-import am.acba.component.cardListing.PrimaryCardListing.IconTypes.Companion.findIconTypeByOrdinal
 import am.acba.component.databinding.CardListingLayoutBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
@@ -18,9 +17,11 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.StyleRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 
 class PrimaryCardListing : FrameLayout {
 
@@ -71,9 +72,9 @@ class PrimaryCardListing : FrameLayout {
                 setEndBodyTextColor(endBodyColor)
                 setCardCurrencyTextColor(cardCurrencyColor)
 
-                val startIconType = getInt(
-                    R.styleable.PrimaryCardListing_cardListingStartIconType, 0
-                ).findIconTypeByOrdinal() ?: IconTypes.LARGE
+                val startIconPadding = getDimension(R.styleable.PrimaryCardListing_cardListingStartIconPadding, 0f).toInt()
+                val startIconWidth = getDimension(R.styleable.PrimaryCardListing_cardListingStartIconWidth, 36.dpToPx().toFloat()).toInt()
+                val startIconHeight = getDimension(R.styleable.PrimaryCardListing_cardListingStartIconHeight, 36.dpToPx().toFloat()).toInt()
 
                 val startIconBackgroundColor = getColorStateList(R.styleable.PrimaryCardListing_cardListingStartIconBackgroundTint)
                 val startIconBackground = getDrawable(R.styleable.PrimaryCardListing_cardListingStartIconBackground)
@@ -97,7 +98,9 @@ class PrimaryCardListing : FrameLayout {
                 setCardCurrencyText(cardCurrency)
 
                 setStartIconBackground(startIconBackground)
-                setStartIconType(startIconType)
+                setStartIconPadding(startIconPadding)
+                setStartIconHeight(startIconHeight)
+                setStartIconWidth(startIconWidth)
                 setStartIcon(startIcon)
                 setStartIconTint(startIconTint)
                 setStartIconBackgroundTint(startIconBackgroundColor)
@@ -188,10 +191,20 @@ class PrimaryCardListing : FrameLayout {
         colorStateList?.let { binding.tvCurrency.setTextColor(colorStateList) }
     }
 
-    fun setStartIconType(iconType: IconTypes) {
-        binding.ivStartIcon.setPadding(
-            iconType.padding.dpToPx()
-        )
+    fun setStartIconPadding(iconPadding: Int) {
+        binding.ivStartIcon.setPadding(iconPadding)
+    }
+
+    fun setStartIconWidth(width: Int) {
+        binding.ivStartIcon.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            this.width = width
+        }
+    }
+
+    fun setStartIconHeight(height: Int) {
+        binding.ivStartIcon.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            this.height = height
+        }
     }
 
     fun setStartIconBackgroundTint(colorStateList: ColorStateList?) {

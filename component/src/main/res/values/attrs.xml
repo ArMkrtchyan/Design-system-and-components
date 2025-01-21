@@ -461,10 +461,9 @@
         <attr name="endTitleTextColor" format="color" />
         <attr name="endBodyTextColor" format="color" />
         <attr name="cardCurrencyTextColor" format="color" />
-        <attr name="cardListingStartIconType" format="enum">
-            <enum name="Large" value="0" />
-            <enum name="Small" value="1" />
-        </attr>
+        <attr name="cardListingStartIconWidth" format="dimension" />
+        <attr name="cardListingStartIconHeight" format="dimension" />
+        <attr name="cardListingStartIconPadding" format="dimension" />
         <attr name="cardListingStartIconBackgroundTint" format="color" />
         <attr name="cardListingStartIconBackground" format="reference" />
         <attr name="cardListingStartIcon" format="reference" />

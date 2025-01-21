@@ -1,7 +1,6 @@
 package am.acba.components
 
 import am.acba.component.R
-import am.acba.component.cardListing.PrimaryCardListing
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.toolbar.PrimaryToolbar
@@ -27,8 +26,6 @@ class CardListingsFragment : BaseViewBindingFragment<FragmentCardListingsBinding
             setEndTitleText("հասանելի")
             setEndBodyText("200000")
             setCardCurrencyText("AMD")
-
-            setStartIconType(PrimaryCardListing.IconTypes.LARGE)
 
             setStartIconBackgroundTint(requireContext().getColorStateListFromAttr(R.attr.backgroundAlternative))
             setStartIconTint(requireContext().getColorStateListFromAttr(R.attr.contentAlternative))
