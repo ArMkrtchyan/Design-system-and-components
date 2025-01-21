@@ -230,6 +230,7 @@ class PrimaryCardListing : FrameLayout {
     }
 
     fun getStartIcon() = binding.ivStartIcon
+    fun getEndIcon() = binding.ivEndIcon
 
     fun setStartIconTint(colorStateList: ColorStateList?) {
         binding.ivStartIcon.imageTintList = colorStateList
