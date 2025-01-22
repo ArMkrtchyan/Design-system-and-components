@@ -16,6 +16,12 @@ class DropDownFragment : BaseViewBindingFragment<FragmentDropDownBinding>() {
         dropDown.setOnClickListener {
             dropDown.addFocus()
         }
+        enableView.setOnClickListener {
+            dropDown.enableView()
+        }
+        disableView.setOnClickListener {
+            dropDown.disableView()
+        }
     }
 
 }

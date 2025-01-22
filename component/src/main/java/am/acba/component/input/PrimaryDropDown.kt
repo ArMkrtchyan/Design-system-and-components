@@ -77,4 +77,23 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.inputDropDown.editText?.setBackgroundResource(R.drawable.background_primary_input)
         binding.inputDropDown.setEndIconDrawable(R.drawable.ic_down)
     }
+    fun disableView() {
+        binding.parent.alpha = 0.5F
+        binding.parent.isFocusable = false
+        binding.parent.isClickable = false
+        binding.frame.isFocusable = false
+        binding.frame.isClickable = false
+        binding.inputDropDown.isFocusable = false
+        binding.inputDropDown.isClickable = false
+    }
+
+    fun enableView() {
+        binding.parent.alpha = 1F
+        binding.parent.isFocusable = true
+        binding.parent.isClickable = true
+        binding.frame.isFocusable = true
+        binding.frame.isClickable = true
+        binding.inputDropDown.isFocusable = true
+        binding.inputDropDown.isClickable = true
+    }
 }
