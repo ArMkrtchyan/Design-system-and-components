@@ -294,6 +294,7 @@
         <attr name="dropDownStartIcon" format="reference" />
         <attr name="dropDownStartIconTint" format="color" />
         <attr name="dropDownEndIconTint" format="color" />
+        <attr name="isDropDownEnabled" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />

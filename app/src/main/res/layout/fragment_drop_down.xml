@@ -40,6 +40,14 @@
                 android:hint="asASas"
                 android:text="asASas" />
 
+            <am.acba.component.input.PrimaryDropDown
+                android:id="@+id/dropDown1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isDropDownEnabled="false"
+                android:hint="asASas"
+                android:text="asASas" />
+
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/inputa"
                 style="@style/Input.Style.Search"

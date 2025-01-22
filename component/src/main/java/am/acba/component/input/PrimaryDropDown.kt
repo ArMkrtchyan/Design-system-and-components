@@ -14,6 +14,7 @@ open class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs, 0) {
     protected val binding by lazy { PrimaryDropdownBinding.inflate(context.inflater(), this, false) }
+    private var isEnabled = true
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryDropDown).apply {
@@ -27,6 +28,8 @@ open class PrimaryDropDown @JvmOverloads constructor(
                 binding.inputDropDown.setEndIconTintList(
                     getColorStateList(R.styleable.PrimaryDropDown_dropDownEndIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
                 )
+                isEnabled = getBoolean(R.styleable.PrimaryDropDown_isDropDownEnabled, true)
+                setDropDownEnabled(isEnabled)
                 setStartIcon(getDrawable(R.styleable.PrimaryDropDown_dropDownStartIcon))
             } finally {
                 recycle()
@@ -77,23 +80,14 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.inputDropDown.editText?.setBackgroundResource(R.drawable.background_primary_input)
         binding.inputDropDown.setEndIconDrawable(R.drawable.ic_down)
     }
-    fun disableView() {
-        binding.parent.alpha = 0.5F
-        binding.parent.isFocusable = false
-        binding.parent.isClickable = false
-        binding.frame.isFocusable = false
-        binding.frame.isClickable = false
-        binding.inputDropDown.isFocusable = false
-        binding.inputDropDown.isClickable = false
-    }
 
-    fun enableView() {
-        binding.parent.alpha = 1F
-        binding.parent.isFocusable = true
-        binding.parent.isClickable = true
-        binding.frame.isFocusable = true
-        binding.frame.isClickable = true
-        binding.inputDropDown.isFocusable = true
-        binding.inputDropDown.isClickable = true
+    fun setDropDownEnabled(isEnabled: Boolean) {
+        binding.parent.alpha = if (isEnabled) 1F else 0.5F
+        binding.parent.isFocusable = isEnabled
+        binding.parent.isClickable = isEnabled
+        binding.frame.isFocusable = isEnabled
+        binding.frame.isClickable = isEnabled
+        binding.inputDropDown.isFocusable = isEnabled
+        binding.inputDropDown.isClickable = isEnabled
     }
 }
