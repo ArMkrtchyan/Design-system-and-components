@@ -23,8 +23,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="20dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -40,6 +40,14 @@
                 android:hint="asASas"
                 android:text="asASas" />
 
+            <am.acba.component.input.PrimaryDropDown
+                android:id="@+id/dropDown1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isDropDownEnabled="false"
+                android:hint="asASas"
+                android:text="asASas" />
+
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/inputa"
                 style="@style/Input.Style.Search"
@@ -49,6 +57,19 @@
                 android:enabled="true"
                 android:hint="@string/app_name"
                 app:hasDropDown="true" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/enableView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="enable" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/disableView"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:layout_height="wrap_content"
+                android:text="disable" />
 
         </LinearLayout>
     </ScrollView>
