@@ -281,6 +281,18 @@ class PrimaryStatusScreen : FrameLayout {
         }
     }
 
+    fun setCentreMediaAnimationFromUrl(animation: String?) {
+        if (animation != null) {
+            addCentreAnimation()
+            (binding.centreMedia.children.first() as? LottieAnimationView)?.let { animationView ->
+                addAnimationListener(animationView)
+                animationView.playLottieAnimation {
+                    animationView.setAnimationFromUrl(animation)
+                }
+            }
+        }
+    }
+
     fun setCentreMediaAnimation(animation: Animation?) {
         if (animation != null) {
             addCentreAnimation()
