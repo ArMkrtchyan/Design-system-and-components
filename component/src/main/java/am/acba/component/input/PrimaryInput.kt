@@ -21,7 +21,6 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -220,8 +219,6 @@ open class PrimaryInput : TextInputLayout {
     }
 
     fun validateAfterFocusChange(errorMessage: String?, isValid: Boolean = true) {
-        if (errorMessage == null) return
-
         if (editText?.hasFocus() == false) {
             val isNotEmpty = editText?.text?.isNotEmpty() == true
             isErrorEnabled = !isValid && isNotEmpty
@@ -234,8 +231,6 @@ open class PrimaryInput : TextInputLayout {
     }
 
     fun validateAfterTextChange(errorMessage: String?, isValid: Boolean = true) {
-        if (errorMessage == null) return
-
         if (validateAfterInput) {
             if (editText?.text?.isEmpty() == true) {
                 isErrorEnabled = false
