@@ -1,12 +1,7 @@
 package am.acba.component.table
 
 import am.acba.component.databinding.ItemTableBinding
-import am.acba.component.textView.PrimaryTextView
-import am.acba.component.viewUtil.ViewUtil
-import am.acba.component.viewUtil.ViewUtil.copyText
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import am.acba.component.viewUtil.ViewUtil.copyWithVibration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -37,14 +32,13 @@ class TableItemAdapter : ListAdapter<TableItem, TableItemAdapter.ViewHolder>(
                 if (item.fieldValueColor != 0) {
                     tvValue.setTextColor(item.fieldValueColor)
                 }
-            }
-            binding.tvValue.setOnLongClickListener {
-                copyText(binding.tvValue)
-                true
+
+                tvValue.setOnLongClickListener {
+                    copyWithVibration(binding.tvValue)
+                    true
+                }
             }
         }
-
-
     }
 
     private class TableItemDiffCallBack : DiffUtil.ItemCallback<TableItem>() {
