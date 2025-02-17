@@ -21,7 +21,6 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -202,12 +201,13 @@ open class PrimaryInput : TextInputLayout {
 
         if (enabled) {
             backgroundRes = R.drawable.background_error_input
-            errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
             errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
 
-            val errorTint = R.attr.borderDanger
-            tvError?.compoundDrawableTintList = context.getColorStateListFromAttr(errorTint)
-            tvError?.compoundDrawablePadding = 4.dpToPx()
+            tvError?.isVisible = error != null
+            error?.let {
+                errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
+                initErrorView(tvError)
+            }
         } else {
             backgroundRes = R.drawable.background_primary_input
             errorTextColorRes = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
@@ -219,9 +219,13 @@ open class PrimaryInput : TextInputLayout {
         defaultHintTextColor = errorTextColorRes
     }
 
-    fun validateAfterFocusChange(errorMessage: String?, isValid: Boolean = true) {
-        if (errorMessage == null) return
+    private fun initErrorView(tvError: TextView?) {
+        val errorTint = R.attr.borderDanger
+        tvError?.compoundDrawableTintList = context.getColorStateListFromAttr(errorTint)
+        tvError?.compoundDrawablePadding = 4.dpToPx()
+    }
 
+    fun validateAfterFocusChange(errorMessage: String?, isValid: Boolean = true) {
         if (editText?.hasFocus() == false) {
             val isNotEmpty = editText?.text?.isNotEmpty() == true
             isErrorEnabled = !isValid && isNotEmpty
@@ -234,8 +238,6 @@ open class PrimaryInput : TextInputLayout {
     }
 
     fun validateAfterTextChange(errorMessage: String?, isValid: Boolean = true) {
-        if (errorMessage == null) return
-
         if (validateAfterInput) {
             if (editText?.text?.isEmpty() == true) {
                 isErrorEnabled = false
