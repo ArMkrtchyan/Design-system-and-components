@@ -21,6 +21,7 @@ class PrimaryTabLayout @JvmOverloads constructor(
 
     init {
         this.tabRippleColor = null
+        this.background = null
         onTabSelectListener()
     }
 
