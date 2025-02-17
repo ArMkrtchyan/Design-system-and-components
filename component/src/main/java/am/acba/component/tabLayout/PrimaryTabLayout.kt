@@ -1,10 +1,10 @@
 package am.acba.component.tabLayout
 
 import am.acba.component.R
+import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.textView.PrimaryTextView
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +20,8 @@ class PrimaryTabLayout @JvmOverloads constructor(
     private lateinit var tabNames: MutableList<String>
 
     init {
+        this.tabRippleColor = null
+        this.background = null
         onTabSelectListener()
     }
 
@@ -58,7 +60,13 @@ class PrimaryTabLayout @JvmOverloads constructor(
     private fun updateTabStyle(tab: Tab?, isSelected: Boolean) {
         tab?.customView?.let {
             val textView = it.findViewById<TextView>(R.id.item_title)
-            textView.typeface = if (isSelected) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+            if (isSelected) {
+                textView.setTextAppearance(R.style.Body2_Bold)
+                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentBrand))
+            } else {
+                textView.setTextAppearance(R.style.Subtitle2_Regular)
+                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
+            }
         }
     }
 
