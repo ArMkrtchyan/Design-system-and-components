@@ -5,6 +5,7 @@ import am.acba.component.R
 import am.acba.component.databinding.StatusScreenLayoutBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.playLottieAnimation
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.statusScreen.PrimaryStatusScreen.MediaTypes.Companion.findMediaTypeByOrdinal
 import android.animation.Animator
@@ -27,18 +28,12 @@ import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.SimpleColorFilter
 import com.airbnb.lottie.model.KeyPath
 import com.airbnb.lottie.value.LottieValueCallback
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class PrimaryStatusScreen : FrameLayout {
 
     private val binding by lazy {
         StatusScreenLayoutBinding.inflate(
-            context.inflater(),
-            this,
-            false
+            context.inflater(), this, false
         )
     }
 
@@ -91,8 +86,7 @@ class PrimaryStatusScreen : FrameLayout {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
-            : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
 
@@ -101,29 +95,23 @@ class PrimaryStatusScreen : FrameLayout {
             addView(binding.root)
             try {
                 showCloseIcon = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenCloseIcon,
-                    false
+                    R.styleable.PrimaryStatusScreen_showStatusScreenCloseIcon, false
                 )
                 showTitle = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenTitle,
-                    false
+                    R.styleable.PrimaryStatusScreen_showStatusScreenTitle, false
                 )
                 showBody = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenBody,
-                    false
+                    R.styleable.PrimaryStatusScreen_showStatusScreenBody, false
                 )
                 showPrimaryButton = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenPrimaryButton,
-                    false
+                    R.styleable.PrimaryStatusScreen_showStatusScreenPrimaryButton, false
                 )
                 showGhostButton = getBoolean(
-                    R.styleable.PrimaryStatusScreen_showStatusScreenGhostButton,
-                    false
+                    R.styleable.PrimaryStatusScreen_showStatusScreenGhostButton, false
                 )
 
                 val mediaType = getInt(
-                    R.styleable.PrimaryStatusScreen_statusScreenMediaType,
-                    0
+                    R.styleable.PrimaryStatusScreen_statusScreenMediaType, 0
                 ).findMediaTypeByOrdinal()
 
                 val centreImage = getDrawable(
@@ -347,8 +335,7 @@ class PrimaryStatusScreen : FrameLayout {
             if (isVisible && onClickListener != null) {
                 setOnClickListener(
                     PreventDoubleClickListener(
-                        onClickListener,
-                        clickInterval
+                        onClickListener, clickInterval
                     )
                 )
             } else {
@@ -362,8 +349,7 @@ class PrimaryStatusScreen : FrameLayout {
             if (isVisible && onClickListener != null) {
                 setOnClickListener(
                     PreventDoubleClickListener(
-                        onClickListener,
-                        clickInterval
+                        onClickListener, clickInterval
                     )
                 )
             } else {
@@ -377,8 +363,7 @@ class PrimaryStatusScreen : FrameLayout {
             if (isVisible && onClickListener != null) {
                 setOnClickListener(
                     PreventDoubleClickListener(
-                        onClickListener,
-                        clickInterval
+                        onClickListener, clickInterval
                     )
                 )
             } else {
@@ -455,17 +440,8 @@ class PrimaryStatusScreen : FrameLayout {
         animationView.pauseAnimation()
     }
 
-    private fun LottieAnimationView.playLottieAnimation(setAnimation: () -> Unit) {
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(300)
-            setAnimation.invoke()
-            playAnimation()
-        }
-    }
-
     enum class MediaTypes(var size: Int) {
-        SMALL(40),
-        LARGE(130);
+        SMALL(40), LARGE(130);
 
         companion object {
             fun Int.findMediaTypeByOrdinal() = entries.find { it.ordinal == this }

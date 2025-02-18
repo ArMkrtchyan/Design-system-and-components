@@ -18,6 +18,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.app.FrameMetricsAggregator
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -26,6 +27,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 fun View.animateRotation(
     target: Float,
@@ -272,5 +277,13 @@ fun EditText.openKeyboard(context: Context) {
     post {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
+
+fun LottieAnimationView.playLottieAnimation(delayTime: Long = 300, setAnimation: () -> Unit) {
+    CoroutineScope(Dispatchers.Main).launch {
+        delay(delayTime)
+        setAnimation.invoke()
+        playAnimation()
     }
 }

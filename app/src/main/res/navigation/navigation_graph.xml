@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_mainFragment_to_tablesFragment"
             app:destination="@id/tablesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_snackBarFragment"
+            app:destination="@id/snackBarFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -275,4 +278,9 @@
         android:name="am.acba.components.DatePickerFragment"
         android:label="fragment_date_picker"
         tools:layout="@layout/fragment_date_picker" />
+    <fragment
+        android:id="@+id/snackBarFragment"
+        android:name="am.acba.components.SnackBarFragment"
+        tools:layout="@layout/fragment_snack_bar"
+        android:label="SnackBarFragment" />
 </navigation>
