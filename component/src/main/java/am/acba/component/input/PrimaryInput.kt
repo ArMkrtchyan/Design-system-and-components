@@ -323,6 +323,8 @@ open class PrimaryInput : TextInputLayout {
         }
     }
 
+    fun isValidEmail() = android.util.Patterns.EMAIL_ADDRESS.matcher(editText?.text ?: "").matches()
+
     companion object {
         const val SHAKE_AMPLITUDE = 500L
         const val VIBRATION_AMPLITUDE = 80L
