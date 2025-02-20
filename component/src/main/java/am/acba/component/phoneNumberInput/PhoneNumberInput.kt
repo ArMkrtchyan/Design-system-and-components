@@ -201,6 +201,10 @@ class PhoneNumberInput @JvmOverloads constructor(
         return ccpBinding.countryCodeLib.fullNumberWithPlus
     }
 
+    fun isPhoneValid(): Boolean {
+        return ccpBinding.countryCodeLib.isValidFullNumber
+    }
+
     private fun countriesMapping() {
         val telephonyManager =
             context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
