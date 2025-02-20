@@ -12,6 +12,8 @@ import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.airbnb.lottie.LottieAnimationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -21,6 +23,7 @@ class PrimarySnackBar(
     private val lottieIcon: String? = null,
     private val title: String = "",
     private val isUserClosable: Boolean = false,
+    private val lifecycleOwner: LifecycleOwner? = null,
 ) {
     private val binding by lazy { PrimarySnackBarBinding.inflate(context.inflater(), context.window.decorView.findViewById(android.R.id.content), false) }
 
@@ -30,6 +33,7 @@ class PrimarySnackBar(
         builder.lottieIcon,
         builder.title,
         builder.isUserClosable,
+        builder.lifecycleOwner,
     )
 
     companion object {
@@ -44,6 +48,7 @@ class PrimarySnackBar(
         var lottieIcon: String? = null,
         var title: String = "",
         var isUserClosable: Boolean = false,
+        var lifecycleOwner: LifecycleOwner? = null,
     ) {
 
         fun build(): PrimarySnackBar {
@@ -93,7 +98,14 @@ class PrimarySnackBar(
             val appearTime = (title.split(" ").size / 4) * 1000
             handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
             coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
-            coordinatorLayout.postDelayed(handlerCallback, (if (appearTime > 2) appearTime else 2000).toLong())
+            coordinatorLayout.postDelayed(handlerCallback, (if (appearTime > 2000) appearTime else 2000).toLong())
+        } else {
+            lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
+                override fun onStop(owner: LifecycleOwner) {
+                    super.onStop(owner)
+                    endIcon.callOnClick()
+                }
+            })
         }
     }
 

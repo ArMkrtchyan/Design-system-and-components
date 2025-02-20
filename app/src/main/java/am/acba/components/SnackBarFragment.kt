@@ -22,7 +22,7 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
         }
         showSnackbarWithIcon.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ Հայտնի է, որ ընթերցողը, կարդալով հասկանալի "
+                title = "Հայտնի է, որ ընթերցողը"
                 icon = am.acba.component.R.drawable.ic_info
             }
         }
@@ -37,6 +37,7 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
             PrimarySnackBar.build(requireActivity()) {
                 title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
                 isUserClosable = true
+                lifecycleOwner = viewLifecycleOwner
             }
         }
         showSnackbarWithIconAndCloseAicon.setOnClickListener {
@@ -44,6 +45,7 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
                 title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
                 icon = am.acba.component.R.drawable.ic_info
                 isUserClosable = true
+                lifecycleOwner = viewLifecycleOwner
             }
         }
         showSnackbarWithLottieAndCloseAicon.setOnClickListener {
@@ -51,6 +53,7 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
                 title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
                 lottieIcon = "check_test.json"
                 isUserClosable = true
+                lifecycleOwner = viewLifecycleOwner
             }
         }
     }
