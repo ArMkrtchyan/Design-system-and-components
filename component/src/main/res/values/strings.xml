@@ -5,4 +5,8 @@
     <string name="acba_cantact_tel">Phone Number</string>
     <string name="phone_input_error_text">Phone number is not valid</string>
     <string name="date_picker_title_text">Select date</string>
+    <string name="phone_number">Phone number</string>
+    <string name="select_phone_number">Select the phone number</string>
+    <string name="from_phone_book">From phonebook</string>
+    <string name="from_acba_contact">From acba contacts</string>
 </resources>

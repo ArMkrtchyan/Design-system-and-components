@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_number">Հեռախոսահամար</string>
+    <string name="select_phone_number">Ընտրել հեռախոսահամարը</string>
+    <string name="from_phone_book">Հեռախոսագրքից</string>
+    <string name="from_acba_contact">acba կոնտակտներից</string>
+</resources>
