@@ -17,32 +17,31 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
     override fun FragmentSnackBarBinding.initView() {
         showSnackbar.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հասկանալի տեքստ"
+                title = getText()
             }
         }
         showSnackbarWithIcon.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հայտնի է, որ ընթերցողը"
+                title = getText()
                 icon = am.acba.component.R.drawable.ic_info
             }
         }
         showSnackbarWithLottie.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title =
-                    "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ Հայտնի է, որ ընթերցողը, կարդալով հասկանալի Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ Հայտնի է, որ ընթերցողը, կարդալով հասկանալի Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ Հայտնի է, որ ընթերցողը, կարդալով հասկանալի "
+                title = getText()
                 lottieIcon = "check_test.json"
             }
         }
         showSnackbarWithCloseIcon.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
+                title = getText()
                 isUserClosable = true
                 lifecycleOwner = viewLifecycleOwner
             }
         }
         showSnackbarWithIconAndCloseAicon.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
+                title = getText()
                 icon = am.acba.component.R.drawable.ic_info
                 isUserClosable = true
                 lifecycleOwner = viewLifecycleOwner
@@ -50,11 +49,16 @@ class SnackBarFragment : BaseViewBindingFragment<FragmentSnackBarBinding>() {
         }
         showSnackbarWithLottieAndCloseAicon.setOnClickListener {
             PrimarySnackBar.build(requireActivity()) {
-                title = "Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ"
+                title = getText()
                 lottieIcon = "check_test.json"
                 isUserClosable = true
                 lifecycleOwner = viewLifecycleOwner
             }
         }
+    }
+
+    private fun getText(): String {
+        val text = mBinding.message.editText?.text.toString().ifEmpty { "Enter your text in input field" }
+        return text
     }
 }

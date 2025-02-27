@@ -16,54 +16,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
-        android:text="" />
+        android:text="Enter text in input field for see snackbar excamples" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp">
+        android:layout_height="match_parent">
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="40dp">
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar_with_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar with icon" />
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="Custom snackbar message" />
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar_with_lottie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar with lottie" />
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp" />
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar_with_close_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar with close icon" />
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar" />
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar_with_icon_and_close_aicon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar with close icon and icon" />
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar_with_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar with icon" />
 
-        <am.acba.component.button.PrimaryButton
-            android:id="@+id/show_snackbar_with_lottie_and_close_aicon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Snackbar with close icon and lottie" />
-    </LinearLayout>
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar_with_lottie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar with lottie" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar_with_close_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar with close icon" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar_with_icon_and_close_aicon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar with close icon and icon" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/show_snackbar_with_lottie_and_close_aicon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Snackbar with close icon and lottie" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
