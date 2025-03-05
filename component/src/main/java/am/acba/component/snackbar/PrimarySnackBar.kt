@@ -2,6 +2,7 @@
 
 import am.acba.component.R
 import am.acba.component.databinding.PrimarySnackBarBinding
+import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.playLottieAnimation
 import am.acba.component.imageView.PrimaryImageView
@@ -83,6 +84,7 @@ class PrimarySnackBar(
         startIcon.isVisible = icon != null
         snackBarTitle.text = title
         endIcon.isVisible = isUserClosable
+        snackBarTitle.setPadding(0, 0, if (isUserClosable) 0 else 16.dpToPx(), 0)
         icon?.let(startIcon::setImageResource)
         sheetBehavior.isDraggable = isUserClosable
         if (lottieIcon != null) {
@@ -95,10 +97,10 @@ class PrimarySnackBar(
         var handlerCallback: Runnable? = coordinatorLayout.getTag(R.id.snackbar_coordinator_layout) as? Runnable
         handlerCallback?.let(coordinatorLayout::removeCallbacks)
         if (!isUserClosable) {
-            val appearTime = (title.split(" ").size / 4) * 1000
+            val appearTime = (3000 + title.split(" ").size * 200).coerceAtMost(15000)
             handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
             coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
-            coordinatorLayout.postDelayed(handlerCallback, (if (appearTime > 2000) appearTime else 2000).toLong())
+            coordinatorLayout.postDelayed(handlerCallback, (appearTime).toLong())
         } else {
             lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
                 override fun onStop(owner: LifecycleOwner) {

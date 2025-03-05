@@ -69,7 +69,7 @@
                     android:layout_weight="1"
                     android:textColor="?attr/contentInverse2"
                     app:layout_constraintTop_toBottomOf="@id/centre_media"
-                    tools:text="Հայտնի է," />
+                    tools:text="Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, Հայտնի է, " />
 
                 <am.acba.component.imageView.PrimaryImageView
                     android:id="@+id/end_icon"
@@ -79,6 +79,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/ic_close"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/scrollView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
