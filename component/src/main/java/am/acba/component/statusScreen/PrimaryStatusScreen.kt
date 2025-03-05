@@ -27,6 +27,7 @@ import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.SimpleColorFilter
 import com.airbnb.lottie.model.KeyPath
 import com.airbnb.lottie.value.LottieValueCallback
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -250,6 +251,17 @@ class PrimaryStatusScreen : FrameLayout {
         addCentreImage()
         (binding.centreMedia.children.first() as? PrimaryImageView)?.setImageDrawable(icon)
     }
+
+    fun setCentreImageFromUrl(url: String) {
+        addCentreImage()
+
+        val imageView = binding.centreMedia.children.firstOrNull() as? PrimaryImageView ?: return
+
+        Glide.with(imageView.context)
+            .load(url)
+            .into(imageView)
+    }
+
 
     fun setCentreImageBackgroundColor(colorStateList: ColorStateList?) {
         binding.centreMedia.backgroundTintList = colorStateList
