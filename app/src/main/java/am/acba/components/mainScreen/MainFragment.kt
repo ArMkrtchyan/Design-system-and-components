@@ -58,12 +58,14 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.OFFERS_COMPONENTS -> findNavController().navigate(R.id.action_mainFragment_to_offersFragment)
             ComponentTypeEnum.PRODUCT_CARD_VIEW -> findNavController().navigate(R.id.action_mainFragment_to_cardViewFragment)
             ComponentTypeEnum.TABLES -> findNavController().navigate(R.id.action_mainFragment_to_tablesFragment)
+            ComponentTypeEnum.SNACK_BAR -> findNavController().navigate(R.id.action_mainFragment_to_snackBarFragment)
         }
     }
 
     private fun getComponents() = arrayListOf(
         Component(ComponentTypeEnum.BUTTONS, ComponentTypeEnum.BUTTONS.componentName),
         Component(ComponentTypeEnum.INPUTS, ComponentTypeEnum.INPUTS.componentName),
+        Component(ComponentTypeEnum.SNACK_BAR, ComponentTypeEnum.SNACK_BAR.componentName),
         Component(ComponentTypeEnum.PHONE_NUMBER_INPUT, ComponentTypeEnum.PHONE_NUMBER_INPUT.componentName),
         Component(ComponentTypeEnum.CURRENCY_INPUT, ComponentTypeEnum.CURRENCY_INPUT.componentName),
         Component(ComponentTypeEnum.PROGRESS_CARD_WIEW, ComponentTypeEnum.PROGRESS_CARD_WIEW.componentName),
