@@ -34,4 +34,5 @@ enum class ComponentTypeEnum(val componentName: String) {
     OFFERS_COMPONENTS("Offers components"),
     PRODUCT_CARD_VIEW("Product Card view component"),
     TABLES("Tables"),
+    SNACK_BAR("SnackBar"),
 }
