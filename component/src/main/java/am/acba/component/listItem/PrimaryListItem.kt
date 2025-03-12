@@ -136,9 +136,16 @@ class PrimaryListItem : FrameLayout {
                 descriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listDescriptionTextAppearance, R.style.Body2_Regular)
 
                 secondaryDescriptionText = getString(R.styleable.PrimaryListItem_listSecondaryDescriptionText)
-                secondaryDescriptionTextStyle = getResourceId(R.styleable.PrimaryListItem_listSecondaryDescriptionTextAppearance, R.style.Body2_Regular)
+                secondaryDescriptionTextStyle =
+                    getResourceId(R.styleable.PrimaryListItem_listSecondaryDescriptionTextAppearance, R.style.Body2_Regular)
 
-                setDescription(binding.listDescriptionComponentContainer, descriptionComponentType, description, descriptionTextStyle, descriptionText)
+                setDescription(
+                    binding.listDescriptionComponentContainer,
+                    descriptionComponentType,
+                    description,
+                    descriptionTextStyle,
+                    descriptionText
+                )
                 setDescription(
                     binding.listSecondaryDescriptionComponentContainer,
                     secondaryDescriptionComponentType,
@@ -345,14 +352,31 @@ class PrimaryListItem : FrameLayout {
     }
 
     fun setDescription(
+        descriptionComponentType: ListTextComponentType,
+        descriptionText: String? = null,
+        textStyle: Int = R.style.Body2_Regular
+    ) {
+        this.descriptionComponentType = descriptionComponentType
+        setDescription(
+            listDescriptionComponentContainer = binding.listDescriptionComponentContainer,
+            descriptionComponentType = descriptionComponentType,
+            description = description,
+            textStyle = textStyle,
+            descriptionText = descriptionText
+        )
+    }
+
+    private fun setDescription(
         listDescriptionComponentContainer: FrameLayout,
         descriptionComponentType: ListTextComponentType,
         description: PrimaryTextView,
         textStyle: Int,
         descriptionText: String?
     ) {
-        listDescriptionComponentContainer.isVisible = descriptionComponentType != ListTextComponentType.NONE
-        listDescriptionComponentContainer.removeAllViews()
+        listDescriptionComponentContainer.apply {
+            isVisible = descriptionComponentType != ListTextComponentType.NONE
+            removeAllViews()
+        }
         when (descriptionComponentType) {
             ListTextComponentType.NONE -> Unit
             ListTextComponentType.SINGLE_LINE -> {

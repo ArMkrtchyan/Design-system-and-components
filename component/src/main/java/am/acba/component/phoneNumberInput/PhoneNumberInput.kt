@@ -99,7 +99,8 @@ class PhoneNumberInput @JvmOverloads constructor(
                 countryTopShips = getString(R.styleable.PhoneNumberInput_countryTopChips)
                 enableErrorAnimation = getBoolean(R.styleable.PhoneNumberInput_enableErrorAnimation, false)
                 bottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneNumberInputBottomSheetTitle) ?: ""
-                phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle) ?: ""
+                phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle)
+                    ?: context.getString(R.string.select_phone_number)
             } finally {
                 recycle()
             }
@@ -199,6 +200,10 @@ class PhoneNumberInput @JvmOverloads constructor(
 
     fun getFullNumberWithPlus(): String {
         return ccpBinding.countryCodeLib.fullNumberWithPlus
+    }
+
+    fun isPhoneValid(): Boolean {
+        return ccpBinding.countryCodeLib.isValidFullNumber
     }
 
     private fun countriesMapping() {

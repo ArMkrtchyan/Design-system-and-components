@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_number">Номер телефона</string>
+    <string name="select_phone_number">Выберите номер телефона</string>
+    <string name="from_phone_book">Из телефонной книги</string>
+    <string name="from_acba_contact">Из acba contact</string>
+</resources>
