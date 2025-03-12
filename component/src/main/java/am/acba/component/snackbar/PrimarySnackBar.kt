@@ -96,19 +96,18 @@ class PrimarySnackBar(
         endIcon.setOnClickListener { swipeDown(sheetBehavior, coordinatorLayout) }
         var handlerCallback: Runnable? = coordinatorLayout.getTag(R.id.snackbar_coordinator_layout) as? Runnable
         handlerCallback?.let(coordinatorLayout::removeCallbacks)
-        if (!isUserClosable) {
-            val appearTime = (3000 + title.split(" ").size * 200).coerceAtMost(15000)
-            handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
-            coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
-            coordinatorLayout.postDelayed(handlerCallback, (appearTime).toLong())
-        } else {
-            lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
-                override fun onStop(owner: LifecycleOwner) {
-                    super.onStop(owner)
-                    endIcon.callOnClick()
-                }
-            })
-        }
+
+        val appearTime = (3000 + title.split(" ").size * 200).coerceAtMost(15000)
+        handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
+        coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
+        coordinatorLayout.postDelayed(handlerCallback, (appearTime).toLong())
+
+        lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
+            override fun onStop(owner: LifecycleOwner) {
+                super.onStop(owner)
+                endIcon.callOnClick()
+            }
+        })
     }
 
     private fun swipeUp(sheetBehavior: BottomSheetBehavior<*>) {
