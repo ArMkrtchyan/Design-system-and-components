@@ -14,6 +14,7 @@ enum class ComponentTypeEnum(val componentName: String) {
     EXCHANGE("Exchange"),
     INPUTS("Inputs"),
     LIST_ITEMS("List items"),
+    LIST_ITEMS_2("List items 2"),
     TOOLBAR("Toolbar"),
     PHONE_NUMBER_INPUT("Phone number input"),
     CURRENCY_INPUT("Currency input"),

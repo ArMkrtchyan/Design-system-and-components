@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Transparent"
+    android:orientation="vertical">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="List item" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Default - Align Top" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                app:listItemFirstEndIcon="@drawable/ic_info"
+                app:listItemFirstEndIconBackgroundTint="?attr/backgroundAlternative2"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemRadius="12"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemRadius="12"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line 1"
+                app:listItemBody2Text="Supporting line 2"
+                app:listItemBody3Text="Supporting line 3"
+                app:listItemBody4Text="Supporting line 4"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_info"
+                app:listItemTextType="DefaultMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemEndComponentType="Icon"
+                app:listItemFirstEndIcon="@drawable/ic_info"
+                app:listItemFirstEndIconBackgroundTint="#DDDDDD"
+                app:listItemFirstEndIconDimensionsType="WithBackground"
+                app:listItemFirstEndIconTint="?attr/contentPrimary"
+                app:listItemSecondEndIcon="@drawable/ic_parking"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemEndComponentType="Icon"
+                app:listItemFirstEndIcon="@drawable/ic_info"
+                app:listItemFirstEndIconBackgroundTint="#DDDDDD"
+                app:listItemFirstEndIconDimensionsType="WithBackground"
+                app:listItemFirstEndIconTint="?attr/contentPrimary"
+                app:listItemSecondEndIcon="@drawable/ic_parking"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="#DDDDDD"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemEndComponentType="Switch"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Overline - Align Top" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Body text duududddd"
+                app:listItemEndComponentType="Switch"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_info"
+                app:listItemStartIconDimensionsType="WithoutBackground"
+                app:listItemTextType="OverLineSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Supporting mmmmmmmmmmmmmmmmmmmmmmmmm"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemEndComponentType="Checkbox"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_info"
+                app:listItemStartIconBackgroundTint="#DDDDDD"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="OverLineSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem71"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Supporting mmmmmmmmmmmmmmmmmmmmmmmmm"
+                app:listItemEndComponentType="RadioButton"
+                app:listItemFirstEndIcon="@drawable/ic_right"
+                app:listItemFirstEndIconBackgroundTint="?attr/backgroundAlternative2"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Supporting mmmmmmmmmmmmmmmmmmmmmmmmm"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_info"
+                app:listItemStartIconDimensionsType="WithoutBackground"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem73"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Supporting mmmmmmmmmmmmmmmmmmmmmmmmm"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_info"
+                app:listItemStartIconBackgroundTint="#DDDDDD"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemEndComponentType="RadioButton"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="@color/AztecPurple_200"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="OverLineSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="@color/AztecPurple_200"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="OverLineSingleViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Title Only" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="@color/AztecPurple_200"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="TitleOnly"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemTextType="TitleOnly"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemEndComponentType="Icon"
+                app:listItemSecondEndIcon="@drawable/ic_right"
+                app:listItemSecondEndIconBackgroundTint="@color/AztecPurple_200"
+                app:listItemSecondEndIconDimensionsType="WithBackground"
+                app:listItemTextType="TitleOnly"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="@color/AztecPurple_200"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="TitleOnly"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Avatar" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                app:listItemFirstEndIcon="@drawable/ic_info"
+                app:listItemFirstEndIconBackgroundTint="?attr/backgroundAlternative2"
+                app:listItemIsBodyContainerVisible="true"
+                app:listItemRadius="12"
+                app:listItemStartComponentType="Avatar"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List item" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBody1Text="Supporting mmmmmmmmmmmmmmmmmmmmmmmmm"
+                app:listItemTextType="OverLineMultiViewBody"
+                app:listItemTitle="List Item" />
+
+            <am.acba.component.divider.PrimaryDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Other" />
+
+            <am.acba.component.listItem.ListItem2
+                android:id="@+id/listItem18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:listItemBackgroundColor="?attr/backgroundTonal1"
+                app:listItemBadgeBackgroundTint="@color/Yellow_700"
+                app:listItemBadgeText="New"
+                app:listItemBadgeTextColor="@color/Black_30"
+                app:listItemBadgeType="Text"
+                app:listItemBody1Text="Supporting line text lorem sdhkjhssdsncjnscnjsdjcbjhbsdfhvbhkdfvhdhbvhd"
+                app:listItemSecondEndIcon="@drawable/ic_parking"
+                app:listItemShowBadge="true"
+                app:listItemShowDivider="true"
+                app:listItemShowStartIconBadge="true"
+                app:listItemStartComponentType="Icon"
+                app:listItemStartIcon="@drawable/ic_right"
+                app:listItemStartIconBackgroundTint="#DDDDDD"
+                app:listItemStartIconBadgeDotTint="#DDDDDD"
+                app:listItemStartIconBadgeStrokeColor="@color/AztecPurple_200"
+                app:listItemStartIconDimensionsType="WithBackground"
+                app:listItemTextType="DefaultSingleViewBody"
+                app:listItemTitle="List Item" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

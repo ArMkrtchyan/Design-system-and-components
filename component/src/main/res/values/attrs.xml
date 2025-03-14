@@ -286,8 +286,7 @@
         <attr name="android:hint" />
         <attr name="android:text" />
     </declare-styleable>
-    <declare-styleable name="PrimaryEditText">
-    </declare-styleable>
+    <declare-styleable name="PrimaryEditText"></declare-styleable>
     <declare-styleable name="PrimaryDropDown">
         <attr name="android:text" />
         <attr name="android:hint" />
@@ -299,8 +298,7 @@
     <declare-styleable name="ExchangeRatesButton">
         <attr name="ratesIconTint" format="color" />
     </declare-styleable>
-    <declare-styleable name="PrimaryCheckbox">
-    </declare-styleable>
+    <declare-styleable name="PrimaryCheckbox"></declare-styleable>
     <declare-styleable name="PrimaryChip">
         <attr name="chipBackground" format="reference" />
         <attr name="chipText" format="string" />
@@ -320,10 +318,8 @@
             <enum name="Custom" value="2" />l
         </attr>
     </declare-styleable>
-    <declare-styleable name="PrimaryRadioButton">
-    </declare-styleable>
-    <declare-styleable name="PrimarySwitcher">
-    </declare-styleable>
+    <declare-styleable name="PrimaryRadioButton"></declare-styleable>
+    <declare-styleable name="PrimarySwitcher"></declare-styleable>
     <declare-styleable name="PrimaryToolbar">
         <attr name="collapseStatusBarHeight" format="boolean" />
     </declare-styleable>
@@ -364,8 +360,7 @@
         <attr name="listTitleText" format="string" />
         <attr name="listDescriptionTextAppearance" format="reference" />
         <attr name="listDescriptionText" format="string" />
-        <attr name="listSecondaryDescriptionTextAppearance"
-            format="reference" />
+        <attr name="listSecondaryDescriptionTextAppearance" format="reference" />
         <attr name="listSecondaryDescriptionText" format="string" />
         <attr name="listStartIcon" format="reference" />
         <attr name="listStartIconGravity" format="enum">
@@ -426,8 +421,7 @@
         <attr name="badgePaddingEnd" />
         <attr name="showBadge" />
     </declare-styleable>
-    <declare-styleable name="PinInput">
-    </declare-styleable>
+    <declare-styleable name="PinInput"></declare-styleable>
     <declare-styleable name="PrimaryCollapsingToolbar">
         <attr name="toolbarTitle" format="string" />
         <attr name="toolbarTitleMaxLines" format="integer" />
@@ -488,12 +482,9 @@
             <enum name="Large" value="1" />
         </attr>
         <attr name="statusScreenCentreImage" format="reference" />
-        <attr name="statusScreenCentreImageBackgroundColor" format="color"
-            />
-        <attr name="statusScreenCentreImageBackgroundTint" format="color"
-            />
-        <attr name="statusScreenCentreMediaAnimationFileName"
-            format="string" />
+        <attr name="statusScreenCentreImageBackgroundColor" format="color" />
+        <attr name="statusScreenCentreImageBackgroundTint" format="color" />
+        <attr name="statusScreenCentreMediaAnimationFileName" format="string" />
         <attr name="statusScreenTitleText" format="string" />
         <attr name="statusScreenBodyText" format="string" />
         <attr name="statusScreenPrimaryButtonText" format="string" />
@@ -578,5 +569,105 @@
     </declare-styleable>
     <declare-styleable name="HorizontalChipsView">
         <attr name="horizontalChipsTitle" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ListItem2">
+        <attr name="listItemBackgroundColor" format="color" />
+        <attr name="listItemRadius" format="integer" />
+        <attr name="listItemStrokeWidth" format="integer" />
+        <attr name="listItemStrokeColor" format="color" />
+
+        <attr name="listItemTitle" format="string" />
+        <attr name="listItemIsTitleSingleLine" format="boolean" />
+        <attr name="listItemTitleMaxLines" format="integer" />
+        <attr name="listItemTitleTextAppearance" format="reference" />
+        <attr name="listItemTitleTextColor" format="color" />
+
+        <attr name="listItemTextType" format="enum">
+            <enum name="DefaultSingleViewBody" value="0" />
+            <enum name="DefaultMultiViewBody" value="1" />
+            <enum name="TitleOnly" value="2" />
+            <enum name="OverLineSingleViewBody" value="3" />
+            <enum name="OverLineMultiViewBody" value="4" />
+            <enum name="Custom" value="5" />
+        </attr>
+        <attr name="listItemStartComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Icon" value="1" />
+            <enum name="Avatar" value="2" />
+        </attr>
+        <attr name="listItemEndComponentType" format="enum">
+            <enum name="None" value="0" />
+            <enum name="Icon" value="1" />
+            <enum name="Checkbox" value="2" />
+            <enum name="RadioButton" value="3" />
+            <enum name="Switch" value="4" />
+        </attr>
+        <attr name="listItemStartIconDimensionsType" format="enum">
+            <enum name="Custom" value="0" />
+            <enum name="WithBackground" value="1" />
+            <enum name="WithoutBackground" value="2" />
+        </attr>
+        <attr name="listItemFirstEndIconDimensionsType" format="enum">
+            <enum name="Custom" value="0" />
+            <enum name="WithBackground" value="1" />
+            <enum name="WithoutBackground" value="2" />
+        </attr>
+        <attr name="listItemSecondEndIconDimensionsType" format="enum">
+            <enum name="Custom" value="0" />
+            <enum name="WithBackground" value="1" />
+            <enum name="WithoutBackground" value="2" />
+        </attr>
+        <attr name="listItemStartIcon" format="reference" />
+        <attr name="listItemStartIconTint" format="color" />
+        <attr name="listItemStartIconBackgroundTint" format="color" />
+
+        <attr name="listItemShowStartIconBadge" format="boolean" />
+        <attr name="listItemStartIconBadgeDotTint" format="color" />
+        <attr name="listItemStartIconBadgeStrokeColor" format="reference" />
+
+        <attr name="listItemShowBadge" format="boolean" />
+        <attr name="listItemBadgeType" format="enum">
+            <enum name="Dot" value="0" />
+            <enum name="SmallIcon" value="1" />
+            <enum name="LargeIcon" value="2" />
+            <enum name="Number" value="3" />
+            <enum name="Text" value="4" />
+        </attr>
+        <attr name="listItemBadgeTextAppearance" format="reference" />
+        <attr name="listItemBadgeText" format="string" />
+        <attr name="listItemBadgeTextColor" format="color" />
+        <attr name="listItemBadgeIcon" format="reference" />
+        <attr name="listItemBadgeIconTint" format="color" />
+        <attr name="listItemBadgeBackgroundTint" format="color" />
+
+        <attr name="listItemFirstEndIcon" format="reference" />
+        <attr name="listItemFirstEndIconTint" format="color" />
+        <attr name="listItemFirstEndIconBackgroundTint" format="color" />
+
+        <attr name="listItemSecondEndIcon" format="reference" />
+        <attr name="listItemSecondEndIconTint" format="color" />
+        <attr name="listItemSecondEndIconBackgroundTint" format="color" />
+
+        <attr name="listItemCheckboxChecked" format="boolean" />
+        <attr name="listItemCheckboxEnabled" format="boolean" />
+
+        <attr name="listItemSwitchChecked" format="boolean" />
+        <attr name="listItemSwitchEnabled" format="boolean" />
+
+        <attr name="listItemRadioButtonChecked" format="boolean" />
+        <attr name="listItemRadioButtonEnabled" format="boolean" />
+
+        <attr name="listItemIsBodyContainerVisible" format="boolean" />
+        <attr name="listItemBodyColor" format="color" />
+        <attr name="listItemBodyStyle" format="reference" />
+        <attr name="listItemBody1SingleLine" format="boolean" />
+        <attr name="listItemBody1MaxLines" format="integer" />
+
+        <attr name="listItemBody1Text" format="string" />
+        <attr name="listItemBody2Text" format="string" />
+        <attr name="listItemBody3Text" format="string" />
+        <attr name="listItemBody4Text" format="string" />
+
+        <attr name="listItemShowDivider" format="boolean" />
     </declare-styleable>
 </resources>

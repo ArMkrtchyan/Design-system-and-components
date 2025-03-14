@@ -17,6 +17,9 @@
             android:id="@+id/action_mainFragment_to_listItemFragment"
             app:destination="@id/listItemFragment" />
         <action
+            android:id="@+id/action_mainFragment_to_listItem2Fragment"
+            app:destination="@id/listItem2Fragment" />
+        <action
             android:id="@+id/action_mainFragment_to_phoneNumberInputFragment"
             app:destination="@id/phoneNumberInputFragment" />
         <action
@@ -173,6 +176,11 @@
         android:name="am.acba.components.ListItemFragment"
         android:label="ListItemFragment"
         tools:layout="@layout/fragment_list_item" />
+    <fragment
+        android:id="@+id/listItem2Fragment"
+        android:name="am.acba.components.ListItemFragment2"
+        android:label="ListItem2Fragment"
+        tools:layout="@layout/fragment_list_item_2" />
     <fragment
         android:id="@+id/phoneNumberInputFragment"
         android:name="am.acba.components.PhoneNumberInputFragment"

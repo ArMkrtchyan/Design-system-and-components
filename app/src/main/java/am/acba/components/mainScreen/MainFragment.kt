@@ -38,6 +38,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
             ComponentTypeEnum.DROP_DOWN -> findNavController().navigate(R.id.action_mainFragment_to_dropDownFragment)
             ComponentTypeEnum.EXCHANGE -> findNavController().navigate(R.id.action_mainFragment_to_exchangeFragment)
             ComponentTypeEnum.LIST_ITEMS -> findNavController().navigate(R.id.action_mainFragment_to_listItemFragment)
+            ComponentTypeEnum.LIST_ITEMS_2 -> findNavController().navigate(R.id.action_mainFragment_to_listItem2Fragment)
             ComponentTypeEnum.PHONE_NUMBER_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_phoneNumberInputFragment)
             ComponentTypeEnum.CARD_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_cardInputFragment)
             ComponentTypeEnum.CURRENCY_INPUT -> findNavController().navigate(R.id.action_mainFragment_to_currencyInputFragment)
@@ -86,6 +87,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
         Component(ComponentTypeEnum.DIALOGS, ComponentTypeEnum.DIALOGS.componentName),
         Component(ComponentTypeEnum.DROP_DOWN, ComponentTypeEnum.DROP_DOWN.componentName),
         Component(ComponentTypeEnum.LIST_ITEMS, ComponentTypeEnum.LIST_ITEMS.componentName),
+        Component(ComponentTypeEnum.LIST_ITEMS_2, ComponentTypeEnum.LIST_ITEMS_2.componentName),
         Component(ComponentTypeEnum.TOOLBAR, ComponentTypeEnum.TOOLBAR.componentName),
         Component(ComponentTypeEnum.ONBOARDING_TOOTLTIPS, ComponentTypeEnum.ONBOARDING_TOOTLTIPS.componentName),
         Component(ComponentTypeEnum.CARD_LISTING, ComponentTypeEnum.CARD_LISTING.componentName),
