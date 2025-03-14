@@ -10,8 +10,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
@@ -82,6 +84,11 @@ class PrimaryBadge : FrameLayout {
         } else if (type == BadgeType.TEXT) {
             textBinding.text.text = text
         }
+    }
+
+    fun setStrokeColor(@ColorRes color: Int) {
+        val background = iconBinding.icon.background.current as? GradientDrawable
+        background?.setStroke(2.dpToPx(), ContextCompat.getColor(context, color))
     }
 
     fun setBadgeTextColor(textColor: Int) {
