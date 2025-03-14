@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingVertical="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="4dp">
+
+            <FrameLayout
+                android:id="@+id/layoutStartComponent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                tools:layout_height="36dp"
+                tools:layout_width="36dp"
+                tools:visibility="visible" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:id="@+id/badgeStartIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationX="-2dp"
+                android:translationY="-2dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/layoutStartComponent"
+                app:layout_constraintTop_toTopOf="@id/layoutStartComponent"
+                tools:visibility="visible" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/tvTitle"
+                style="@style/Body2.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/barrierCentre"
+                app:layout_constraintEnd_toStartOf="@id/badgeListItem"
+                app:layout_constraintStart_toEndOf="@id/layoutStartComponent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="0dp"
+                tools:text="List Item" />
+
+            <am.acba.component.badge.PrimaryBadge
+                android:id="@+id/badgeListItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:visibility="gone"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+                app:layout_constraintEnd_toStartOf="@id/ivFirstEndIcon"
+                app:layout_constraintStart_toEndOf="@id/tvTitle"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                tools:visibility="visible" />
+
+            <am.acba.component.imageView.PrimaryImageView
+                android:id="@+id/ivFirstEndIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/layoutSecondEndComponent"
+                app:layout_constraintEnd_toStartOf="@id/layoutSecondEndComponent"
+                app:layout_constraintStart_toEndOf="@id/badgeListItem"
+                app:layout_constraintTop_toTopOf="@id/layoutSecondEndComponent"
+                tools:background="@drawable/ic_checkmark_badge" />
+
+            <FrameLayout
+                android:id="@+id/layoutSecondEndComponent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTitle"
+                tools:layout_height="24dp"
+                tools:layout_width="24dp" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierCentre"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tvTitle, ivFirstEndIcon, layoutSecondEndComponent" />
+
+            <LinearLayout
+                android:id="@+id/layoutBodies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/barrierCentre"
+                tools:layout_height="24dp"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <am.acba.component.divider.PrimaryDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</LinearLayout>
