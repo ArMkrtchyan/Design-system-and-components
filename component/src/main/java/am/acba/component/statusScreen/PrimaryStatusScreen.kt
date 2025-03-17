@@ -29,10 +29,7 @@ import com.airbnb.lottie.SimpleColorFilter
 import com.airbnb.lottie.model.KeyPath
 import com.airbnb.lottie.value.LottieValueCallback
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class PrimaryStatusScreen : FrameLayout {
 
@@ -251,6 +248,7 @@ class PrimaryStatusScreen : FrameLayout {
 
         Glide.with(imageView.context)
             .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(imageView)
     }
 
