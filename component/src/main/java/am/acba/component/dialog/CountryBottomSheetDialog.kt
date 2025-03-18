@@ -40,6 +40,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
         get() = 0
 
     override fun CountryBottomSheetBinding.initView() {
+        openFullScreen = true
         getBundleVariablesAndSetupUi()
         setUpShadow()
     }
