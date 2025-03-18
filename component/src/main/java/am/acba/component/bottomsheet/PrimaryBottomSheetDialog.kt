@@ -1,6 +1,5 @@
 package am.acba.component.bottomsheet
 
-
 import am.acba.component.R
 import am.acba.component.databinding.BottomSheetBaseContainerBinding
 import am.acba.component.extensions.Inflater
@@ -10,6 +9,7 @@ import am.acba.component.extensions.getDisplayHeight
 import am.acba.component.extensions.getStatusBarHeight
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
+import am.acba.component.extensions.onState
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
@@ -57,6 +57,7 @@ abstract class PrimaryBottomSheetDialog<VB : ViewBinding> : BottomSheetDialogFra
         bottomSheetBehavior = behavior
         behavior.isDraggable = draggable
         behavior.state = state
+        behavior.onState { if (it == BottomSheetBehavior.STATE_COLLAPSED || it == BottomSheetBehavior.STATE_HALF_EXPANDED) dismiss() }
     }
 
     private lateinit var binding: VB
