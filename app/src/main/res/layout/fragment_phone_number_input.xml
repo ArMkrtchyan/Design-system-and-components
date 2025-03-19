@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 app:countryTopChips="am,us"
                 app:phoneNumberInputBottomSheetTitle="Select country"
+                app:phoneNumberSearchInputHint="@string/search_hint"
                 app:phoneBookBottomSheetTitle="Select"
                 app:enableErrorAnimation="true"
                 app:phoneInputErrorText="Phone number is not valid"

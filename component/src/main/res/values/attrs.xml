@@ -209,6 +209,7 @@
         <attr name="countryTopChips" format="string" />
         <attr name="enableErrorAnimation" />
         <attr name="phoneNumberInputBottomSheetTitle" format="string" />
+        <attr name="phoneNumberSearchInputHint" format="string" />
         <attr name="phoneBookBottomSheetTitle" format="string" />
     </declare-styleable>
     <declare-styleable name="CurrencyInput">

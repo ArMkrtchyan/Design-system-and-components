@@ -81,6 +81,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     var onSelectedContactSet: (() -> Unit)? = null
     private var onAcbaContactClick: (() -> Unit)? = null
     private var bottomSheetTitle = ""
+    private var searchInputHint = ""
     private var phoneBookBottomSheetTitle = ""
 
 
@@ -99,6 +100,7 @@ class PhoneNumberInput @JvmOverloads constructor(
                 countryTopShips = getString(R.styleable.PhoneNumberInput_countryTopChips)
                 enableErrorAnimation = getBoolean(R.styleable.PhoneNumberInput_enableErrorAnimation, false)
                 bottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneNumberInputBottomSheetTitle) ?: ""
+                searchInputHint = getString(R.styleable.PhoneNumberInput_phoneNumberSearchInputHint) ?: ""
                 phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle)
                     ?: context.getString(R.string.select_phone_number)
             } finally {
@@ -123,7 +125,6 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun CutCopyPasteEditText.initListeners() {
-        doOnTextChanged { text, _, _, _ -> clearText(text ?: "") }
         doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
         onKeyboardDoneButtonClick { setErrorAnimation() }
         onKeyboardActionButtonClick { actionId ->
@@ -152,7 +153,6 @@ class PhoneNumberInput @JvmOverloads constructor(
                 val pastedText = clip.getItemAt(0).text.toString()
                 pastedText.log("pastedText")
                 setPhoneNumber(pastedText)
-                binding.clear.setOnClickListener { binding.phoneNumber.setText("") }
             }
         }
     }
@@ -162,7 +162,6 @@ class PhoneNumberInput @JvmOverloads constructor(
             this.isFocusable = isFocusable
 
             if (!isFocusable) {
-                isFirstFocusable = false
                 isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
             }
             if (isValidNumber) {
@@ -242,21 +241,8 @@ class PhoneNumberInput @JvmOverloads constructor(
             binding.icError.isVisible = !errorText.isNullOrEmpty()
         }
     }
-
-    @SuppressLint("SetTextI18n")
-    private fun clearText(text: CharSequence) {
-        if (text.isEmpty()) {
-            setupBackgroundByFocusable()
-            binding.clear.visibility = GONE
-            isValidNumber = true
-            setupHelpErrorText()
-        } else {
-            binding.clear.visibility = if (isEnabled) VISIBLE else GONE
-        }
-        binding.clear.setOnClickListener { binding.phoneNumber.setText("") }
-    }
-
     private fun setErrorBackground() {
+        isFirstFocusable = false
         binding.countryCodeLayout.background = ContextCompat.getDrawable(
             context,
             R.drawable.background_primary_input_error_left_border
@@ -351,7 +337,6 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     override fun setEnabled(isEnable: Boolean) {
-        binding.clear.isVisible = if (binding.phoneNumber.text?.isNotEmpty() == true) isEnable else false
         binding.countryCodeLayout.isEnabled = isEnable
         binding.phoneNumberLayout.isEnabled = isEnable
         binding.icPhoneBook.isEnabled = isEnable
