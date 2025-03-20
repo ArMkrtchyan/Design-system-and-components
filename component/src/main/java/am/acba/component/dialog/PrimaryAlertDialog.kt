@@ -26,6 +26,7 @@ class PrimaryAlertDialog(
     private var mOnNegativeButtonClick: (() -> Unit)?,
     private var mOnPositiveButtonClick: (() -> Unit)?,
     private var mNeedToDismissOnPositiveButtonClick: (() -> Unit)?,
+    private val dismiss: Boolean? = null
 ) : Dialog(context) {
 
     private lateinit var mBinding: DialogLayoutBinding
@@ -45,6 +46,7 @@ class PrimaryAlertDialog(
         builder.mOnNegativeButtonClick,
         builder.mOnPositiveButtonClick,
         builder.mNeedToDismissOnPositiveButtonClick,
+        builder.dismiss
     )
 
     companion object {
@@ -70,8 +72,8 @@ class PrimaryAlertDialog(
         var mOnNegativeButtonClick: (() -> Unit)? = null,
         var mOnPositiveButtonClick: (() -> Unit)? = null,
         var mNeedToDismissOnPositiveButtonClick: (() -> Unit)? = null,
+        var dismiss: Boolean? = null
     ) {
-
         fun setCancelable(isCancelable: Boolean) = apply { this.mCancelable = isCancelable }
 
         fun negativeButtonClick(onNegativeButtonClick: (() -> Unit)?) =
@@ -164,5 +166,6 @@ class PrimaryAlertDialog(
         mBinding.buttonSecondary.setOnClickListener {
             mOnNegativeButtonClick?.invoke() ?: run { dismiss() }
         }
+        if (dismiss == true) dismiss()
     }
 }
