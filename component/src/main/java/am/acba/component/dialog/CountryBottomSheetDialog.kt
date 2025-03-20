@@ -16,7 +16,6 @@ import android.content.DialogInterface
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -68,8 +67,8 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
 
     private fun CountryBottomSheetBinding.getBundleVariablesAndSetupUi() {
         val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
-        needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") ?: false
-        isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") ?: false
+        needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") == true
+        isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") == true
         if (needToSaveActions) getCountryChipListFromDb()
         search.isVisible = isSearchInputVisible
         setupAdapter(countriesList as ArrayList, true)
@@ -105,8 +104,8 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     ) {
         if (rvCountries.adapter == null) {
             countriesAdapter = CountriesListAdapter(::selectCountry, countriesList)
-            val countriesTitleAdapter = TitleAdapter(getString(R.string.history_filter_button_all))
-            titleAdapter = TitleAdapter(getString(R.string.frequendly_search))
+            val countriesTitleAdapter = TitleAdapter(getString(R.string.phone_number_most_searched))
+            titleAdapter = TitleAdapter(getString(R.string.all))
             chipsAdapter = CountriesChipsAdapter(dBActionsList, ::selectCountry)
             concatAdapter = ConcatAdapter().apply {
                 if (dBActionsList.isNotEmpty()) {
@@ -129,7 +128,6 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
             countriesAdapter.replaceList(countriesList)
         }
     }
-
 
     private fun CountryBottomSheetBinding.searchCountry(countriesList: List<CountryModel>) {
         search.editText?.doAfterTextChanged { text ->

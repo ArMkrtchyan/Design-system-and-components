@@ -36,7 +36,6 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
@@ -80,9 +79,9 @@ class PhoneNumberInput @JvmOverloads constructor(
     lateinit var fragment: Fragment
     var onSelectedContactSet: (() -> Unit)? = null
     private var onAcbaContactClick: (() -> Unit)? = null
-    private var bottomSheetTitle = ""
-    private var searchInputHint = ""
-    private var phoneBookBottomSheetTitle = ""
+    private var searchInputHint = context.getString(R.string.search)
+    private var bottomSheetTitle: String = context.getString(R.string.select_country_code)
+    private var phoneBookBottomSheetTitle = context.getString(R.string.select_phone_number)
 
 
     var errorText: String? = null
@@ -99,10 +98,9 @@ class PhoneNumberInput @JvmOverloads constructor(
                 helpText = getString(R.styleable.PhoneNumberInput_phoneInputHelpText)
                 countryTopShips = getString(R.styleable.PhoneNumberInput_countryTopChips)
                 enableErrorAnimation = getBoolean(R.styleable.PhoneNumberInput_enableErrorAnimation, false)
-                bottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneNumberInputBottomSheetTitle) ?: ""
-                searchInputHint = getString(R.styleable.PhoneNumberInput_phoneNumberSearchInputHint) ?: ""
-                phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle)
-                    ?: context.getString(R.string.select_phone_number)
+                searchInputHint = getString(R.styleable.PhoneNumberInput_phoneNumberSearchInputHint) ?: searchInputHint
+                bottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneNumberInputBottomSheetTitle) ?: bottomSheetTitle
+                phoneBookBottomSheetTitle = getString(R.styleable.PhoneNumberInput_phoneBookBottomSheetTitle) ?: phoneBookBottomSheetTitle
             } finally {
                 recycle()
             }
@@ -361,7 +359,6 @@ class PhoneNumberInput @JvmOverloads constructor(
         val bundle = Bundle()
         bundle.putBoolean("needToSavActionsOnDB", true)
         bundle.putBoolean("isSearchInputVisible", true)
-        bundle.putString("bottomSheetTitle", "Phone Number")
         bundle.putString("title", bottomSheetTitle)
         bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
         CountryBottomSheetDialog.show(

@@ -14,7 +14,7 @@
         android:layout_marginEnd="@dimen/spacing_16"
         android:drawableEnd="@drawable/ic_contacts"
         android:drawableTint="?attr/contentPrimary"
-        android:text="@string/from_acba_contact"
+        android:text="@string/phone_number_from_acba_contact"
         app:drawableTint="?attr/contentPrimary"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_marginEnd="@dimen/spacing_16"
         android:drawableEnd="@drawable/ic_phonebook"
         android:drawableTint="?attr/contentPrimary"
-        android:text="@string/from_phone_book"
+        android:text="@string/phone_number_from_phone_book"
         app:drawableTint="?attr/contentPrimary"
 
         app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
