@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--General-->
+
+    <string name="all">Բոլորը</string>
+    <string name="search">Search</string>
+
+    <!--Phone Input-->
+
+    <string name="phone_number">Հեռախոսահամար</string>
+    <string name="select_phone_number">Ընտրել հեռախոսահամարը</string>
+    <string name="phone_number_from_phone_book">Հեռախոսագրքից</string>
+    <string name="phone_number_from_acba_contact">acba կոնտակտներից</string>
+    <string name="select_country_code">Ընտրել երկրի կոդը</string>
+    <string name="phone_number_most_searched">Հաճախ որոնվող</string>
+</resources>

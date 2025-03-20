@@ -27,6 +27,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -286,4 +287,15 @@ fun LottieAnimationView.playLottieAnimation(delayTime: Long = 300, setAnimation:
         setAnimation.invoke()
         playAnimation()
     }
+}
+
+fun BottomSheetBehavior<*>.onState(alpha: (state: Int) -> Unit) {
+    addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+        }
+
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            alpha.invoke(newState)
+        }
+    })
 }

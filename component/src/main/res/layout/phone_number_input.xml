@@ -80,22 +80,11 @@
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_weight="0.9"
                 android:background="@color/Transparent"
-                android:hint="Phone number"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:maxLength="15"
                 android:paddingVertical="16dp"
                 android:textSize="@dimen/text_size_16" />
-
-            <am.acba.component.imageView.PrimaryImageView
-                android:id="@+id/clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center"
-                android:padding="5dp"
-                android:src="@drawable/ic_close_small"
-                android:tint="?attr/contentPrimary"
-                android:visibility="gone"
-                tools:visibility="visible" />
 
             <am.acba.component.imageView.PrimaryImageView
                 android:id="@+id/ic_phone_book"

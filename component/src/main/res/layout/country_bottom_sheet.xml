@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="@dimen/spacing_20"
         android:layout_marginEnd="@dimen/spacing_16"
-        android:hint="@string/acba_cantact_tel"
+        android:hint="@string/search"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_search" />

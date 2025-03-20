@@ -31,6 +31,9 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     private var dBActionsList: MutableList<CountryModel> = mutableListOf()
     private var topChipsListByDigital: MutableList<CountryModel> = mutableListOf()
     private lateinit var countriesAdapter: CountriesListAdapter
+    private lateinit var concatAdapter: ConcatAdapter
+    private lateinit var titleAdapter: TitleAdapter
+    private lateinit var chipsAdapter: CountriesChipsAdapter
     private var needToSaveActions: Boolean = true
     private var isSearchInputVisible: Boolean = true
 
@@ -40,6 +43,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
         get() = 0
 
     override fun CountryBottomSheetBinding.initView() {
+        openFullScreen = true
         getBundleVariablesAndSetupUi()
         setUpShadow()
     }
@@ -63,11 +67,11 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
 
     private fun CountryBottomSheetBinding.getBundleVariablesAndSetupUi() {
         val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
-        needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") ?: false
-        isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") ?: false
+        needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") == true
+        isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") == true
         if (needToSaveActions) getCountryChipListFromDb()
         search.isVisible = isSearchInputVisible
-        setupAdapter(countriesList as ArrayList)
+        setupAdapter(countriesList as ArrayList, true)
         searchCountry(countriesList)
     }
 
@@ -94,20 +98,33 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
         })
     }
 
-    private fun CountryBottomSheetBinding.setupAdapter(countriesList: List<CountryModel>) {
+    private fun CountryBottomSheetBinding.setupAdapter(
+        countriesList: List<CountryModel>,
+        isChipsVisible: Boolean
+    ) {
         if (rvCountries.adapter == null) {
             countriesAdapter = CountriesListAdapter(::selectCountry, countriesList)
-            val titleAdapter = TitleAdapter(getString(R.string.frequendly_search))
-            val countriesTitleAdapter = TitleAdapter(getString(R.string.history_filter_button_all))
-            val chipList = dBActionsList
-            val chipsAdapter = CountriesChipsAdapter(chipList, ::selectCountry)
-            val concatAdapter = if (dBActionsList.isNotEmpty()) {
-                ConcatAdapter(titleAdapter, chipsAdapter, countriesTitleAdapter, countriesAdapter)
-            } else {
-                ConcatAdapter(countriesAdapter)
+            val countriesTitleAdapter = TitleAdapter(getString(R.string.phone_number_most_searched))
+            titleAdapter = TitleAdapter(getString(R.string.all))
+            chipsAdapter = CountriesChipsAdapter(dBActionsList, ::selectCountry)
+            concatAdapter = ConcatAdapter().apply {
+                if (dBActionsList.isNotEmpty()) {
+                    addAdapter(titleAdapter)
+                    addAdapter(chipsAdapter)
+                }
+                addAdapter(countriesTitleAdapter)
+                addAdapter(countriesAdapter)
             }
             rvCountries.adapter = concatAdapter
         } else {
+            val hasChips = concatAdapter.adapters.contains(titleAdapter)
+            if (isChipsVisible && !hasChips) {
+                concatAdapter.addAdapter(0, titleAdapter)
+                concatAdapter.addAdapter(1, chipsAdapter)
+            } else if (!isChipsVisible && hasChips) {
+                concatAdapter.removeAdapter(titleAdapter)
+                concatAdapter.removeAdapter(chipsAdapter)
+            }
             countriesAdapter.replaceList(countriesList)
         }
     }
@@ -118,7 +135,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
             if (searchText.isNotEmpty()) {
                 filterAction(countriesList, searchText)
             } else {
-                setupAdapter(countriesList)
+                setupAdapter(countriesList, true)
             }
         }
     }
@@ -126,10 +143,10 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     private fun CountryBottomSheetBinding.filterAction(countriesList: List<CountryModel>, char: CharSequence) {
         val filterList = countriesList.filter { country ->
             country.name?.lowercase()?.startsWith(char) == true ||
-                    country.englishName?.startsWith(char) == true ||
-                    country.phoneCode?.startsWith(char) == true
+                country.englishName?.startsWith(char) == true ||
+                country.phoneCode?.startsWith(char) == true
         }.toMutableList()
-        setupAdapter(filterList)
+        setupAdapter(filterList, char.isEmpty())
     }
 
     override fun onDismiss(dialog: DialogInterface) {

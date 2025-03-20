@@ -46,13 +46,14 @@ class CountriesListAdapter(
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(country: CountryModel) {
             binding.apply {
                 Glide.with(binding.root.context).asBitmap().load(country.flagResId)
                     .apply(RequestOptions.circleCropTransform().override(24.dpToPx(), 24.dpToPx()))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.icFlag)
-                countryText.text = country.name
+                countryText.text = "${country.name} (+${country.phoneCode})"
             }
 
         }
