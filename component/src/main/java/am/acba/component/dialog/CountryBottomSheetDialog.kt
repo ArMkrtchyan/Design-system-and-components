@@ -34,6 +34,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     private lateinit var concatAdapter: ConcatAdapter
     private lateinit var titleAdapter: TitleAdapter
     private lateinit var chipsAdapter: CountriesChipsAdapter
+    private lateinit var countriesList: ArrayList<CountryModel>
     private var needToSaveActions: Boolean = true
     private var isSearchInputVisible: Boolean = true
 
@@ -66,12 +67,13 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     }
 
     private fun CountryBottomSheetBinding.getBundleVariablesAndSetupUi() {
-        val countriesList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
+        val getCountryList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
         needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") == true
         isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") == true
         if (needToSaveActions) getCountryChipListFromDb()
         search.isVisible = isSearchInputVisible
-        setupAdapter(countriesList as ArrayList, true)
+        countriesList = getCountryList as ArrayList
+        setupAdapter(countriesList, true)
         searchCountry(countriesList)
     }
 
@@ -155,6 +157,15 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     }
 
     private fun selectCountry(country: CountryModel) {
+        val previousSelectedIndex = countriesList.indexOfFirst { it.isSelected }
+        if (previousSelectedIndex != -1) {
+            countriesList[previousSelectedIndex].isSelected = false
+        }
+        val selectedCountryIndex = countriesList.indexOfFirst { it.name == country.name }
+        if (selectedCountryIndex != -1) {
+            countriesList[selectedCountryIndex].isSelected = true
+        }
+        countriesAdapter.replaceList(countriesList)
         mAction?.invoke(country)
         if (needToSaveActions) context?.saveCountryLastAction(country)
         dismiss()

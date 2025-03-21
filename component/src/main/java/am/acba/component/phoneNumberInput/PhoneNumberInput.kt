@@ -223,6 +223,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         }.onEach {   //Default country
             if (it.nameCode?.lowercase() == simCountryISO) {
                 selectCountry(it)
+                it.isSelected = true
             }
         }
     }
