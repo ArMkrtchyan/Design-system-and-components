@@ -60,10 +60,10 @@ class CountriesListAdapter(
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.icFlag)
                 countryText.text = "${country.name} (+${country.phoneCode})"
-                val backgroundColor = root.context.getColorFromAttr(if (country.isSelected) R.attr.backgroundTonal2 else 0)
+                val colorRes = if (country.isSelected) R.attr.backgroundTonal2 else 0
+                val backgroundColor = root.context.getColorFromAttr(colorRes)
                 root.setBackgroundColor(backgroundColor)
             }
-
         }
     }
 }
