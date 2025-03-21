@@ -45,6 +45,7 @@ class CountriesChipsAdapter(
                         .into(chip.startIcon)
 
                     chip.setOnClickListener {
+                        country.isSelected = true
                         itemClick?.invoke(country)
                     }
                 }
