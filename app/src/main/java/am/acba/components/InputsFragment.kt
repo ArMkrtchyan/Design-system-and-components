@@ -23,19 +23,20 @@ class InputsFragment : BaseViewBindingFragment<FragmentInputsBinding>() {
     override fun FragmentInputsBinding.initView() {
         input.apply {
             editText?.isSingleLine = true
+            editText?.maxLines=3
             helperText = "Min amount"
             hint = "Amount"
             val errorText = "Amount is too short"
-            editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            editText?.onFocusChangeListener = OnFocusChangeListener { _, _ ->
                 validateAfterFocusChange(
                     errorMessage = errorText,
-                    isValid = editText?.text?.length ?: 0 < 4
+                    isValid = (editText?.text?.length ?: 0) < 4
                 )
             }
             editText?.doAfterTextChanged {
                 validateAfterTextChange(
                     errorMessage = errorText,
-                    isValid = editText?.text?.length ?: 0 < 4
+                    isValid = (editText?.text?.length ?: 0) < 4
                 )
             }
         }

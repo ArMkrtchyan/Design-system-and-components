@@ -38,6 +38,9 @@ import com.google.android.material.textfield.TextInputLayout
 open class PrimaryInput : TextInputLayout {
 
     var enableErrorAnimation = false
+    private val TYPE_AMOUNT = 0
+    private val TYPE_NUMBER = 1
+    private val TYPE_EMAIL = 3
 
     private var textMaxLength = -1
     private var cornerStyle = -1
@@ -46,6 +49,7 @@ open class PrimaryInput : TextInputLayout {
     private var formattingWithDot = false
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
+    private var isFirstFocusable = true
 
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
@@ -101,8 +105,9 @@ open class PrimaryInput : TextInputLayout {
                     context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
             }
             when (inputType) {
-                0 -> setInputTypeForAmount()
-                1 -> setInputTypeForNumber()
+                TYPE_AMOUNT -> setInputTypeForAmount()
+                TYPE_NUMBER -> setInputTypeForNumber()
+                TYPE_EMAIL -> setInputTypeForEmail()
             }
 //            editText?.hideSoftInput()
 //            editText?.let { rootView.addKeyboardVisibilityListener(it) }
@@ -165,8 +170,8 @@ open class PrimaryInput : TextInputLayout {
         editText?.inputType = InputType.TYPE_CLASS_NUMBER
     }
 
-    fun setInputTypeForText() {
-        editText?.inputType = InputType.TYPE_CLASS_TEXT
+    fun setInputTypeForEmail() {
+        editText?.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
     }
 
     fun setAmountText(amount: String) {
@@ -231,6 +236,7 @@ open class PrimaryInput : TextInputLayout {
             isErrorEnabled = !isValid && isNotEmpty
             validateAfterInput = isNotEmpty
             if (isErrorEnabled) {
+                isFirstFocusable = false
                 if (isKeyboardActionClicked) setErrorAnimation()
                 error = errorMessage
             }
@@ -238,7 +244,7 @@ open class PrimaryInput : TextInputLayout {
     }
 
     fun validateAfterTextChange(errorMessage: String?, isValid: Boolean = true) {
-        if (validateAfterInput) {
+        if (validateAfterInput && !isFirstFocusable) {
             if (editText?.text?.isEmpty() == true) {
                 isErrorEnabled = false
                 validateAfterInput = false
