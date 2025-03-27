@@ -422,7 +422,17 @@
         <attr name="badgePaddingEnd" />
         <attr name="showBadge" />
     </declare-styleable>
-    <declare-styleable name="PinInput"></declare-styleable>
+    <declare-styleable name="PinInput">
+        <attr name="pinType" format="enum">
+            <enum name="Numeric" value="0" />
+            <enum name="Gemalto" value="1" />
+        </attr>
+        <attr name="showPinCode" format="boolean" />
+        <attr name="pinLength" format="enum">
+            <enum name="Four" value="4" />
+            <enum name="Six" value="6" />
+        </attr>
+    </declare-styleable>
     <declare-styleable name="PrimaryCollapsingToolbar">
         <attr name="toolbarTitle" format="string" />
         <attr name="toolbarTitleMaxLines" format="integer" />
