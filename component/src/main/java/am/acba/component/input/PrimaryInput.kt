@@ -23,6 +23,7 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -38,13 +39,12 @@ import androidx.core.view.updateMarginsRelative
 import com.google.android.material.textfield.TextInputLayout
 import java.text.NumberFormat
 import java.util.Locale
-import kotlin.math.max
 
 open class PrimaryInput : TextInputLayout {
 
     var enableErrorAnimation = false
-    private val TYPE_AMOUNT = 0
     private val TYPE_NUMBER = 1
+    private val AMOUNT_FORMATTING = 2
     private val TYPE_EMAIL = 3
 
     private var textMaxLength = -1
@@ -120,8 +120,8 @@ open class PrimaryInput : TextInputLayout {
                     context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
             }
             when (inputType) {
-                TYPE_AMOUNT -> setInputTypeForAmount()
                 TYPE_NUMBER -> setInputTypeForNumber()
+                AMOUNT_FORMATTING -> amountFormattingWhileTyping()
                 TYPE_EMAIL -> setInputTypeForEmail()
             }
 
@@ -172,15 +172,6 @@ open class PrimaryInput : TextInputLayout {
         this.onOtherActionButtonClick = onActionButtonClick
     }
 
-    fun setInputTypeForAmount(enableFormattingWithDots: Boolean = false) {
-        formattingWithDot = enableFormattingWithDots
-        editText?.inputType = InputType.TYPE_CLASS_NUMBER
-        editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            amountTextFormatting(hasFocus)
-            mAction?.invoke(hasFocus)
-        }
-    }
-
     fun setInputTypeForNumber() {
         editText?.inputType = InputType.TYPE_CLASS_NUMBER
     }
@@ -189,31 +180,7 @@ open class PrimaryInput : TextInputLayout {
         editText?.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
     }
 
-    fun setAmountText(amount: String) {
-        editText?.setText((if (formattingWithDot) amount.numberFormatting() else amount.numberFormattingWithOutDot()))
-    }
-
-    private fun amountTextFormatting(isFocusable: Boolean) {
-        if (isFocusable) {
-            editText?.setText(getDeFormatedStringAmount())
-            setMaxLength(textMaxLength)
-        } else {
-            val text = editText?.text?.toString()?.trim() ?: ""
-            val formattedText = if (!formattingWithDot) text.numberFormattingWithOutDot() else text.numberFormatting()
-            setMaxLengthForFormattedText(formattedText.length)
-            editText?.setText(formattedText)
-        }
-    }
-
-    private fun reformatAmount(amount: String): String {
-        return if (formattingWithDot) amount.numberFormatting() else amount.numberFormattingWithOutDot()
-    }
-
-    fun setInputTypeForNumber() {
-        editText?.inputType = InputType.TYPE_CLASS_NUMBER
-    }
-
-    fun setInputTypeForText() {
+    fun setInputTypeDefault() {
         editText?.inputType = InputType.TYPE_CLASS_TEXT
     }
 
@@ -221,7 +188,7 @@ open class PrimaryInput : TextInputLayout {
         editText?.setText((if (formattingWithDot) amount.numberFormatting() else amount.numberFormattingWithOutDot()))
     }
 
-    fun amountFormattingWhileTyping() {
+    private fun amountFormattingWhileTyping() {
         editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
         val currencyTextWatcher = object : TextWatcher {
@@ -403,7 +370,6 @@ open class PrimaryInput : TextInputLayout {
             if (isErrorEnabled) error = errorMessage
         }
     }
-
 
 
     private fun updateEndIconBackgroundState() {
