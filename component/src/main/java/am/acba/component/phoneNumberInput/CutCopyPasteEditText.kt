@@ -25,6 +25,12 @@ class CutCopyPasteEditText : AppCompatEditText {
         mAction = action
     }
 
+    companion object {
+        const val ACTION_CUT = R.id.cut
+        const val ACTION_COPY = R.id.copy
+        const val ACTION_PASTE = R.id.paste
+    }
+
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -40,7 +46,6 @@ class CutCopyPasteEditText : AppCompatEditText {
                 val imm = getSystemService(context, InputMethodManager::class.java)
                 imm?.hideSoftInputFromWindow(windowToken, 0)
                 clearFocus()
-
                 onDoneButtonClick?.invoke()
                 true
             } else {
@@ -61,9 +66,9 @@ class CutCopyPasteEditText : AppCompatEditText {
     override fun onTextContextMenuItem(id: Int): Boolean {
         val consumed = super.onTextContextMenuItem(id)
         when (id) {
-            R.id.cut -> mAction?.invoke(id)
-            R.id.copy -> mAction?.invoke(id)
-            R.id.paste -> mAction?.invoke(id)
+            ACTION_CUT -> mAction?.invoke(id)
+            ACTION_COPY -> mAction?.invoke(id)
+            ACTION_PASTE -> mAction?.invoke(id)
         }
         return consumed
     }

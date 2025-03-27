@@ -6,6 +6,11 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.log
+import am.acba.component.extensions.shakeViewHorizontally
+import am.acba.component.extensions.vibrate
+import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
+import am.acba.component.input.PrimaryInput.Companion.VIBRATION_AMPLITUDE
+import am.acba.component.phoneNumberInput.CutCopyPasteEditText
 import android.annotation.SuppressLint
 import android.content.ClipboardManager
 import android.content.ContentValues.TAG
@@ -17,7 +22,9 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -48,7 +55,9 @@ class PrimaryCardInput @JvmOverloads constructor(
     private var errorIconColor: ColorStateList? = null
     private var isValidNumber = true
     private var isFocusable = false
+    private var isKeyboardActionClicked = false
     private var cardInputEndIconAction: Int
+    private var enableErrorAnimation = false
 
     private var onCardScanDataAction: ((CardDataModel) -> Unit)? = null
     lateinit var fragment: Fragment
@@ -68,6 +77,7 @@ class PrimaryCardInput @JvmOverloads constructor(
                 endIcon = getDrawable(R.styleable.CardInput_cardInputEndIcon)
                 errorIconColor = getColorStateList(R.styleable.CardInput_cardInputErrorIconTint)
                 cardInputEndIconAction = getInt(R.styleable.CardInput_cardInputEndIconAction, 0)
+                enableErrorAnimation = getBoolean(R.styleable.CardInput_cardInputEnableErrorAnimation, false)
             } finally {
                 recycle()
             }
@@ -77,7 +87,15 @@ class PrimaryCardInput @JvmOverloads constructor(
         copyPaste()
         setupHelpErrorText(true)
         onCardNumberTextChange()
+        binding.cardNumber.initListeners()
         binding.clear.setOnClickListener { binding.cardNumber.setText("") }
+        binding.cardNumber.setOnCutCopyPasteListener { actionId ->
+            when (actionId) {
+                android.R.id.cut -> Toast.makeText(context, "Cut action performed", Toast.LENGTH_SHORT).show()
+                android.R.id.copy -> Toast.makeText(context, "Copy action performed", Toast.LENGTH_SHORT).show()
+                android.R.id.paste -> Toast.makeText(context, "Paste action performed", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun setEnabled(isEnable: Boolean) {
@@ -158,9 +176,20 @@ class PrimaryCardInput @JvmOverloads constructor(
             if (isValidNumber) {
                 setupBackgroundByFocusable()
             } else {
+                if (isKeyboardActionClicked) setErrorAnimation()
                 setErrorBackground()
             }
             setupHelpErrorText(isValidNumber)
+        }
+    }
+
+    private fun CutCopyPasteEditText.initListeners() {
+        onKeyboardDoneButtonClick { setErrorAnimation() }
+        onKeyboardActionButtonClick { actionId ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                isKeyboardActionClicked = true
+                setErrorAnimation()
+            }
         }
     }
 
@@ -309,6 +338,13 @@ class PrimaryCardInput @JvmOverloads constructor(
         onCardScanDataAction = cardData
     }
 
+    private fun setErrorAnimation() {
+        if (enableErrorAnimation && !isValidNumber) {
+            isKeyboardActionClicked = false
+            context.vibrate(VIBRATION_AMPLITUDE)
+            shakeViewHorizontally(SHAKE_AMPLITUDE)
+        }
+    }
     /*private val SCAN_REQUEST_CODE = 1
         private val CAMERA_PERMISSION_CODE = 1002*/
 

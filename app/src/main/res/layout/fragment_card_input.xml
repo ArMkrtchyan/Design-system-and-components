@@ -45,6 +45,7 @@
                 app:cardInputErrorIcon="@drawable/ic_info"
                 app:cardInputEndIcon="@drawable/ic_scan"
                 app:cardInputMaxLength="16"
+                app:cardInputEnableErrorAnimation="true"
                 app:cardInputMinLength="14"
                 app:cardInputLogoDetectCount="2"
                 app:cardInputErrorIconTint="?attr/contentDangerTonal1"/>

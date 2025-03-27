@@ -254,7 +254,7 @@
             <enum name="CardScanner" value="0" />
             <enum name="DropDown" value="1" />
         </attr>
-        <attr name="enableErrorAnimation" />
+        <attr name="cardInputEnableErrorAnimation" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />
