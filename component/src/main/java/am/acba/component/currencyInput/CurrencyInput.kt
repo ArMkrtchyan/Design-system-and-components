@@ -271,6 +271,7 @@ class CurrencyInput @JvmOverloads constructor(
         val bundle = Bundle()
         bundle.putBoolean("needToSavActionsOnDB", false)
         bundle.putBoolean("isSearchInputVisible", false)
+        bundle.putInt("bottomSheetType", 2)
         bundle.putString("title", bottomSheetTitle)
         bundle.putParcelableArrayList("CountriesList", currencyList as ArrayList)
         CountryBottomSheetDialog.show(getFragmentManager(), bundle, ::selectCurrency, arrayListOf())

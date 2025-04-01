@@ -1,6 +1,7 @@
 package am.acba.component.input
 
 import am.acba.component.R
+import am.acba.component.currencyInput.ThousandsFormatDelegate
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.load
@@ -26,6 +27,7 @@ import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -65,6 +67,7 @@ open class PrimaryInput : TextInputLayout {
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
     private var mAction: ((Boolean) -> Unit?)? = null
+    val formattedText by lazy { ThousandsFormatDelegate(editText!!)}
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
@@ -189,82 +192,88 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun amountFormattingWhileTyping() {
-        editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        formattedText
+//        editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+//
+//        val currencyTextWatcher = object : TextWatcher {
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//
+//            override fun afterTextChanged(s: Editable?) {
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                if (s.toString().isEmpty() || s.toString() == current) {
+//                    return
+//                }
+//
+//                editText?.removeTextChangedListener(this)
+//                val amount = s.toString()
+//                val cleanString = amount.replace(",", "")
+//
+//                if (amount.contains(".")) {
+//                    when (amount.split(".")[1].length) {
+//
+//                        1 -> {
+//                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
+//                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
+//                            formatter.maximumFractionDigits = 2
+//                            formatter.minimumFractionDigits = 1
+//                            formatter.format(parsed)
+//
+//                            current = formatter.format(parsed)
+//                            editText?.setText(current)
+//                            editText?.setSelection(current.length)
+//                        }
+//
+//                        2 -> {
+//                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
+//                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
+//                            formatter.maximumFractionDigits = 2
+//                            formatter.minimumFractionDigits = 2
+//                            formatter.format(parsed)
+//
+//                            current = formatter.format(parsed)
+//                            editText?.setText(current)
+//                            editText?.setSelection(current.length)
+//                        }
+//
+//                        else -> {
+//                            if (amount.split(".")[1].isNotEmpty()) {
+//                                val parts = amount.split(".")
+//                                val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
+//
+//                                val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
+//                                val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
+//                                    maximumFractionDigits = 2
+//                                    minimumFractionDigits = 0
+//                                }
+//
+//                                current = formatter.format(parsed)
+//                                editText?.setText(current)
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    parsed = cleanString.toDoubleOrNull() ?: 0.0
+//                    formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
+//
+//                    current = formatter.format(parsed)
+//                    editText?.setText(current)
+//                    val length = editText?.text?.length ?: 0
+//                    editText?.setSelection(length.coerceAtMost(current.length))
+//                }
+//                editText?.addTextChangedListener(this)
+//            }
+//        }
+//        editText?.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+//            if (hasFocus){
+//                (v as EditText).post { v.selectAll() }
+//            }
+//            amountTextFormattingWhileTyping(hasFocus, currencyTextWatcher)
+//            mAction?.invoke(hasFocus)
 
-        val currencyTextWatcher = object : TextWatcher {
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString().isEmpty() || s.toString() == current) {
-                    return
-                }
-
-                editText?.removeTextChangedListener(this)
-                val amount = s.toString()
-                val cleanString = amount.replace(",", "")
-
-                if (amount.contains(".")) {
-                    when (amount.split(".")[1].length) {
-
-                        1 -> {
-                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                            formatter.maximumFractionDigits = 2
-                            formatter.minimumFractionDigits = 1
-                            formatter.format(parsed)
-
-                            current = formatter.format(parsed)
-                            editText?.setText(current)
-                            editText?.setSelection(current.length)
-                        }
-
-                        2 -> {
-                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                            formatter.maximumFractionDigits = 2
-                            formatter.minimumFractionDigits = 2
-                            formatter.format(parsed)
-
-                            current = formatter.format(parsed)
-                            editText?.setText(current)
-                            editText?.setSelection(current.length)
-                        }
-
-                        else -> {
-                            if (amount.split(".")[1].isNotEmpty()) {
-                                val parts = amount.split(".")
-                                val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
-
-                                val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
-                                val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
-                                    maximumFractionDigits = 2
-                                    minimumFractionDigits = 0
-                                }
-
-                                current = formatter.format(parsed)
-                                editText?.setText(current)
-                            }
-                        }
-                    }
-                } else {
-                    parsed = cleanString.toDoubleOrNull() ?: 0.0
-                    formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
-
-                    current = formatter.format(parsed)
-                    editText?.setText(current)
-                    val length = editText?.text?.length ?: 0
-                    editText?.setSelection(length.coerceAtMost(current.length))
-                }
-                editText?.addTextChangedListener(this)
-            }
-        }
-        editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            amountTextFormattingWhileTyping(hasFocus, currencyTextWatcher)
-            mAction?.invoke(hasFocus)
-        }
     }
 
 

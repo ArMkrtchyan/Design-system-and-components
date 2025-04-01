@@ -37,6 +37,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     private lateinit var countriesList: ArrayList<CountryModel>
     private var needToSaveActions: Boolean = true
     private var isSearchInputVisible: Boolean = true
+    private var bottomSheetType: Int = -1
 
     override val contentPaddingStart: Int
         get() = 0
@@ -70,10 +71,11 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
         val getCountryList = arguments?.parcelableArrayList<CountryModel>("CountriesList")
         needToSaveActions = arguments?.getBoolean("needToSavActionsOnDB") == true
         isSearchInputVisible = arguments?.getBoolean("isSearchInputVisible") == true
+        bottomSheetType = arguments?.getInt("bottomSheetType") ?: -1
         if (needToSaveActions) getCountryChipListFromDb()
         search.isVisible = isSearchInputVisible
         countriesList = getCountryList as ArrayList
-        setupAdapter(countriesList, true)
+        setupAdapter(countriesList, true, bottomSheetType)
         searchCountry(countriesList)
     }
 
@@ -102,10 +104,11 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
 
     private fun CountryBottomSheetBinding.setupAdapter(
         countriesList: List<CountryModel>,
-        isChipsVisible: Boolean
+        isChipsVisible: Boolean,
+        bottomSheetType: Int
     ) {
         if (rvCountries.adapter == null) {
-            countriesAdapter = CountriesListAdapter(::selectCountry, countriesList)
+            countriesAdapter = CountriesListAdapter(::selectCountry, countriesList, bottomSheetType)
             val countriesTitleAdapter = TitleAdapter(getString(R.string.phone_number_most_searched))
             titleAdapter = TitleAdapter(getString(R.string.all))
             chipsAdapter = CountriesChipsAdapter(dBActionsList, ::selectCountry)
@@ -114,7 +117,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
                     addAdapter(titleAdapter)
                     addAdapter(chipsAdapter)
                 }
-                addAdapter(countriesTitleAdapter)
+                if (bottomSheetType == 1) addAdapter(countriesTitleAdapter)
                 addAdapter(countriesAdapter)
             }
             rvCountries.adapter = concatAdapter
@@ -137,7 +140,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
             if (searchText.isNotEmpty()) {
                 filterAction(countriesList, searchText)
             } else {
-                setupAdapter(countriesList, true)
+                setupAdapter(countriesList, true, bottomSheetType)
             }
         }
     }
@@ -148,7 +151,7 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
                 country.englishName?.startsWith(char) == true ||
                 country.phoneCode?.startsWith(char) == true
         }.toMutableList()
-        setupAdapter(filterList, char.isEmpty())
+        setupAdapter(filterList, char.isEmpty(), bottomSheetType)
     }
 
     override fun onDismiss(dialog: DialogInterface) {

@@ -361,6 +361,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         bundle.putBoolean("needToSavActionsOnDB", true)
         bundle.putBoolean("isSearchInputVisible", true)
         bundle.putString("title", bottomSheetTitle)
+        bundle.putInt("bottomSheetType", 1)
         bundle.putParcelableArrayList("CountriesList", countriesList as ArrayList)
         CountryBottomSheetDialog.show(
             getFragmentManager(),
