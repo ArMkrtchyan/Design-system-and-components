@@ -14,7 +14,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.util.AttributeSet
@@ -22,7 +21,6 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -189,12 +187,21 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun amountFormattingWhileTyping() {
+//        editText?.doOnTextChanged { text, start, _, _ ->
+//            text?.let {
+//                if (it.isNotEmpty() && it[start] == '.' && it.count { char -> char == '.' } == 2) {
+//                    text.removeRange(start, start + 1)
+//                }
+//            }
+//        }
         editText?.doAfterTextChanged { editable ->
             if (!isEditing && !editable.isNullOrEmpty()) {
                 isEditing = true
                 val currentText = editable.toString()
-                if (currentText.count { it == '.' } > 1) {
-                    val fixedText = currentText.replaceFirst("\\.(?=.*\\.)".toRegex(), "")
+                val dotCount = currentText.count { it == '.' }
+                if (dotCount > 1) {
+                    val cursorPosition = editText?.selectionStart ?: 0
+                    val fixedText = currentText.removeRange(cursorPosition - 1, cursorPosition)
                     editable.replace(0, currentText.length, fixedText)
                 } else {
                     if (currentText.contains(".")) {
@@ -238,48 +245,33 @@ open class PrimaryInput : TextInputLayout {
 
     private fun Editable.calculateCountAfterDot() {
         cleanString = this.toString().replace(",", "")
-        when (this.toString().split(".")[1].length) {
-            1 -> {
-                val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                formatter.maximumFractionDigits = 2
-                formatter.minimumFractionDigits = 1
-                formatter.format(parsed)
-                current = formatter.format(parsed)
-                this.replace(0, this.toString().length, current)
-            }
-
-            2 -> {
-                val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                formatter.maximumFractionDigits = 2
-                formatter.minimumFractionDigits = 2
-                formatter.format(parsed)
-                current = formatter.format(parsed)
-                this.replace(0, this.toString().length, current)
-            }
-
+        val length = this.toString().split(".")[1].length
+        when (length) {
+            1, 2 -> format(cleanString, length)
             else -> {
                 if (this.toString().split(".")[1].isNotEmpty()) {
                     val parts = this.toString().split(".")
                     val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
-                    val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
-                    val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
-                        maximumFractionDigits = 2
-                        minimumFractionDigits = 0
-                    }
-                    current = formatter.format(parsed)
-                    this.replace(0, this.toString().length, current)
+                    format(limitedAmount, 0)
                 }
             }
         }
     }
 
+    private fun Editable.format(limitedAmount: String, minimumDigits: Int) {
+        val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
+        val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
+            maximumFractionDigits = 2
+            minimumFractionDigits = minimumDigits
+        }
+        current = formatter.format(parsed)
+        this.replace(0, this.toString().length, current)
+    }
+
     fun setMaxLength(maxLength: Int) {
         textMaxLength = maxLength
-        val fArray = arrayOfNulls<InputFilter>(1)
-        fArray[0] = LengthFilter(maxLength)
-        editText?.filters = fArray
+        val lengthFilter = LengthFilter(maxLength)
+        editText?.filters = arrayOf(lengthFilter)
     }
 
     fun setMaxLengthForFormattedText(maxLength: Int) {
