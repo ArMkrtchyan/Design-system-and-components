@@ -1,7 +1,6 @@
 package am.acba.component.input
 
 import am.acba.component.R
-import am.acba.component.currencyInput.ThousandsFormatDelegate
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.load
@@ -14,7 +13,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
@@ -24,10 +22,8 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
@@ -38,7 +34,10 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputLayout
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -63,11 +62,10 @@ open class PrimaryInput : TextInputLayout {
     private var parsed = 0.0
     private var formatter = ""
     private var current = ""
-
+    private var isEditing = false
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
     private var mAction: ((Boolean) -> Unit?)? = null
-    val formattedText by lazy { ThousandsFormatDelegate(editText!!)}
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
@@ -192,88 +190,15 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun amountFormattingWhileTyping() {
-        formattedText
-//        editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-//
-//        val currencyTextWatcher = object : TextWatcher {
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun afterTextChanged(s: Editable?) {
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                if (s.toString().isEmpty() || s.toString() == current) {
-//                    return
-//                }
-//
-//                editText?.removeTextChangedListener(this)
-//                val amount = s.toString()
-//                val cleanString = amount.replace(",", "")
-//
-//                if (amount.contains(".")) {
-//                    when (amount.split(".")[1].length) {
-//
-//                        1 -> {
-//                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-//                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-//                            formatter.maximumFractionDigits = 2
-//                            formatter.minimumFractionDigits = 1
-//                            formatter.format(parsed)
-//
-//                            current = formatter.format(parsed)
-//                            editText?.setText(current)
-//                            editText?.setSelection(current.length)
-//                        }
-//
-//                        2 -> {
-//                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-//                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-//                            formatter.maximumFractionDigits = 2
-//                            formatter.minimumFractionDigits = 2
-//                            formatter.format(parsed)
-//
-//                            current = formatter.format(parsed)
-//                            editText?.setText(current)
-//                            editText?.setSelection(current.length)
-//                        }
-//
-//                        else -> {
-//                            if (amount.split(".")[1].isNotEmpty()) {
-//                                val parts = amount.split(".")
-//                                val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
-//
-//                                val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
-//                                val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
-//                                    maximumFractionDigits = 2
-//                                    minimumFractionDigits = 0
-//                                }
-//
-//                                current = formatter.format(parsed)
-//                                editText?.setText(current)
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    parsed = cleanString.toDoubleOrNull() ?: 0.0
-//                    formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
-//
-//                    current = formatter.format(parsed)
-//                    editText?.setText(current)
-//                    val length = editText?.text?.length ?: 0
-//                    editText?.setSelection(length.coerceAtMost(current.length))
-//                }
-//                editText?.addTextChangedListener(this)
-//            }
-//        }
-//        editText?.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-//            if (hasFocus){
-//                (v as EditText).post { v.selectAll() }
-//            }
-//            amountTextFormattingWhileTyping(hasFocus, currencyTextWatcher)
-//            mAction?.invoke(hasFocus)
-
+        editText?.doAfterTextChanged { editable ->
+            if (!isEditing && !editable.isNullOrEmpty()) {
+                isEditing = true
+                val currentText = editable.toString()
+                val formattedString = getOriginalText(currentText).toThousandsWithoutDecimals()
+                editable.replace(0, currentText.length, formattedString)
+                isEditing = false
+            }
+        }
     }
 
 
@@ -445,6 +370,31 @@ open class PrimaryInput : TextInputLayout {
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
+    }
+
+    fun getOriginalText(text: String): String {
+        val originalString = text.replace(",", "")
+        if (originalString.all { it.isDigit() }) {
+            return originalString
+        }
+        return ""
+    }
+
+
+    fun String.toThousands(): String =
+        kotlin.runCatching {
+            DecimalFormat("#,##0.00").apply {
+                decimalFormatSymbols = DecimalFormatSymbols(Locale.ENGLISH)
+            }.format(this.toDoubleOrNull() ?: 0.0)
+        }.getOrDefault("")
+
+
+    fun String?.toThousandsWithoutDecimals(): String {
+        return runCatching {
+            DecimalFormat("#,##0").apply {
+                decimalFormatSymbols = DecimalFormatSymbols(Locale.ENGLISH)
+            }.format(this?.toLongOrNull() ?: 0L)
+        }.getOrDefault("")
     }
 
     companion object {

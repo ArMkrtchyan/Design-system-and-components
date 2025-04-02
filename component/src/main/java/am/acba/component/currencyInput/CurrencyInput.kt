@@ -172,14 +172,12 @@ class CurrencyInput @JvmOverloads constructor(
         binding.helpText.text = helpText
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hint = hintText
-        binding.amount.hintTextColor =
-            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
-        binding.amount.editText?.inputType =
-            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.editText?.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_NUMBER_FLAG_DECIMAL
     }
 
     private fun setupBackgroundsByFocusChange() {
-        binding.amount.onFocusChangeListener {isFocusable ->
+        binding.amount.onFocusChangeListener { isFocusable ->
             this.isFocusable = isFocusable
             val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
