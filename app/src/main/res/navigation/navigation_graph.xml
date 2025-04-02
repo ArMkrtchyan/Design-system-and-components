@@ -11,6 +11,9 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
+            android:id="@+id/action_mainFragment_to_buttonsComposeFragment"
+            app:destination="@id/buttonsComposeFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_buttonsFragment"
             app:destination="@id/buttonsFragment" />
         <action
@@ -291,4 +294,8 @@
         android:name="am.acba.components.SnackBarFragment"
         tools:layout="@layout/fragment_snack_bar"
         android:label="SnackBarFragment" />
+    <fragment
+        android:id="@+id/buttonsComposeFragment"
+        android:name="am.acba.composeComponents.buttons.ButtonsComposeFragment"
+        android:label="ButtonsComposeFragment" />
 </navigation>

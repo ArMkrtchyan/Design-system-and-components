@@ -2,6 +2,7 @@ package am.acba.components
 
 enum class ComponentTypeEnum(val componentName: String) {
     BUTTONS("Buttons"),
+    BUTTONS_COMPOSE("Buttons compose"),
     ALERTS("Alerts"),
     BADGES("Badges"),
     BANNERS("Banners"),

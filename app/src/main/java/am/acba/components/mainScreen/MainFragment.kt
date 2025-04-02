@@ -26,6 +26,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
     private fun onItemClick(component: Component) {
         when (component.type) {
             ComponentTypeEnum.BUTTONS -> findNavController().navigate(R.id.action_mainFragment_to_buttonsFragment)
+            ComponentTypeEnum.BUTTONS_COMPOSE -> findNavController().navigate(R.id.action_mainFragment_to_buttonsComposeFragment)
             ComponentTypeEnum.INPUTS -> findNavController().navigate(R.id.action_mainFragment_to_inputsFragment)
             ComponentTypeEnum.ALERTS -> findNavController().navigate(R.id.action_mainFragment_to_alertsFragment)
             ComponentTypeEnum.BADGES -> findNavController().navigate(R.id.action_mainFragment_to_badgesFragment)
@@ -65,6 +66,7 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
 
     private fun getComponents() = arrayListOf(
         Component(ComponentTypeEnum.BUTTONS, ComponentTypeEnum.BUTTONS.componentName),
+        Component(ComponentTypeEnum.BUTTONS_COMPOSE, ComponentTypeEnum.BUTTONS_COMPOSE.componentName),
         Component(ComponentTypeEnum.INPUTS, ComponentTypeEnum.INPUTS.componentName),
         Component(ComponentTypeEnum.SNACK_BAR, ComponentTypeEnum.SNACK_BAR.componentName),
         Component(ComponentTypeEnum.PHONE_NUMBER_INPUT, ComponentTypeEnum.PHONE_NUMBER_INPUT.componentName),

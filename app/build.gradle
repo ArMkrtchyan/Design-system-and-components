@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'am.acba.components'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "am.acba.components"
@@ -33,6 +33,10 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15"
     }
 }
 
