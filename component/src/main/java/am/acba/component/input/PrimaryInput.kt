@@ -196,12 +196,18 @@ open class PrimaryInput : TextInputLayout {
             if (!isEditing && !editable.isNullOrEmpty()) {
                 isEditing = true
                 val currentText = editable.toString()
-                if (currentText.contains(".")) {
-                    editable.calculateCountAfterDot()
+                if (currentText.count { it == '.' } > 1) {
+                    val fixedText = currentText.replaceFirst("\\.(?=.*\\.)".toRegex(), "")
+                    editable.replace(0, currentText.length, fixedText)
                 } else {
-                    val formattedString =
-                        if (formattingWithDot) getOriginalText(currentText).numberFormatting() else getOriginalText(currentText).numberFormattingWithOutDot()
-                    editable.replace(0, currentText.length, formattedString)
+                    if (currentText.contains(".")) {
+                        editable.calculateCountAfterDot()
+                    } else {
+                        val formattedString =
+                            if (formattingWithDot) getOriginalText(currentText).numberFormatting()
+                            else getOriginalText(currentText).numberFormattingWithOutDot()
+                        editable.replace(0, currentText.length, formattedString)
+                    }
                 }
 
                 isEditing = false
@@ -212,6 +218,7 @@ open class PrimaryInput : TextInputLayout {
             mAction?.invoke(hasFocus)
         }
     }
+
 
     private fun formatAmountAfterFocusChange(isFocusable: Boolean) {
         val text = editText?.text?.toString()?.trim() ?: ""
