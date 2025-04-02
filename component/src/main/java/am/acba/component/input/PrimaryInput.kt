@@ -17,12 +17,12 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -36,10 +36,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doBeforeTextChanged
 import com.google.android.material.textfield.TextInputLayout
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -248,10 +245,8 @@ open class PrimaryInput : TextInputLayout {
                 formatter.maximumFractionDigits = 2
                 formatter.minimumFractionDigits = 1
                 formatter.format(parsed)
-
                 current = formatter.format(parsed)
                 this.replace(0, this.toString().length, current)
-
             }
 
             2 -> {
@@ -260,49 +255,23 @@ open class PrimaryInput : TextInputLayout {
                 formatter.maximumFractionDigits = 2
                 formatter.minimumFractionDigits = 2
                 formatter.format(parsed)
-
                 current = formatter.format(parsed)
                 this.replace(0, this.toString().length, current)
-
             }
 
             else -> {
                 if (this.toString().split(".")[1].isNotEmpty()) {
                     val parts = this.toString().split(".")
                     val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
-
                     val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
                     val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
                         maximumFractionDigits = 2
                         minimumFractionDigits = 0
                     }
-
                     current = formatter.format(parsed)
                     this.replace(0, this.toString().length, current)
                 }
             }
-
-        }
-    }
-
-    private fun amountTextFormattingWhileTyping(isFocusable: Boolean, currencyTextWatcher: TextWatcher? = null) {
-        val text = editText?.text?.toString()?.trim() ?: ""
-        if (isFocusable) {
-            setMaxLength(currencyInputMaxLength)
-            if (text.contains(".") && text.split(".")[1].toDouble() == 0.00) {
-                cleanString = text.replace(",", "")
-                parsed = cleanString.toDoubleOrNull() ?: 0.0
-                formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
-                current = formatter.format(parsed)
-
-                editText?.setText(current)
-            }
-            editText?.addTextChangedListener(currencyTextWatcher)
-        } else {
-            val formattedText = text.replace(",", "").numberFormatting()
-            setMaxLength(formattedText.length)
-            editText?.setText(formattedText)
-            editText?.removeTextChangedListener(currencyTextWatcher)
         }
     }
 
