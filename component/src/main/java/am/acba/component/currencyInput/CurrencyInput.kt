@@ -175,7 +175,11 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.hint = hintText
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
         binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-        binding.amount.editText?.keyListener = DigitsKeyListener.getInstance("0123456789,.")
+        if (formattingWithOutDot) {
+            binding.amount.editText?.keyListener = DigitsKeyListener.getInstance("0123456789,")
+        } else {
+            binding.amount.editText?.keyListener = DigitsKeyListener.getInstance("0123456789,.")
+        }
     }
 
     private fun setupBackgroundsByFocusChange() {

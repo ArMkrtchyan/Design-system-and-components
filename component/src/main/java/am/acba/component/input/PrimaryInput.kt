@@ -194,7 +194,7 @@ open class PrimaryInput : TextInputLayout {
             if (!isEditing && !editable.isNullOrEmpty()) {
                 isEditing = true
                 val currentText = editable.toString()
-                val formattedString = getOriginalText(currentText).toThousandsWithoutDecimals()
+                val formattedString = if (formattingWithDot) getOriginalText(currentText).toThousands() else getOriginalText(currentText).toThousandsWithoutDecimals()
                 editable.replace(0, currentText.length, formattedString)
                 isEditing = false
             }
