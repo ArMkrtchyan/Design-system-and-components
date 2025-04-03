@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.app.FrameMetricsAggregator
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.airbnb.lottie.LottieAnimationView

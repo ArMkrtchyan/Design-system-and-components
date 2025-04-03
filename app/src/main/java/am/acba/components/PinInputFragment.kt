@@ -29,6 +29,14 @@ class PinInputFragment : BaseViewBindingFragment<FragmentPinInputBinding>() {
             }
         }
         var pinCount = ""
+
+        mBinding.showPin.setOnClickListener {
+            mBinding.pinInput.setPinShow(true)
+        }
+        mBinding.hidePin.setOnClickListener {
+            mBinding.pinInput.setPinShow(false)
+        }
+
         mBinding.addError.setOnClickListener {
             mBinding.pinInput.addErrorState("Error")
         }
@@ -36,19 +44,12 @@ class PinInputFragment : BaseViewBindingFragment<FragmentPinInputBinding>() {
             mBinding.pinInput.removeErrorState()
         }
 
-        mBinding.clearPinInput.setOnClickListener{
+        mBinding.clearPinInput.setOnClickListener {
             mBinding.pinInput.clearPinInput()
         }
 
-        mBinding.addPinCount.setOnClickListener {
-            pinCount = "$pinCount*"
-            mBinding.pinInput.setUiPinCount(pinCount = pinCount)
-        }
-
-        mBinding.removePinCount.setOnClickListener {
-            pinCount = pinCount.dropLast(1)
-            mBinding.pinInput.setUiPinCount(pinCount = pinCount)
+        mBinding.switchPinVisibility.setOnClickListener {
+            mBinding.pinInput.switchPinVisibility()
         }
     }
-
 }
