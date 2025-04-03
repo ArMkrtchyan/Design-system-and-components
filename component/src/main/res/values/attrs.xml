@@ -242,6 +242,7 @@
     </declare-styleable>
     <declare-styleable name="CardInput">
         <attr name="cardInputErrorText" format="string" />
+        <attr name="cardInputEnableErrorAnimation" format="boolean" />
         <attr name="cardInputHintText" format="string" />
         <attr name="cardInputHelpText" format="string" />
         <attr name="cardInputMaxLength" format="integer" />
@@ -255,7 +256,6 @@
             <enum name="CardScanner" value="0" />
             <enum name="DropDown" value="1" />
         </attr>
-        <attr name="enableErrorAnimation" />
     </declare-styleable>
     <declare-styleable name="AccordionView">
         <attr name="accordionStartIcon" format="reference" />

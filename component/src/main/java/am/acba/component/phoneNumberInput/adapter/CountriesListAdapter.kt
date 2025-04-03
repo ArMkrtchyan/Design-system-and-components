@@ -15,7 +15,8 @@ import com.bumptech.glide.request.RequestOptions
 
 class CountriesListAdapter(
     private val itemClick: ((CountryModel) -> Unit)? = null,
-    private var countries: List<CountryModel>
+    private var countries: List<CountryModel>,
+    private var bottomSheetType: Int,
 ) : RecyclerView.Adapter<CountriesListAdapter.CountryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
@@ -59,7 +60,10 @@ class CountriesListAdapter(
                     .apply(RequestOptions.circleCropTransform().override(24.dpToPx(), 24.dpToPx()))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(binding.icFlag)
-                countryText.text = "${country.name} (+${country.phoneCode})"
+                countryText.text = when (bottomSheetType) {
+                    1 -> "${country.name} (+${country.phoneCode})"
+                    else -> country.name
+                }
                 val colorRes = if (country.isSelected) R.attr.backgroundTonal2 else 0
                 val backgroundColor = root.context.getColorFromAttr(colorRes)
                 root.setBackgroundColor(backgroundColor)
