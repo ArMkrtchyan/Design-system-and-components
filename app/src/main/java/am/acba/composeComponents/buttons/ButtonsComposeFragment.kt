@@ -6,6 +6,6 @@ import androidx.compose.runtime.Composable
 class ButtonsComposeFragment : BaseComposeFragment() {
     @Composable
     override fun SetContent() {
-        ButtonsScreen()
+        ButtonsScreen(title)
     }
 }

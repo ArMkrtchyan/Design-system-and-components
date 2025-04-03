@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ButtonsScreen() {
+fun ButtonsScreen(title: String = "") {
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -47,11 +47,11 @@ fun ButtonsScreen() {
             )
     ) {
         Column(Modifier.fillMaxSize()) {
-            PrimaryToolbar(title = "Compose Buttons", actions = {
+            PrimaryToolbar(title = title, actions = {
                 IconButton(onClick = {
 
                 }) {
-                    PrimaryIcon(painterResource(R.drawable.ic_settings))
+
                 }
             })
             Column(

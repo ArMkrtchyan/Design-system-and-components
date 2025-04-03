@@ -14,11 +14,13 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseComposeFragment : Fragment() {
     private lateinit var focusManager: FocusManager
+    protected var title: String = ""
 
     @Composable
     abstract fun SetContent()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = ComposeView(inflater.context).apply {
+        title = arguments?.getString("Title") ?: ""
         setContent {
             DigitalTheme(MainActivity.darkTheme) {
                 SetContent()

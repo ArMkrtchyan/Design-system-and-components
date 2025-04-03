@@ -353,7 +353,7 @@ fun PrimaryButtonPreview() {
                     IconButton(onClick = {
 
                     }) {
-                        PrimaryIcon(painterResource(R.drawable.ic_settings))
+
                     }
                 })
                 Column(

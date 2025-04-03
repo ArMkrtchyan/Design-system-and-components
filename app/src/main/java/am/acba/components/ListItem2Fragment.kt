@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.isVisible
 
-class ListItemFragment2 : BaseViewBindingFragment<FragmentListItem2Binding>() {
+class ListItem2Fragment : BaseViewBindingFragment<FragmentListItem2Binding>() {
     override val inflate: Inflater<FragmentListItem2Binding>
         get() = FragmentListItem2Binding::inflate
     override val toolbar: PrimaryToolbar
