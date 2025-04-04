@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
+import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.KeyEvent
@@ -197,28 +198,41 @@ open class PrimaryInput : TextInputLayout {
 //            }
 //        }
         editText?.doAfterTextChanged { editable ->
-            if (!isEditing && !editable.isNullOrEmpty()) {
-                isEditing = true
-                val currentText = editable.toString()
-                val dotCount = currentText.count { it == '.' }
-                if (dotCount > 1) {
-                    val cursorPosition = editText?.selectionStart ?: 0
+            if (isEditing || editable.isNullOrEmpty()) return@doAfterTextChanged
+
+            isEditing = true
+
+            // Remove style spans (e.g., bold, big text, etc.)
+            editable.getSpans(0, editable.length, CharacterStyle::class.java).forEach {
+                editable.removeSpan(it)
+            }
+
+            val currentText = editable.toString()
+            val cursorPosition = editText?.selectionStart ?: 0
+            val dotCount = currentText.count { it == '.' }
+
+            when {
+                dotCount > 1 || (currentText.contains('.') && cursorPosition != currentText.length) -> {
                     val fixedText = currentText.removeRange(cursorPosition - 1, cursorPosition)
-                    editable.replace(0, currentText.length, fixedText)
-                } else {
-                    if (currentText.contains(".")) {
-                        editable.calculateCountAfterDot()
-                    } else {
-                        val formattedString =
-                            if (formattingWithDot) getOriginalText(currentText).numberFormatting()
-                            else getOriginalText(currentText).numberFormattingWithOutDot()
-                        editable.replace(0, currentText.length, formattedString)
-                    }
+                    editable.replace(0, editable.length, fixedText)
                 }
 
-                isEditing = false
+                currentText.contains('.') -> {
+                    editable.calculateCountAfterDot()
+                }
+
+                else -> {
+                    val formatted = getOriginalText(currentText).let {
+                        if (formattingWithDot) it.numberFormatting()
+                        else it.numberFormattingWithOutDot()
+                    }
+                    editable.replace(0, editable.length, formatted)
+                }
             }
+
+            isEditing = false
         }
+
         editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             formatAmountAfterFocusChange(hasFocus)
             mAction?.invoke(hasFocus)
@@ -235,13 +249,12 @@ open class PrimaryInput : TextInputLayout {
                 parsed = cleanString.toDoubleOrNull() ?: 0.0
                 formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
                 current = formatter.format(parsed)
-
                 editText?.setText(current)
             }
         } else {
             val formattedText = text.replace(",", "").numberFormatting()
             setMaxLength(formattedText.length)
-            editText?.setText(formattedText)
+            editText?.editableText?.replace(0, editText?.editableText?.length ?: 0, formattedText)
         }
     }
 
@@ -346,7 +359,6 @@ open class PrimaryInput : TextInputLayout {
                 return
             }
             isErrorEnabled = !isValid && editText?.text?.isNotEmpty() == true
-
             if (isErrorEnabled) error = errorMessage
         }
     }
