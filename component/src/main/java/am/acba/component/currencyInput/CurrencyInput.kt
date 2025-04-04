@@ -85,6 +85,7 @@ class CurrencyInput @JvmOverloads constructor(
             binding.amount.editText?.doOnTextChanged { text, _, _, _ ->
                 if (text.isNullOrEmpty()) {
                     isValidAmount = true
+                    isFirstFocusable = true
                     setValidState()
                 } else if (!isFirstFocusable) validateAmount()
             }

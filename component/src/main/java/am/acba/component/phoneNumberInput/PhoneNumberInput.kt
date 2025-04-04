@@ -36,6 +36,7 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
@@ -123,6 +124,12 @@ class PhoneNumberInput @JvmOverloads constructor(
     }
 
     private fun CutCopyPasteEditText.initListeners() {
+        doOnTextChanged { text, _, _, _ ->
+            if (text?.isEmpty() == true) {
+                isFirstFocusable = true
+                isValidNumber(true)
+            }
+        }
         doAfterTextChanged { view -> doAfterTextChanged?.invoke(view) }
         onKeyboardDoneButtonClick { setErrorAnimation() }
         onKeyboardActionButtonClick { actionId ->
@@ -240,6 +247,7 @@ class PhoneNumberInput @JvmOverloads constructor(
             binding.icError.isVisible = !errorText.isNullOrEmpty()
         }
     }
+
     private fun setErrorBackground() {
         isFirstFocusable = false
         binding.countryCodeLayout.background = ContextCompat.getDrawable(
