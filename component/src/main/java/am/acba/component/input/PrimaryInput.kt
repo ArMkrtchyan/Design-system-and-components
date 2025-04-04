@@ -52,7 +52,7 @@ open class PrimaryInput : TextInputLayout {
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
-    private var formattingWithDot = false
+    var formattingWithDot = false
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
     private var isFirstFocusable = true
@@ -215,16 +215,11 @@ open class PrimaryInput : TextInputLayout {
                     val fixedText = currentText.removeRange(cursorPosition - 1, cursorPosition)
                     editable.replace(0, editable.length, fixedText)
                 }
-
                 currentText.contains('.') -> {
                     editable.calculateCountAfterDot()
                 }
-
                 else -> {
-                    val formatted = getOriginalText(currentText).let {
-                        if (formattingWithDot) it.numberFormatting()
-                        else it.numberFormattingWithOutDot()
-                    }
+                    val formatted = getOriginalText(currentText).numberFormattingWithOutDot()
                     editable.replace(0, editable.length, formatted)
                 }
             }
@@ -251,7 +246,9 @@ open class PrimaryInput : TextInputLayout {
                 editText?.setText(current)
             }
         } else {
-            val formattedText = text.replace(",", "").numberFormatting()
+            val formattedText = text.replace(",", "").let {
+                if (formattingWithDot) it.numberFormattingWithOutDot() else it.numberFormatting()
+            }
             setMaxLength(formattedText.length)
             editText?.editableText?.replace(0, editText?.editableText?.length ?: 0, formattedText)
         }

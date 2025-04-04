@@ -95,6 +95,7 @@ class CurrencyInput @JvmOverloads constructor(
         setHelpText(helpText)
         setErrorText(errorText)
         initKeyboardListeners()
+        binding.amount.formattingWithDot = formattingWithOutDot
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
