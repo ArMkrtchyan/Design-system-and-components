@@ -31,6 +31,7 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
@@ -51,6 +52,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var isKeyboardActionClicked = false
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
+    private var isFirstFocusable = true
     private var bottomSheetTitle = ""
     private var currency: String = ""
         get() = binding.currency.text.toString()
@@ -79,11 +81,21 @@ class CurrencyInput @JvmOverloads constructor(
             } finally {
                 recycle()
             }
+
+            binding.amount.editText?.doOnTextChanged { text, _, _, _ ->
+                if (text.isNullOrEmpty()) {
+                    isValidAmount = true
+                    isFirstFocusable = true
+                    setValidState()
+                } else if (!isFirstFocusable) validateAmount()
+            }
+
         }
         setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
         initKeyboardListeners()
+        binding.amount.formattingWithDot = formattingWithOutDot
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
@@ -185,12 +197,8 @@ class CurrencyInput @JvmOverloads constructor(
     private fun setupBackgroundsByFocusChange() {
         binding.amount.onFocusChangeListener { isFocusable ->
             this.isFocusable = isFocusable
-            val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
                 setupBackgroundByFocusable()
-            } else if (amountText.isEmpty()) {
-                isValidAmount = true
-                setValidState()
             } else {
                 validateAmount()
             }
@@ -199,21 +207,17 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun validateAmount() {
-        when {
-            minAmount != 0.0 && getFloatAmount() < minAmount.toFloat() -> {
-                setErrorState()
-                isValidAmount = false
-            }
+        val amount = getFloatAmount()
+        val text = binding.amount.editText?.text ?: ""
+        val isBelowMin = minAmount != 0.0 && amount < minAmount
+        val isAboveMax = maxAmount != 0.0 && amount > maxAmount
+        if (text.isEmpty()) isFirstFocusable = true
+        isValidAmount = text.isEmpty() || !(isBelowMin || isAboveMax)
 
-            maxAmount != 0.0 && getFloatAmount() > maxAmount.toFloat() -> {
-                setErrorState()
-                isValidAmount = false
-            }
-
-            else -> {
-                isValidAmount = true
-                setValidState()
-            }
+        if (isValidAmount) {
+            setValidState()
+        } else {
+            setErrorState()
         }
         if (isKeyboardActionClicked) setErrorAnimation()
     }
@@ -316,6 +320,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setErrorState() {
+        isFirstFocusable = false
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor =
