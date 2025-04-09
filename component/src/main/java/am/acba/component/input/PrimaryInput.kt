@@ -22,6 +22,7 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -35,7 +36,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.google.android.material.textfield.TextInputLayout
 import java.text.NumberFormat
 import java.util.Locale
@@ -123,6 +123,7 @@ open class PrimaryInput : TextInputLayout {
                 TYPE_NUMBER -> setInputTypeForNumber()
                 AMOUNT_FORMATTING -> amountFormattingWhileTyping()
                 TYPE_EMAIL -> setInputTypeForEmail()
+                else -> setInputTypeDefault()
             }
 
             updateEndIconBackgroundState()
@@ -189,13 +190,7 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun amountFormattingWhileTyping() {
-//        editText?.doOnTextChanged { text, start, _, _ ->
-//            text?.let {
-//                if (it.isNotEmpty() && it[start] == '.' && it.count { char -> char == '.' } == 2) {
-//                    text.removeRange(start, start + 1)
-//                }
-//            }
-//        }
+
         editText?.doAfterTextChanged { editable ->
             if (isEditing || editable.isNullOrEmpty()) return@doAfterTextChanged
 
