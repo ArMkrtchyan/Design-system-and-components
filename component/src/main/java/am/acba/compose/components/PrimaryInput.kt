@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -47,6 +49,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrimaryInput(
     modifier: Modifier = Modifier,
@@ -88,7 +91,7 @@ fun PrimaryInput(
         }
 
         else -> {
-            Modifier.border(1.dp, Color.Transparent, ShapeTokens.shapePrimaryInput)
+            Modifier
         }
     }
     Column(
@@ -97,12 +100,14 @@ fun PrimaryInput(
         TextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = newModifier.fillMaxWidth(),
+            modifier = newModifier
+                .fillMaxWidth()
+                .heightIn(min = 58.dp),
             enabled = enabled,
             readOnly = readOnly,
             placeholder = placeholder?.let { { Label(text = placeholder) } },
-            leadingIcon = leadingOrTrailingIcon(iconRes = leadingIcon, tint = leadingIconTint, onClick = onLeadingIconClick),
-            trailingIcon = leadingOrTrailingIcon(iconRes = trailingIcon, tint = trailingTint, onClick = onTrailingIconClick),
+            leadingIcon = leadingOrTrailingIcon(iconRes = leadingIcon, tint = leadingIconTint, isEnabled = enabled, onClick = onLeadingIconClick),
+            trailingIcon = leadingOrTrailingIcon(iconRes = trailingIcon, tint = trailingTint, isEnabled = enabled, onClick = onTrailingIconClick),
             prefix = prefix,
             suffix = suffix,
             shape = ShapeTokens.shapePrimaryInput,
@@ -115,7 +120,7 @@ fun PrimaryInput(
             interactionSource = interactionSource,
             colors = createStateColors(),
             isError = isError,
-            label = label?.let { { Label(text = label) } },
+            label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
         )
         Spacer(modifier = Modifier.height(4.dp))
         if (isError) {
@@ -123,7 +128,11 @@ fun PrimaryInput(
                 SupportRow(iconRes = am.acba.component.R.drawable.ic_close_round, text = errorText, color = DigitalTheme.colorScheme.contentDangerTonal1)
             }
         } else if (!helpText.isNullOrEmpty()) {
-            SupportRow(text = helpText, color = DigitalTheme.colorScheme.contentPrimaryTonal1)
+            val textColor = when {
+                !enabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+                else -> DigitalTheme.colorScheme.contentPrimaryTonal1
+            }
+            SupportRow(text = helpText, color = textColor)
         }
     }
 }
@@ -131,7 +140,7 @@ fun PrimaryInput(
 @Composable
 fun SearchBar(
     hint: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     height: Dp = 40.dp,
     cornerShape: Shape = ShapeTokens.shapePrimaryInput,
@@ -242,14 +251,24 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
 }
 
 @Composable
-fun Label(text: String?) {
+fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
+    val textColor = when {
+        isError -> DigitalTheme.colorScheme.contentDangerTonal1
+        !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+        else -> DigitalTheme.colorScheme.contentPrimaryTonal1
+    }
     Text(
         text = text ?: "",
-        color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+        color = textColor
     )
 }
 
-fun leadingOrTrailingIcon(iconRes: Int? = null, tint: Color, onClick: (() -> Unit)? = null): @Composable (() -> Unit)? {
+@Composable
+fun leadingOrTrailingIcon(iconRes: Int? = null, tint: Color, isEnabled: Boolean = true, onClick: (() -> Unit)? = null): @Composable (() -> Unit)? {
+    val iconTint = when {
+        !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+        else -> tint
+    }
     return if (iconRes != null) {
         {
             Icon(
@@ -259,7 +278,7 @@ fun leadingOrTrailingIcon(iconRes: Int? = null, tint: Color, onClick: (() -> Uni
                     .height(24.dp)
                     .clickable { onClick?.invoke() },
                 contentDescription = "",
-                tint = tint
+                tint = iconTint
             )
         }
     } else null

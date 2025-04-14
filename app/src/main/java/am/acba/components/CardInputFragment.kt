@@ -1,14 +1,11 @@
 package am.acba.components
 
 import am.acba.component.bottomsheet.ModalBottomSheet
-import am.acba.component.extensions.log
 import am.acba.component.textView.PrimaryTextView
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentCardInputBinding
-import android.content.Intent
-import android.view.View
 
 class CardInputFragment : BaseViewBindingFragment<FragmentCardInputBinding>() {
 

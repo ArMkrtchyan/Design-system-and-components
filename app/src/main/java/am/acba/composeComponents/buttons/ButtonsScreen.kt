@@ -1,11 +1,9 @@
 ﻿package am.acba.composeComponents.buttons
 
-import am.acba.component.R
 import am.acba.compose.components.EmojiButton
 import am.acba.compose.components.GhostButton
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryButtonSmall
-import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.SecondaryButtonGreen
 import am.acba.compose.components.SecondaryButtonGrey
@@ -28,7 +26,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 

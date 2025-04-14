@@ -1,7 +1,5 @@
 ﻿package am.acba.composeComponents.liatItem
 
-import am.acba.component.R
-import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
@@ -19,7 +17,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 

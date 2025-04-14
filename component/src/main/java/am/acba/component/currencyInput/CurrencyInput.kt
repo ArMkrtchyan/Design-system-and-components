@@ -357,6 +357,7 @@ class CurrencyInput @JvmOverloads constructor(
     fun setAmountText(amount: String) {
         this.currency = currency
         val amountFormatting = if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()
+
         binding.amount.editText?.setText(amountFormatting)
         validateAmount()
     }
