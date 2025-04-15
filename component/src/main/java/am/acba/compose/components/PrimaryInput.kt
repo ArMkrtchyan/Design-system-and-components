@@ -1,5 +1,6 @@
 package am.acba.compose.components
 
+import am.acba.component.extensions.numberFormatting
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -48,6 +50,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
+import kotlin.math.abs
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,10 +77,12 @@ fun PrimaryInput(
     singleLine: Boolean = false,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
+    maxLength: Int = Integer.MAX_VALUE,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     errorText: String? = null,
     helpText: String? = null,
     label: String? = null,
+    autoFormatting: Boolean = false,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
     val newModifier = when {
@@ -98,8 +104,10 @@ fun PrimaryInput(
         modifier = modifier
     ) {
         TextField(
-            value = value,
-            onValueChange = onValueChange,
+            value = value.checkOnlyNumbers(keyboardOptions, value, autoFormatting)?.checkMaxLength(maxLength) ?: value,
+            onValueChange = {
+                it.checkOnlyNumbers(keyboardOptions, value, autoFormatting)?.checkMaxLength(maxLength, value)?.let { ifNotNulValue -> onValueChange(ifNotNulValue) }
+            },
             modifier = newModifier
                 .fillMaxWidth()
                 .heightIn(min = 58.dp),
@@ -125,7 +133,7 @@ fun PrimaryInput(
         Spacer(modifier = Modifier.height(4.dp))
         if (isError) {
             if (!errorText.isNullOrEmpty()) {
-                SupportRow(iconRes = am.acba.component.R.drawable.ic_close_round, text = errorText, color = DigitalTheme.colorScheme.contentDangerTonal1)
+                SupportRow(iconRes = am.acba.component.R.drawable.ic_info, text = errorText, color = DigitalTheme.colorScheme.contentDangerTonal1)
             }
         } else if (!helpText.isNullOrEmpty()) {
             val textColor = when {
@@ -134,6 +142,69 @@ fun PrimaryInput(
             }
             SupportRow(text = helpText, color = textColor)
         }
+    }
+}
+
+fun TextFieldValue.checkMaxLength(maxLength: Int, currentValue: TextFieldValue? = null): TextFieldValue? {
+    if (currentValue != null && currentValue.text.length == maxLength && text.length > maxLength) return null
+    if (text.length <= maxLength) {
+        return this
+    } else {
+        val newText = text.substring(0, maxLength)
+        val newSelection = when {
+            currentValue == null -> {
+                TextRange(newText.length)
+            }
+
+            abs(text.length - currentValue.text.length) == 1 -> {
+                selection
+            }
+
+            else -> {
+                TextRange(newText.length)
+            }
+        }
+        return TextFieldValue(newText, newSelection)
+    }
+}
+
+fun TextFieldValue.checkOnlyNumbers(keyboardOptions: KeyboardOptions, currentValue: TextFieldValue? = null, autoFormatting: Boolean = false): TextFieldValue? {
+    when (keyboardOptions.keyboardType) {
+        KeyboardType.Number, KeyboardType.Decimal -> {
+            if (text.isDigitsOnly()) return this
+            else {
+                val filteredText = text.filter { it.isDigit() }
+                val formatedText = filteredText.numberFormatting()
+                val newSelection = when {
+                    currentValue == null -> {
+                        if (autoFormatting) {
+                            TextRange(formatedText.length)
+                        } else {
+                            TextRange(text.length)
+                        }
+                    }
+
+                    abs(text.length - currentValue.text.length) == 1 -> {
+                        selection
+                    }
+
+                    else -> {
+                        if (autoFormatting) {
+                            TextRange(formatedText.length)
+                        } else {
+                            TextRange(text.length)
+                        }
+                    }
+                }
+                return if (autoFormatting) {
+                    TextFieldValue(formatedText, newSelection)
+                } else {
+                    TextFieldValue(filteredText, newSelection)
+                }
+            }
+        }
+
+        else -> return this
     }
 }
 

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -63,7 +65,12 @@ fun InputsScreen(title: String = "") {
                     onValueChange = { textNormal.value = it },
                     label = "Label",
                     helpText = "Some help text",
+                    maxLength = 5,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = KeyboardType.Decimal
+                    ),
                     leadingIcon = am.acba.component.R.drawable.ic_close,
+                    onLeadingIconClick = { textNormal.value = TextFieldValue("dflkvmdfmlklvf") }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 PrimaryInput(
