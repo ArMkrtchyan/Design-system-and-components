@@ -65,10 +65,11 @@ fun InputsScreen(title: String = "") {
                     onValueChange = { textNormal.value = it },
                     label = "Label",
                     helpText = "Some help text",
-                    maxLength = 5,
+                    maxLength = 15,
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Decimal
                     ),
+                    autoFormatting = true,
                     leadingIcon = am.acba.component.R.drawable.ic_close,
                     onLeadingIconClick = { textNormal.value = TextFieldValue("dflkvmdfmlklvf") }
                 )

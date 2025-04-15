@@ -1,6 +1,7 @@
 package am.acba.compose.components
 
-import am.acba.component.extensions.numberFormatting
+import am.acba.component.extensions.numberDeFormatting
+import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
@@ -104,7 +105,7 @@ fun PrimaryInput(
         modifier = modifier
     ) {
         TextField(
-            value = value.checkOnlyNumbers(keyboardOptions, value, autoFormatting)?.checkMaxLength(maxLength) ?: value,
+            value = value.checkOnlyNumbers(keyboardOptions, null, autoFormatting)?.checkMaxLength(maxLength) ?: value,
             onValueChange = {
                 it.checkOnlyNumbers(keyboardOptions, value, autoFormatting)?.checkMaxLength(maxLength, value)?.let { ifNotNulValue -> onValueChange(ifNotNulValue) }
             },
@@ -171,10 +172,16 @@ fun TextFieldValue.checkMaxLength(maxLength: Int, currentValue: TextFieldValue? 
 fun TextFieldValue.checkOnlyNumbers(keyboardOptions: KeyboardOptions, currentValue: TextFieldValue? = null, autoFormatting: Boolean = false): TextFieldValue? {
     when (keyboardOptions.keyboardType) {
         KeyboardType.Number, KeyboardType.Decimal -> {
-            if (text.isDigitsOnly()) return this
-            else {
-                val filteredText = text.filter { it.isDigit() }
-                val formatedText = filteredText.numberFormatting()
+            if (text.isDigitsOnly()) {
+                val formatedText = text.numberFormattingWithOutDot()
+                return if (autoFormatting) {
+                    TextFieldValue(formatedText, selection)
+                } else {
+                    this
+                }
+            } else {
+                val filteredText = text.numberDeFormatting().filter { it.isDigit() }
+                val formatedText = filteredText.numberFormattingWithOutDot()
                 val newSelection = when {
                     currentValue == null -> {
                         if (autoFormatting) {
