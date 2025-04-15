@@ -39,41 +39,58 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                app:pinLength="Six"
+                app:pinType="Numeric" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/showPin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="show Pin"
+                app:isPreventClick="false" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/hidePin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/spacing_4"
+                android:text="hide Pin"
+                app:isPreventClick="false" />
 
             <am.acba.component.button.PrimaryButton
                 android:id="@+id/addError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Add Error" />
+                android:layout_marginTop="10dp"
+                android:text="Add Error"
+                app:isPreventClick="false" />
 
             <am.acba.component.button.PrimaryButton
                 android:id="@+id/removeError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Remove Error" />
+                android:text="Remove Error"
+                app:isPreventClick="false" />
 
             <am.acba.component.button.PrimaryButton
                 android:id="@+id/clearPinInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Clear Pin" />
+                android:text="Clear Pin"
+                app:isPreventClick="false" />
 
             <am.acba.component.button.PrimaryButton
-                android:id="@+id/addPinCount"
+                android:id="@+id/switchPinVisibility"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="+" />
-
-            <am.acba.component.button.PrimaryButton
-                android:id="@+id/removePinCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="-" />
+                android:text="switch pin visibility"
+                app:isPreventClick="false" />
 
         </LinearLayout>
     </ScrollView>

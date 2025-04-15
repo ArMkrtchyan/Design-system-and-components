@@ -1,0 +1,24 @@
+﻿<!-- custom_context_menu.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/menuItemCopy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Copy" />
+
+    <Button
+        android:id="@+id/menuItemPaste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Paste" />
+
+    <Button
+        android:id="@+id/menuItemCut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cut" />
+</LinearLayout>

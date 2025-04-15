@@ -30,24 +30,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="20dp">
+            android:orientation="vertical">
 
             <am.acba.component.cardInput.PrimaryCardInput
                 android:id="@+id/card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_20"
                 android:layout_marginTop="@dimen/spacing_20"
+                android:layout_marginEnd="@dimen/spacing_20"
+                app:cardInputEnableErrorAnimation="true"
+                app:cardInputEndIcon="@drawable/ic_scan"
+                app:cardInputErrorIcon="@drawable/ic_info"
+                app:cardInputErrorIconTint="?attr/contentDangerTonal1"
                 app:cardInputErrorText="Card number is not valid"
                 app:cardInputHelpText="Fill the card number"
                 app:cardInputHintText="Card number"
                 app:cardInputLogoBackground="@drawable/logo_back"
-                app:cardInputErrorIcon="@drawable/ic_info"
-                app:cardInputEndIcon="@drawable/ic_scan"
-                app:cardInputMaxLength="16"
-                app:cardInputMinLength="14"
                 app:cardInputLogoDetectCount="2"
-                app:cardInputErrorIconTint="?attr/contentDangerTonal1"/>
+                app:cardInputMaxLength="16"
+                app:cardInputMinLength="14" />
         </LinearLayout>
     </ScrollView>
 

@@ -71,6 +71,7 @@ class OffersFragment : BaseViewBindingFragment<FragmentOffersBinding>() {
     )
 
     override fun FragmentOffersBinding.initView() {
+
         loanOffers.submitLoanOffers(items2)
         loanOffers.setOnOfferClick { it.log() }
         loanOffers.setOnSeeAllOfferClick { "See all".log() }

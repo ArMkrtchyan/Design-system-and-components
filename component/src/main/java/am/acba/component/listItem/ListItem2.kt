@@ -617,10 +617,9 @@ class ListItem2 : FrameLayout {
     }
 
     fun setStartIconTint(colorStateList: ColorStateList?) {
-        colorStateList?.let {
-            ensureStartComponentIcon()
-            startIcon.imageTintList = it
-        }
+        ensureStartComponentIcon()
+        startIcon.imageTintList = colorStateList
+
     }
 
     fun setStartIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {

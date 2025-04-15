@@ -14,10 +14,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
-import android.text.TextWatcher
+import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.KeyEvent
@@ -36,6 +35,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
+import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputLayout
 import java.text.NumberFormat
 import java.util.Locale
@@ -52,7 +52,7 @@ open class PrimaryInput : TextInputLayout {
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
-    private var formattingWithDot = false
+    var formattingWithDot = false
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
     private var isFirstFocusable = true
@@ -61,7 +61,7 @@ open class PrimaryInput : TextInputLayout {
     private var parsed = 0.0
     private var formatter = ""
     private var current = ""
-
+    private var isEditing = false
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
     private var mAction: ((Boolean) -> Unit?)? = null
@@ -123,6 +123,7 @@ open class PrimaryInput : TextInputLayout {
                 TYPE_NUMBER -> setInputTypeForNumber()
                 AMOUNT_FORMATTING -> amountFormattingWhileTyping()
                 TYPE_EMAIL -> setInputTypeForEmail()
+                else -> setInputTypeDefault()
             }
 
             updateEndIconBackgroundState()
@@ -189,86 +190,48 @@ open class PrimaryInput : TextInputLayout {
     }
 
     private fun amountFormattingWhileTyping() {
-        editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
-        val currencyTextWatcher = object : TextWatcher {
+        editText?.doAfterTextChanged { editable ->
+            if (isEditing || editable.isNullOrEmpty()) return@doAfterTextChanged
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            isEditing = true
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString().isEmpty() || s.toString() == current) {
-                    return
-                }
-
-                editText?.removeTextChangedListener(this)
-                val amount = s.toString()
-                val cleanString = amount.replace(",", "")
-
-                if (amount.contains(".")) {
-                    when (amount.split(".")[1].length) {
-
-                        1 -> {
-                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                            formatter.maximumFractionDigits = 2
-                            formatter.minimumFractionDigits = 1
-                            formatter.format(parsed)
-
-                            current = formatter.format(parsed)
-                            editText?.setText(current)
-                            editText?.setSelection(current.length)
-                        }
-
-                        2 -> {
-                            val parsed = cleanString.toDoubleOrNull() ?: 0.0
-                            val formatter = NumberFormat.getInstance(Locale.ENGLISH)
-                            formatter.maximumFractionDigits = 2
-                            formatter.minimumFractionDigits = 2
-                            formatter.format(parsed)
-
-                            current = formatter.format(parsed)
-                            editText?.setText(current)
-                            editText?.setSelection(current.length)
-                        }
-
-                        else -> {
-                            if (amount.split(".")[1].isNotEmpty()) {
-                                val parts = amount.split(".")
-                                val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
-
-                                val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
-                                val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
-                                    maximumFractionDigits = 2
-                                    minimumFractionDigits = 0
-                                }
-
-                                current = formatter.format(parsed)
-                                editText?.setText(current)
-                            }
-                        }
-                    }
-                } else {
-                    parsed = cleanString.toDoubleOrNull() ?: 0.0
-                    formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
-
-                    current = formatter.format(parsed)
-                    editText?.setText(current)
-                    val length = editText?.text?.length ?: 0
-                    editText?.setSelection(length.coerceAtMost(current.length))
-                }
-                editText?.addTextChangedListener(this)
+            // Remove style spans (e.g., bold, big text, etc.)
+            editable.getSpans(0, editable.length, CharacterStyle::class.java).forEach {
+                editable.removeSpan(it)
             }
+
+            val currentText = editable.toString()
+            val cursorPosition = editText?.selectionStart ?: 0
+            val dotCount = currentText.count { it == '.' }
+
+            when {
+                dotCount > 1 || (currentText.contains('.') && cursorPosition != currentText.length) -> {
+                    val fixedText = currentText.removeRange(cursorPosition - 1, cursorPosition)
+                    editable.replace(0, editable.length, fixedText)
+                }
+
+                currentText.contains('.') -> {
+                    editable.calculateCountAfterDot()
+                }
+
+                else -> {
+                    val formatted = getOriginalText(currentText).numberFormattingWithOutDot()
+                    editable.replace(0, editable.length, formatted)
+                }
+            }
+
+            isEditing = false
         }
+
         editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            amountTextFormattingWhileTyping(hasFocus, currencyTextWatcher)
+            if (editText?.editableText?.isNotEmpty() == true) formatAmountAfterFocusChange(hasFocus)
             mAction?.invoke(hasFocus)
         }
     }
 
 
-    private fun amountTextFormattingWhileTyping(isFocusable: Boolean, currencyTextWatcher: TextWatcher? = null) {
+    private fun formatAmountAfterFocusChange(isFocusable: Boolean) {
         val text = editText?.text?.toString()?.trim() ?: ""
         if (isFocusable) {
             setMaxLength(currencyInputMaxLength)
@@ -277,23 +240,48 @@ open class PrimaryInput : TextInputLayout {
                 parsed = cleanString.toDoubleOrNull() ?: 0.0
                 formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
                 current = formatter.format(parsed)
-
                 editText?.setText(current)
             }
-            editText?.addTextChangedListener(currencyTextWatcher)
         } else {
-            val formattedText = text.replace(",", "").numberFormatting()
+            val formattedText = text
+                .replace(",", "")
+                .takeIf { it.isNotEmpty() }
+                ?.let { if (formattingWithDot) it.numberFormattingWithOutDot() else it.numberFormatting() }
+                ?: ""
             setMaxLength(formattedText.length)
-            editText?.setText(formattedText)
-            editText?.removeTextChangedListener(currencyTextWatcher)
+            editText?.editableText?.replace(0, editText?.editableText?.length ?: 0, formattedText)
         }
+    }
+
+    private fun Editable.calculateCountAfterDot() {
+        cleanString = this.toString().replace(",", "")
+        val length = this.toString().split(".")[1].length
+        when (length) {
+            1, 2 -> format(cleanString, length)
+            else -> {
+                if (this.toString().split(".")[1].isNotEmpty()) {
+                    val parts = this.toString().split(".")
+                    val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
+                    format(limitedAmount, 0)
+                }
+            }
+        }
+    }
+
+    private fun Editable.format(limitedAmount: String, minimumDigits: Int) {
+        val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
+        val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
+            maximumFractionDigits = 2
+            minimumFractionDigits = minimumDigits
+        }
+        current = formatter.format(parsed)
+        this.replace(0, this.toString().length, current)
     }
 
     fun setMaxLength(maxLength: Int) {
         textMaxLength = maxLength
-        val fArray = arrayOfNulls<InputFilter>(1)
-        fArray[0] = LengthFilter(maxLength)
-        editText?.filters = fArray
+        val lengthFilter = LengthFilter(maxLength)
+        editText?.filters = arrayOf(lengthFilter)
     }
 
     fun setMaxLengthForFormattedText(maxLength: Int) {
@@ -366,7 +354,6 @@ open class PrimaryInput : TextInputLayout {
                 return
             }
             isErrorEnabled = !isValid && editText?.text?.isNotEmpty() == true
-
             if (isErrorEnabled) error = errorMessage
         }
     }
@@ -436,6 +423,14 @@ open class PrimaryInput : TextInputLayout {
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
+    }
+
+    fun getOriginalText(text: String): String {
+        val originalString = text.replace(",", "")
+        if (originalString.all { it.isDigit() }) {
+            return originalString
+        }
+        return ""
     }
 
     companion object {

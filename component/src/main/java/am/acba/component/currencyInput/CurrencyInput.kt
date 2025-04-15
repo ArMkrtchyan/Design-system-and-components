@@ -8,8 +8,6 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
-import am.acba.component.extensions.numberFormatting
-import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.component.extensions.shakeViewHorizontally
 import am.acba.component.extensions.vibrate
 import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
@@ -21,6 +19,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -30,6 +29,7 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
@@ -50,6 +50,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var isKeyboardActionClicked = false
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
+    private var isFirstFocusable = true
     private var bottomSheetTitle = ""
     private var currency: String = ""
         get() = binding.currency.text.toString()
@@ -78,11 +79,21 @@ class CurrencyInput @JvmOverloads constructor(
             } finally {
                 recycle()
             }
+
+            binding.amount.editText?.doOnTextChanged { text, _, _, _ ->
+                if (text.isNullOrEmpty()) {
+                    isValidAmount = true
+                    isFirstFocusable = true
+                    setValidState()
+                } else if (!isFirstFocusable) validateAmount()
+            }
+
         }
         setMaxLength(maxLength)
         setHelpText(helpText)
         setErrorText(errorText)
         initKeyboardListeners()
+        binding.amount.formattingWithDot = formattingWithOutDot
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
@@ -172,21 +183,20 @@ class CurrencyInput @JvmOverloads constructor(
         binding.helpText.text = helpText
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
         binding.amount.hint = hintText
-        binding.amount.hintTextColor =
-            context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
-        binding.amount.editText?.inputType =
-            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        binding.amount.editText?.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        if (formattingWithOutDot) {
+            binding.amount.editText?.keyListener = DigitsKeyListener.getInstance("0123456789,")
+        } else {
+            binding.amount.editText?.keyListener = DigitsKeyListener.getInstance("0123456789,.")
+        }
     }
 
     private fun setupBackgroundsByFocusChange() {
-        binding.amount.onFocusChangeListener {isFocusable ->
+        binding.amount.onFocusChangeListener { isFocusable ->
             this.isFocusable = isFocusable
-            val amountText = binding.amount.editText?.text ?: ""
             if (isFocusable) {
                 setupBackgroundByFocusable()
-            } else if (amountText.isEmpty()) {
-                isValidAmount = true
-                setValidState()
             } else {
                 validateAmount()
             }
@@ -195,21 +205,17 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun validateAmount() {
-        when {
-            minAmount != 0.0 && getFloatAmount() < minAmount.toFloat() -> {
-                setErrorState()
-                isValidAmount = false
-            }
+        val amount = getFloatAmount()
+        val text = binding.amount.editText?.text ?: ""
+        val isBelowMin = minAmount != 0.0 && amount < minAmount
+        val isAboveMax = maxAmount != 0.0 && amount > maxAmount
+        if (text.isEmpty()) isFirstFocusable = true
+        isValidAmount = text.isEmpty() || !(isBelowMin || isAboveMax)
 
-            maxAmount != 0.0 && getFloatAmount() > maxAmount.toFloat() -> {
-                setErrorState()
-                isValidAmount = false
-            }
-
-            else -> {
-                isValidAmount = true
-                setValidState()
-            }
+        if (isValidAmount) {
+            setValidState()
+        } else {
+            setErrorState()
         }
         if (isKeyboardActionClicked) setErrorAnimation()
     }
@@ -271,6 +277,7 @@ class CurrencyInput @JvmOverloads constructor(
         val bundle = Bundle()
         bundle.putBoolean("needToSavActionsOnDB", false)
         bundle.putBoolean("isSearchInputVisible", false)
+        bundle.putInt("bottomSheetType", 2)
         bundle.putString("title", bottomSheetTitle)
         bundle.putParcelableArrayList("CountriesList", currencyList as ArrayList)
         CountryBottomSheetDialog.show(getFragmentManager(), bundle, ::selectCurrency, arrayListOf())
@@ -311,6 +318,7 @@ class CurrencyInput @JvmOverloads constructor(
     }
 
     fun setErrorState() {
+        isFirstFocusable = false
         binding.helpText.setTextColor(context.getColorStateListFromAttr(R.attr.contentDangerTonal1))
         binding.amount.hintTextColor = context.getColorStateListFromAttr(R.attr.contentDangerTonal1)
         binding.amount.defaultHintTextColor =
@@ -355,10 +363,9 @@ class CurrencyInput @JvmOverloads constructor(
 
 
     fun setAmountText(amount: String) {
-        this.currency = currency
-        val amountFormatting = if (formattingWithOutDot) amount.numberFormattingWithOutDot() else amount.numberFormatting()
+        setMaxLength(maxLength)
 
-        binding.amount.editText?.setText(amountFormatting)
+        binding.amount.editText?.setText(amount)
         validateAmount()
     }
 
