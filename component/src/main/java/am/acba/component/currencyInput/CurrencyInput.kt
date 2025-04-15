@@ -8,8 +8,6 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
-import am.acba.component.extensions.numberFormatting
-import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.component.extensions.shakeViewHorizontally
 import am.acba.component.extensions.vibrate
 import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
@@ -365,7 +363,7 @@ class CurrencyInput @JvmOverloads constructor(
 
 
     fun setAmountText(amount: String) {
-        this.currency = currency
+        setMaxLength(maxLength)
         binding.amount.editText?.setText(amount)
         validateAmount()
     }
