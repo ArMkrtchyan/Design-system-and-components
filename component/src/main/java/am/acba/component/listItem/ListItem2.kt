@@ -702,6 +702,12 @@ class ListItem2 : FrameLayout {
         }
     }
 
+    fun setCheckboxTouchable(isTouchable: Boolean) {
+        ensureSecondEndComponentCheckbox()
+        checkbox.isFocusable = isTouchable
+        checkbox.isClickable = isTouchable
+    }
+
     fun setCheckboxChecked(isChecked: Boolean) {
         ensureSecondEndComponentCheckbox()
         checkbox.isChecked = isChecked
@@ -730,6 +736,11 @@ class ListItem2 : FrameLayout {
 
     fun isSwitchEnabled() = switch.isEnabled
 
+    fun setRadioButtonTouchable(isTouchable: Boolean) {
+        ensureSecondEndComponentRadioButton()
+        radiobutton.isFocusable = isTouchable
+        radiobutton.isClickable = isTouchable
+    }
     fun setRadioButtonChecked(isChecked: Boolean) {
         ensureSecondEndComponentRadioButton()
         radiobutton.isChecked = isChecked
