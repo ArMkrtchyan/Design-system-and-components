@@ -363,9 +363,8 @@ class CurrencyInput @JvmOverloads constructor(
 
 
     fun setAmountText(amount: String) {
-        this.currency = currency
-        binding.amount.editText?.setText(amount)
         setMaxLength(maxLength)
+        binding.amount.editText?.setText(amount)
         validateAmount()
     }
 
