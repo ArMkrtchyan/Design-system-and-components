@@ -10,7 +10,6 @@ import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -112,13 +111,13 @@ class PinInput : FrameLayout {
     private fun initEditText(pinCount: Int) {
         when (pinCount) {
             4 -> {
-                binding.box5.visibility = View.GONE
-                binding.box6.visibility = View.GONE
+                binding.box5.visibility = GONE
+                binding.box6.visibility = GONE
             }
 
             6 -> {
-                binding.box5.visibility = View.VISIBLE
-                binding.box6.visibility = View.VISIBLE
+                binding.box5.visibility = VISIBLE
+                binding.box6.visibility = VISIBLE
             }
         }
         val fArray = arrayOfNulls<InputFilter>(1)
@@ -127,7 +126,7 @@ class PinInput : FrameLayout {
     }
 
     private fun setupGemaltoPinInput() {
-        binding.numericPinInput.visibility = View.GONE
+        binding.numericPinInput.visibility = GONE
     }
 
     private fun initTextChangeListener() {
@@ -152,6 +151,16 @@ class PinInput : FrameLayout {
         }
     }
 
+    fun setOnPinFocusChangeListener(listener: (hasFocus: Boolean) -> Unit) {
+        binding.numericPinInput.setOnFocusChangeListener { _, hasFocus ->
+            listener(hasFocus)
+        }
+    }
+
+    fun getPin(): String {
+        return enteredPin.toString()
+    }
+
     fun setUpUIPinCountForGemalto(count: Int) {
         listOf(
             binding.box1, binding.box2, binding.box3,
@@ -167,7 +176,12 @@ class PinInput : FrameLayout {
             binding.box1, binding.box2, binding.box3,
             binding.box4, binding.box5, binding.box6
         ).forEach { it.background = pinItemErrorBackground }
-        errorTextView.animate().alpha(1.0f).setDuration(200)
+        errorTextView.apply {
+            visibility = VISIBLE
+            animate()
+                .alpha(1f)
+                .setDuration(200)
+        }
     }
 
     fun removeErrorState() {
@@ -176,7 +190,12 @@ class PinInput : FrameLayout {
             binding.box1, binding.box2, binding.box3,
             binding.box4, binding.box5, binding.box6
         ).forEach { it.background = pinItemBackground }
-        errorTextView.animate().alpha(0.0f).setDuration(200)
+        errorTextView.animate()
+            .alpha(0f)
+            .setDuration(200)
+            .withEndAction {
+                errorTextView.visibility = GONE
+            }
     }
 
     fun clearPinInput() {
