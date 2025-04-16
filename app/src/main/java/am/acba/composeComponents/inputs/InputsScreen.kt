@@ -1,8 +1,12 @@
 ﻿package am.acba.composeComponents.inputs
 
-import am.acba.compose.components.PrimaryInput
+import am.acba.component.R
+import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.SearchBar
+import am.acba.compose.components.inputs.CurrencyInput
+import am.acba.compose.components.inputs.SearchBar
+import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
+import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -32,9 +36,12 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputsScreen(title: String = "") {
-    val textNormal = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
-    val textNormal2 = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
-    val textNormal3 = rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
+    val textNormal =
+        rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
+    val textNormal2 =
+        rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
+    val textNormal3 =
+        rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -65,22 +72,23 @@ fun InputsScreen(title: String = "") {
                     onValueChange = { textNormal.value = it },
                     label = "Label",
                     helpText = "Some help text",
-                    maxLength = 15,
+                    visualTransformation = MaxLengthVisualTransformation(15),
+                    autoFormatting = true,
+                    leadingIcon = R.drawable.ic_close,
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                CurrencyInput(
+                    value = textNormal2.value,
+                    onValueChange = { textNormal2.value = it },
+                    label = "Amount",
+                    isError = false,
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Decimal
                     ),
-                    autoFormatting = true,
-                    leadingIcon = am.acba.component.R.drawable.ic_close,
-                    onLeadingIconClick = { textNormal.value = TextFieldValue("dflkvmdfmlklvf") }
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                PrimaryInput(
-                    value = textNormal2.value,
-                    onValueChange = { textNormal2.value = it },
-                    label = "Label",
-                    isError = true,
-                    errorText = "Some error text",
-                    leadingIcon = am.acba.component.R.drawable.ic_close,
+                    visualTransformation = AmountFormattingVisualTransformation(
+                        maxLength = 15,
+                        formatDecimal = false
+                    ),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 PrimaryInput(
@@ -90,7 +98,7 @@ fun InputsScreen(title: String = "") {
                     enabled = false,
                     errorText = "Some error text",
                     helpText = "Some help text",
-                    leadingIcon = am.acba.component.R.drawable.ic_close,
+                    leadingIcon = R.drawable.ic_close,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SearchBar(hint = "Search...")
