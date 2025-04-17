@@ -70,7 +70,7 @@ fun CurrencyInputScreen(title: String = "") {
                     value = currencyText1.value,
                     onValueChange = { currencyText1.value = it },
                     label = "Amount",
-                    helpText = "Min. 50,000.00 AMD",
+                    helpText = "Input without dot",
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
                 )
@@ -81,7 +81,7 @@ fun CurrencyInputScreen(title: String = "") {
                     label = "Amount",
                     formatDecimal = true,
                     onFocusChanged = { hasFocus -> hasFocus.log() },
-                    helpText = "Min. 50,000.00 AMD",
+                    helpText = "Input with dot",
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 CurrencyInput(
