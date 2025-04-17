@@ -15,12 +15,14 @@ class TabLayoutFragment : BaseViewBindingFragment<FragmentTabLayoutBinding>() {
     override val toolbar: PrimaryToolbar
         get() = mBinding.toolbar
 
-    private val tabName = arrayListOf("Tab1", "Tab2", "Tab3", "Tab4", "Tab5", "Tab6")
+    private val tabName = arrayListOf("Բոլորը", "Քարտային գործարքներ", "Tab3", "Tab4", "Tab5", "Tab6")
 
     override fun FragmentTabLayoutBinding.initView() {
         tabLayout.setTabItemsList(tabName)
-        tabLayout.setTabItemBadgeText(1, "4")
-        tabLayout.setSelectTab(3)
+        tabLayout.setTabItemBadgeText(0, "33")
+        tabLayout.setTabItemBadgeText(1, "444")
+        tabLayout.setTabItemBadgeText(2, "444+")
+        tabLayout.setSelectTab(1)
         tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
         tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         tabLayout.onTabSelectListener { position ->
