@@ -2,9 +2,11 @@ package am.acba.compose.components.inputs
 
 
 import am.acba.component.R
+import am.acba.component.extensions.numberFormatting
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
+import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import android.annotation.SuppressLint
@@ -56,7 +58,9 @@ fun CurrencyInput(
     maxLength: Int = 15,
     formatDecimal: Boolean = false,
     showArrow: Boolean = false,
+    autoFormatting: Boolean = true,
     onCurrencyClick: (() -> Unit)? = null,
+    onFocusChanged: ((hasFocus: Boolean) -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -74,7 +78,13 @@ fun CurrencyInput(
             inputModifier = focusedBorderForAmountInput()
             currencyModifier = focusedBorderForCurrency()
         }
+
+        !isFocused && formatDecimal && value.text.isNotEmpty() -> {
+            onValueChange(TextFieldValue(value.text.replace(",", "").numberFormatting().replace(",", "")))
+
+        }
     }
+    onFocusChanged?.invoke(isFocused)
     Column(
         modifier = modifier
     ) {
@@ -88,6 +98,7 @@ fun CurrencyInput(
                 readOnly,
                 placeholder,
                 formatDecimal,
+                autoFormatting,
                 keyboardOptions,
                 keyboardActions,
                 interactionSource,
@@ -111,6 +122,7 @@ private fun RowScope.AmountTextField(
     readOnly: Boolean,
     placeholder: String?,
     formatDecimal: Boolean,
+    autoFormatting: Boolean = true,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
     interactionSource: MutableInteractionSource,
@@ -121,10 +133,18 @@ private fun RowScope.AmountTextField(
         if (formatDecimal) Regex("^\\d*\\.?\\d*\$")
         else Regex("^[0-9]*\$")
     }
+    val visualTransformation = if (autoFormatting) {
+        AmountFormattingVisualTransformation(
+            maxLength = maxLength,
+            formatDecimal = formatDecimal
+        )
+    } else {
+        MaxLengthVisualTransformation(maxLength)
+    }
     TextField(
         value = value,
         onValueChange = {
-            if ((value.text.length != maxLength || it.text.length <= maxLength) && it.text.matches(pattern))
+            if (checkInputValidation(value, maxLength, pattern, it))
                 onValueChange(it)
         },
         modifier = modifier
@@ -135,10 +155,7 @@ private fun RowScope.AmountTextField(
         placeholder = placeholder?.let { { Label(text = placeholder) } },
         shape = ShapeTokens.shapeCurrencyInput,
         textStyle = DigitalTheme.typography.body1Regular,
-        visualTransformation = AmountFormattingVisualTransformation(
-            maxLength = maxLength,
-            formatDecimal = formatDecimal
-        ),
+        visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         maxLines = 1,
@@ -147,6 +164,17 @@ private fun RowScope.AmountTextField(
         isError = isError,
         label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
     )
+}
+
+private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
+    val splitTextArray = textFieldValue.text.split(".")
+    val isDecimal = splitTextArray.size == 2
+    val isDotPositionValid = !isDecimal || splitTextArray[1].length <= 2
+    return (value.text.length != maxLength || textFieldValue.text.length <= maxLength)
+            && textFieldValue.text.matches(pattern)
+            && isDotPositionValid
+            && !textFieldValue.text.startsWith(".")
+            && !textFieldValue.text.startsWith("0")
 }
 
 @Composable

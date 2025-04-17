@@ -1,5 +1,6 @@
 ﻿package am.acba.composeComponents.currencyInput
 
+import am.acba.component.extensions.log
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.CurrencyInput
 import am.acba.compose.theme.DigitalTheme
@@ -79,6 +80,7 @@ fun CurrencyInputScreen(title: String = "") {
                     onValueChange = { currencyText2.value = it },
                     label = "Amount",
                     formatDecimal = true,
+                    onFocusChanged = { hasFocus -> hasFocus.log() },
                     helpText = "Min. 50,000.00 AMD",
                 )
                 Spacer(modifier = Modifier.height(16.dp))

@@ -3,11 +3,7 @@ package am.acba.compose.components.inputs.visualTransformations
 import am.acba.component.extensions.log
 import androidx.compose.ui.text.input.OffsetMapping
 
-class AmountFormattingOffsetMapping(
-    val formatted: String,
-    val originalString: String
-) :
-    OffsetMapping {
+class AmountFormattingOffsetMapping(val formatted: String) : OffsetMapping {
     override fun originalToTransformed(offset: Int): Int {
         if (offset == 0) return 0
         val transformedOffsets = formatted.log()
