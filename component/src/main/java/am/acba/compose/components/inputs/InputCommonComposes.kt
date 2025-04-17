@@ -1,8 +1,10 @@
 package am.acba.compose.components.inputs
 
+import am.acba.component.R
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -91,6 +93,28 @@ fun SupportText(text: String, color: Color) {
         maxLines = 2,
         overflow = TextOverflow.Ellipsis
     )
+}
+
+@Composable
+fun SupportAndErrorTexts(isError: Boolean, enabled: Boolean, errorText: String?, helpText: String?) {
+    Column {
+        Spacer(modifier = Modifier.height(4.dp))
+        if (isError) {
+            if (!errorText.isNullOrEmpty()) {
+                SupportRow(
+                    iconRes = R.drawable.ic_info,
+                    text = errorText,
+                    color = DigitalTheme.colorScheme.contentDangerTonal1
+                )
+            }
+        } else if (!helpText.isNullOrEmpty()) {
+            val textColor = when {
+                !enabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+                else -> DigitalTheme.colorScheme.contentPrimaryTonal1
+            }
+            SupportRow(text = helpText, color = textColor)
+        }
+    }
 }
 
 @Composable

@@ -3,7 +3,7 @@ package am.acba.compose.components.inputs.visualTransformations
 import am.acba.component.extensions.log
 import androidx.compose.ui.text.input.OffsetMapping
 
-class AmountFormattingOffsetMapping(
+class DecimalAmountFormattingOffsetMapping(
     val formatted: String,
     val originalString: String
 ) :
@@ -23,24 +23,12 @@ class AmountFormattingOffsetMapping(
                 listOf(0) + offsetList
             }
 
-        return transformedOffsets[offset]
+        return formatted.length
     }
 
     override fun transformedToOriginal(offset: Int): Int {
         if (offset == 0) return 0
-        return formatted
-            // This creates a list of all separator offsets
-            .mapIndexedNotNull { index, c ->
-                index.takeIf { isSeparator(c) }
-            }
-            // We want to count how many separators precede the transformed offset
-            .count { separatorIndex ->
-                separatorIndex < offset
-            }
-            // We find the original offset by subtracting the number of separators
-            .let { separatorCount ->
-                offset - separatorCount
-            }
+        return originalString.length
     }
 
     fun isSeparator(char: Char): Boolean {

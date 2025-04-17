@@ -1,13 +1,10 @@
 package am.acba.compose.components.inputs.visualTransformations
 
-import am.acba.component.extensions.log
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import kotlin.math.max
 
 class AmountFormattingVisualTransformation(
     val maxLength: Int = Integer.MAX_VALUE,
@@ -21,18 +18,17 @@ class AmountFormattingVisualTransformation(
             } else {
                 text.text
             }
+        val digitsText = validText.filter { it.isDigit() }
         val formattedText = if (formatDecimal) {
-            validText.filter { it.isDigit() }
-                .numberFormattingWithOutDot()
+            digitsText.numberFormatting()
         } else {
-            validText.filter { it.isDigit() }.numberFormatting()
+            digitsText.numberFormattingWithOutDot()
         }
+        val offsetMapping = if (formatDecimal) DecimalAmountFormattingOffsetMapping(formattedText, text.text)
+        else AmountFormattingOffsetMapping(formattedText, text.text)
         return TransformedText(
             text = AnnotatedString(formattedText),
-            offsetMapping = AmountFormattingOffsetMapping(
-                formatDecimal,
-                formattedText, text.text
-            )
+            offsetMapping = offsetMapping
         )
     }
 }

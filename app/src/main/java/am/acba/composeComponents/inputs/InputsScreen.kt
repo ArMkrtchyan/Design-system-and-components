@@ -1,11 +1,9 @@
 ﻿package am.acba.composeComponents.inputs
 
 import am.acba.component.R
-import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.inputs.CurrencyInput
+import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.inputs.SearchBar
-import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
@@ -19,7 +17,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
@@ -28,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -75,20 +71,6 @@ fun InputsScreen(title: String = "") {
                     visualTransformation = MaxLengthVisualTransformation(15),
                     autoFormatting = true,
                     leadingIcon = R.drawable.ic_close,
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                CurrencyInput(
-                    value = textNormal2.value,
-                    onValueChange = { textNormal2.value = it },
-                    label = "Amount",
-                    isError = false,
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Decimal
-                    ),
-                    visualTransformation = AmountFormattingVisualTransformation(
-                        maxLength = 15,
-                        formatDecimal = false
-                    ),
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 PrimaryInput(
