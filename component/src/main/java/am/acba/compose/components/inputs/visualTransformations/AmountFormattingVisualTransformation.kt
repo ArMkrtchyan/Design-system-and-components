@@ -11,12 +11,7 @@ class AmountFormattingVisualTransformation(
 ) :
     VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
-        val validText =
-            if (text.text.isNotEmpty() && text.text.length > maxLength) {
-                text.text.substring(0, maxLength)
-            } else {
-                text.text
-            }
+        val validText = text.text
         val digitsText = validText.filter { it.isDigit() || it == '.' }
         val formattedText = if (formatDecimal) {
             formatDecimalAmount(digitsText)
