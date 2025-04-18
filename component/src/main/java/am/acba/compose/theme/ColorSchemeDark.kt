@@ -85,5 +85,6 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     contentAlternative3 = AcbaColors.AztecPurple_700,
     contentAlternative4 = AcbaColors.Orchid_700,
     contentAlternative5 = AcbaColors.BrandGreen_550,
-    contentAlternative6 = AcbaColors.Blue_700
+    contentAlternative6 = AcbaColors.Blue_700,
+    backgroundPendingTonal1 = AcbaColors.BlueGrey_550_15,
 )

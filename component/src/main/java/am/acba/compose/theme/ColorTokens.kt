@@ -29,6 +29,7 @@ class ColorTokens(
     backgroundWarning: Color,
     backgroundWarningTonal1: Color,
     backgroundPending: Color,
+    backgroundPendingTonal1: Color,
     backgroundAlternative: Color,
     backgroundAlternative2: Color,
     backgroundAlternative3: Color,
@@ -245,6 +246,8 @@ class ColorTokens(
         private set
     var contentPending by mutableStateOf(contentPending)
         private set
+    var backgroundPendingTonal1 by mutableStateOf(backgroundPendingTonal1)
+        private set
     var contentAlternative by mutableStateOf(contentAlternative)
         private set
     var contentAlternative2 by mutableStateOf(contentAlternative2)
@@ -335,6 +338,7 @@ class ColorTokens(
         contentWarningTonal1 = oldColors.contentWarningTonal1
         contentWarningTonal2 = oldColors.contentWarningTonal2
         contentPending = oldColors.contentPending
+        backgroundPendingTonal1 = oldColors.backgroundPendingTonal1
         contentAlternative = oldColors.contentAlternative
         contentAlternative2 = oldColors.contentAlternative2
         contentAlternative3 = oldColors.contentAlternative3

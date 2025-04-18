@@ -22,6 +22,7 @@ fun lightColorScheme(): ColorTokens = ColorTokens(
     backgroundWarning = AcbaColors.Orange_500,
     backgroundWarningTonal1 = AcbaColors.Orange_200_40,
     backgroundPending = AcbaColors.BlueGrey_200,
+    backgroundPendingTonal1 = AcbaColors.BlueGrey_200,
     backgroundAlternative = AcbaColors.Purple_200,
     backgroundAlternative2 = AcbaColors.Yellow_200,
     backgroundAlternative3 = AcbaColors.AztecPurple_200,

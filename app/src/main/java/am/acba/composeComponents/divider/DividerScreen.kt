@@ -1,13 +1,16 @@
 ﻿package am.acba.composeComponents.divider
 
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -48,6 +51,9 @@ fun DividerScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                PrimaryDivider()
+                Spacer(Modifier.height(16.dp))
+                PrimaryDivider(text = "Primary Divider")
             }
         }
     }
