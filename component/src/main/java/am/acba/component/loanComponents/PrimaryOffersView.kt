@@ -92,9 +92,9 @@ class PrimaryOffersView : FrameLayout {
         binding.seeAll.setOnClickListener { onItemClick.invoke() }
     }
 
-    fun setNewBadgeCount(count: Int) {
+    fun setNewBadgeCount(count: Int, countPrefix: String = "+") {
         binding.loanOfferCardBadge.isVisible = count > 1
-        binding.loanOfferCardBadge.setBadgeText("+${count}")
+        binding.loanOfferCardBadge.setBadgeText("${countPrefix}${count}")
     }
 
     fun setSeeAllText(text: String?) {
@@ -106,8 +106,8 @@ class PrimaryOffersView : FrameLayout {
         binding.seeAll.isVisible = !text.isNullOrEmpty()
     }
 
-    fun submitLoanOffers(list: List<IOfferCard>) {
+    fun submitLoanOffers(list: List<IOfferCard>, countPrefix: String = "+") {
         adapter.submitList(list.toMutableList())
-        setNewBadgeCount(list.count { it.getBadgeVisibility() })
+        setNewBadgeCount(list.count { it.getBadgeVisibility() }, countPrefix)
     }
 }
