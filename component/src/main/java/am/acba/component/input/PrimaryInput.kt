@@ -7,17 +7,23 @@ import am.acba.component.extensions.load
 import am.acba.component.extensions.numberDeFormatting
 import am.acba.component.extensions.numberFormatting
 import am.acba.component.extensions.numberFormattingWithOutDot
+import am.acba.component.extensions.restoreChildViewStates
+import am.acba.component.extensions.saveChildViewStates
 import am.acba.component.extensions.shakeViewHorizontally
 import am.acba.component.extensions.vibrate
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.style.CharacterStyle
 import android.util.AttributeSet
+import android.util.SparseArray
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -436,5 +442,42 @@ open class PrimaryInput : TextInputLayout {
     companion object {
         const val SHAKE_AMPLITUDE = 500L
         const val VIBRATION_AMPLITUDE = 80L
+        const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
+        const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
+    }
+
+    override fun dispatchSaveInstanceState(container: SparseArray<Parcelable>) {
+        dispatchFreezeSelfOnly(container)
+    }
+
+    override fun dispatchRestoreInstanceState(container: SparseArray<Parcelable>) {
+        dispatchThawSelfOnly(container)
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        return Bundle().apply {
+            putParcelable(SUPER_STATE_KEY, super.onSaveInstanceState())
+            putSparseParcelableArray(SPARSE_STATE_KEY, saveChildViewStates())
+        }
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        var newState = state
+        if (newState is Bundle) {
+            val childrenState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                newState.getSparseParcelableArray(SPARSE_STATE_KEY, Parcelable::class.java)
+            } else {
+                newState.getSparseParcelableArray(SPARSE_STATE_KEY)
+            }
+            childrenState?.let { restoreChildViewStates(it) }
+            newState = newState.getUsCoParcelable(SUPER_STATE_KEY)
+        }
+        super.onRestoreInstanceState(newState)
+    }
+
+    inline fun <reified T : Parcelable> Bundle.getUsCoParcelable(key: String?) = if (Build.VERSION.SDK_INT >= 33) {
+        this.getParcelable(key, T::class.java)
+    } else {
+        this.getParcelable(key)
     }
 }
