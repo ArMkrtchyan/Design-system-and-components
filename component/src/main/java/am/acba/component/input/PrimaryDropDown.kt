@@ -4,8 +4,10 @@ import am.acba.component.R
 import am.acba.component.databinding.PrimaryDropdownBinding
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.parcelable
 import am.acba.component.extensions.restoreChildViewStates
 import am.acba.component.extensions.saveChildViewStates
+import am.acba.component.extensions.sparseParcelableArray
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -32,7 +34,8 @@ open class PrimaryDropDown @JvmOverloads constructor(
                 binding.inputDropDown.hint = getString(R.styleable.PrimaryDropDown_android_hint)
                 binding.inputDropDown.setStartIconTintList(getColorStateList(R.styleable.PrimaryDropDown_dropDownStartIconTint))
                 binding.inputDropDown.setEndIconTintList(
-                    getColorStateList(R.styleable.PrimaryDropDown_dropDownEndIconTint) ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+                    getColorStateList(R.styleable.PrimaryDropDown_dropDownEndIconTint)
+                        ?: context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
                 )
                 isEnabled = getBoolean(R.styleable.PrimaryDropDown_isDropDownEnabled, true)
                 setDropDownEnabled(isEnabled)
@@ -96,10 +99,12 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.inputDropDown.isFocusable = isEnabled
         binding.inputDropDown.isClickable = isEnabled
     }
-    companion object{
+
+    companion object {
         const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
         const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
     }
+
     override fun dispatchSaveInstanceState(container: SparseArray<Parcelable>) {
         dispatchFreezeSelfOnly(container)
     }
@@ -118,20 +123,10 @@ open class PrimaryDropDown @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         var newState = state
         if (newState is Bundle) {
-            val childrenState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                newState.getSparseParcelableArray(SPARSE_STATE_KEY, Parcelable::class.java)
-            } else {
-                newState.getSparseParcelableArray(SPARSE_STATE_KEY)
-            }
+            val childrenState = newState.sparseParcelableArray<Parcelable>(SPARSE_STATE_KEY)
             childrenState?.let { restoreChildViewStates(it) }
-            newState = newState.getUsCoParcelable(SUPER_STATE_KEY)
+            newState = newState.parcelable(SUPER_STATE_KEY)
         }
         super.onRestoreInstanceState(newState)
-    }
-
-    inline fun <reified T : Parcelable> Bundle.getUsCoParcelable(key: String?) = if (Build.VERSION.SDK_INT >= 33) {
-        this.getParcelable(key, T::class.java)
-    } else {
-        this.getParcelable(key)
     }
 }
