@@ -36,27 +36,27 @@
                 android:id="@+id/amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_20"
-                app:countryTopChips="am,us"
-                app:formattingWithOutDot="false"
                 android:layout_marginStart="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_20"
                 android:layout_marginEnd="@dimen/spacing_20"
-                app:currencyInputErrorText="amount is not valid"
+                app:countryTopChips="am,us"
                 app:currencyInputBottomSheetTitle="Select currency"
+                app:currencyInputErrorText="amount is not valid"
                 app:currencyInputHintText="Fill the amount"
                 app:currencyInputMaxAmount="10000"
-                app:currencyInputMinAmount="100" />
+                app:currencyInputMinAmount="100"
+                app:formattingWithOutDot="false" />
 
             <am.acba.component.input.PrimaryInput
                 android:id="@+id/duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="@dimen/spacing_20"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="@dimen/spacing_20"
-                app:inputType="quantity"
                 android:hint="Duration"
-                android:text="10" />
+                android:text="10"
+                app:inputType="quantity" />
         </LinearLayout>
     </ScrollView>
 
