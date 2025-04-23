@@ -58,7 +58,6 @@ class CurrencyInput @JvmOverloads constructor(
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
     private var isEditing = false
-    private var formattingWithDot = false
     private var isFirstFocusable = true
     private var currencyInputMaxLength = -1
     private var parsed = 0.0
@@ -542,7 +541,7 @@ class CurrencyInput @JvmOverloads constructor(
             val formattedText = text
                 .replace(",", "")
                 .takeIf { it.isNotEmpty() }
-                ?.let { if (formattingWithDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
+                ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
 
             setMaxLengthForFormattedText(formattedText.length)
             binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
