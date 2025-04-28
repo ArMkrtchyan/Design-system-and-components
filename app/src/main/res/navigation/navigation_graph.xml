@@ -333,4 +333,14 @@
         android:id="@+id/expandableCardComposeFragment"
         android:name="am.acba.composeComponents.expandableCard.ExpandableCardComposeFragment"
         android:label="TimeLineComposeFragment" />
+    <fragment
+        android:id="@+id/fileUploadFragment"
+        android:name="am.acba.components.FileUploadFragment"
+        android:label="FileUploadFragment"
+        tools:layout="@layout/fragment_file_upload" />
+    <dialog
+        android:id="@+id/filePreviewBottomSheetDialog"
+        android:name="am.acba.components.FilePreviewBottomSheetDialog"
+        android:label="FilePreviewBottomSheetDialog"
+        tools:layout="@layout/bottom_sheet_file_preview" />
 </navigation>
