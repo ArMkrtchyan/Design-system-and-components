@@ -346,7 +346,17 @@
         android:name="am.acba.composeComponents.dataTable.DataTableComposeFragment"
         android:label="DataTableComposeFragment" />
     <fragment
+        android:id="@+id/fileUploadFragment"
+        android:name="am.acba.components.FileUploadFragment"
+        android:label="FileUploadFragment"
+        tools:layout="@layout/fragment_file_upload" />
+    <fragment
         android:id="@+id/fileUploadComposeFragment"
         android:name="am.acba.composeComponents.fileUpload.FileUploadComposeFragment"
         android:label="FileUploadComposeFragment" />
+    <dialog
+        android:id="@+id/filePreviewBottomSheetDialog"
+        android:name="am.acba.components.FilePreviewBottomSheetDialog"
+        android:label="FilePreviewBottomSheetDialog"
+        tools:layout="@layout/bottom_sheet_file_preview" />
 </navigation>
