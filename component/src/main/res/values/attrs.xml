@@ -692,4 +692,35 @@
 
         <attr name="listItemShowDivider" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="FileUpload">
+        <attr name="fileUploadState" format="enum">
+            <enum name="Empty" value="0" />
+            <enum name="Uploading" value="1" />
+            <enum name="Failed" value="2" />
+            <enum name="Uploaded" value="3" />
+            <enum name="Error" value="4" />
+            <enum name="Preview" value="5" />
+        </attr>
+
+        <attr name="fileUploadTitle" format="string" />
+        <attr name="fileUploadBody" format="string" />
+
+        <attr name="fileUploadEmptyIcon" format="reference" />
+        <attr name="fileUploadEmptyIconTint" format="color" />
+        <attr name="fileUploadEmptyIconBackground" format="reference" />
+        <attr name="fileUploadEmptyIconBackgroundTint" format="color" />
+
+        <attr name="fileUploadUploadedIcon" format="reference" />
+        <attr name="fileUploadUploadedIconTint" format="color" />
+        <attr name="fileUploadUploadedIconBackground" format="reference" />
+        <attr name="fileUploadUploadedIconBackgroundTint" format="color" />
+
+        <attr name="fileDeleteDialogTitle" format="string" />
+        <attr name="fileDeleteDialogDescription" format="string" />
+        <attr name="fileDeleteDialogPositiveButtonText" format="string" />
+        <attr name="fileDeleteDialogNegativeButtonText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="FileUploadList" />
 </resources>
