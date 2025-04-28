@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:minWidth="136dp"
+        android:minHeight="114dp">
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/ivUploadedImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?attr/overlayBackgroundTonal1"
+            android:scaleType="centerCrop"
+            android:tint="?attr/overlayBackgroundTonal1"
+            android:visibility="gone" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="16dp">
+
+            <FrameLayout
+                android:id="@+id/layoutFileStatus"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:layout_constraintBottom_toTopOf="@id/tvTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed">
+
+                <am.acba.component.imageView.PrimaryImageView
+                    android:id="@+id/ivIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottie"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+                <FrameLayout
+                    android:id="@+id/progressContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:indeterminate="false"
+                        app:indicatorColor="?attr/contentSecondary"
+                        app:indicatorDirectionCircular="clockwise"
+                        app:indicatorSize="32dp"
+                        app:indicatorTrackGapSize="0dp"
+                        app:trackColor="?attr/contentBrandTonal1Disable"
+                        app:trackThickness="2dp" />
+
+                    <TextView
+                        android:id="@+id/tvProgress"
+                        style="@style/XSmall.Regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="?attr/contentPrimary"
+                        tools:text="10%" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/tvTitle"
+                style="@style/Subtitle2.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:textColor="?attr/contentPrimary"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/tvBody"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutFileStatus"
+                tools:visibility="visible" />
+
+            <am.acba.component.textView.PrimaryTextView
+                android:id="@+id/tvBody"
+                style="@style/Small.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:maxLines="3"
+                android:textColor="?attr/contentPrimaryTonal1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/ivClose"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="end"
+            android:layoutDirection="inherit"
+            android:padding="12dp"
+            android:src="@drawable/ic_close"
+            android:tint="?attr/contentSecondary"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </FrameLayout>
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/tvDescription"
+        style="@style/XSmall.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:singleLine="true"
+        android:textColor="?attr/contentPrimaryTonal1"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>
