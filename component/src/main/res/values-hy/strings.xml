@@ -2,9 +2,10 @@
 <resources>
     <!--General-->
     <string name="ok">Լավ</string>
-    <string name="cancel">Չեղարկել</string>
     <string name="all">Բոլորը</string>
     <string name="search">Որոնել</string>
+    <string name="cancel">Չեղարկել</string>
+    <string name="delete">Հեռացնել</string>
 
     <!--Phone Input-->
 
@@ -14,4 +15,13 @@
     <string name="phone_number_from_acba_contact">acba կոնտակտներից</string>
     <string name="select_country_code">Ընտրել երկրի կոդը</string>
     <string name="phone_number_most_searched">Հաճախ որոնվող</string>
+
+    <!--File Upload-->
+
+    <string name="file_limit_error">Առավելագույն սահմանաչափը՝ 700 KB</string>
+    <string name="file_format_error">Թույլատրելի ֆորմատներ՝ %s</string>
+    <string name="document_deletion_title">Փաստաթղթի հեռացում</string>
+    <string name="document_deletion_message">Վստա՞հ եք որ ցանկանում եք հեռացնել փաստաթուղթը</string>
+    <string name="uploading">Վերբեռնվում է…</string>
+
 </resources>
