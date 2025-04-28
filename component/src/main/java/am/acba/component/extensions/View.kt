@@ -1,5 +1,6 @@
 package am.acba.component.extensions
 
+import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
@@ -16,7 +17,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.core.app.FrameMetricsAggregator
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.airbnb.lottie.LottieAnimationView
@@ -289,6 +289,17 @@ fun LottieAnimationView.playLottieAnimation(delayTime: Long = 300, setAnimation:
         setAnimation.invoke()
         playAnimation()
     }
+}
+
+fun LottieAnimationView.onLottieAnimationEndListener(animationEnd: () -> Unit) {
+    addAnimatorListener(object : Animator.AnimatorListener {
+        override fun onAnimationStart(animation: Animator) = Unit
+        override fun onAnimationRepeat(animation: Animator) = Unit
+        override fun onAnimationCancel(animation: Animator) = Unit
+        override fun onAnimationEnd(animation: Animator) {
+            animationEnd.invoke()
+        }
+    })
 }
 
 fun BottomSheetBehavior<*>.onState(alpha: (state: Int) -> Unit) {
