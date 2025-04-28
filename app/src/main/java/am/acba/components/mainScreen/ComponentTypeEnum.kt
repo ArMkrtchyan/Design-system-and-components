@@ -73,7 +73,8 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     TIME_LINE("TimeLine", false, R.id.timeLineFragment),
     TIME_LINE_COMPOSE("TimeLine", true, R.id.timeLineComposeFragment, isReady = true),
     TOOLBAR("Toolbar", false, R.id.toolbarFragment),
-    TOOLBAR_COMPOSE("Toolbar", true, R.id.toolbarComposeFragment);
+    TOOLBAR_COMPOSE("Toolbar", true, R.id.toolbarComposeFragment),
+    FILE_UPLOAD("FileUpload", false, R.id.fileUploadFragment);
 
     companion object {
         fun getComponentsList(isCompose: Boolean) =
