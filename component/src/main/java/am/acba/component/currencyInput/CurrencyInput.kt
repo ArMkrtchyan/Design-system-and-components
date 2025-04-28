@@ -543,7 +543,9 @@ class CurrencyInput @JvmOverloads constructor(
                 .takeIf { it.isNotEmpty() }
                 ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
 
-            setMaxLengthForFormattedText(formattedText.length)
+            val textLength = if (formattedText.length <= 0) 1 else formattedText.length
+            setMaxLengthForFormattedText(textLength)
+
             binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
         }
     }
