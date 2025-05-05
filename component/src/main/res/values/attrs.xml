@@ -158,13 +158,7 @@
         <attr name="badgeChecked" format="boolean" />
         <attr name="checkable" format="boolean" />
         <attr name="showBadge" />
-        <attr name="badgeText" />
-        <attr name="badgeTextAppearance" />
-        <attr name="badgeTextColor" />
-        <attr name="badgeIcon" />
-        <attr name="badgeIconTint" />
         <attr name="badgeBackgroundTint" />
-        <attr name="badgeType" />
         <attr name="badgeIconGravity" format="enum">
             <enum name="Bottom" value="0" />
             <enum name="Top" value="1" />
@@ -183,6 +177,7 @@
             <enum name="XSmall" value="5" />
         </attr>
         <attr name="actionIconBackground" format="reference" />
+        <attr name="actionIconBackgroundTint" format="color" />
         <attr name="actionIconTint" format="color" />
         <attr name="actionIconPadding" format="dimension" />
         <attr name="badgeVisibility" format="boolean" />

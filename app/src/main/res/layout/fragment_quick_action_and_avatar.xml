@@ -54,12 +54,17 @@
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:id="@+id/second"
-                        android:layout_width="wrap_content"
+                        android:layout_width="90dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:text="Acba contacts"
                         app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconBackground="@drawable/background_primary_input"
+                        app:actionIconBackgroundTint="?attr/backgroundTonal1"
                         app:actionIconSize="XLarge"
+                        app:actionIconTint="?attr/contentBrand"
                         app:checkable="false"
-                        app:showActionText="false" />
+                        app:showActionText="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -115,8 +120,9 @@
                         android:id="@+id/quickAction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:actionIconSize="XXLarge"
-                        app:checkable="true" />
+                        app:actionIconSize="XLarge"
+
+                        app:checkable="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -156,8 +162,8 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Small"
-                        app:badgeVisibility="true"
                         app:badgeIcon="@drawable/ic_success_filled"
+                        app:badgeVisibility="true"
                         app:checkable="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -167,8 +173,8 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XSmall"
-                        app:checkable="true"
-                        app:badgeIcon="@drawable/ic_success_filled" />
+                        app:badgeIcon="@drawable/ic_success_filled"
+                        app:checkable="true" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </HorizontalScrollView>
 

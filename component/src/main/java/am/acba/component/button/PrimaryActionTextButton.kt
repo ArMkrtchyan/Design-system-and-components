@@ -3,18 +3,19 @@ package am.acba.component.button
 import am.acba.component.PreventDoubleClickListener
 import am.acba.component.R
 import am.acba.component.badge.PrimaryBadge
-import am.acba.component.badge.PrimaryBadge.BadgeType.Companion.findBadgeTypeByOrdinal
 import am.acba.component.button.PrimaryActionTextButton.ActionButtonType.Companion.findTypeByOrdinal
 import am.acba.component.button.PrimaryActionTextButton.ActionIconSize.Companion.findSizeByOrdinal
 import am.acba.component.databinding.WidgetActionTextButtonBinding
 import am.acba.component.extensions.dpToPx
-import am.acba.component.extensions.getColorStateListFromAttr
+import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.imageView.MaterialTextDrawable
 import am.acba.component.imageView.PrimaryImageView
 import am.acba.component.textView.PrimaryTextView
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
@@ -29,9 +30,11 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
-import com.airbnb.lottie.SimpleColorFilter
+import com.airbnb.lottie.LottieProperty
+import com.airbnb.lottie.model.KeyPath
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 
 class PrimaryActionTextButton : FrameLayout {
 
@@ -51,11 +54,6 @@ class PrimaryActionTextButton : FrameLayout {
     private var textDrawableBackgroundColor: Int = 0
     private var textDrawableColor: Int = 0
     private var badgeIconGravity: Int = 0
-    private var badgeTextPaddingTop = 0f
-    private var badgeTextPaddingBottom = 0f
-    private var badgeTextPaddingEnd = 0f
-    private var badgeTextPaddingStart = 0f
-    private var badgeTextStyle = -1
     private val binding by lazy { WidgetActionTextButtonBinding.inflate(context.inflater(), this, false) }
 
     constructor(context: Context) : super(context, null, R.attr.primaryActionTextButtonStyle) {
@@ -87,17 +85,6 @@ class PrimaryActionTextButton : FrameLayout {
                     }
                 }
 
-                text = getString(R.styleable.PrimaryActionTextButton_badgeText)
-                textColor = getColor(R.styleable.PrimaryActionTextButton_badgeTextColor, ContextCompat.getColor(context, R.color.White))
-                icon = getDrawable(R.styleable.PrimaryActionTextButton_badgeIcon)
-                iconTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeIconTint)
-                backgroundTint = getColorStateList(R.styleable.PrimaryActionTextButton_badgeBackgroundTint)
-                badgeType = getInt(R.styleable.PrimaryActionTextButton_badgeType, 0).findBadgeTypeByOrdinal() ?: PrimaryBadge.BadgeType.DOT
-                badgeTextPaddingTop = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
-                badgeTextPaddingBottom = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
-                badgeTextPaddingEnd = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
-                badgeTextPaddingStart = getDimension(R.styleable.PrimaryActionTextButton_badgePaddingTop, -1f)
-                badgeTextStyle = getResourceId(R.styleable.PrimaryActionTextButton_badgeTextAppearance, R.style.Small_Regular)
                 binding.badgeIcon.isVisible = getBoolean(R.styleable.PrimaryActionTextButton_showBadge, false)
 
 
@@ -112,6 +99,9 @@ class PrimaryActionTextButton : FrameLayout {
                 val background =
                     getDrawable(R.styleable.PrimaryActionTextButton_actionIconBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_rounded)
                 setIconBackground(background)
+                val backgroundTint =
+                    getColorStateList(R.styleable.PrimaryActionTextButton_actionIconBackgroundTint)
+                if (backgroundTint != null) setIconBackgroundTint(backgroundTint)
                 val tint =
                     getColorStateList(R.styleable.PrimaryActionTextButton_actionIconTint)
                 if (tint != null) setIconTint(tint)
@@ -122,6 +112,9 @@ class PrimaryActionTextButton : FrameLayout {
                 setActionBadgeSize(iconSizeEnum)
                 setBadgeSize(iconSizeEnum)
                 setBadgeBackgroundTint(backgroundTint)
+                val badgeBackgroundTint =
+                    getColorStateList(R.styleable.PrimaryActionTextButton_badgeBackgroundTint)
+                if (badgeBackgroundTint != null) setBadgeBackgroundTint(badgeBackgroundTint)
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
@@ -201,10 +194,20 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setAnimation(animation: String?, color: Int) {
-        binding.actionImage.visibility = View.GONE
         binding.actionAnimation.visibility = View.VISIBLE
         binding.actionAnimation.setAnimation(animation)
-        binding.actionAnimation.colorFilter = SimpleColorFilter(color)
+        binding.actionAnimation.addValueCallback(
+            KeyPath("**"),
+            LottieProperty.COLOR_FILTER
+        ) {
+            PorterDuffColorFilter(context.getColorFromAttr(R.attr.contentAlternative3), PorterDuff.Mode.SRC_ATOP)
+        }
+        binding.actionAnimation.addValueCallback(
+            KeyPath("BG", "**"),
+            LottieProperty.COLOR_FILTER
+        ) {
+            PorterDuffColorFilter(context.getColorFromAttr(R.attr.backgroundAlternative3), PorterDuff.Mode.SRC_ATOP)
+        }
         binding.actionAnimation.playAnimation()
     }
 
@@ -214,6 +217,10 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setIconBackground(iconDrawable: Drawable?) {
         binding.actionImage.background = iconDrawable
+    }
+
+    fun setIconBackgroundTint(colorStateList: ColorStateList?) {
+        binding.actionImage.backgroundTintList = colorStateList
     }
 
     fun setIconTint(colorStateList: ColorStateList?) {
@@ -345,12 +352,12 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val actionIconPadding: Int, val padding: Int, val badgeSize: Int) {
-        XXLARGE(80, 32, 8,16, 20),
-        XLARGE(56, 24, 7,16, 14),
-        LARGE(40, 16, 1,10, 10),
-        MEDIUM(36, 14, 1,8, 9),
-        SMALL(32, 8, 1,8, 8),
-        XSMALL(24, 0, 4, 4,6);
+        XXLARGE(80, 32, 8, 16, 20),
+        XLARGE(100, 24, 7, 16, 14),
+        LARGE(40, 16, 1, 10, 10),
+        MEDIUM(36, 14, 1, 8, 9),
+        SMALL(32, 8, 1, 8, 8),
+        XSMALL(24, 0, 4, 4, 6);
 
         companion object {
             fun Int.findSizeByOrdinal(): ActionIconSize? {
