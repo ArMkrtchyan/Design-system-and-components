@@ -48,9 +48,7 @@
                         android:layout_height="wrap_content"
                         android:text="Action button1"
                         app:actionIcon="@drawable/ic_contacts"
-                        app:actionIconTint="?attr/contentBrand"
-                        app:badgeChecked="true"
-                        app:checkable="false" />
+                        app:actionIconTint="?attr/contentBrand" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:id="@+id/second"
@@ -63,7 +61,6 @@
                         app:actionIconBackgroundTint="?attr/backgroundTonal1"
                         app:actionIconSize="XLarge"
                         app:actionIconTint="?attr/contentBrand"
-                        app:checkable="false"
                         app:showActionText="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -72,7 +69,6 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Large"
-                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -81,7 +77,6 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Medium"
-                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -90,7 +85,6 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="Small"
-                        app:checkable="false"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -99,7 +93,6 @@
                         android:layout_marginStart="10dp"
                         app:actionIcon="@drawable/ic_contacts"
                         app:actionIconSize="XSmall"
-                        app:checkable="true"
                         app:showActionText="false" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -120,9 +113,7 @@
                         android:id="@+id/quickAction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:actionIconSize="XLarge"
-
-                        app:checkable="false" />
+                        app:actionIconSize="XLarge" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -131,7 +122,6 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XLarge"
-                        app:badgeVisibility="true"
                         app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
@@ -163,8 +153,7 @@
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="Small"
                         app:badgeIcon="@drawable/ic_success_filled"
-                        app:badgeVisibility="true"
-                        app:checkable="true" />
+                        app:badgeVisibility="true" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -173,8 +162,7 @@
                         app:actionButtonType="Avatar"
                         app:actionIcon="@drawable/default_avatar"
                         app:actionIconSize="XSmall"
-                        app:badgeIcon="@drawable/ic_success_filled"
-                        app:checkable="true" />
+                        app:badgeIcon="@drawable/ic_success_filled" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </HorizontalScrollView>
 
