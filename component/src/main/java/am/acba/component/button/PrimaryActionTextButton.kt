@@ -353,7 +353,7 @@ class PrimaryActionTextButton : FrameLayout {
 
     enum class ActionIconSize(val size: Int, val actionButtonSize: Int, val actionIconPadding: Int, val padding: Int, val badgeSize: Int) {
         XXLARGE(80, 32, 8, 16, 20),
-        XLARGE(100, 24, 7, 16, 14),
+        XLARGE(56, 24, 7, 16, 14),
         LARGE(40, 16, 1, 10, 10),
         MEDIUM(36, 14, 1, 8, 9),
         SMALL(32, 8, 1, 8, 8),
