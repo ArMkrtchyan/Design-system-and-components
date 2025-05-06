@@ -42,7 +42,7 @@ fun Avatar(
     backgroundColor: Color = Color.Transparent,
     backgroundRadius: Int = 0,
     icon: Int? = null,
-    iconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
     iconPadding: Dp = Dp.Unspecified,
     imageUrl: String? = null,
     clipPercent: Int = 0,
