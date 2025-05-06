@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/badgeParent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_badge"
     android:backgroundTint="?attr/backgroundPending"
+    android:orientation="horizontal"
     android:paddingHorizontal="8dp"
     android:paddingVertical="3dp">
 
@@ -12,15 +14,16 @@
         android:id="@+id/start_icon"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        tools:src="@drawable/default_icon"
-        android:tint="?attr/contentPending" />
+        android:paddingTop="2dp"
+        android:tint="?attr/contentPending"
+        tools:src="@drawable/default_icon" />
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/title"
         style="@style/Small.Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="2dp"
         android:textColor="?attr/contentPending"
         tools:text="-50% տարեկան վճար" />
-</FrameLayout>
+</LinearLayout>
