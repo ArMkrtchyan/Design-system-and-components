@@ -41,10 +41,12 @@ android {
 
 dependencies {
     implementation libs.lottie
+    implementation libs.lottie.compose
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.glide
+    implementation libs.glide.compose
     /*implementation libs.pageIndicatorView*/
     implementation libs.countries
     implementation libs.live.event

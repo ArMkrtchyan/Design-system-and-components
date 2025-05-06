@@ -1,15 +1,25 @@
 ﻿package am.acba.composeComponents.quickActionAndAvatar
 
+import am.acba.component.R
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.avatar.Avatar
+import am.acba.compose.components.avatar.AvatarEnum
+import am.acba.compose.components.avatar.AvatarSizeEnum
+import am.acba.compose.components.badges.BadgeEnum
+import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,8 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun QuickActionAndAvatarScreen(title: String = "") {
     Box(
@@ -48,8 +59,66 @@ fun QuickActionAndAvatarScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                PrimaryDivider(text = "Avatar icon state")
+                Spacer(modifier = Modifier.height(16.dp))
+                AvatarIconStates()
+                Avatar(
+                    avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
+                    imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
+                    clipPercent = 50,
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Avatar(
+                    avatarType = AvatarEnum.LOTTIE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, badgeType = BadgeEnum.ICON,
+                    badgeIcon = R.drawable.ic_camera, badgeBackgroundColor = DigitalTheme.colorScheme.backgroundTonal3,
+                    badgeIconColor = DigitalTheme.colorScheme.contentBrand
+                )
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
+    }
+}
+
+@Composable
+private fun AvatarIconStates() {
+    Row {
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_24, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+            iconPadding = 6.dp
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
+            backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
+            backgroundRadius = 100,
+        )
+        Spacer(modifier = Modifier.width(16.dp))
     }
 }
 

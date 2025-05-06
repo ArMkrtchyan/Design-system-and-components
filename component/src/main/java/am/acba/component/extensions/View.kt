@@ -218,14 +218,14 @@ fun ImageView.load(
         .timeout(timeout)
         .listener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
-                e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+                e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean
             ): Boolean {
                 onResourceReady?.invoke(null, e)
                 return true
             }
 
             override fun onResourceReady(
-                resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+                resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
             ): Boolean {
                 setImageDrawable(resource)
                 onResourceReady?.invoke(resource, null)
@@ -250,8 +250,9 @@ fun ImageView.load(
         .load(url)
         .timeout(timeout)
         .listener(object : RequestListener<Drawable> {
+
             override fun onLoadFailed(
-                e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean
+                e: GlideException?, model: Any?, target: Target<Drawable>, isFirstResource: Boolean
             ): Boolean {
                 shimmer?.stopShimmer()
                 shimmer?.isVisible = false
@@ -261,7 +262,7 @@ fun ImageView.load(
             }
 
             override fun onResourceReady(
-                resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean
+                resource: Drawable, model: Any, target: Target<Drawable>?, dataSource: DataSource, isFirstResource: Boolean
             ): Boolean {
                 shimmer?.stopShimmer()
                 shimmer?.isVisible = false

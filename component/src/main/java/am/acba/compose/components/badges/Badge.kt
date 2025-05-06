@@ -1,0 +1,171 @@
+﻿package am.acba.compose.components.badges
+
+import am.acba.component.R
+import am.acba.compose.components.PrimaryIcon
+import am.acba.compose.components.PrimaryText
+import am.acba.compose.theme.DigitalTheme
+import am.acba.compose.theme.ShapeTokens
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun Badge(
+    modifier: Modifier = Modifier,
+    badgeType: BadgeEnum = BadgeEnum.INFO,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
+    iconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    textColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    text: String? = null,
+    icon: Int? = null,
+) {
+    when (badgeType) {
+        BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor)
+        BadgeEnum.ICON -> BadgeIcon(modifier = modifier, icon = icon, backgroundColor = backgroundColor, iconColor = iconColor)
+        BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, text = text, backgroundColor = backgroundColor, textColor = textColor)
+        BadgeEnum.INFO -> BadgeTextAndIcon(modifier = modifier, icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor)
+        BadgeEnum.NONE -> Unit
+    }
+}
+
+@Composable
+private fun Dot(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color
+) {
+    Box(
+        modifier = modifier
+            .width(10.dp)
+            .height(10.dp)
+            .background(backgroundColor, ShapeTokens.shapeRound)
+            .border(1.dp, DigitalTheme.colorScheme.borderSecondary, ShapeTokens.shapeRound)
+    )
+}
+
+@Composable
+private fun BadgeIcon(
+    modifier: Modifier = Modifier,
+    iconColor: Color,
+    backgroundColor: Color,
+    @DrawableRes icon: Int? = null,
+) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(percent = 50))
+            .background(backgroundColor)
+    ) {
+        PrimaryIcon(
+            painter = painterResource(icon ?: R.drawable.default_icon),
+            tint = iconColor,
+            modifier = modifier
+                .width(12.dp)
+                .height(12.dp)
+                .padding(2.dp),
+        )
+    }
+}
+
+@Composable
+private fun BadgeNumber(
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    textColor: Color,
+    backgroundColor: Color,
+) {
+    Box(
+        modifier = Modifier
+            .background(backgroundColor, ShapeTokens.shapeBadge)
+    ) {
+        BadgeText(modifier.padding(horizontal = 4.dp), text ?: "", textColor)
+    }
+}
+
+@Composable
+private fun BadgeTextAndIcon(
+    modifier: Modifier = Modifier,
+    textModifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
+    icon: Int? = null,
+    text: String? = null,
+    textColor: Color,
+    backgroundColor: Color,
+) {
+    Box(
+        modifier = Modifier
+            .background(backgroundColor, ShapeTokens.shapeBadge)
+    ) {
+        Row(
+            modifier = modifier
+                .padding(horizontal = 8.dp, vertical = 2.dp)
+        ) {
+            icon?.let {
+                if (icon > 0) {
+                    PrimaryIcon(
+                        painter = painterResource(icon),
+                        tint = textColor,
+                        modifier = iconModifier
+                            .width(16.dp)
+                            .height(16.dp),
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                }
+            }
+            BadgeText(textModifier, text ?: "", textColor)
+        }
+    }
+}
+
+@Composable
+private fun BadgeText(modifier: Modifier, text: String, textColor: Color) {
+    PrimaryText(
+        text = text,
+        color = textColor,
+        style = DigitalTheme.typography.smallRegular,
+        modifier = modifier
+    )
+}
+
+@Composable
+@PreviewLightDark
+fun AlertsScreenPreview() {
+    DigitalTheme {
+        Column(
+            Modifier
+                .background(DigitalTheme.colorScheme.backgroundBase)
+                .padding(10.dp)
+        ) {
+            Badge(badgeType = BadgeEnum.DOT, backgroundColor = DigitalTheme.colorScheme.backgroundWarning)
+            Spacer(modifier = Modifier.height(16.dp))
+            Badge(
+                badgeType = BadgeEnum.ICON, modifier = Modifier
+                    .width(24.dp)
+                    .height(24.dp)
+                    .padding(4.dp), icon = R.drawable.ic_edit
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Badge(badgeType = BadgeEnum.ICON)
+            Spacer(modifier = Modifier.height(16.dp))
+            Badge(badgeType = BadgeEnum.NUMBER, text = "2")
+            Spacer(modifier = Modifier.height(16.dp))
+            Badge(badgeType = BadgeEnum.INFO, text = "Badge")
+            Spacer(modifier = Modifier.height(16.dp))
+            Badge(badgeType = BadgeEnum.INFO, icon = R.drawable.ic_info, text = "Info text")
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
