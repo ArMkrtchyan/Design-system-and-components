@@ -1,11 +1,13 @@
 ﻿package am.acba.compose.components.avatar
 
 import am.acba.component.R
+import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +35,66 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 
 @Composable
+fun ActionButton(
+    actionText: String,
+    actionTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    backgroundModifier: Modifier = Modifier,
+    badgeModifier: Modifier = Modifier,
+    contentModifier: Modifier = Modifier,
+    avatarType: AvatarEnum = AvatarEnum.ICON,
+    avatarSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_56,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
+    backgroundRadius: Int = 100,
+    icon: Int? = null,
+    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    iconPadding: Dp = 16.dp,
+    imageUrl: String? = null,
+    clipPercent: Int = 0,
+    contentScale: ContentScale = ContentScale.Crop,
+    text: String? = null,
+    textColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    badgeType: BadgeEnum = BadgeEnum.NONE,
+    badgeIcon: Int? = null,
+    badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
+    badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    onActionButtonClick: () -> Unit = {},
+    onBadgeClick: () -> Unit = {},
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.clickable {
+        onActionButtonClick.invoke()
+    }) {
+        Avatar(
+            backgroundModifier,
+            badgeModifier,
+            contentModifier,
+            avatarType,
+            avatarSize,
+            backgroundColor,
+            backgroundRadius,
+            icon,
+            iconColor,
+            iconPadding,
+            imageUrl,
+            clipPercent,
+            contentScale,
+            text,
+            textColor,
+            badgeType,
+            badgeIcon,
+            badgeBackgroundColor,
+            badgeIconColor,
+            onBadgeClick
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        PrimaryText(
+            text = actionText,
+            color = actionTextColor,
+            style = DigitalTheme.typography.smallRegular
+        )
+    }
+}
+
+@Composable
 fun Avatar(
     backgroundModifier: Modifier = Modifier,
     badgeModifier: Modifier = Modifier,
@@ -53,17 +115,19 @@ fun Avatar(
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    onBadgeClick: () -> Unit = {},
 ) {
     Box(
         modifier = backgroundModifier
             .width(avatarSize.size.dp)
             .height(avatarSize.size.dp)
-            .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
+            .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp)),
+        contentAlignment = Alignment.Center
     ) {
         when (avatarType) {
             AvatarEnum.ICON -> AvatarIcon(modifier = contentModifier, icon = icon ?: R.drawable.default_icon, iconColor = iconColor, padding = iconPadding)
             AvatarEnum.IMAGE -> AvatarImage(modifier = contentModifier, imageRes = icon, clipPercent = clipPercent, imageUrl = imageUrl, contentScale = contentScale)
-            AvatarEnum.TEXT -> AvatarText(modifier = contentModifier)
+            AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
             AvatarEnum.LOTTIE -> AvatarLottie(modifier = contentModifier)
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
@@ -76,7 +140,13 @@ fun Avatar(
                 else -> avatarSize.iconBadgePadding.dp
             }
             Box(
-                modifier = Modifier.align(Alignment.BottomEnd)
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .clickable {
+                        if (badgeType == BadgeEnum.ICON) {
+                            onBadgeClick.invoke()
+                        }
+                    }
             ) {
                 Badge(
                     modifier = badgeModifier
@@ -93,6 +163,7 @@ fun Avatar(
         }
     }
 }
+
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -141,10 +212,14 @@ private fun AvatarIcon(
 @Composable
 private fun AvatarText(
     modifier: Modifier = Modifier,
+    avatarSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_24,
+    text: String,
+    textColor: Color
 ) {
-    Image(
-        painterResource(R.drawable.ic_flag_am), contentDescription = "",
-        modifier = modifier.fillMaxSize()
+    PrimaryText(
+        text = text,
+        style = avatarSize.getTextStyle(),
+        color = textColor
     )
 }
 
@@ -183,7 +258,13 @@ fun AvatarScreenPreview() {
                 iconPadding = 16.dp
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Avatar(avatarType = AvatarEnum.TEXT, avatarSize = AvatarSizeEnum.AVATAR_SIZE_36)
+            Avatar(
+                avatarType = AvatarEnum.TEXT, avatarSize = AvatarSizeEnum.AVATAR_SIZE_36,
+                text = "AA",
+                textColor = DigitalTheme.colorScheme.contentAlternative5,
+                backgroundColor = DigitalTheme.colorScheme.backgroundAlternative5,
+                backgroundRadius = 100,
+            )
             Spacer(modifier = Modifier.height(16.dp))
             Avatar(
                 avatarType = AvatarEnum.IMAGE,
@@ -201,6 +282,7 @@ fun AvatarScreenPreview() {
                 backgroundRadius = 100,
             )
             Spacer(modifier = Modifier.height(16.dp))
+            ActionButton(actionText = "Action button")
         }
     }
 }
