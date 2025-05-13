@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/onboardingParent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboardingParent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <am.acba.component.ClipView
         android:id="@+id/clip_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/info_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.7"
         android:elevation="2dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintWidth_percent="0.7"
+        tools:ignore="MissingConstraints">
+
+        <am.acba.component.tooltip.PrimaryTooltip
+            android:id="@+id/tooltip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <am.acba.component.imageView.PrimaryImageView
+            android:id="@+id/anchor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_anchor"
+            android:tint="?attr/backgroundTonal1"
+            app:layout_constraintBottom_toTopOf="@+id/tooltip"
+            app:layout_constraintEnd_toEndOf="@+id/tooltip"
+            app:layout_constraintStart_toStartOf="@+id/tooltip" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
