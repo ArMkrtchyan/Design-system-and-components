@@ -4,7 +4,6 @@ import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getStatusBarHeight
 import am.acba.component.extensions.log
-import android.app.Activity
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -13,7 +12,6 @@ import android.graphics.RectF
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
-import android.view.WindowManager
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
@@ -53,25 +51,14 @@ class ClipView @JvmOverloads constructor(
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), backgroundPaint)
     }
 
-    fun isFullScreen(activity: Activity): Boolean {
-        val flg: Int = activity.window.attributes.flags
-        var flag = false
-        if (flg and WindowManager.LayoutParams.FLAG_FULLSCREEN == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
-            flag = true
-        }
-        return flag
-    }
-
-    fun clipForView(view: View, activity: Activity) {
+    fun clipForView(view: View) {
         val location = intArrayOf(-1, -1)
         view.getLocationOnScreen(location)
 
         val viewX = location[0].toFloat().log("Coordinates", "Location X ->")
         var viewY = location[1].toFloat().log("Coordinates", "Location Y ->")
 
-        if (!isFullScreen(activity)) {
-            viewY -= context.getStatusBarHeight()
-        }
+        viewY -= context.getStatusBarHeight()
 
         clipRect.top = (viewY - clipPadding)
         clipRect.left = (viewX - clipPadding)
