@@ -85,6 +85,10 @@ class PrimaryTooltip : FrameLayout {
         binding.forward.isVisible = isVisible
     }
 
+    fun setCloseButtonVisibility(isVisible: Boolean) {
+        binding.close.isVisible = isVisible
+    }
+
     fun setBackwardVisibility(isVisible: Boolean) {
         binding.backward.isVisible = isVisible
     }

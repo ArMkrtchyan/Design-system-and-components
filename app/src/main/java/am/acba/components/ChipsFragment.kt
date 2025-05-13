@@ -50,48 +50,30 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         val tooltipModel7 = TooltipModel("CCC", "info 555 CCC CCC")
 
         val tooltipList = arrayListOf(
-            tooltipModel1,
-            tooltipModel2,
-            tooltipModel3,
-            tooltipModel4,
-            tooltipModel5,
-            tooltipModel6,
-            tooltipModel7
+            tooltipModel1 to mBinding.chipSmall1,
+            tooltipModel2 to mBinding.chipSmall2,
+            tooltipModel3 to mBinding.chipSmall3,
+            tooltipModel4 to mBinding.chipSmall4,
+            tooltipModel5 to mBinding.chipSmall5,
+            tooltipModel6 to mBinding.chipSmall6,
+            tooltipModel7 to mBinding.chipSmall8
         )
 
-        val viewsList = arrayListOf(
-            mBinding.chipSmall1,
-            mBinding.chipSmall2,
-            mBinding.chipSmall3,
-            mBinding.chipSmall4,
-            mBinding.chipSmall5,
-            mBinding.chipSmall6,
-            mBinding.chipSmall8
-        )
 
         chipSmall1.setEndIconClickListener {
             Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
         }
         lifecycleScope.launch {
             delay(100)
-            if (onboardingHint == null && tooltipList.isNotEmpty() && viewsList.isNotEmpty())
+            if (onboardingHint == null)
                 onboardingHint = OnboardingHint(
                     requireContext(),
-                    null,
-                    requireActivity(),
                     tooltipList,
-                    viewsList
-                ).apply {
-                    setCancelable(false)
-                    setButtonTitle(R.string.ok)
-                    setTooltipList(
-                        tooltipList
-                    )
-                    setTargetViews(
-                        viewsList, requireActivity()
-                    )
-                }
-
+                    R.string.ok,
+                    onLastButtonClick = {
+                        Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
+                    }
+                )
             mBinding.clContainer.addView(onboardingHint)
             onboardingHint?.handleSkip {
                 mBinding.clContainer.removeView(onboardingHint)
