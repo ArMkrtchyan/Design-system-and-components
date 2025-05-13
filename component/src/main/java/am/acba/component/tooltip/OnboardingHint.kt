@@ -1,6 +1,7 @@
 package am.acba.component.tooltip
 
 import am.acba.component.databinding.OnboardingHintLayoutBinding
+import am.acba.component.databinding.OnboardingInfoLayoutBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getDisplayHeight
 import am.acba.component.extensions.getDisplayWidth
@@ -31,32 +32,35 @@ class OnboardingHint(
 ) : FrameLayout(context, null, 0) {
 
     private val binding by lazy { OnboardingHintLayoutBinding.inflate(context.inflater(), this, false) }
-
+    private val onboardingInfoBinding by lazy {
+        OnboardingInfoLayoutBinding.inflate(
+            context.inflater(),
+            this,
+            false
+        )
+    }
     private var currentPosition = 0
     private var onFinish: (() -> Unit)? = null
     private var scrollView: ScrollView? = null
 
     init {
         addView(binding.root)
-        binding.tooltip.setBackwardClickListener {
+        binding.infoContainer.addView(onboardingInfoBinding.root)
+        onboardingInfoBinding.tooltip.setBackwardClickListener {
             currentPosition--
             handleScrollPositionAndChangeTargetView()
         }
-        binding.tooltip.setForwardClickListener {
+        onboardingInfoBinding.tooltip.setForwardClickListener {
             currentPosition++
             handleScrollPositionAndChangeTargetView()
         }
-        binding.tooltip.setSkipClickListener {
+        onboardingInfoBinding.tooltip.setSkipClickListener {
             onFinish?.invoke()
             onLastButtonClick.invoke()
         }
-        binding.tooltip.setCloseTooltipClickListener { onFinish?.invoke() }
+        onboardingInfoBinding.tooltip.setCloseTooltipClickListener { onFinish?.invoke() }
         if (contentAndViews.isNotEmpty()) {
-            binding.tooltip.setTooltip(contentAndViews[0].first)
             setTargetViews()
-            lastButtonTextResource?.let(::setButtonTitle) ?: run {
-                lastButtonText?.let(::setButtonTitle)
-            }
         }
     }
 
@@ -78,59 +82,62 @@ class OnboardingHint(
         return localVisibleRect.top == 0 && localVisibleRect.bottom == height
     }
 
-    private fun setTooltipCountAndText(tooltipListSize: Int) {
-        if (this.contentAndViews.size > 1)
-            binding.tooltip.setTooltipCount(
+    private fun setTooltipCountAndText() {
+        if (contentAndViews.size > 1)
+            onboardingInfoBinding.tooltip.setTooltipCount(
                 (currentPosition + 1),
-                tooltipListSize
+                contentAndViews.size
             )
     }
 
     private fun setButtonTitle(@StringRes title: Int) {
-        binding.tooltip.setButtonTitle(title)
+        onboardingInfoBinding.tooltip.setButtonTitle(title)
     }
 
     private fun setButtonTitle(title: String) {
-        binding.tooltip.setButtonTitle(title)
+        onboardingInfoBinding.tooltip.setButtonTitle(title)
     }
 
     private fun setTargetViews() {
-        binding.root.viewTreeObserver
-            .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    currentPosition = 0
-                    val view = contentAndViews.first().second
-                    binding.clipView.clipForView(view)
-                    val height = binding.root.height
-                    val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
-                    binding.clParent.x = coordinates.first
-                    binding.clParent.y = coordinates.second
-                    binding.tooltip.setForwardVisibility(contentAndViews.size > 1)
-                    binding.tooltip.setSkipVisibility(contentAndViews.size == 1)
+        val globalListener = object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                val view = contentAndViews.first().second
+                binding.clipView.clipForView(view)
+                val height = onboardingInfoBinding.root.height
+                val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
+                binding.infoContainer.x = coordinates.first
+                binding.infoContainer.y = coordinates.second
+                onboardingInfoBinding.tooltip.setForwardVisibility(contentAndViews.size > 1)
+                onboardingInfoBinding.tooltip.setSkipVisibility(contentAndViews.size == 1)
+                onboardingInfoBinding.tooltip.setTooltip(contentAndViews[0].first)
+                lastButtonTextResource?.let(::setButtonTitle) ?: run {
+                    lastButtonText?.let(::setButtonTitle)
                 }
-            })
-        setTooltipCountAndText(contentAndViews.size)
+                setTooltipCountAndText()
+            }
+        }
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(globalListener)
     }
 
 
     private fun changeTargetView() {
-        binding.tooltip.setTooltip(contentAndViews[currentPosition].first)
+        onboardingInfoBinding.tooltip.setTooltip(contentAndViews[currentPosition].first)
         var height: Int
         binding.root.viewTreeObserver
             .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    height = binding.root.height
+                    height = onboardingInfoBinding.root.height
                     height.log("info height by observer")
                     val view = contentAndViews[currentPosition].second
                     val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
-                    binding.clParent.animate()
+                    binding.infoContainer.animate()
                         .y(coordinates.second)
                         .setInterpolator(LinearInterpolator())
                         .setDuration(300)
                         .start()
-                    binding.clParent.animate()
+                    binding.infoContainer.animate()
                         .x(coordinates.first)
                         .setInterpolator(LinearInterpolator())
                         .setDuration(300)
@@ -141,11 +148,11 @@ class OnboardingHint(
                 }
             })
 
-        binding.tooltip.setSkipVisibility(contentAndViews.size - 1 == currentPosition)
-        binding.tooltip.setForwardVisibility(contentAndViews.size - 1 != currentPosition)
-        binding.tooltip.setBackwardVisibility(currentPosition != 0)
+        onboardingInfoBinding.tooltip.setSkipVisibility(contentAndViews.size - 1 == currentPosition)
+        onboardingInfoBinding.tooltip.setForwardVisibility(contentAndViews.size - 1 != currentPosition)
+        onboardingInfoBinding.tooltip.setBackwardVisibility(currentPosition != 0)
         binding.root.invalidate()
-
+        setTooltipCountAndText()
     }
 
     private fun calculateNewXYCoordinatesForInfoContainer(
@@ -157,13 +164,13 @@ class OnboardingHint(
         view.getLocationOnScreen(location)
         val viewX = location[0].toFloat().log("Coordinates", "Location X ->")
         val viewY = location[1].toFloat().log("Coordinates", "Location Y ->")
-        binding.root.height.toString().log("info height")
+        onboardingInfoBinding.root.height.toString().log("info height")
 
         return if ((displayHeight - viewY - view.height - 16.dpToPx() - context.getStatusBarHeight()) < height) {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
                 false,
-                viewX - x + view.width / 2 - binding.anchor.width / 2
+                viewX - x + view.width / 2 - onboardingInfoBinding.anchor.width / 2
             )
 
             Pair(x, viewY - height - 48.dpToPx() + context.getStatusBarHeight())
@@ -171,7 +178,7 @@ class OnboardingHint(
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
                 true,
-                viewX - x + view.width / 2 - binding.anchor.width / 2
+                viewX - x + view.width / 2 - onboardingInfoBinding.anchor.width / 2
             )
 
             Pair(x, viewY + view.height - 16.dpToPx() + context.getStatusBarHeight())
@@ -180,20 +187,20 @@ class OnboardingHint(
     }
 
     private fun setAnchorPosition(isTopAnchor: Boolean, newAnchorX: Float) {
-        binding.anchor.updateLayoutParams<ConstraintLayout.LayoutParams> {
+        onboardingInfoBinding.anchor.updateLayoutParams<ConstraintLayout.LayoutParams> {
             if (isTopAnchor) {
-                binding.anchor.rotation = 180f
+                onboardingInfoBinding.anchor.rotation = 180f
                 topToBottom = ConstraintLayout.LayoutParams.UNSET
-                bottomToTop = binding.tooltip.id
+                bottomToTop = onboardingInfoBinding.tooltip.id
             } else {
-                binding.anchor.rotation = 0f
+                onboardingInfoBinding.anchor.rotation = 0f
                 bottomToTop = ConstraintLayout.LayoutParams.UNSET
-                topToBottom = binding.tooltip.id
+                topToBottom = onboardingInfoBinding.tooltip.id
             }
-            startToStart = binding.clParent.id
-            endToEnd = binding.clParent.id
+            startToStart = onboardingInfoBinding.clParent.id
+            endToEnd = onboardingInfoBinding.clParent.id
         }
-        binding.anchor.x = newAnchorX
+        onboardingInfoBinding.anchor.x = newAnchorX
     }
 
     private fun calculateXCoordinateOfView(view: View): Float {
@@ -217,6 +224,6 @@ class OnboardingHint(
     }
 
     fun setCloseButtonVisibility(isVisible: Boolean) {
-        binding.tooltip.setCloseButtonVisibility(isVisible)
+        onboardingInfoBinding.tooltip.setCloseButtonVisibility(isVisible)
     }
 }

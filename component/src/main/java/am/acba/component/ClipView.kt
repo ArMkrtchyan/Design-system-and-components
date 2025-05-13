@@ -2,7 +2,6 @@ package am.acba.component
 
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
-import am.acba.component.extensions.getStatusBarHeight
 import am.acba.component.extensions.log
 import android.content.Context
 import android.graphics.Canvas
@@ -58,7 +57,7 @@ class ClipView @JvmOverloads constructor(
         val viewX = location[0].toFloat().log("Coordinates", "Location X ->")
         var viewY = location[1].toFloat().log("Coordinates", "Location Y ->")
 
-        viewY -= context.getStatusBarHeight()
+        //  viewY -= context.getStatusBarHeight()
 
         clipRect.top = (viewY - clipPadding)
         clipRect.left = (viewX - clipPadding)
