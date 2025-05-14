@@ -21,6 +21,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
+import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -79,13 +80,17 @@ class PrimaryActionTextButton : FrameLayout {
                 binding.actionText.text = getString(R.styleable.PrimaryActionTextButton_android_text)
                 val textStyle = getResourceId(R.styleable.PrimaryActionTextButton_textAppearance, R.style.Button_Style_Text)
                 TextViewCompat.setTextAppearance(binding.actionText, textStyle)
-                textDrawableColor = getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
+                textDrawableColor =
+                    getColor(R.styleable.PrimaryActionTextButton_textDrawableColor, ContextCompat.getColor(context, R.color.BrandGreen_650))
                 textDrawableBackgroundColor =
                     getColor(R.styleable.PrimaryActionTextButton_textDrawableBackgroundColor, ContextCompat.getColor(context, R.color.BrandGreen_200))
 
                 setIcon(getDrawable(R.styleable.PrimaryActionTextButton_actionIcon))
                 val background =
-                    getDrawable(R.styleable.PrimaryActionTextButton_actionIconBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_rounded)
+                    getDrawable(R.styleable.PrimaryActionTextButton_actionIconBackground) ?: ContextCompat.getDrawable(
+                        context,
+                        R.drawable.background_rounded
+                    )
                 setIconBackground(background)
                 val backgroundTint =
                     getColorStateList(R.styleable.PrimaryActionTextButton_actionIconBackgroundTint)
@@ -128,11 +133,11 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     override fun setOnClickListener(onClickListener: OnClickListener?) {
-            if (isPreventDoubleClick && onClickListener != null) {
-                super.setOnClickListener(PreventDoubleClickListener(onClickListener, clickInterval))
-            } else {
-                super.setOnClickListener(onClickListener)
-            }
+        if (isPreventDoubleClick && onClickListener != null) {
+            super.setOnClickListener(PreventDoubleClickListener(onClickListener, clickInterval))
+        } else {
+            super.setOnClickListener(onClickListener)
+        }
     }
 
     fun setAvatarCheckedStatus(isChecked: Boolean) {
@@ -152,22 +157,20 @@ class PrimaryActionTextButton : FrameLayout {
             .into(binding.actionImage)
     }
 
-    fun setAnimation(animation: String?, color: Int) {
+    fun setAnimation(animation: String?) {
         binding.actionAnimation.visibility = View.VISIBLE
         binding.actionAnimation.setAnimation(animation)
-        binding.actionAnimation.addValueCallback(
-            KeyPath("**"),
-            LottieProperty.COLOR_FILTER
-        ) {
-            PorterDuffColorFilter(context.getColorFromAttr(R.attr.contentAlternative3), PorterDuff.Mode.SRC_ATOP)
-        }
-        binding.actionAnimation.addValueCallback(
-            KeyPath("BG", "**"),
-            LottieProperty.COLOR_FILTER
-        ) {
-            PorterDuffColorFilter(context.getColorFromAttr(R.attr.backgroundAlternative3), PorterDuff.Mode.SRC_ATOP)
-        }
         binding.actionAnimation.playAnimation()
+    }
+
+    fun setAnimationColor(keyPathValues: String? = null, @AttrRes colorAttr: Int) {
+        val keyPath = keyPathValues?.let { KeyPath(it, "**") } ?: KeyPath("**")
+        binding.actionAnimation.addValueCallback(
+            keyPath,
+            LottieProperty.COLOR_FILTER
+        ) {
+            PorterDuffColorFilter(context.getColorFromAttr(colorAttr), PorterDuff.Mode.SRC_ATOP)
+        }
     }
 
     fun setIconBackground(@DrawableRes iconRes: Int) {

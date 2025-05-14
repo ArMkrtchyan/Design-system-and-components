@@ -1,6 +1,5 @@
 package am.acba.components
 
-import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
@@ -18,7 +17,9 @@ class QuickActionAndAvatarFragment : BaseViewBindingFragment<FragmentQuickAction
         get() = mBinding.toolbar
 
     override fun FragmentQuickActionAndAvatarBinding.initView() {
-        mBinding.quickAction.setAnimation("music.json", requireContext().getColorFromAttr(am.acba.component.R.attr.contentDangerTonal1))
+        mBinding.quickAction.setAnimation("music.json")
+        mBinding.quickAction.setAnimationColor(colorAttr = am.acba.component.R.attr.contentAlternative4)
+        mBinding.quickAction.setAnimationColor(keyPathValues = "BG", colorAttr = am.acba.component.R.attr.backgroundAlternative4)
         mBinding.quickAction.setIconBackground(am.acba.component.R.drawable.background_rounded)
         mBinding.quickAction.getActionIcon().isVisible = false
         mBinding.quickAction.setIconBackgroundTint(requireContext().getColorStateListFromAttr(am.acba.component.R.attr.contentBrandTonal1))
@@ -38,7 +39,7 @@ class QuickActionAndAvatarFragment : BaseViewBindingFragment<FragmentQuickAction
         mBinding.fourth.setActionBadgeBackground(am.acba.component.R.drawable.background_rounded)
         mBinding.fourth.setActionBadgeImageTint(context?.getColorStateListFromAttr(am.acba.component.R.attr.contentBrand))
         mBinding.fourth.setActionBadgeImage(getDrawable(requireContext(), am.acba.component.R.drawable.ic_camera))
-        
+
         mBinding.third.setAvatarCheckedStatus(true)
         mBinding.third.setBadgeIconTint(context?.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
     }

@@ -44,11 +44,15 @@
                     android:layout_gravity="center_vertical">
 
                     <am.acba.component.button.PrimaryActionTextButton
+                        android:id="@+id/camera"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Action button1"
-                        app:actionIcon="@drawable/ic_contacts"
-                        app:actionIconTint="?attr/contentBrand" />
+                        android:layout_marginTop="@dimen/spacing_24"
+                        app:actionIcon="@drawable/ic_camera"
+                        app:actionIconSize="XLarge"
+                        app:actionButtonType="ActionButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:id="@+id/second"
