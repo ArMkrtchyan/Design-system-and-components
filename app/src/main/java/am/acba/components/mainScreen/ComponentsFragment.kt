@@ -4,6 +4,7 @@ import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentComponentsBinding
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 
 class ComponentsFragment(private val isCompose: Boolean = false) : BaseViewBindingFragment<FragmentComponentsBinding>() {
     private val adapter = ComponentsAdapter(::onItemClick)
@@ -14,7 +15,10 @@ class ComponentsFragment(private val isCompose: Boolean = false) : BaseViewBindi
 
     override fun FragmentComponentsBinding.initView() {
         componentsRecycler.adapter = adapter
-        adapter.submitList(ComponentTypeEnum.getComponentsList(isCompose))
+        val components = ComponentTypeEnum.getComponentsList(isCompose)
+        adapter.submitList(components)
+        componentsCount.isVisible = isCompose
+        componentsCount.text = "Components (${components.size})\nReady (${components.count { it.isReady }})"
     }
 
     private fun onItemClick(component: Component) {

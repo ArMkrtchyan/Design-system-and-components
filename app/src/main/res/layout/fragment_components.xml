@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/components_recycler"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:paddingHorizontal="16dp"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:spanCount="2"
-    tools:itemCount="20"
-    tools:listitem="@layout/item_components" />
+    android:orientation="vertical">
+
+    <am.acba.component.textView.PrimaryTextView
+        android:id="@+id/components_count"
+        style="@style/Body1.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:text="Components (20)\nReady (7)" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/components_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingHorizontal="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_components" />
+</LinearLayout>
