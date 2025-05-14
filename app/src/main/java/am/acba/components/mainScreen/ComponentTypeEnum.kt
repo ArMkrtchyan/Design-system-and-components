@@ -2,17 +2,17 @@ package am.acba.components.mainScreen
 
 import am.acba.components.R
 
-enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, val navigationId: Int) {
+enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, val navigationId: Int, val isReady: Boolean = false) {
     ALERTS("Alerts", false, R.id.alertsFragment),
-    ALERTS_COMPOSE("Alerts", true, R.id.alertsComposeFragment),
+    ALERTS_COMPOSE("Alerts", true, R.id.alertsComposeFragment, isReady = true),
     BADGES("Badges", false, R.id.badgesFragment),
-    BADGES_COMPOSE("Badges", true, R.id.badgesComposeFragment),
+    BADGES_COMPOSE("Badges", true, R.id.badgesComposeFragment, isReady = true),
     BANNERS("Banners", false, R.id.bannersFragment),
     BANNERS_COMPOSE("Banners", true, R.id.bannersComposeFragment),
     BOTTOM_SHEET("Bottom sheet", false, R.id.bottomSheetFragment),
     BOTTOM_SHEET_COMPOSE("Bottom sheet", true, R.id.bottomSheetComposeFragment),
     BUTTONS("Buttons", false, R.id.buttonsFragment),
-    BUTTONS_COMPOSE("Buttons", true, R.id.buttonsComposeFragment),
+    BUTTONS_COMPOSE("Buttons", true, R.id.buttonsComposeFragment, isReady = true),
     CARD_INPUT("Card input", false, R.id.cardInputFragment),
     CARD_INPUT_COMPOSE("Card input", true, R.id.cardInputComposeFragment),
     CARD_LISTING("Card listing", false, R.id.cardListingFragment),
@@ -22,13 +22,13 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     CONTROLS("Controls", false, R.id.controlsFragment),
     CONTROLS_COMPOSE("Controls", true, R.id.controlsComposeFragment),
     CURRENCY_INPUT("Currency input", false, R.id.currencyInputFragment),
-    CURRENCY_INPUT_COMPOSE("Currency input", true, R.id.currencyInputComposeFragment),
+    CURRENCY_INPUT_COMPOSE("Currency input", true, R.id.currencyInputComposeFragment, isReady = true),
     DATE_PICKER("Date picker and Calendar", false, R.id.datePickerFragment),
     DATE_PICKER_COMPOSE("Date picker and Calendar", true, R.id.datePickerComposeFragment),
     DIALOGS("Dialogs", false, R.id.dialogsFragment),
-    DIALOGS_COMPOSE("Dialogs", true, R.id.dialogsComposeFragment),
+    DIALOGS_COMPOSE("Dialogs", true, R.id.dialogsComposeFragment, isReady = true),
     DIVIDER("Dividers", false, R.id.dividerFragment),
-    DIVIDER_COMPOSE("Dividers", true, R.id.dividerComposeFragment),
+    DIVIDER_COMPOSE("Dividers", true, R.id.dividerComposeFragment, isReady = true),
     DROP_DOWN("Drop downs", false, R.id.dropDownFragment),
     DROP_DOWN_COMPOSE("Drop downs", true, R.id.dropDownComposeFragment),
     EMPTY_SCREEN("Empty screen", false, R.id.emptyStateFragment),
@@ -38,7 +38,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     EXPANDABLE_VIEW("Expandable view", false, R.id.expandableViewFragment),
     EXPANDABLE_VIEW_COMPOSE("Expandable view", true, R.id.expandableViewComposeFragment),
     INPUTS("Inputs", false, R.id.inputsFragment),
-    INPUTS_COMPOSE("Inputs", true, R.id.inputsComposeFragment),
+    INPUTS_COMPOSE("Inputs", true, R.id.inputsComposeFragment, isReady = true),
     LIST_ITEMS("List items", false, R.id.listItemFragment),
     LIST_ITEMS_2("List items 2", false, R.id.listItem2Fragment),
     LIST_ITEMS_COMPOSE("List items", true, R.id.listItemComposeFragment),
@@ -61,7 +61,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     PROGRESS_INDICATOR("Progress indicator", false, R.id.progressIndicatorFragment),
     PROGRESS_INDICATOR_COMPOSE("Progress indicator", true, R.id.progressIndicatorComposeFragment),
     QUICK_ACTION_AVATAR("Quick actions and avatar", false, R.id.quickActionAndAvatarFragment),
-    QUICK_ACTION_AVATAR_COMPOSE("Quick actions and avatar", true, R.id.quickActionAndAvatarComposeFragment),
+    QUICK_ACTION_AVATAR_COMPOSE("Quick actions and avatar", true, R.id.quickActionAndAvatarComposeFragment, isReady = true),
     SEARCH_INPUT("Search input", false, R.id.searchInputFragment),
     SEARCH_INPUT_COMPOSE("Search input", true, R.id.searchInputComposeFragment),
     SNACK_BAR("SnackBar", false, R.id.snackBarFragment),
@@ -74,6 +74,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     TOOLBAR_COMPOSE("Toolbar", true, R.id.toolbarComposeFragment);
 
     companion object {
-        fun getComponentsList(isCompose: Boolean) = entries.filter { it.isCompose == isCompose }.map { Component(it, it.componentName, navigationId = it.navigationId) }
+        fun getComponentsList(isCompose: Boolean) =
+            entries.filter { it.isCompose == isCompose }.map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
     }
 }

@@ -7,6 +7,7 @@ data class Component(
     val title: String,
     val description: String = "",
     val navigationId: Int = -1,
+    val isReady: Boolean = false,
 ) : DifItem<Component> {
     override fun areItemsTheSame(second: Component): Boolean {
         return type == second.type
