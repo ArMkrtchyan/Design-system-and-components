@@ -1,6 +1,7 @@
 ﻿package am.acba.compose.components.alerts
 
 import am.acba.component.R
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -11,9 +12,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -116,10 +115,10 @@ fun PrimaryAlert(
                         .padding(horizontal = 8.dp)
                 ) {
                     PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3)
-                    Spacer(modifier = Modifier.height(4.dp))
+                    VerticalSpacer(4)
                     PrimaryText(text = description, style = DigitalTheme.typography.smallRegular)
                     if (!linkText.isNullOrEmpty()) {
-                        Spacer(modifier = Modifier.height(4.dp))
+                        VerticalSpacer(4)
                         val color = DigitalTheme.colorScheme.contentPrimary
                         PrimaryText(modifier = Modifier
                             .drawBehind {

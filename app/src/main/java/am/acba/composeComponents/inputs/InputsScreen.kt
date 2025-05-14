@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.inputs
 
 import am.acba.component.R
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.inputs.SearchBar
@@ -9,11 +10,9 @@ import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -72,7 +71,7 @@ fun InputsScreen(title: String = "") {
                     autoFormatting = true,
                     leadingIcon = R.drawable.ic_close,
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryInput(
                     value = textNormal3.value,
                     onValueChange = { textNormal3.value = it },
@@ -82,9 +81,9 @@ fun InputsScreen(title: String = "") {
                     helpText = "Some help text",
                     leadingIcon = R.drawable.ic_close,
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 SearchBar(hint = "Search...")
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
             }
         }
     }

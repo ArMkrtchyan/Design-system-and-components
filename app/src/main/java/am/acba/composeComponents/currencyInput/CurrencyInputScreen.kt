@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.currencyInput
 
 import am.acba.component.extensions.log
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.CurrencyInput
 import am.acba.compose.theme.DigitalTheme
@@ -8,11 +9,9 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -74,7 +73,7 @@ fun CurrencyInputScreen(title: String = "") {
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 CurrencyInput(
                     value = currencyText2.value,
                     onValueChange = { currencyText2.value = it },
@@ -83,7 +82,7 @@ fun CurrencyInputScreen(title: String = "") {
                     onFocusChanged = { hasFocus -> hasFocus.log() },
                     helpText = "Input with dot",
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 CurrencyInput(
                     value = currencyText3.value,
                     onValueChange = { currencyText3.value = it },
@@ -93,7 +92,7 @@ fun CurrencyInputScreen(title: String = "") {
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 CurrencyInput(
                     value = currencyText4.value,
                     onValueChange = { currencyText4.value = it },

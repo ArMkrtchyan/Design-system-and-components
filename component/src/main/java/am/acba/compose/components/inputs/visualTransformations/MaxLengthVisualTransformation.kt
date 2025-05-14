@@ -1,10 +1,8 @@
 package am.acba.compose.components.inputs.visualTransformations
 
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import kotlin.math.max
 
 class MaxLengthVisualTransformation(val maxLength: Int = Integer.MAX_VALUE) :
     VisualTransformation {

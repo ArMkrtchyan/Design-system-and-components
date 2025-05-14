@@ -1,12 +1,13 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
+import am.acba.compose.HorizontalSpacer
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,7 +32,7 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
     ) {
         iconRes?.let {
             SupportIcon(it)
-            Spacer(modifier = Modifier.width(4.dp))
+            HorizontalSpacer(4)
         }
         SupportText(text = text, color = color)
     }
@@ -98,7 +99,7 @@ fun SupportText(text: String, color: Color) {
 @Composable
 fun SupportAndErrorTexts(isError: Boolean, enabled: Boolean, errorText: String?, helpText: String?) {
     Column {
-        Spacer(modifier = Modifier.height(4.dp))
+        VerticalSpacer(4)
         if (isError) {
             if (!errorText.isNullOrEmpty()) {
                 SupportRow(

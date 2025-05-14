@@ -1,6 +1,7 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
@@ -10,9 +11,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -154,7 +153,7 @@ fun PrimaryInputPreview(
                     textNormal.value = TextFieldValue("jcndskjcndk")
                 }
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             SearchBar(hint = "Search...", modifier = modifier)
         }
     }

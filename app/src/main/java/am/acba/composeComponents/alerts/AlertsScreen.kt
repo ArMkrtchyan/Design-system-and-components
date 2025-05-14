@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.alerts
 
 import am.acba.component.R
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.alerts.ComposeAlertTypes
 import am.acba.compose.components.alerts.PrimaryAlert
@@ -9,11 +10,9 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -62,14 +61,14 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     endIconPainter = painterResource(R.drawable.ic_close),
                     title = "Title",
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     onCloseClick = { Toast.makeText(context, "Close", Toast.LENGTH_SHORT).show() }
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.DANGER,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -77,7 +76,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.WARNING,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -85,7 +84,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.SUCCESS,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -93,7 +92,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.NEUTRAL,
                     iconPainter = painterResource(R.drawable.ic_settings),
@@ -102,7 +101,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     endIconPainter = painterResource(R.drawable.ic_close),
                     endIconTint = DigitalTheme.colorScheme.contentPrimary,
@@ -111,7 +110,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.DANGER,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -120,7 +119,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.WARNING,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -129,7 +128,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.SUCCESS,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -138,7 +137,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.NEUTRAL,
                     iconPainter = painterResource(R.drawable.ic_settings),
@@ -148,7 +147,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                VerticalSpacer(16)
             }
         }
     }

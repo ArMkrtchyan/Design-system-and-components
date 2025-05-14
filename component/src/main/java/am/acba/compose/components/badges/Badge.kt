@@ -1,6 +1,8 @@
 ﻿package am.acba.compose.components.badges
 
 import am.acba.component.R
+import am.acba.compose.HorizontalSpacer
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -11,7 +13,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -122,7 +123,7 @@ private fun BadgeTextAndIcon(
                             .width(16.dp)
                             .height(16.dp),
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
+                    HorizontalSpacer(width = 4)
                 }
             }
             BadgeText(textModifier, text ?: "", textColor)
@@ -150,22 +151,22 @@ fun AlertsScreenPreview() {
                 .padding(10.dp)
         ) {
             Badge(badgeType = BadgeEnum.DOT, backgroundColor = DigitalTheme.colorScheme.backgroundWarning)
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             Badge(
                 badgeType = BadgeEnum.ICON, modifier = Modifier
                     .width(24.dp)
                     .height(24.dp)
                     .padding(4.dp), icon = R.drawable.ic_edit
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             Badge(badgeType = BadgeEnum.ICON)
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             Badge(badgeType = BadgeEnum.NUMBER, text = "2")
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             Badge(badgeType = BadgeEnum.INFO, text = "Badge")
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
             Badge(badgeType = BadgeEnum.INFO, icon = R.drawable.ic_info, text = "Info text")
-            Spacer(modifier = Modifier.height(16.dp))
+            VerticalSpacer(16)
         }
     }
 }

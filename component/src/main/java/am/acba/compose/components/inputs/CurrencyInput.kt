@@ -3,6 +3,7 @@ package am.acba.compose.components.inputs
 
 import am.acba.component.R
 import am.acba.component.extensions.numberFormatting
+import am.acba.compose.HorizontalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
@@ -19,7 +20,6 @@ import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -105,7 +105,7 @@ fun CurrencyInput(
                 isError,
                 label
             )
-            Spacer(modifier = Modifier.width(1.dp))
+            HorizontalSpacer(width = 1)
             CurrencyField(currencyModifier, enabled, showArrow, onCurrencyClick)
         }
         SupportAndErrorTexts(isError, enabled, errorText, helpText)
@@ -211,9 +211,9 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
                 .height(20.dp),
             alpha = flagOpacity
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        HorizontalSpacer(width = 4)
         PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor)
-        Spacer(modifier = Modifier.width(2.dp))
+        HorizontalSpacer(width = 2)
         if (showArrow) {
             PrimaryIcon(
                 painterResource(R.drawable.ic_down), modifier = Modifier

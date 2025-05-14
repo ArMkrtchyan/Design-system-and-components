@@ -1,6 +1,7 @@
 package am.acba.compose.components
 
-import am.acba.component.R
+import am.acba.compose.HorizontalSpacer
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import android.view.Gravity
@@ -12,16 +13,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -38,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -110,6 +109,10 @@ fun GhostButton(
     modifier: Modifier = Modifier,
     text: String = "",
     textStyle: TextStyle = DigitalTheme.typography.body1Bold,
+    textColor: Color = DigitalTheme.colorScheme.contentBrandTonal1,
+    disabledContainerColor: Color = DigitalTheme.colorScheme.contentBrandTonal1Disable,
+    disabledContentColor: Color = DigitalTheme.colorScheme.backgroundBrandDisable,
+    shape: Shape = ShapeTokens.shapePrimaryButton,
     icon: Int = -1,
     iconGravity: Int = Gravity.START,
     enabled: Boolean = true,
@@ -122,12 +125,12 @@ fun GhostButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        shape = ShapeTokens.shapePrimaryButton,
+        shape = shape,
         colors = ButtonColors(
-            contentColor = DigitalTheme.colorScheme.contentBrandTonal1,
+            contentColor = textColor,
             containerColor = color,
-            disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
-            disabledContainerColor = DigitalTheme.colorScheme.backgroundBrandDisable
+            disabledContentColor = disabledContainerColor,
+            disabledContainerColor = disabledContentColor
         ),
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
         elevation = null,
@@ -325,11 +328,7 @@ private fun PrimaryButtonText(text: String, style: TextStyle) {
 
 @Composable
 private fun PrimaryButtonSpacer(width: Int = 8) {
-    Spacer(
-        Modifier
-            .width(width.dp)
-            .height(4.dp)
-    )
+    HorizontalSpacer(width)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -362,7 +361,7 @@ fun PrimaryButtonPreview() {
                         .padding(horizontal = 16.dp)
                         .verticalScroll(rememberScrollState()),
                 ) {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     EmojiButton(
                         onClick = {
 
@@ -371,7 +370,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         emojiIcon = am.acba.component.R.drawable.ic_add_small,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     PrimaryButton(
                         onClick = {
 
@@ -380,7 +379,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     PrimaryButtonSmall(
                         onClick = {
 
@@ -389,7 +388,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     PrimaryButton(
                         onClick = {
 
@@ -399,7 +398,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     SecondaryButtonGreen(
                         onClick = {
 
@@ -408,7 +407,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     SecondaryButtonGreen(
                         onClick = {
 
@@ -418,7 +417,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     SecondaryButtonGrey(
                         onClick = {
 
@@ -427,7 +426,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     SecondaryButtonGrey(
                         onClick = {
 
@@ -437,7 +436,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     GhostButton(
                         onClick = {
 
@@ -446,7 +445,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    VerticalSpacer(16)
                     GhostButton(
                         onClick = {
 
