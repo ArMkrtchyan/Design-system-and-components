@@ -8,6 +8,8 @@ import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.numberDeFormatting
+import am.acba.component.extensions.numberFormatting
+import am.acba.component.extensions.numberFormattingWithOutDot
 import am.acba.component.extensions.shakeViewHorizontally
 import am.acba.component.extensions.vibrate
 import am.acba.component.input.PrimaryInput.Companion.SHAKE_AMPLITUDE
@@ -18,8 +20,11 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.method.DigitsKeyListener
+import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -29,11 +34,14 @@ import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import java.text.NumberFormat
+import java.util.Locale
 
 @SuppressLint("CustomViewStyleable")
 class CurrencyInput @JvmOverloads constructor(
@@ -44,14 +52,19 @@ class CurrencyInput @JvmOverloads constructor(
     private var errorText: String
     private var hintText: String
     private var helpText: String
-    private var maxLength: Int
     private var maxAmount: Double
     private var minAmount: Double
     private var isKeyboardActionClicked = false
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
+    private var isEditing = false
     private var isFirstFocusable = true
+    private var currencyInputMaxLength = -1
+    private var parsed = 0.0
     private var bottomSheetTitle = ""
+    private var cleanString = ""
+    private var formatter = ""
+    private var current = ""
     private var currency: String = ""
         get() = binding.currency.text.toString()
 
@@ -66,7 +79,7 @@ class CurrencyInput @JvmOverloads constructor(
                 errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
                 hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
-                maxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 13)
+                currencyInputMaxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 10)
                 maxAmount =
                     getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
                 minAmount =
@@ -89,15 +102,15 @@ class CurrencyInput @JvmOverloads constructor(
             }
 
         }
-        setMaxLength(maxLength)
+        amountFormattingWhileTyping()
+        setMaxLengthForFormattedText(currencyInputMaxLength)
         setHelpText(helpText)
         setErrorText(errorText)
         initKeyboardListeners()
-        binding.amount.formattingWithDot = formattingWithOutDot
         binding.currencyLayout.setOnClickListener { currencyIconClick() }
         setupFirstUi()
         setupCurrenciesList()
-        setupBackgroundsByFocusChange()
+        setupBackgroundsByFocusChange(false)
     }
 
     private fun initKeyboardListeners() {
@@ -115,9 +128,6 @@ class CurrencyInput @JvmOverloads constructor(
         binding.currencyLayout.setOnClickListener(onClickListener)
     }
 
-    fun setMaxLength(maxLength: Int) {
-        binding.amount.setMaxLengthForFormattedText(maxLength)
-    }
 
     fun setImeOptions(imeOptions: Int) {
         binding.amount.editText?.imeOptions = imeOptions
@@ -192,16 +202,15 @@ class CurrencyInput @JvmOverloads constructor(
         }
     }
 
-    private fun setupBackgroundsByFocusChange() {
-        binding.amount.onFocusChangeListener { isFocusable ->
-            this.isFocusable = isFocusable
-            if (isFocusable) {
-                setupBackgroundByFocusable()
-            } else {
-                validateAmount()
-            }
-            mAction?.invoke(isFocusable)
+    private fun setupBackgroundsByFocusChange(isFocusable: Boolean) {
+        this.isFocusable = isFocusable
+        if (isFocusable) {
+            setupBackgroundByFocusable()
+        } else {
+            validateAmount()
         }
+        mAction?.invoke(isFocusable)
+
     }
 
     fun validateAmount() {
@@ -363,9 +372,9 @@ class CurrencyInput @JvmOverloads constructor(
 
 
     fun setAmountText(amount: String) {
-        setMaxLength(maxLength)
-
+        setMaxLengthForFormattedText(currencyInputMaxLength)
         binding.amount.editText?.setText(amount)
+        formatAmountAfterFocusChange(binding.amount.editText?.hasFocus() == true)
         validateAmount()
     }
 
@@ -379,7 +388,10 @@ class CurrencyInput @JvmOverloads constructor(
 
     fun getLongAmount(): Long {
         val amountText = binding.amount.editText?.text?.toString()?.trim() ?: ""
-        return if (amountText.isEmpty()) 0 else amountText.toLong()
+        return if (amountText.isEmpty()) 0 else {
+            if (amountText.numberDeFormatting().isEmpty()) 0
+            else amountText.numberDeFormatting().toLong()
+        }
     }
 
     fun getDeFormatedStringAmount(): String {
@@ -454,5 +466,128 @@ class CurrencyInput @JvmOverloads constructor(
             context.vibrate(VIBRATION_AMPLITUDE)
             shakeViewHorizontally(SHAKE_AMPLITUDE)
         }
+    }
+
+    private fun Editable.replaceText(newText: String) {
+        this.replace(0, this.length, newText)
+    }
+
+    private fun amountFormattingWhileTyping() {
+        binding.amount.editText?.doAfterTextChanged { editable ->
+            if (isEditing || editable.isNullOrEmpty()) return@doAfterTextChanged
+
+            isEditing = true
+
+            // Remove style spans (e.g., bold, big text, etc.)
+            editable.getSpans(0, editable.length, CharacterStyle::class.java).forEach {
+                editable.removeSpan(it)
+            }
+
+            val currentText = editable.toString()
+            val cursorPosition = binding.amount.editText?.selectionStart ?: 0
+            val dotCount = currentText.count { it == '.' }
+            val hasFocus = binding.amount.editText?.hasFocus() == true
+            val containsDot = currentText.contains('.')
+            when {
+                dotCount > 1 || (containsDot && cursorPosition != 0 && cursorPosition != currentText.length) -> {
+                    if (hasFocus) {
+                        val isComma = currentText.getOrNull(cursorPosition - 1) == ','
+                        val fixedText = currentText.replaceFirst(".", "")
+                        val cleaned = if (isComma) {
+                            currentText.removeRange(cursorPosition - 1, cursorPosition)
+                        } else {
+                            fixedText
+                        }
+                        editable.replaceText(cleaned)
+                    } else {
+                        editable.replaceText(currentText.numberDeFormatting().numberFormatting())
+                    }
+                }
+
+                currentText.contains('.') -> {
+                    editable.calculateCountAfterDot()
+                }
+
+                else -> {
+                    val formatted = getOriginalText(currentText).numberFormattingWithOutDot()
+                    editable.replaceText(formatted)
+                }
+            }
+
+            isEditing = false
+        }
+
+        binding.amount.editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (binding.amount.editText?.editableText?.isNotEmpty() == true) formatAmountAfterFocusChange(hasFocus)
+            setupBackgroundsByFocusChange(hasFocus)
+            mAction?.invoke(hasFocus)
+        }
+    }
+
+
+    private fun formatAmountAfterFocusChange(isFocusable: Boolean) {
+        val text = binding.amount.editText?.text?.toString()?.trim() ?: ""
+        if (isFocusable) {
+            setMaxLengthForFormattedText(currencyInputMaxLength)
+            if (text.contains(".") && text.split(".")[1].toDouble() == 0.00) {
+                cleanString = text.replace(",", "")
+                parsed = cleanString.toDoubleOrNull() ?: 0.0
+                formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
+                current = formatter.format(parsed)
+                setMaxLengthForFormattedText(currencyInputMaxLength)
+                binding.amount.editText?.setText(current)
+            }
+        } else {
+            val formattedText = text
+                .replace(",", "")
+                .takeIf { it.isNotEmpty() }
+                ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
+
+            setMaxLengthForFormattedText(formattedText.length)
+            binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
+        }
+    }
+
+    private fun Editable.calculateCountAfterDot() {
+        cleanString = this.toString().replace(",", "")
+        val length = this.toString().split(".")[1].length
+        when (length) {
+            1, 2 -> format(cleanString, length)
+            else -> {
+                if (this.toString().split(".")[1].isNotEmpty()) {
+                    val parts = this.toString().split(".")
+                    val limitedAmount = "${parts[0]}.${parts[1].take(2)}".replace(",", "")
+                    format(limitedAmount, 0)
+                }
+            }
+        }
+    }
+
+    private fun Editable.format(limitedAmount: String, minimumDigits: Int) {
+        val parsed = limitedAmount.toDoubleOrNull() ?: 0.0
+        val formatter = NumberFormat.getInstance(Locale.ENGLISH).apply {
+            maximumFractionDigits = 2
+            minimumFractionDigits = minimumDigits
+        }
+        current = formatter.format(parsed)
+        this.replace(0, this.toString().length, current)
+    }
+
+    fun setMaxLength(maxLength: Int) {
+        currencyInputMaxLength = maxLength
+        setMaxLengthForFormattedText(currencyInputMaxLength)
+    }
+
+    private fun setMaxLengthForFormattedText(maxLength: Int) {
+        val lengthFilter = LengthFilter(maxLength)
+        binding.amount.editText?.filters = arrayOf(lengthFilter)
+    }
+
+    fun getOriginalText(text: String): String {
+        val originalString = text.replace(",", "")
+        if (originalString.all { it.isDigit() }) {
+            return originalString
+        }
+        return ""
     }
 }

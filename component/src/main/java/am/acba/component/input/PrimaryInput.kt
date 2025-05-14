@@ -4,25 +4,27 @@ import am.acba.component.R
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.load
-import am.acba.component.extensions.numberDeFormatting
-import am.acba.component.extensions.numberFormatting
-import am.acba.component.extensions.numberFormattingWithOutDot
+import am.acba.component.extensions.parcelable
+import am.acba.component.extensions.restoreChildViewStates
+import am.acba.component.extensions.saveChildViewStates
 import am.acba.component.extensions.shakeViewHorizontally
+import am.acba.component.extensions.sparseParcelableArray
 import am.acba.component.extensions.vibrate
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
-import android.text.style.CharacterStyle
 import android.util.AttributeSet
+import android.util.SparseArray
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
@@ -35,7 +37,6 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.core.view.updateMarginsRelative
-import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputLayout
 import java.text.NumberFormat
 import java.util.Locale
@@ -44,24 +45,18 @@ open class PrimaryInput : TextInputLayout {
 
     var enableErrorAnimation = false
     private val TYPE_NUMBER = 1
-    private val AMOUNT_FORMATTING = 2
-    private val TYPE_EMAIL = 3
+    private val TYPE_EMAIL = 2
 
     private var textMaxLength = -1
-    private var currencyInputMaxLength = -1
     private var cornerStyle = -1
     private var hasDropDown = false
     private var inputType = -1
-    var formattingWithDot = false
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
     private var isFirstFocusable = true
     private var isDotDisabled = false
     private var cleanString = ""
-    private var parsed = 0.0
-    private var formatter = ""
     private var current = ""
-    private var isEditing = false
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
     private var mAction: ((Boolean) -> Unit?)? = null
@@ -93,7 +88,6 @@ open class PrimaryInput : TextInputLayout {
                 hasDropDown = getBoolean(R.styleable.PrimaryInput_hasDropDown, false)
                 isDotDisabled = getBoolean(R.styleable.PrimaryInput_isDotDisabledInMiddleOfText, false)
                 inputType = getInt(R.styleable.PrimaryInput_inputType, -1)
-                formattingWithDot = getBoolean(R.styleable.PrimaryInput_formattingWithDots, false)
                 enableErrorAnimation = getBoolean(R.styleable.PrimaryInput_enableErrorAnimation, false)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -121,7 +115,6 @@ open class PrimaryInput : TextInputLayout {
             }
             when (inputType) {
                 TYPE_NUMBER -> setInputTypeForNumber()
-                AMOUNT_FORMATTING -> amountFormattingWhileTyping()
                 TYPE_EMAIL -> setInputTypeForEmail()
                 else -> setInputTypeDefault()
             }
@@ -185,74 +178,6 @@ open class PrimaryInput : TextInputLayout {
         editText?.inputType = InputType.TYPE_CLASS_TEXT
     }
 
-    fun setAmountText(amount: String) {
-        editText?.setText((if (formattingWithDot) amount.numberFormatting() else amount.numberFormattingWithOutDot()))
-    }
-
-    private fun amountFormattingWhileTyping() {
-
-        editText?.doAfterTextChanged { editable ->
-            if (isEditing || editable.isNullOrEmpty()) return@doAfterTextChanged
-
-            isEditing = true
-
-            // Remove style spans (e.g., bold, big text, etc.)
-            editable.getSpans(0, editable.length, CharacterStyle::class.java).forEach {
-                editable.removeSpan(it)
-            }
-
-            val currentText = editable.toString()
-            val cursorPosition = editText?.selectionStart ?: 0
-            val dotCount = currentText.count { it == '.' }
-
-            when {
-                dotCount > 1 || (currentText.contains('.') && cursorPosition != currentText.length) -> {
-                    val fixedText = currentText.removeRange(cursorPosition - 1, cursorPosition)
-                    editable.replace(0, editable.length, fixedText)
-                }
-
-                currentText.contains('.') -> {
-                    editable.calculateCountAfterDot()
-                }
-
-                else -> {
-                    val formatted = getOriginalText(currentText).numberFormattingWithOutDot()
-                    editable.replace(0, editable.length, formatted)
-                }
-            }
-
-            isEditing = false
-        }
-
-        editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
-            if (editText?.editableText?.isNotEmpty() == true) formatAmountAfterFocusChange(hasFocus)
-            mAction?.invoke(hasFocus)
-        }
-    }
-
-
-    private fun formatAmountAfterFocusChange(isFocusable: Boolean) {
-        val text = editText?.text?.toString()?.trim() ?: ""
-        if (isFocusable) {
-            setMaxLength(currencyInputMaxLength)
-            if (text.contains(".") && text.split(".")[1].toDouble() == 0.00) {
-                cleanString = text.replace(",", "")
-                parsed = cleanString.toDoubleOrNull() ?: 0.0
-                formatter = NumberFormat.getInstance(Locale.ENGLISH).format(parsed)
-                current = formatter.format(parsed)
-                editText?.setText(current)
-            }
-        } else {
-            val formattedText = text
-                .replace(",", "")
-                .takeIf { it.isNotEmpty() }
-                ?.let { if (formattingWithDot) it.numberFormattingWithOutDot() else it.numberFormatting() }
-                ?: ""
-            setMaxLength(formattedText.length)
-            editText?.editableText?.replace(0, editText?.editableText?.length ?: 0, formattedText)
-        }
-    }
-
     private fun Editable.calculateCountAfterDot() {
         cleanString = this.toString().replace(",", "")
         val length = this.toString().split(".")[1].length
@@ -284,18 +209,8 @@ open class PrimaryInput : TextInputLayout {
         editText?.filters = arrayOf(lengthFilter)
     }
 
-    fun setMaxLengthForFormattedText(maxLength: Int) {
-        currencyInputMaxLength = maxLength
-        setMaxLength(currencyInputMaxLength)
-    }
-
     fun onFocusChangeListener(action: ((Boolean) -> Unit)? = null) {
         mAction = action
-    }
-
-    fun getDeFormatedStringAmount(): String {
-        val amountText = editText?.text?.toString()?.trim() ?: ""
-        return if (amountText.isEmpty()) amountText else amountText.numberDeFormatting()
     }
 
     @SuppressLint("UseCompatTextViewDrawableApis")
@@ -425,16 +340,35 @@ open class PrimaryInput : TextInputLayout {
         }
     }
 
-    fun getOriginalText(text: String): String {
-        val originalString = text.replace(",", "")
-        if (originalString.all { it.isDigit() }) {
-            return originalString
-        }
-        return ""
-    }
-
     companion object {
         const val SHAKE_AMPLITUDE = 500L
         const val VIBRATION_AMPLITUDE = 80L
+        const val SPARSE_STATE_KEY = "SPARSE_STATE_KEY"
+        const val SUPER_STATE_KEY = "SUPER_STATE_KEY"
+    }
+
+    override fun dispatchSaveInstanceState(container: SparseArray<Parcelable>) {
+        dispatchFreezeSelfOnly(container)
+    }
+
+    override fun dispatchRestoreInstanceState(container: SparseArray<Parcelable>) {
+        dispatchThawSelfOnly(container)
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        return Bundle().apply {
+            putParcelable(SUPER_STATE_KEY, super.onSaveInstanceState())
+            putSparseParcelableArray(SPARSE_STATE_KEY, saveChildViewStates())
+        }
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        var newState = state
+        if (newState is Bundle) {
+            val childrenState = newState.sparseParcelableArray<Parcelable>(SPARSE_STATE_KEY)
+            childrenState?.let { restoreChildViewStates(it) }
+            newState = newState.parcelable(SUPER_STATE_KEY)
+        }
+        super.onRestoreInstanceState(newState)
     }
 }

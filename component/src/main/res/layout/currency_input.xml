@@ -23,7 +23,6 @@
             android:enabled="true"
             app:isDotDisabledInMiddleOfText="true"
             android:hint="Amount"
-            app:inputType="amountFormattingWhileTyping"
             app:cornerStyle="1"/>
 
         <LinearLayout

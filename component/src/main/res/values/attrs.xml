@@ -195,13 +195,11 @@
         <attr name="hasDropDown" format="boolean" />
         <attr name="isDotDisabledInMiddleOfText" format="boolean" />
         <attr name="android:text" />
-        <attr name="formattingWithDots" format="boolean" />
         <attr name="enableErrorAnimation" />
         <attr name="inputType" format="enum">
             <enum name="amountFormatting" value="0" />
             <enum name="quantity" value="1" />
-            <enum name="amountFormattingWhileTyping" value="2" />
-            <enum name="email" value="3" />
+            <enum name="email" value="2" />
         </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">
@@ -581,6 +579,7 @@
     </declare-styleable>
     <declare-styleable name="HorizontalChipsView">
         <attr name="horizontalChipsTitle" format="string" />
+        <attr name="isFirstSelected" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ListItem2">
         <attr name="listItemBackgroundColor" format="color" />

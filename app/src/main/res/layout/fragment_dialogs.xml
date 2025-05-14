@@ -59,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:horizontalChipsTitle="Chips title" />
+                app:horizontalChipsTitle="Chips title"
+                app:isFirstSelected="false" />
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

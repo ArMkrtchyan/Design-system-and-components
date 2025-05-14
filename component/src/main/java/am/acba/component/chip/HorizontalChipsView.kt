@@ -11,6 +11,7 @@ class HorizontalChipsView @JvmOverloads constructor(
     context: android.content.Context, attrs: android.util.AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
     private val binding by lazy { LayoutHorizontalChipsBinding.inflate(context.inflater(), this, false) }
+    private var isFirstSelected = true
 
     init {
         context.obtainStyledAttributes(attrs, R.styleable.HorizontalChipsView).apply {
@@ -21,9 +22,14 @@ class HorizontalChipsView @JvmOverloads constructor(
             addView(binding.root, layoutParams)
             val horizontalChipsTitle = getString(R.styleable.HorizontalChipsView_horizontalChipsTitle)
             setTitle(horizontalChipsTitle)
+            setDefaultFirstSelected(getBoolean(R.styleable.HorizontalChipsView_isFirstSelected, true))
             recycle()
             invalidate()
         }
+    }
+
+    fun setDefaultFirstSelected(isSelected: Boolean) {
+        isFirstSelected = isSelected
     }
 
     fun setTitle(title: String?) {
@@ -34,14 +40,12 @@ class HorizontalChipsView @JvmOverloads constructor(
     fun <T : IChipModel> submitChips(chips: List<T>, onChipClick: (T) -> Unit) {
         val chipsAdapter: ChipsAdapter<T> = ChipsAdapter()
         val indexOfFirst = chips.indexOfFirst { it.getSelected() }
-        chipsAdapter.selectedChip.postValue(if (indexOfFirst > -1) indexOfFirst else 0)
+        if (isFirstSelected) {
+            chipsAdapter.selectedChip.postValue(if (indexOfFirst > -1) indexOfFirst else 0)
+        } else {
+            chipsAdapter.selectedChip.postValue(indexOfFirst)
+        }
         binding.chipsRecycler.adapter = chipsAdapter
-//        if (binding.chipsRecycler.adapter == null) {
-//            chipsAdapter = ChipsAdapter<T>()
-//            binding.chipsRecycler.adapter = chipsAdapter
-//        } else {
-//            chipsAdapter = binding.chipsRecycler.adapter as ChipsAdapter<T>
-//        }
         chipsAdapter.setOnChipClick(onChipClick)
         chipsAdapter.submitList(chips)
     }
