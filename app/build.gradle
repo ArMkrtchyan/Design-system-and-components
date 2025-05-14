@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace 'am.acba.components'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "am.acba.components"
@@ -33,13 +33,19 @@ android {
     }
     buildFeatures {
         viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15"
     }
 }
 
 dependencies {
 
     implementation libs.glide
+    implementation libs.glide.compose
     implementation libs.lottie
+    implementation libs.lottie.compose
     implementation project(":component")
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat

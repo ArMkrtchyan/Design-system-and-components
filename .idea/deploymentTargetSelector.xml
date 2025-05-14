@@ -4,14 +4,17 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-04-01T11:19:37.929290500Z">
+        <DropdownSelection timestamp="2025-04-02T12:26:47.516686100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=OFXOONFMMJIJA6QG" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\arshak.mkrtchyan\.android\avd\Pixel_8_Pro_API_34.avd" />
             </handle>
           </Target>
         </DropdownSelection>
         <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="ACBA design system and components.ACBA_design_system_and_components.app">
+        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>

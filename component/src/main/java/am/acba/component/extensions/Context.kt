@@ -2,6 +2,7 @@ package am.acba.component.extensions
 
 import am.acba.component.phoneNumberInput.CountryModel
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.VibrationEffect
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -119,4 +121,15 @@ private fun Context.getVibrator(): Vibrator {
     } else {
         getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
     }
+}
+
+fun Context.getActivity(): AppCompatActivity? {
+    var currentContext = this
+    while (currentContext is ContextWrapper) {
+        if (currentContext is AppCompatActivity) {
+            return currentContext
+        }
+        currentContext = currentContext.baseContext
+    }
+    return null
 }

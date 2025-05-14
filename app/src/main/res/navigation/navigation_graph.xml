@@ -9,113 +9,7 @@
         android:id="@+id/mainFragment"
         android:name="am.acba.components.mainScreen.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_mainFragment_to_buttonsFragment"
-            app:destination="@id/buttonsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_listItemFragment"
-            app:destination="@id/listItemFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_listItem2Fragment"
-            app:destination="@id/listItem2Fragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_phoneNumberInputFragment"
-            app:destination="@id/phoneNumberInputFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_currencyInputFragment"
-            app:destination="@id/currencyInputFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_cardInputFragment"
-            app:destination="@id/cardInputFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_progressViewFragment"
-            app:destination="@id/progressCardViewFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_expandableViewFragment"
-            app:destination="@id/expandableViewFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_tabLayoutFragment"
-            app:destination="@id/tabLayoutFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_datePickerFragment"
-            app:destination="@id/datePickerFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_pinInputFragment"
-            app:destination="@id/pinInputFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_quickActionAndAvatarFragment"
-            app:destination="@id/quickActionAndAvatarFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_dialogsFragment"
-            app:destination="@id/dialogsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_dividerFragment"
-            app:destination="@id/dividerFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_dropDownFragment"
-            app:destination="@id/dropDownFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_exchangeFragment"
-            app:destination="@id/exchangeFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_inputsFragment"
-            app:destination="@id/inputsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_alertsFragment"
-            app:destination="@id/alertsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_badgesFragment"
-            app:destination="@id/badgesFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_bannersFragment"
-            app:destination="@id/bannersFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_chipsFragment"
-            app:destination="@id/chipsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_controlsFragment"
-            app:destination="@id/controlsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_searchInputFragment"
-            app:destination="@id/searchInputFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_toolbarFragment"
-            app:destination="@id/toolbarFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_tooltipFragment"
-            app:destination="@id/tooltipFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_cardListingFragment"
-            app:destination="@id/cardListingFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_statusScreenFragment"
-            app:destination="@id/statusScreenFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_bottomSheetFragment"
-            app:destination="@id/bottomSheetFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_emptyStateFragment"
-            app:destination="@id/emptyStateFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_productDescriptionCardFragment"
-            app:destination="@id/productDescriptionCardFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_progressIndicatorFragment"
-            app:destination="@id/progressIndicatorFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_offersFragment"
-            app:destination="@id/offersFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_cardViewFragment"
-            app:destination="@id/cardViewFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_tablesFragment"
-            app:destination="@id/tablesFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_snackBarFragment"
-            app:destination="@id/snackBarFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_main" />
     <fragment
         android:id="@+id/buttonsFragment"
         android:name="am.acba.components.ButtonsFragment"
@@ -178,7 +72,7 @@
         tools:layout="@layout/fragment_list_item" />
     <fragment
         android:id="@+id/listItem2Fragment"
-        android:name="am.acba.components.ListItemFragment2"
+        android:name="am.acba.components.ListItem2Fragment"
         android:label="ListItem2Fragment"
         tools:layout="@layout/fragment_list_item_2" />
     <fragment
@@ -265,7 +159,7 @@
         android:id="@+id/progressIndicatorFragment"
         android:name="am.acba.components.ProgressIndicatorFragment"
         android:label="ProgressIndicatorFragment"
-        tools:layout="@layout/fragment_progress_indicator"/>
+        tools:layout="@layout/fragment_progress_indicator" />
     <fragment
         android:id="@+id/offersFragment"
         android:name="am.acba.components.OffersFragment"
@@ -289,6 +183,142 @@
     <fragment
         android:id="@+id/snackBarFragment"
         android:name="am.acba.components.SnackBarFragment"
-        tools:layout="@layout/fragment_snack_bar"
-        android:label="SnackBarFragment" />
+        android:label="SnackBarFragment"
+        tools:layout="@layout/fragment_snack_bar" />
+    <fragment
+        android:id="@+id/buttonsComposeFragment"
+        android:name="am.acba.composeComponents.buttons.ButtonsComposeFragment"
+        android:label="ButtonsComposeFragment" />
+    <fragment
+        android:id="@+id/alertsComposeFragment"
+        android:name="am.acba.composeComponents.alerts.AlertsComposeFragment"
+        android:label="AlertsComposeFragment" />
+    <fragment
+        android:id="@+id/badgesComposeFragment"
+        android:name="am.acba.composeComponents.badges.BadgesComposeFragment"
+        android:label="BadgesComposeFragment" />
+    <fragment
+        android:id="@+id/bannersComposeFragment"
+        android:name="am.acba.composeComponents.banners.BannersComposeFragment"
+        android:label="BannersComposeFragment" />
+    <fragment
+        android:id="@+id/chipsComposeFragment"
+        android:name="am.acba.composeComponents.chips.ChipsComposeFragment"
+        android:label="ChipsComposeFragment" />
+    <fragment
+        android:id="@+id/controlsComposeFragment"
+        android:name="am.acba.composeComponents.controls.ControlsComposeFragment"
+        android:label="ControlsComposeFragment" />
+    <fragment
+        android:id="@+id/dialogsComposeFragment"
+        android:name="am.acba.composeComponents.dialog.DialogsComposeFragment"
+        android:label="DialogsComposeFragment" />
+    <fragment
+        android:id="@+id/dividerComposeFragment"
+        android:name="am.acba.composeComponents.divider.DividerComposeFragment"
+        android:label="DividerComposeFragment" />
+    <fragment
+        android:id="@+id/dropDownComposeFragment"
+        android:name="am.acba.composeComponents.dropDown.DropDownComposeFragment"
+        android:label="DropDownComposeFragment" />
+    <fragment
+        android:id="@+id/exchangeComposeFragment"
+        android:name="am.acba.composeComponents.exchangeRate.ExchangeComposeFragment"
+        android:label="ExchangeComposeFragment" />
+    <fragment
+        android:id="@+id/inputsComposeFragment"
+        android:name="am.acba.composeComponents.inputs.InputsComposeFragment"
+        android:label="InputsComposeFragment" />
+    <fragment
+        android:id="@+id/listItemComposeFragment"
+        android:name="am.acba.composeComponents.liatItem.ListItemComposeFragment"
+        android:label="ListItemComposeFragment" />
+    <fragment
+        android:id="@+id/phoneNumberInputComposeFragment"
+        android:name="am.acba.composeComponents.phoneNumberInput.PhoneNumberInputComposeFragment"
+        android:label="PhoneNumberInputComposeFragment" />
+    <fragment
+        android:id="@+id/currencyInputComposeFragment"
+        android:name="am.acba.composeComponents.currencyInput.CurrencyInputComposeFragment"
+        android:label="CurrencyInputComposeFragment" />
+    <fragment
+        android:id="@+id/progressCardViewComposeFragment"
+        android:name="am.acba.composeComponents.progressView.ProgressViewComposeFragment"
+        android:label="ProgressViewComposeFragment" />
+    <fragment
+        android:id="@+id/expandableViewComposeFragment"
+        android:name="am.acba.composeComponents.expandableView.ExpandableViewComposeFragment"
+        android:label="ExpandableViewComposeFragment" />
+    <fragment
+        android:id="@+id/cardInputComposeFragment"
+        android:name="am.acba.composeComponents.cardInput.CardInputComposeFragment"
+        android:label="CardInputComposeFragment" />
+    <fragment
+        android:id="@+id/tabLayoutComposeFragment"
+        android:name="am.acba.composeComponents.tabLayout.TabLayoutComposeFragment"
+        android:label="TabLayoutComposeFragment" />
+    <fragment
+        android:id="@+id/pinInputComposeFragment"
+        android:name="am.acba.composeComponents.pinInput.PinInputComposeFragment"
+        android:label="PinInputComposeFragment" />
+    <fragment
+        android:id="@+id/quickActionAndAvatarComposeFragment"
+        android:name="am.acba.composeComponents.quickActionAndAvatar.QuickActionAndAvatarComposeFragment"
+        android:label="QuickActionAndAvatarComposeFragment" />
+    <fragment
+        android:id="@+id/searchInputComposeFragment"
+        android:name="am.acba.composeComponents.searchInput.SearchInputComposeFragment"
+        android:label="SearchInputComposeFragment" />
+    <fragment
+        android:id="@+id/toolbarComposeFragment"
+        android:name="am.acba.composeComponents.toolbar.ToolbarComposeFragment"
+        android:label="ToolbarComposeFragment" />
+    <fragment
+        android:id="@+id/tooltipComposeFragment"
+        android:name="am.acba.composeComponents.onboardingTooltip.OnboardingTooltipComposeFragment"
+        android:label="OnboardingTooltipComposeFragment" />
+    <fragment
+        android:id="@+id/cardListingComposeFragment"
+        android:name="am.acba.composeComponents.cardListing.CardListingsComposeFragment"
+        android:label="CardListingsComposeFragment" />
+    <fragment
+        android:id="@+id/statusScreenComposeFragment"
+        android:name="am.acba.composeComponents.statusScreen.StatusScreenComposeFragment"
+        android:label="StatusScreenComposeFragment" />
+    <fragment
+        android:id="@+id/bottomSheetComposeFragment"
+        android:name="am.acba.composeComponents.bottomSheets.BottomSheetsComposeFragment"
+        android:label="BottomSheetsComposeFragment" />
+    <fragment
+        android:id="@+id/emptyStateComposeFragment"
+        android:name="am.acba.composeComponents.emptyState.EmptyStateComposeFragment"
+        android:label="EmptyStateComposeFragment" />
+    <fragment
+        android:id="@+id/productDescriptionCardComposeFragment"
+        android:name="am.acba.composeComponents.productDescriptionCard.ProductDescriptionCardComposeFragment"
+        android:label="ProductDescriptionCardComposeFragment" />
+    <fragment
+        android:id="@+id/progressIndicatorComposeFragment"
+        android:name="am.acba.composeComponents.progressIndicator.ProgressIndicatorComposeFragment"
+        android:label="ProgressIndicatorComposeFragment" />
+    <fragment
+        android:id="@+id/offersComposeFragment"
+        android:name="am.acba.composeComponents.offers.OffersComposeFragment"
+        android:label="OffersComposeFragment" />
+    <fragment
+        android:id="@+id/cardViewComposeFragment"
+        android:name="am.acba.composeComponents.cardView.CardViewComposeFragment"
+        android:label="CardViewComposeFragment" />
+    <fragment
+        android:id="@+id/tablesComposeFragment"
+        android:name="am.acba.composeComponents.tabLayout.TabLayoutComposeFragment"
+        android:label="TabLayoutComposeFragment" />
+    <fragment
+        android:id="@+id/datePickerComposeFragment"
+        android:name="am.acba.composeComponents.datePicker.DatePickerComposeFragment"
+        android:label="DatePickerComposeFragment" />
+    <fragment
+        android:id="@+id/snackBarComposeFragment"
+        android:name="am.acba.composeComponents.snackbar.SnackBarComposeFragment"
+        android:label="SnackBarComposeFragment" />
 </navigation>

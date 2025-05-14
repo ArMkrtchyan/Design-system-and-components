@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'am.acba.component'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdk 23
@@ -32,21 +32,36 @@ android {
     buildFeatures {
         dataBinding true
         viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.5.15"
     }
 }
 
 dependencies {
     implementation libs.lottie
+    implementation libs.lottie.compose
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.glide
+    implementation libs.glide.compose
     /*implementation libs.pageIndicatorView*/
     implementation libs.countries
     implementation libs.live.event
     implementation libs.gson
     implementation libs.shimmer
     implementation libs.androidsvg
+
+    api(libs.androidx.activity.compose)
+    api(platform(libs.androidx.compose.bom))
+    api(libs.androidx.ui)
+    api(libs.androidx.ui.graphics)
+    api(libs.androidx.ui.tooling)
+    api(libs.androidx.ui.tooling.preview)
+    api(libs.androidx.material3)
+
     ksp(libs.androidsvg)
     ksp(libs.kspGlide)
     testImplementation libs.junit
