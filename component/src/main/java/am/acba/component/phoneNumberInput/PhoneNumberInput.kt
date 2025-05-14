@@ -271,6 +271,11 @@ class PhoneNumberInput @JvmOverloads constructor(
         )
     }
 
+    private fun handleCountryDialogSelect(countryModel: CountryModel) {
+        selectCountry(countryModel)
+        isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
+    }
+
     @SuppressLint("SetTextI18n")
     private fun selectCountry(countryModel: CountryModel) {
         binding.countryCode.text = "+${countryModel.phoneCode}"
@@ -374,7 +379,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         CountryBottomSheetDialog.show(
             getFragmentManager(),
             bundle,
-            ::selectCountry,
+            ::handleCountryDialogSelect,
             topCountryChipList
         )
     }
