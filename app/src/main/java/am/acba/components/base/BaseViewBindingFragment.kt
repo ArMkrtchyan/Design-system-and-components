@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
@@ -19,21 +21,30 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
     protected abstract val inflate: Inflater<VB>
     protected abstract fun VB.initView()
     open val toolbar: PrimaryToolbar? = null
+    open val setInsets: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (!::_binding.isInitialized || !keepBindingAlive) {
             _binding = inflate(inflater, container, false)
             _binding.initView()
         }
+        if (setInsets) {
+            ViewCompat.setOnApplyWindowInsetsListener(_binding.root) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
+        }
         return _binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        toolbar?.let {
+        toolbar?.let { mToolbar ->
             mActivity.setSupportActionBar(toolbar)
-            it.setNavigationOnClickListener { mActivity.onBackPressed() }
-            it.setLifecycleOwner(viewLifecycleOwner)
+            mToolbar.setNavigationOnClickListener { mActivity.onBackPressed() }
+            mToolbar.setLifecycleOwner(viewLifecycleOwner)
+            arguments?.getString("Title")?.let { mToolbar.setTitle(it) }
         }
     }
 
@@ -50,7 +61,7 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
                 val child = rootView.getChildAt(i)
                 if (child is PhoneNumberInput) {
                     return child
-                }else if(child is ViewGroup) {
+                } else if (child is ViewGroup) {
                     val phoneNumberInput = findPhoneNumberInputRecursively(child)
                     if (phoneNumberInput != null) {
                         return phoneNumberInput
@@ -60,13 +71,14 @@ abstract class BaseViewBindingFragment<VB : ViewBinding> : BaseFragment() {
         }
         return null
     }
+
     private fun findCreditCardInputRecursively(rootView: View?): PrimaryCardInput? {
         if (rootView is ViewGroup) {
             for (i in 0 until rootView.childCount) {
                 val child = rootView.getChildAt(i)
                 if (child is PrimaryCardInput) {
                     return child
-                }else if(child is ViewGroup) {
+                } else if (child is ViewGroup) {
                     val cardInput = findCreditCardInputRecursively(child)
                     if (cardInput != null) {
                         return cardInput
