@@ -77,6 +77,7 @@ class ColorTokens(
     contentSecondary: Color,
     contentSecondaryDisable: Color,
     contentInverse: Color,
+    contentInverse2: Color,
     contentNeutralTonal1: Color,
     contentDangerTonal1: Color,
     contentInfoTonal1: Color,
@@ -230,6 +231,8 @@ class ColorTokens(
         private set
     var contentInverse by mutableStateOf(contentInverse)
         private set
+    var contentInverse2 by mutableStateOf(contentInverse2)
+        private set
     var contentNeutralTonal1 by mutableStateOf(contentNeutralTonal1)
         private set
     var contentDangerTonal1 by mutableStateOf(contentDangerTonal1)
@@ -330,6 +333,7 @@ class ColorTokens(
         contentSecondary = oldColors.contentSecondary
         contentSecondaryDisable = oldColors.contentSecondaryDisable
         contentInverse = oldColors.contentInverse
+        contentInverse2 = oldColors.contentInverse2
         contentNeutralTonal1 = oldColors.contentNeutralTonal1
         contentDangerTonal1 = oldColors.contentDangerTonal1
         contentInfoTonal1 = oldColors.contentInfoTonal1

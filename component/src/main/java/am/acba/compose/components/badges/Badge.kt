@@ -30,13 +30,14 @@ fun Badge(
     modifier: Modifier = Modifier,
     badgeType: BadgeEnum = BadgeEnum.INFO,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
+    badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     iconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     textColor: Color = DigitalTheme.colorScheme.contentSecondary,
     text: String? = null,
     icon: Int? = null,
 ) {
     when (badgeType) {
-        BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor)
+        BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor, borderColor = badgeBorderColor)
         BadgeEnum.ICON -> BadgeIcon(modifier = modifier, icon = icon, backgroundColor = backgroundColor, iconColor = iconColor)
         BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, text = text, backgroundColor = backgroundColor, textColor = textColor)
         BadgeEnum.INFO -> BadgeTextAndIcon(modifier = modifier, icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor)
@@ -47,14 +48,15 @@ fun Badge(
 @Composable
 private fun Dot(
     modifier: Modifier = Modifier,
-    backgroundColor: Color
+    backgroundColor: Color,
+    borderColor: Color,
 ) {
     Box(
         modifier = modifier
             .width(10.dp)
             .height(10.dp)
             .background(backgroundColor, ShapeTokens.shapeRound)
-            .border(1.dp, DigitalTheme.colorScheme.borderSecondary, ShapeTokens.shapeRound)
+            .border(1.dp, borderColor, ShapeTokens.shapeRound)
     )
 }
 
