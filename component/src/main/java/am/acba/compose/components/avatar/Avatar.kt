@@ -57,6 +57,7 @@ fun ActionButton(
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     onActionButtonClick: () -> Unit = {},
     onBadgeClick: () -> Unit = {},
 ) {
@@ -83,6 +84,7 @@ fun ActionButton(
             badgeIcon,
             badgeBackgroundColor,
             badgeIconColor,
+            badgeBorderColor,
             onBadgeClick
         )
         VerticalSpacer(8)
@@ -115,6 +117,7 @@ fun Avatar(
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     onBadgeClick: () -> Unit = {},
 ) {
     Box(
@@ -156,6 +159,7 @@ fun Avatar(
                     badgeType = badgeType,
                     icon = badgeIcon,
                     backgroundColor = badgeBackgroundColor,
+                    badgeBorderColor = badgeBorderColor,
                     iconColor = badgeIconColor
                 )
             }
@@ -246,7 +250,7 @@ fun AvatarScreenPreview() {
         ) {
             Avatar(avatarSize = AvatarSizeEnum.AVATAR_SIZE_24)
             VerticalSpacer(16)
-            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32)
+            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, badgeType = BadgeEnum.DOT)
             VerticalSpacer(16)
             Avatar(
                 avatarType = AvatarEnum.ICON,
