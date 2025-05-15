@@ -44,15 +44,11 @@
                     android:layout_gravity="center_vertical">
 
                     <am.acba.component.button.PrimaryActionTextButton
-                        android:id="@+id/camera"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_24"
-                        app:actionIcon="@drawable/ic_camera"
-                        app:actionIconSize="XLarge"
-                        app:actionButtonType="ActionButton"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider" />
+                        android:text="Action button1"
+                        app:actionIcon="@drawable/ic_contacts"
+                        app:actionIconTint="?attr/contentBrand" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:id="@+id/second"
@@ -190,6 +186,7 @@
                         app:actionIconSize="XXLarge" />
 
                     <am.acba.component.button.PrimaryActionTextButton
+                        android:id="@+id/testAvatar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Աննա Հովսեփյան"
@@ -197,9 +194,7 @@
                         app:actionIconSize="XLarge"
                         app:badgeIcon="@drawable/ic_burger_menu"
                         app:badgeIconGravity="Top"
-                        app:showActionText="false"
-                        app:textDrawableBackgroundColor="@color/BrandGreen_400"
-                        app:textDrawableColor="@color/BrandGreen_650" />
+                        app:showActionText="false" />
 
                     <am.acba.component.button.PrimaryActionTextButton
                         android:layout_width="wrap_content"
@@ -246,6 +241,39 @@
                         app:showActionText="false" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </HorizontalScrollView>
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/changeTextFromAnotherState"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="change to text type" />
+
+            <am.acba.component.button.PrimaryButton
+                android:id="@+id/changeTextColor"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="changeTextColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <am.acba.component.button.PrimaryButton
+                    android:id="@+id/avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="lottie" />
+
+                <am.acba.component.button.PrimaryButton
+                    android:id="@+id/color"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="color" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

@@ -19,7 +19,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
@@ -158,9 +157,10 @@ class PrimaryActionTextButton : FrameLayout {
     }
 
     fun setAnimation(animation: String?) {
-        binding.actionAnimation.visibility = View.VISIBLE
+        binding.actionAnimation.visibility = VISIBLE
         binding.actionAnimation.setAnimation(animation)
         binding.actionAnimation.playAnimation()
+        setIcon(null)
     }
 
     fun setAnimationColor(keyPathValues: String? = null, @AttrRes colorAttr: Int) {
@@ -265,20 +265,21 @@ class PrimaryActionTextButton : FrameLayout {
 
 
     fun setText(@StringRes stringRes: Int) {
-        binding.actionText.setText(stringRes)
-        if (type == ActionButtonType.TEXT) {
-            MaterialTextDrawable.with(context)
-                .text(binding.actionText.text.toString())
-                .into(binding.actionImage)
-        }
+        setText(context.getString(stringRes))
     }
 
     fun setText(text: String?) {
         binding.actionText.text = text
-        if (type == ActionButtonType.TEXT) {
+        setActionButtonColors(textDrawableColor, textDrawableBackgroundColor)
+    }
+
+    fun setActionButtonColors(textColor: Int, textBackgroundColor: Int) {
+        textDrawableColor = textColor
+        textDrawableBackgroundColor = textBackgroundColor
+        if (type == ActionButtonType.TEXT && binding.actionText.text.toString().isNotEmpty()) {
             MaterialTextDrawable.with(context)
-                .textColor(textDrawableColor)
-                .textBackgroundColor(textDrawableBackgroundColor)
+                .textColor(textColor)
+                .textBackgroundColor(textBackgroundColor)
                 .text(binding.actionText.text.toString())
                 .into(binding.actionImage)
         }
@@ -294,12 +295,16 @@ class PrimaryActionTextButton : FrameLayout {
             ActionButtonType.AVATAR -> {
                 binding.actionImage.imageTintList = null
                 binding.actionImage.setPadding(0)
+                binding.actionImage.backgroundTintList = null
                 binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
+                binding.actionAnimation.visibility = GONE
             }
 
             else -> {
+                binding.actionAnimation.visibility = GONE
                 binding.actionText.isVisible = !binding.actionText.text.isNullOrEmpty() && showActionText
                 binding.actionImage.setBackgroundColor(ContextCompat.getColor(context, R.color.Transparent))
+                binding.actionImage.backgroundTintList = null
                 binding.actionImage.imageTintList = null
                 binding.actionImage.setPadding(0)
                 if (type == ActionButtonType.TEXT) {

@@ -1,5 +1,8 @@
 package am.acba.components
 
+import am.acba.component.R
+import am.acba.component.button.PrimaryActionTextButton.ActionButtonType
+import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
@@ -42,5 +45,27 @@ class QuickActionAndAvatarFragment : BaseViewBindingFragment<FragmentQuickAction
 
         mBinding.third.setAvatarCheckedStatus(true)
         mBinding.third.setBadgeIconTint(context?.getColorStateListFromAttr(am.acba.component.R.attr.backgroundWarning))
+
+        mBinding.changeTextFromAnotherState.setOnClickListener {
+            testAvatar.setType(ActionButtonType.TEXT)
+            testAvatar.setText("Misak Manukyan")
+            testAvatar.setActionButtonColors(requireContext().getColorFromAttr(R.attr.contentAlternative3), requireContext().getColorFromAttr(R.attr.backgroundAlternative3))
+        }
+
+        mBinding.changeTextColor.setOnClickListener {
+            testAvatar.setActionButtonColors(requireContext().getColorFromAttr(R.attr.contentAlternative2), requireContext().getColorFromAttr(R.attr.backgroundAlternative2))
+        }
+
+        mBinding.avatar.setOnClickListener {
+            testAvatar.setType(ActionButtonType.AVATAR)
+            testAvatar.getActionIcon().setBackgroundResource(R.drawable.background_rounded)
+            testAvatar.setAnimation("smililng.json")
+        }
+
+        mBinding.color.setOnClickListener {
+            testAvatar.setIconBackground(R.drawable.background_rounded)
+            testAvatar.setIconBackgroundTint(context?.getColorStateListFromAttr(R.attr.backgroundAlternative4))
+            testAvatar.setAnimationColor(colorAttr = R.attr.contentAlternative4)
+        }
     }
 }
