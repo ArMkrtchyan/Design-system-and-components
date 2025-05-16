@@ -11,6 +11,11 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 object DigitalTheme {
 
+    val themedResources: ThemedResources
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalThemedResources.current
+
     val colorScheme: ColorTokens
         @Composable
         @ReadOnlyComposable
@@ -27,12 +32,16 @@ object DigitalTheme {
 
 internal val LocalCustomColors = staticCompositionLocalOf<ColorTokens> { error("No CustomColors provided") }
 internal val LocalTypography = staticCompositionLocalOf { TypographyTokens() }
+internal val LocalThemedResources = staticCompositionLocalOf<ThemedResources> { error("No Custom resources provided") }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DigitalTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) darkColorScheme() else lightColorScheme()
+    val resources = if (darkTheme) darkResourcesScheme() else lightResourcesScheme()
     val colorPalette = remember { colors }
+    val resourcesPalette = remember { resources }
     colorPalette.update(colors)
-    CompositionLocalProvider(LocalCustomColors provides colorPalette, LocalRippleConfiguration provides null, content = content)
+    resourcesPalette.update(resources)
+    CompositionLocalProvider(LocalThemedResources provides resourcesPalette, LocalCustomColors provides colorPalette, LocalRippleConfiguration provides null, content = content)
 }

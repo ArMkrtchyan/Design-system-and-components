@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,9 +27,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrimaryInput(
     modifier: Modifier = Modifier,
@@ -41,10 +40,16 @@ fun PrimaryInput(
     placeholder: String? = null,
     leadingIcon: Int? = null,
     trailingIcon: Int? = null,
-    leadingIconTint: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    trailingTint: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    secondaryTrailingIcon: Int? = null,
+    leadingIconTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    trailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    secondaryTrailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    leadingIconSize: Dp = 24.dp,
+    trailingIconSize: Dp = 24.dp,
+    secondaryTrailingIconSize: Dp = 24.dp,
     onLeadingIconClick: (() -> Unit)? = null,
     onTrailingIconClick: (() -> Unit)? = null,
+    onSecondaryTrailingIconClick: (() -> Unit)? = null,
     prefix: @Composable (() -> Unit)? = null,
     suffix: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
@@ -58,7 +63,6 @@ fun PrimaryInput(
     errorText: String? = null,
     helpText: String? = null,
     label: String? = null,
-    autoFormatting: Boolean = false,
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
     val newModifier = when {
@@ -105,12 +109,19 @@ fun PrimaryInput(
                 iconRes = leadingIcon,
                 tint = leadingIconTint,
                 isEnabled = enabled,
+                iconSize = leadingIconSize,
                 onClick = onLeadingIconClick
             ),
             trailingIcon = leadingOrTrailingIcon(
                 iconRes = trailingIcon,
+                secondaryIconRes = secondaryTrailingIcon,
                 tint = trailingTint,
+                secondaryTint = secondaryTrailingTint,
                 isEnabled = enabled,
+                iconSize = trailingIconSize,
+                isLeading = false,
+                secondaryIconSize = secondaryTrailingIconSize,
+                onSecondaryIconClick = onSecondaryTrailingIconClick,
                 onClick = onTrailingIconClick
             ),
             prefix = prefix,
@@ -148,6 +159,18 @@ fun PrimaryInputPreview(
                 value = textNormal.value,
                 onValueChange = { textNormal.value = it },
                 label = "Label",
+                isError = true,
+                errorText = "Error",
+                leadingIcon = R.drawable.ic_close,
+                onLeadingIconClick = {
+                    textNormal.value = TextFieldValue("jcndskjcndk")
+                }
+            )
+            VerticalSpacer(16)
+            PrimaryInput(
+                value = TextFieldValue("Some text"),
+                onValueChange = { textNormal.value = it },
+                enabled = false,
                 leadingIcon = R.drawable.ic_close,
                 onLeadingIconClick = {
                     textNormal.value = TextFieldValue("jcndskjcndk")
