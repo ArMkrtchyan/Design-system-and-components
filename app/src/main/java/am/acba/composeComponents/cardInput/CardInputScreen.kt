@@ -35,6 +35,8 @@ fun CardInputScreen(title: String = "") {
         rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
     val textNormal3 =
         rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("")) }
+    val textNormal4 =
+        rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue("9556236558963658")) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -66,8 +68,6 @@ fun CardInputScreen(title: String = "") {
                     placeholder = "Քարտի համար",
                     trailingIcon = R.drawable.ic_scan,
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
-                    leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                    leadingIconTint = null
                 )
                 VerticalSpacer(16)
                 CardInput(
@@ -75,8 +75,6 @@ fun CardInputScreen(title: String = "") {
                     onValueChange = { textNormal2.value = it },
                     placeholder = "Քարտի համար",
                     helpText = "Enter card number",
-                    leadingIcon = DigitalTheme.themedResources.visaCardIcon,
-                    leadingIconTint = null
                 )
                 VerticalSpacer(16)
                 CardInput(
@@ -87,19 +85,15 @@ fun CardInputScreen(title: String = "") {
                     isError = true,
                     errorText = "Wrong card number",
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
-                    leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                    leadingIconTint = null
                 )
                 VerticalSpacer(16)
                 CardInput(
-                    value = TextFieldValue("1456236558963658"),
-                    onValueChange = { },
+                    value = textNormal4.value,
+                    onValueChange = { textNormal4.value = it },
                     placeholder = "Քարտի համար",
                     trailingIcon = R.drawable.ic_scan,
                     enabled = false,
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
-                    leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                    leadingIconTint = null
                 )
                 VerticalSpacer(16)
             }

@@ -1,8 +1,10 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
+import am.acba.component.cardInput.PrimaryCardInput.CardSystemTypes
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.inputs.visualTransformations.CardFormattingVisualTransformation
+import am.acba.compose.components.inputs.visualTransformations.detectCardSystem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,11 +31,8 @@ fun CardInput(
     modifier: Modifier = Modifier,
     value: TextFieldValue = TextFieldValue(""),
     onValueChange: (TextFieldValue) -> Unit,
-    leadingIcon: Int? = null,
     trailingIcon: Int? = null,
-    leadingIconTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
     trailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    leadingIconSize: Dp = 36.dp,
     trailingIconSize: Dp = 24.dp,
     label: String? = null,
     placeholder: String? = null,
@@ -48,6 +47,7 @@ fun CardInput(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val showSecondaryIcon = remember { mutableStateOf(false) }
+    val cardSystemTypes = remember { mutableStateOf(value.text.trim().detectCardSystem()) }
     val isFocused by interactionSource.collectIsFocusedAsState()
     onFocusChanged?.invoke(isFocused)
     val pattern = Regex("^[0-9]*\$")
@@ -55,7 +55,8 @@ fun CardInput(
     PrimaryInput(
         value = value,
         onValueChange = {
-            val maxLength = if (it.text.startsWith("37")) 15 else 16
+            cardSystemTypes.value = it.text.trim().detectCardSystem()
+            val maxLength = if (cardSystemTypes.value == CardSystemTypes.AMEX) 15 else 16
             if (checkInputValidation(value, maxLength, pattern, it)) {
                 onValueChange(it)
                 showSecondaryIcon.value = it.text.isNotEmpty()
@@ -74,9 +75,9 @@ fun CardInput(
         label = label,
         errorText = errorText,
         helpText = helpText,
-        leadingIcon = leadingIcon,
+        leadingIcon = getLeadingIconByType(cardSystemTypes.value),
         trailingIcon = trailingIcon,
-        leadingIconTint = leadingIconTint,
+        leadingIconTint = null,
         trailingTint = trailingTint,
         secondaryTrailingIcon = if (showSecondaryIcon.value) R.drawable.ic_close_small_2 else null,
         secondaryTrailingTint = DigitalTheme.colorScheme.contentPrimary,
@@ -84,11 +85,22 @@ fun CardInput(
             onValueChange(TextFieldValue(""))
             showSecondaryIcon.value = false
         },
-        leadingIconSize = leadingIconSize,
+        leadingIconSize = 36.dp,
         trailingIconSize = trailingIconSize,
     )
 }
 
+@Composable
+private fun getLeadingIconByType(cardSystemTypes: CardSystemTypes): Int {
+    return when (cardSystemTypes) {
+        CardSystemTypes.VISA -> DigitalTheme.themedResources.visaCardIcon
+        CardSystemTypes.MASTER -> DigitalTheme.themedResources.masterCardIcon
+        CardSystemTypes.AMEX -> DigitalTheme.themedResources.amexCardIcon
+        CardSystemTypes.UNION -> DigitalTheme.themedResources.uPayCardIcon
+        CardSystemTypes.ARCA -> DigitalTheme.themedResources.arcaCardIcon
+        CardSystemTypes.UNKNOWN -> DigitalTheme.themedResources.defaultCardIcon
+    }
+}
 
 private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
     return (value.text.length != maxLength || textFieldValue.text.length <= maxLength)
@@ -113,19 +125,15 @@ fun CardInputPreview() {
                 placeholder = "Քարտի համար",
                 trailingIcon = R.drawable.ic_scan,
                 trailingTint = DigitalTheme.colorScheme.contentPrimary,
-                leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                leadingIconTint = null,
             )
             VerticalSpacer(20)
             CardInput(
-                value = TextFieldValue("1456236558963658"),
+                value = TextFieldValue("1556236558963658"),
                 onValueChange = { textNormal.value = it },
                 placeholder = "Քարտի համար",
                 trailingIcon = R.drawable.ic_scan,
                 enabled = false,
                 trailingTint = DigitalTheme.colorScheme.contentPrimary,
-                leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                leadingIconTint = null,
             )
             VerticalSpacer(20)
             CardInput(
@@ -135,8 +143,6 @@ fun CardInputPreview() {
                 isError = true,
                 errorText = "Error text",
                 trailingIcon = R.drawable.ic_scan,
-                leadingIcon = DigitalTheme.themedResources.defaultCardIcon,
-                leadingIconTint = null,
                 trailingTint = DigitalTheme.colorScheme.contentPrimary
             )
         }

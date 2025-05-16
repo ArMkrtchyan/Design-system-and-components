@@ -1,5 +1,6 @@
 ﻿package am.acba.compose.components.inputs.visualTransformations
 
+import am.acba.component.cardInput.PrimaryCardInput.CardSystemTypes
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
@@ -9,14 +10,14 @@ class CardFormattingVisualTransformation : VisualTransformation {
         val formattedText = formatCardPattern(text.text)
         val offsetMapping = CardFormattingOffsetMapping(formattedText)
         return TransformedText(
-            text = AnnotatedString(formattedText),
-            offsetMapping = offsetMapping
+            text = AnnotatedString(formattedText), offsetMapping = offsetMapping
         )
     }
 
     private fun formatCardPattern(cardNumber: String): String {
         var formatedCardNumber = cardNumber
-        if (formatedCardNumber.startsWith("37")) {
+        val cardSystemTypes = cardNumber.trim().detectCardSystem()
+        if (cardSystemTypes == CardSystemTypes.AMEX) {
             if (formatedCardNumber.length > 4) {
                 val str: String = formatedCardNumber.substring(0, 4)
                 val endStr: String = formatedCardNumber.substring(4)
@@ -45,5 +46,20 @@ class CardFormattingVisualTransformation : VisualTransformation {
             }
         }
         return formatedCardNumber
+    }
+
+
+}
+
+fun String.detectCardSystem(): CardSystemTypes {
+    val digitsOnly = this.filter { it.isDigit() }
+    return when {
+        digitsOnly.startsWith("4") -> CardSystemTypes.VISA
+        digitsOnly.take(2).toIntOrNull()?.let { it in 51..55 } == true -> CardSystemTypes.MASTER
+        digitsOnly.take(4).toIntOrNull()?.let { it in 2221..2720 } == true -> CardSystemTypes.MASTER
+        digitsOnly.startsWith("34") || digitsOnly.startsWith("37") -> CardSystemTypes.AMEX
+        digitsOnly.startsWith("9") -> CardSystemTypes.ARCA
+        digitsOnly.startsWith("62") -> CardSystemTypes.UNION
+        else -> CardSystemTypes.UNKNOWN
     }
 }
