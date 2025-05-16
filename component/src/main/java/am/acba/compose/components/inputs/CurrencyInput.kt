@@ -134,10 +134,7 @@ private fun RowScope.AmountTextField(
         else Regex("^[0-9]*\$")
     }
     val visualTransformation = if (autoFormatting) {
-        AmountFormattingVisualTransformation(
-            maxLength = maxLength,
-            formatDecimal = formatDecimal
-        )
+        AmountFormattingVisualTransformation(formatDecimal = formatDecimal)
     } else {
         MaxLengthVisualTransformation(maxLength)
     }
@@ -171,10 +168,10 @@ private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern:
     val isDecimal = splitTextArray.size == 2
     val isDotPositionValid = !isDecimal || splitTextArray[1].length <= 2
     return (value.text.length != maxLength || textFieldValue.text.length <= maxLength)
-            && textFieldValue.text.matches(pattern)
-            && isDotPositionValid
-            && !textFieldValue.text.startsWith(".")
-            && !textFieldValue.text.startsWith("0")
+        && textFieldValue.text.matches(pattern)
+        && isDotPositionValid
+        && !textFieldValue.text.startsWith(".")
+        && !textFieldValue.text.startsWith("0")
 }
 
 @Composable
