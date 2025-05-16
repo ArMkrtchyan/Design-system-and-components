@@ -129,7 +129,7 @@ fun CardInputPreview() {
             )
             VerticalSpacer(20)
             CardInput(
-                value = TextFieldValue("1556236558963658"),
+                value = TextFieldValue("9556236558963658"),
                 onValueChange = { textNormal.value = it },
                 placeholder = "Քարտի համար",
                 trailingIcon = R.drawable.ic_scan,

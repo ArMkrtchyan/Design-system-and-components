@@ -16,6 +16,9 @@
       <SelectionState runConfigName="ACBA design system and components.ACBA_design_system_and_components.app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="Design-system-and-components.ACBA_design_system_and_components.app">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
