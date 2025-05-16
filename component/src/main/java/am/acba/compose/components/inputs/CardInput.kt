@@ -84,6 +84,7 @@ fun CardInput(
         onSecondaryTrailingIconClick = {
             onValueChange(TextFieldValue(""))
             showSecondaryIcon.value = false
+            cardSystemTypes.value = CardSystemTypes.UNKNOWN
         },
         leadingIconSize = 36.dp,
         trailingIconSize = trailingIconSize,
