@@ -385,6 +385,10 @@ class ListItem2 : FrameLayout {
         }
     }
 
+    fun setStartIconDimensions(size: Int, padding: Int) {
+        startIcon.updateIconDimensions(size, padding)
+    }
+
     private fun PrimaryImageView.updateIconDimensions(size: Int, padding: Int) {
         updateLayoutParams<ViewGroup.LayoutParams> {
             height = size
