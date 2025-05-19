@@ -16,6 +16,7 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 
 open class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -53,6 +54,11 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.frame.setOnClickListener {
             l?.onClick(it)
         }
+    }
+
+    fun showDropdown(hasDropdown: Boolean) {
+        binding.inputDropDown.hasDropDown = hasDropdown
+        binding.frame.isVisible = hasDropdown
     }
 
     fun setStartIcon(drawable: Drawable?) {
