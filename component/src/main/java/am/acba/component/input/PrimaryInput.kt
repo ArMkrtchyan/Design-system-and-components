@@ -51,7 +51,11 @@ open class PrimaryInput : TextInputLayout {
 
     private var textMaxLength = -1
     private var cornerStyle = -1
-    private var hasDropDown = false
+    var hasDropDown = false
+        set(value) {
+            field = value
+            updateDropDown(value)
+        }
     private var inputType = -1
     private var validateAfterInput = false
     private var isKeyboardActionClicked = false
@@ -108,14 +112,6 @@ open class PrimaryInput : TextInputLayout {
             setText(text)
             isHintAnimationEnabled = true
             if (textMaxLength != -1) setMaxLength(textMaxLength)
-            if (hasDropDown) {
-                val endIcon =
-                    findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
-                editText?.isEnabled = false
-                endIcon.setImageResource(R.drawable.ic_down)
-                endIcon.imageTintList =
-                    context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
-            }
             when (inputType) {
                 TYPE_NUMBER -> setInputTypeForNumber()
                 TYPE_EMAIL -> setInputTypeForEmail()
@@ -160,6 +156,17 @@ open class PrimaryInput : TextInputLayout {
             })
             recycle()
         }
+    }
+
+    private fun updateDropDown(hasDropDown: Boolean) {
+        val endIcon = findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)
+        if (hasDropDown) {
+            endIcon.setImageResource(R.drawable.ic_down)
+            endIcon.imageTintList = context.getColorStateListFromAttr(R.attr.contentPrimaryTonal1)
+        }
+        endIcon.isVisible = hasDropDown
+        editText?.isEnabled = !hasDropDown
+        isEnabled = !hasDropDown
     }
 
     fun onKeyboardDoneButtonClick(onDoneButtonClick: () -> Unit) {
