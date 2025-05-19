@@ -22,6 +22,10 @@ open class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs, 0) {
     protected val binding by lazy { PrimaryDropdownBinding.inflate(context.inflater(), this, false) }
+
+    val inputView: PrimaryInput
+        get() = binding.inputDropDown
+
     private var isEnabled = true
 
     init {
