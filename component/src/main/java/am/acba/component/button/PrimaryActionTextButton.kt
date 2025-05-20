@@ -28,6 +28,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
 import androidx.core.widget.TextViewCompat
+import com.airbnb.lottie.LottieDrawable
 import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.model.KeyPath
 import com.bumptech.glide.Glide
@@ -265,6 +266,10 @@ class PrimaryActionTextButton : FrameLayout {
 
     fun setActionBadgeVisibility(isVisible: Boolean) {
         binding.actionBadge.isVisible = isVisible
+    }
+
+    fun setAnimationRepeatCount(isLoop: Boolean = false, repeatCount: Int = 0) {
+        binding.actionAnimation.repeatCount = if (isLoop) LottieDrawable.INFINITE else repeatCount
     }
 
 

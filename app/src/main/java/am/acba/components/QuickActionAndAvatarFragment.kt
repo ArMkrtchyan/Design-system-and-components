@@ -60,6 +60,7 @@ class QuickActionAndAvatarFragment : BaseViewBindingFragment<FragmentQuickAction
             testAvatar.setType(ActionButtonType.AVATAR)
             testAvatar.getActionIcon().setBackgroundResource(R.drawable.background_rounded)
             testAvatar.setAnimation("smililng.json")
+            testAvatar.setAnimationRepeatCount(repeatCount = 3)
         }
 
         mBinding.color.setOnClickListener {
