@@ -10,6 +10,7 @@ import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -152,6 +153,15 @@ class PinInput : FrameLayout {
     }
 
     fun setOnPinFocusChangeListener(listener: (hasFocus: Boolean) -> Unit) {
+        binding.numericPinInput.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                listener(false)
+                binding.numericPinInput.clearFocus()
+                true
+            } else {
+                false
+            }
+        }
         binding.numericPinInput.setOnFocusChangeListener { _, hasFocus ->
             listener(hasFocus)
         }
