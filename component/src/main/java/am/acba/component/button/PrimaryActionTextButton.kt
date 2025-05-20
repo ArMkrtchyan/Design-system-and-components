@@ -263,6 +263,10 @@ class PrimaryActionTextButton : FrameLayout {
         binding.actionBadge.imageTintList = colorStateList
     }
 
+    fun setActionBadgeVisibility(isVisible: Boolean) {
+        binding.actionBadge.isVisible = isVisible
+    }
+
 
     fun setText(@StringRes stringRes: Int) {
         setText(context.getString(stringRes))
