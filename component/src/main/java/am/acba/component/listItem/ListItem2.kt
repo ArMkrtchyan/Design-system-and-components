@@ -866,48 +866,36 @@ class ListItem2 : FrameLayout {
     }
 
     fun setStartComponentClickListener(listener: OnClickListener?) {
-        listener?.let {
-            binding.layoutStartComponent.setOnClickListener(
-                PreventDoubleClickListener(listener, clickInterval)
-            )
-        }
+        binding.layoutStartComponent.setOnClickListener(
+            PreventDoubleClickListener(listener, clickInterval)
+        )
     }
 
     fun setFirstEndIconClickListener(listener: OnClickListener?) {
-        listener?.let {
-            binding.ivFirstEndIcon.setOnClickListener(
-                PreventDoubleClickListener(listener, clickInterval)
-            )
-        }
+        binding.ivFirstEndIcon.setOnClickListener(
+            PreventDoubleClickListener(listener, clickInterval)
+        )
     }
 
     fun setSecondEndComponentClickListener(listener: OnClickListener?) {
-        listener?.let {
-            binding.layoutSecondEndComponent.setOnClickListener(
-                PreventDoubleClickListener(listener, clickInterval)
-            )
-        }
+        binding.layoutSecondEndComponent.setOnClickListener(
+            PreventDoubleClickListener(listener, clickInterval)
+        )
     }
 
     fun setOnCheckboxChangeListener(listener: CompoundButton.OnCheckedChangeListener?) {
-        listener?.let {
-            ensureSecondEndComponentCheckbox()
-            checkbox.setOnCheckedChangeListener(it)
-        }
+        ensureSecondEndComponentCheckbox()
+        checkbox.setOnCheckedChangeListener(listener)
     }
 
     fun setOnSwitchChangeListener(listener: CompoundButton.OnCheckedChangeListener?) {
-        listener?.let {
-            ensureSecondEndComponentSwitch()
-            switch.setOnCheckedChangeListener(it)
-        }
+        ensureSecondEndComponentSwitch()
+        switch.setOnCheckedChangeListener(listener)
     }
 
     fun setOnRadioButtonChangeListener(listener: CompoundButton.OnCheckedChangeListener?) {
-        listener?.let {
-            ensureSecondEndComponentRadioButton()
-            radiobutton.setOnCheckedChangeListener(it)
-        }
+        ensureSecondEndComponentRadioButton()
+        radiobutton.setOnCheckedChangeListener(listener)
     }
 
     enum class ListStartComponentType {
