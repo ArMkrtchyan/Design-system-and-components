@@ -105,7 +105,7 @@
             <am.acba.component.textView.PrimaryTextView
                 android:id="@+id/skip"
                 style="@style/Small.Regular"
-                android:layout_width="55dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
