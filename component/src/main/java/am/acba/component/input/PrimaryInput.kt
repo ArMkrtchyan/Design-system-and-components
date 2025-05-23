@@ -47,7 +47,7 @@ open class PrimaryInput : TextInputLayout {
     var enableErrorAnimation = false
     private val TYPE_NUMBER = 1
     private val TYPE_EMAIL = 2
-    private  val PASSWORD = 3
+    private val PASSWORD = 3
 
     private var textMaxLength = -1
     private var cornerStyle = -1
