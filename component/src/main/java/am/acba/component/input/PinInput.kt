@@ -10,6 +10,7 @@ import android.content.Context
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -26,6 +27,8 @@ class PinInput : FrameLayout {
     private val errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
     private var showPinCode = false
     private val enteredPin = StringBuilder()
+    private var pinFocusChangeListener: ((Boolean) -> Unit)? = null
+    private var skipNextFocusCallback = false
 
     constructor(context: Context) : super(context, null)
 
@@ -64,6 +67,32 @@ class PinInput : FrameLayout {
         errorTextView.compoundDrawablePadding = 4.dpToPx()
         errorTextView.compoundDrawableTintList =
             context.getColorStateListFromAttr(R.attr.borderDanger)
+
+        viewTreeObserver.addOnGlobalFocusChangeListener { oldFocus, newFocus ->
+            if (oldFocus == binding.numericPinInput && newFocus != binding.numericPinInput) {
+                if (skipNextFocusCallback) {
+                    skipNextFocusCallback = false
+                    return@addOnGlobalFocusChangeListener
+                }
+                pinFocusChangeListener?.invoke(false)
+            } else if (newFocus == binding.numericPinInput) {
+                pinFocusChangeListener?.invoke(true)
+            }
+        }
+        binding.numericPinInput.setOnEditorActionListener { v, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+                imm.hideSoftInputFromWindow(v.windowToken, 0)
+
+                skipNextFocusCallback = true
+                v.clearFocus()
+                pinFocusChangeListener?.invoke(false)
+
+                true
+            } else {
+                false
+            }
+        }
     }
 
     fun isPinShown(): Boolean {
@@ -151,11 +180,10 @@ class PinInput : FrameLayout {
         }
     }
 
-    fun setOnPinFocusChangeListener(listener: (hasFocus: Boolean) -> Unit) {
-        binding.numericPinInput.setOnFocusChangeListener { _, hasFocus ->
-            listener(hasFocus)
-        }
+    fun setOnPinFocusChangeListener(listener: (Boolean) -> Unit) {
+        pinFocusChangeListener = listener
     }
+
 
     fun getPin(): String {
         return enteredPin.toString()
