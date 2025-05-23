@@ -44,6 +44,15 @@
                 tools:hint="Վարկային կոդ" />
 
             <am.acba.component.input.PrimaryInput
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:inputType="password"
+                app:enableErrorAnimation="true"
+                android:hint="Նոր գաղտնաբառ" />
+
+            <am.acba.component.input.PrimaryInput
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
