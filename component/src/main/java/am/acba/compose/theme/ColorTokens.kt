@@ -45,6 +45,7 @@ class ColorTokens(
     borderPrimary: Color,
     borderPrimaryTonal1: Color,
     borderPrimaryTonal2: Color,
+    borderPrimaryTonal3: Color,
     borderBrand: Color,
     borderBrandTonal1: Color,
     borderBrandTonal1Disable: Color,
@@ -92,6 +93,7 @@ class ColorTokens(
     contentAlternative4: Color,
     contentAlternative5: Color,
     contentAlternative6: Color,
+    transparent: Color,
 ) {
     var backgroundBase by mutableStateOf(backgroundBase)
         private set
@@ -165,6 +167,8 @@ class ColorTokens(
     var borderPrimaryTonal1 by mutableStateOf(borderPrimaryTonal1)
         private set
     var borderPrimaryTonal2 by mutableStateOf(borderPrimaryTonal2)
+        private set
+    var borderPrimaryTonal3 by mutableStateOf(borderPrimaryTonal3)
         private set
     var borderBrand by mutableStateOf(borderBrand)
         private set
@@ -264,6 +268,9 @@ class ColorTokens(
     var contentAlternative6 by mutableStateOf(contentAlternative6)
         private set
 
+    var transparent by mutableStateOf(transparent)
+        private set
+
     fun update(oldColors: ColorTokens) {
         backgroundBase = oldColors.backgroundBase
         backgroundBrand = oldColors.backgroundBrand
@@ -301,6 +308,7 @@ class ColorTokens(
         borderPrimary = oldColors.borderPrimary
         borderPrimaryTonal1 = oldColors.borderPrimaryTonal1
         borderPrimaryTonal2 = oldColors.borderPrimaryTonal2
+        borderPrimaryTonal3 = oldColors.borderPrimaryTonal3
         borderBrand = oldColors.borderBrand
         borderBrandTonal1 = oldColors.borderBrandTonal1
         borderBrandTonal1Disable = oldColors.borderBrandTonal1Disable
@@ -349,5 +357,6 @@ class ColorTokens(
         contentAlternative4 = oldColors.contentAlternative4
         contentAlternative5 = oldColors.contentAlternative5
         contentAlternative6 = oldColors.contentAlternative6
+        transparent = oldColors.transparent
     }
 }
