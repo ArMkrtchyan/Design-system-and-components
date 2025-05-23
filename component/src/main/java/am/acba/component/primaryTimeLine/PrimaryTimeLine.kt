@@ -64,7 +64,7 @@ class PrimaryTimeLine : FrameLayout {
         this.timeLineType = timeLineType
     }
 
-    fun setTimelineItems(timeLineItems: List<ITimeLineInfo>) {
+    fun <T : ITimeLineInfo> setTimelineItems(timeLineItems: List<T>, onItemClickListener: ((T) -> Unit)? = null) {
         binding.timeLines.removeAllViews()
         val bindingList = arrayListOf<Pair<ItemTimeLineBinding, TimeLineStatusEnum>>()
         timeLineItems.forEachIndexed { index, timeLineInfo ->
@@ -118,6 +118,9 @@ class PrimaryTimeLine : FrameLayout {
             itemBinding.endText.isVisible = !timeLineInfo.getEndText().isNullOrEmpty()
             itemBinding.description.isVisible = !timeLineInfo.getDescription().isNullOrEmpty()
             itemBinding.linkText.isVisible = !timeLineInfo.getLinkText().isNullOrEmpty()
+            onItemClickListener?.let {
+                itemBinding.cardContainer.setOnClickListener { onItemClickListener.invoke(timeLineInfo) }
+            }
             binding.timeLines.addView(itemBinding.root)
         }
         if (timeLineType == TimeLineType.PROGRESS) {

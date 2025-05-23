@@ -5,6 +5,7 @@ import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentTimeLineBinding
+import android.widget.Toast
 
 class TimeLineFragment : BaseViewBindingFragment<FragmentTimeLineBinding>() {
     override val inflate: Inflater<FragmentTimeLineBinding>
@@ -13,30 +14,55 @@ class TimeLineFragment : BaseViewBindingFragment<FragmentTimeLineBinding>() {
         get() = mBinding.toolbar
 
     override fun FragmentTimeLineBinding.initView() {
-        timeLineExample1.setTimelineItems(example1)
-        timeLineExample2.setTimelineItems(example2)
-        timeLineExample3.setTimelineItems(example3)
-        timeLineExample4.setTimelineItems(example4)
-        timeLineExample5.setTimelineItems(example5)
-        timeLineExample6.setTimelineItems(example6)
-        timeLineExample7.setTimelineItems(example7)
-        timeLineExample8.setTimelineItems(example8)
-        timeLineExample9.setTimelineItems(example9)
-        timeLineExample10.setTimelineItems(example10)
-        timeLineExample11.setTimelineItems(example11)
-        timeLineExample12.setTimelineItems(example12)
-        timeLineExample13.setTimelineItems(example13)
-        timeLineExample14.setTimelineItems(example14)
-        timeLineExample15.setTimelineItems(example15)
-        timeLineExample16.setTimelineItems(example16)
-        timeLineExample17.setTimelineItems(example17)
-        timeLineExample18.setTimelineItems(example18)
-        timeLineExample19.setTimelineItems(example19)
-        timeLineExample20.setTimelineItems(example20)
-        timeLineExample21.setTimelineItems(example21)
-        timeLineExample22.setTimelineItems(example22)
-        timeLineExample23.setTimelineItems(example23)
-        timeLineExample24.setTimelineItems(example24)
+        timeLineExample1.setTimelineItems(example1) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample2.setTimelineItems(example2) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample3.setTimelineItems(example3) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample4.setTimelineItems(example4) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample5.setTimelineItems(example5) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample6.setTimelineItems(example6) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample7.setTimelineItems(example7) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample8.setTimelineItems(example8) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample9.setTimelineItems(example9) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample10.setTimelineItems(example10) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample11.setTimelineItems(example11) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample12.setTimelineItems(example12) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample13.setTimelineItems(example13) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample14.setTimelineItems(example14) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample15.setTimelineItems(example15) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample16.setTimelineItems(example16) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample17.setTimelineItems(example17) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample18.setTimelineItems(example18) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample19.setTimelineItems(example19) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample20.setTimelineItems(example20) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample21.setTimelineItems(example21) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample22.setTimelineItems(example22) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample23.setTimelineItems(example23) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+        timeLineExample24.setTimelineItems(example24) { Toast.makeText(requireContext(), it.timeLineTitle, Toast.LENGTH_SHORT).show() }
+
+        timeLineExample1.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample2.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample3.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample4.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample5.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample6.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample7.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample8.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample9.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample10.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample11.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample12.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample13.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample14.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample15.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample16.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample17.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample18.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample19.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample20.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample21.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample22.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample23.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
+        timeLineExample24.setOnClickListener { Toast.makeText(requireContext(), "On Time line click", Toast.LENGTH_SHORT).show() }
     }
 
     private val example1 = arrayListOf(
@@ -212,10 +238,14 @@ class TimeLineFragment : BaseViewBindingFragment<FragmentTimeLineBinding>() {
         TimeLine(
             timeLineTitle = "Պայմանագրի կնքում",
             timeLineDescription = "Մինչև ՝ 20.04.2023",
+            timeLineStatusEnum = TimeLineStatusEnum.DEFAULT,
+            timeLineContentBackgroundTintAttr = am.acba.component.R.attr.transparent
         ),
         TimeLine(
             timeLineTitle = "Սարքի ակտիվացում",
             timeLineDescription = "Պայմանագրի կնքումից հետո 2-3 աշխ. օրվա ընթացքում",
+            timeLineStatusEnum = TimeLineStatusEnum.DEFAULT,
+            timeLineContentBackgroundTintAttr = am.acba.component.R.attr.transparent
         ),
     )
 
