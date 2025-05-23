@@ -186,6 +186,10 @@
         android:label="SnackBarFragment"
         tools:layout="@layout/fragment_snack_bar" />
     <fragment
+        android:id="@+id/timeLineFragment"
+        android:name="am.acba.components.TimeLineFragment"
+        android:label="TimeLineFragment" />
+    <fragment
         android:id="@+id/buttonsComposeFragment"
         android:name="am.acba.composeComponents.buttons.ButtonsComposeFragment"
         android:label="ButtonsComposeFragment" />
@@ -321,4 +325,8 @@
         android:id="@+id/snackBarComposeFragment"
         android:name="am.acba.composeComponents.snackbar.SnackBarComposeFragment"
         android:label="SnackBarComposeFragment" />
+    <fragment
+        android:id="@+id/timeLineComposeFragment"
+        android:name="am.acba.composeComponents.timeLine.TimeLineComposeFragment"
+        android:label="TimeLineComposeFragment" />
 </navigation>
