@@ -10,7 +10,6 @@ import am.acba.component.extensions.saveChildViewStates
 import am.acba.component.extensions.sparseParcelableArray
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet

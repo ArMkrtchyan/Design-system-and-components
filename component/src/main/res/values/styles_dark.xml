@@ -47,6 +47,7 @@
         <item name="borderPrimary">@color/BlueGrey_650</item>
         <item name="borderPrimaryTonal1">@color/BlueGrey_850</item>
         <item name="borderPrimaryTonal2">@color/White_10</item>
+        <item name="borderPrimaryTonal3">@color/BlueGrey_850</item>
         <item name="borderBrand">@color/BrandGreen_500</item>
         <item name="borderBrandTonal1">@color/BrandGreen_450</item>
         <item name="borderBrandTonal1Disable">@color/BlueGrey_700</item>
@@ -100,6 +101,7 @@
         <item name="contentAlternative4">@color/Orchid_700</item>
         <item name="contentAlternative5">@color/BrandGreen_550</item>
         <item name="contentAlternative6">@color/Blue_700</item>
+        <item name="transparent">@color/Transparent</item>
         <item name="visaLogo">@drawable/logo_visa_dark</item>
         <item name="masterLogo">@drawable/logo_master_dark</item>
         <item name="amexLogo">@drawable/logo_amex_light</item>

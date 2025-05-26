@@ -70,6 +70,8 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     STATUS_SCREEN_COMPOSE("Status screen", true, R.id.statusScreenComposeFragment),
     TABLES("Tables", false, R.id.tablesFragment),
     TABLES_COMPOSE("Tables", true, R.id.tablesComposeFragment),
+    TIME_LINE("TimeLine", false, R.id.timeLineFragment),
+    TIME_LINE_COMPOSE("TimeLine", true, R.id.timeLineComposeFragment, isReady = true),
     TOOLBAR("Toolbar", false, R.id.toolbarFragment),
     TOOLBAR_COMPOSE("Toolbar", true, R.id.toolbarComposeFragment);
 
