@@ -48,31 +48,31 @@ data class TimeLine(
         return timeLineEndText
     }
 
-    override fun getLinkTextColorAttr(): Int? {
-        return timeLineLinkTextColorAttr
+    override fun getLinkTextColorAttr(): Int {
+        return timeLineLinkTextColorAttr ?: super.getLinkTextColorAttr()
     }
 
     override fun getLinkText(): String? {
         return timeLineLinkText
     }
 
-    override fun getStartIcon(): Int? {
-        return timeLineStartIcon
+    override fun getStartIcon(): Int {
+        return timeLineStartIcon ?: super.getStartIcon()
     }
 
-    override fun getStartIconTint(): Int? {
-        return timeLineStartIconTintAttr
+    override fun getStartIconTint(): Int {
+        return timeLineStartIconTintAttr ?: super.getStartIconTint()
     }
 
-    override fun getStartIconBackground(): Int? {
-        return timeLineStartIconBackground
+    override fun getStartIconBackground(): Int {
+        return timeLineStartIconBackground ?: super.getStartIconBackground()
     }
 
-    override fun getStartIconBackgroundTint(): Int? {
-        return timeLineStartIconBackgroundTintAttr
+    override fun getStartIconBackgroundTint(): Int {
+        return timeLineStartIconBackgroundTintAttr ?: super.getStartIconBackgroundTint()
     }
 
-    override fun getContentBackgroundAttr(): Int? {
-        return timeLineContentBackgroundTintAttr
+    override fun getContentBackgroundAttr(): Int {
+        return timeLineContentBackgroundTintAttr ?: super.getContentBackgroundAttr()
     }
 }

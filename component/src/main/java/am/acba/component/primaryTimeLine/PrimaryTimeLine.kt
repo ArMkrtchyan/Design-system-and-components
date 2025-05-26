@@ -74,12 +74,12 @@ class PrimaryTimeLine : FrameLayout {
             itemBinding.root.setTag(R.id.title, status.type)
             setIconAndContentColors(
                 itemBinding,
-                timeLineInfo.getStartIcon() ?: status.icon,
-                timeLineInfo.getStartIconBackground() ?: status.iconBackground,
-                timeLineInfo.getStartIconBackgroundTint() ?: status.iconBackgroundTint,
-                timeLineInfo.getStartIconTint() ?: status.iconTint,
-                timeLineInfo.getContentBackgroundAttr() ?: status.contentBackgroundTint,
-                timeLineInfo.getLinkTextColorAttr() ?: status.linkTextColor,
+                timeLineInfo.getStartIcon(),
+                timeLineInfo.getStartIconBackground(),
+                timeLineInfo.getStartIconBackgroundTint(),
+                timeLineInfo.getStartIconTint(),
+                timeLineInfo.getContentBackgroundAttr(),
+                timeLineInfo.getLinkTextColorAttr(),
             )
             if (status == TimeLineStatusEnum.NONE) {
                 setTextsStylesSmall(itemBinding)

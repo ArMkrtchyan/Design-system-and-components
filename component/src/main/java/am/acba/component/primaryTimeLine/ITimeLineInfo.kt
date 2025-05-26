@@ -23,21 +23,21 @@ interface ITimeLineInfo {
 
 
     @AttrRes
-    fun getLinkTextColorAttr(): Int? = null
+    fun getLinkTextColorAttr(): Int = getTimeLineStatus().linkTextColor
     fun getLinkText(): String? = null
 
     @DrawableRes
-    fun getStartIcon(): Int? = null
+    fun getStartIcon(): Int = getTimeLineStatus().icon
 
     @AttrRes
-    fun getStartIconTint(): Int? = null
+    fun getStartIconTint(): Int = getTimeLineStatus().iconTint
 
     @DrawableRes
-    fun getStartIconBackground(): Int? = null
+    fun getStartIconBackground(): Int = getTimeLineStatus().iconBackground
 
     @AttrRes
-    fun getStartIconBackgroundTint(): Int? = null
+    fun getStartIconBackgroundTint(): Int = getTimeLineStatus().iconBackgroundTint
 
     @AttrRes
-    fun getContentBackgroundAttr(): Int? = null
+    fun getContentBackgroundAttr(): Int = getTimeLineStatus().contentBackgroundTint
 }

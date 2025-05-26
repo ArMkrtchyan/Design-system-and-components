@@ -5,10 +5,10 @@ import am.acba.component.R
 enum class TimeLineStatusEnum(
     val type: Int,
     val icon: Int,
-    val iconTint: Int? = null,
+    val iconTint: Int,
     val iconBackground: Int = R.drawable.background_rounded,
-    val iconBackgroundTint: Int? = null,
-    val contentBackgroundTint: Int? = null,
+    val iconBackgroundTint: Int = R.attr.transparent,
+    val contentBackgroundTint: Int = R.attr.transparent,
     val linkTextColor: Int = R.attr.contentPrimary,
 ) {
     NONE(
