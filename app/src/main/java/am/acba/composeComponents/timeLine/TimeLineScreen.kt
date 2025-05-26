@@ -145,7 +145,7 @@ fun TimeLineScreen(title: String = "") {
             ) {
                 PrimaryTimeLine(
                     title = "Մարման գրաֆիկ",
-                    endIconPainter = painterResource(am.acba.component.R.drawable.ic_right),
+                    endIconPainter = painterResource(R.drawable.ic_right),
                     timeLineItems = list,
                 )
                 VerticalSpacer(30)
