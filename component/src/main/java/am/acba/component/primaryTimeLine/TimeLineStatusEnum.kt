@@ -67,10 +67,5 @@ enum class TimeLineStatusEnum(
         iconBackgroundTint = R.attr.backgroundDanger,
         contentBackgroundTint = R.attr.backgroundDangerTonal1,
         linkTextColor = R.attr.contentDangerTonal1
-    ),
-    CUSTOM(
-        type = 0,
-        icon = R.drawable.ic_ellipse,
-        iconTint = R.attr.borderPrimaryTonal3,
-    ),
+    );
 }

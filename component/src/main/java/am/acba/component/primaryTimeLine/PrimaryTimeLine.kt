@@ -72,36 +72,19 @@ class PrimaryTimeLine : FrameLayout {
             val status = timeLineInfo.getTimeLineStatus()
             val itemCount = timeLineItems.size
             itemBinding.root.setTag(R.id.title, status.type)
-            if (status == TimeLineStatusEnum.CUSTOM) {
-                setIconAndContentColors(
-                    itemBinding,
-                    timeLineInfo.getStartIcon() ?: R.drawable.ic_ellipse,
-                    timeLineInfo.getStartIconBackground() ?: R.attr.borderPrimaryTonal3,
-                    timeLineInfo.getStartIconBackgroundTint(),
-                    timeLineInfo.getStartIconTint(),
-                    timeLineInfo.getContentBackgroundAttr(),
-                    timeLineInfo.getLinkTextColorAttr() ?: R.attr.contentPrimary
-                )
-                if (timeLineInfo.getContentBackgroundAttr() != null || itemBinding.description.isVisible || itemBinding.linkText.isVisible) {
-                    setTextsStylesLarge(itemBinding, timeLineInfo)
-                } else {
-                    setTextsStylesSmall(itemBinding)
-                }
+            setIconAndContentColors(
+                itemBinding,
+                timeLineInfo.getStartIcon() ?: status.icon,
+                timeLineInfo.getStartIconBackground() ?: status.iconBackground,
+                timeLineInfo.getStartIconBackgroundTint() ?: status.iconBackgroundTint,
+                timeLineInfo.getStartIconTint() ?: status.iconTint,
+                timeLineInfo.getContentBackgroundAttr() ?: status.contentBackgroundTint,
+                timeLineInfo.getLinkTextColorAttr() ?: status.linkTextColor,
+            )
+            if (status == TimeLineStatusEnum.NONE) {
+                setTextsStylesSmall(itemBinding)
             } else {
-                setIconAndContentColors(
-                    itemBinding,
-                    timeLineInfo.getStartIcon() ?: status.icon,
-                    timeLineInfo.getStartIconBackground() ?: status.iconBackground,
-                    timeLineInfo.getStartIconBackgroundTint() ?: status.iconBackgroundTint,
-                    timeLineInfo.getStartIconTint() ?: status.iconTint,
-                    timeLineInfo.getContentBackgroundAttr() ?: status.contentBackgroundTint,
-                    timeLineInfo.getLinkTextColorAttr() ?: status.linkTextColor,
-                )
-                if (status == TimeLineStatusEnum.NONE) {
-                    setTextsStylesSmall(itemBinding)
-                } else {
-                    setTextsStylesLarge(itemBinding, timeLineInfo)
-                }
+                setTextsStylesLarge(itemBinding, timeLineInfo)
             }
             itemBinding.topLine.isVisible = index != 0 && itemCount > 1
             if (timeLineType == TimeLineType.PROGRESS) {
