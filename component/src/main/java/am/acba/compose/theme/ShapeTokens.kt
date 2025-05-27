@@ -12,4 +12,5 @@ object ShapeTokens {
     val shapePrimaryInput: RoundedCornerShape = RoundedCornerShape(12.0.dp)
     val shapeCurrencyInput: RoundedCornerShape = RoundedCornerShape(topStart = 12.0.dp, bottomStart = 12.0.dp)
     val shapeCurrency: RoundedCornerShape = RoundedCornerShape(topEnd = 12.0.dp, bottomEnd = 12.0.dp)
+    val shapeStatus: RoundedCornerShape = RoundedCornerShape(bottomStart = 12.0.dp, bottomEnd = 12.0.dp)
 }
