@@ -86,6 +86,11 @@ fun ProductCardScreen(title: String = "") {
                     bottomRowValue1 = "14/սեպ/2024",
                     bottomRowTitle2 = "Վճարման ենթակա գումար",
                     bottomRowValue2 = "40,000.00 AMD",
+                    statusTitle = "Առկա է ժամկետնանց պարտավորություն",
+                    statusIcon = am.acba.component.R.drawable.ic_warning,
+                    statusBackgroundColor = DigitalTheme.colorScheme.backgroundDangerTonal1,
+                    statusTextColor = DigitalTheme.colorScheme.contentDangerTonal1,
+                    statusIconColor = DigitalTheme.colorScheme.contentDangerTonal1
                 ) {}
                 VerticalSpacer(20)
                 ProductCard(

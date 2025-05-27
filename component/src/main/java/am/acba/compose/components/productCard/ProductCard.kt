@@ -4,6 +4,7 @@ import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.StatusBadge
 import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
@@ -55,6 +56,13 @@ fun ProductCard(
     bottomRowTitle2: String = "",
     bottomRowValue2: String? = null,
     rowItems: List<Pair<String, String>> = emptyList(),
+    statusModifier: Modifier = Modifier,
+    statusTitle: String? = null,
+    statusIcon: Int? = null,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusAlign: Alignment = Alignment.TopEnd,
     onClick: () -> Unit,
 ) {
     val showBottomRow1 = remember { mutableStateOf(!bottomRowValue1.isNullOrEmpty()) }
@@ -64,46 +72,67 @@ fun ProductCard(
         modifier = modifier
             .fillMaxWidth()
             .background(DigitalTheme.colorScheme.backgroundTonal1, shape = ShapeTokens.shapePrimaryButton)
-            .padding(horizontal = 16.dp)
             .padding(top = 16.dp)
             .clickable { onClick.invoke() }
     ) {
         Column(
-            Modifier.fillMaxWidth()
+            Modifier
+                .fillMaxWidth()
         ) {
-            ProductCardHeader(
-                title = title, description = description,
-                startAvatarBackgroundColor = startAvatarBackgroundColor,
-                startAvatarBackgroundRadius = startAvatarBackgroundRadius,
-                startAvatarIcon = startAvatarIcon,
-                startAvatarIconColor = startAvatarIconColor,
-                startAvatarIconPadding = startAvatarIconPadding,
-                startAvatarImageUrl = startAvatarImageUrl,
-                startAvatarClipPercent = startAvatarClipPercent,
-                startAvatarImageCornerRadius = startAvatarImageCornerRadius,
-                startAvatarContentScale = startAvatarContentScale
-            )
-            if (rowItems.isNotEmpty()) {
-                VerticalSpacer(16)
-                ProductCardDynamicRows(rowItems, showBottomRow1.value || showBottomRow2.value)
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                ProductCardHeader(
+                    title = title, description = description,
+                    startAvatarBackgroundColor = startAvatarBackgroundColor,
+                    startAvatarBackgroundRadius = startAvatarBackgroundRadius,
+                    startAvatarIcon = startAvatarIcon,
+                    startAvatarIconColor = startAvatarIconColor,
+                    startAvatarIconPadding = startAvatarIconPadding,
+                    startAvatarImageUrl = startAvatarImageUrl,
+                    startAvatarClipPercent = startAvatarClipPercent,
+                    startAvatarImageCornerRadius = startAvatarImageCornerRadius,
+                    startAvatarContentScale = startAvatarContentScale
+                )
+                if (rowItems.isNotEmpty()) {
+                    VerticalSpacer(16)
+                    ProductCardDynamicRows(rowItems, showBottomRow1.value || showBottomRow2.value)
+                }
+                if (showBottomRow1.value || showBottomRow2.value) {
+                    VerticalSpacer(16)
+                }
+                if (showBottomRow1.value) {
+                    ProductRowTexts(bottomRowTitle1, bottomRowValue1 ?: "")
+                }
+                if (showBottomRow1.value && showBottomRow2.value) {
+                    VerticalSpacer(8)
+                }
+                if (showBottomRow2.value) {
+                    ProductRowTexts(
+                        bottomRowTitle2,
+                        bottomRowValue2 ?: "",
+                        endTextStyle = DigitalTheme.typography.body2Bold,
+                        endTextColor = DigitalTheme.colorScheme.contentPrimary
+                    )
+                }
+                if (showBottomRow1.value || showBottomRow2.value) {
+                    VerticalSpacer(16)
+                }
             }
-            if (showBottomRow1.value || showBottomRow2.value) {
-                VerticalSpacer(16)
-            }
-            if (showBottomRow1.value) {
-                ProductRowTexts(bottomRowTitle1, bottomRowValue1 ?: "")
-            }
-            if (showBottomRow1.value && showBottomRow2.value) {
-                VerticalSpacer(8)
-            }
-            if (showBottomRow2.value) {
-                ProductRowTexts(bottomRowTitle2, bottomRowValue2 ?: "", endTextStyle = DigitalTheme.typography.body2Bold, endTextColor = DigitalTheme.colorScheme.contentPrimary)
-            }
-            if (showBottomRow1.value || showBottomRow2.value) {
-                VerticalSpacer(16)
+            if (!statusTitle.isNullOrEmpty()) {
+                StatusBadge(
+                    title = statusTitle,
+                    icon = statusIcon,
+                    textColor = statusTextColor,
+                    iconColor = statusIconColor,
+                    backgroundColor = statusBackgroundColor,
+                    align = statusAlign,
+                    modifier = statusModifier
+                )
             }
         }
-
     }
 }
 
