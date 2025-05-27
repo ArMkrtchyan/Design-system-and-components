@@ -310,8 +310,8 @@
         android:name="am.acba.composeComponents.offers.OffersComposeFragment"
         android:label="OffersComposeFragment" />
     <fragment
-        android:id="@+id/cardViewComposeFragment"
-        android:name="am.acba.composeComponents.cardView.CardViewComposeFragment"
+        android:id="@+id/productCardScreenComposeFragment"
+        android:name="am.acba.composeComponents.cardView.ProductCardScreenComposeFragment"
         android:label="CardViewComposeFragment" />
     <fragment
         android:id="@+id/tablesComposeFragment"

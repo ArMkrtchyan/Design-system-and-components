@@ -1,6 +1,7 @@
 ﻿package am.acba.compose.components.avatar
 
 import am.acba.component.R
+import am.acba.component.extensions.dpToPx
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
@@ -33,6 +34,8 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 
 @Composable
 fun ActionButton(
@@ -50,6 +53,7 @@ fun ActionButton(
     iconPadding: Dp = 16.dp,
     imageUrl: String? = null,
     clipPercent: Int = 0,
+    imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
     textColor: Color = DigitalTheme.colorScheme.contentSecondary,
@@ -77,6 +81,7 @@ fun ActionButton(
             iconPadding,
             imageUrl,
             clipPercent,
+            imageCornerRadius,
             contentScale,
             text,
             textColor,
@@ -110,6 +115,7 @@ fun Avatar(
     iconPadding: Dp = Dp.Unspecified,
     imageUrl: String? = null,
     clipPercent: Int = 0,
+    imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
     textColor: Color = DigitalTheme.colorScheme.contentSecondary,
@@ -129,7 +135,15 @@ fun Avatar(
     ) {
         when (avatarType) {
             AvatarEnum.ICON -> AvatarIcon(modifier = contentModifier, icon = icon ?: R.drawable.default_icon, iconColor = iconColor, padding = iconPadding)
-            AvatarEnum.IMAGE -> AvatarImage(modifier = contentModifier, imageRes = icon, clipPercent = clipPercent, imageUrl = imageUrl, contentScale = contentScale)
+            AvatarEnum.IMAGE -> AvatarImage(
+                modifier = contentModifier,
+                imageRes = icon,
+                clipPercent = clipPercent,
+                imageUrl = imageUrl,
+                imageCornerRadius = imageCornerRadius,
+                contentScale = contentScale
+            )
+
             AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
             AvatarEnum.LOTTIE -> AvatarLottie(modifier = contentModifier)
         }
@@ -175,15 +189,22 @@ private fun AvatarImage(
     modifier: Modifier = Modifier,
     imageRes: Int? = null,
     imageUrl: String? = null,
+    imageCornerRadius: Int? = null,
     clipPercent: Int = 0,
     contentScale: ContentScale = ContentScale.Crop,
 ) {
     if (!imageUrl.isNullOrEmpty()) {
         GlideImage(
             model = imageUrl ?: imageRes ?: R.drawable.default_icon, contentDescription = "",
-            contentScale = contentScale, modifier = modifier
+            contentScale = contentScale,
+            modifier = modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(clipPercent))
+                .clip(RoundedCornerShape(clipPercent)),
+            requestBuilderTransform = { transform ->
+                imageCornerRadius?.let { radius ->
+                    transform.apply(RequestOptions.bitmapTransform(RoundedCorners(radius.dpToPx())))
+                } ?: transform
+            }
         )
     } else {
         Image(
