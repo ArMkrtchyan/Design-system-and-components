@@ -147,29 +147,50 @@ fun SecondaryButtonGreen(
     icon: Int = -1,
     iconGravity: Int = Gravity.START,
     enabled: Boolean = true,
+    isSmall: Boolean = false,
     onClick: () -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val backgroundColor = if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
     val borderColor = if (enabled) DigitalTheme.colorScheme.borderBrandTonal1 else DigitalTheme.colorScheme.borderBrandTonal1Disable
-    SecondaryButton(
-        modifier = modifier,
-        text = text,
-        textStyle = textStyle,
-        icon = icon,
-        iconGravity = iconGravity,
-        enabled = enabled,
-        interactionSource = interactionSource,
-        colors = ButtonColors(
-            contentColor = DigitalTheme.colorScheme.borderBrandTonal1,
-            containerColor = backgroundColor,
-            disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
-            disabledContainerColor = Color.Transparent
-        ),
-        borderColor = borderColor,
-        onClick = onClick
-    )
+    if (isSmall) {
+        SecondaryButtonSmall(
+            modifier = modifier,
+            text = text,
+            textStyle = textStyle,
+            icon = icon,
+            iconGravity = iconGravity,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = ButtonColors(
+                contentColor = DigitalTheme.colorScheme.borderBrandTonal1,
+                containerColor = backgroundColor,
+                disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
+                disabledContainerColor = Color.Transparent
+            ),
+            borderColor = borderColor,
+            onClick = onClick
+        )
+    } else {
+        SecondaryButton(
+            modifier = modifier,
+            text = text,
+            textStyle = textStyle,
+            icon = icon,
+            iconGravity = iconGravity,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = ButtonColors(
+                contentColor = DigitalTheme.colorScheme.borderBrandTonal1,
+                containerColor = backgroundColor,
+                disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
+                disabledContainerColor = Color.Transparent
+            ),
+            borderColor = borderColor,
+            onClick = onClick
+        )
+    }
 }
 
 @Composable
@@ -180,29 +201,50 @@ fun SecondaryButtonGrey(
     icon: Int = -1,
     iconGravity: Int = Gravity.START,
     enabled: Boolean = true,
+    isSmall: Boolean = false,
     onClick: () -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val backgroundColor = if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
     val borderColor = if (enabled) DigitalTheme.colorScheme.borderBase else DigitalTheme.colorScheme.borderBrandTonal1Disable
-    SecondaryButton(
-        modifier = modifier,
-        text = text,
-        textStyle = textStyle,
-        icon = icon,
-        iconGravity = iconGravity,
-        enabled = enabled,
-        interactionSource = interactionSource,
-        colors = ButtonColors(
-            contentColor = DigitalTheme.colorScheme.contentPrimary,
-            containerColor = backgroundColor,
-            disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
-            disabledContainerColor = Color.Transparent
-        ),
-        borderColor = borderColor,
-        onClick = onClick
-    )
+    if (isSmall) {
+        SecondaryButtonSmall(
+            modifier = modifier,
+            text = text,
+            textStyle = textStyle,
+            icon = icon,
+            iconGravity = iconGravity,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = ButtonColors(
+                contentColor = DigitalTheme.colorScheme.contentPrimary,
+                containerColor = backgroundColor,
+                disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
+                disabledContainerColor = Color.Transparent
+            ),
+            borderColor = borderColor,
+            onClick = onClick
+        )
+    } else {
+        SecondaryButton(
+            modifier = modifier,
+            text = text,
+            textStyle = textStyle,
+            icon = icon,
+            iconGravity = iconGravity,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = ButtonColors(
+                contentColor = DigitalTheme.colorScheme.contentPrimary,
+                containerColor = backgroundColor,
+                disabledContentColor = DigitalTheme.colorScheme.contentBrandTonal1Disable,
+                disabledContainerColor = Color.Transparent
+            ),
+            borderColor = borderColor,
+            onClick = onClick
+        )
+    }
 }
 
 @Composable
@@ -229,6 +271,33 @@ fun SecondaryButton(
         elevation = null,
         interactionSource = interactionSource
     ) { SetIconWithText(icon = icon, iconGravity = iconGravity, text = text, textStyle) }
+}
+
+@Composable
+fun SecondaryButtonSmall(
+    modifier: Modifier = Modifier,
+    text: String = "",
+    textStyle: TextStyle = DigitalTheme.typography.body2Bold,
+    icon: Int = -1,
+    iconGravity: Int = Gravity.START,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = MutableInteractionSource(),
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
+    contentPadding: PaddingValues = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+    borderColor: Color = Color.Transparent,
+    onClick: () -> Unit,
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        shape = ShapeTokens.shapePrimaryButtonSmall,
+        border = BorderStroke(1.dp, borderColor),
+        colors = colors,
+        contentPadding = contentPadding,
+        elevation = null,
+        interactionSource = interactionSource
+    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16, text = text, style = textStyle, iconAndTextSpacing = 4) }
 }
 
 @Composable
