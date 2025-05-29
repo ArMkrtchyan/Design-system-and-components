@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ListItem(
     modifier: Modifier = Modifier,
+    listItemType: ListItemType = ListItemType.DEFAULT,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 12,
 
@@ -61,21 +62,21 @@ fun ListItem(
     endIconSecondBackgroundRadius: Int = 4,
 
     title: String = "",
-    titleMaxLines: Int = 2,
-    titleColor: Color = DigitalTheme.colorScheme.contentPrimary,
-    titleStyle: TextStyle = DigitalTheme.typography.body1Bold,
+    titleMaxLines: Int? = null,
+    titleColor: Color? = null,
+    titleStyle: TextStyle? = null,
 
     description: String = "",
-    descriptionMaxLines: Int = 4,
-    descriptionColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    descriptionStyle: TextStyle = DigitalTheme.typography.body2Regular,
+    descriptionMaxLines: Int? = null,
+    descriptionColor: Color? = null,
+    descriptionStyle: TextStyle? = null,
 
     description2: String = "",
-    description2MaxLines: Int = 3,
+    description2MaxLines: Int? = null,
     description3: String = "",
-    description3MaxLines: Int = 3,
+    description3MaxLines: Int? = null,
     description4: String = "",
-    description4MaxLines: Int = 2,
+    description4MaxLines: Int? = null,
 
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
@@ -174,9 +175,17 @@ fun ListItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = if (controllerType == ControllerTypeEnum.SWITCH && isTitleOnly) Alignment.CenterVertically else Alignment.Top
                 ) {
-                    PrimaryText(modifier = Modifier.weight(1f), text = title, color = titleColor, style = titleStyle, maxLines = titleMaxLines, overflow = TextOverflow.Ellipsis)
+                    PrimaryText(
+                        modifier = Modifier.weight(1f),
+                        text = title,
+                        color = titleColor ?: listItemType.getTitleTextColor(),
+                        style = titleStyle ?: listItemType.getTitleStyle(),
+                        maxLines = titleMaxLines ?: listItemType.titleMaxLines,
+                        overflow = TextOverflow.Ellipsis
+                    )
                     if (badgeType != BadgeEnum.NONE) {
                         HorizontalSpacer(12)
                         Badge(
@@ -233,18 +242,54 @@ fun ListItem(
                         })
                     }
                 }
+                val newDescriptions = arrayListOf(description, description2, description3, description4).filter { it.isNotEmpty() }
+                val newDescription = if (newDescriptions.isNotEmpty()) newDescriptions.first() else ""
+                val newDescription2 = if (newDescriptions.size > 1) newDescriptions.first() else ""
+                val newDescription3 = if (newDescriptions.size > 2) newDescriptions.first() else ""
+                val newDescription4 = if (newDescriptions.size > 3) newDescriptions.first() else ""
+
+                val descriptionsList = arrayListOf(newDescription2, newDescription3, newDescription4)
+                val firstDescriptionMaxLines = listItemType.descriptionMaxLines - descriptionsList.count { it.isNotEmpty() }
+                val descriptions2List = arrayListOf(newDescription3, newDescription4)
+                val secondDescriptionMaxLines = listItemType.descriptionMaxLines - firstDescriptionMaxLines - descriptions2List.count { it.isNotEmpty() }
+                val descriptions3List = arrayListOf(description4)
+                val thirdDescriptionMaxLines = listItemType.descriptionMaxLines - secondDescriptionMaxLines - descriptions3List.count { it.isNotEmpty() }
 
                 if (description.isNotEmpty()) {
-                    PrimaryText(text = description, color = descriptionColor, style = descriptionStyle, maxLines = descriptionMaxLines, overflow = TextOverflow.Ellipsis)
+                    PrimaryText(
+                        text = newDescription,
+                        color = descriptionColor ?: listItemType.getDescriptionTextColor(),
+                        style = descriptionStyle ?: listItemType.getDescriptionStyle(),
+                        maxLines = descriptionMaxLines ?: firstDescriptionMaxLines,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
                 if (description2.isNotEmpty()) {
-                    PrimaryText(text = description2, color = descriptionColor, style = descriptionStyle, maxLines = description2MaxLines, overflow = TextOverflow.Ellipsis)
+                    PrimaryText(
+                        text = newDescription2,
+                        color = descriptionColor ?: listItemType.getDescriptionTextColor(),
+                        style = descriptionStyle ?: listItemType.getDescriptionStyle(),
+                        maxLines = description2MaxLines ?: secondDescriptionMaxLines,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
                 if (description3.isNotEmpty()) {
-                    PrimaryText(text = description3, color = descriptionColor, style = descriptionStyle, maxLines = description3MaxLines, overflow = TextOverflow.Ellipsis)
+                    PrimaryText(
+                        text = newDescription3,
+                        color = descriptionColor ?: listItemType.getDescriptionTextColor(),
+                        style = descriptionStyle ?: listItemType.getDescriptionStyle(),
+                        maxLines = description3MaxLines ?: thirdDescriptionMaxLines,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
                 if (description4.isNotEmpty()) {
-                    PrimaryText(text = description4, color = descriptionColor, style = descriptionStyle, maxLines = description4MaxLines, overflow = TextOverflow.Ellipsis)
+                    PrimaryText(
+                        text = newDescription4,
+                        color = descriptionColor ?: listItemType.getDescriptionTextColor(),
+                        style = descriptionStyle ?: listItemType.getDescriptionStyle(),
+                        maxLines = description4MaxLines ?: 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
             }
         }
