@@ -101,6 +101,7 @@ fun EmptyStateScreen(title: String = "") {
                 SetEmptyItemWithDivider(
                     dividerTitle = "Full screen empty state with lottie",
                     lottieFileName = "check_test.json",
+                    lottieColor = DigitalTheme.colorScheme.contentPrimary,
                     title = "Բացեք խնայողական հաշիվ",
                     description = "Բացեք խնայողական հաշիվ և խնայեք ձեր նպատակների համար",
                     buttonText = "Խնայել",
