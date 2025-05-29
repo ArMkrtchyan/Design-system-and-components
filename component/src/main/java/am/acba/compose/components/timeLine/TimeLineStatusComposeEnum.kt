@@ -79,7 +79,7 @@ enum class TimeLineStatusComposeEnum(
         NONE -> Color.Transparent
         DEFAULT -> DigitalTheme.colorScheme.backgroundTonal2
         PENDING -> DigitalTheme.colorScheme.backgroundTonal2
-        PENDING_2 -> DigitalTheme.colorScheme.backgroundTonal2
+        PENDING_2 -> DigitalTheme.colorScheme.backgroundInfoTonal1
         WARNING -> DigitalTheme.colorScheme.backgroundWarningTonal1
         SUCCESS -> DigitalTheme.colorScheme.backgroundSuccessTonal1
         DANGER -> DigitalTheme.colorScheme.backgroundDangerTonal1

@@ -38,7 +38,7 @@ enum class TimeLineStatusEnum(
         iconTint = R.attr.contentSecondary,
         iconBackground = R.drawable.background_rounded,
         iconBackgroundTint = R.attr.borderInfoTonal1,
-        contentBackgroundTint = R.attr.backgroundTonal2,
+        contentBackgroundTint = R.attr.backgroundInfoTonal1,
         linkTextColor = R.attr.contentInfoTonal1
     ),
     WARNING(
