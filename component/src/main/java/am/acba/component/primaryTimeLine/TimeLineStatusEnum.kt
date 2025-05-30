@@ -12,7 +12,7 @@ enum class TimeLineStatusEnum(
     val linkTextColor: Int = R.attr.contentPrimary,
 ) {
     NONE(
-        type = -1,
+        type = 0,
         icon = R.drawable.ic_ellipse,
         iconTint = R.attr.borderPrimaryTonal3,
     ),
@@ -34,11 +34,11 @@ enum class TimeLineStatusEnum(
     ),
     PENDING_2(
         type = 3,
-        icon = R.drawable.ic_attention_1,
+        icon = R.drawable.ic_info_1,
         iconTint = R.attr.contentSecondary,
         iconBackground = R.drawable.background_rounded,
         iconBackgroundTint = R.attr.borderInfoTonal1,
-        contentBackgroundTint = R.attr.backgroundTonal2,
+        contentBackgroundTint = R.attr.backgroundInfoTonal1,
         linkTextColor = R.attr.contentInfoTonal1
     ),
     WARNING(
@@ -50,22 +50,22 @@ enum class TimeLineStatusEnum(
         contentBackgroundTint = R.attr.backgroundWarningTonal1,
         linkTextColor = R.attr.contentWarningTonal1
     ),
-    SUCCESS(
-        type = 5,
-        icon = R.drawable.ic_success_small,
-        iconTint = R.attr.contentSecondary,
-        iconBackground = R.drawable.background_rounded,
-        iconBackgroundTint = R.attr.backgroundSuccess,
-        contentBackgroundTint = R.attr.backgroundSuccessTonal1,
-        linkTextColor = R.attr.contentSuccessTonal1
-    ),
     DANGER(
-        type = 6,
+        type = 5,
         icon = R.drawable.ic_attention_1,
         iconTint = R.attr.contentSecondary,
         iconBackground = R.drawable.background_rounded,
         iconBackgroundTint = R.attr.backgroundDanger,
         contentBackgroundTint = R.attr.backgroundDangerTonal1,
         linkTextColor = R.attr.contentDangerTonal1
+    ),
+    SUCCESS(
+        type = 6,
+        icon = R.drawable.ic_success_small,
+        iconTint = R.attr.contentSecondary,
+        iconBackground = R.drawable.background_rounded,
+        iconBackgroundTint = R.attr.backgroundSuccess,
+        contentBackgroundTint = R.attr.backgroundSuccessTonal1,
+        linkTextColor = R.attr.contentSuccessTonal1
     );
 }
