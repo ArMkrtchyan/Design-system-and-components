@@ -22,9 +22,11 @@ fun PrimaryDivider(
     modifyTextAllCaps: Boolean = true,
     dividerColor: Color = DigitalTheme.colorScheme.borderPrimaryTonal1,
     thickness: Dp = 1.dp,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
     ) {
         HorizontalDivider(modifier = Modifier.weight(1f), color = dividerColor, thickness = thickness)
         text?.let {
