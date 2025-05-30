@@ -11,7 +11,7 @@ enum class TimeLineStatusComposeEnum(
     val verticalPadding: Int = 8
 ) {
     NONE(
-        type = -1,
+        type = 0,
         icon = R.drawable.ic_ellipse,
         verticalPadding = 0
     ),
@@ -25,19 +25,19 @@ enum class TimeLineStatusComposeEnum(
     ),
     PENDING_2(
         type = 3,
-        icon = R.drawable.ic_attention_1,
+        icon = R.drawable.ic_info_1,
     ),
     WARNING(
         type = 4,
         icon = R.drawable.ic_attention_1,
     ),
-    SUCCESS(
-        type = 5,
-        icon = R.drawable.ic_success_small,
-    ),
     DANGER(
-        type = 6,
+        type = 5,
         icon = R.drawable.ic_attention_1,
+    ),
+    SUCCESS(
+        type = 6,
+        icon = R.drawable.ic_success_small,
     );
 
 

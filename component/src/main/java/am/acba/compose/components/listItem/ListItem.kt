@@ -27,12 +27,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -112,8 +111,10 @@ fun ListItem(
     showDivider: Boolean = false,
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
-
+    controllerSelected: Boolean = false,
+    onRadioButtonClick: () -> Unit = {},
     onCheckedChangeListener: (Boolean) -> Unit = {},
+
     onClick: () -> Unit = {}
 ) {
     Column(
@@ -176,12 +177,12 @@ fun ListItem(
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = if (controllerType == ControllerTypeEnum.SWITCH && isTitleOnly) Alignment.CenterVertically else Alignment.Top
+                    verticalAlignment = if (isTitleOnly) Alignment.CenterVertically else Alignment.Top
                 ) {
                     PrimaryText(
                         modifier = Modifier
                             .weight(1f)
-                            .align(Alignment.CenterVertically),
+                            .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top),
                         text = title,
                         color = titleColor ?: listItemType.getTitleTextColor(),
                         style = titleStyle ?: listItemType.getTitleStyle(),
@@ -225,21 +226,16 @@ fun ListItem(
                             iconPadding = endIconSecondPadding.dp
                         )
                     }
-                    val isChecked = remember { mutableStateOf(false) }
+
                     when (controllerType) {
                         ControllerTypeEnum.NONE -> Unit
-                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(checked = isChecked.value, onCheckedChange = {
-                            isChecked.value = it
-                            onCheckedChangeListener.invoke(it)
+                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(state = if (controllerSelected) ToggleableState.On else ToggleableState.Off, onClick = {
+                            onCheckedChangeListener.invoke(it == ToggleableState.On)
                         })
 
-                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(selected = isChecked.value, onClick = {
-                            isChecked.value = true
-                            onCheckedChangeListener.invoke(true)
-                        })
+                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(selected = controllerSelected, onClick = onRadioButtonClick)
 
-                        ControllerTypeEnum.SWITCH -> PrimarySwitch(checked = isChecked.value, onCheckedChange = {
-                            isChecked.value = it
+                        ControllerTypeEnum.SWITCH -> PrimarySwitch(checked = controllerSelected, onCheckedChange = {
                             onCheckedChangeListener.invoke(it)
                         })
                     }
@@ -326,7 +322,8 @@ fun PrimaryListItemPreview() {
                 //     description2 = "Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 ",
                 //    description3 = "Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 ",
                 description4 = "Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4",
-                endIcon = R.drawable.ic_right
+                endIcon = R.drawable.ic_right,
+                controllerType = ControllerTypeEnum.CHECK_BOX
             )
         }
     }

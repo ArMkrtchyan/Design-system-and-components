@@ -25,6 +25,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -215,6 +217,7 @@ fun ListItemScreen(title: String = "") {
                     endIconPadding = 5,
                     endIconSecond = R.drawable.ic_right
                 )
+                val checkBoxState = remember { mutableStateOf(false) }
                 ListItemWithDivider(
                     title = "Supporting line ",
                     avatarIcon = R.drawable.ic_info,
@@ -222,8 +225,13 @@ fun ListItemScreen(title: String = "") {
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal3,
                     avatarIconPadding = 8.dp,
                     avatarBackgroundRadius = 8,
-                    controllerType = ControllerTypeEnum.CHECK_BOX
+                    controllerType = ControllerTypeEnum.CHECK_BOX,
+                    controllerSelected = checkBoxState.value,
+                    onCheckedChangeListener = {
+                        checkBoxState.value = it
+                    }
                 )
+                val switchState = remember { mutableStateOf(false) }
                 ListItemWithDivider(
                     title = "Supporting line ",
                     avatarIcon = R.drawable.ic_info,
@@ -231,8 +239,13 @@ fun ListItemScreen(title: String = "") {
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal3,
                     avatarIconPadding = 8.dp,
                     avatarBackgroundRadius = 8,
-                    controllerType = ControllerTypeEnum.SWITCH
+                    controllerType = ControllerTypeEnum.SWITCH,
+                    controllerSelected = switchState.value,
+                    onCheckedChangeListener = {
+                        switchState.value = it
+                    }
                 )
+                val radioButtonState = remember { mutableStateOf(false) }
                 ListItemWithDivider(
                     title = "Supporting line ",
                     avatarIcon = R.drawable.ic_info,
@@ -240,7 +253,11 @@ fun ListItemScreen(title: String = "") {
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal3,
                     avatarIconPadding = 8.dp,
                     avatarBackgroundRadius = 8,
-                    controllerType = ControllerTypeEnum.RADIO_BUTTON
+                    controllerType = ControllerTypeEnum.RADIO_BUTTON,
+                    controllerSelected = radioButtonState.value,
+                    onRadioButtonClick = {
+                        radioButtonState.value = !radioButtonState.value
+                    }
                 )
             }
         }
@@ -321,8 +338,10 @@ private fun ListItemWithDivider(
     showDivider: Boolean = false,
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
-
+    controllerSelected: Boolean = false,
+    onRadioButtonClick: () -> Unit = {},
     onCheckedChangeListener: (Boolean) -> Unit = {},
+
     onClick: () -> Unit = {}
 ) {
     PrimaryDivider()
@@ -390,6 +409,8 @@ private fun ListItemWithDivider(
         badgeText = badgeText,
         showDivider = showDivider,
         controllerType = controllerType,
+        controllerSelected = controllerSelected,
+        onRadioButtonClick = onRadioButtonClick,
         onCheckedChangeListener = onCheckedChangeListener,
         onClick = onClick
     )
