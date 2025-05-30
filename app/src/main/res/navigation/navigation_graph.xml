@@ -315,7 +315,7 @@
         android:label="CardViewComposeFragment" />
     <fragment
         android:id="@+id/tablesComposeFragment"
-        android:name="am.acba.composeComponents.tabLayout.TabLayoutComposeFragment"
+        android:name="am.acba.composeComponents.tables.TablesComposeFragment"
         android:label="TabLayoutComposeFragment" />
     <fragment
         android:id="@+id/datePickerComposeFragment"
