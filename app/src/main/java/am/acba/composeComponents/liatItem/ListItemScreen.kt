@@ -100,31 +100,31 @@ fun ListItemScreen(title: String = "") {
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds",
                     avatarIcon = R.drawable.ic_info,
-                    description = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
+                    description = "Description 1 Description 1 Description 1 Description 1 Description  1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 ",
                     endIcon = R.drawable.ic_right
                 )
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds",
                     avatarIcon = R.drawable.ic_info,
-                    description = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description2 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
+                    description = "Description 1 Description 1 Description 1 Description 1 Description 1  1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 ",
+                    description2 = "Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 ",
                     endIcon = R.drawable.ic_right
                 )
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds",
                     avatarIcon = R.drawable.ic_info,
-                    description = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description2 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description3 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
+                    description = "Description 1 Description 1 Description 1 Description 1 Description  Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 ",
+                    description2 = "Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 ",
+                    description3 = "Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 ",
                     endIcon = R.drawable.ic_right
                 )
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds",
                     avatarIcon = R.drawable.ic_info,
-                    description = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description2 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description3 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
-                    description4 = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
+                    description = "Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 ",
+                    description2 = "Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 ",
+                    description3 = "Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 ",
+                    description4 = "Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4",
                     endIcon = R.drawable.ic_right
                 )
                 ListItemWithDivider(
@@ -141,6 +141,17 @@ fun ListItemScreen(title: String = "") {
                     avatarIconPadding = 8.dp,
                     avatarBackgroundRadius = 8,
                     endIcon = R.drawable.ic_right
+                )
+                ListItemWithDivider(
+                    title = "Supporting line text lorem  Supporting line text lorem  ",
+                    avatarType = AvatarEnum.IMAGE,
+                    listItemStartAvatarSizeEnum = ListItemStartAvatarSizeEnum.AVATAR,
+                    avatarIcon = R.drawable.default_avatar,
+                    avatarBadgeType = BadgeEnum.ICON,
+                    avatarBadgeIcon = R.drawable.ic_camera,
+                    avatarBadgeIconColor = DigitalTheme.colorScheme.contentBrand,
+                    avatarBadgeBackgroundColor = DigitalTheme.colorScheme.backgroundTonal3,
+                    endIcon = R.drawable.ic_right,
                 )
                 ListItemWithDivider(
                     title = "Supporting line text lorem  Supporting line text lorem  Supporting line text lorem ",
@@ -275,7 +286,6 @@ private fun ListItemWithDivider(
     description3: String = "",
     description3MaxLines: Int? = null,
     description4: String = "",
-    description4MaxLines: Int? = null,
 
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
@@ -349,7 +359,6 @@ private fun ListItemWithDivider(
         description3 = description3,
         description3MaxLines = description3MaxLines,
         description4 = description4,
-        description4MaxLines = description4MaxLines,
         avatarBackgroundModifier = avatarBackgroundModifier,
         avatarBadgeModifier = avatarBadgeModifier,
         avatarContentModifier = avatarContentModifier,

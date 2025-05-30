@@ -1,5 +1,6 @@
 package am.acba.compose.components.listItem
 
+import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
@@ -76,7 +77,6 @@ fun ListItem(
     description3: String = "",
     description3MaxLines: Int? = null,
     description4: String = "",
-    description4MaxLines: Int? = null,
 
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
@@ -179,7 +179,9 @@ fun ListItem(
                     verticalAlignment = if (controllerType == ControllerTypeEnum.SWITCH && isTitleOnly) Alignment.CenterVertically else Alignment.Top
                 ) {
                     PrimaryText(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically),
                         text = title,
                         color = titleColor ?: listItemType.getTitleTextColor(),
                         style = titleStyle ?: listItemType.getTitleStyle(),
@@ -244,50 +246,56 @@ fun ListItem(
                 }
                 val newDescriptions = arrayListOf(description, description2, description3, description4).filter { it.isNotEmpty() }
                 val newDescription = if (newDescriptions.isNotEmpty()) newDescriptions.first() else ""
-                val newDescription2 = if (newDescriptions.size > 1) newDescriptions.first() else ""
-                val newDescription3 = if (newDescriptions.size > 2) newDescriptions.first() else ""
-                val newDescription4 = if (newDescriptions.size > 3) newDescriptions.first() else ""
+                val newDescription2 = if (newDescriptions.size > 1) newDescriptions[1] else ""
+                val newDescription3 = if (newDescriptions.size > 2) newDescriptions[2] else ""
+                val newDescription4 = if (newDescriptions.size > 3) newDescriptions[3] else ""
 
                 val descriptionsList = arrayListOf(newDescription2, newDescription3, newDescription4)
-                val firstDescriptionMaxLines = listItemType.descriptionMaxLines - descriptionsList.count { it.isNotEmpty() }
-                val descriptions2List = arrayListOf(newDescription3, newDescription4)
-                val secondDescriptionMaxLines = listItemType.descriptionMaxLines - firstDescriptionMaxLines - descriptions2List.count { it.isNotEmpty() }
-                val descriptions3List = arrayListOf(description4)
-                val thirdDescriptionMaxLines = listItemType.descriptionMaxLines - secondDescriptionMaxLines - descriptions3List.count { it.isNotEmpty() }
+                val newDescriptionMaxLines = if (descriptionMaxLines == null || descriptionMaxLines < 1) null else descriptionMaxLines
+                val newDescription2MaxLines = if (description2MaxLines == null || description2MaxLines < 1) null else description2MaxLines
+                val newDescription3MaxLines = if (description3MaxLines == null || description3MaxLines < 1) null else description3MaxLines
 
-                if (description.isNotEmpty()) {
+                val firstDescriptionMaxLines = newDescriptionMaxLines ?: (listItemType.descriptionMaxLines - descriptionsList.count { it.isNotEmpty() })
+                val descriptions2List = arrayListOf(newDescription3, newDescription4)
+                val secondDescriptionMaxLines =
+                    newDescription2MaxLines ?: (listItemType.descriptionMaxLines - firstDescriptionMaxLines - descriptions2List.count { it.isNotEmpty() })
+                val descriptions3List = arrayListOf(newDescription4)
+                val thirdDescriptionMaxLines = newDescription3MaxLines
+                    ?: (listItemType.descriptionMaxLines - (firstDescriptionMaxLines + secondDescriptionMaxLines) - descriptions3List.count { it.isNotEmpty() })
+
+                if (newDescription.isNotEmpty()) {
                     PrimaryText(
                         text = newDescription,
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
-                        maxLines = descriptionMaxLines ?: firstDescriptionMaxLines,
+                        maxLines = firstDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-                if (description2.isNotEmpty()) {
+                if (newDescription2.isNotEmpty()) {
                     PrimaryText(
                         text = newDescription2,
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
-                        maxLines = description2MaxLines ?: secondDescriptionMaxLines,
+                        maxLines = secondDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-                if (description3.isNotEmpty()) {
+                if (newDescription3.isNotEmpty()) {
                     PrimaryText(
                         text = newDescription3,
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
-                        maxLines = description3MaxLines ?: thirdDescriptionMaxLines,
+                        maxLines = thirdDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
-                if (description4.isNotEmpty()) {
+                if (newDescription4.isNotEmpty()) {
                     PrimaryText(
                         text = newDescription4,
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
-                        maxLines = description4MaxLines ?: 1,
+                        maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
@@ -312,7 +320,13 @@ fun PrimaryListItemPreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             ListItem(
-                title = "djcknsdkjbncsdbcsdbcjhds"
+                title = "djcknsdkjbncsdbcsdbcjhds",
+                avatarIcon = R.drawable.ic_info,
+                description = "Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 Description 1 ",
+                //     description2 = "Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 Description 2 ",
+                //    description3 = "Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 ",
+                description4 = "Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4",
+                endIcon = R.drawable.ic_right
             )
         }
     }
