@@ -55,7 +55,7 @@ fun ExpandableViewScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 val expanded = remember { mutableStateOf(false) }
-                Accordion(avatarIcon = am.acba.component.R.drawable.ic_income, expanded = expanded, onClick = { expanded.value = !expanded.value }) {
+                Accordion(avatarIcon = R.drawable.ic_income, expanded = expanded, onClick = { expanded.value = !expanded.value }) {
                     ListItem(
                         title = "djcknsdkjbncsdbcsdbcjhds",
                         avatarIcon = R.drawable.ic_info,
