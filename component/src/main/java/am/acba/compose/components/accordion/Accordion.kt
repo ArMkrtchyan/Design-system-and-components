@@ -1,7 +1,9 @@
 package am.acba.compose.components.accordion
 
+import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.VerticalSpacer
+import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
@@ -11,12 +13,12 @@ import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,12 +27,16 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -40,6 +46,21 @@ fun Accordion(
     modifier: Modifier = Modifier,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 12,
+
+    title: String,
+    titleColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    titleStyle: TextStyle = DigitalTheme.typography.smallRegular,
+
+    endText: String? = null,
+    endTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    endTextStyle: TextStyle = DigitalTheme.typography.body2Bold,
+
+    currency: String? = null,
+    currencyColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    currencyStyle: TextStyle = DigitalTheme.typography.body2Regular,
+
+    endIcon: Int? = R.drawable.ic_down,
+    endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
 
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
@@ -67,6 +88,13 @@ fun Accordion(
     onClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit)? = null
 ) {
+    val arrowRotation by animateFloatAsState(
+        targetValue = if (expanded.value) 180f else 0f,
+        label = "accordion-arrow",
+        animationSpec = tween(
+            easing = LinearOutSlowInEasing
+        )
+    )
     Column(
         modifier = modifier
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
@@ -81,37 +109,56 @@ fun Accordion(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.CenterVertically
         ) {
             if (showStartAvatar) {
-                Box(
-
-                ) {
-                    Avatar(
-                        backgroundModifier = avatarBackgroundModifier,
-                        badgeModifier = avatarBadgeModifier,
-                        contentModifier = avatarContentModifier,
-                        avatarType = AvatarEnum.ICON,
-                        avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
-                        backgroundColor = avatarBackgroundColor,
-                        backgroundRadius = avatarBackgroundRadius,
-                        icon = avatarIcon,
-                        iconColor = avatarIconColor,
-                        iconPadding = avatarIconPadding,
-                        imageUrl = avatarImageUrl,
-                        clipPercent = avatarClipPercent,
-                        imageCornerRadius = avatarImageCornerRadius,
-                        contentScale = avatarContentScale,
-                        text = avatarText,
-                        textColor = avatarTextColor,
-                        badgeType = avatarBadgeType,
-                        badgeIcon = avatarBadgeIcon,
-                        badgeBackgroundColor = avatarBadgeBackgroundColor,
-                        badgeIconColor = avatarBadgeIconColor,
-                        badgeBorderColor = avatarBadgeBorderColor,
-                    )
-                }
+                Avatar(
+                    backgroundModifier = avatarBackgroundModifier,
+                    badgeModifier = avatarBadgeModifier,
+                    contentModifier = avatarContentModifier,
+                    avatarType = AvatarEnum.ICON,
+                    avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
+                    backgroundColor = avatarBackgroundColor,
+                    backgroundRadius = avatarBackgroundRadius,
+                    icon = avatarIcon,
+                    iconColor = avatarIconColor,
+                    iconPadding = avatarIconPadding,
+                    imageUrl = avatarImageUrl,
+                    clipPercent = avatarClipPercent,
+                    imageCornerRadius = avatarImageCornerRadius,
+                    contentScale = avatarContentScale,
+                    text = avatarText,
+                    textColor = avatarTextColor,
+                    badgeType = avatarBadgeType,
+                    badgeIcon = avatarBadgeIcon,
+                    badgeBackgroundColor = avatarBadgeBackgroundColor,
+                    badgeIconColor = avatarBadgeIconColor,
+                    badgeBorderColor = avatarBadgeBorderColor,
+                )
                 HorizontalSpacer(16)
+            }
+            PrimaryText(text = title, style = titleStyle, color = titleColor, modifier = Modifier.weight(1f), maxLines = 1)
+            Row(
+                modifier = Modifier
+                    .wrapContentHeight(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (!endText.isNullOrEmpty() || !currency.isNullOrEmpty()) {
+                    HorizontalSpacer(8)
+                }
+                if (!endText.isNullOrEmpty()) {
+                    PrimaryText(text = endText, style = endTextStyle, color = endTextColor, maxLines = 1)
+                }
+                if (!endText.isNullOrEmpty() && !currency.isNullOrEmpty()) {
+                    HorizontalSpacer(2)
+                }
+                if (!currency.isNullOrEmpty()) {
+                    PrimaryText(text = currency, style = currencyStyle, color = currencyColor, maxLines = 1)
+                }
+                if (endIcon != null) {
+                    HorizontalSpacer(8)
+                    PrimaryIcon(painter = painterResource(endIcon), modifier = Modifier.rotate(arrowRotation), tint = endIconColor)
+                }
             }
         }
         content?.let {
@@ -164,8 +211,8 @@ fun AccordionPreview() {
                 .padding(10.dp)
         ) {
             val expanded = remember { mutableStateOf(true) }
-            Accordion(avatarIcon = am.acba.component.R.drawable.ic_income, expanded = expanded, onClick = { expanded.value = !expanded.value }) {
-                PrimaryText(text = "hcdujbjhdscb dsjchbjhdsbc jdshbcjhds dshjiubcsd cjhbds jchsdb cjhbsd chjsd jh")
+            Accordion(avatarIcon = R.drawable.ic_income, title = "Փոխանցում հաշվին ", expanded = expanded, onClick = { expanded.value = !expanded.value }) {
+                PrimaryText(text = "ՊՔ սպասարկման միջն./վճ. գանձում")
             }
         }
     }
