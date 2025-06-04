@@ -19,7 +19,7 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
     private var list4 = arrayListOf<String>()
     override fun FragmentProductDescriptionCardBinding.initView() {
         list1 = arrayListOf(
-            Pair(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.ic_info), "-50% տարեկան վճար"),
+            Pair(null, "-50% տարեկան վճար"),
             Pair(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.ic_card), "Բարերար"),
             Pair(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.ic_id_card), "Նոր"),
         )
@@ -47,7 +47,7 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
         mBinding.productCardFull.setDescription("Հետևիր խնայողություններիդ աճին")
         mBinding.productCardFull.setImage("https://bcw-media.s3.ap-northeast-1.amazonaws.com/text_to_image_topbanner_mb_1_f66b5f345b.jpg")
         mBinding.productCardFull.setBullets(list3)
-        mBinding.productCardExcample.setBadgesGroup(list1)
+        mBinding.productCardExcample.setBadgesGroup(list1, am.acba.component.R.attr.backgroundWarning)
         mBinding.productCardExcample.setBullets(list3)
     }
 
@@ -55,7 +55,7 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
         mBinding.productCard1.setTitle("Խնայողական")
         mBinding.productCard1.setSubTitle("ԹՎԱՅԻՆ ՔԱՐՏ")
         mBinding.productCard1.setImage(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.coins_illustration))
-        mBinding.productCard1.setBadgesGroup(list1)
+        mBinding.productCard1.setBadgesGroup(list1, am.acba.component.R.attr.backgroundWarning)
         mBinding.productCard1.setBullets(list3)
     }
 
@@ -69,7 +69,7 @@ class ProductDescriptionCardFragment : BaseViewBindingFragment<FragmentProductDe
     private fun setProductCard3() {
         mBinding.productCard3.setTitle("Խնայողական")
         mBinding.productCard3.setImage(ContextCompat.getDrawable(requireContext(), am.acba.component.R.drawable.coins_illustration))
-        mBinding.productCard3.setBadgesGroup(list2)
+        mBinding.productCard3.setBadgesGroup(list2, am.acba.component.R.attr.backgroundWarning)
         mBinding.productCard3.setBullets(list3)
     }
 

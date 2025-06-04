@@ -46,7 +46,8 @@ class PrimaryProductCard : FrameLayout {
             image = getDrawable(R.styleable.PrimaryProductCard_productCardImage)
             val cardHeight = getDimensionPixelOffset(R.styleable.PrimaryProductCard_productCardHeight, -2)
             val backgroundColor =
-                getColorStateList(R.styleable.PrimaryProductCard_productCardBackgroundColor) ?: context.getColorStateListFromAttr(R.attr.backgroundTonal1)
+                getColorStateList(R.styleable.PrimaryProductCard_productCardBackgroundColor)
+                    ?: context.getColorStateListFromAttr(R.attr.backgroundTonal1)
             setTitle(title)
             setSubTitle(subTitle)
             setDescription(description)
@@ -111,19 +112,35 @@ class PrimaryProductCard : FrameLayout {
         }
     }
 
-    fun setBadgesGroup(badgesGroup: List<Pair<Drawable?, String>>) {
+    fun setBadgesGroup(
+        badgesGroup: List<Pair<Drawable?, String>>,
+        backgroundTintColor: Int = R.attr.backgroundPending
+    ) {
         binding.flow.referencedIds = intArrayOf()
         this.badgesGroup.forEach { binding.parentLayout.removeView(it) }
         this.badgesGroup.clear()
+
         badgesGroup.forEach {
             val badgeGroupView = LayoutBadgesGroupBinding.inflate(context.inflater(), this, false)
             badgeGroupView.root.id = View.generateViewId()
-            badgeGroupView.startIcon.setImageDrawable(it.first)
+
+            // Use the backgroundTintColor, which defaults to Color.TRANSPARENT if not provided
+            badgeGroupView.badgeParent.backgroundTintList = context.getColorStateListFromAttr(backgroundTintColor)
+
+            if (it.first == null) {
+                badgeGroupView.startIcon.visibility = View.GONE
+            } else {
+                badgeGroupView.startIcon.visibility = View.VISIBLE
+                badgeGroupView.startIcon.setImageDrawable(it.first)
+            }
+
             badgeGroupView.title.text = it.second
+
             binding.flow.addView(badgeGroupView.root)
             binding.parentLayout.addView(badgeGroupView.root)
             this.badgesGroup.add(badgeGroupView.root)
         }
+
         binding.flow.referencedIds = this.badgesGroup.map { it.id }.toIntArray()
         binding.flow.isVisible = badgesGroup.isNotEmpty()
         invalidate()
