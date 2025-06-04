@@ -81,7 +81,7 @@ class CurrencyInput @JvmOverloads constructor(
                 helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
                 currencyInputMaxLength = getInt(R.styleable.CurrencyInput_currencyInputMaxLength, 10)
                 maxAmount =
-                    getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, 0f).toDouble()
+                    getFloat(R.styleable.CurrencyInput_currencyInputMaxAmount, -1f).toDouble()
                 minAmount =
                     getFloat(R.styleable.CurrencyInput_currencyInputMinAmount, 0F).toDouble()
                 formattingWithOutDot =
@@ -217,7 +217,7 @@ class CurrencyInput @JvmOverloads constructor(
         val amount = getFloatAmount()
         val text = binding.amount.editText?.text ?: ""
         val isBelowMin = minAmount != 0.0 && amount < minAmount
-        val isAboveMax = maxAmount != 0.0 && amount > maxAmount
+        val isAboveMax = maxAmount > -1.0 && amount > maxAmount
         if (text.isEmpty()) isFirstFocusable = true
         isValidAmount = text.isEmpty() || !(isBelowMin || isAboveMax)
 
@@ -543,7 +543,9 @@ class CurrencyInput @JvmOverloads constructor(
                 .takeIf { it.isNotEmpty() }
                 ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
 
-            setMaxLengthForFormattedText(formattedText.length)
+            val textLength = if (formattedText.isEmpty()) currencyInputMaxLength else formattedText.length
+            setMaxLengthForFormattedText(textLength)
+
             binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
         }
     }
