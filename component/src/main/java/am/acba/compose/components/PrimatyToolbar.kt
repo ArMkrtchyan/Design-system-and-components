@@ -28,7 +28,7 @@ fun PrimaryToolbar(
         title = {
             PrimaryText(
                 modifier = Modifier
-                    .padding(end = 16.dp),
+                    .padding(end = 16.dp, start = 16.dp),
                 text = title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis

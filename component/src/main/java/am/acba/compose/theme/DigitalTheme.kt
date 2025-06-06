@@ -1,5 +1,7 @@
 package am.acba.compose.theme
 
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalRippleConfiguration
@@ -41,7 +43,14 @@ fun DigitalTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
     val resources = if (darkTheme) darkResourcesScheme() else lightResourcesScheme()
     val colorPalette = remember { colors }
     val resourcesPalette = remember { resources }
+    val indication = object : Indication {}
     colorPalette.update(colors)
     resourcesPalette.update(resources)
-    CompositionLocalProvider(LocalThemedResources provides resourcesPalette, LocalCustomColors provides colorPalette, LocalRippleConfiguration provides null, content = content)
+    CompositionLocalProvider(
+        LocalThemedResources provides resourcesPalette,
+        LocalCustomColors provides colorPalette,
+        LocalRippleConfiguration provides null,
+        LocalIndication provides indication,
+        content = content
+    )
 }
