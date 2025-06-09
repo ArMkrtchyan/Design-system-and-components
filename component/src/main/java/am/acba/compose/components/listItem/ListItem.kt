@@ -153,9 +153,7 @@ fun ListItem(
                 ) {
                     Avatar(
                         backgroundModifier = avatarBackgroundModifier
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/startIcon"),
                         badgeModifier = avatarBadgeModifier,
                         contentModifier = avatarContentModifier,
@@ -192,9 +190,7 @@ fun ListItem(
                         modifier = Modifier
                             .weight(1f)
                             .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/title"),
                         text = title,
                         color = titleColor ?: listItemType.getTitleTextColor(),
@@ -211,9 +207,7 @@ fun ListItem(
                             iconColor = badgeIconColor,
                             badgeBorderColor = badgeBorderColor,
                             modifier = badgeModifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/badge"),
                             text = badgeText,
                             textColor = badgeTextColor
@@ -230,9 +224,7 @@ fun ListItem(
                             iconColor = endIconColor,
                             iconPadding = endIconPadding.dp,
                             backgroundModifier = Modifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/endIcon")
                         )
                     }
@@ -247,38 +239,32 @@ fun ListItem(
                             iconColor = endIconSecondColor,
                             iconPadding = endIconSecondPadding.dp,
                             backgroundModifier = Modifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/endIconSecond")
                         )
                     }
 
                     when (controllerType) {
                         ControllerTypeEnum.NONE -> Unit
-                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(state = if (controllerSelected) ToggleableState.On else ToggleableState.Off, onClick = {
-                            onCheckedChangeListener.invoke(it == ToggleableState.On)
-                        },
+                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(
+                            state = if (controllerSelected) ToggleableState.On else ToggleableState.Off,
+                            onClick = { onCheckedChangeListener.invoke(it == ToggleableState.On) },
                             modifier = Modifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/listItemCheckbox"))
 
-                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(selected = controllerSelected, onClick = onRadioButtonClick,
+                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(
+                            selected = controllerSelected,
+                            onClick = onRadioButtonClick,
                             modifier = Modifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/listItemRadioButton"))
 
-                        ControllerTypeEnum.SWITCH -> PrimarySwitch(checked = controllerSelected, onCheckedChange = {
-                            onCheckedChangeListener.invoke(it)
-                        },
+                        ControllerTypeEnum.SWITCH -> PrimarySwitch(
+                            checked = controllerSelected,
+                            onCheckedChange = { onCheckedChangeListener.invoke(it) },
                             modifier = Modifier
-                                .semantics {
-                                    testTagsAsResourceId = true
-                                }
+                                .semantics { testTagsAsResourceId = true }
                                 .testTag("android:id/listItemSwitcher"))
                     }
                 }
@@ -309,9 +295,7 @@ fun ListItem(
                         maxLines = firstDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/description")
                     )
                 }
@@ -323,9 +307,7 @@ fun ListItem(
                         maxLines = secondDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/description2")
                     )
                 }
@@ -337,9 +319,7 @@ fun ListItem(
                         maxLines = thirdDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/description3")
                     )
                 }
@@ -351,9 +331,7 @@ fun ListItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .semantics {
-                                testTagsAsResourceId = true
-                            }
+                            .semantics { testTagsAsResourceId = true }
                             .testTag("android:id/description4")
                     )
                 }
