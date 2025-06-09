@@ -36,7 +36,7 @@ fun PrimaryToolbar(
                     .semantics {
                         testTagsAsResourceId = true
                     }
-                    .testTag("android:id/`centre_title`"),
+                    .testTag("android:id/centre_title"),
                 text = title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -54,7 +54,7 @@ fun PrimaryToolbar(
                 .semantics {
                     testTagsAsResourceId = true
                 }
-                .testTag("android:id/`leftIcon`")) {
+                .testTag("android:id/leftIcon")) {
                 PrimaryIcon(painterResource(R.drawable.ic_back))
             }
         }
