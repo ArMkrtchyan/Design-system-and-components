@@ -30,9 +30,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,12 +55,12 @@ fun ExpandableCard(
     statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusAlign: Alignment = Alignment.TopEnd,
     expanded: Boolean = false,
+    onCardClick: () -> Unit = {},
     pinedContent: @Composable () -> Unit,
     animatedContent: @Composable () -> Unit,
 ) {
-    val expandedState = remember { mutableStateOf(expanded) }
     val arrowRotation by animateFloatAsState(
-        targetValue = if (expandedState.value) 180f else 0f,
+        targetValue = if (expanded) 180f else 0f,
         label = "accordion-arrow",
         animationSpec = tween(
             durationMillis = 500,
@@ -74,9 +72,7 @@ fun ExpandableCard(
             .fillMaxWidth()
             .background(backgroundColor, shape = RoundedCornerShape(backgroundRadius.dp))
             .padding(top = 16.dp)
-            .clickable {
-                expandedState.value = !expandedState.value
-            }
+            .clickable { onCardClick.invoke() }
     ) {
         Column(
             Modifier
@@ -89,7 +85,7 @@ fun ExpandableCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 pinedContent.invoke()
-                AnimatedContent(expandedState, animatedContent)
+                AnimatedContent(expanded, animatedContent)
             }
             Box(
                 modifier = Modifier
@@ -122,7 +118,7 @@ fun ExpandableCard(
 
 
 @Composable
-private fun AnimatedContent(expanded: MutableState<Boolean>, animatedContent: @Composable () -> Unit) {
+private fun AnimatedContent(expanded: Boolean, animatedContent: @Composable () -> Unit) {
     val enterTransition = remember {
         expandVertically(
             expandFrom = Alignment.Top,
@@ -145,7 +141,7 @@ private fun AnimatedContent(expanded: MutableState<Boolean>, animatedContent: @C
     }
 
     AnimatedVisibility(
-        visible = expanded.value,
+        visible = expanded,
         enter = enterTransition,
         exit = exitTransition
     ) {
