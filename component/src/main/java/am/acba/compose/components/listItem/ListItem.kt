@@ -28,9 +28,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -38,6 +42,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@ExperimentalComposeUiApi
 @Composable
 fun ListItem(
     modifier: Modifier = Modifier,
@@ -147,7 +152,9 @@ fun ListItem(
                     modifier = Modifier.padding(top = if (isTitleOnly) 0.dp else 4.dp)
                 ) {
                     Avatar(
-                        backgroundModifier = avatarBackgroundModifier,
+                        backgroundModifier = avatarBackgroundModifier
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/startIcon"),
                         badgeModifier = avatarBadgeModifier,
                         contentModifier = avatarContentModifier,
                         avatarType = avatarType,
@@ -182,7 +189,9 @@ fun ListItem(
                     PrimaryText(
                         modifier = Modifier
                             .weight(1f)
-                            .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top),
+                            .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/title"),
                         text = title,
                         color = titleColor ?: listItemType.getTitleTextColor(),
                         style = titleStyle ?: listItemType.getTitleStyle(),
@@ -197,7 +206,9 @@ fun ListItem(
                             backgroundColor = badgeBackgroundColor,
                             iconColor = badgeIconColor,
                             badgeBorderColor = badgeBorderColor,
-                            modifier = badgeModifier,
+                            modifier = badgeModifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/badge"),
                             text = badgeText,
                             textColor = badgeTextColor
                         )
@@ -211,7 +222,10 @@ fun ListItem(
                             backgroundRadius = endIconBackgroundRadius,
                             icon = endIcon,
                             iconColor = endIconColor,
-                            iconPadding = endIconPadding.dp
+                            iconPadding = endIconPadding.dp,
+                            backgroundModifier = Modifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/endIcon")
                         )
                     }
                     if (endIconSecond != null) {
@@ -223,21 +237,35 @@ fun ListItem(
                             backgroundRadius = endIconSecondBackgroundRadius,
                             icon = endIconSecond,
                             iconColor = endIconSecondColor,
-                            iconPadding = endIconSecondPadding.dp
+                            iconPadding = endIconSecondPadding.dp,
+                            backgroundModifier = Modifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/endIconSecond")
                         )
                     }
 
                     when (controllerType) {
                         ControllerTypeEnum.NONE -> Unit
-                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(state = if (controllerSelected) ToggleableState.On else ToggleableState.Off, onClick = {
-                            onCheckedChangeListener.invoke(it == ToggleableState.On)
-                        })
+                        ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(
+                            state = if (controllerSelected) ToggleableState.On else ToggleableState.Off,
+                            onClick = { onCheckedChangeListener.invoke(it == ToggleableState.On) },
+                            modifier = Modifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/listItemCheckbox"))
 
-                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(selected = controllerSelected, onClick = onRadioButtonClick)
+                        ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(
+                            selected = controllerSelected,
+                            onClick = onRadioButtonClick,
+                            modifier = Modifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/listItemRadioButton"))
 
-                        ControllerTypeEnum.SWITCH -> PrimarySwitch(checked = controllerSelected, onCheckedChange = {
-                            onCheckedChangeListener.invoke(it)
-                        })
+                        ControllerTypeEnum.SWITCH -> PrimarySwitch(
+                            checked = controllerSelected,
+                            onCheckedChange = { onCheckedChangeListener.invoke(it) },
+                            modifier = Modifier
+                                .semantics { testTagsAsResourceId = true }
+                                .testTag("android:id/listItemSwitcher"))
                     }
                 }
                 val newDescriptions = arrayListOf(description, description2, description3, description4).filter { it.isNotEmpty() }
@@ -265,7 +293,10 @@ fun ListItem(
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
                         maxLines = firstDescriptionMaxLines,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/description")
                     )
                 }
                 if (newDescription2.isNotEmpty()) {
@@ -274,7 +305,10 @@ fun ListItem(
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
                         maxLines = secondDescriptionMaxLines,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/description2")
                     )
                 }
                 if (newDescription3.isNotEmpty()) {
@@ -283,7 +317,10 @@ fun ListItem(
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
                         maxLines = thirdDescriptionMaxLines,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/description3")
                     )
                 }
                 if (newDescription4.isNotEmpty()) {
@@ -292,7 +329,10 @@ fun ListItem(
                         color = descriptionColor ?: listItemType.getDescriptionTextColor(),
                         style = descriptionStyle ?: listItemType.getDescriptionStyle(),
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .semantics { testTagsAsResourceId = true }
+                            .testTag("android:id/description4")
                     )
                 }
             }
@@ -305,6 +345,7 @@ fun ListItem(
 }
 
 
+@ExperimentalComposeUiApi
 @Composable
 @PreviewLightDark
 fun PrimaryListItemPreview() {

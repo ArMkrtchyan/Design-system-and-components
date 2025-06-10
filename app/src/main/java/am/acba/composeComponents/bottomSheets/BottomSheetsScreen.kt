@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@ExperimentalComposeUiApi
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetsScreen(title: String = "") {
@@ -102,6 +104,7 @@ fun closeBottomSheet(scope: CoroutineScope, state: SheetState, showBottomSheet: 
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 @PreviewLightDark
 fun AlertsScreenPreview() {
