@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 package am.acba.compose.components.listItem
 
 import am.acba.component.R
@@ -42,7 +44,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-@ExperimentalComposeUiApi
 @Composable
 fun ListItem(
     modifier: Modifier = Modifier,

@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@ExperimentalComposeUiApi
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetsScreen(title: String = "") {
