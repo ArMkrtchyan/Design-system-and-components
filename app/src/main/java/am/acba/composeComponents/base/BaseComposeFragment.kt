@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.base
 
 import am.acba.components.mainScreen.MainActivity
+import am.acba.compose.composableView
 import am.acba.compose.theme.DigitalTheme
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.fragment.app.Fragment
@@ -26,9 +26,9 @@ abstract class BaseComposeFragment : Fragment() {
     @Composable
     abstract fun SetContent()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = ComposeView(inflater.context).apply {
-        title = arguments?.getString("Title") ?: ""
-        setContent {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        requireContext().composableView {
+            title = arguments?.getString("Title") ?: ""
             DigitalTheme(MainActivity.darkTheme) {
                 focusManager = LocalFocusManager.current
                 val keyboardController = LocalSoftwareKeyboardController.current
@@ -50,7 +50,7 @@ abstract class BaseComposeFragment : Fragment() {
                 }
             }
         }
-    }
+
 
     fun clearFocus() {
         focusManager.clearFocus()
