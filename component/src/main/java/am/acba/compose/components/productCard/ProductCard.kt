@@ -169,7 +169,7 @@ private fun ProductCardHeader(
                 clipPercent = startAvatarClipPercent,
                 imageCornerRadius = startAvatarImageCornerRadius,
                 contentScale = startAvatarContentScale,
-                backgroundModifier = Modifier.id("android:id/productCardIcon")
+                backgroundModifier = Modifier.id("productCardIcon")
             )
             HorizontalSpacer(16)
         }
@@ -181,7 +181,7 @@ private fun ProductCardHeader(
             PrimaryText(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .id("android:id/productCardTitle"),
+                    .id("productCardTitle"),
                 text = title,
                 maxLines = 1,
                 style = DigitalTheme.typography.body2Bold,
@@ -190,7 +190,7 @@ private fun ProductCardHeader(
                 PrimaryText(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .id("android:id/productCardDescription"),
+                        .id("productCardDescription"),
                     text = description,
                     style = DigitalTheme.typography.xSmallRegular,
                     color = DigitalTheme.colorScheme.contentPrimaryTonal1,
@@ -198,7 +198,7 @@ private fun ProductCardHeader(
             }
         }
         HorizontalSpacer(16)
-        Avatar(icon = R.drawable.ic_right, iconColor = DigitalTheme.colorScheme.contentPrimaryTonal1, backgroundModifier = Modifier.id("android:id/productCardEndIcon"))
+        Avatar(icon = R.drawable.ic_right, iconColor = DigitalTheme.colorScheme.contentPrimaryTonal1, backgroundModifier = Modifier.id("productCardEndIcon"))
     }
 }
 
@@ -254,7 +254,7 @@ private fun ProductRowTexts(
         PrimaryText(
             modifier = Modifier
                 .fillMaxWidth(fraction = 0.5f)
-                .id("android:id/productCardRowTitle${index}"),
+                .id("productCardRowTitle${index}"),
             text = startText,
             style = startTextStyle,
             color = startTextColor,
@@ -262,7 +262,7 @@ private fun ProductRowTexts(
         PrimaryText(
             modifier = Modifier
                 .weight(1f)
-                .id("android:id/productCardRowValue${index}"),
+                .id("productCardRowValue${index}"),
             text = endText,
             style = endTextStyle,
             color = endTextColor,
