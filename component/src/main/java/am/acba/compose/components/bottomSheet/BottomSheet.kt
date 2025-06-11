@@ -1,4 +1,6 @@
-﻿package am.acba.compose.components.bottomSheet
+﻿@file:OptIn(ExperimentalMaterial3Api::class)
+
+package am.acba.compose.components.bottomSheet
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
@@ -32,7 +34,6 @@ import androidx.compose.material3.SheetValue
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,18 +48,17 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrimaryBottomSheet(
     title: String = "",
     icon: Int? = R.drawable.ic_close,
-    bottomSheetVisible: MutableState<Boolean>,
-    onDismissRequest: () -> Unit = {},
+    bottomSheetVisible: Boolean,
+    dismiss: () -> Unit = {},
     modifier: Modifier = Modifier,
     properties: ModalBottomSheetProperties = ModalBottomSheetDefaults.properties,
     contentHorizontalPadding: Dp = 16.dp,
     contentBottomPadding: Dp = 16.dp,
-    content: @Composable (sheetState: SheetState, bottomSheetVisible: MutableState<Boolean>, coroutineScope: CoroutineScope) -> Unit,
+    content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
@@ -73,16 +73,14 @@ fun PrimaryBottomSheet(
         .asPaddingValues()
         .calculateBottomPadding()
 
-    if (bottomSheetVisible.value) {
+    if (bottomSheetVisible) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
 
             ModalBottomSheet(
                 onDismissRequest = {
-                    bottomSheetVisible.value = false
-                    onDismissRequest.invoke()
+                    dismiss.invoke()
                 },
                 modifier = if (openFullScreen.value) modifier
                     .height(fullScreenHeight)
@@ -120,7 +118,7 @@ fun PrimaryBottomSheet(
                     BottomSheetHeader(title, icon) {
                         coroutineScope.launch {
                             sheetState.hide()
-                        }.invokeOnCompletion { bottomSheetVisible.value = false }
+                        }.invokeOnCompletion { dismiss.invoke() }
                     }
                     Box(
                         modifier = Modifier
@@ -128,7 +126,7 @@ fun PrimaryBottomSheet(
                             .padding(horizontal = contentHorizontalPadding)
                             .padding(bottom = contentBottomPadding)
                     ) {
-                        content.invoke(sheetState, bottomSheetVisible, coroutineScope)
+                        content.invoke(sheetState, coroutineScope)
                     }
                 }
 
@@ -148,6 +146,14 @@ private fun BottomSheetHeader(title: String = "", icon: Int? = null, onDismissRe
         PrimaryText(text = title, modifier = Modifier.weight(1f), style = DigitalTheme.typography.body1Bold)
         if (icon != null) {
             PrimaryIcon(painter = painterResource(icon), modifier = Modifier.clickable { onDismissRequest.invoke() })
+        }
+    }
+}
+
+fun closeBottomSheet(scope: CoroutineScope, state: SheetState, onComplete: () -> Unit) {
+    scope.launch { state.hide() }.invokeOnCompletion {
+        if (!state.isVisible) {
+            onComplete.invoke()
         }
     }
 }
