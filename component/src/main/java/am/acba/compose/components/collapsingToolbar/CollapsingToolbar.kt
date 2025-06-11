@@ -33,7 +33,6 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,10 +42,10 @@ import kotlin.math.roundToInt
 @Composable
 fun CollapsingToolbar(
     modifier: Modifier = Modifier,
+    title: String? = null,
     actions: (@Composable RowScope.() -> Unit)? = null,
     centralContent: (@Composable () -> Unit)? = null,
     additionalContent: (@Composable () -> Unit)? = null,
-    collapsingTitle: CollapsingTitle? = null,
     scrollBehavior: CollapsingToolbarScrollBehavior? = null,
 ) {
     val collapsedFraction = when {
@@ -56,7 +55,7 @@ fun CollapsingToolbar(
     }
 
     val fullyCollapsedTitleScale = when {
-        collapsingTitle != null -> CollapsedTitleLineHeight.value / collapsingTitle.expandedTextStyle.lineHeight.value
+        title != null -> CollapsedTitleLineHeight.value / DigitalTheme.typography.heading5Bold.lineHeight.value
         else -> 1f
     }
 
@@ -74,7 +73,7 @@ fun CollapsingToolbar(
     ) {
         Layout(
             content = {
-                if (collapsingTitle != null) {
+                if (title != null) {
                     PrimaryText(
                         modifier = Modifier
                             .layoutId(ExpandedTitleId)
@@ -84,8 +83,8 @@ fun CollapsingToolbar(
                                 scaleY = collapsingTitleScale,
                                 transformOrigin = TransformOrigin(0f, 0f)
                             ),
-                        text = collapsingTitle.titleText,
-                        style = collapsingTitle.expandedTextStyle
+                        text = title,
+                        style = DigitalTheme.typography.heading5Bold
                     )
                     PrimaryText(
                         modifier = Modifier
@@ -96,8 +95,8 @@ fun CollapsingToolbar(
                                 scaleY = collapsingTitleScale,
                                 transformOrigin = TransformOrigin(0f, 0f)
                             ),
-                        text = collapsingTitle.titleText,
-                        style = collapsingTitle.expandedTextStyle,
+                        text = title,
+                        style = DigitalTheme.typography.heading5Bold,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -309,11 +308,6 @@ fun CollapsingToolbar(
 private fun lerp(a: Float, b: Float, fraction: Float): Float {
     return a + fraction * (b - a)
 }
-
-data class CollapsingTitle(
-    val titleText: String,
-    val expandedTextStyle: TextStyle,
-)
 
 private val MinCollapsedHeight = 56.dp
 private val HorizontalPadding = 2.dp

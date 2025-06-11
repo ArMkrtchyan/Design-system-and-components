@@ -1,6 +1,5 @@
 ﻿package am.acba.composeComponents.toolbar
 
-import am.acba.compose.components.collapsingToolbar.CollapsingTitle
 import am.acba.compose.components.collapsingToolbar.CollapsingToolbar
 import am.acba.compose.components.collapsingToolbar.rememberToolbarScrollBehavior
 import am.acba.compose.components.listItem.ListItem
@@ -44,7 +43,7 @@ fun ToolbarScreen(title: String = "") {
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
             CollapsingToolbar(
-                collapsingTitle = CollapsingTitle("Toolbar title Toolbar title Toolbar title", DigitalTheme.typography.heading5Bold),
+                title = "Toolbar title Toolbar title Toolbar title",
                 scrollBehavior = scrollBehavior
             )
             LazyColumn(modifier = Modifier) {
