@@ -29,7 +29,7 @@ fun PrimaryToolbar(
         PrimaryText(
             modifier = Modifier
                 .padding(end = 16.dp, start = 16.dp)
-                .id("android:id/centre_title"), text = title, maxLines = 1, overflow = TextOverflow.Ellipsis
+                .id("centre_title"), text = title, maxLines = 1, overflow = TextOverflow.Ellipsis
         )
     }, colors = TopAppBarDefaults.topAppBarColors(
         containerColor = DigitalTheme.colorScheme.backgroundBase,
@@ -37,7 +37,7 @@ fun PrimaryToolbar(
     ), actions = actions, navigationIcon = {
         IconButton(onClick = {
             activity?.onBackPressed()
-        }, modifier = Modifier.id("android:id/leftIcon")) {
+        }, modifier = Modifier.id("leftIcon")) {
             PrimaryIcon(painterResource(R.drawable.ic_back))
         }
     })

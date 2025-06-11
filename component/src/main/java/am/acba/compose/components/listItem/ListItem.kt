@@ -152,7 +152,7 @@ fun ListItem(
                 ) {
                     Avatar(
                         backgroundModifier = avatarBackgroundModifier
-                            .id("android:id/startIcon"),
+                            .id("startIcon"),
                         badgeModifier = avatarBadgeModifier,
                         contentModifier = avatarContentModifier,
                         avatarType = avatarType,
@@ -188,7 +188,7 @@ fun ListItem(
                         modifier = Modifier
                             .weight(1f)
                             .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
-                            .id("android:id/title"),
+                            .id("title"),
                         text = title,
                         color = titleColor ?: listItemType.getTitleTextColor(),
                         style = titleStyle ?: listItemType.getTitleStyle(),
@@ -204,7 +204,7 @@ fun ListItem(
                             iconColor = badgeIconColor,
                             badgeBorderColor = badgeBorderColor,
                             modifier = badgeModifier
-                                .id("android:id/badge"),
+                                .id("badge"),
                             text = badgeText,
                             textColor = badgeTextColor
                         )
@@ -220,7 +220,7 @@ fun ListItem(
                             iconColor = endIconColor,
                             iconPadding = endIconPadding.dp,
                             backgroundModifier = Modifier
-                                .id("android:id/endIcon")
+                                .id("endIcon")
                         )
                     }
                     if (endIconSecond != null) {
@@ -234,7 +234,7 @@ fun ListItem(
                             iconColor = endIconSecondColor,
                             iconPadding = endIconSecondPadding.dp,
                             backgroundModifier = Modifier
-                                .id("android:id/endIconSecond")
+                                .id("endIconSecond")
                         )
                     }
 
@@ -244,21 +244,21 @@ fun ListItem(
                             state = if (controllerSelected) ToggleableState.On else ToggleableState.Off,
                             onClick = { onCheckedChangeListener.invoke(it == ToggleableState.On) },
                             modifier = Modifier
-                                .id("android:id/listItemCheckbox")
+                                .id("listItemCheckbox")
                         )
 
                         ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(
                             selected = controllerSelected,
                             onClick = onRadioButtonClick,
                             modifier = Modifier
-                                .id("android:id/listItemRadioButton")
+                                .id("listItemRadioButton")
                         )
 
                         ControllerTypeEnum.SWITCH -> PrimarySwitch(
                             checked = controllerSelected,
                             onCheckedChange = { onCheckedChangeListener.invoke(it) },
                             modifier = Modifier
-                                .id("android:id/listItemSwitcher")
+                                .id("listItemSwitcher")
                         )
                     }
                 }
@@ -289,7 +289,7 @@ fun ListItem(
                         maxLines = firstDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .id("android:id/description")
+                            .id("description")
                     )
                 }
                 if (newDescription2.isNotEmpty()) {
@@ -300,7 +300,7 @@ fun ListItem(
                         maxLines = secondDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .id("android:id/description2")
+                            .id("description2")
                     )
                 }
                 if (newDescription3.isNotEmpty()) {
@@ -311,7 +311,7 @@ fun ListItem(
                         maxLines = thirdDescriptionMaxLines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .id("android:id/description3")
+                            .id("description3")
                     )
                 }
                 if (newDescription4.isNotEmpty()) {
@@ -322,7 +322,7 @@ fun ListItem(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
-                            .id("android:id/description4")
+                            .id("description4")
                     )
                 }
             }
