@@ -3,6 +3,7 @@
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
+import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.listItem.ListItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
@@ -23,7 +24,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,33 +73,29 @@ fun BottomSheetsScreen(title: String = "") {
     }
     PrimaryBottomSheet(
         title = "Ընտրել հաշվեհամարը",
-        bottomSheetVisible = bottomSheetVisible,
-        contentHorizontalPadding = 0.dp
-    ) { state: SheetState, bottomSheetVisible: MutableState<Boolean>, coroutineScope: CoroutineScope ->
+        bottomSheetVisible = bottomSheetVisible.value,
+        contentHorizontalPadding = 0.dp,
+        dismiss = {
+            bottomSheetVisible.value = false
+        }
+    ) { state: SheetState, coroutineScope: CoroutineScope ->
         LazyColumn {
             items((0..9).toList()) {
                 ListItem(
-                    title = "List item ${it}",
+                    title = "List item $it",
                     titleStyle = DigitalTheme.typography.body1Regular,
                     backgroundColor = Color.Transparent,
                     showDivider = true,
                     onClick = {
-                        if (it == 3) closeBottomSheet(state = state, scope = coroutineScope, showBottomSheet = bottomSheetVisible)
+                        closeBottomSheet(state = state, scope = coroutineScope) {
+                            bottomSheetVisible.value = false
+                        }
                     }
                 )
             }
         }
     }
 
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-fun closeBottomSheet(scope: CoroutineScope, state: SheetState, showBottomSheet: MutableState<Boolean>) {
-    scope.launch { state.hide() }.invokeOnCompletion {
-        if (!state.isVisible) {
-            showBottomSheet.value = false
-        }
-    }
 }
 
 @ExperimentalComposeUiApi
