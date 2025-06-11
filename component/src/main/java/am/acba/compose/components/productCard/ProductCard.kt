@@ -9,6 +9,7 @@ import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.divider.PrimaryDivider
+import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
@@ -104,7 +105,7 @@ fun ProductCard(
                     VerticalSpacer(16)
                 }
                 if (showBottomRow1.value) {
-                    ProductRowTexts(bottomRowTitle1, bottomRowValue1 ?: "")
+                    ProductRowTexts(bottomRowTitle1, bottomRowValue1 ?: "", index = 4)
                 }
                 if (showBottomRow1.value && showBottomRow2.value) {
                     VerticalSpacer(8)
@@ -114,7 +115,7 @@ fun ProductCard(
                         bottomRowTitle2,
                         bottomRowValue2 ?: "",
                         endTextStyle = DigitalTheme.typography.body2Bold,
-                        endTextColor = DigitalTheme.colorScheme.contentPrimary
+                        endTextColor = DigitalTheme.colorScheme.contentPrimary, index = 5
                     )
                 }
                 if (showBottomRow1.value || showBottomRow2.value) {
@@ -167,7 +168,8 @@ private fun ProductCardHeader(
                 imageUrl = startAvatarImageUrl,
                 clipPercent = startAvatarClipPercent,
                 imageCornerRadius = startAvatarImageCornerRadius,
-                contentScale = startAvatarContentScale
+                contentScale = startAvatarContentScale,
+                backgroundModifier = Modifier.id("android:id/productCardIcon")
             )
             HorizontalSpacer(16)
         }
@@ -177,14 +179,18 @@ private fun ProductCardHeader(
                 .height(IntrinsicSize.Max)
         ) {
             PrimaryText(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .id("android:id/productCardTitle"),
                 text = title,
                 maxLines = 1,
                 style = DigitalTheme.typography.body2Bold,
             )
             description?.let {
                 PrimaryText(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .id("android:id/productCardDescription"),
                     text = description,
                     style = DigitalTheme.typography.xSmallRegular,
                     color = DigitalTheme.colorScheme.contentPrimaryTonal1,
@@ -192,7 +198,7 @@ private fun ProductCardHeader(
             }
         }
         HorizontalSpacer(16)
-        Avatar(icon = R.drawable.ic_right, iconColor = DigitalTheme.colorScheme.contentPrimaryTonal1)
+        Avatar(icon = R.drawable.ic_right, iconColor = DigitalTheme.colorScheme.contentPrimaryTonal1, backgroundModifier = Modifier.id("android:id/productCardEndIcon"))
     }
 }
 
@@ -202,13 +208,13 @@ private fun ProductCardDynamicRows(items: List<Pair<String, String>>, showLastLi
         Modifier.fillMaxWidth()
     ) {
         items.forEachIndexed { index, item ->
-            ProductCardDynamicRowItem(item, index == items.size - 1, showLastLine)
+            ProductCardDynamicRowItem(item, index == items.size - 1, showLastLine, index + 1)
         }
     }
 }
 
 @Composable
-private fun ProductCardDynamicRowItem(item: Pair<String, String>, isLast: Boolean, showLastLine: Boolean) {
+private fun ProductCardDynamicRowItem(item: Pair<String, String>, isLast: Boolean, showLastLine: Boolean, index: Int) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -218,7 +224,8 @@ private fun ProductCardDynamicRowItem(item: Pair<String, String>, isLast: Boolea
             item.second,
             modifier = Modifier.padding(vertical = 12.dp),
             endTextStyle = DigitalTheme.typography.smallBold,
-            endTextColor = DigitalTheme.colorScheme.contentPrimary
+            endTextColor = DigitalTheme.colorScheme.contentPrimary,
+            index = index
         )
         if (!isLast) {
             PrimaryDivider()
@@ -236,7 +243,8 @@ private fun ProductRowTexts(
     endTextStyle: TextStyle = DigitalTheme.typography.smallRegular,
     startTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     endTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    index: Int
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -244,13 +252,17 @@ private fun ProductRowTexts(
         verticalAlignment = Alignment.CenterVertically
     ) {
         PrimaryText(
-            modifier = Modifier.fillMaxWidth(fraction = 0.5f),
+            modifier = Modifier
+                .fillMaxWidth(fraction = 0.5f)
+                .id("android:id/productCardRowTitle${index}"),
             text = startText,
             style = startTextStyle,
             color = startTextColor,
         )
         PrimaryText(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier
+                .weight(1f)
+                .id("android:id/productCardRowValue${index}"),
             text = endText,
             style = endTextStyle,
             color = endTextColor,
