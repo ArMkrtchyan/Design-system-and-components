@@ -4,6 +4,7 @@ import am.acba.component.R
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.SecondaryButtonGreen
+import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
 import android.view.Gravity
 import androidx.annotation.DrawableRes
@@ -79,8 +80,18 @@ fun EmptyState(
             imageContainerWidth = imageContainerWidth,
             imageContainerHeight = imageContainerHeight
         )
-        SetEmptyStateText(text = title, textColor = DigitalTheme.colorScheme.contentPrimary, style = DigitalTheme.typography.subTitle1Bold)
-        SetEmptyStateText(text = description, textColor = DigitalTheme.colorScheme.contentPrimaryTonal1, style = DigitalTheme.typography.body2Regular)
+        SetEmptyStateText(
+            text = title,
+            textColor = DigitalTheme.colorScheme.contentPrimary,
+            style = DigitalTheme.typography.subTitle1Bold,
+            textFieldId = "emptyStateTitle"
+        )
+        SetEmptyStateText(
+            text = description,
+            textColor = DigitalTheme.colorScheme.contentPrimaryTonal1,
+            style = DigitalTheme.typography.body2Regular,
+            textFieldId = "emptyStateDescription"
+        )
         SetEmptyStateButton(
             buttonText = buttonText,
             buttonIcon = buttonIcon,
@@ -121,7 +132,8 @@ private fun SetEmptyStateMedia(
                         Image(
                             modifier = Modifier
                                 .align(Alignment.Center)
-                                .fillMaxSize(),
+                                .fillMaxSize()
+                                .id("emptyStateImage"),
                             painter = painterResource(id = icon),
                             colorFilter = iconColor?.let { ColorFilter.tint(it) },
                             contentDescription = null
@@ -132,7 +144,8 @@ private fun SetEmptyStateMedia(
                         GlideImage(
                             modifier = Modifier
                                 .align(Alignment.Center)
-                                .fillMaxSize(),
+                                .fillMaxSize()
+                                .id("emptyStateImage"),
                             model = imageUrl,
                             contentDescription = null,
                             contentScale = imageContentScale
@@ -175,7 +188,9 @@ private fun SetEmptyStateMedia(
                         )
                         LottieAnimation(
                             composition = preloaderLottieComposition,
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .id("emptyStateLottie"),
                             progress = { progress },
                             dynamicProperties = dynamicProperties
                         )
@@ -188,7 +203,7 @@ private fun SetEmptyStateMedia(
 }
 
 @Composable
-private fun SetEmptyStateText(text: String? = null, textColor: Color, style: TextStyle) {
+private fun SetEmptyStateText(text: String? = null, textColor: Color, style: TextStyle, textFieldId: String) {
     text?.let {
         Column(
             modifier = Modifier
@@ -196,7 +211,7 @@ private fun SetEmptyStateText(text: String? = null, textColor: Color, style: Tex
                 .wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            PrimaryText(text = it, color = textColor, style = style, textAlign = TextAlign.Center)
+            PrimaryText(text = it, color = textColor, style = style, textAlign = TextAlign.Center, modifier = Modifier.id(textFieldId))
             VerticalSpacer(8)
         }
     }
@@ -221,7 +236,8 @@ private fun SetEmptyStateButton(
                 text = it,
                 icon = buttonIcon ?: -1,
                 iconGravity = buttonIconGravity,
-                isSmall = true
+                isSmall = true,
+                modifier = Modifier.id("emptyStateButton")
             )
             VerticalSpacer(8)
         }
