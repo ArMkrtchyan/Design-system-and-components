@@ -1,4 +1,6 @@
-﻿package am.acba.compose.components.bottomSheet
+﻿@file:OptIn(ExperimentalMaterial3Api::class)
+
+package am.acba.compose.components.bottomSheet
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
@@ -46,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun PrimaryBottomSheet(
     title: String = "",
@@ -149,7 +151,6 @@ private fun BottomSheetHeader(title: String = "", icon: Int? = null, onDismissRe
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 fun closeBottomSheet(scope: CoroutineScope, state: SheetState, onComplete: () -> Unit) {
     scope.launch { state.hide() }.invokeOnCompletion {
         if (!state.isVisible) {

@@ -1,4 +1,6 @@
-﻿package am.acba.composeComponents.bottomSheets
+﻿@file:OptIn(ExperimentalMaterial3Api::class)
+
+package am.acba.composeComponents.bottomSheets
 
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryToolbar
@@ -26,14 +28,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheetsScreen(title: String = "") {
     val bottomSheetVisible = remember { mutableStateOf(false) }
@@ -98,7 +98,6 @@ fun BottomSheetsScreen(title: String = "") {
 
 }
 
-@ExperimentalComposeUiApi
 @Composable
 @PreviewLightDark
 fun AlertsScreenPreview() {
