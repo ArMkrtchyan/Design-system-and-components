@@ -28,7 +28,8 @@ data class TypographyTokens(
     val heading5Bold: TextStyle = TextStyle(
         fontFamily = FontFamily.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 22.sp
+        fontSize = 22.sp,
+        lineHeight = 33.sp
     ),
     val heading6Bold: TextStyle = TextStyle(
         fontFamily = FontFamily.DefaultFontFamily,
