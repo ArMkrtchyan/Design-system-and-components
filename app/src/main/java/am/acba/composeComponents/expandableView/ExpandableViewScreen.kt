@@ -83,7 +83,7 @@ private fun AccordionStateWithDivider() {
         endText = "-5,200.00",
         endTextColor = DigitalTheme.colorScheme.contentBrand,
         currency = "AMD",
-        expanded = expanded,
+        expanded = expanded.value,
         onClick = { expanded.value = !expanded.value }
     ) {
         Column {
@@ -124,7 +124,7 @@ private fun AccordionOutComeStateWithDivider() {
         title = "Փոխանցում հաշվին ",
         endText = "-5,200.00",
         currency = "AMD",
-        expanded = expanded,
+        expanded = expanded.value,
         onClick = { expanded.value = !expanded.value }
     ) {
         Column {
@@ -163,7 +163,7 @@ private fun AccordionOutComeStateWithoutIconWithDivider() {
         title = "Փոխանցում հաշվին ",
         endText = "-5,200.00",
         currency = "AMD",
-        expanded = expanded,
+        expanded = expanded.value,
         onClick = { expanded.value = !expanded.value }
     ) {
         Column {
@@ -200,7 +200,7 @@ private fun AccordionWithTitleStateWithDivider() {
     VerticalSpacer(20)
     Accordion(
         title = "Ինչպե՞ս բացել դասական ավանդ;",
-        expanded = expanded,
+        expanded = expanded.value,
         onClick = { expanded.value = !expanded.value }
     ) {
         PrimaryText(
@@ -219,7 +219,7 @@ private fun AccordionWithTitleStateWithoutBackgroundWithDivider() {
     VerticalSpacer(20)
     Accordion(
         title = "Ինչպե՞ս բացել դասական ավանդ;",
-        expanded = expanded,
+        expanded = expanded.value,
         onClick = { expanded.value = !expanded.value },
         backgroundColor = Color.Transparent,
         showDivider = true

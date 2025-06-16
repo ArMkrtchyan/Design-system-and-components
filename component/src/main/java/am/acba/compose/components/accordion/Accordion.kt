@@ -84,12 +84,12 @@ fun Accordion(
 
     showDivider: Boolean = false,
 
-    expanded: MutableState<Boolean> = mutableStateOf(false),
+    expanded: Boolean = false,
     onClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit)? = null
 ) {
     val arrowRotation by animateFloatAsState(
-        targetValue = if (expanded.value) 180f else 0f,
+        targetValue = if (expanded) 180f else 0f,
         label = "accordion-arrow",
         animationSpec = tween(
             easing = LinearOutSlowInEasing
@@ -180,7 +180,7 @@ fun Accordion(
             }
 
             AnimatedVisibility(
-                visible = expanded.value,
+                visible = expanded,
                 enter = enterTransition,
                 exit = exitTransition
             ) {
@@ -211,7 +211,7 @@ fun AccordionPreview() {
                 .padding(10.dp)
         ) {
             val expanded = remember { mutableStateOf(true) }
-            Accordion(avatarIcon = R.drawable.ic_income, title = "Փոխանցում հաշվին ", expanded = expanded, onClick = { expanded.value = !expanded.value }) {
+            Accordion(avatarIcon = R.drawable.ic_income, title = "Փոխանցում հաշվին ", expanded = expanded.value, onClick = { expanded.value = !expanded.value }) {
                 PrimaryText(text = "ՊՔ սպասարկման միջն./վճ. գանձում")
             }
         }
