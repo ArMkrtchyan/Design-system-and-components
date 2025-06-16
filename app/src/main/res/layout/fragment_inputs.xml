@@ -62,6 +62,16 @@
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:endIconTint="?attr/contentPrimary"
                 app:expandedHintEnabled="true" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/removeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/addError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

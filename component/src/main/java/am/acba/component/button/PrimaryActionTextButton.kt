@@ -160,9 +160,13 @@ class PrimaryActionTextButton : FrameLayout {
     fun setAnimation(animation: String?) {
         binding.actionAnimation.visibility = VISIBLE
         binding.actionAnimation.setAnimation(animation)
-        binding.actionAnimation.playAnimation()
         setIcon(null)
     }
+
+    fun playAnimation() {
+        binding.actionAnimation.playAnimation()
+    }
+
 
     fun setAnimationColor(keyPathValues: String? = null, @AttrRes colorAttr: Int) {
         val keyPath = keyPathValues?.let { KeyPath(it, "**") } ?: KeyPath("**")
