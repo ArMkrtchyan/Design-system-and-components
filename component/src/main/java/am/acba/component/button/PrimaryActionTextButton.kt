@@ -286,6 +286,10 @@ class PrimaryActionTextButton : FrameLayout {
         setActionButtonColors(textDrawableColor, textDrawableBackgroundColor)
     }
 
+    fun getType(): ActionButtonType {
+        return type
+    }
+
     fun setActionButtonColors(textColor: Int, textBackgroundColor: Int) {
         textDrawableColor = textColor
         textDrawableBackgroundColor = textBackgroundColor
