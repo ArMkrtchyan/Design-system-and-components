@@ -81,7 +81,8 @@ class PrimaryChip : FrameLayout {
             chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
             setChipText(getString(R.styleable.PrimaryChip_chipText))
             setChipTextAppearance(getResourceId(R.styleable.PrimaryChip_chipTextAppearance, R.style.Body2_Regular))
-            val background = getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
+            val background =
+                getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
             background?.let { setChipBackground(it) }
             setChipStartIconType(getInt(R.styleable.PrimaryChip_chipStartIconType, 0).findChipStartIconTypeByOrdinal() ?: ChipStartIconType.NONE)
             setStartIcon(getDrawable(R.styleable.PrimaryChip_chipStartIcon))
@@ -110,6 +111,11 @@ class PrimaryChip : FrameLayout {
                     binding.lastIconContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                         width = 16.dpToPx()
                         height = 16.dpToPx()
+                    }
+                } else {
+                    binding.lastIconContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+                        width = 0.dpToPx()
+                        height = 0.dpToPx()
                     }
                 }
                 if (chipStartIconType == ChipStartIconType.ICON || chipStartIconType == ChipStartIconType.IMAGE) {
@@ -140,6 +146,11 @@ class PrimaryChip : FrameLayout {
                     binding.lastIconContainer.updateLayoutParams<LinearLayout.LayoutParams> {
                         width = 24.dpToPx()
                         height = 24.dpToPx()
+                    }
+                } else {
+                    binding.lastIconContainer.updateLayoutParams<LinearLayout.LayoutParams> {
+                        width = 0.dpToPx()
+                        height = 0.dpToPx()
                     }
                 }
                 if (chipStartIconType == ChipStartIconType.ICON || chipStartIconType == ChipStartIconType.IMAGE) {
