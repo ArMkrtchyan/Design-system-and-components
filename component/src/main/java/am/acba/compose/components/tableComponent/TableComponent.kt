@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TableComponent(
+    modifier: Modifier = Modifier,
     title: String? = null,
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
@@ -90,7 +91,7 @@ fun TableComponent(
     )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .border(1.dp, DigitalTheme.colorScheme.borderNeutral, ShapeTokens.shapePrimaryButton)
             .animateContentSize(
