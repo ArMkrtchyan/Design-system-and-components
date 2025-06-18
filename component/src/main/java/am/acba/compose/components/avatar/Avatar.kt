@@ -7,6 +7,7 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
+import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,13 +26,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -194,18 +198,32 @@ private fun AvatarImage(
     contentScale: ContentScale = ContentScale.Crop,
 ) {
     if (!imageUrl.isNullOrEmpty()) {
-        GlideImage(
-            model = imageUrl ?: imageRes ?: R.drawable.default_icon, contentDescription = "",
-            contentScale = contentScale,
-            modifier = modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(clipPercent)),
-            requestBuilderTransform = { transform ->
-                imageCornerRadius?.let { radius ->
-                    transform.apply(RequestOptions.bitmapTransform(RoundedCorners(radius.dpToPx())))
-                } ?: transform
-            }
-        )
+        if (imageUrl.endsWith("svg")) {
+            val context = LocalContext.current
+            AndroidView(
+                factory = {
+                    val imageView = ImageView(context)
+                    Glide.with(context).load("https://online1-test.acba.am/Shared/Currencies/US.svg").into(imageView)
+                    imageView
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(clipPercent))
+            )
+        } else {
+            GlideImage(
+                model = imageUrl ?: imageRes ?: R.drawable.default_icon, contentDescription = "",
+                contentScale = contentScale,
+                modifier = modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(clipPercent)),
+                requestBuilderTransform = { transform ->
+                    imageCornerRadius?.let { radius ->
+                        transform.apply(RequestOptions.bitmapTransform(RoundedCorners(radius.dpToPx())))
+                    } ?: transform
+                }
+            )
+        }
     } else {
         Image(
             painterResource(imageRes ?: R.drawable.default_icon), contentDescription = "",

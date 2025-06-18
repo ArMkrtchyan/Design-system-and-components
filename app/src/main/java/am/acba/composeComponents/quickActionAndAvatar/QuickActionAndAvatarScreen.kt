@@ -213,6 +213,11 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_24, icon = R.drawable.ic_phonebook,
+            avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+            clipPercent = 0
+        )
         HorizontalSpacer(16)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
