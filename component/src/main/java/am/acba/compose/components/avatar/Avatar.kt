@@ -7,6 +7,11 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.compose.theme.paintColor
+import am.acba.compose.theme.toGraphicColor
+import am.acba.compose.theme.toGraphicColorStateList
+import am.acba.compose.theme.toHexString
+import android.graphics.PorterDuff
 import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,6 +37,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.widget.ImageViewCompat
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
@@ -40,6 +46,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+
 
 @Composable
 fun ActionButton(
@@ -53,7 +60,7 @@ fun ActionButton(
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 100,
     icon: Int? = null,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    iconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     iconPadding: Dp = 16.dp,
     imageUrl: String? = null,
     clipPercent: Int = 0,
@@ -115,7 +122,7 @@ fun Avatar(
     backgroundColor: Color = Color.Transparent,
     backgroundRadius: Int = 0,
     icon: Int? = null,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    iconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     iconPadding: Dp = Dp.Unspecified,
     imageUrl: String? = null,
     clipPercent: Int = 0,
@@ -138,14 +145,22 @@ fun Avatar(
         contentAlignment = Alignment.Center
     ) {
         when (avatarType) {
-            AvatarEnum.ICON -> AvatarIcon(modifier = contentModifier, icon = icon ?: R.drawable.default_icon, iconColor = iconColor, padding = iconPadding)
+            AvatarEnum.ICON -> AvatarIcon(
+                modifier = contentModifier,
+                icon = icon ?: R.drawable.default_icon,
+                iconColor = iconColor ?: DigitalTheme.colorScheme.contentPrimary,
+                padding = iconPadding
+            )
+
             AvatarEnum.IMAGE -> AvatarImage(
                 modifier = contentModifier,
                 imageRes = icon,
                 clipPercent = clipPercent,
                 imageUrl = imageUrl,
                 imageCornerRadius = imageCornerRadius,
-                contentScale = contentScale
+                contentScale = contentScale,
+                iconColor = iconColor,
+                padding = iconPadding
             )
 
             AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
@@ -196,6 +211,8 @@ private fun AvatarImage(
     imageCornerRadius: Int? = null,
     clipPercent: Int = 0,
     contentScale: ContentScale = ContentScale.Crop,
+    iconColor: Color? = null,
+    padding: Dp = Dp.Unspecified,
 ) {
     if (!imageUrl.isNullOrEmpty()) {
         if (imageUrl.endsWith("svg")) {
@@ -203,16 +220,26 @@ private fun AvatarImage(
             AndroidView(
                 factory = {
                     val imageView = ImageView(context)
-                    Glide.with(context).load("https://online1-test.acba.am/Shared/Currencies/US.svg").into(imageView)
+                    iconColor?.let {
+                        imageView.setColorFilter(iconColor.toGraphicColor(), android.graphics.PorterDuff.Mode.SRC_IN)
+                        ImageViewCompat.setImageTintList(imageView, iconColor.toGraphicColorStateList())
+                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.MULTIPLY)
+                        imageView.paintColor(it.toHexString())
+                    }
+                    Glide
+                        .with(context)
+                        .load(imageUrl)
+                        .into(imageView)
                     imageView
                 },
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(padding)
                     .clip(RoundedCornerShape(clipPercent))
             )
         } else {
             GlideImage(
-                model = imageUrl ?: imageRes ?: R.drawable.default_icon, contentDescription = "",
+                model = imageUrl, contentDescription = "",
                 contentScale = contentScale,
                 modifier = modifier
                     .fillMaxSize()
@@ -224,9 +251,9 @@ private fun AvatarImage(
                 }
             )
         }
-    } else {
+    } else if (imageRes != null) {
         Image(
-            painterResource(imageRes ?: R.drawable.default_icon), contentDescription = "",
+            painterResource(imageRes), contentDescription = "",
             modifier = modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(clipPercent)),

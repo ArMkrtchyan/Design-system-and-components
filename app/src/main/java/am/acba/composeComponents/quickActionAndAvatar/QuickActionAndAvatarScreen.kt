@@ -216,7 +216,7 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
-            clipPercent = 0
+            clipPercent = 0, iconColor = null
         )
         HorizontalSpacer(16)
         Avatar(
