@@ -1,6 +1,6 @@
 package am.acba.components.models
 
-import am.acba.acbamobile.ui.kotlin.screens.loan.IChipModel
+import am.acba.component.chip.IChipModel
 import am.acba.component.chip.PrimaryChip
 
 data class RepaymentFrequency(

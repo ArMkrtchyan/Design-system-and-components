@@ -1,6 +1,5 @@
 package am.acba.component.chip
 
-import am.acba.acbamobile.ui.kotlin.screens.loan.IChipModel
 import am.acba.component.R
 import am.acba.component.databinding.LayoutHorizontalChipsBinding
 import am.acba.component.extensions.inflater
