@@ -4,6 +4,7 @@ package am.acba.composeComponents.bottomSheets
 
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.listItem.ListItem
@@ -79,12 +80,21 @@ fun BottomSheetsScreen(title: String = "") {
             bottomSheetVisible.value = false
         }
     ) { state: SheetState, coroutineScope: CoroutineScope ->
+        val list = listOf(
+            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg" to "Հերթական մարում",
+            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Partial.svg" to "Մասնակի մարում",
+            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Total.svg" to "Ամբողջական մարում",
+            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ",
+        )
         LazyColumn {
-            items((0..9).toList()) {
+            items(list) {
                 ListItem(
-                    title = "List item $it",
+                    title = it.second,
                     titleStyle = DigitalTheme.typography.body1Regular,
                     backgroundColor = Color.Transparent,
+                    avatarType = AvatarEnum.IMAGE,
+                    avatarImageUrl = it.first,
+                    avatarIconColor = DigitalTheme.colorScheme.contentPrimary,
                     showDivider = true,
                     onClick = {
                         closeBottomSheet(state = state, scope = coroutineScope) {
