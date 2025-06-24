@@ -67,7 +67,7 @@ fun ActionButton(
     imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
-    textColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    textColor: Color = DigitalTheme.colorScheme.contentPrimary,
     badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
