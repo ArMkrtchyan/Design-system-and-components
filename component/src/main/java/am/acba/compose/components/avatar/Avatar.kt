@@ -51,7 +51,7 @@ import com.bumptech.glide.request.RequestOptions
 @Composable
 fun ActionButton(
     actionText: String,
-    actionTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    actionTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
     backgroundModifier: Modifier = Modifier,
     badgeModifier: Modifier = Modifier,
     contentModifier: Modifier = Modifier,
@@ -67,7 +67,7 @@ fun ActionButton(
     imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
-    textColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    textColor: Color = DigitalTheme.colorScheme.contentSecondary,
     badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
