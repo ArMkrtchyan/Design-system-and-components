@@ -37,16 +37,18 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun <T : ITimeLineCompose> PrimaryTimeLine(
+    modifier: Modifier = Modifier,
     endIconPainter: Painter? = null,
     endIconTint: Color = DigitalTheme.colorScheme.contentPrimary,
     title: String = "",
+    titleMaxLines: Int = 2,
     timeLineItems: List<T>,
     timeLineType: TimeLineType = TimeLineType.TIMELINE,
     onClick: () -> Unit = {},
     onItemClick: (T) -> Unit = {},
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(ShapeTokens.shapePrimaryButton)
             .background(DigitalTheme.colorScheme.backgroundTonal1)
@@ -66,7 +68,7 @@ fun <T : ITimeLineCompose> PrimaryTimeLine(
                         }, verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End
                 ) {
-                    PrimaryText(modifier = Modifier.weight(1f), text = title, style = DigitalTheme.typography.body2Bold)
+                    PrimaryText(modifier = Modifier.weight(1f), text = title, maxLines = titleMaxLines, style = DigitalTheme.typography.body2Bold)
                     endIconPainter?.let {
                         HorizontalSpacer(8)
                         PrimaryIcon(modifier = Modifier.size(20.dp), painter = endIconPainter, tint = endIconTint)
@@ -207,11 +209,13 @@ private fun <T : ITimeLineCompose> TimeLineItemContent(item: T, onItemClick: (T)
                 onItemClick.invoke(item)
             }
     ) {
+        val titleStyle = if (item.getStatus() == TimeLineStatusComposeEnum.NONE) DigitalTheme.typography.smallRegular else DigitalTheme.typography.body2Regular
+        val endTextStyle = if (item.getStatus() != TimeLineStatusComposeEnum.NONE) DigitalTheme.typography.smallRegular else DigitalTheme.typography.subTitle2Bold
         Row {
-            PrimaryText(modifier = Modifier.weight(1f), text = item.getTitle(), style = DigitalTheme.typography.body2Regular, color = item.getTitleColor())
+            PrimaryText(modifier = Modifier.weight(1f), text = item.getTitle(), style = titleStyle, color = item.getTitleColor())
             item.getEndText()?.let {
                 HorizontalSpacer(8)
-                PrimaryText(modifier = Modifier.wrapContentWidth(), text = it, style = DigitalTheme.typography.subTitle2Bold, color = item.getEndTextColor())
+                PrimaryText(modifier = Modifier.wrapContentWidth(), text = it, style = endTextStyle, color = item.getEndTextColor())
             }
         }
         item.getDescription()?.let {
