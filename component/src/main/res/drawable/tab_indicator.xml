@@ -3,7 +3,7 @@
         android:end="6dp"
         android:start="6dp">
         <shape android:shape="rectangle">
-            <solid android:color="?attr/contentBrand" />
+            <solid android:color="?attr/borderBrandTonal1" />
             <size android:height="2dp" />
         </shape>
     </item>

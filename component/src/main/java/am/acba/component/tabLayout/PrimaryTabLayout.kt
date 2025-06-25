@@ -66,7 +66,7 @@ class PrimaryTabLayout @JvmOverloads constructor(
             val textView = it.findViewById<TextView>(R.id.item_title)
             if (isSelected) {
                 textView.setTextAppearance(R.style.Body2_Bold)
-                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.backgroundBrand))
+                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentBrandTonal1))
             } else {
                 textView.setTextAppearance(R.style.Subtitle2_Regular)
                 textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))
