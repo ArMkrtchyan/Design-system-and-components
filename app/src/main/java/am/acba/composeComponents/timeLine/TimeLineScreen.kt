@@ -80,10 +80,12 @@ fun TimeLineScreen(title: String = "") {
         ),
         TimeLineComposeModel(
             "14/10/2024",
+            "400,000.00 AMD",
             timeLineStatus = TimeLineStatusComposeEnum.NONE
         ),
         TimeLineComposeModel(
             "14/10/2024",
+            "400,000.00 AMD",
             timeLineStatus = TimeLineStatusComposeEnum.NONE
         ),
     )
@@ -143,6 +145,21 @@ fun TimeLineScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+
+                PrimaryTimeLine(
+                    title = "Մարման գրաֆիկ",
+                    endIconPainter = painterResource(R.drawable.ic_right),
+                    timeLineItems = listOf(
+                        TimeLineComposeModel(
+                            "14/10/2024",
+                            "400,000.00 AMD",
+                            "Մարումը՝ այսօր",
+                            "LinkText",
+                            timeLineStatus = TimeLineStatusComposeEnum.DANGER,
+                        )
+                    ),
+                )
+                VerticalSpacer(30)
                 PrimaryTimeLine(
                     title = "Մարման գրաֆիկ",
                     endIconPainter = painterResource(R.drawable.ic_right),
