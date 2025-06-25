@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -108,28 +109,25 @@ private fun BadgeTextAndIcon(
     textColor: Color,
     backgroundColor: Color,
 ) {
-    Box(
+    Row(
         modifier = Modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
+            .padding(horizontal = 8.dp, vertical = 2.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            modifier = modifier
-                .padding(horizontal = 8.dp, vertical = 2.dp)
-        ) {
-            icon?.let {
-                if (icon > 0) {
-                    PrimaryIcon(
-                        painter = painterResource(icon),
-                        tint = textColor,
-                        modifier = iconModifier
-                            .width(16.dp)
-                            .height(16.dp),
-                    )
-                    HorizontalSpacer(width = 4)
-                }
+        icon?.let {
+            if (icon > 0) {
+                PrimaryIcon(
+                    painter = painterResource(icon),
+                    tint = textColor,
+                    modifier = iconModifier
+                        .width(16.dp)
+                        .height(16.dp),
+                )
+                HorizontalSpacer(width = 4)
             }
-            BadgeText(textModifier, text ?: "", textColor)
         }
+        BadgeText(textModifier, text ?: "", textColor)
     }
 }
 
