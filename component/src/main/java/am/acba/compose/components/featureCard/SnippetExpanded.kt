@@ -34,16 +34,15 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SnippetExpanded(
     modifier: Modifier = Modifier,
-    text: String,
-    secondaryText: String,
-    tertiaryText: String,
-    badgeText: String = "",
+    offerAmount: String,
+    creditLimitTitle: String,
+    offerExpirationDate: String,
+    badge: String = "",
     width: Int? = null,
     cardBackground: Color = DigitalTheme.colorScheme.backgroundAlternative6,
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
     onIconClick: () -> Unit = {}
 ) {
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -56,14 +55,13 @@ fun SnippetExpanded(
             modifier = columnModifier
                 .padding(16.dp)
                 .fillMaxWidth()
-                .height(108.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 PrimaryText(
-                    secondaryText,
+                    creditLimitTitle,
                     color = DigitalTheme.colorScheme.contentInverse,
                     style = DigitalTheme.typography.body2Regular,
                     modifier = Modifier.weight(1f)
@@ -71,7 +69,7 @@ fun SnippetExpanded(
                 CircleBox(onIconClick)
             }
             PrimaryText(
-                text,
+                offerAmount,
                 color = DigitalTheme.colorScheme.contentInverse,
                 style = DigitalTheme.typography.heading6Bold
             )
@@ -82,16 +80,15 @@ fun SnippetExpanded(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 PrimaryText(
-                    tertiaryText,
+                    offerExpirationDate,
                     color = DigitalTheme.colorScheme.contentInverse,
                     style = DigitalTheme.typography.xSmallRegular,
                     modifier = Modifier.padding(top = 8.dp)
                 )
-
-                if (badgeText.isNotEmpty()) {
+                badge.takeIf { it.isNotEmpty() }?.let {
                     Badge(
                         badgeType = BadgeEnum.INFO,
-                        text = badgeText,
+                        text = it,
                         backgroundColor = badgeBackground,
                         modifier = Modifier.padding(vertical = 4.dp)
                     )
@@ -131,10 +128,10 @@ private fun SnippetExpandedPreview() {
                 .padding(10.dp)
         ) {
             SnippetExpanded(
-                text = "10,000,000.00 AMD",
-                secondaryText = "վարկային սահմանաչափ",
-                tertiaryText = "Վերջնաժամկետ 12/09/2024",
-                badgeText = "նոր",
+                offerAmount = "10,000,000.00 AMD",
+                creditLimitTitle = "վարկային սահմանաչափ",
+                offerExpirationDate = "Վերջնաժամկետ 12/09/2024",
+                badge = "նոր",
             )
         }
     }

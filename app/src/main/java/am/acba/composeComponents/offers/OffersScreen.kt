@@ -47,16 +47,16 @@ fun OffersScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 val a = FeatureCardItem(
-                    text = "10,000,000.00 AMD",
-                    secondaryText = "վարկային սահմանաչափ",
-                    tertiaryText = "Վերջնաժամկետ 12/09/2024",
-                    badgeText = "նոր",
+                    offerAmount = "10,000,000.00 AMD",
+                    creditLimitTitle = "վարկային սահմանաչափ",
+                    offerExpirationDate = "Վերջնաժամկետ 12/09/2024",
+                    badge = "նոր",
                 )
 
                 FeatureCard(
                     title = "duq uneq nor arajark",
-                    snippetBadgeText = "նոր",
                     items = listOf(a, a),
+                    badge = "+1",
                     isExpanded = expanded.value,
                     onClick = {
                         expanded.value = !expanded.value

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -26,10 +25,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SnippetCollapsed(
     modifier: Modifier = Modifier,
-    text: String,
-    secondaryText: String = "",
-    badgeText: String = "",
-    width: Int? = null,
+    offerAmount: String,
+    creditLimitTitle: String = "",
+    badgeTitle: String = "",
     cardBackground: Color = DigitalTheme.colorScheme.backgroundAlternative6,
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess
 ) {
@@ -40,16 +38,15 @@ fun SnippetCollapsed(
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = cardBackground)
     ) {
-        val rowModifier = if (width != null) Modifier.width(width.dp) else Modifier.fillMaxWidth()
         Row(
-            modifier = rowModifier
+            modifier = Modifier.fillMaxWidth()
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp)
                 .height(38.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             PrimaryText(
-                text,
+                offerAmount,
                 color = DigitalTheme.colorScheme.contentInverse,
                 style = DigitalTheme.typography.smallBold,
                 maxLines = 1,
@@ -57,17 +54,17 @@ fun SnippetCollapsed(
             )
             HorizontalSpacer(8)
             PrimaryText(
-                secondaryText,
+                creditLimitTitle,
                 color = DigitalTheme.colorScheme.contentInverse,
                 style = DigitalTheme.typography.xSmallRegular,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f)
             )
-            if (badgeText.isNotEmpty()) {
+            if (badgeTitle.isNotEmpty()) {
                 Badge(
                     badgeType = BadgeEnum.INFO,
-                    text = badgeText,
+                    text = badgeTitle,
                     backgroundColor = badgeBackground,
                 )
             }
@@ -85,9 +82,9 @@ private fun SnippetCollapsedPreview() {
                 .padding(10.dp)
         ) {
             SnippetCollapsed(
-                text = "10,000,000.00 AMD",
-                secondaryText = "վարկային սահմանաչափ",
-                badgeText = "նոր",
+                offerAmount = "10,000,000.00 AMD",
+                creditLimitTitle = "վարկային սահմանաչափ",
+                badgeTitle = "նոր",
             )
         }
     }
