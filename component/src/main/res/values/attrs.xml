@@ -224,6 +224,7 @@
         <attr name="currencyInputMinAmount" format="float" />
         <attr name="formattingWithOutDot" format="boolean" />
         <attr name="enableErrorAnimation" />
+        <attr name="enableAutoValidation" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ProgressCardView">
         <attr name="ProgressViewTitleText" format="string" />

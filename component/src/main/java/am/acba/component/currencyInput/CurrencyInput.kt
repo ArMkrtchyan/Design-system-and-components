@@ -28,6 +28,7 @@ import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -54,6 +55,7 @@ class CurrencyInput @JvmOverloads constructor(
     private var helpText: String
     private var maxAmount: Double
     private var minAmount: Double
+    private var enableAutoValidation = true
     private var isKeyboardActionClicked = false
     private var isValidAmount: Boolean = true
     private var formattingWithOutDot = false
@@ -76,6 +78,7 @@ class CurrencyInput @JvmOverloads constructor(
         addView(binding.root)
         context.obtainStyledAttributes(attrs, R.styleable.CurrencyInput).apply {
             try {
+                enableAutoValidation = getBoolean(R.styleable.CurrencyInput_enableAutoValidation, true)
                 errorText = getString(R.styleable.CurrencyInput_currencyInputErrorText) ?: ""
                 hintText = getString(R.styleable.CurrencyInput_currencyInputHintText) ?: ""
                 helpText = getString(R.styleable.CurrencyInput_currencyInputHelpText) ?: ""
@@ -98,7 +101,9 @@ class CurrencyInput @JvmOverloads constructor(
                     isValidAmount = true
                     isFirstFocusable = true
                     setValidState()
-                } else if (!isFirstFocusable) validateAmount()
+                } else if (!isFirstFocusable && enableAutoValidation) {
+                    validateAmount()
+                }
             }
 
         }
@@ -542,8 +547,11 @@ class CurrencyInput @JvmOverloads constructor(
                 .replace(",", "")
                 .takeIf { it.isNotEmpty() }
                 ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
-
-            setMaxLengthForFormattedText(formattedText.length)
+            if (formattedText.isNotEmpty()) {
+                setMaxLengthForFormattedText(formattedText.length)
+            } else {
+                setMaxLengthForFormattedText(currencyInputMaxLength)
+            }
             binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
         }
     }
