@@ -43,6 +43,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.NumberFormat
 import java.util.Locale
+import kotlin.math.max
 
 @SuppressLint("CustomViewStyleable")
 class CurrencyInput @JvmOverloads constructor(
@@ -547,11 +548,9 @@ class CurrencyInput @JvmOverloads constructor(
                 .replace(",", "")
                 .takeIf { it.isNotEmpty() }
                 ?.let { if (formattingWithOutDot) it.numberFormattingWithOutDot() else it.numberFormatting() } ?: ""
-            if (formattedText.isNotEmpty()) {
-                setMaxLengthForFormattedText(formattedText.length)
-            } else {
-                setMaxLengthForFormattedText(currencyInputMaxLength)
-            }
+
+            setMaxLengthForFormattedText(max(currencyInputMaxLength, formattedText.length))
+
             binding.amount.editText?.editableText?.replace(0, binding.amount.editText?.editableText?.length ?: 0, formattedText)
         }
     }
