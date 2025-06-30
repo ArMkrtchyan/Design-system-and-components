@@ -526,7 +526,6 @@ class CurrencyInput @JvmOverloads constructor(
         binding.amount.editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (binding.amount.editText?.editableText?.isNotEmpty() == true) formatAmountAfterFocusChange(hasFocus)
             setupBackgroundsByFocusChange(hasFocus)
-            mAction?.invoke(hasFocus)
         }
     }
 
