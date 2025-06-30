@@ -46,7 +46,7 @@ fun OffersScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                val a = OfferCardItem(
+                val offer = OfferCardItem(
                     amount = "10,000,000.00 AMD",
                     creditLimitTitle = "վարկային սահմանաչափ",
                     expirationDate = "Վերջնաժամկետ 12/09/2024",
@@ -55,7 +55,7 @@ fun OffersScreen(title: String = "") {
 
                 OfferCard(
                     title = "duq uneq nor arajark",
-                    items = listOf(a, a),
+                    items = listOf(offer, offer),
                     badge = "+1",
                     seeAllTitle = "Տեսնել բոլոր առաջարկները",
                     isExpanded = expanded.value,

@@ -126,7 +126,7 @@ fun OfferCardPreview() {
                 .background(DigitalTheme.colorScheme.backgroundBase)
                 .padding(10.dp)
         ) {
-            val a = OfferCardItem(
+            val offer = OfferCardItem(
                 amount = "10,000,000.00 AMD",
                 creditLimitTitle = "վարկային սահմանաչափ",
                 expirationDate = "Վերջնաժամկետ 12/09/2024",
@@ -135,7 +135,7 @@ fun OfferCardPreview() {
 
             OfferCard(
                 title = "duq uneq nor arajark",
-                items = listOf(a, a),
+                items = listOf(offer, offer),
                 seeAllTitle = "Տեսնել բոլոր առաջարկները",
                 isExpanded = false,
                 onClick = {},
