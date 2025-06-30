@@ -63,7 +63,7 @@ fun CardListingsScreen(title: String = "") {
                 VerticalSpacer(20)
                 CardListItem(
                     startTitle = "Դրամային",
-                    startDescription = "***3562",
+                    startDescription = "***3562 jh db dsbhdsh sdbdsc sdjsdb",
                     endTitle = "հասանելի",
                     endDescription = "400,000,000.00",
                     currency = "AMD",

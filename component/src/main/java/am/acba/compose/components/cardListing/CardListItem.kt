@@ -34,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -155,6 +156,7 @@ fun CardListItem(
                         text = startTitle,
                         style = startTitleStyle,
                         color = startTitleColor,
+                        overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
                     if (startDescription.isNotEmpty()) {
@@ -163,6 +165,7 @@ fun CardListItem(
                             text = startDescription,
                             style = startDescriptionStyle,
                             color = startDescriptionColor,
+                            overflow = TextOverflow.Ellipsis,
                             maxLines = 1
                         )
                     }
@@ -254,7 +257,7 @@ fun CardListItemPreview() {
         ) {
             CardListItem(
                 startTitle = "Դրամային",
-                startDescription = "***3562",
+                startDescription = "***3562 aaaaaa fddddddfd",
                 endTitle = "հասանելի",
                 endDescription = "400,000,000.00",
                 currency = "AMD",
