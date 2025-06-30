@@ -37,16 +37,18 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun <T : ITimeLineCompose> PrimaryTimeLine(
+    modifier: Modifier = Modifier,
     endIconPainter: Painter? = null,
     endIconTint: Color = DigitalTheme.colorScheme.contentPrimary,
     title: String = "",
+    titleMaxLines: Int = 2,
     timeLineItems: List<T>,
     timeLineType: TimeLineType = TimeLineType.TIMELINE,
     onClick: () -> Unit = {},
     onItemClick: (T) -> Unit = {},
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(ShapeTokens.shapePrimaryButton)
             .background(DigitalTheme.colorScheme.backgroundTonal1)
@@ -66,7 +68,7 @@ fun <T : ITimeLineCompose> PrimaryTimeLine(
                         }, verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End
                 ) {
-                    PrimaryText(modifier = Modifier.weight(1f), text = title, style = DigitalTheme.typography.body2Bold)
+                    PrimaryText(modifier = Modifier.weight(1f), text = title, maxLines = titleMaxLines, style = DigitalTheme.typography.body2Bold)
                     endIconPainter?.let {
                         HorizontalSpacer(8)
                         PrimaryIcon(modifier = Modifier.size(20.dp), painter = endIconPainter, tint = endIconTint)
@@ -110,7 +112,7 @@ private fun <T : ITimeLineCompose> TimeLineItem(item: T, timeLineItems: List<T>,
                 .height(16.dp)
                 .padding(start = 25.5.dp)
         ) {
-            if (timeLineType == TimeLineType.TIMELINE || index != itemCount - 1) {
+            if (itemCount > 1 && (timeLineType == TimeLineType.TIMELINE || index != itemCount - 1)) {
                 var color = DigitalTheme.colorScheme.backgroundTonal3
                 if (timeLineType == TimeLineType.PROGRESS && item.getStatus() == TimeLineStatusComposeEnum.SUCCESS) {
                     color = DigitalTheme.colorScheme.backgroundSuccess
@@ -207,11 +209,13 @@ private fun <T : ITimeLineCompose> TimeLineItemContent(item: T, onItemClick: (T)
                 onItemClick.invoke(item)
             }
     ) {
+        val titleStyle = if (item.getStatus() == TimeLineStatusComposeEnum.NONE) DigitalTheme.typography.smallRegular else DigitalTheme.typography.body2Regular
+        val endTextStyle = if (item.getStatus() == TimeLineStatusComposeEnum.NONE) DigitalTheme.typography.smallRegular else DigitalTheme.typography.subTitle2Bold
         Row {
-            PrimaryText(modifier = Modifier.weight(1f), text = item.getTitle(), style = DigitalTheme.typography.body2Regular, color = item.getTitleColor())
+            PrimaryText(modifier = Modifier.weight(1f), text = item.getTitle(), style = titleStyle, color = item.getTitleColor())
             item.getEndText()?.let {
                 HorizontalSpacer(8)
-                PrimaryText(modifier = Modifier.wrapContentWidth(), text = it, style = DigitalTheme.typography.subTitle2Bold, color = item.getEndTextColor())
+                PrimaryText(modifier = Modifier.wrapContentWidth(), text = it, style = endTextStyle, color = item.getEndTextColor())
             }
         }
         item.getDescription()?.let {
@@ -242,52 +246,52 @@ fun PrimaryListItemPreview() {
                 "LinkText",
                 timeLineStatus = TimeLineStatusComposeEnum.PENDING
             ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                "400,000.00 AMD",
-                "Մարումը՝ այսօր",
-                "LinkText",
-                timeLineStatus = TimeLineStatusComposeEnum.PENDING_2
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                "400,000.00 AMD",
-                "Մարումը՝ այսօր",
-                "LinkText",
-                timeLineStatus = TimeLineStatusComposeEnum.WARNING
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                "400,000.00 AMD",
-                "Մարումը՝ այսօր",
-                "LinkText",
-                timeLineStatus = TimeLineStatusComposeEnum.SUCCESS
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                "400,000.00 AMD",
-                "Մարումը՝ այսօր",
-                "LinkText",
-                timeLineStatus = TimeLineStatusComposeEnum.DANGER,
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                "400,000.00 AMD",
-                "Մարումը՝ այսօր",
-                "LinkText",
-                timeLineStatus = TimeLineStatusComposeEnum.DANGER,
-                timeLineStartIcon = R.drawable.ic_close_small_2,
-                timeLineContentBackgroundColor = Color.Transparent,
-                timeLineLinkTextColor = DigitalTheme.colorScheme.contentInverse
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                timeLineStatus = TimeLineStatusComposeEnum.NONE
-            ),
-            TimeLineComposeModel(
-                "14/10/2024",
-                timeLineStatus = TimeLineStatusComposeEnum.NONE
-            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                "400,000.00 AMD",
+//                "Մարումը՝ այսօր",
+//                "LinkText",
+//                timeLineStatus = TimeLineStatusComposeEnum.PENDING_2
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                "400,000.00 AMD",
+//                "Մարումը՝ այսօր",
+//                "LinkText",
+//                timeLineStatus = TimeLineStatusComposeEnum.WARNING
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                "400,000.00 AMD",
+//                "Մարումը՝ այսօր",
+//                "LinkText",
+//                timeLineStatus = TimeLineStatusComposeEnum.SUCCESS
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                "400,000.00 AMD",
+//                "Մարումը՝ այսօր",
+//                "LinkText",
+//                timeLineStatus = TimeLineStatusComposeEnum.DANGER,
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                "400,000.00 AMD",
+//                "Մարումը՝ այսօր",
+//                "LinkText",
+//                timeLineStatus = TimeLineStatusComposeEnum.DANGER,
+//                timeLineStartIcon = R.drawable.ic_close_small_2,
+//                timeLineContentBackgroundColor = Color.Transparent,
+//                timeLineLinkTextColor = DigitalTheme.colorScheme.contentInverse
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                timeLineStatus = TimeLineStatusComposeEnum.NONE
+//            ),
+//            TimeLineComposeModel(
+//                "14/10/2024",
+//                timeLineStatus = TimeLineStatusComposeEnum.NONE
+//            ),
         )
         val progressList = arrayListOf(
             TimeLineComposeModel(
@@ -327,9 +331,14 @@ fun PrimaryListItemPreview() {
 //                timeLineItems = list,
 //            )
 //            VerticalSpacer(30)
+//            PrimaryTimeLine(
+//                timeLineItems = progressList,
+//                timeLineType = TimeLineType.PROGRESS
+//            )
             PrimaryTimeLine(
-                timeLineItems = progressList,
-                timeLineType = TimeLineType.PROGRESS
+                title = "Մարման գրաֆիկ",
+                endIconPainter = painterResource(R.drawable.ic_right),
+                timeLineItems = list,
             )
         }
     }
