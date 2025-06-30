@@ -1,8 +1,8 @@
 ﻿package am.acba.composeComponents.offers
 
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.featureCard.FeatureCard
-import am.acba.compose.components.featureCard.model.FeatureCardItem
+import am.acba.compose.components.featureCard.OfferCard
+import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -46,21 +46,24 @@ fun OffersScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                val a = FeatureCardItem(
-                    offerAmount = "10,000,000.00 AMD",
+                val a = OfferCardItem(
+                    amount = "10,000,000.00 AMD",
                     creditLimitTitle = "վարկային սահմանաչափ",
-                    offerExpirationDate = "Վերջնաժամկետ 12/09/2024",
+                    expirationDate = "Վերջնաժամկետ 12/09/2024",
                     badge = "նոր",
                 )
 
-                FeatureCard(
+                OfferCard(
                     title = "duq uneq nor arajark",
                     items = listOf(a, a),
                     badge = "+1",
+                    seeAllTitle = "Տեսնել բոլոր առաջարկները",
                     isExpanded = expanded.value,
                     onClick = {
                         expanded.value = !expanded.value
-                    }
+                    },
+                    onItemClick = {},
+                    onSeeAllClick = {},
                 )
             }
         }

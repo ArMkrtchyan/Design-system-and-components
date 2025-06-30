@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SnippetExpanded(
+fun OfferCardExpanded(
     modifier: Modifier = Modifier,
     offerAmount: String,
     creditLimitTitle: String,
@@ -120,14 +120,14 @@ private fun CircleBox(onClick: () -> Unit) {
 
 @PreviewLightDark
 @Composable
-private fun SnippetExpandedPreview() {
+private fun OfferCardExpandedPreview() {
     DigitalTheme {
         Column(
             Modifier
                 .background(DigitalTheme.colorScheme.backgroundBase)
                 .padding(10.dp)
         ) {
-            SnippetExpanded(
+            OfferCardExpanded(
                 offerAmount = "10,000,000.00 AMD",
                 creditLimitTitle = "վարկային սահմանաչափ",
                 offerExpirationDate = "Վերջնաժամկետ 12/09/2024",

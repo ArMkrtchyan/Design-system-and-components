@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SnippetCollapsed(
+fun OfferCardCollapsed(
     modifier: Modifier = Modifier,
     offerAmount: String,
     creditLimitTitle: String = "",
@@ -74,14 +74,14 @@ fun SnippetCollapsed(
 
 @PreviewLightDark
 @Composable
-private fun SnippetCollapsedPreview() {
+private fun OfferCardCollapsedPreview() {
     DigitalTheme {
         Column(
             Modifier
                 .background(DigitalTheme.colorScheme.backgroundBase)
                 .padding(10.dp)
         ) {
-            SnippetCollapsed(
+            OfferCardCollapsed(
                 offerAmount = "10,000,000.00 AMD",
                 creditLimitTitle = "վարկային սահմանաչափ",
                 badgeTitle = "նոր",

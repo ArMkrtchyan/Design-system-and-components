@@ -7,7 +7,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
-import am.acba.compose.components.featureCard.model.FeatureCardItem
+import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -23,21 +23,26 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FeatureCard(
+fun OfferCard(
     title: String,
-    items: List<FeatureCardItem>,
+    items: List<OfferCardItem>,
+    seeAllTitle: String,
+    onClick: () -> Unit,
+    onItemClick: () -> Unit,
+    onSeeAllClick: () -> Unit,
     modifier: Modifier = Modifier,
     badge: String = "",
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
@@ -46,28 +51,25 @@ fun FeatureCard(
     trailingIcon: Int? = R.drawable.ic_down,
     trailingIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
     isExpanded: Boolean = false,
-    onClick: (() -> Unit)? = null,
-    onSnippedIconClick: () -> Unit = {},
 ) {
 
     val arrowRotation by animateFloatAsState(
         targetValue = if (isExpanded) 180f else 0f,
-        label = "accordion-arrow",
-        animationSpec = tween(
-            easing = LinearOutSlowInEasing
-        )
+        label = "arrow-rotation",
+        animationSpec = tween(easing = LinearOutSlowInEasing)
     )
 
     Column(
         modifier = modifier
             .background(cardBackground, RoundedCornerShape(cardRadius.dp))
-            .padding(16.dp)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.End
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onClick?.invoke() }
+                .clickable { onClick.invoke() }
         ) {
             PrimaryText(
                 text = title,
@@ -86,42 +88,59 @@ fun FeatureCard(
         VerticalSpacer(8)
         LazyRow(modifier = Modifier.fillMaxWidth()) {
             items(items) {
-                FeatureCardAnimatedContent(
-                    offerAmount = it.offerAmount,
-                    creditLimitTitle = it.creditLimitTitle,
-                    offerExpirationDate = it.offerExpirationDate,
-                    badgeTitle = it.badge,
-                    width = 250,
+                OfferCardAnimatedContent(
+                    offerAmount = it.amount,
+                    offerCreditLimitTitle = it.creditLimitTitle,
+                    offerExpirationDate = it.expirationDate,
+                    badge = it.badge,
+                    cardWidth = 250,
                     isExpanded = isExpanded,
-                    onIconClick = onSnippedIconClick
+                    onClick = onItemClick
                 )
             }
         }
+        SeeAllText(seeAllTitle, onSeeAllClick)
     }
+}
+
+@Composable
+@NonRestartableComposable
+private fun SeeAllText(title: String, onClick: () -> Unit) {
+    PrimaryText(
+        title,
+        style = TextStyle(textDecoration = TextDecoration.Underline),
+        modifier = Modifier
+            .clickable {
+                onClick.invoke()
+            }
+            .padding(top = 12.dp, bottom = 8.dp, end = 8.dp)
+    )
 }
 
 @PreviewLightDark
 @Composable
-fun FeatureCardPreview() {
+fun OfferCardPreview() {
     DigitalTheme {
         Column(
             Modifier
                 .background(DigitalTheme.colorScheme.backgroundBase)
                 .padding(10.dp)
         ) {
-            val expanded by remember { mutableStateOf(false) }
-
-            val a = FeatureCardItem(
-                offerAmount = "10,000,000.00 AMD",
+            val a = OfferCardItem(
+                amount = "10,000,000.00 AMD",
                 creditLimitTitle = "վարկային սահմանաչափ",
-                offerExpirationDate = "Վերջնաժամկետ 12/09/2024",
+                expirationDate = "Վերջնաժամկետ 12/09/2024",
                 badge = "նոր",
             )
 
-            FeatureCard(
+            OfferCard(
                 title = "duq uneq nor arajark",
                 items = listOf(a, a),
-                isExpanded = expanded
+                seeAllTitle = "Տեսնել բոլոր առաջարկները",
+                isExpanded = false,
+                onClick = {},
+                onItemClick = {},
+                onSeeAllClick = {}
             )
         }
     }

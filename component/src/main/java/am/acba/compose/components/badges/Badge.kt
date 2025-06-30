@@ -110,7 +110,7 @@ private fun BadgeTextAndIcon(
     backgroundColor: Color,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
             .padding(horizontal = 8.dp, vertical = 2.dp),
         verticalAlignment = Alignment.CenterVertically

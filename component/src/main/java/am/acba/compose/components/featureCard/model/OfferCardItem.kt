@@ -2,10 +2,10 @@
 
 import androidx.compose.ui.graphics.Color
 
-data class FeatureCardItem(
-    val offerAmount: String = "",
+data class OfferCardItem(
+    val amount: String = "",
     val creditLimitTitle: String = "",
-    val offerExpirationDate: String = "",
+    val expirationDate: String = "",
     val badge: String = "",
     val background: Color? = null,
     val badgeBackground: Color? = null
