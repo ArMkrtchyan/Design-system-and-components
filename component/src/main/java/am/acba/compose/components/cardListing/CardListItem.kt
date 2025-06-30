@@ -170,6 +170,7 @@ fun CardListItem(
                         )
                     }
                 }
+                HorizontalSpacer(8)
                 Column(
                     horizontalAlignment = Alignment.End
                 ) {
