@@ -6,6 +6,8 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
+import am.acba.compose.components.featureCard.model.IOfferCardItem
+import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateDpAsState
@@ -45,18 +47,13 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun OfferCardAnimatedContent(
-    offerAmount: String,
-    offerCreditLimitTitle: String,
-    offerExpirationDate: String,
+fun <T : IOfferCardItem> OfferCardAnimatedContent(
+    item: T,
     modifier: Modifier = Modifier,
-    badge: String = "",
     cardWidth: Int? = null,
     cardRadius: Int = 8,
     isExpanded: Boolean = true,
-    cardBackground: Color = DigitalTheme.colorScheme.backgroundAlternative6,
-    badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
-    onClick: () -> Unit = {}
+    onClick: (T) -> Unit = {}
 ) {
     val transition = updateTransition(targetState = isExpanded, label = "expand-transition")
 
@@ -70,10 +67,10 @@ fun OfferCardAnimatedContent(
             .padding(end = 8.dp)
             .height(cardHeight)
             .clickable {
-                onClick.invoke()
+                onClick.invoke(item)
             },
         shape = RoundedCornerShape(cardRadius.dp),
-        colors = CardDefaults.cardColors(containerColor = cardBackground)
+        colors = CardDefaults.cardColors(containerColor = item.background ?: DigitalTheme.colorScheme.backgroundAlternative6)
     ) {
         val columnModifier = if (cardWidth != null) Modifier.width(cardWidth.dp) else Modifier.fillMaxWidth()
         Column(
@@ -85,15 +82,15 @@ fun OfferCardAnimatedContent(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                AmountText(offerAmount, isExpanded)
-                CreditLimitText(offerCreditLimitTitle, isExpanded)
+                AmountText(item.amount, isExpanded)
+                CreditLimitText(item.creditLimitTitle, isExpanded)
                 CircleBox(isExpanded)
-                AnimatedBadge(badge, badgeBackground, isExpanded)
+                AnimatedBadge(item.badge, item.badgeBackground, item.badgeTextColor, isExpanded)
             }
             if (isExpanded) {
-                ExpandedAmountText(offerAmount)
+                ExpandedAmountText(item.amount)
                 Spacer(modifier = Modifier.height(8.dp))
-                ExpirationDateRow(offerExpirationDate, badge, badgeBackground)
+                ExpirationDateRow(item.expirationDate, item.badge, item.badgeBackground, item.badgeTextColor)
             }
         }
     }
@@ -172,7 +169,7 @@ private fun CircleBox(isExpanded: Boolean) {
 }
 
 @Composable
-private fun AnimatedBadge(badge: String, badgeBackground: Color, isExpanded: Boolean) {
+private fun AnimatedBadge(badge: String, badgeBackground: Color?, badgeTextColor: Color?, isExpanded: Boolean) {
     val transition = updateTransition(targetState = isExpanded, label = "expand-transition")
 
     val badgeWidth by transition.animateDp(label = "bade-width") { isExpanded ->
@@ -187,7 +184,8 @@ private fun AnimatedBadge(badge: String, badgeBackground: Color, isExpanded: Boo
         Badge(
             badgeType = BadgeEnum.INFO,
             text = badge,
-            backgroundColor = badgeBackground,
+            backgroundColor = badgeBackground ?: DigitalTheme.colorScheme.backgroundSuccess,
+            textColor = badgeTextColor ?: DigitalTheme.colorScheme.contentSecondary,
             modifier = Modifier
                 .width(badgeWidth)
                 .height(badgeHeight),
@@ -205,7 +203,7 @@ private fun ExpandedAmountText(offerAmount: String) {
 }
 
 @Composable
-private fun ExpirationDateRow(expirationDate: String, badge: String, badgeBackground: Color) {
+private fun ExpirationDateRow(expirationDate: String, badge: String, badgeBackground: Color?, badgeTextColor: Color?) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -216,7 +214,8 @@ private fun ExpirationDateRow(expirationDate: String, badge: String, badgeBackgr
             Badge(
                 badgeType = BadgeEnum.INFO,
                 text = badge,
-                backgroundColor = badgeBackground,
+                backgroundColor = badgeBackground ?: DigitalTheme.colorScheme.backgroundSuccess,
+                textColor = badgeTextColor ?: DigitalTheme.colorScheme.contentSecondary
             )
         }
     }
@@ -241,10 +240,12 @@ private fun FeatureCardAnimatedContentPreview() {
                 .padding(10.dp)
         ) {
             OfferCardAnimatedContent(
-                offerAmount = "10,000,000.00 AMD",
-                offerCreditLimitTitle = "վարկային սահմանաչափ",
-                offerExpirationDate = "Վերջնաժամկետ 12/09/2024",
-                badge = "նոր",
+                item = OfferCardItem(
+                    amount = "10,000,000.00 AMD",
+                    creditLimitTitle = "վարկային սահմանաչափ",
+                    expirationDate = "Վերջնաժամկետ 12/09/2024",
+                    badge = "նոր"
+                ),
             )
         }
     }

@@ -7,6 +7,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
+import am.acba.compose.components.featureCard.model.IOfferCardItem
 import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -36,16 +37,17 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun OfferCard(
+fun <T : IOfferCardItem> OfferCard(
     title: String,
-    items: List<OfferCardItem>,
+    items: List<T>,
     seeAllTitle: String,
     onClick: () -> Unit,
-    onItemClick: () -> Unit,
+    onItemClick: (T) -> Unit,
     onSeeAllClick: () -> Unit,
     modifier: Modifier = Modifier,
     badge: String = "",
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
+    badgeTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
     cardBackground: Color = DigitalTheme.colorScheme.backgroundTonal1,
     cardRadius: Int = 12,
     trailingIcon: Int? = R.drawable.ic_down,
@@ -77,7 +79,7 @@ fun OfferCard(
             )
             badge.takeIf { it.isNotEmpty() }?.let {
                 HorizontalSpacer(8)
-                Badge(badgeType = BadgeEnum.INFO, text = badge, backgroundColor = badgeBackground)
+                Badge(badgeType = BadgeEnum.INFO, text = badge, backgroundColor = badgeBackground, textColor = badgeTextColor)
             }
             Spacer(modifier = Modifier.weight(1f))
             trailingIcon.takeIf { it != null }?.let {
@@ -89,10 +91,7 @@ fun OfferCard(
         LazyRow(modifier = Modifier.fillMaxWidth()) {
             items(items) {
                 OfferCardAnimatedContent(
-                    offerAmount = it.amount,
-                    offerCreditLimitTitle = it.creditLimitTitle,
-                    offerExpirationDate = it.expirationDate,
-                    badge = it.badge,
+                    item = it,
                     cardWidth = 250,
                     isExpanded = isExpanded,
                     onClick = onItemClick
