@@ -1,7 +1,9 @@
 ﻿package am.acba.composeComponents.offers
 
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.featureCard.OfferCard
+import am.acba.compose.components.featureCard.Offers
 import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
@@ -27,6 +29,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun OffersScreen(title: String = "") {
     var expanded = remember { mutableStateOf(false) }
+    var expanded2 = remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -61,6 +64,19 @@ fun OffersScreen(title: String = "") {
                     isExpanded = expanded.value,
                     onClick = {
                         expanded.value = !expanded.value
+                    },
+                    onItemClick = {},
+                    onSeeAllClick = {},
+                )
+                VerticalSpacer(40)
+                Offers(
+                    title = "duq uneq nor arajark",
+                    items = listOf(offer, offer),
+                    badge = "+1",
+                    seeAllTitle = "Տեսնել բոլոր առաջարկները",
+                    isExpanded = expanded2.value,
+                    onClick = {
+                        expanded2.value = !expanded2.value
                     },
                     onItemClick = {},
                     onSeeAllClick = {},

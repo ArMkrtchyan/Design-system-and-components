@@ -37,13 +37,13 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun <T : IOfferCardItem> OfferCard(
+fun <T : IOfferCardItem> Offers(
     title: String,
     items: List<T>,
-    seeAllTitle: String,
     onClick: () -> Unit,
     onItemClick: (T) -> Unit,
-    onSeeAllClick: () -> Unit,
+    seeAllTitle: String = "",
+    onSeeAllClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     badge: String = "",
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
@@ -87,18 +87,29 @@ fun <T : IOfferCardItem> OfferCard(
                 PrimaryIcon(painter = painterResource(it), modifier = Modifier.rotate(arrowRotation), tint = trailingIconColor)
             }
         }
-        VerticalSpacer(8)
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(items) {
-                OfferCardAnimatedContent(
-                    item = it,
-                    cardWidth = 250,
-                    isExpanded = isExpanded,
-                    onClick = onItemClick
-                )
+        VerticalSpacer(12)
+        if (items.size == 1) {
+            OfferCard(
+                item = items.first(),
+                isExpanded = isExpanded,
+                onClick = onItemClick
+            )
+        } else {
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                items(items) {
+                    OfferCard(
+                        item = it,
+                        cardWidth = 300,
+                        isExpanded = isExpanded,
+                        onClick = onItemClick
+                    )
+                    HorizontalSpacer(8)
+                }
             }
         }
-        SeeAllText(seeAllTitle, onSeeAllClick)
+        seeAllTitle.takeIf { it.isNotEmpty() }?.let {
+            SeeAllText(seeAllTitle, onSeeAllClick)
+        }
     }
 }
 
@@ -118,7 +129,7 @@ private fun SeeAllText(title: String, onClick: () -> Unit) {
 
 @PreviewLightDark
 @Composable
-fun OfferCardPreview() {
+fun OffersPreview() {
     DigitalTheme {
         Column(
             Modifier
@@ -132,7 +143,7 @@ fun OfferCardPreview() {
                 badge = "նոր",
             )
 
-            OfferCard(
+            Offers(
                 title = "duq uneq nor arajark",
                 items = listOf(offer),
                 seeAllTitle = "",
