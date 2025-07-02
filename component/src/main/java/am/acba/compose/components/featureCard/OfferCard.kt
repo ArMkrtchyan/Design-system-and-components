@@ -10,18 +10,22 @@ import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.featureCard.model.IOfferCardItem
 import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
@@ -40,12 +44,12 @@ import androidx.compose.ui.unit.dp
 fun <T : IOfferCardItem> OfferCard(
     title: String,
     items: List<T>,
-    seeAllTitle: String,
     onClick: () -> Unit,
     onItemClick: (T) -> Unit,
-    onSeeAllClick: () -> Unit,
+    seeAllTitle: String = EMPTY_STRING,
+    onSeeAllClick: () -> Unit = {},
     modifier: Modifier = Modifier,
-    badge: String = "",
+    badge: String = EMPTY_STRING,
     badgeBackground: Color = DigitalTheme.colorScheme.backgroundSuccess,
     badgeTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
     cardBackground: Color = DigitalTheme.colorScheme.backgroundTonal1,
@@ -87,18 +91,36 @@ fun <T : IOfferCardItem> OfferCard(
                 PrimaryIcon(painter = painterResource(it), modifier = Modifier.rotate(arrowRotation), tint = trailingIconColor)
             }
         }
-        VerticalSpacer(8)
-        LazyRow(modifier = Modifier.fillMaxWidth()) {
-            items(items) {
-                OfferCardAnimatedContent(
-                    item = it,
-                    cardWidth = 250,
-                    isExpanded = isExpanded,
-                    onClick = onItemClick
-                )
+        VerticalSpacer(12)
+        if (items.size == 1) {
+            OfferCardAnimatedContent(
+                item = items.first(),
+                isExpanded = isExpanded,
+                onClick = onItemClick
+            )
+        } else {
+
+            val listState = rememberLazyListState()
+
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                state = listState,
+                flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
+            ) {
+                items(items) {
+                    OfferCardAnimatedContent(
+                        item = it,
+                        modifier = Modifier.width(250.dp),
+                        isExpanded = isExpanded,
+                        onClick = onItemClick
+                    )
+                    HorizontalSpacer(8)
+                }
             }
         }
-        SeeAllText(seeAllTitle, onSeeAllClick)
+        seeAllTitle.takeIf { it.isNotEmpty() }?.let {
+            SeeAllText(seeAllTitle, onSeeAllClick)
+        }
     }
 }
 

@@ -1,9 +1,7 @@
 ﻿package am.acba.composeComponents.offers
 
-import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.featureCard.OfferCard
-import am.acba.compose.components.featureCard.Offers
 import am.acba.compose.components.featureCard.model.OfferCardItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
@@ -29,7 +27,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun OffersScreen(title: String = "") {
     var expanded = remember { mutableStateOf(false) }
-    var expanded2 = remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -38,50 +35,32 @@ fun OffersScreen(title: String = "") {
                 bottom = TopAppBarDefaults.windowInsets
                     .only(WindowInsetsSides.Bottom)
                     .asPaddingValues()
-                    .calculateBottomPadding()
+                    .calculateBottomPadding(),
+                start = 16.dp,
+                end = 16.dp
             )
     ) {
         Column(Modifier.fillMaxSize()) {
             PrimaryToolbar(title = title)
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState()),
-            ) {
-                val offer = OfferCardItem(
-                    amount = "10,000,000.00 AMD",
-                    creditLimitTitle = "վարկային սահմանաչափ",
-                    expirationDate = "Վերջնաժամկետ 12/09/2024",
-                    badge = "նոր",
-                )
+            val offer = OfferCardItem(
+                amount = "10,000,000.00 AMD",
+                creditLimitTitle = "վարկային սահմանաչափ",
+                expirationDate = "Վերջնաժամկետ 12/09/2024",
+                badge = "նոր",
+            )
 
-                OfferCard(
-                    title = "duq uneq nor arajark",
-                    items = listOf(offer, offer),
-                    badge = "+1",
-                    seeAllTitle = "Տեսնել բոլոր առաջարկները",
-                    isExpanded = expanded.value,
-                    onClick = {
-                        expanded.value = !expanded.value
-                    },
-                    onItemClick = {},
-                    onSeeAllClick = {},
-                )
-                VerticalSpacer(40)
-                Offers(
-                    title = "duq uneq nor arajark",
-                    items = listOf(offer, offer),
-                    badge = "+1",
-                    seeAllTitle = "Տեսնել բոլոր առաջարկները",
-                    isExpanded = expanded2.value,
-                    onClick = {
-                        expanded2.value = !expanded2.value
-                    },
-                    onItemClick = {},
-                    onSeeAllClick = {},
-                )
-            }
+            OfferCard(
+                title = "duq uneq nor arajark",
+                items = listOf(offer, offer, offer, offer),
+                badge = "+1",
+                seeAllTitle = "Տեսնել բոլոր առաջարկները",
+                isExpanded = expanded.value,
+                onClick = {
+                    expanded.value = !expanded.value
+                },
+                onItemClick = {},
+                onSeeAllClick = {},
+            )
         }
     }
 }
@@ -89,7 +68,12 @@ fun OffersScreen(title: String = "") {
 @Composable
 @PreviewLightDark
 fun AlertsScreenPreview() {
-    DigitalTheme {
+    DigitalTheme
+    Column(
+        Modifier
+            .background(DigitalTheme.colorScheme.backgroundBase)
+            .padding(10.dp)
+    ) {
         OffersScreen()
     }
 }
