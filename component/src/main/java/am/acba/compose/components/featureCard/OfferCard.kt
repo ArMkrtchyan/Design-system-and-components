@@ -16,20 +16,24 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -92,36 +96,73 @@ fun <T : IOfferCardItem> OfferCard(
             }
         }
         VerticalSpacer(12)
-        if (items.size == 1) {
-            OfferCardContent(
-                item = items.first(),
-                isExpanded = isExpanded,
-                onClick = onItemClick
-            )
-        } else {
-
-            val listState = rememberLazyListState()
-
-            LazyRow(
-                modifier = Modifier.fillMaxWidth(),
-                state = listState,
-                flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
-            ) {
-                items(items) {
-                    OfferCardContent(
-                        item = it,
-                        modifier = Modifier.width(250.dp),
-                        isExpanded = isExpanded,
-                        onClick = onItemClick
-                    )
-                    HorizontalSpacer(8)
-                }
-            }
-        }
+        ItemsPager(items, isExpanded, onItemClick)
         seeAllTitle.takeIf { it.isNotEmpty() }?.let {
             SeeAllText(seeAllTitle, onSeeAllClick)
         }
     }
+}
+
+@Composable
+private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean, onItemClick: (T) -> Unit) {
+    val pagerState = rememberPagerState { items.size }
+    var startPadding by remember { mutableStateOf(32.dp) }
+    var endPadding by remember { mutableStateOf(32.dp) }
+
+    LaunchedEffect(pagerState.currentPage) {
+        if (items.size == 1) {
+            startPadding = 0.dp
+            endPadding = 0.dp
+            return@LaunchedEffect
+        }
+        when (pagerState.currentPage) {
+            0 -> {
+                startPadding = 0.dp
+                endPadding = 64.dp
+            }
+
+            items.size - 1 -> {
+                endPadding = 0.dp
+                startPadding = 64.dp
+            }
+
+            else -> {
+                startPadding = 32.dp
+                endPadding = 32.dp
+            }
+        }
+    }
+
+    BoxWithConstraints {
+        val itemWidth = if (items.size == 1) this.maxWidth else this.maxWidth * 0.8f
+        HorizontalPager(
+            state = pagerState,
+            pageSpacing = 8.dp,
+            contentPadding = PaddingValues(start = startPadding, end = endPadding),
+            userScrollEnabled = items.size != 1,
+            modifier = Modifier.fillMaxWidth()
+        ) { page ->
+            OfferCardContent(
+                modifier = Modifier.width(itemWidth),
+                item = items[page],
+                isExpanded = isExpanded,
+                onClick = onItemClick
+            )
+        }
+    }
+
+//    HorizontalPager(
+//        state = pagerState,
+//        pageSpacing = 8.dp,
+//        contentPadding = PaddingValues(start = startPadding, end = endPadding),
+//        modifier = Modifier.fillMaxWidth()
+//    ) { page ->
+//        OfferCardContent(
+//            item = items[page],
+//            isExpanded = isExpanded,
+//            onClick = onItemClick
+//        )
+//    }
 }
 
 @Composable
@@ -166,4 +207,3 @@ fun OfferCardPreview() {
         }
     }
 }
-
