@@ -44,6 +44,15 @@
                 tools:hint="Վարկային կոդ" />
 
             <am.acba.component.input.PrimaryInput
+                android:id="@+id/inputt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:enableErrorAnimation="true"
+                tools:helperText="15 նիշ"
+                tools:hint="Վարկային կոդ" />
+
+            <am.acba.component.input.PrimaryInput
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
