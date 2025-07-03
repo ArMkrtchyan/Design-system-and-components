@@ -93,7 +93,7 @@ fun <T : IOfferCardItem> OfferCard(
         }
         VerticalSpacer(12)
         if (items.size == 1) {
-            OfferCardAnimatedContent(
+            OfferCardContent(
                 item = items.first(),
                 isExpanded = isExpanded,
                 onClick = onItemClick
@@ -108,7 +108,7 @@ fun <T : IOfferCardItem> OfferCard(
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = listState),
             ) {
                 items(items) {
-                    OfferCardAnimatedContent(
+                    OfferCardContent(
                         item = it,
                         modifier = Modifier.width(250.dp),
                         isExpanded = isExpanded,

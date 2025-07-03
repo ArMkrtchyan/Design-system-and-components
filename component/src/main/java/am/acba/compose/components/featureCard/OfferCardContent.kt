@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun <T : IOfferCardItem> OfferCardAnimatedContent(
+fun <T : IOfferCardItem> OfferCardContent(
     item: T,
     modifier: Modifier = Modifier,
     cardRadius: Int = 8,
@@ -230,7 +230,7 @@ private fun FeatureCardAnimatedContentPreview() {
                 .background(DigitalTheme.colorScheme.backgroundBase)
                 .padding(10.dp)
         ) {
-            OfferCardAnimatedContent(
+            OfferCardContent(
                 item = OfferCardItem(
                     amount = "10,000,000.00 AMD",
                     creditLimitTitle = "վարկային սահմանաչափ",
