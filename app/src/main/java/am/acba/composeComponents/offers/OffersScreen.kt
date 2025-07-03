@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -57,9 +55,7 @@ fun OffersScreen(title: String = "") {
                 isExpanded = expanded.value,
                 onClick = {
                     expanded.value = !expanded.value
-                },
-                onItemClick = {},
-                onSeeAllClick = {},
+                }
             )
         }
     }

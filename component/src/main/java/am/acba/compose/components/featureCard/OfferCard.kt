@@ -48,8 +48,8 @@ import androidx.compose.ui.unit.dp
 fun <T : IOfferCardItem> OfferCard(
     title: String,
     items: List<T>,
-    onClick: () -> Unit,
-    onItemClick: (T) -> Unit,
+    onClick: () -> Unit = {},
+    onItemClick: (T) -> Unit = {},
     seeAllTitle: String = EMPTY_STRING,
     onSeeAllClick: () -> Unit = {},
     modifier: Modifier = Modifier,
