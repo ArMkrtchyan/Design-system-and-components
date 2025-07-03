@@ -44,6 +44,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
+private const val PAGER_CONTENT_PADDING = 32
+
 @Composable
 fun <T : IOfferCardItem> OfferCard(
     title: String,
@@ -106,8 +108,8 @@ fun <T : IOfferCardItem> OfferCard(
 @Composable
 private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean, onItemClick: (T) -> Unit) {
     val pagerState = rememberPagerState { items.size }
-    var startPadding by remember { mutableStateOf(32.dp) }
-    var endPadding by remember { mutableStateOf(32.dp) }
+    var startPadding by remember { mutableStateOf(PAGER_CONTENT_PADDING.dp) }
+    var endPadding by remember { mutableStateOf(PAGER_CONTENT_PADDING.dp) }
 
     LaunchedEffect(pagerState.currentPage) {
         if (items.size == 1) {
@@ -118,17 +120,17 @@ private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean,
         when (pagerState.currentPage) {
             0 -> {
                 startPadding = 0.dp
-                endPadding = 64.dp
+                endPadding = (PAGER_CONTENT_PADDING * 2).dp
             }
 
             items.size - 1 -> {
                 endPadding = 0.dp
-                startPadding = 64.dp
+                startPadding = (PAGER_CONTENT_PADDING * 2).dp
             }
 
             else -> {
-                startPadding = 32.dp
-                endPadding = 32.dp
+                startPadding = PAGER_CONTENT_PADDING.dp
+                endPadding = PAGER_CONTENT_PADDING.dp
             }
         }
     }
@@ -150,19 +152,6 @@ private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean,
             )
         }
     }
-
-//    HorizontalPager(
-//        state = pagerState,
-//        pageSpacing = 8.dp,
-//        contentPadding = PaddingValues(start = startPadding, end = endPadding),
-//        modifier = Modifier.fillMaxWidth()
-//    ) { page ->
-//        OfferCardContent(
-//            item = items[page],
-//            isExpanded = isExpanded,
-//            onClick = onItemClick
-//        )
-//    }
 }
 
 @Composable
