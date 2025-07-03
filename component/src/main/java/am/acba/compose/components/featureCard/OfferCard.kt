@@ -44,8 +44,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
-private const val PAGER_CONTENT_PADDING = 32
-
 @Composable
 fun <T : IOfferCardItem> OfferCard(
     title: String,
@@ -60,6 +58,7 @@ fun <T : IOfferCardItem> OfferCard(
     badgeTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
     cardBackground: Color = DigitalTheme.colorScheme.backgroundTonal1,
     cardRadius: Int = 12,
+    cardItemPadding: Int = 32,
     trailingIcon: Int? = R.drawable.ic_down,
     trailingIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
     isExpanded: Boolean = false,
@@ -98,7 +97,7 @@ fun <T : IOfferCardItem> OfferCard(
             }
         }
         VerticalSpacer(12)
-        ItemsPager(items, isExpanded, onItemClick)
+        ItemsPager(items, isExpanded, onItemClick, cardItemPadding)
         seeAllTitle.takeIf { it.isNotEmpty() }?.let {
             SeeAllText(seeAllTitle, onSeeAllClick)
         }
@@ -106,10 +105,10 @@ fun <T : IOfferCardItem> OfferCard(
 }
 
 @Composable
-private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean, onItemClick: (T) -> Unit) {
+private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean, onItemClick: (T) -> Unit, cardItemPadding: Int) {
     val pagerState = rememberPagerState { items.size }
-    var startPadding by remember { mutableStateOf(PAGER_CONTENT_PADDING.dp) }
-    var endPadding by remember { mutableStateOf(PAGER_CONTENT_PADDING.dp) }
+    var startPadding by remember { mutableStateOf(cardItemPadding.dp) }
+    var endPadding by remember { mutableStateOf(cardItemPadding.dp) }
 
     LaunchedEffect(pagerState.currentPage) {
         if (items.size == 1) {
@@ -120,17 +119,17 @@ private fun <T : IOfferCardItem> ItemsPager(items: List<T>, isExpanded: Boolean,
         when (pagerState.currentPage) {
             0 -> {
                 startPadding = 0.dp
-                endPadding = (PAGER_CONTENT_PADDING * 2).dp
+                endPadding = (cardItemPadding * 2).dp
             }
 
             items.size - 1 -> {
                 endPadding = 0.dp
-                startPadding = (PAGER_CONTENT_PADDING * 2).dp
+                startPadding = (cardItemPadding * 2).dp
             }
 
             else -> {
-                startPadding = PAGER_CONTENT_PADDING.dp
-                endPadding = PAGER_CONTENT_PADDING.dp
+                startPadding = cardItemPadding.dp
+                endPadding = cardItemPadding.dp
             }
         }
     }
