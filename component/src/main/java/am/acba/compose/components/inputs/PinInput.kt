@@ -9,13 +9,11 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -28,11 +26,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -48,6 +45,7 @@ fun PinInput(
     onDone: (String) -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     var isFocused by remember { mutableStateOf(false) }
     var pinValue by remember { mutableStateOf("") } // todo EH change to empty string from constants
 
@@ -62,10 +60,6 @@ fun PinInput(
         label = "Cursor-Alpha"
     )
 
-    LaunchedEffect(Unit) {
-//        focusRequester.requestFocus()
-    }
-
     BasicTextField(
         value = pinValue,
         onValueChange = {
@@ -73,6 +67,7 @@ fun PinInput(
             if (it.length <= length && it.all { char -> char.isDigit() }) {
                 pinValue = it
                 if (it.length == length) {
+                    focusManager.clearFocus()
                     onDone(it)
                 }
             }
@@ -88,7 +83,10 @@ fun PinInput(
             imeAction = ImeAction.Done
         ),
         decorationBox = {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 repeat(length) { index ->
                     val char = pinValue.getOrNull(index)?.toString() ?: "" // todo EH change to empty string from constants
 
@@ -108,8 +106,7 @@ fun PinInput(
                             pinValue.length == index && isFocused -> Box {
                                 PrimaryText(
                                     text = "|",
-                                    style = DigitalTheme.typography.heading3Bold,
-                                    color = DigitalTheme.colorScheme.contentPrimary.copy(alpha = cursorAlpha)
+                                    color = DigitalTheme.colorScheme.contentBrand.copy(alpha = cursorAlpha)
                                 )
                             }
                         }
@@ -124,8 +121,6 @@ fun PinInput(
 @PreviewLightDark
 fun AlertsScreenPreview() {
     DigitalTheme {
-        PinInput {
-
-        }
+        PinInput {}
     }
 }
