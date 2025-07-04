@@ -25,11 +25,11 @@ class MainFragment : BaseViewBindingFragment<FragmentMainBinding>() {
     private fun initViewPager() {
         val adapter = StatePagerAdapter(childFragmentManager, lifecycle, fragments)
         fragments.clear()
-        fragments.add(ComponentsFragment())
         fragments.add(ComponentsFragment(true))
+        fragments.add(ComponentsFragment())
         mBinding.viewPager.adapter = adapter
         mBinding.viewPager.isSaveEnabled = false
-        val tabName = arrayListOf("Native components", "Compose components")
+        val tabName = arrayListOf("Compose components", "Native components")
         TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager) { tab, position ->
             tab.text = tabName[position]
         }.attach()

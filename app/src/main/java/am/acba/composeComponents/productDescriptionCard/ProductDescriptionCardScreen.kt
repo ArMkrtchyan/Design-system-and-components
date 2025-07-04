@@ -1,6 +1,9 @@
 ﻿package am.acba.composeComponents.productDescriptionCard
 
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.productDescription.ProductDescription
+import am.acba.compose.components.productDescription.ProductDescriptionCard
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -46,8 +49,26 @@ fun ProductDescriptionCardScreen(title: String = "") {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
+                    .padding(bottom = 40.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan1())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan2())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan3())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan4())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getMockAllField())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState1())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState2())
+                VerticalSpacer(20)
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState3())
             }
         }
     }

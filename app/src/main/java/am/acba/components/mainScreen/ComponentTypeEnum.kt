@@ -55,7 +55,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     PRODUCT_CARD_VIEW("Product Card view component", false, R.id.cardViewFragment),
     PRODUCT_CARD_VIEW_COMPOSE("Product Card component", true, R.id.productCardScreenComposeFragment, isReady = true),
     PRODUCT_DESCRIPTION_CARD("Product description card", false, R.id.productDescriptionCardFragment),
-    PRODUCT_DESCRIPTION_CARD_COMPOSE("Product description card", true, R.id.productDescriptionCardComposeFragment),
+    PRODUCT_DESCRIPTION_CARD_COMPOSE("Product description card", true, R.id.productDescriptionCardComposeFragment, isReady = true),
     PROGRESS_CARD_VIEW("Progress View", false, R.id.progressCardViewFragment),
     PROGRESS_CARD_VIEW_COMPOSE("Progress View", true, R.id.progressCardViewComposeFragment),
     PROGRESS_INDICATOR("Progress indicator", false, R.id.progressIndicatorFragment),
@@ -76,6 +76,8 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
 
     companion object {
         fun getComponentsList(isCompose: Boolean) =
-            entries.filter { it.isCompose == isCompose }.map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+            entries.filter { it.isCompose == isCompose }
+                .map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+                .sortedBy { it.title }.sortedBy { it.isReady }
     }
 }
