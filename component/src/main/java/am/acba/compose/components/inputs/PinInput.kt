@@ -1,4 +1,6 @@
-﻿package am.acba.compose.components.inputs
+﻿@file:OptIn(ExperimentalFoundationApi::class)
+
+package am.acba.compose.components.inputs
 
 import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
@@ -17,19 +19,25 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,13 +45,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -61,12 +75,118 @@ fun PinInput(
     length: Int = 4,
     width: Int = 48,
     height: Int = 60,
-    error: String = "Մուտքագրված կոդը սխալ է մի քիչ երկար"
+    spacing: Int = 8,
+    error: String = ""
 ) {
 
-    val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
+    val focusRequester = remember { FocusRequester() }
     var isFocused by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = modifier
+            .width((width * length + (length * (spacing - 1))).dp)
+    ) {
+        BasicTextField(
+            value = value,
+            onValueChange = {
+                when {
+                    it.length > length -> onValueChange.invoke(it.substring(0, length))
+                    it.length == length -> {
+                        onValueChange.invoke(it)
+                        focusManager.clearFocus()
+                    }
+
+                    else -> onValueChange.invoke(it)
+                }
+            },
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .focusable()
+                .onFocusChanged {
+                    isFocused = it.isFocused
+                }
+                .semantics {
+                    contentDescription = "PIN code input"
+                },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.NumberPassword,
+                imeAction = imeAction
+            ),
+            interactionSource = remember { MutableInteractionSource() },
+            cursorBrush = SolidColor(Color.Transparent),
+            enabled = enabled,
+            readOnly = readOnly,
+            decorationBox = { innerTextField ->
+                CompositionLocalProvider(
+                    LocalTextSelectionColors provides TextSelectionColors(
+                        handleColor = Color.Transparent,
+                        backgroundColor = DigitalTheme.colorScheme.contentPrimary
+                    )
+                ) {
+                    PinItemRow(value, length, width, height, spacing, mask, showMask, isFocused, error, innerTextField)
+                }
+            }
+        )
+        error.takeIf { it.isNotEmpty() }?.let {
+            VerticalSpacer(8)
+            ErrorRow(it)
+        }
+    }
+}
+
+@Composable
+private fun PinItemRow(
+    value: String,
+    length: Int,
+    width: Int,
+    height: Int,
+    spacing: Int,
+    mask: String,
+    showMask: Boolean,
+    isFocused: Boolean,
+    error: String,
+    innerTextField: @Composable () -> Unit
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(spacing.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        repeat(length) { index ->
+            val char = value.getOrNull(index)?.toString().orEmpty()
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .width(width.dp)
+                    .height(height.dp)
+                    .let {
+                        if (error.isNotEmpty())
+                            it.border(1.dp, DigitalTheme.colorScheme.borderDanger, RoundedCornerShape(12.dp))
+                        else it
+                    }
+                    .background(DigitalTheme.colorScheme.backgroundTonal2, RoundedCornerShape(12.dp))
+            ) {
+                PinItem(char, mask, showMask, value.length == index && isFocused)
+            }
+        }
+    }
+    Box(
+        modifier = Modifier
+            .alpha(0f)
+            .focusable(false)
+    ) {
+        innerTextField()
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+private fun PinItem(
+    char: String,
+    mask: String,
+    showMask: Boolean,
+    showCursor: Boolean,
+) {
 
     val infiniteTransition = rememberInfiniteTransition(label = "Cursor")
     val cursorAlpha by infiniteTransition.animateFloat(
@@ -79,101 +199,12 @@ fun PinInput(
         label = "Cursor-Alpha"
     )
 
-    Column(modifier = modifier.width((width * length + (32)).dp)) {
-        BasicTextField(
-            value = value,
-            onValueChange = {
-                onValueChange.invoke(it)
-                if (it.length == length) {
-                    focusManager.clearFocus()
-                }
-            },
-            modifier = modifier
-                .focusRequester(focusRequester)
-                .focusable()
-                .onFocusChanged {
-                    isFocused = it.isFocused
-                },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.NumberPassword,
-                imeAction = imeAction
-            ),
-            enabled = enabled,
-            readOnly = readOnly,
-            decorationBox = {
-                PinItemRow(length, showMask, value, mask, isFocused, cursorAlpha, width, height, error)
-            }
-        )
-        error.takeIf { it.isNotEmpty() }?.let {
-            VerticalSpacer(8)
-            ErrorRow(it)
-        }
-    }
-}
-
-@Composable
-private fun PinItemRow(
-    length: Int,
-    showMask: Boolean,
-    value: String,
-    mask: String,
-    isFocused: Boolean,
-    cursorAlpha: Float,
-    width: Int,
-    height: Int,
-    error: String
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        repeat(length) { index ->
-            val char = value.getOrNull(index)?.toString().orEmpty()
-            val modifier = if (error.isEmpty()) {
-                Modifier
-                    .width(width.dp)
-                    .height(height.dp)
-                    .background(DigitalTheme.colorScheme.backgroundTonal2, shape = RoundedCornerShape(12.dp))
-            } else {
-                Modifier
-                    .width(width.dp)
-                    .height(height.dp)
-                    .border(1.dp, DigitalTheme.colorScheme.borderDanger, RoundedCornerShape(12.dp))
-                    .background(DigitalTheme.colorScheme.backgroundTonal2, shape = RoundedCornerShape(12.dp))
-            }
-            Box(
-                modifier = modifier,
-                contentAlignment = Alignment.Center
-            ) {
-                PinCharItem(showMask, value, char, mask, index, isFocused, cursorAlpha)
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-private fun PinCharItem(
-    showMask: Boolean,
-    value: String,
-    char: String,
-    mask: String,
-    index: Int,
-    isFocused: Boolean,
-    cursorAlpha: Float,
-    visibleDuration: Long = 200L,
-) {
-
     var showValueBeforeMask by remember(char) { mutableStateOf(true) }
 
     LaunchedEffect(char) {
-        if (char.isNotEmpty()) {
-            showValueBeforeMask = true
-            delay(visibleDuration)
-            showValueBeforeMask = false
-        } else {
-            showValueBeforeMask = false
-        }
+        showValueBeforeMask = char.isNotEmpty()
+        if (showValueBeforeMask) delay(200)
+        showValueBeforeMask = false
     }
 
     when {
@@ -196,7 +227,7 @@ private fun PinCharItem(
             }
         }
 
-        value.length == index && isFocused -> {
+        showCursor -> {
             Box {
                 PrimaryText(
                     text = "|",
@@ -209,10 +240,21 @@ private fun PinCharItem(
 
 @Composable
 private fun ErrorRow(error: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        PrimaryIcon(painter = painterResource(R.drawable.ic_info), tint = DigitalTheme.colorScheme.contentDangerTonal1)
+    Row {
+        PrimaryIcon(
+            modifier = Modifier.size(18.dp),
+            painter = painterResource(R.drawable.ic_info),
+            tint = DigitalTheme.colorScheme.contentDangerTonal1
+        )
         HorizontalSpacer(4)
-        PrimaryText(error, style = DigitalTheme.typography.smallRegular, color = DigitalTheme.colorScheme.contentDangerTonal1)
+        PrimaryText(
+            error,
+            style = DigitalTheme.typography.smallRegular,
+            color = DigitalTheme.colorScheme.contentDangerTonal1,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.align(Alignment.CenterVertically),
+        )
     }
 }
 

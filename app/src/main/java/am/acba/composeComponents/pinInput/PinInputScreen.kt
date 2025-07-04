@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,6 +30,7 @@ import androidx.compose.ui.unit.dp
 fun PinInputScreen(title: String = "") {
 
     var pinValue by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -52,9 +52,15 @@ fun PinInputScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                PinInput(pinValue, {
-                    pinValue = it
-                })
+                PinInput(
+                    modifier = Modifier.padding(top = 100.dp),
+                    value = pinValue,
+                    onValueChange = {
+                        pinValue = it
+                        error = if (it == "1111") "Մուտքագրված կոդը սխալ է մի քիչ երկար" else ""
+                    },
+                    error = error
+                )
             }
         }
     }
