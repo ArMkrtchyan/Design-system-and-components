@@ -76,6 +76,8 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
 
     companion object {
         fun getComponentsList(isCompose: Boolean) =
-            entries.filter { it.isCompose == isCompose }.map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+            entries.filter { it.isCompose == isCompose }
+                .map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+                .sortedBy { it.title }.sortedBy { it.isReady }
     }
 }
