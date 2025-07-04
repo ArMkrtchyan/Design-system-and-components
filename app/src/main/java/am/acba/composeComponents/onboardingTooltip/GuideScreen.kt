@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TooltipScreen(title: String = "") {
+fun GuideScreen(title: String = "") {
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -57,6 +57,6 @@ fun TooltipScreen(title: String = "") {
 @PreviewLightDark
 fun AlertsScreenPreview() {
     DigitalTheme {
-        TooltipScreen()
+        GuideScreen()
     }
 }

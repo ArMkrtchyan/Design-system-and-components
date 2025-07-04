@@ -3,9 +3,9 @@ package am.acba.composeComponents.onboardingTooltip
 import am.acba.composeComponents.base.BaseComposeFragment
 import androidx.compose.runtime.Composable
 
-class OnboardingTooltipComposeFragment : BaseComposeFragment() {
+class GuideComposeFragment : BaseComposeFragment() {
     @Composable
     override fun SetContent() {
-        TooltipScreen(title)
+        GuideScreen(title)
     }
 }
