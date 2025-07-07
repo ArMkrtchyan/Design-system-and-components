@@ -9,6 +9,7 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableFloatStateOf
@@ -32,16 +34,16 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import java.util.SortedMap
 
 @SuppressLint("UseOfNonLambdaOffsetOverload")
 @Composable
 fun Guide(
-    layoutCoordinates: MutableState<SortedMap<Int, Triple<Float, Float, IntSize>>>,
+    layoutCoordinates: MutableState<SortedMap<Int, ElementPositionAndSize>>,
     guides: List<IGuide>,
     completeButtonText: String = stringResource(R.string.ok),
+    scrollState: ScrollState? = null,
     onFinished: () -> Unit = {}
 ) {
     val currentCoordinatePosition = remember { mutableIntStateOf(0) }
@@ -52,19 +54,26 @@ fun Guide(
 
     if (values.isNotEmpty()) {
         Box(modifier = Modifier.fillMaxSize()) {
-            val sizeTriple = values[currentCoordinatePosition.intValue]
-            val left = sizeTriple.first - 8.dpToPx()
-            val top = sizeTriple.second - 8.dpToPx()
-            val right = left + sizeTriple.third.width.toFloat() + 16.dpToPx()
-            val bottom = top + sizeTriple.third.height.toFloat() + 16.dpToPx()
-            val centerX = sizeTriple.first + (sizeTriple.third.width.toFloat() / 2)
+            val elementPositionAndSize = values[currentCoordinatePosition.intValue]
+            val left = elementPositionAndSize.coordinateX - 8.dpToPx()
+            val top = elementPositionAndSize.coordinateY - 8.dpToPx()
+            val right = left + elementPositionAndSize.width + 16.dpToPx()
+            val bottom = top + elementPositionAndSize.height + 16.dpToPx()
+            val centerX = elementPositionAndSize.coordinateX + (elementPositionAndSize.width / 2)
+            val displayHeight = LocalContext.current.getDisplayHeight()
+
+            if (scrollState != null && elementPositionAndSize.coordinateY > displayHeight - bottom || elementPositionAndSize.coordinateY < 0) {
+                LaunchedEffect(currentCoordinatePosition.intValue) {
+                    scrollState?.scrollTo(elementPositionAndSize.scrollYPosition)
+                }
+            }
 
             Background(left, top, right, bottom, currentCoordinatePosition)
 
             GuidePopUpLayer(
                 modifier = Modifier
                     .offset(
-                        y = calculateOffsetY(bottom, popUpLayerHeight.intValue, sizeTriple.third.height.toFloat()),
+                        y = calculateOffsetY(bottom, popUpLayerHeight.intValue, elementPositionAndSize.height),
                         x = calculateOffsetX(centerX, popUpLayerWidth.intValue)
                     )
                     .onGloballyPositioned { layoutCoordinates ->
@@ -179,7 +188,7 @@ private fun isTopAnchor(bottom: Float, popUpLayerHeight: Int): Boolean {
 @Composable
 @PreviewLightDark
 fun GuidePreview() {
-    val coordinatesState = remember { mutableStateOf(sortedMapOf<Int, Triple<Float, Float, IntSize>>()) }
+    val coordinatesState = remember { mutableStateOf(sortedMapOf<Int, ElementPositionAndSize>()) }
     DigitalTheme {
         Column(
             modifier = Modifier

@@ -3,6 +3,7 @@
 import am.acba.component.extensions.dpToPx
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +19,9 @@ fun GuideBackgroundLayer(animateLeft: Float, animateTop: Float, animateRight: Fl
     val color = DigitalTheme.colorScheme.overlayBackground
     val cornerRadius = CornerRadius(12.dpToPx().toFloat(), 12.dpToPx().toFloat())
     val roundRect = RoundRect(left = animateLeft, top = animateTop, right = animateRight, bottom = animateBottom, cornerRadius = cornerRadius)
-    Canvas(modifier = Modifier.fillMaxSize()) {
+    Canvas(modifier = Modifier
+        .fillMaxSize()
+        .clickable { }) {
         val path = Path()
         path.addRoundRect(roundRect)
         clipPath(path, clipOp = ClipOp.Difference) {
