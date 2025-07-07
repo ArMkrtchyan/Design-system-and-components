@@ -2,8 +2,9 @@
 
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.productDescription.ProductDescription
+import am.acba.compose.components.productDescription.MockState
 import am.acba.compose.components.productDescription.ProductDescriptionCard
+import am.acba.compose.components.productDescription.createMockState
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -52,23 +53,23 @@ fun ProductDescriptionCardScreen(title: String = "") {
                     .padding(bottom = 40.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan1()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan2()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(2))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan3()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(3))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan4()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(4))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(5))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockAllField()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(6))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState1()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(7))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState2()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(8))) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState3()) {}
+                ProductDescriptionCard(productDescription = createMockState(MockState(9))) {}
             }
         }
     }

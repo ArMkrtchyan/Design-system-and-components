@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -40,22 +41,23 @@ fun Badge(
     icon: Int? = null,
 ) {
     when (badgeType) {
-        BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor, borderColor = badgeBorderColor)
-        BadgeEnum.ICON -> BadgeIcon(modifier = modifier, icon = icon, backgroundColor = backgroundColor, iconColor = iconColor, imageUrl = imageUrl)
-        BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, text = text, backgroundColor = backgroundColor, textColor = textColor)
-        BadgeEnum.INFO -> BadgeTextAndIcon(modifier = modifier, icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor, imageUrl = imageUrl)
+        BadgeEnum.DOT -> Dot(backgroundColor = backgroundColor, borderColor = badgeBorderColor)
+        BadgeEnum.ICON -> BadgeIcon(icon = icon, backgroundColor = backgroundColor, iconColor = iconColor, imageUrl = imageUrl)
+        BadgeEnum.NUMBER -> BadgeNumber(text = text, backgroundColor = backgroundColor, textColor = textColor)
+        BadgeEnum.INFO -> BadgeTextAndIcon(icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor, imageUrl = imageUrl)
         BadgeEnum.NONE -> Unit
     }
 }
 
 @Composable
 private fun Dot(
-    modifier: Modifier = Modifier,
     backgroundColor: Color,
     borderColor: Color,
+    width: Dp = 10.dp,
+    height: Dp = 10.dp
 ) {
     Box(
-        modifier = modifier
+        modifier = Modifier
             .width(10.dp)
             .height(10.dp)
             .background(backgroundColor, ShapeTokens.shapeRound)
@@ -88,11 +90,11 @@ private fun BadgeIcon(
         } else {
             imageUrl?.takeIf { it.isNotEmpty() }?.let {
                 Box(
-                    modifier = Modifier
+                    modifier = modifier
                         .width(12.dp)
                         .height(12.dp)
                 ) {
-                    AvatarImage(modifier = modifier, imageUrl = it, iconColor = iconColor)
+                    AvatarImage(modifier = Modifier, imageUrl = it, iconColor = iconColor)
                 }
             }
         }
@@ -101,7 +103,7 @@ private fun BadgeIcon(
 
 @Composable
 private fun BadgeNumber(
-    modifier: Modifier = Modifier,
+
     text: String? = null,
     textColor: Color,
     backgroundColor: Color,
@@ -110,15 +112,12 @@ private fun BadgeNumber(
         modifier = Modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
     ) {
-        BadgeText(modifier.padding(horizontal = 4.dp), text ?: "", textColor)
+        BadgeText(Modifier.padding(horizontal = 4.dp), text.orEmpty(), textColor)
     }
 }
 
 @Composable
 private fun BadgeTextAndIcon(
-    modifier: Modifier = Modifier,
-    textModifier: Modifier = Modifier,
-    iconModifier: Modifier = Modifier,
     icon: Int? = null,
     imageUrl: String? = null,
     text: String? = null,
@@ -126,7 +125,7 @@ private fun BadgeTextAndIcon(
     backgroundColor: Color,
 ) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
             .padding(horizontal = 8.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -136,7 +135,7 @@ private fun BadgeTextAndIcon(
                     PrimaryIcon(
                         painter = painterResource(icon),
                         tint = textColor,
-                        modifier = iconModifier
+                        modifier = Modifier
                             .width(16.dp)
                             .height(16.dp),
                     )
@@ -149,13 +148,13 @@ private fun BadgeTextAndIcon(
                             .width(12.dp)
                             .height(12.dp)
                     ) {
-                        AvatarImage(modifier = iconModifier, imageUrl = it, iconColor = textColor)
+                        AvatarImage(modifier = Modifier, imageUrl = it, iconColor = textColor)
                     }
                     HorizontalSpacer(width = 4)
                 }
             }
 
-        BadgeText(textModifier, text ?: "", textColor)
+        BadgeText(Modifier, text ?: "", textColor)
     }
 }
 

@@ -136,8 +136,8 @@ fun Avatar(
 ) {
     Box(
         modifier = backgroundModifier
-            .width(avatarSize.size.dp)
-            .height(avatarSize.size.dp)
+            .width(avatarSize.size)
+            .height(avatarSize.size)
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp)),
         contentAlignment = Alignment.Center
     ) {
@@ -165,12 +165,12 @@ fun Avatar(
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
             val badgeSize = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize.dp
-                else -> avatarSize.iconBadgeSize.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize
+                else -> avatarSize.iconBadgeSize
             }
             val padding = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding.dp
-                else -> avatarSize.iconBadgePadding.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding
+                else -> avatarSize.iconBadgePadding
             }
             Box(
                 modifier = Modifier
@@ -284,7 +284,8 @@ private fun AvatarText(
     PrimaryText(
         text = text,
         style = avatarSize.getTextStyle(),
-        color = textColor
+        color = textColor,
+        modifier = modifier
     )
 }
 

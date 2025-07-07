@@ -9,6 +9,7 @@ import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
+import am.acba.compose.components.timeLine.ProductDescriptionBadge
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
@@ -50,6 +51,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -151,7 +153,7 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
             ProductDescriptionBullets(productDescription.bullets)
         }
-        ProductDescriptionMedia(productDescription.mediaImage, mediaHeight.intValue)
+        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() })
     }
 }
 
@@ -172,7 +174,7 @@ private fun ProductDescriptionSecondTitle(secondTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionBadges(badges: List<Pair<String, String>>, badgeBackgroundColor: Color?, badgeTextColor: Color?) {
+private fun ProductDescriptionBadges(badges: List<ProductDescriptionBadge>, badgeBackgroundColor: Color?, badgeTextColor: Color?) {
     if (badges.isNotEmpty()) {
         FlowRow(
             verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -180,10 +182,10 @@ private fun ProductDescriptionBadges(badges: List<Pair<String, String>>, badgeBa
         ) {
             badges.forEach { badge ->
                 Badge(
-                    text = badge.second,
+                    text = badge.title,
                     backgroundColor = badgeBackgroundColor ?: DigitalTheme.colorScheme.backgroundTonal2,
                     textColor = badgeTextColor ?: DigitalTheme.colorScheme.contentPrimary,
-                    imageUrl = badge.first
+                    imageUrl = badge.iconUrl
                 )
             }
         }
@@ -224,11 +226,10 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionMedia(imageUrl: String, height: Int) {
-    val density = LocalDensity.current
+private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
     Box(
         modifier = Modifier
-            .height(with(density) { height.toDp() })
+            .height(height)
             .fillMaxWidth(fraction = 0.38f)
     ) {
         Box(
@@ -277,9 +278,9 @@ fun ProductDescriptionCardPreview() {
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia()) {}
+            ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
             VerticalSpacer(20)
-            ProductDescriptionCard(productDescription = ProductDescription.getMockAllField()) {}
+            ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
         }
     }
 }
