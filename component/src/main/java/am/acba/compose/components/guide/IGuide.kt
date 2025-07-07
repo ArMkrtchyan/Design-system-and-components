@@ -3,8 +3,10 @@
 import androidx.compose.runtime.Composable
 
 interface IGuide {
-
-    @Composable
-    fun Content() {
-    }
+    val title: String
+        get() = ""
+    val description: String
+        get() = ""
+    val content: (@Composable () -> Unit)?
+        get() = null
 }

@@ -1,4 +1,9 @@
 ﻿package am.acba.compose.components.guide
 
-class GuideItem : IGuide {
-}
+import androidx.compose.runtime.Composable
+
+class GuideItem(
+    override val title: String = "",
+    override val description: String = "",
+    override var content: (@Composable () -> Unit)? = null
+) : IGuide
