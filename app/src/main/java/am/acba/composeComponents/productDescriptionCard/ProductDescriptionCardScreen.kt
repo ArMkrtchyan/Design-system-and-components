@@ -52,23 +52,23 @@ fun ProductDescriptionCardScreen(title: String = "") {
                     .padding(bottom = 40.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan1())
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan1()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan2())
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan2()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan3())
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan3()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getLoan4())
+                ProductDescriptionCard(productDescription = ProductDescription.getLoan4()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia())
+                ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockAllField())
+                ProductDescriptionCard(productDescription = ProductDescription.getMockAllField()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState1())
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState1()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState2())
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState2()) {}
                 VerticalSpacer(20)
-                ProductDescriptionCard(productDescription = ProductDescription.getMockState3())
+                ProductDescriptionCard(productDescription = ProductDescription.getMockState3()) {}
             }
         }
     }

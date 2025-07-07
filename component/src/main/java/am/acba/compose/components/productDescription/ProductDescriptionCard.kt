@@ -12,6 +12,7 @@ import am.acba.compose.components.badges.Badge
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -55,9 +56,10 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 
 @Composable
-fun ProductDescriptionCard(
+fun <T : IProductDescription> ProductDescriptionCard(
     modifier: Modifier = Modifier,
-    productDescription: IProductDescription
+    productDescription: T,
+    onClick: (T) -> Unit
 ) {
     val contentMinHeight = remember { mutableIntStateOf(100) }
     Column(
@@ -66,6 +68,7 @@ fun ProductDescriptionCard(
             .heightIn(min = 190.dp)
             .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapePrimaryButton)
             .padding(top = 12.dp, start = 16.dp)
+            .clickable { onClick.invoke(productDescription) }
     ) {
         ProductDescriptionHeader(productDescription.title, productDescription.subTitle, contentMinHeight)
         ProductDescriptionContent(productDescription, contentMinHeight)
@@ -130,7 +133,7 @@ private fun ProductDescriptionSubTitle(subTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionContent(productDescription: IProductDescription, contentMinHeight: MutableIntState) {
+private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState) {
     val mediaHeight = remember { mutableIntStateOf(200) }
     val density = LocalDensity.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -274,9 +277,9 @@ fun ProductDescriptionCardPreview() {
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia())
+            ProductDescriptionCard(productDescription = ProductDescription.getMockTitleSubTitleAndMedia()) {}
             VerticalSpacer(20)
-            ProductDescriptionCard(productDescription = ProductDescription.getMockAllField())
+            ProductDescriptionCard(productDescription = ProductDescription.getMockAllField()) {}
         }
     }
 }
