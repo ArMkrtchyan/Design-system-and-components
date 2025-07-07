@@ -7,10 +7,7 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
-import am.acba.compose.theme.paintColor
-import am.acba.compose.theme.toGraphicColor
 import am.acba.compose.theme.toGraphicColorStateList
-import am.acba.compose.theme.toHexString
 import android.graphics.PorterDuff
 import android.widget.ImageView
 import androidx.compose.foundation.Image
@@ -139,8 +136,8 @@ fun Avatar(
 ) {
     Box(
         modifier = backgroundModifier
-            .width(avatarSize.size.dp)
-            .height(avatarSize.size.dp)
+            .width(avatarSize.size)
+            .height(avatarSize.size)
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp)),
         contentAlignment = Alignment.Center
     ) {
@@ -168,12 +165,12 @@ fun Avatar(
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
             val badgeSize = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize.dp
-                else -> avatarSize.iconBadgeSize.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize
+                else -> avatarSize.iconBadgeSize
             }
             val padding = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding.dp
-                else -> avatarSize.iconBadgePadding.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding
+                else -> avatarSize.iconBadgePadding
             }
             Box(
                 modifier = Modifier
@@ -204,7 +201,7 @@ fun Avatar(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-private fun AvatarImage(
+fun AvatarImage(
     modifier: Modifier = Modifier,
     imageRes: Int? = null,
     imageUrl: String? = null,
@@ -221,10 +218,8 @@ private fun AvatarImage(
                 factory = {
                     val imageView = ImageView(context)
                     iconColor?.let {
-                        imageView.setColorFilter(iconColor.toGraphicColor(), android.graphics.PorterDuff.Mode.SRC_IN)
                         ImageViewCompat.setImageTintList(imageView, iconColor.toGraphicColorStateList())
-                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.MULTIPLY)
-                        imageView.paintColor(it.toHexString())
+                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
                     }
                     Glide
                         .with(context)
@@ -289,7 +284,8 @@ private fun AvatarText(
     PrimaryText(
         text = text,
         style = avatarSize.getTextStyle(),
-        color = textColor
+        color = textColor,
+        modifier = modifier
     )
 }
 
