@@ -8,6 +8,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -114,7 +115,7 @@ private fun NavigationButtonsWithText(currentCoordinatePosition: MutableIntState
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val count = if (size > 1) "${currentCoordinatePosition.intValue + 1}/${size}" else ""
+        val count = if (size > 1) "${currentCoordinatePosition.intValue + 1}/${size}" else EMPTY_STRING
         PageCounter(count)
         NavigationButtons(currentCoordinatePosition, size, completeButtonText, onFinished)
     }
