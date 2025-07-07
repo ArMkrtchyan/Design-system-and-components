@@ -3,6 +3,7 @@
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.chips.PrimaryChip
 import am.acba.compose.components.guide.Guide
+import am.acba.compose.components.guide.GuideItem
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -102,7 +103,14 @@ fun GuideScreen(title: String = "") {
         }
     }
     if (showGuide.value) {
-        Guide(coordinatesState) {
+        Guide(
+            coordinatesState,
+            coordinatesState.value.map {
+                GuideItem(
+                    title = "Ռեֆերալ կոդ",
+                    description = "Ստացեք դրամական քեշբեք հավելվածի միջոցով կատարված վճարումների համար"
+                )
+            }) {
             showGuide.value = false
         }
     }
