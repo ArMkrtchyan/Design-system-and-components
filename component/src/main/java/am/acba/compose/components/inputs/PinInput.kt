@@ -8,6 +8,8 @@ import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.Constants.EMPTY_STRING
+import am.acba.utils.Constants.STAR_MASK
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.LinearEasing
@@ -59,6 +61,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
@@ -69,14 +72,14 @@ fun PinInput(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    mask: String = "*",
+    mask: String = STAR_MASK,
     showMask: Boolean = true,
     imeAction: ImeAction = ImeAction.Done,
     length: Int = 4,
-    width: Int = 48,
-    height: Int = 60,
+    width: Dp = 48.dp,
+    height: Dp = 60.dp,
     spacing: Int = 8,
-    error: String = ""
+    error: String = EMPTY_STRING
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -85,7 +88,7 @@ fun PinInput(
 
     Column(
         modifier = modifier
-            .width((width * length + (length * (spacing - 1))).dp)
+            .width((width * length + (length * (spacing - 1)).dp))
     ) {
         BasicTextField(
             value = value,
@@ -139,8 +142,8 @@ fun PinInput(
 private fun PinItemRow(
     value: String,
     length: Int,
-    width: Int,
-    height: Int,
+    width: Dp,
+    height: Dp,
     spacing: Int,
     mask: String,
     showMask: Boolean,
@@ -157,8 +160,8 @@ private fun PinItemRow(
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .width(width.dp)
-                    .height(height.dp)
+                    .width(width)
+                    .height(height)
                     .let {
                         if (error.isNotEmpty())
                             it.border(1.dp, DigitalTheme.colorScheme.borderDanger, RoundedCornerShape(12.dp))
