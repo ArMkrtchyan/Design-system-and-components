@@ -7,6 +7,7 @@ import android.graphics.PorterDuffColorFilter
 import android.widget.ImageView
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.core.graphics.toColorInt
 
 
 fun Color.toHexString(): String {
@@ -15,17 +16,17 @@ fun Color.toHexString(): String {
 
 fun Color.toGraphicColor(): Int {
     val colorHex = this.toHexString()
-    return android.graphics.Color.parseColor(colorHex)
+    return colorHex.toColorInt()
 }
 
 fun Color.toGraphicColorStateList(): ColorStateList {
     val colorHex = this.toHexString()
-    return ColorStateList.valueOf(android.graphics.Color.parseColor(colorHex))
+    return ColorStateList.valueOf(colorHex.toColorInt())
 }
 
 fun ImageView.paintColor(colorString: String) {
     val paint = Paint()
-    val colorFilter = PorterDuffColorFilter(android.graphics.Color.parseColor(colorString), PorterDuff.Mode.SRC_ATOP)
+    val colorFilter = PorterDuffColorFilter(colorString.toColorInt(), PorterDuff.Mode.SRC_ATOP)
     paint.colorFilter = colorFilter
     setLayerPaint(paint)
 }
