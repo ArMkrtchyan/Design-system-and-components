@@ -43,7 +43,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     LIST_ITEMS_2("List items 2", false, R.id.listItem2Fragment),
     LIST_ITEMS_COMPOSE("List items", true, R.id.listItemComposeFragment, isReady = true),
     OFFERS_COMPONENTS("Offers components", false, R.id.offersFragment),
-    OFFERS_COMPONENTS_COMPOSE("Offers components", true, R.id.offersComposeFragment),
+    OFFERS_COMPONENTS_COMPOSE("Offers components", true, R.id.offersComposeFragment, isReady = true),
     ONBOARDING_TOOLTIPS("Onboarding tooltips", false, R.id.tooltipFragment),
     ONBOARDING_TOOLTIPS_COMPOSE("Onboarding tooltips", true, R.id.tooltipComposeFragment),
     PHONE_NUMBER_INPUT("Phone number input", false, R.id.phoneNumberInputFragment),
@@ -55,7 +55,7 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     PRODUCT_CARD_VIEW("Product Card view component", false, R.id.cardViewFragment),
     PRODUCT_CARD_VIEW_COMPOSE("Product Card component", true, R.id.productCardScreenComposeFragment, isReady = true),
     PRODUCT_DESCRIPTION_CARD("Product description card", false, R.id.productDescriptionCardFragment),
-    PRODUCT_DESCRIPTION_CARD_COMPOSE("Product description card", true, R.id.productDescriptionCardComposeFragment),
+    PRODUCT_DESCRIPTION_CARD_COMPOSE("Product description card", true, R.id.productDescriptionCardComposeFragment, isReady = true),
     PROGRESS_CARD_VIEW("Progress View", false, R.id.progressCardViewFragment),
     PROGRESS_CARD_VIEW_COMPOSE("Progress View", true, R.id.progressCardViewComposeFragment),
     PROGRESS_INDICATOR("Progress indicator", false, R.id.progressIndicatorFragment),
@@ -76,6 +76,8 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
 
     companion object {
         fun getComponentsList(isCompose: Boolean) =
-            entries.filter { it.isCompose == isCompose }.map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+            entries.filter { it.isCompose == isCompose }
+                .map { Component(it, it.componentName, navigationId = it.navigationId, isReady = it.isReady || !it.isCompose) }
+                .sortedBy { it.title }.sortedBy { it.isReady }
     }
 }
