@@ -125,13 +125,10 @@ private fun BadgeTextAndIcon(
     textColor: Color,
     backgroundColor: Color,
 ) {
-    Box(
-        modifier = Modifier
+    Row(
+        modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
-    ) {
-        Row(
-            modifier = modifier
-                .padding(horizontal = 8.dp, vertical = 2.dp),
+            .padding(horizontal = 8.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
@@ -158,8 +155,7 @@ private fun BadgeTextAndIcon(
                 }
             }
 
-            BadgeText(textModifier, text ?: "", textColor)
-        }
+        BadgeText(textModifier, text ?: "", textColor)
     }
 }
 
