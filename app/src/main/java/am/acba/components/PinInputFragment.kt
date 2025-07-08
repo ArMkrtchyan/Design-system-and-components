@@ -4,9 +4,9 @@ import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentPinInputBinding
+import am.acba.utils.extensions.openKeyboard
 import android.util.Log
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 
