@@ -108,7 +108,6 @@ class ListItem2Fragment : BaseViewBindingFragment<FragmentListItem2Binding>() {
                 setActionBadgeImage(
                     getDrawable(requireContext(), am.acba.component.R.drawable.ic_camera)
                 )
-                setBadgeChecked(true)
                 setOnActionBadgeClickListener {
                     Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
                 }

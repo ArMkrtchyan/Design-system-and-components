@@ -27,7 +27,8 @@ class OnboardingHint(
     private val contentAndViews: List<Pair<TooltipModel, View>>,
     @StringRes private val lastButtonTextResource: Int? = null,
     private val lastButtonText: String? = null,
-    private val onLastButtonClick: () -> Unit = {}
+    private val onLastButtonClick: () -> Unit = {},
+    private val onCloseButtonClick: () -> Unit = {}
 ) : FrameLayout(context, null, 0) {
 
     private val binding by lazy { OnboardingHintLayoutBinding.inflate(context.inflater(), this, false) }
@@ -49,7 +50,10 @@ class OnboardingHint(
             onFinish?.invoke()
             onLastButtonClick.invoke()
         }
-        binding.tooltip.setCloseTooltipClickListener { onFinish?.invoke() }
+        binding.tooltip.setCloseTooltipClickListener {
+            onFinish?.invoke()
+            onCloseButtonClick.invoke()
+        }
         if (contentAndViews.isNotEmpty()) {
             setTargetViews()
         }

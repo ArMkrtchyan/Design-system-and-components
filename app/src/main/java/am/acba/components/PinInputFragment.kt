@@ -5,6 +5,9 @@ import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentPinInputBinding
 import android.util.Log
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 
 class PinInputFragment : BaseViewBindingFragment<FragmentPinInputBinding>() {
@@ -56,5 +59,10 @@ class PinInputFragment : BaseViewBindingFragment<FragmentPinInputBinding>() {
         mBinding.pinInput.setOnPinFocusChangeListener { it ->
             Log.d("TAG", "setOnPinFocusChangeListener $it")
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mBinding.pinInput.requestPinFocusWithKeyboard()
     }
 }
