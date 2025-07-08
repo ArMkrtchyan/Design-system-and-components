@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--General-->
-
+    <string name="ok">Լավ</string>
     <string name="all">Բոլորը</string>
     <string name="search">Search</string>
 

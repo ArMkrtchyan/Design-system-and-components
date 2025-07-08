@@ -14,7 +14,7 @@ class ComponentsAdapter(
 
     override fun ItemComponentsBinding.onBind(position: Int, item: Component) {
         buttons.text = item.title
-        buttons.backgroundTintList = mContext.getColorStateListFromAttr(if (item.isReady) R.attr.backgroundTonal1 else R.attr.backgroundTonal2)
+        buttons.backgroundTintList = mContext.getColorStateListFromAttr(if (item.isReady) R.attr.backgroundTonal1 else R.attr.backgroundPendingTonal1)
         root.setOnClickListener { onItemClick.invoke(item) }
     }
 }

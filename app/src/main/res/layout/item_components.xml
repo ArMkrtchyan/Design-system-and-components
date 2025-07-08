@@ -6,15 +6,14 @@
 
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/buttons"
+        style="@style/Body2.Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/background_primary_input"
         android:backgroundTint="?attr/backgroundTonal1"
         android:backgroundTintMode="src_over"
-        android:drawableEnd="@drawable/ic_right"
-        android:drawableTint="?attr/contentPrimary"
-        android:layout_marginHorizontal="4dp"
         android:gravity="center_vertical"
         android:padding="16dp"
         android:text="Buttons"

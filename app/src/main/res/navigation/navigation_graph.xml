@@ -278,8 +278,8 @@
         android:name="am.acba.composeComponents.toolbar.ToolbarComposeFragment"
         android:label="ToolbarComposeFragment" />
     <fragment
-        android:id="@+id/tooltipComposeFragment"
-        android:name="am.acba.composeComponents.onboardingTooltip.OnboardingTooltipComposeFragment"
+        android:id="@+id/guideComposeFragment"
+        android:name="am.acba.composeComponents.onboardingTooltip.GuideComposeFragment"
         android:label="OnboardingTooltipComposeFragment" />
     <fragment
         android:id="@+id/cardListingComposeFragment"
