@@ -69,16 +69,8 @@ class PinInput : FrameLayout {
         errorTextView.compoundDrawableTintList =
             context.getColorStateListFromAttr(R.attr.borderDanger)
 
-        viewTreeObserver.addOnGlobalFocusChangeListener { oldFocus, newFocus ->
-            if (oldFocus == binding.numericPinInput && newFocus != binding.numericPinInput) {
-                if (skipNextFocusCallback) {
-                    skipNextFocusCallback = false
-                    return@addOnGlobalFocusChangeListener
-                }
-                pinFocusChangeListener?.invoke(false)
-            } else if (newFocus == binding.numericPinInput) {
-                pinFocusChangeListener?.invoke(true)
-            }
+        binding.numericPinInput.setOnFocusChangeListener { _, hasFocus ->
+            pinFocusChangeListener?.invoke(hasFocus)
         }
         binding.numericPinInput.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
