@@ -8,6 +8,7 @@ import am.acba.compose.components.guide.Guide
 import am.acba.compose.components.guide.GuideItem
 import am.acba.compose.components.listItem.ListItem
 import am.acba.compose.theme.DigitalTheme
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
+@SuppressLint("MutableCollectionMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GuideScreen(title: String = "") {
@@ -170,7 +172,7 @@ fun GuideScreen(title: String = "") {
     }
     if (showGuide.value) {
         Guide(
-            coordinatesState,
+            coordinatesState.value,
             coordinatesState.value.map {
                 GuideItem(
                     title = "Ռեֆերալ կոդ",

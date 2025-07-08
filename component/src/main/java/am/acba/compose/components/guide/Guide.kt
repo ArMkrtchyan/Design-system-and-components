@@ -2,8 +2,6 @@
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.component.extensions.getDisplayHeight
-import am.acba.component.extensions.getDisplayWidth
 import am.acba.compose.theme.DigitalTheme
 import android.annotation.SuppressLint
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -21,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -40,9 +37,9 @@ import java.util.SortedMap
 @SuppressLint("UseOfNonLambdaOffsetOverload")
 @Composable
 fun Guide(
-    layoutCoordinates: MutableState<SortedMap<Int, ElementPositionAndSize>>,
+    layoutCoordinates: SortedMap<Int, ElementPositionAndSize>,
     guides: List<IGuide>,
-    completeButtonText: String = stringResource(R.string.ok),
+    actionName: String = stringResource(R.string.ok),
     scrollState: ScrollState? = null,
     onFinished: () -> Unit = {}
 ) {
@@ -50,7 +47,7 @@ fun Guide(
     val popUpLayerX = remember { mutableFloatStateOf(0f) }
     val popUpLayerHeight = remember { mutableIntStateOf(0) }
     val popUpLayerWidth = remember { mutableIntStateOf(0) }
-    val values = layoutCoordinates.value.values.toList()
+    val values = layoutCoordinates.values.toList()
 
     if (values.isNotEmpty()) {
         Box(modifier = Modifier.fillMaxSize()) {
@@ -60,7 +57,7 @@ fun Guide(
             val right = left + elementPositionAndSize.width + 16.dpToPx()
             val bottom = top + elementPositionAndSize.height + 16.dpToPx()
             val centerX = elementPositionAndSize.coordinateX + (elementPositionAndSize.width / 2)
-            val displayHeight = LocalContext.current.getDisplayHeight()
+            val displayHeight = LocalConfiguration.current.screenHeightDp.dpToPx()
 
             if (scrollState != null && elementPositionAndSize.coordinateY > displayHeight - bottom || elementPositionAndSize.coordinateY < 0) {
                 LaunchedEffect(currentCoordinatePosition.intValue) {
@@ -85,7 +82,7 @@ fun Guide(
                 isAnchorTop = isTopAnchor(bottom, popUpLayerHeight.intValue),
                 anchorXPosition = calculateAnchorX(centerX, popUpLayerX.floatValue),
                 guides = guides,
-                completeButtonText = completeButtonText,
+                completeButtonText = actionName,
                 onFinished = onFinished
             )
         }
@@ -123,7 +120,7 @@ private fun Background(left: Float, top: Float, right: Float, bottom: Float, cur
 
 @Composable
 private fun calculateOffsetY(bottom: Float, popUpLayerHeight: Int, elementHeight: Float): Dp {
-    val displayHeight = LocalContext.current.getDisplayHeight()
+    val displayHeight = LocalConfiguration.current.screenHeightDp.dpToPx()
     val density = LocalDensity.current
     return with(density) {
         if (displayHeight - bottom > popUpLayerHeight) {
@@ -146,7 +143,7 @@ private fun calculateOffsetY(bottom: Float, popUpLayerHeight: Int, elementHeight
 
 @Composable
 private fun calculateOffsetX(centerX: Float, popUpLayerWidth: Int): Dp {
-    val displayWidth = LocalContext.current.getDisplayWidth()
+    val displayWidth = LocalConfiguration.current.screenWidthDp.dpToPx()
     val density = LocalDensity.current
     val firstGuideLine = displayWidth / 3
     val secondGuideLine = (displayWidth / 3) * 2
@@ -180,7 +177,7 @@ private fun calculateAnchorX(centerX: Float, popUpLayerX: Float): Dp {
 
 @Composable
 private fun isTopAnchor(bottom: Float, popUpLayerHeight: Int): Boolean {
-    val displayHeight = LocalContext.current.getDisplayHeight()
+    val displayHeight = LocalConfiguration.current.screenHeightDp.dpToPx()
     return displayHeight - bottom > popUpLayerHeight
 }
 
@@ -197,7 +194,7 @@ fun GuidePreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             Guide(
-                coordinatesState,
+                coordinatesState.value,
                 coordinatesState.value.map {
                     GuideItem(
                         title = "Ստացեք դրամական քեշբեք հավելվածի միջոցով կատարված վճարումների համար",
