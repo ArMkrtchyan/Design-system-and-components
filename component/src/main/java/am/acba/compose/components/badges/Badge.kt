@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Badge(
     modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     badgeType: BadgeEnum = BadgeEnum.INFO,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
@@ -41,25 +42,26 @@ fun Badge(
     icon: Int? = null,
 ) {
     when (badgeType) {
-        BadgeEnum.DOT -> Dot(backgroundColor = backgroundColor, borderColor = badgeBorderColor)
-        BadgeEnum.ICON -> BadgeIcon(icon = icon, backgroundColor = backgroundColor, iconColor = iconColor, imageUrl = imageUrl)
-        BadgeEnum.NUMBER -> BadgeNumber(text = text, backgroundColor = backgroundColor, textColor = textColor)
-        BadgeEnum.INFO -> BadgeTextAndIcon(icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor, imageUrl = imageUrl)
+        BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor, borderColor = badgeBorderColor)
+        BadgeEnum.ICON -> BadgeIcon(modifier = modifier, iconModifier = iconModifier, icon = icon, backgroundColor = backgroundColor, iconColor = iconColor, imageUrl = imageUrl)
+        BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, text = text, backgroundColor = backgroundColor, textColor = textColor)
+        BadgeEnum.INFO -> BadgeTextAndIcon(modifier = modifier, icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor, imageUrl = imageUrl)
         BadgeEnum.NONE -> Unit
     }
 }
 
 @Composable
 private fun Dot(
+    modifier: Modifier = Modifier,
     backgroundColor: Color,
     borderColor: Color,
     width: Dp = 10.dp,
     height: Dp = 10.dp
 ) {
     Box(
-        modifier = Modifier
-            .width(10.dp)
-            .height(10.dp)
+        modifier = modifier
+            .width(width)
+            .height(height)
             .background(backgroundColor, ShapeTokens.shapeRound)
             .border(1.dp, borderColor, ShapeTokens.shapeRound)
     )
@@ -68,13 +70,14 @@ private fun Dot(
 @Composable
 private fun BadgeIcon(
     modifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     iconColor: Color,
     backgroundColor: Color,
     @DrawableRes icon: Int? = null,
     imageUrl: String? = null
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(percent = 50))
             .background(backgroundColor)
     ) {
@@ -82,7 +85,7 @@ private fun BadgeIcon(
             PrimaryIcon(
                 painter = painterResource(icon),
                 tint = iconColor,
-                modifier = modifier
+                modifier = iconModifier
                     .width(12.dp)
                     .height(12.dp)
                     .padding(2.dp),
@@ -90,7 +93,7 @@ private fun BadgeIcon(
         } else {
             imageUrl?.takeIf { it.isNotEmpty() }?.let {
                 Box(
-                    modifier = modifier
+                    modifier = iconModifier
                         .width(12.dp)
                         .height(12.dp)
                 ) {
@@ -103,13 +106,13 @@ private fun BadgeIcon(
 
 @Composable
 private fun BadgeNumber(
-
+    modifier: Modifier = Modifier,
     text: String? = null,
     textColor: Color,
     backgroundColor: Color,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
     ) {
         BadgeText(Modifier.padding(horizontal = 4.dp), text.orEmpty(), textColor)
@@ -118,6 +121,7 @@ private fun BadgeNumber(
 
 @Composable
 private fun BadgeTextAndIcon(
+    modifier: Modifier = Modifier,
     icon: Int? = null,
     imageUrl: String? = null,
     text: String? = null,
@@ -125,7 +129,7 @@ private fun BadgeTextAndIcon(
     backgroundColor: Color,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
             .padding(horizontal = 8.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
