@@ -44,6 +44,25 @@
                 tools:hint="Վարկային կոդ" />
 
             <am.acba.component.input.PrimaryInput
+                android:id="@+id/inputt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:enableErrorAnimation="true"
+                tools:helperText="15 նիշ"
+                tools:hint="Վարկային կոդ" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:inputType="password"
+                app:enableErrorAnimation="true"
+                app:endIconTint="?attr/contentPrimary"
+                android:hint="Նոր գաղտնաբառ" />
+
+            <am.acba.component.input.PrimaryInput
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,6 +71,16 @@
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:endIconTint="?attr/contentPrimary"
                 app:expandedHintEnabled="true" />
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/removeError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <am.acba.component.input.PrimaryInput
+                android:id="@+id/addError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -13,6 +13,7 @@ import am.acba.component.extensions.vibrate
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Parcelable
@@ -46,6 +47,7 @@ open class PrimaryInput : TextInputLayout {
     var enableErrorAnimation = false
     private val TYPE_NUMBER = 1
     private val TYPE_EMAIL = 2
+    private val PASSWORD = 3
 
     private var textMaxLength = -1
     private var cornerStyle = -1
@@ -60,6 +62,7 @@ open class PrimaryInput : TextInputLayout {
     private var onOtherActionButtonClick: ((Int) -> Unit)? = null
     private var onDoneButtonClick: (() -> Unit)? = null
     private var mAction: ((Boolean) -> Unit?)? = null
+    private var isPasswordVisible = false
 
     constructor(context: Context) : super(context, null, R.attr.primaryInputStyle)
 
@@ -116,6 +119,7 @@ open class PrimaryInput : TextInputLayout {
             when (inputType) {
                 TYPE_NUMBER -> setInputTypeForNumber()
                 TYPE_EMAIL -> setInputTypeForEmail()
+                PASSWORD -> setInputTypeForPassword()
                 else -> setInputTypeDefault()
             }
 
@@ -172,6 +176,38 @@ open class PrimaryInput : TextInputLayout {
 
     fun setInputTypeForEmail() {
         editText?.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+    }
+
+    fun setInputTypeForPassword() {
+        val currentTypeFace: Typeface? = editText?.typeface
+        isPasswordVisible = false
+        findViewById<ImageButton>(com.google.android.material.R.id.text_input_end_icon)?.isVisible = true
+        editText?.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        editText?.transformationMethod = CustomPasswordTransformationMethod('●')
+        editText?.typeface = currentTypeFace
+        setEndIconDrawable(R.drawable.ic_closed_eye)
+        setEndIconOnClickListener {
+            togglePasswordVisibility()
+        }
+    }
+
+    private fun togglePasswordVisibility() {
+        isPasswordVisible = !isPasswordVisible
+        val currentTypeFace: Typeface? = editText?.typeface
+        if (isPasswordVisible) {
+            editText?.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            editText?.transformationMethod = null
+            setEndIconDrawable(R.drawable.ic_opened_eye)
+        } else {
+            editText?.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            editText?.transformationMethod = CustomPasswordTransformationMethod('●')
+            setEndIconDrawable(R.drawable.ic_closed_eye)
+        }
+        editText?.typeface = currentTypeFace
+        editText?.setSelection(editText?.text?.length ?: 0)
     }
 
     fun setInputTypeDefault() {

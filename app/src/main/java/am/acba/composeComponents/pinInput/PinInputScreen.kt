@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.pinInput
 
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.inputs.PinInput
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,9 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -23,6 +28,10 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PinInputScreen(title: String = "") {
+
+    var pinValue by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -35,19 +44,23 @@ fun PinInputScreen(title: String = "") {
             )
     ) {
         Column(Modifier.fillMaxSize()) {
-            PrimaryToolbar(title = title, actions = {
-                IconButton(onClick = {
-
-                }) {
-
-                }
-            })
+            PrimaryToolbar(title = title)
             Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                PinInput(
+                    modifier = Modifier.padding(top = 100.dp),
+                    value = pinValue,
+                    onValueChange = {
+                        pinValue = it
+                        error = if (it == "1111") "Մուտքագրված կոդը սխալ է մի քիչ երկար" else ""
+                    },
+                    error = error
+                )
             }
         }
     }

@@ -152,22 +152,16 @@
         <attr name="isPreventClick" />
         <attr name="android:text" />
         <attr name="textAppearance" format="reference" />
+        <attr name="textDrawableColor" format="color" />
+        <attr name="textDrawableBackgroundColor" format="color" />
         <attr name="actionButtonType" format="enum">
             <enum name="ActionButton" value="0" />
             <enum name="Avatar" value="1" />
             <enum name="Text" value="2" />
         </attr>
         <attr name="showActionText" format="boolean" />
-        <attr name="badgeChecked" format="boolean" />
-        <attr name="checkable" format="boolean" />
         <attr name="showBadge" />
-        <attr name="badgeText" />
-        <attr name="badgeTextAppearance" />
-        <attr name="badgeTextColor" />
-        <attr name="badgeIcon" />
-        <attr name="badgeIconTint" />
         <attr name="badgeBackgroundTint" />
-        <attr name="badgeType" />
         <attr name="badgeIconGravity" format="enum">
             <enum name="Bottom" value="0" />
             <enum name="Top" value="1" />
@@ -176,6 +170,7 @@
         <attr name="badgePaddingBottom" />
         <attr name="badgePaddingStart" />
         <attr name="badgePaddingEnd" />
+        <attr name="badgeVisibility" format="boolean" />
         <attr name="actionIcon" format="reference" />
         <attr name="actionIconSize" format="enum">
             <enum name="XXLarge" value="0" />
@@ -186,11 +181,9 @@
             <enum name="XSmall" value="5" />
         </attr>
         <attr name="actionIconBackground" format="reference" />
+        <attr name="actionIconBackgroundTint" format="color" />
         <attr name="actionIconTint" format="color" />
         <attr name="actionIconPadding" format="dimension" />
-        <attr name="badgeVisibility" format="boolean" />
-        <attr name="textDrawableColor" format="color" />
-        <attr name="textDrawableBackgroundColor" format="color" />
     </declare-styleable>
     <declare-styleable name="PrimaryInput">
         <attr name="textMaxLength" format="integer" />
@@ -203,6 +196,7 @@
             <enum name="amountFormatting" value="0" />
             <enum name="quantity" value="1" />
             <enum name="email" value="2" />
+            <enum name="password" value="3" />
         </attr>
     </declare-styleable>
     <declare-styleable name="PhoneNumberInput">
