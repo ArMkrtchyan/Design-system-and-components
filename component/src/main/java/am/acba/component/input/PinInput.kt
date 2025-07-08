@@ -5,6 +5,7 @@ import am.acba.component.databinding.WidgetPinInputBinding
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorStateListFromAttr
 import am.acba.component.extensions.inflater
+import am.acba.component.extensions.openKeyboard
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.InputFilter
@@ -100,9 +101,7 @@ class PinInput : FrameLayout {
     }
 
     fun requestPinFocusWithKeyboard() {
-        binding.numericPinInput.requestFocus()
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-        imm.showSoftInput(binding.numericPinInput, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
+        binding.numericPinInput.openKeyboard(context)
     }
 
 
