@@ -1,11 +1,15 @@
 ﻿package am.acba.compose.components.avatar
 
 import am.acba.component.R
+import am.acba.component.extensions.dpToPx
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.compose.theme.toGraphicColorStateList
+import android.graphics.PorterDuff
+import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,20 +28,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.widget.ImageViewCompat
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+
 
 @Composable
 fun ActionButton(
     actionText: String,
-    actionTextColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    actionTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
     backgroundModifier: Modifier = Modifier,
     badgeModifier: Modifier = Modifier,
     contentModifier: Modifier = Modifier,
@@ -46,10 +57,11 @@ fun ActionButton(
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 100,
     icon: Int? = null,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    iconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     iconPadding: Dp = 16.dp,
     imageUrl: String? = null,
     clipPercent: Int = 0,
+    imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
     textColor: Color = DigitalTheme.colorScheme.contentSecondary,
@@ -57,6 +69,7 @@ fun ActionButton(
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     onActionButtonClick: () -> Unit = {},
     onBadgeClick: () -> Unit = {},
 ) {
@@ -76,6 +89,7 @@ fun ActionButton(
             iconPadding,
             imageUrl,
             clipPercent,
+            imageCornerRadius,
             contentScale,
             text,
             textColor,
@@ -83,6 +97,7 @@ fun ActionButton(
             badgeIcon,
             badgeBackgroundColor,
             badgeIconColor,
+            badgeBorderColor,
             onBadgeClick
         )
         VerticalSpacer(8)
@@ -104,10 +119,11 @@ fun Avatar(
     backgroundColor: Color = Color.Transparent,
     backgroundRadius: Int = 0,
     icon: Int? = null,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    iconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     iconPadding: Dp = Dp.Unspecified,
     imageUrl: String? = null,
     clipPercent: Int = 0,
+    imageCornerRadius: Int? = null,
     contentScale: ContentScale = ContentScale.Crop,
     text: String? = null,
     textColor: Color = DigitalTheme.colorScheme.contentSecondary,
@@ -115,29 +131,46 @@ fun Avatar(
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
+    badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     onBadgeClick: () -> Unit = {},
 ) {
     Box(
         modifier = backgroundModifier
-            .width(avatarSize.size.dp)
-            .height(avatarSize.size.dp)
+            .width(avatarSize.size)
+            .height(avatarSize.size)
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp)),
         contentAlignment = Alignment.Center
     ) {
         when (avatarType) {
-            AvatarEnum.ICON -> AvatarIcon(modifier = contentModifier, icon = icon ?: R.drawable.default_icon, iconColor = iconColor, padding = iconPadding)
-            AvatarEnum.IMAGE -> AvatarImage(modifier = contentModifier, imageRes = icon, clipPercent = clipPercent, imageUrl = imageUrl, contentScale = contentScale)
+            AvatarEnum.ICON -> AvatarIcon(
+                modifier = contentModifier,
+                icon = icon ?: R.drawable.default_icon,
+                iconColor = iconColor ?: DigitalTheme.colorScheme.contentPrimary,
+                padding = iconPadding
+            )
+
+            AvatarEnum.IMAGE -> AvatarImage(
+                modifier = contentModifier,
+                imageRes = icon,
+                clipPercent = clipPercent,
+                imageUrl = imageUrl,
+                imageCornerRadius = imageCornerRadius,
+                contentScale = contentScale,
+                iconColor = iconColor,
+                padding = iconPadding
+            )
+
             AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
             AvatarEnum.LOTTIE -> AvatarLottie(modifier = contentModifier)
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
             val badgeSize = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize.dp
-                else -> avatarSize.iconBadgeSize.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgeSize
+                else -> avatarSize.iconBadgeSize
             }
             val padding = when {
-                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding.dp
-                else -> avatarSize.iconBadgePadding.dp
+                badgeType == BadgeEnum.DOT -> avatarSize.dotBadgePadding
+                else -> avatarSize.iconBadgePadding
             }
             Box(
                 modifier = Modifier
@@ -156,6 +189,7 @@ fun Avatar(
                     badgeType = badgeType,
                     icon = badgeIcon,
                     backgroundColor = badgeBackgroundColor,
+                    badgeBorderColor = badgeBorderColor,
                     iconColor = badgeIconColor
                 )
             }
@@ -167,23 +201,54 @@ fun Avatar(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-private fun AvatarImage(
+fun AvatarImage(
     modifier: Modifier = Modifier,
     imageRes: Int? = null,
     imageUrl: String? = null,
+    imageCornerRadius: Int? = null,
     clipPercent: Int = 0,
     contentScale: ContentScale = ContentScale.Crop,
+    iconColor: Color? = null,
+    padding: Dp = Dp.Unspecified,
 ) {
     if (!imageUrl.isNullOrEmpty()) {
-        GlideImage(
-            model = imageUrl ?: imageRes ?: R.drawable.default_icon, contentDescription = "",
-            contentScale = contentScale, modifier = modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(clipPercent))
-        )
-    } else {
+        if (imageUrl.endsWith("svg")) {
+            val context = LocalContext.current
+            AndroidView(
+                factory = {
+                    val imageView = ImageView(context)
+                    iconColor?.let {
+                        ImageViewCompat.setImageTintList(imageView, iconColor.toGraphicColorStateList())
+                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
+                    }
+                    Glide
+                        .with(context)
+                        .load(imageUrl)
+                        .into(imageView)
+                    imageView
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .clip(RoundedCornerShape(clipPercent))
+            )
+        } else {
+            GlideImage(
+                model = imageUrl, contentDescription = "",
+                contentScale = contentScale,
+                modifier = modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(clipPercent)),
+                requestBuilderTransform = { transform ->
+                    imageCornerRadius?.let { radius ->
+                        transform.apply(RequestOptions.bitmapTransform(RoundedCorners(radius.dpToPx())))
+                    } ?: transform
+                }
+            )
+        }
+    } else if (imageRes != null) {
         Image(
-            painterResource(imageRes ?: R.drawable.default_icon), contentDescription = "",
+            painterResource(imageRes), contentDescription = "",
             modifier = modifier
                 .fillMaxSize()
                 .clip(RoundedCornerShape(clipPercent)),
@@ -219,7 +284,8 @@ private fun AvatarText(
     PrimaryText(
         text = text,
         style = avatarSize.getTextStyle(),
-        color = textColor
+        color = textColor,
+        modifier = modifier
     )
 }
 
@@ -246,7 +312,7 @@ fun AvatarScreenPreview() {
         ) {
             Avatar(avatarSize = AvatarSizeEnum.AVATAR_SIZE_24)
             VerticalSpacer(16)
-            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32)
+            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, badgeType = BadgeEnum.DOT)
             VerticalSpacer(16)
             Avatar(
                 avatarType = AvatarEnum.ICON,

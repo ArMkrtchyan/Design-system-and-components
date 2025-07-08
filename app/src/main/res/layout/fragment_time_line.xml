@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <am.acba.component.toolbar.PrimaryToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="TimeLine" />
+
+    <am.acba.component.textView.PrimaryTextView
+        style="@style/Subtitle1.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:text="Currency Inputs allow users to enter text into a UI. They typically appear in forms and dialogs. Use this component if you need to collect some information from the user"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="Մարման գրաֆիկ" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineType="Progress" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="ՀԴՄ-ով վճարման ակտիվացում" />
+
+            <am.acba.component.primaryTimeLine.PrimaryTimeLine
+                android:id="@+id/time_line_example12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:timeLineEndIconVisibility="true"
+                app:timeLineTitle="ՀԴՄ-ով վճարման ակտիվացում" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>

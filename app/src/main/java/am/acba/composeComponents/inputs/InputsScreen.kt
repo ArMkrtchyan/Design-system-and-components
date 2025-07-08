@@ -68,7 +68,6 @@ fun InputsScreen(title: String = "") {
                     label = "Label",
                     helpText = "Some help text",
                     visualTransformation = MaxLengthVisualTransformation(15),
-                    autoFormatting = true,
                     leadingIcon = R.drawable.ic_close,
                 )
                 VerticalSpacer(16)

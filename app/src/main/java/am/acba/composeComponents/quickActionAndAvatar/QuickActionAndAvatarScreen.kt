@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -212,6 +213,11 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_24, icon = R.drawable.ic_phonebook,
+            avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+            clipPercent = 0, iconColor = null
+        )
         HorizontalSpacer(16)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
@@ -224,6 +230,14 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
+        HorizontalSpacer(16)
+        Avatar(
+            avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
+            avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType37_1_1.png",
+            imageCornerRadius = 4,
+            contentScale = ContentScale.FillWidth,
+
+            )
         HorizontalSpacer(16)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,

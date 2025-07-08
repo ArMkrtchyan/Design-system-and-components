@@ -186,6 +186,10 @@
         android:label="SnackBarFragment"
         tools:layout="@layout/fragment_snack_bar" />
     <fragment
+        android:id="@+id/timeLineFragment"
+        android:name="am.acba.components.TimeLineFragment"
+        android:label="TimeLineFragment" />
+    <fragment
         android:id="@+id/buttonsComposeFragment"
         android:name="am.acba.composeComponents.buttons.ButtonsComposeFragment"
         android:label="ButtonsComposeFragment" />
@@ -306,12 +310,12 @@
         android:name="am.acba.composeComponents.offers.OffersComposeFragment"
         android:label="OffersComposeFragment" />
     <fragment
-        android:id="@+id/cardViewComposeFragment"
-        android:name="am.acba.composeComponents.cardView.CardViewComposeFragment"
+        android:id="@+id/productCardScreenComposeFragment"
+        android:name="am.acba.composeComponents.cardView.ProductCardScreenComposeFragment"
         android:label="CardViewComposeFragment" />
     <fragment
         android:id="@+id/tablesComposeFragment"
-        android:name="am.acba.composeComponents.tabLayout.TabLayoutComposeFragment"
+        android:name="am.acba.composeComponents.tables.TablesComposeFragment"
         android:label="TabLayoutComposeFragment" />
     <fragment
         android:id="@+id/datePickerComposeFragment"
@@ -321,4 +325,12 @@
         android:id="@+id/snackBarComposeFragment"
         android:name="am.acba.composeComponents.snackbar.SnackBarComposeFragment"
         android:label="SnackBarComposeFragment" />
+    <fragment
+        android:id="@+id/timeLineComposeFragment"
+        android:name="am.acba.composeComponents.timeLine.TimeLineComposeFragment"
+        android:label="TimeLineComposeFragment" />
+    <fragment
+        android:id="@+id/expandableCardComposeFragment"
+        android:name="am.acba.composeComponents.expandableCard.ExpandableCardComposeFragment"
+        android:label="TimeLineComposeFragment" />
 </navigation>

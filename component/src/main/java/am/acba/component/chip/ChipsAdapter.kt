@@ -1,6 +1,5 @@
 package am.acba.component.chip
 
-import am.acba.acbamobile.ui.kotlin.screens.loan.IChipModel
 import am.acba.component.databinding.ItemChipBinding
 import am.acba.component.extensions.inflater
 import android.view.ViewGroup

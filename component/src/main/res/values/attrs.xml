@@ -80,6 +80,7 @@
         <attr name="borderPrimary" format="color" />
         <attr name="borderPrimaryTonal1" format="color" />
         <attr name="borderPrimaryTonal2" format="color" />
+        <attr name="borderPrimaryTonal3" format="color" />
         <attr name="borderBrand" format="color" />
         <attr name="borderBrandTonal1" format="color" />
         <attr name="borderBrandTonal1Disable" format="color" />
@@ -131,6 +132,8 @@
         <attr name="contentAlternative4" format="color" />
         <attr name="contentAlternative5" format="color" />
         <attr name="contentAlternative6" format="color" />
+
+        <attr name="transparent" format="color" />
 
         <!-- logo -->
         <attr name="visaLogo" format="reference" />
@@ -215,6 +218,7 @@
         <attr name="currencyInputMinAmount" format="float" />
         <attr name="formattingWithOutDot" format="boolean" />
         <attr name="enableErrorAnimation" />
+        <attr name="enableAutoValidation" format="boolean" />
     </declare-styleable>
     <declare-styleable name="ProgressCardView">
         <attr name="ProgressViewTitleText" format="string" />
@@ -506,6 +510,14 @@
         <attr name="productCardImage" format="reference" />
         <attr name="productCardHeight" format="dimension" />
         <attr name="productCardBackgroundColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="PrimaryTimeLine">
+        <attr name="timeLineTitle" format="string" />
+        <attr name="timeLineEndIconVisibility" format="boolean" />
+        <attr name="timeLineType" format="enum">
+            <enum name="TimeLine" value="0" />
+            <enum name="Progress" value="1" />
+        </attr>
     </declare-styleable>
     <declare-styleable name="PrimaryEmptyView">
         <attr name="emptyIcon" format="reference" />

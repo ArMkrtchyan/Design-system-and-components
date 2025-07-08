@@ -1,5 +1,7 @@
 package am.acba.compose.theme
 
+import androidx.compose.ui.graphics.Color
+
 fun darkColorScheme(): ColorTokens = ColorTokens(
     backgroundBase = AcbaColors.BlueGrey_1000,
     backgroundBrand = AcbaColors.BrandGreen_500,
@@ -38,6 +40,7 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     borderPrimary = AcbaColors.BlueGrey_650,
     borderPrimaryTonal1 = AcbaColors.BlueGrey_850,
     borderPrimaryTonal2 = AcbaColors.White_10,
+    borderPrimaryTonal3 = AcbaColors.BlueGrey_150,
     borderBrand = AcbaColors.BrandGreen_500,
     borderBrandTonal1 = AcbaColors.BrandGreen_450,
     borderBrandTonal1Disable = AcbaColors.BlueGrey_700,
@@ -71,7 +74,8 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     contentPrimaryTonal1Disable = AcbaColors.BlueGrey_700,
     contentSecondary = AcbaColors.White,
     contentSecondaryDisable = AcbaColors.BlueGrey_700,
-    contentInverse = AcbaColors.Grey_900,
+    contentInverse = AcbaColors.BlueGrey_900,
+    contentInverse2 = AcbaColors.BlueGrey_900,
     contentNeutralTonal1 = AcbaColors.BlueGrey_150,
     contentDangerTonal1 = AcbaColors.Red_500,
     contentInfoTonal1 = AcbaColors.Blue_500,
@@ -87,4 +91,5 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     contentAlternative5 = AcbaColors.BrandGreen_550,
     contentAlternative6 = AcbaColors.Blue_700,
     backgroundPendingTonal1 = AcbaColors.BlueGrey_550_15,
+    transparent = Color.Transparent,
 )

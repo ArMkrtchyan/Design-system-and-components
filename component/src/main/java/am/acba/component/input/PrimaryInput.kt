@@ -287,12 +287,14 @@ open class PrimaryInput : TextInputLayout {
     fun validateAfterFocusChange(errorMessage: String?, isValid: Boolean = true) {
         if (editText?.hasFocus() == false) {
             val isNotEmpty = editText?.text?.isNotEmpty() == true
-            isErrorEnabled = !isValid && isNotEmpty
             validateAfterInput = isNotEmpty
-            if (isErrorEnabled) {
+            if (!isValid && isNotEmpty) {
+                error = errorMessage
+                isErrorEnabled = true
                 isFirstFocusable = false
                 if (isKeyboardActionClicked) setErrorAnimation()
-                error = errorMessage
+            } else {
+                isErrorEnabled = false
             }
         }
     }
@@ -304,8 +306,9 @@ open class PrimaryInput : TextInputLayout {
                 validateAfterInput = false
                 return
             }
-            isErrorEnabled = !isValid && editText?.text?.isNotEmpty() == true
-            if (isErrorEnabled) error = errorMessage
+            val isInvalid = !isValid && editText?.text?.isNotEmpty() == true
+            if (isInvalid) error = errorMessage
+            isErrorEnabled = isInvalid
         }
     }
 

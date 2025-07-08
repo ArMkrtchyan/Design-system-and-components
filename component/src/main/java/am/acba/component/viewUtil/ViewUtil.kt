@@ -18,4 +18,16 @@ object ViewUtil {
         val clipData = ClipData.newPlainText("text", view.text)
         clipboardManager.setPrimaryClip(clipData)
     }
+
+
+    fun Context.copyWithVibration(text: String) {
+        copyText(text)
+        vibrate(VIBRATION_AMPLITUDE)
+    }
+
+    fun Context.copyText(text: String) {
+        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("text", text)
+        clipboardManager.setPrimaryClip(clipData)
+    }
 }

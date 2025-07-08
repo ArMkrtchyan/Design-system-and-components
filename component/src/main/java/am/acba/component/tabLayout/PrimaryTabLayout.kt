@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
@@ -56,14 +57,6 @@ class PrimaryTabLayout @JvmOverloads constructor(
             tab.customView = customTabItem
             this.addTab(tab)
             updateTabStyle(this.getTabAt(this.selectedTabPosition), true)
-            val badgeTextView = customTabItem.findViewById<PrimaryTextView>(R.id.item_badge_text)
-            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-                badgeTextView,
-                4,   // min size in SP
-                16,  // max size in SP
-                1,   // step size in SP
-                TypedValue.COMPLEX_UNIT_SP
-            )
         }
 
     }
@@ -73,7 +66,7 @@ class PrimaryTabLayout @JvmOverloads constructor(
             val textView = it.findViewById<TextView>(R.id.item_title)
             if (isSelected) {
                 textView.setTextAppearance(R.style.Body2_Bold)
-                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentBrand))
+                textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentBrandTonal1))
             } else {
                 textView.setTextAppearance(R.style.Subtitle2_Regular)
                 textView.setTextColor(context?.getColorStateListFromAttr(R.attr.contentPrimaryTonal1))

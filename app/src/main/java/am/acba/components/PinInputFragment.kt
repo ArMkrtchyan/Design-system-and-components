@@ -4,6 +4,7 @@ import am.acba.component.toolbar.PrimaryToolbar
 import am.acba.components.base.BaseViewBindingFragment
 import am.acba.components.base.Inflater
 import am.acba.components.databinding.FragmentPinInputBinding
+import android.util.Log
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -53,6 +54,10 @@ class PinInputFragment : BaseViewBindingFragment<FragmentPinInputBinding>() {
 
         mBinding.switchPinVisibility.setOnClickListener {
             mBinding.pinInput.switchPinVisibility()
+        }
+
+        mBinding.pinInput.setOnPinFocusChangeListener { it ->
+            Log.d("TAG", "setOnPinFocusChangeListener $it")
         }
     }
 

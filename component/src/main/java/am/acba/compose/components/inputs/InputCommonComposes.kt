@@ -5,6 +5,7 @@ import am.acba.compose.HorizontalSpacer
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,8 +20,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
@@ -52,24 +55,73 @@ fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
 }
 
 @Composable
-fun leadingOrTrailingIcon(iconRes: Int? = null, tint: Color, isEnabled: Boolean = true, onClick: (() -> Unit)? = null): @Composable (() -> Unit)? {
-    val iconTint = when {
-        !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
-        else -> tint
+fun leadingOrTrailingIcon(
+    iconRes: Int? = null,
+    tint: Color?,
+    secondaryIconRes: Int? = null,
+    secondaryTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    isEnabled: Boolean = true,
+    secondaryIconSize: Dp = 24.dp,
+    iconSize: Dp = 24.dp,
+    isLeading: Boolean = true,
+    onSecondaryIconClick: (() -> Unit)? = null,
+    onClick: (() -> Unit)? = null
+): @Composable (() -> Unit)? {
+    val iconColorFilter = when {
+        tint == null -> null
+        !isEnabled -> ColorFilter.tint(DigitalTheme.colorScheme.contentPrimaryTonal1Disable)
+        else -> ColorFilter.tint(tint)
     }
-    return if (iconRes != null) {
-        {
-            Icon(
-                painter = painterResource(id = iconRes),
-                modifier = Modifier
-                    .width(24.dp)
-                    .height(24.dp)
-                    .clickable { onClick?.invoke() },
-                contentDescription = "",
-                tint = iconTint
-            )
+    val secondaryIconColorFilter = when {
+        secondaryTint == null -> null
+        !isEnabled -> ColorFilter.tint(DigitalTheme.colorScheme.contentPrimaryTonal1Disable)
+        else -> ColorFilter.tint(secondaryTint)
+    }
+    return when {
+        iconRes != null && secondaryIconRes != null -> {
+            {
+                Row {
+                    ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 12, onSecondaryIconClick)
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 0, spaceEnd = 16, onClick)
+                }
+            }
         }
-    } else null
+
+        iconRes != null -> {
+            {
+                if (isLeading) {
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 16, spaceEnd = 8, onClick)
+                } else {
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 12, spaceEnd = 16, onClick)
+                }
+            }
+        }
+
+        secondaryIconRes != null -> {
+            {
+                ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 16, onSecondaryIconClick)
+            }
+        }
+
+        else -> null
+    }
+}
+
+@Composable
+private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24.dp, spaceStart: Int, spaceEnd: Int, onClick: (() -> Unit)? = null) {
+    Row {
+        HorizontalSpacer(spaceStart)
+        Image(
+            painter = painterResource(id = iconRes),
+            modifier = Modifier
+                .width(iconSize)
+                .height(iconSize)
+                .clickable { onClick?.invoke() },
+            contentDescription = "",
+            colorFilter = colorFilter
+        )
+        HorizontalSpacer(spaceEnd)
+    }
 }
 
 @Composable

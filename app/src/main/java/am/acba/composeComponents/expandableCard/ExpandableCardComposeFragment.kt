@@ -1,11 +1,11 @@
-package am.acba.composeComponents.cardView
+﻿package am.acba.composeComponents.expandableCard
 
 import am.acba.composeComponents.base.BaseComposeFragment
 import androidx.compose.runtime.Composable
 
-class CardViewComposeFragment : BaseComposeFragment() {
+class ExpandableCardComposeFragment : BaseComposeFragment() {
     @Composable
     override fun SetContent() {
-        CardViewScreen(title)
+        ExpandableCardScreen(title)
     }
 }

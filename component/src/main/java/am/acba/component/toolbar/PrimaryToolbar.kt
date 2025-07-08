@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.core.graphics.drawable.DrawableCompat
@@ -48,6 +49,8 @@ class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
             }
             recycle()
         }
+        getTextView()?.id = R.id.centre_title
+        getIcon()?.id = R.id.leftIcon
     }
 
     fun setLifecycleOwner(lifecycleOwner: LifecycleOwner) {
@@ -105,6 +108,16 @@ class PrimaryToolbar : MaterialToolbar, LifecycleEventObserver {
         for (i in 0 until this.childCount) {
             val child = this.getChildAt(i)
             if (child is TextView) {
+                return child
+            }
+        }
+        return null
+    }
+
+    private fun getIcon(): ImageView? {
+        for (i in 0 until this.childCount) {
+            val child = this.getChildAt(i)
+            if (child is ImageView) {
                 return child
             }
         }

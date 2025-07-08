@@ -2,6 +2,7 @@ package am.acba.compose.components
 
 import am.acba.component.R
 import am.acba.component.extensions.getActivity
+import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -24,29 +25,22 @@ fun PrimaryToolbar(
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val activity = LocalContext.current.getActivity()
-    TopAppBar(
-        title = {
-            PrimaryText(
-                modifier = Modifier
-                    .padding(end = 16.dp),
-                text = title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = DigitalTheme.colorScheme.backgroundBase,
-            titleContentColor = DigitalTheme.colorScheme.contentPrimary,
-        ),
-        actions = actions,
-        navigationIcon = {
-            IconButton(onClick = {
-                activity?.onBackPressed()
-            }) {
-                PrimaryIcon(painterResource(R.drawable.ic_back))
-            }
+    TopAppBar(title = {
+        PrimaryText(
+            modifier = Modifier
+                .padding(end = 16.dp, start = 16.dp)
+                .id("centre_title"), text = title, maxLines = 1, overflow = TextOverflow.Ellipsis
+        )
+    }, colors = TopAppBarDefaults.topAppBarColors(
+        containerColor = DigitalTheme.colorScheme.backgroundBase,
+        titleContentColor = DigitalTheme.colorScheme.contentPrimary,
+    ), actions = actions, navigationIcon = {
+        IconButton(onClick = {
+            activity?.onBackPressed()
+        }, modifier = Modifier.id("leftIcon")) {
+            PrimaryIcon(painterResource(R.drawable.ic_back))
         }
-    )
+    })
 }
 
 @Composable

@@ -1,6 +1,5 @@
-package am.acba.acbamobile.ui.kotlin.screens.loan
+package am.acba.component.chip
 
-import am.acba.component.chip.PrimaryChip
 import androidx.annotation.DrawableRes
 
 interface IChipModel {
