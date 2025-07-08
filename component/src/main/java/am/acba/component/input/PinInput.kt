@@ -70,6 +70,13 @@ class PinInput : FrameLayout {
         return showPinCode
     }
 
+    fun requestPinFocusWithKeyboard() {
+        binding.numericPinInput.requestFocus()
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.showSoftInput(binding.numericPinInput, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
+    }
+
+
     fun switchPinVisibility() {
         showPinCode = !showPinCode
         if (showPinCode) {
