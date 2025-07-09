@@ -333,4 +333,8 @@
         android:id="@+id/expandableCardComposeFragment"
         android:name="am.acba.composeComponents.expandableCard.ExpandableCardComposeFragment"
         android:label="TimeLineComposeFragment" />
+    <fragment
+        android:id="@+id/sliderComposeFragment"
+        android:name="am.acba.composeComponents.slider.SliderComposeFragment"
+        android:label="SliderComposeFragment" />
 </navigation>

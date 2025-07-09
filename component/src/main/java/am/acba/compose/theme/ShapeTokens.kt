@@ -6,6 +6,8 @@ import androidx.compose.ui.unit.dp
 object ShapeTokens {
     val unspecified: RoundedCornerShape = RoundedCornerShape(0.0.dp)
     val shapeRound: RoundedCornerShape = RoundedCornerShape(100.0.dp)
+    val shapeRoundEnd: RoundedCornerShape = RoundedCornerShape(topEnd = 100.0.dp, bottomEnd = 100.0.dp)
+    val shapeRoundStart: RoundedCornerShape = RoundedCornerShape(topStart = 100.0.dp, bottomStart = 100.dp)
     val shapeBadge: RoundedCornerShape = RoundedCornerShape(4.0.dp)
     val shapeCheckbox: RoundedCornerShape = RoundedCornerShape(4.0.dp)
     val shapePrimaryButton: RoundedCornerShape = RoundedCornerShape(12.0.dp)
