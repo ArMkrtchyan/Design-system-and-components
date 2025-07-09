@@ -56,7 +56,7 @@ fun PrimarySlider(
                         modifier = Modifier
                             .size(22.dp)
                             .shadow(3.dp, ShapeTokens.shapeRound)
-                            .background(DigitalTheme.colorScheme.contentSecondary, ShapeTokens.shapeRound)
+                            .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapeRound)
                             .border(2.dp, DigitalTheme.colorScheme.backgroundBrand, ShapeTokens.shapeRound)
 
                     )
