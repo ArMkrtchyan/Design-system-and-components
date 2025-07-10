@@ -1,4 +1,4 @@
-﻿package am.acba.composeComponents.progressIndicator
+﻿package am.acba.composeComponents.piechart
 
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.theme.DigitalTheme
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProgressIndicatorScreen(title: String = "") {
+fun PieChartScreen(title: String = "") {
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -48,8 +48,8 @@ fun ProgressIndicatorScreen(title: String = "") {
 
 @Composable
 @PreviewLightDark
-fun AlertsScreenPreview() {
+fun PieChartPreview() {
     DigitalTheme {
-        ProgressIndicatorScreen()
+        PieChartScreen()
     }
 }

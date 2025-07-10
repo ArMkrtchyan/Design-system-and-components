@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,13 +34,7 @@ fun StatusScreen(title: String = "") {
             )
     ) {
         Column(Modifier.fillMaxSize()) {
-            PrimaryToolbar(title = title, actions = {
-                IconButton(onClick = {
-
-                }) {
-
-                }
-            })
+            PrimaryToolbar(title = title)
             Column(
                 modifier = Modifier
                     .fillMaxSize()

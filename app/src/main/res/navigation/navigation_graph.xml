@@ -333,4 +333,20 @@
         android:id="@+id/expandableCardComposeFragment"
         android:name="am.acba.composeComponents.expandableCard.ExpandableCardComposeFragment"
         android:label="TimeLineComposeFragment" />
+    <fragment
+        android:id="@+id/sliderComposeFragment"
+        android:name="am.acba.composeComponents.slider.SliderComposeFragment"
+        android:label="SliderComposeFragment" />
+    <fragment
+        android:id="@+id/pieChartComposeFragment"
+        android:name="am.acba.composeComponents.piechart.PieChartComposeFragment"
+        android:label="PieChartComposeFragment" />
+    <fragment
+        android:id="@+id/dataTableComposeFragment"
+        android:name="am.acba.composeComponents.dataTable.DataTableComposeFragment"
+        android:label="DataTableComposeFragment" />
+    <fragment
+        android:id="@+id/fileUploadComposeFragment"
+        android:name="am.acba.composeComponents.fileUpload.FileUploadComposeFragment"
+        android:label="FileUploadComposeFragment" />
 </navigation>
