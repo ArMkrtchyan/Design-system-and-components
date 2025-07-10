@@ -24,7 +24,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -79,11 +78,11 @@ fun PinInput(
     width: Dp = 48.dp,
     height: Dp = 60.dp,
     spacing: Int = 8,
+    focusRequester: FocusRequester = FocusRequester(),
     error: String = EMPTY_STRING
 ) {
 
     val focusManager = LocalFocusManager.current
-    val focusRequester = remember { FocusRequester() }
     var isFocused by remember { mutableStateOf(false) }
 
     Column(
@@ -105,7 +104,6 @@ fun PinInput(
             },
             modifier = Modifier
                 .focusRequester(focusRequester)
-                .focusable()
                 .onFocusChanged {
                     isFocused = it.isFocused
                 }
@@ -176,7 +174,6 @@ private fun PinItemRow(
     Box(
         modifier = Modifier
             .alpha(0f)
-            .focusable(false)
     ) {
         innerTextField()
     }
