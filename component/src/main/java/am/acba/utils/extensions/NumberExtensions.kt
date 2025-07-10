@@ -1,5 +1,10 @@
 ﻿package am.acba.utils.extensions
 
+import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
+
 fun Int?.orEmpty() = this ?: 0
 
 fun Long?.orEmpty() = this ?: 0L
@@ -7,3 +12,18 @@ fun Long?.orEmpty() = this ?: 0L
 fun Double?.orEmpty() = this ?: 0.0
 
 fun Float?.orEmpty() = this ?: 0F
+
+fun Float.formatWithPattern(
+    pattern: String = PATTERN_NUMBER_SEPARATOR,
+    minimumFractionDigits: Int = 0
+): String {
+    return try {
+        val decimalFormat = DecimalFormat(pattern, DecimalFormatSymbols(Locale.US))
+        decimalFormat.minimumFractionDigits = minimumFractionDigits
+        decimalFormat.maximumFractionDigits = 2
+        decimalFormat.format(this)
+    } catch (e: NumberFormatException) {
+        e.stackTrace
+        ""
+    }
+}

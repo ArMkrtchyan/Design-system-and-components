@@ -1,11 +1,11 @@
 ﻿package am.acba.composeComponents.slider
 
-import am.acba.component.extensions.formatWithPattern
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.slider.PrimarySlider
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.formatWithPattern
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

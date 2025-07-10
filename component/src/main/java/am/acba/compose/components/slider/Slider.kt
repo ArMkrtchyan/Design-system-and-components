@@ -1,7 +1,6 @@
 ﻿package am.acba.compose.components.slider
 
 import am.acba.component.extensions.dpToPx
-import am.acba.component.extensions.formatWithPattern
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -9,6 +8,7 @@ import am.acba.compose.theme.ShapeTokens
 import am.acba.utils.Constants.EMPTY_STRING
 import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
 import am.acba.utils.annotations.AcbaScheme
+import am.acba.utils.extensions.formatWithPattern
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
