@@ -1,5 +1,6 @@
 ﻿package am.acba.composeComponents.slider
 
+import am.acba.component.extensions.formatWithPattern
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
@@ -48,15 +49,37 @@ fun SliderScreen(title: String = "") {
             ) {
                 val sliderState = remember {
                     SliderState(
-                        valueRange = 0f..100f,
+                        valueRange = 100.5f..100000000.25f,
                         onValueChangeFinished = {},
-                        value = 0f,
+                        value = 100.5f,
                         steps = 9
                     )
                 }
-                PrimaryText(text = "${sliderState.value.toInt()}$")
+                PrimaryText(text = "${sliderState.value.formatWithPattern(minimumFractionDigits = 2)}$")
                 VerticalSpacer(20)
-                PrimarySlider(state = sliderState, startValue = "0$", endValue = "100$")
+                PrimarySlider(
+                    state = sliderState,
+                    startSuffix = "AMD",
+                    endSuffix = "AMD",
+                    minimumFractionDigits = 2
+                )
+                VerticalSpacer(20)
+
+                val sliderState2 = remember {
+                    SliderState(
+                        valueRange = 6f..48f,
+                        onValueChangeFinished = {},
+                        value = 12f,
+                        steps = 6
+                    )
+                }
+                PrimaryText(text = "${sliderState2.value.formatWithPattern()} Months")
+                VerticalSpacer(20)
+                PrimarySlider(
+                    state = sliderState2,
+                    startSuffix = "Months",
+                    endSuffix = "Months",
+                )
             }
         }
     }

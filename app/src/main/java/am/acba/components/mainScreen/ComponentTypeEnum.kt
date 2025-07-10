@@ -68,9 +68,11 @@ enum class ComponentTypeEnum(val componentName: String, val isCompose: Boolean, 
     SEARCH_INPUT("Search input", false, R.id.searchInputFragment),
     SLIDER("Slider", true, R.id.sliderComposeFragment, isReady = true),
     SNACK_BAR("SnackBar", false, R.id.snackBarFragment),
-    SNACK_BAR_COMPOSE("SnackBar", true, R.id.snackBarComposeFragment),
+
+    //    SNACK_BAR_COMPOSE("SnackBar", true, R.id.snackBarComposeFragment),
     STATUS_SCREEN("Status screen", false, R.id.statusScreenFragment),
-    STATUS_SCREEN_COMPOSE("Status screen", true, R.id.statusScreenComposeFragment),
+
+    //    STATUS_SCREEN_COMPOSE("Status screen", true, R.id.statusScreenComposeFragment),
     TABLES("Tables", false, R.id.tablesFragment),
     TABLES_COMPOSE("Tables", true, R.id.tablesComposeFragment, isReady = true),
     TIME_LINE("TimeLine", false, R.id.timeLineFragment),

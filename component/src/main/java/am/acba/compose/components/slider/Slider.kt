@@ -1,10 +1,14 @@
 ﻿package am.acba.compose.components.slider
 
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.formatWithPattern
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.Constants.EMPTY_STRING
+import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
+import am.acba.utils.annotations.AcbaScheme
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -39,26 +43,35 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@AcbaScheme(
+    value = "Step calculation",
+    examples = ["""
+        val step = (state.valueRange.endInclusive - state.valueRange.start)/stepCount - 1
+    """]
+)
 fun PrimarySlider(
     state: SliderState,
     modifier: Modifier = Modifier,
-    startValue: String = "",
-    endValue: String = ""
+    startSuffix: String = EMPTY_STRING,
+    endSuffix: String = EMPTY_STRING,
+    pattern: String = PATTERN_NUMBER_SEPARATOR,
+    minimumFractionDigits: Int = 0,
+    enabled: Boolean = true,
 ) {
     Column(modifier = modifier) {
         Box {
             LeftAdditionalTrack()
             RightAdditionalTrack()
             Slider(
+                enabled = enabled,
                 state = state,
                 thumb = {
                     Box(
                         modifier = Modifier
                             .size(22.dp)
-                            .shadow(3.dp, ShapeTokens.shapeRound)
+                            .shadow(4.dp, ShapeTokens.shapeRound)
                             .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapeRound)
                             .border(2.dp, DigitalTheme.colorScheme.backgroundBrand, ShapeTokens.shapeRound)
-
                     )
                 },
                 track = {
@@ -77,7 +90,11 @@ fun PrimarySlider(
                 },
             )
         }
-        BottomTexts(startValue, endValue)
+        Row(modifier = Modifier.fillMaxWidth()) {
+            BottomText("${state.valueRange.start.formatWithPattern(pattern, minimumFractionDigits)} $startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
+            HorizontalSpacer(8)
+            BottomText("${state.valueRange.endInclusive.formatWithPattern(pattern, minimumFractionDigits)} $endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
+        }
     }
 }
 
@@ -123,25 +140,14 @@ private fun BoxScope.RightAdditionalTrack() {
 
 @Composable
 @NonRestartableComposable
-private fun BottomTexts(startValue: String, endValue: String) {
-    Row(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        PrimaryText(
-            modifier = Modifier.fillMaxWidth(fraction = 0.5f),
-            text = startValue,
-            style = DigitalTheme.typography.smallRegular,
-            color = DigitalTheme.colorScheme.contentPrimaryTonal1
-        )
-        HorizontalSpacer(8)
-        PrimaryText(
-            modifier = Modifier.weight(1f),
-            text = endValue,
-            textAlign = TextAlign.End,
-            style = DigitalTheme.typography.smallRegular,
-            color = DigitalTheme.colorScheme.contentPrimaryTonal1
-        )
-    }
+private fun BottomText(value: String, modifier: Modifier, textAlign: TextAlign = TextAlign.Start) {
+    PrimaryText(
+        modifier = modifier,
+        text = value,
+        textAlign = textAlign,
+        style = DigitalTheme.typography.smallRegular,
+        color = DigitalTheme.colorScheme.contentPrimaryTonal1
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -156,13 +162,17 @@ fun SliderPreview() {
         ) {
             val sliderState = remember {
                 SliderState(
-                    valueRange = 0f..100f,
+                    valueRange = 6f..48f,
                     onValueChangeFinished = {},
-                    value = 10f,
-                    steps = 9
+                    value = 12f,
+                    steps = 1
                 )
             }
-            PrimarySlider(state = sliderState, startValue = "Start", endValue = "End")
+            PrimarySlider(
+                state = sliderState,
+                startSuffix = "Months",
+                endSuffix = "Months"
+            )
         }
     }
 }
