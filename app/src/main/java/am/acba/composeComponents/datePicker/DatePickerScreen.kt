@@ -1,6 +1,9 @@
 ﻿package am.acba.composeComponents.datePicker
 
+import am.acba.compose.VerticalSpacer
+import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.datePicker.PrimaryDatePicker
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -41,9 +45,22 @@ fun DatePickerScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                DescriptionText()
+                VerticalSpacer(24)
+                PrimaryDatePicker("ChooseDate")
             }
         }
     }
+}
+
+@Composable
+@NonRestartableComposable
+private fun DescriptionText() {
+    PrimaryText(
+        "Date Picker allows users to pick single or multiple dates. " +
+            "They typically appear in forms, filters and etc. Use this component " +
+            " if you need to collect some information from the user or filter out a range."
+    )
 }
 
 @Composable
