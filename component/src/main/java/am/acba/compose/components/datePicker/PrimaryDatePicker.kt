@@ -6,9 +6,12 @@ import am.acba.component.R
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
-import am.acba.compose.components.datePicker.calendar.AcbaCalendar
+import am.acba.compose.components.datePicker.calendar.PrimaryCalendar
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.Constants.DATE_FORMAT_DD_MM_YYYY
 import am.acba.utils.Constants.EMPTY_STRING
+import am.acba.utils.extensions.toDateStringFrom
+import am.acba.utils.extensions.orEmpty
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +20,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -33,8 +38,12 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PrimaryDatePicker(
     label: String,
-    selectedDate: String = EMPTY_STRING,
+    selectedDate: String,
+    onDateSelected: (Long, String) -> Unit,
     modifier: Modifier = Modifier,
+    datePickerState: DatePickerState = rememberDatePickerState(
+        initialSelectedDateMillis = System.currentTimeMillis()
+    ),
     labelStyleInitial: TextStyle = DigitalTheme.typography.body1Regular,
     labelStyleFloating: TextStyle = DigitalTheme.typography.smallRegular,
     labelColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
@@ -57,9 +66,14 @@ fun PrimaryDatePicker(
             ErrorText(error, errorTextStyle, errorTextColor)
         }
         if (showCalendar.value) {
-            AcbaCalendar(onDismissRequest = {
-                showCalendar.value = false
-            })
+            PrimaryCalendar(
+                state = datePickerState,
+                onDismissRequest = {
+                    showCalendar.value = false
+                    val selectedDateMills = datePickerState.selectedDateMillis.orEmpty()
+                    val selectedDateString = selectedDateMills toDateStringFrom DATE_FORMAT_DD_MM_YYYY
+                    onDateSelected.invoke(datePickerState.selectedDateMillis.orEmpty(), selectedDateString)
+                })
         }
     }
 }
@@ -108,5 +122,5 @@ private fun ErrorText(error: String, style: TextStyle, color: Color) {
 @Composable
 @PreviewLightDark
 fun PrimaryDatePickerPreview() {
-    PrimaryDatePicker("Choose date")
+    PrimaryDatePicker("Choose date", "", { mills, string -> })
 }
