@@ -2,6 +2,9 @@
 
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,6 +24,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PrimaryProgressBar(
     progress: Float,
+    min: Float,
+    max: Float,
     topLeftText: String = "",
     topRightText: String = "",
     bottomLeftText: String = "",
@@ -31,12 +37,17 @@ fun PrimaryProgressBar(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        val normalizedProgress = ((progress - min) / (max - min)).coerceIn(0f, 1f)
+        val animatedProgress by animateFloatAsState(
+            targetValue = normalizedProgress,
+            animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing)
+        )
         TopContent(topRightText = topRightText, topLeftText = topLeftText)
-        Spacer(modifier = Modifier.height(8.dp))
         LinearProgressIndicator(
-            progress = { progress },
+            progress = { animatedProgress },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(4.dp),
@@ -44,8 +55,6 @@ fun PrimaryProgressBar(
             trackColor = trackColor,
             drawStopIndicator = {}
         )
-
-        Spacer(modifier = Modifier.height(8.dp))
         BottomContent(
             bottomLeftText = bottomLeftText,
             bottomLeftTextBold = bottomLeftTextBold,
@@ -141,16 +150,9 @@ fun BottomContent(
 @PreviewLightDark
 fun PrimaryProgressBarPreview() {
     PrimaryProgressBar(
-        progress = 0.1f,
-        modifier = Modifier.fillMaxWidth(),
-        topLeftText = "1,000,000.00 AMD",
-        topRightText = "1,000,000.00 AMD",
-        bottomLeftText = "Սկսած",
-        bottomRightText = "Առավելագույնը` 20,000,000.00 AMD"
-    )
-    Spacer(modifier = Modifier.height(20.dp))
-    PrimaryProgressBar(
-        progress = 0.5f,
+        progress = 20000f,
+        min = 10000f,
+        max = 100000f,
         modifier = Modifier.fillMaxWidth(),
         progressColor = DigitalTheme.colorScheme.backgroundInfo,
         bottomLeftText = "Օգտագործած",
