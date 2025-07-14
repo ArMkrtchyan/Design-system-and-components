@@ -6,6 +6,9 @@ import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.Constants.DATE_FORMAT_DD_MM_YYYY
+import am.acba.utils.extensions.orEmpty
+import am.acba.utils.extensions.toDateStringFrom
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,6 +27,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,12 +45,13 @@ import androidx.compose.ui.window.PopupProperties
 fun PrimaryCalendar(
     state: DatePickerState,
     onDismissRequest: () -> Unit,
+    onDateSelected: (Long, String) -> Unit,
     modifier: Modifier = Modifier,
     mode: CalendarMode = CalendarMode.POPUP,
 ) {
     Box(modifier = modifier) {
         when (mode) {
-            CalendarMode.POPUP -> PopUp(state, onDismissRequest)
+            CalendarMode.POPUP -> PopUp(state, onDismissRequest, onDateSelected)
             CalendarMode.MODAL -> TODO()
         }
     }
@@ -51,7 +59,7 @@ fun PrimaryCalendar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit) {
+private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit, onDateSelected: (Long, String) -> Unit) {
     Popup(
         onDismissRequest = onDismissRequest,
         properties = PopupProperties(focusable = true)
@@ -71,7 +79,7 @@ private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit) {
             ) {
                 Column {
                     Calendar(state)
-                    ActionRow(onDismissRequest)
+                    ActionRow(state, onDismissRequest, onDateSelected)
                 }
             }
         }
@@ -106,12 +114,16 @@ private fun Calendar(state: DatePickerState) {
 
 @Composable
 @NonRestartableComposable
-private fun ActionRow(onDismissRequest: () -> Unit) {
+private fun ActionRow(state: DatePickerState, onDismissRequest: () -> Unit, onDateSelected: (Long, String) -> Unit) {
+    var confirmDateMills by remember { mutableLongStateOf(state.selectedDateMillis.orEmpty()) }
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End
     ) {
-        TextButton(onClick = onDismissRequest) {
+        TextButton(onClick = {
+            state.selectedDateMillis = confirmDateMills
+            onDismissRequest.invoke()
+        }) {
             PrimaryText(
                 "Cancel",
                 color = DigitalTheme.colorScheme.contentBrand,
@@ -119,7 +131,13 @@ private fun ActionRow(onDismissRequest: () -> Unit) {
             )
         }
         HorizontalSpacer(8)
-        TextButton(onClick = onDismissRequest) {
+        TextButton(onClick = {
+            val selectedDateMills = state.selectedDateMillis.orEmpty()
+            val selectedDateString = selectedDateMills toDateStringFrom DATE_FORMAT_DD_MM_YYYY
+            confirmDateMills = selectedDateMills
+            onDateSelected.invoke(selectedDateMills, selectedDateString)
+            onDismissRequest.invoke()
+        }) {
             PrimaryText(
                 stringResource(R.string.ok),
                 color = DigitalTheme.colorScheme.contentBrand,
@@ -133,7 +151,7 @@ private fun ActionRow(onDismissRequest: () -> Unit) {
 @Composable
 @PreviewLightDark
 private fun AcbaCalendarPreview() {
-    PrimaryCalendar(rememberDatePickerState(), onDismissRequest = {})
+    PrimaryCalendar(rememberDatePickerState(), onDismissRequest = {}, onDateSelected = { _, _ -> })
 }
 
 enum class CalendarMode {
