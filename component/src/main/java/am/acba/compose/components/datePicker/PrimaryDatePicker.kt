@@ -1,4 +1,6 @@
-﻿package am.acba.compose.components.datePicker
+﻿@file:OptIn(ExperimentalMaterial3Api::class)
+
+package am.acba.compose.components.datePicker
 
 import am.acba.component.R
 import am.acba.compose.VerticalSpacer
@@ -10,13 +12,14 @@ import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -44,13 +47,20 @@ fun PrimaryDatePicker(
     val labelStyle = if (selectedDate.isEmpty()) labelStyleInitial else labelStyleFloating
     val labelColor = if (error.isEmpty()) labelColor else DigitalTheme.colorScheme.contentDangerTonal1
     val showCalendar = remember { mutableStateOf(false) }
-    Column(
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
-        DatePickerCard(label, selectedDate, labelStyle, labelColor, dateTextStyle, dateTextColor, showCalendar)
-        VerticalSpacer(4)
-        ErrorText(error, errorTextStyle, errorTextColor)
+    Box {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+        ) {
+            DatePickerCard(label, selectedDate, labelStyle, labelColor, dateTextStyle, dateTextColor, showCalendar)
+            VerticalSpacer(4)
+            ErrorText(error, errorTextStyle, errorTextColor)
+        }
+        if (showCalendar.value) {
+            AcbaCalendar(onDismissRequest = {
+                showCalendar.value = false
+            })
+        }
     }
 }
 
@@ -62,7 +72,7 @@ private fun DatePickerCard(
     labelColor: Color,
     dateTextStyle: TextStyle,
     dateTextColor: Color,
-    showCalendar: MutableState<Boolean>,
+    showCalendar: MutableState<Boolean>
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -87,9 +97,6 @@ private fun DatePickerCard(
             }
         }
         PrimaryIcon(painterResource(R.drawable.ic_calendar))
-        if (showCalendar.value) {
-            AcbaCalendar(true, onDismissRequest = {})
-        }
     }
 }
 
