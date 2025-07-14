@@ -9,7 +9,6 @@ import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,7 +51,7 @@ fun PrimaryCalendar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun BoxScope.PopUp(state: DatePickerState, onDismissRequest: () -> Unit) {
+private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit) {
     Popup(
         onDismissRequest = onDismissRequest,
         properties = PopupProperties(focusable = true)
@@ -91,7 +90,7 @@ private fun Calendar(state: DatePickerState) {
             headlineContentColor = DigitalTheme.colorScheme.contentPrimary,
             weekdayContentColor = DigitalTheme.colorScheme.contentPrimaryTonal2,
             yearContentColor = DigitalTheme.colorScheme.contentPrimary,
-            selectedYearContentColor = DigitalTheme.colorScheme.contentPrimary,
+            selectedYearContentColor = DigitalTheme.colorScheme.contentSecondary,
             selectedYearContainerColor = DigitalTheme.colorScheme.contentBrand,
             dayContentColor = DigitalTheme.colorScheme.contentPrimary,
             selectedDayContentColor = DigitalTheme.colorScheme.contentSecondary,
