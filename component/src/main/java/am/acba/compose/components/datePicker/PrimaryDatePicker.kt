@@ -10,8 +10,8 @@ import am.acba.compose.components.datePicker.calendar.PrimaryCalendar
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.DATE_FORMAT_DD_MM_YYYY
 import am.acba.utils.Constants.EMPTY_STRING
-import am.acba.utils.extensions.toDateStringFrom
 import am.acba.utils.extensions.orEmpty
+import am.acba.utils.extensions.toDateStringFrom
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import java.util.Calendar
 
 @Composable
 fun PrimaryDatePicker(
@@ -42,7 +43,8 @@ fun PrimaryDatePicker(
     onDateSelected: (Long, String) -> Unit,
     modifier: Modifier = Modifier,
     datePickerState: DatePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = System.currentTimeMillis()
+        initialSelectedDateMillis = System.currentTimeMillis(),
+        yearRange = Calendar.getInstance().get(Calendar.YEAR)..Calendar.getInstance().get(Calendar.YEAR)
     ),
     labelStyleInitial: TextStyle = DigitalTheme.typography.body1Regular,
     labelStyleFloating: TextStyle = DigitalTheme.typography.smallRegular,
