@@ -21,7 +21,7 @@ fun PrimarySegmentedProgressBar(
     trackColor: Color = DigitalTheme.colorScheme.backgroundTonal3,
     progressColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     segmentSpacing: Dp = 4.dp,
-    animationDuration: Int = 150
+    animationDuration: Int = 100
 ) {
     val animates = remember(segmentCount) {
         List(segmentCount) { Animatable(0f) }
