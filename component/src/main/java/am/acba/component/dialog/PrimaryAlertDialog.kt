@@ -162,7 +162,8 @@ class PrimaryAlertDialog(
             }
         }
         mBinding.buttonSecondary.setOnClickListener {
-            mOnNegativeButtonClick?.invoke() ?: run { dismiss() }
+            mOnNegativeButtonClick?.invoke()
+            dismiss()
         }
     }
 }
