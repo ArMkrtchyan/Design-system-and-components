@@ -23,28 +23,31 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun PrimaryProgressBar(
-    progress: Float,
+    modifier: Modifier = Modifier,
     min: Float,
     max: Float,
+    progress: Float,
+    trackColor: Color = DigitalTheme.colorScheme.backgroundTonal3,
+    progressColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     topLeftText: String = "",
     topRightText: String = "",
     bottomLeftText: String = "",
     bottomLeftTextBold: String = "",
     bottomRightText: String = "",
-    bottomRightTextBold: String = "",
-    trackColor: Color = DigitalTheme.colorScheme.backgroundTonal3,
-    progressColor: Color = DigitalTheme.colorScheme.backgroundBrand,
-    modifier: Modifier = Modifier,
+    bottomRightTextBold: String = ""
 ) {
+    val normalizedProgress = ((progress - min) / (max - min)).coerceIn(0f, 1f)
+    val animatedProgress by animateFloatAsState(
+        targetValue = normalizedProgress,
+        animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
+    )
+
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        val normalizedProgress = ((progress - min) / (max - min)).coerceIn(0f, 1f)
-        val animatedProgress by animateFloatAsState(
-            targetValue = normalizedProgress,
-            animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing)
-        )
+
         TopContent(topRightText = topRightText, topLeftText = topLeftText)
         LinearProgressIndicator(
             progress = { animatedProgress },
