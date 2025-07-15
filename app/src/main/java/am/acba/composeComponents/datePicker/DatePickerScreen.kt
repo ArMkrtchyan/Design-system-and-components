@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
@@ -73,8 +74,18 @@ fun DatePickerScreen(title: String = EMPTY_STRING) {
 @Composable
 private fun DatePickerPopup(selectedDate: MutableState<String>) {
     var selectedDateMills by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    val selectableDates = object : SelectableDates {
+        override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = utcTimeMillis
+            }
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+            return dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY
+        }
+    }
     val state = rememberDatePickerState(
         initialSelectedDateMillis = selectedDateMills,
+        selectableDates = selectableDates,
         yearRange = Calendar.getInstance().get(Calendar.YEAR)..Calendar.getInstance().get(Calendar.YEAR)
     )
 
