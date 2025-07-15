@@ -5,6 +5,9 @@ package am.acba.compose.components.datePicker.calendar
 import am.acba.component.R
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
+import am.acba.compose.components.bottomSheet.closeBottomSheet
+import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.DATE_FORMAT_DD_MM_YYYY
 import am.acba.utils.extensions.orEmpty
@@ -52,7 +55,7 @@ fun PrimaryCalendar(
     Box(modifier = modifier) {
         when (mode) {
             CalendarMode.POPUP -> PopUp(state, onDismissRequest, onDateSelected)
-            CalendarMode.MODAL -> TODO()
+            CalendarMode.MODAL -> BottomSheet(state, onDismissRequest, onDateSelected)
         }
     }
 }
@@ -70,18 +73,42 @@ private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit, onDateSe
                 .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .align(Alignment.Center)
-                    .background(DigitalTheme.colorScheme.backgroundTonal1, shape = RoundedCornerShape(16.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                Column {
-                    Calendar(state)
-                    ActionRow(state, onDismissRequest, onDateSelected)
+            CalendarViewWithActions(state, onDismissRequest, onDateSelected)
+        }
+    }
+}
+
+@Composable
+private fun BottomSheet(state: DatePickerState, onDismissRequest: () -> Unit, onDateSelected: (Long, String) -> Unit) {
+    PrimaryBottomSheet(
+        bottomSheetVisible = true,
+        calculatePercentForOpenFullScreen = false,
+        icon = null,
+        dismiss = {
+            onDismissRequest.invoke()
+        }) { sheetState, scope ->
+        CalendarViewWithActions(
+            state,
+            onDismissRequest = {
+                closeBottomSheet(state = sheetState, scope = scope) {
+                    onDismissRequest.invoke()
                 }
-            }
+            },
+            onDateSelected
+        )
+    }
+}
+
+@Composable
+private fun CalendarViewWithActions(state: DatePickerState, onDismissRequest: () -> Unit, onDateSelected: (Long, String) -> Unit) {
+    Box(
+        modifier = Modifier
+            .wrapContentSize()
+            .background(DigitalTheme.colorScheme.backgroundTonal1, shape = RoundedCornerShape(16.dp)),
+    ) {
+        Column(modifier = Modifier.wrapContentSize()) {
+            Calendar(state)
+            ActionRow(state, onDismissRequest, onDateSelected)
         }
     }
 }
@@ -152,9 +179,4 @@ private fun ActionRow(state: DatePickerState, onDismissRequest: () -> Unit, onDa
 @PreviewLightDark
 private fun AcbaCalendarPreview() {
     PrimaryCalendar(rememberDatePickerState(), onDismissRequest = {}, onDateSelected = { _, _ -> })
-}
-
-enum class CalendarMode {
-    POPUP,
-    MODAL
 }

@@ -8,6 +8,7 @@ import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.datePicker.calendar.PrimaryCalendar
+import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.foundation.background
@@ -50,7 +51,8 @@ fun PrimaryDatePicker(
     dateTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
     error: String = EMPTY_STRING,
     errorTextStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    errorTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1
+    errorTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    mode: CalendarMode = CalendarMode.POPUP,
 ) {
     val labelStyle = if (selectedDate.isEmpty()) labelStyleInitial else labelStyleFloating
     val labelColor = if (error.isEmpty()) labelColor else DigitalTheme.colorScheme.contentDangerTonal1
@@ -70,6 +72,7 @@ fun PrimaryDatePicker(
             PrimaryCalendar(
                 state = datePickerState,
                 onDateSelected = onDateSelected,
+                mode = mode,
                 onDismissRequest = {
                     showCalendar.value = false
                 })

@@ -6,6 +6,7 @@ import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.datePicker.PrimaryDatePicker
+import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.foundation.background
@@ -38,6 +39,8 @@ import java.util.Calendar
 @Composable
 fun DatePickerScreen(title: String = EMPTY_STRING) {
     var selectedDate = remember { mutableStateOf(EMPTY_STRING) }
+    var selectedDateModal = remember { mutableStateOf(EMPTY_STRING) }
+
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -59,14 +62,16 @@ fun DatePickerScreen(title: String = EMPTY_STRING) {
             ) {
                 DescriptionText()
                 VerticalSpacer(24)
-                DatePicker(selectedDate)
+                DatePickerPopup(selectedDate)
+                VerticalSpacer(24)
+                DatePickerModal(selectedDateModal)
             }
         }
     }
 }
 
 @Composable
-private fun DatePicker(selectedDate: MutableState<String>) {
+private fun DatePickerPopup(selectedDate: MutableState<String>) {
     var selectedDateMills by remember { mutableLongStateOf(System.currentTimeMillis()) }
     val state = rememberDatePickerState(
         initialSelectedDateMillis = selectedDateMills,
@@ -77,6 +82,25 @@ private fun DatePicker(selectedDate: MutableState<String>) {
         label = "ChooseDate",
         selectedDate = selectedDate.value,
         state,
+        onDateSelected = { dateMills, dateString ->
+            selectedDate.value = dateString
+            selectedDateMills = dateMills
+        })
+}
+
+@Composable
+private fun DatePickerModal(selectedDate: MutableState<String>) {
+    var selectedDateMills by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    val state = rememberDatePickerState(
+        initialSelectedDateMillis = selectedDateMills,
+        yearRange = Calendar.getInstance().get(Calendar.YEAR)..Calendar.getInstance().get(Calendar.YEAR)
+    )
+
+    PrimaryDatePicker(
+        label = "ChooseDate",
+        selectedDate = selectedDate.value,
+        state,
+        mode = CalendarMode.MODAL,
         onDateSelected = { dateMills, dateString ->
             selectedDate.value = dateString
             selectedDateMills = dateMills
