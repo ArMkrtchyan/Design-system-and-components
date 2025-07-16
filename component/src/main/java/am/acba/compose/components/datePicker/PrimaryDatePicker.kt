@@ -3,39 +3,28 @@
 package am.acba.compose.components.datePicker
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
-import am.acba.compose.components.PrimaryIcon
-import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.datePicker.calendar.PrimaryCalendar
 import am.acba.compose.components.datePicker.calendar.model.CalendarMode
+import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.theme.DigitalTheme
+import am.acba.compose.theme.ShapeTokens
 import am.acba.utils.Constants.EMPTY_STRING
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun PrimaryDatePicker(
@@ -44,30 +33,28 @@ fun PrimaryDatePicker(
     datePickerState: DatePickerState,
     onDateSelected: (Long, String) -> Unit,
     modifier: Modifier = Modifier,
-    labelStyleInitial: TextStyle = DigitalTheme.typography.body1Regular,
-    labelStyleFloating: TextStyle = DigitalTheme.typography.smallRegular,
-    labelColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    dateTextStyle: TextStyle = DigitalTheme.typography.body1Regular,
-    dateTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    enabled: Boolean = true,
+    trailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
     error: String = EMPTY_STRING,
-    errorTextStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    errorTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    helpText: String = EMPTY_STRING,
     mode: CalendarMode = CalendarMode.POPUP,
 ) {
-    val labelStyle = if (selectedDate.isEmpty()) labelStyleInitial else labelStyleFloating
-    val labelColor = if (error.isEmpty()) labelColor else DigitalTheme.colorScheme.contentDangerTonal1
     val showCalendar = remember { mutableStateOf(false) }
     Box {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            modifier = modifier
-        ) {
-            DatePickerCard(label, selectedDate, labelStyle, labelColor, dateTextStyle, dateTextColor, error, showCalendar)
-            error.takeIf { it.isNotEmpty() }?.let {
-                VerticalSpacer(8)
-                ErrorRow(it, errorTextStyle, errorTextColor)
-            }
-        }
+        PrimaryInput(
+            value = TextFieldValue(selectedDate),
+            modifier = modifier,
+            label = label,
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = R.drawable.ic_calendar,
+            trailingTint = trailingTint,
+            singleLine = true,
+            errorText = error,
+            helpText = helpText,
+            isError = error.isNotEmpty()
+        )
+        TransparentButton(enabled, showCalendar)
         if (showCalendar.value) {
             PrimaryCalendar(
                 state = datePickerState,
@@ -81,64 +68,22 @@ fun PrimaryDatePicker(
 }
 
 @Composable
-private fun DatePickerCard(
-    label: String,
-    selectedDate: String,
-    labelStyle: TextStyle,
-    labelColor: Color,
-    dateTextStyle: TextStyle,
-    dateTextColor: Color,
-    error: String,
-    showCalendar: MutableState<Boolean>
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .background(
-                DigitalTheme.colorScheme.backgroundTonal2,
-                shape = RoundedCornerShape(12)
-            ).let {
-                if (error.isNotEmpty())
-                    it.border(1.dp, DigitalTheme.colorScheme.borderDanger, RoundedCornerShape(12.dp))
-                else it
-            }
-            .padding(16.dp)
-            .clickable {
-                showCalendar.value = true
-            }
-    ) {
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.Center
-        ) {
-            PrimaryText(label, style = labelStyle, color = labelColor)
-            selectedDate.takeIf { it.isNotEmpty() }?.let {
-                VerticalSpacer(4)
-                PrimaryText(selectedDate, style = dateTextStyle, color = dateTextColor)
-            }
-        }
-        PrimaryIcon(painterResource(R.drawable.ic_calendar))
-    }
-}
-
-@Composable
-private fun ErrorRow(error: String, style: TextStyle, color: Color) {
-    Row {
-        PrimaryIcon(
-            modifier = Modifier.size(18.dp),
-            painter = painterResource(R.drawable.ic_info),
-            tint = DigitalTheme.colorScheme.contentDangerTonal1
+@NonRestartableComposable
+private fun TransparentButton(enabled: Boolean, showCalendar: MutableState<Boolean>) {
+    Button(
+        modifier = Modifier.fillMaxSize(),
+        onClick = {
+            showCalendar.value = true
+        },
+        enabled = enabled,
+        shape = ShapeTokens.shapePrimaryButton,
+        colors = ButtonColors(
+            contentColor = Color.Transparent,
+            containerColor = Color.Transparent,
+            disabledContentColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent
         )
-        HorizontalSpacer(4)
-        PrimaryText(
-            error,
-            style = style,
-            color = color,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.align(Alignment.CenterVertically),
-        )
-    }
+    ) {}
 }
 
 @Composable

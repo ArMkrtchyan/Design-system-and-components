@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun PrimaryInput(
+    onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
     value: TextFieldValue = TextFieldValue(""),
-    onValueChange: (TextFieldValue) -> Unit,
     enabled: Boolean = true,
     readOnly: Boolean = false,
     placeholder: String? = null,
