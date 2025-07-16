@@ -152,7 +152,7 @@ private fun ActionRow(state: DatePickerState, onDismissRequest: () -> Unit, onDa
             onDismissRequest.invoke()
         }) {
             PrimaryText(
-                "Cancel",
+                stringResource(R.string.cancel),
                 color = DigitalTheme.colorScheme.contentBrand,
                 style = DigitalTheme.typography.body1Regular
             )
