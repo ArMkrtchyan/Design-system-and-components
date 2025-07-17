@@ -9,6 +9,7 @@ import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.theme.DigitalTheme
+import am.acba.compose.theme.ShapeTokens
 import am.acba.utils.Constants.DATE_FORMAT_DD_MM_YYYY
 import am.acba.utils.extensions.orEmpty
 import am.acba.utils.extensions.toDateStringFrom
@@ -21,7 +22,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerState
@@ -40,8 +40,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupProperties
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,9 +63,9 @@ fun PrimaryCalendar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PopUp(state: DatePickerState, onDismissRequest: () -> Unit, onDateSelected: (Long, String) -> Unit) {
-    Popup(
+    Dialog(
         onDismissRequest = onDismissRequest,
-        properties = PopupProperties(focusable = true)
+        properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Box(
             modifier = Modifier
@@ -83,6 +83,7 @@ private fun BottomSheet(state: DatePickerState, onDismissRequest: () -> Unit, on
     PrimaryBottomSheet(
         bottomSheetVisible = true,
         calculatePercentForOpenFullScreen = false,
+        contentHorizontalPadding = 0.dp,
         icon = null,
         dismiss = {
             onDismissRequest.invoke()
@@ -104,7 +105,7 @@ private fun CalendarViewWithActions(state: DatePickerState, onDismissRequest: ()
     Box(
         modifier = Modifier
             .wrapContentSize()
-            .background(DigitalTheme.colorScheme.backgroundTonal1, shape = RoundedCornerShape(16.dp)),
+            .background(DigitalTheme.colorScheme.backgroundTonal1, shape = ShapeTokens.shapeCalendar),
     ) {
         Column(modifier = Modifier.wrapContentSize()) {
             Calendar(state)
@@ -118,7 +119,7 @@ private fun Calendar(state: DatePickerState) {
     DatePicker(
         state = state,
         showModeToggle = false,
-        modifier = Modifier.clip(RoundedCornerShape(16.dp)),
+        modifier = Modifier.clip(ShapeTokens.shapeCalendar),
         colors = DatePickerDefaults.colors(
             containerColor = DigitalTheme.colorScheme.backgroundTonal1,
             titleContentColor = DigitalTheme.colorScheme.contentPrimary,

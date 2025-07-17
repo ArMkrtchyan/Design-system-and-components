@@ -3,6 +3,7 @@
 package am.acba.composeComponents.datePicker
 
 import am.acba.compose.VerticalSpacer
+import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.datePicker.PrimaryDatePicker
@@ -42,6 +43,10 @@ fun DatePickerScreen(title: String = EMPTY_STRING) {
     var selectedDate = remember { mutableStateOf(EMPTY_STRING) }
     var selectedDateModal = remember { mutableStateOf(EMPTY_STRING) }
 
+    var enabled by remember { mutableStateOf(true) }
+    var helpText by remember { mutableStateOf(EMPTY_STRING) }
+    var error by remember { mutableStateOf(EMPTY_STRING) }
+
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -63,16 +68,32 @@ fun DatePickerScreen(title: String = EMPTY_STRING) {
             ) {
                 DescriptionText()
                 VerticalSpacer(24)
-                DatePickerPopup(selectedDate)
+                PrimaryText("Date picker Dialog")
+                VerticalSpacer(8)
+                DatePickerPopup(selectedDate, error, helpText, enabled)
                 VerticalSpacer(24)
-                DatePickerModal(selectedDateModal)
+                PrimaryText("Date picker Bottom sheet")
+                VerticalSpacer(8)
+                DatePickerModal(selectedDateModal, error, helpText, enabled)
+                VerticalSpacer(24)
+                PrimaryButton(text = "show hide error") {
+                    error = if (error.isEmpty()) "error text" else EMPTY_STRING
+                }
+                VerticalSpacer(24)
+                PrimaryButton(text = "show hide help text") {
+                    helpText = if (helpText.isEmpty()) "help text" else EMPTY_STRING
+                }
+                VerticalSpacer(24)
+                PrimaryButton(text = "enable disable") {
+                    enabled = !enabled
+                }
             }
         }
     }
 }
 
 @Composable
-private fun DatePickerPopup(selectedDate: MutableState<String>) {
+private fun DatePickerPopup(selectedDate: MutableState<String>, error: String, helpText: String, enabled: Boolean) {
     var selectedDateMills by remember { mutableLongStateOf(System.currentTimeMillis()) }
     val selectableDates = object : SelectableDates {
         override fun isSelectableDate(utcTimeMillis: Long): Boolean {
@@ -93,6 +114,9 @@ private fun DatePickerPopup(selectedDate: MutableState<String>) {
         label = "ChooseDate",
         selectedDate = selectedDate.value,
         state,
+        error = error,
+        helpText = helpText,
+        enabled = enabled,
         onDateSelected = { dateMills, dateString ->
             selectedDate.value = dateString
             selectedDateMills = dateMills
@@ -100,7 +124,7 @@ private fun DatePickerPopup(selectedDate: MutableState<String>) {
 }
 
 @Composable
-private fun DatePickerModal(selectedDate: MutableState<String>) {
+private fun DatePickerModal(selectedDate: MutableState<String>, error: String, helpText: String, enabled: Boolean) {
     var selectedDateMills by remember { mutableLongStateOf(System.currentTimeMillis()) }
     val state = rememberDatePickerState(
         initialSelectedDateMillis = selectedDateMills,
@@ -111,6 +135,9 @@ private fun DatePickerModal(selectedDate: MutableState<String>) {
         label = "ChooseDate",
         selectedDate = selectedDate.value,
         state,
+        error = error,
+        helpText = helpText,
+        enabled = enabled,
         mode = CalendarMode.MODAL,
         onDateSelected = { dateMills, dateString ->
             selectedDate.value = dateString

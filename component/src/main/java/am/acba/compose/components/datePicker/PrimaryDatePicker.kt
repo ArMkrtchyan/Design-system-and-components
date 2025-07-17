@@ -47,6 +47,7 @@ fun PrimaryDatePicker(
             label = label,
             onValueChange = {},
             readOnly = true,
+            enabled = enabled,
             trailingIcon = R.drawable.ic_calendar,
             trailingTint = trailingTint,
             singleLine = true,
