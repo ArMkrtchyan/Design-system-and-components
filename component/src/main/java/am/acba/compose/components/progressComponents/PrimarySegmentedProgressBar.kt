@@ -3,14 +3,18 @@
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -29,26 +33,20 @@ fun PrimarySegmentedProgressBar(
 
     LaunchedEffect(progress) {
         animates.forEachIndexed { index, anim ->
-            if (index < progress) {
-                launch {
-                    anim.animateTo(
-                        targetValue = 1f,
-                        animationSpec = tween(durationMillis = animationDuration)
-                    )
-                }
-            } else {
-                launch {
-                    anim.animateTo(
-                        targetValue = 0f,
-                        animationSpec = tween(durationMillis = animationDuration)
-                    )
-                }
+            val targetValue = if (index < progress) 1f else 0f
+            launch {
+                anim.animateTo(
+                    targetValue = targetValue,
+                    animationSpec = tween(durationMillis = animationDuration)
+                )
             }
         }
     }
 
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .then(modifier),
         horizontalArrangement = Arrangement.spacedBy(segmentSpacing)
     ) {
         animates.forEach { anim ->
