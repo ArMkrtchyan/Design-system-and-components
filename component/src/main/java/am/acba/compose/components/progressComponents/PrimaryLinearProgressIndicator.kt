@@ -1,6 +1,6 @@
 ﻿package am.acba.compose.components.progressComponents
 
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,15 +31,15 @@ fun PrimaryLinearProgressIndicator(
     trackColor: Color = DigitalTheme.colorScheme.backgroundTonal3,
     progressColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     type: ProgressIndicatorType = ProgressIndicatorType.TOP_AND_BOTTOM_TEXTS,
-    content: List<Content> = emptyList(),
+    items: List<Content> = emptyList(),
 ) {
     val normalizedProgress = ((progress - min) / (max - min)).coerceIn(0f, 1f)
     val animatedProgress by animateFloatAsState(
         targetValue = normalizedProgress,
         animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
     )
-    val topRow = content.getOrNull(0)
-    val bottomRow = content.getOrNull(1)
+    val topRow = items.getOrNull(0)
+    val bottomRow = items.getOrNull(1)
 
     Column(
         modifier = modifier,
@@ -50,7 +51,7 @@ fun PrimaryLinearProgressIndicator(
                     defaultStyle = DigitalTheme.typography.body2Bold,
                     defaultColor = DigitalTheme.colorScheme.contentPrimary
                 )
-                HorizontalSpacer(8)
+                VerticalSpacer(8)
                 LinearProgressIndicator(
                     progress = { animatedProgress },
                     modifier = Modifier
@@ -60,7 +61,7 @@ fun PrimaryLinearProgressIndicator(
                     trackColor = trackColor,
                     drawStopIndicator = {}
                 )
-                HorizontalSpacer(4)
+                VerticalSpacer(4)
                 ProgressTextRow(
                     content = bottomRow,
                     defaultStyle = DigitalTheme.typography.smallRegular,
@@ -78,7 +79,7 @@ fun PrimaryLinearProgressIndicator(
                     trackColor = trackColor,
                     drawStopIndicator = {}
                 )
-                HorizontalSpacer(4)
+                VerticalSpacer(4)
                 ProgressTextRow(
                     content = topRow,
                     defaultStyle = DigitalTheme.typography.smallRegular,
@@ -135,15 +136,24 @@ fun ProgressTextRow(
 @Composable
 @PreviewLightDark
 fun PrimaryProgressBarPreview() {
-    /*PrimaryLinearProgressIndicator(
-        progress = 20000f,
+    PrimaryLinearProgressIndicator(
+        progress = 10000F,
         min = 10000f,
         max = 100000f,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         progressColor = DigitalTheme.colorScheme.backgroundInfo,
-        bottomLeftText = "Օգտագործած",
-        bottomLeftTextBold = "548,003,065.00 AMD",
-        bottomRightText = "Սկզբնական",
-        bottomRightTextBold = "20,000,000.00 AMD"
-    )*/
+        type = ProgressIndicatorType.ONLY_BOTTOM_TEXTS,
+        items = listOf(
+            Content(
+                leadingContent = ContentStyle() to "Օգտագործած",
+                trailingContent = ContentStyle() to "Սկզբնական"
+            ),
+            Content(
+                leadingContent = ContentStyle() to "548,003,065.00 AMD",
+                trailingContent = ContentStyle() to "20,000,000.00 AMD"
+            )
+        )
+    )
 }

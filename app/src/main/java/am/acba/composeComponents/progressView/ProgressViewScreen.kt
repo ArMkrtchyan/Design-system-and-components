@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -76,7 +75,7 @@ fun ProgressViewScreen(title: String = "") {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    content = listOf(
+                    items = listOf(
                         Content(
                             leadingContent = ContentStyle() to "1,000,000.00 AMD",
                             trailingContent = ContentStyle() to "2,000,000.00 AMD"
@@ -96,7 +95,7 @@ fun ProgressViewScreen(title: String = "") {
                         .padding(horizontal = 16.dp),
                     progressColor = DigitalTheme.colorScheme.backgroundInfo,
                     type = ProgressIndicatorType.ONLY_BOTTOM_TEXTS,
-                    content = listOf(
+                    items = listOf(
                         Content(
                             leadingContent = ContentStyle() to "Օգտագործած",
                             trailingContent = ContentStyle() to "Սկզբնական"
