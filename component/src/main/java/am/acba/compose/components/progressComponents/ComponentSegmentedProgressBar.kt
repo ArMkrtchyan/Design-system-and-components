@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
-fun PrimarySegmentedProgressBar(
+fun ComponentSegmentedProgressBar(
     modifier: Modifier = Modifier,
     segmentCount: Int,
     progress: Int,

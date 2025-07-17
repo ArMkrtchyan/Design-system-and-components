@@ -2,7 +2,10 @@
 
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
+import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.tripleOf
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -21,33 +24,32 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
-
 @Composable
-fun PrimaryLinearProgressIndicator(
+fun ComponentLinearProgressIndicator(
     modifier: Modifier = Modifier,
     min: Float,
     max: Float,
     progress: Float,
     trackColor: Color = DigitalTheme.colorScheme.backgroundTonal3,
     progressColor: Color = DigitalTheme.colorScheme.backgroundBrand,
-    type: ProgressIndicatorType = ProgressIndicatorType.TOP_AND_BOTTOM_TEXTS,
-    items: List<Content> = emptyList(),
+    type: ProgressIndicatorType = ProgressIndicatorType.PRIMARY,
+    progressCaptionLines: List<ProgressCaptionLine> = emptyList(),
 ) {
     val normalizedProgress = ((progress - min) / (max - min)).coerceIn(0f, 1f)
     val animatedProgress by animateFloatAsState(
         targetValue = normalizedProgress,
         animationSpec = tween(durationMillis = 300, easing = FastOutSlowInEasing)
     )
-    val topRow = items.getOrNull(0)
-    val bottomRow = items.getOrNull(1)
+    val topCaption = progressCaptionLines.getOrNull(0)
+    val bottomCaption = progressCaptionLines.getOrNull(1)
 
     Column(
         modifier = modifier,
     ) {
         when (type) {
-            ProgressIndicatorType.TOP_AND_BOTTOM_TEXTS -> {
+            ProgressIndicatorType.PRIMARY -> {
                 ProgressTextRow(
-                    content = topRow,
+                    progressCaptionLine = topCaption,
                     defaultStyle = DigitalTheme.typography.body2Bold,
                     defaultColor = DigitalTheme.colorScheme.contentPrimary
                 )
@@ -63,13 +65,13 @@ fun PrimaryLinearProgressIndicator(
                 )
                 VerticalSpacer(4)
                 ProgressTextRow(
-                    content = bottomRow,
+                    progressCaptionLine = bottomCaption,
                     defaultStyle = DigitalTheme.typography.smallRegular,
                     defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
                 )
             }
 
-            ProgressIndicatorType.ONLY_BOTTOM_TEXTS -> {
+            ProgressIndicatorType.SECONDARY -> {
                 LinearProgressIndicator(
                     progress = { animatedProgress },
                     modifier = Modifier
@@ -81,12 +83,12 @@ fun PrimaryLinearProgressIndicator(
                 )
                 VerticalSpacer(4)
                 ProgressTextRow(
-                    content = topRow,
+                    progressCaptionLine = topCaption,
                     defaultStyle = DigitalTheme.typography.smallRegular,
                     defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
                 )
                 ProgressTextRow(
-                    content = bottomRow,
+                    progressCaptionLine = bottomCaption,
                     defaultStyle = DigitalTheme.typography.smallBold,
                     defaultColor = DigitalTheme.colorScheme.contentPrimary
                 )
@@ -97,35 +99,35 @@ fun PrimaryLinearProgressIndicator(
 
 @Composable
 fun ProgressTextRow(
-    content: Content?,
+    progressCaptionLine: ProgressCaptionLine?,
     defaultStyle: TextStyle,
     defaultColor: Color
 ) {
-    val hasLeading = content?.leadingContent?.second?.isNotEmpty() == true
-    val hasTrailing = content?.trailingContent?.second?.isNotEmpty() == true
+    val hasLeading = progressCaptionLine?.leading?.first?.isNotEmpty() == true
+    val hasTrailing = progressCaptionLine?.trailing?.first?.isNotEmpty() == true
 
     if (hasLeading || hasTrailing) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            content?.leadingContent
-                ?.takeIf { it.second.isNotEmpty() }
-                ?.let { (style, text) ->
+            progressCaptionLine?.leading
+                ?.takeIf { !it.first.isNullOrEmpty() }
+                ?.let { (text, color, style) ->
                     PrimaryText(
-                        text = text,
-                        style = style.style ?: defaultStyle,
-                        color = style.color ?: defaultColor
+                        text = text.orEmpty(),
+                        style = style ?: defaultStyle,
+                        color = color ?: defaultColor
                     )
                 }
 
-            content?.trailingContent
-                ?.takeIf { it.second.isNotEmpty() }
-                ?.let { (style, text) ->
+            progressCaptionLine?.trailing
+                ?.takeIf { !it.first.isNullOrEmpty() }
+                ?.let { (text, color, style) ->
                     PrimaryText(
-                        text = text,
-                        style = style.style ?: defaultStyle,
-                        color = style.color ?: defaultColor
+                        text = text.orEmpty(),
+                        style = style ?: defaultStyle,
+                        color = color ?: defaultColor
                     )
                 }
         }
@@ -136,7 +138,7 @@ fun ProgressTextRow(
 @Composable
 @PreviewLightDark
 fun PrimaryProgressBarPreview() {
-    PrimaryLinearProgressIndicator(
+    ComponentLinearProgressIndicator(
         progress = 10000F,
         min = 10000f,
         max = 100000f,
@@ -144,15 +146,15 @@ fun PrimaryProgressBarPreview() {
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         progressColor = DigitalTheme.colorScheme.backgroundInfo,
-        type = ProgressIndicatorType.ONLY_BOTTOM_TEXTS,
-        items = listOf(
-            Content(
-                leadingContent = ContentStyle() to "Օգտագործած",
-                trailingContent = ContentStyle() to "Սկզբնական"
+        type = ProgressIndicatorType.SECONDARY,
+        progressCaptionLines = listOf(
+            ProgressCaptionLine(
+                leading = tripleOf("Օգտագործած"),
+                trailing = tripleOf("Սկզբնական"),
             ),
-            Content(
-                leadingContent = ContentStyle() to "548,003,065.00 AMD",
-                trailingContent = ContentStyle() to "20,000,000.00 AMD"
+            ProgressCaptionLine(
+                leading = tripleOf("548,003,065.00 AMD"),
+                trailing = tripleOf("20,000,000.00 AMD"),
             )
         )
     )

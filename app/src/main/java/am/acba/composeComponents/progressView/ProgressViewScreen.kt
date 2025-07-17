@@ -2,12 +2,12 @@
 
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.progressComponents.Content
-import am.acba.compose.components.progressComponents.ContentStyle
-import am.acba.compose.components.progressComponents.PrimaryLinearProgressIndicator
-import am.acba.compose.components.progressComponents.PrimarySegmentedProgressBar
-import am.acba.compose.components.progressComponents.ProgressIndicatorType
+import am.acba.compose.components.progressComponents.ComponentLinearProgressIndicator
+import am.acba.compose.components.progressComponents.ComponentSegmentedProgressBar
+import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
+import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.tripleOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,7 +60,7 @@ fun ProgressViewScreen(title: String = "") {
                 verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
 
-                PrimaryLinearProgressIndicator(
+                ComponentLinearProgressIndicator(
                     progress = 25000f,
                     min = 10000f,
                     max = 100000f,
@@ -68,25 +68,25 @@ fun ProgressViewScreen(title: String = "") {
                         .fillMaxWidth()
                         .scale(scaleX = 1.005f, scaleY = 1.0f),
                 )
-                PrimaryLinearProgressIndicator(
+                ComponentLinearProgressIndicator(
                     progress = 15000f,
                     min = 10000f,
                     max = 100000f,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    items = listOf(
-                        Content(
-                            leadingContent = ContentStyle() to "1,000,000.00 AMD",
-                            trailingContent = ContentStyle() to "2,000,000.00 AMD"
+                    progressCaptionLines = listOf(
+                        ProgressCaptionLine(
+                            leading = tripleOf("Օգտագործած"),
+                            trailing = tripleOf("Սկզբնական"),
                         ),
-                        Content(
-                            leadingContent = ContentStyle() to "Սկսած",
-                            trailingContent = ContentStyle() to "Առավելագույնը` 20,000,000.00 AMD"
+                        ProgressCaptionLine(
+                            leading = tripleOf("548,003,065.00 AMD"),
+                            trailing = tripleOf("20,000,000.00 AMD"),
                         )
                     )
                 )
-                PrimaryLinearProgressIndicator(
+                ComponentLinearProgressIndicator(
                     progress = targetProgress,
                     min = 10000f,
                     max = 100000f,
@@ -94,15 +94,15 @@ fun ProgressViewScreen(title: String = "") {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     progressColor = DigitalTheme.colorScheme.backgroundInfo,
-                    type = ProgressIndicatorType.ONLY_BOTTOM_TEXTS,
-                    items = listOf(
-                        Content(
-                            leadingContent = ContentStyle() to "Օգտագործած",
-                            trailingContent = ContentStyle() to "Սկզբնական"
+                    type = ProgressIndicatorType.SECONDARY,
+                    progressCaptionLines = listOf(
+                        ProgressCaptionLine(
+                            leading = tripleOf("Օգտագործած"),
+                            trailing = tripleOf("Սկզբնական"),
                         ),
-                        Content(
-                            leadingContent = ContentStyle() to "548,003,065.00 AMD",
-                            trailingContent = ContentStyle() to "20,000,000.00 AMD"
+                        ProgressCaptionLine(
+                            leading = tripleOf("548,003,065.00 AMD"),
+                            trailing = tripleOf("20,000,000.00 AMD"),
                         )
                     )
                 )
@@ -117,7 +117,7 @@ fun ProgressViewScreen(title: String = "") {
                         .padding(horizontal = 16.dp)
                 )
 
-                PrimarySegmentedProgressBar(
+                ComponentSegmentedProgressBar(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     segmentCount = 5,
                     progress = segmentProgress,
