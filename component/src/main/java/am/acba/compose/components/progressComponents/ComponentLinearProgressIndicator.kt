@@ -47,54 +47,71 @@ fun ComponentLinearProgressIndicator(
         modifier = modifier,
     ) {
         when (type) {
-            ProgressIndicatorType.PRIMARY -> {
-                ProgressTextRow(
-                    progressCaptionLine = topCaption,
-                    defaultStyle = DigitalTheme.typography.body2Bold,
-                    defaultColor = DigitalTheme.colorScheme.contentPrimary
-                )
-                VerticalSpacer(8)
-                LinearProgressIndicator(
-                    progress = { animatedProgress },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(4.dp),
-                    color = progressColor,
-                    trackColor = trackColor,
-                    drawStopIndicator = {}
-                )
-                VerticalSpacer(4)
-                ProgressTextRow(
-                    progressCaptionLine = bottomCaption,
-                    defaultStyle = DigitalTheme.typography.smallRegular,
-                    defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
-                )
-            }
-
-            ProgressIndicatorType.SECONDARY -> {
-                LinearProgressIndicator(
-                    progress = { animatedProgress },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(4.dp),
-                    color = progressColor,
-                    trackColor = trackColor,
-                    drawStopIndicator = {}
-                )
-                VerticalSpacer(4)
-                ProgressTextRow(
-                    progressCaptionLine = topCaption,
-                    defaultStyle = DigitalTheme.typography.smallRegular,
-                    defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
-                )
-                ProgressTextRow(
-                    progressCaptionLine = bottomCaption,
-                    defaultStyle = DigitalTheme.typography.smallBold,
-                    defaultColor = DigitalTheme.colorScheme.contentPrimary
-                )
-            }
+            ProgressIndicatorType.PRIMARY -> Primary(animatedProgress, topCaption, bottomCaption, trackColor, progressColor)
+            ProgressIndicatorType.SECONDARY -> Secondary(animatedProgress, topCaption, bottomCaption, trackColor, progressColor)
         }
     }
+}
+
+@Composable
+private fun Primary(
+    progress: Float,
+    topCaptionLine: ProgressCaptionLine?,
+    bottomCaptionLine: ProgressCaptionLine?,
+    trackColor: Color,
+    progressColor: Color,
+) {
+    ProgressTextRow(
+        progressCaptionLine = topCaptionLine,
+        defaultStyle = DigitalTheme.typography.body2Bold,
+        defaultColor = DigitalTheme.colorScheme.contentPrimary
+    )
+    VerticalSpacer(8)
+    LinearProgressIndicator(
+        progress = { progress },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(4.dp),
+        color = progressColor,
+        trackColor = trackColor,
+        drawStopIndicator = {}
+    )
+    VerticalSpacer(4)
+    ProgressTextRow(
+        progressCaptionLine = bottomCaptionLine,
+        defaultStyle = DigitalTheme.typography.smallRegular,
+        defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
+    )
+}
+
+@Composable
+private fun Secondary(
+    progress: Float,
+    topCaptionLine: ProgressCaptionLine?,
+    bottomCaptionLine: ProgressCaptionLine?,
+    trackColor: Color,
+    progressColor: Color,
+) {
+    LinearProgressIndicator(
+        progress = { progress },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(4.dp),
+        color = progressColor,
+        trackColor = trackColor,
+        drawStopIndicator = {}
+    )
+    VerticalSpacer(4)
+    ProgressTextRow(
+        progressCaptionLine = topCaptionLine,
+        defaultStyle = DigitalTheme.typography.smallRegular,
+        defaultColor = DigitalTheme.colorScheme.contentPrimaryTonal1
+    )
+    ProgressTextRow(
+        progressCaptionLine = bottomCaptionLine,
+        defaultStyle = DigitalTheme.typography.smallBold,
+        defaultColor = DigitalTheme.colorScheme.contentPrimary
+    )
 }
 
 @Composable
