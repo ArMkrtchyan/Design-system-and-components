@@ -16,7 +16,7 @@
     <am.acba.component.textView.PrimaryTextView
         android:id="@+id/chip_text"
         style="@style/Body2.Regular"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/chip_text_and_icons_selector"
         android:layout_gravity="center_vertical"
