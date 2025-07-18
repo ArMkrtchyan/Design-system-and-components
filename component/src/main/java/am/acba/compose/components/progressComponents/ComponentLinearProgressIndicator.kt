@@ -6,6 +6,7 @@ import am.acba.compose.components.progressComponents.model.ProgressCaption
 import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
 import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.safeLet
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -115,42 +117,58 @@ private fun Secondary(
 }
 
 @Composable
-fun ProgressTextRow(
+private fun ProgressTextRow(
     progressCaptionLine: ProgressCaptionLine?,
     defaultStyle: TextStyle,
     defaultColor: Color
 ) {
-    val hasLeading = progressCaptionLine?.leading?.value?.isNotEmpty() == true
-    val hasTrailing = progressCaptionLine?.trailing?.value?.isNotEmpty() == true
+    val leading = progressCaptionLine?.leading
+    val trailing = progressCaptionLine?.trailing
+
+    val hasLeading = !leading?.value.isNullOrEmpty()
+    val hasTrailing = !trailing?.value.isNullOrEmpty()
 
     if (hasLeading || hasTrailing) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            progressCaptionLine?.leading
-                ?.takeIf { !it.value.isNullOrEmpty() }
-                ?.let { (text, color, style) ->
-                    PrimaryText(
-                        text = text.orEmpty(),
-                        style = style ?: defaultStyle,
-                        color = color ?: defaultColor
+            leading?.let {
+                safeLet(leading, leading.value) {leading, value ->
+                    CaptionText(
+                        text = value,
+                        style = it.style ?: defaultStyle,
+                        color = it.color ?: defaultColor
                     )
                 }
+            }
 
-            progressCaptionLine?.trailing
-                ?.takeIf { !it.value.isNullOrEmpty() }
-                ?.let { (text, color, style) ->
-                    PrimaryText(
-                        text = text.orEmpty(),
-                        style = style ?: defaultStyle,
-                        color = color ?: defaultColor
+            trailing?.let {
+                safeLet(leading, trailing.value) {leading, value ->
+                    CaptionText(
+                        text = value,
+                        style = it.style ?: defaultStyle,
+                        color = it.color ?: defaultColor
                     )
                 }
+            }
         }
     }
 }
 
+@Composable
+@NonRestartableComposable
+private fun CaptionText(
+    text: String,
+    color: Color,
+    style: TextStyle
+) {
+    PrimaryText(
+        text = text,
+        style = style,
+        color = color
+    )
+}
 
 @Composable
 @PreviewLightDark
