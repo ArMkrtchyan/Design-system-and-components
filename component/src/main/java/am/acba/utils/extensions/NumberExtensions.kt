@@ -3,6 +3,8 @@
 import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 fun Int?.orEmpty() = this ?: 0
@@ -26,4 +28,9 @@ fun Float.formatWithPattern(
         e.stackTrace
         ""
     }
+}
+
+infix fun Long.toDateStringFrom(format: String): String {
+    val formatter = SimpleDateFormat(format, Locale.getDefault())
+    return formatter.format(Date(this))
 }

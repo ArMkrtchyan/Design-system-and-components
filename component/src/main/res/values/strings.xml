@@ -3,6 +3,7 @@
     <!--General-->
 
     <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
     <string name="all">All</string>
     <string name="search">Search</string>
 

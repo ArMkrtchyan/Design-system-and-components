@@ -54,9 +54,9 @@ fun PrimaryDropDown(
         modifier = Modifier.height(IntrinsicSize.Min)
     ) {
         PrimaryInput(
+            onValueChange,
             modifier,
             value,
-            onValueChange,
             enabled,
             readOnly,
             isError = isError,

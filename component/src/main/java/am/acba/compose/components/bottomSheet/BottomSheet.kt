@@ -9,6 +9,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -48,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 fun PrimaryBottomSheet(
     title: String = "",
@@ -58,6 +60,7 @@ fun PrimaryBottomSheet(
     properties: ModalBottomSheetProperties = ModalBottomSheetDefaults.properties,
     contentHorizontalPadding: Dp = 16.dp,
     contentBottomPadding: Dp = 16.dp,
+    calculatePercentForOpenFullScreen: Boolean = true,
     content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(
@@ -112,13 +115,15 @@ fun PrimaryBottomSheet(
                         val displayHeightDouble = screenHeight.value.dpToPx() * 1.0
                         val dimensionInPercent =
                             contentHeightDouble.log("HeightTag", "contentHeightDouble -> ").div(displayHeightDouble.log("HeightTag", "displayHeightDouble -> ")) * 100.0
-                        openFullScreen.value = dimensionInPercent.log("HeightTag", "dimensionInPercent -> ") > 70
+                        openFullScreen.value = if (calculatePercentForOpenFullScreen) dimensionInPercent.log("HeightTag", "dimensionInPercent -> ") > 70 else false
                     }
                 ) {
-                    BottomSheetHeader(title, icon) {
-                        coroutineScope.launch {
-                            sheetState.hide()
-                        }.invokeOnCompletion { dismiss.invoke() }
+                    if (title.isNotEmpty() || icon != null) {
+                        BottomSheetHeader(title, icon) {
+                            coroutineScope.launch {
+                                sheetState.hide()
+                            }.invokeOnCompletion { dismiss.invoke() }
+                        }
                     }
                     Box(
                         modifier = Modifier
