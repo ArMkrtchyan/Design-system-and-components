@@ -10,6 +10,7 @@ import am.acba.utils.extensions.safeLet
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -136,6 +137,7 @@ private fun ProgressTextRow(
             leading?.let {
                 safeLet(leading, leading.value) {leading, value ->
                     CaptionText(
+                        modifier = Modifier.weight(1f),
                         text = value,
                         style = it.style ?: defaultStyle,
                         color = it.color ?: defaultColor
@@ -146,6 +148,7 @@ private fun ProgressTextRow(
             trailing?.let {
                 safeLet(leading, trailing.value) {leading, value ->
                     CaptionText(
+                        modifier = Modifier.weight(1f),
                         text = value,
                         style = it.style ?: defaultStyle,
                         color = it.color ?: defaultColor
@@ -159,38 +162,48 @@ private fun ProgressTextRow(
 @Composable
 @NonRestartableComposable
 private fun CaptionText(
+    modifier: Modifier,
     text: String,
     color: Color,
     style: TextStyle
 ) {
     PrimaryText(
+        modifier = modifier,
         text = text,
         style = style,
-        color = color
+        color = color,
     )
 }
 
 @Composable
 @PreviewLightDark
 fun PrimaryProgressBarPreview() {
-    ComponentLinearProgressIndicator(
-        progress = 10000F,
-        min = 10000f,
-        max = 100000f,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        progressColor = DigitalTheme.colorScheme.backgroundInfo,
-        type = ProgressIndicatorType.SECONDARY,
-        progressCaptionLines = listOf(
-            ProgressCaptionLine(
-                leading = ProgressCaption("Օգտագործած"),
-                trailing = ProgressCaption("Սկզբնական"),
-            ),
-            ProgressCaptionLine(
-                leading = ProgressCaption("548,003,065.00 AMD"),
-                trailing = ProgressCaption("20,000,000.00 AMD"),
-            ),
-        )
-    )
+    DigitalTheme {
+        Column(
+            Modifier
+                .background(DigitalTheme.colorScheme.backgroundBase)
+                .padding(10.dp)
+        ) {
+            ComponentLinearProgressIndicator(
+                progress = 10000F,
+                min = 10000f,
+                max = 100000f,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                progressColor = DigitalTheme.colorScheme.backgroundInfo,
+                type = ProgressIndicatorType.SECONDARY,
+                progressCaptionLines = listOf(
+                    ProgressCaptionLine(
+                        leading = ProgressCaption("Օգտագործած"),
+                        trailing = ProgressCaption("Սկզբնական"),
+                    ),
+                    ProgressCaptionLine(
+                        leading = ProgressCaption("548,003,065.00 AMD"),
+                        trailing = ProgressCaption("20,000,000.00 AMD"),
+                    ),
+                )
+            )
+        }
+    }
 }
