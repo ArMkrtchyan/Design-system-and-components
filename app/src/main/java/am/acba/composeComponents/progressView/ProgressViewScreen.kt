@@ -4,10 +4,10 @@ import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.progressComponents.ComponentLinearProgressIndicator
 import am.acba.compose.components.progressComponents.ComponentSegmentedProgressBar
+import am.acba.compose.components.progressComponents.model.ProgressCaption
 import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
 import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
-import am.acba.utils.extensions.tripleOf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -77,13 +77,13 @@ fun ProgressViewScreen(title: String = "") {
                         .padding(horizontal = 16.dp),
                     progressCaptionLines = listOf(
                         ProgressCaptionLine(
-                            leading = tripleOf("Օգտագործած"),
-                            trailing = tripleOf("Սկզբնական"),
+                            leading = ProgressCaption("Օգտագործած"),
+                            trailing = ProgressCaption("Սկզբնական"),
                         ),
                         ProgressCaptionLine(
-                            leading = tripleOf("548,003,065.00 AMD"),
-                            trailing = tripleOf("20,000,000.00 AMD"),
-                        )
+                            leading = ProgressCaption("548,003,065.00 AMD"),
+                            trailing = ProgressCaption("20,000,000.00 AMD"),
+                        ),
                     )
                 )
                 ComponentLinearProgressIndicator(
@@ -97,13 +97,13 @@ fun ProgressViewScreen(title: String = "") {
                     type = ProgressIndicatorType.SECONDARY,
                     progressCaptionLines = listOf(
                         ProgressCaptionLine(
-                            leading = tripleOf("Օգտագործած"),
-                            trailing = tripleOf("Սկզբնական"),
+                            leading = ProgressCaption("Օգտագործած"),
+                            trailing = ProgressCaption("Սկզբնական"),
                         ),
                         ProgressCaptionLine(
-                            leading = tripleOf("548,003,065.00 AMD"),
-                            trailing = tripleOf("20,000,000.00 AMD"),
-                        )
+                            leading = ProgressCaption("548,003,065.00 AMD"),
+                            trailing = ProgressCaption("20,000,000.00 AMD"),
+                        ),
                     )
                 )
                 PrimaryButton(

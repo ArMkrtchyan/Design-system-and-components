@@ -2,10 +2,10 @@
 
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.progressComponents.model.ProgressCaption
 import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
 import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
-import am.acba.utils.extensions.tripleOf
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -120,8 +120,8 @@ fun ProgressTextRow(
     defaultStyle: TextStyle,
     defaultColor: Color
 ) {
-    val hasLeading = progressCaptionLine?.leading?.first?.isNotEmpty() == true
-    val hasTrailing = progressCaptionLine?.trailing?.first?.isNotEmpty() == true
+    val hasLeading = progressCaptionLine?.leading?.value?.isNotEmpty() == true
+    val hasTrailing = progressCaptionLine?.trailing?.value?.isNotEmpty() == true
 
     if (hasLeading || hasTrailing) {
         Row(
@@ -129,7 +129,7 @@ fun ProgressTextRow(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             progressCaptionLine?.leading
-                ?.takeIf { !it.first.isNullOrEmpty() }
+                ?.takeIf { !it.value.isNullOrEmpty() }
                 ?.let { (text, color, style) ->
                     PrimaryText(
                         text = text.orEmpty(),
@@ -139,7 +139,7 @@ fun ProgressTextRow(
                 }
 
             progressCaptionLine?.trailing
-                ?.takeIf { !it.first.isNullOrEmpty() }
+                ?.takeIf { !it.value.isNullOrEmpty() }
                 ?.let { (text, color, style) ->
                     PrimaryText(
                         text = text.orEmpty(),
@@ -166,13 +166,13 @@ fun PrimaryProgressBarPreview() {
         type = ProgressIndicatorType.SECONDARY,
         progressCaptionLines = listOf(
             ProgressCaptionLine(
-                leading = tripleOf("Օգտագործած"),
-                trailing = tripleOf("Սկզբնական"),
+                leading = ProgressCaption("Օգտագործած"),
+                trailing = ProgressCaption("Սկզբնական"),
             ),
             ProgressCaptionLine(
-                leading = tripleOf("548,003,065.00 AMD"),
-                trailing = tripleOf("20,000,000.00 AMD"),
-            )
+                leading = ProgressCaption("548,003,065.00 AMD"),
+                trailing = ProgressCaption("20,000,000.00 AMD"),
+            ),
         )
     )
 }
