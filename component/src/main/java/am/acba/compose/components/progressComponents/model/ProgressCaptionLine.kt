@@ -9,7 +9,7 @@ data class ProgressCaptionLine(
 )
 
 data class ProgressCaption(
-    val value: String? = null,
+    val value: String,
     val color: Color? = null,
     val style: TextStyle? = null
 )

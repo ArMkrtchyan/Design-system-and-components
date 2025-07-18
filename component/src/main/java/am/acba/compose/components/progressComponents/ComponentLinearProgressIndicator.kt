@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
@@ -135,25 +136,22 @@ private fun ProgressTextRow(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             leading?.let {
-                safeLet(leading, leading.value) {leading, value ->
-                    CaptionText(
-                        modifier = Modifier.weight(1f),
-                        text = value,
-                        style = it.style ?: defaultStyle,
-                        color = it.color ?: defaultColor
-                    )
-                }
+                CaptionText(
+                    modifier = Modifier.weight(1f),
+                    text = it.value,
+                    style = it.style ?: defaultStyle,
+                    color = it.color ?: defaultColor
+                )
             }
 
             trailing?.let {
-                safeLet(leading, trailing.value) {leading, value ->
-                    CaptionText(
-                        modifier = Modifier.weight(1f),
-                        text = value,
-                        style = it.style ?: defaultStyle,
-                        color = it.color ?: defaultColor
-                    )
-                }
+                CaptionText(
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.End,
+                    text = it.value,
+                    style = it.style ?: defaultStyle,
+                    color = it.color ?: defaultColor
+                )
             }
         }
     }
@@ -163,12 +161,14 @@ private fun ProgressTextRow(
 @NonRestartableComposable
 private fun CaptionText(
     modifier: Modifier,
+    textAlign: TextAlign? = null,
     text: String,
     color: Color,
     style: TextStyle
 ) {
     PrimaryText(
         modifier = modifier,
+        textAlign = textAlign,
         text = text,
         style = style,
         color = color,
