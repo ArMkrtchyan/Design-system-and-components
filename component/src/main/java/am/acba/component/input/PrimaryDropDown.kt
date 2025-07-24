@@ -105,6 +105,7 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.parent.isClickable = isEnabled
         binding.frame.isFocusable = isEnabled
         binding.frame.isClickable = isEnabled
+        binding.frame.isEnabled = isEnabled
         binding.inputDropDown.isFocusable = isEnabled
         binding.inputDropDown.isClickable = isEnabled
     }
