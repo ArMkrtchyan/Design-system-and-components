@@ -3,7 +3,7 @@
 package am.acba.compose.components.datePicker
 
 import am.acba.component.R
-import am.acba.compose.components.datePicker.calendar.PrimaryCalendar
+import am.acba.compose.components.datePicker.calendar.ComponentCalendar
 import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.theme.DigitalTheme
@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 
 @Composable
-fun PrimaryDatePicker(
+fun ComponentDatePicker(
     label: String,
     selectedDate: String,
     datePickerState: DatePickerState,
@@ -57,7 +57,7 @@ fun PrimaryDatePicker(
         )
         TransparentButton(enabled, showCalendar)
         if (showCalendar.value) {
-            PrimaryCalendar(
+            ComponentCalendar(
                 state = datePickerState,
                 onDateSelected = onDateSelected,
                 mode = mode,
@@ -90,5 +90,7 @@ private fun TransparentButton(enabled: Boolean, showCalendar: MutableState<Boole
 @Composable
 @PreviewLightDark
 fun PrimaryDatePickerPreview() {
-    PrimaryDatePicker("Choose date", "", rememberDatePickerState(), { mills, string -> })
+    DigitalTheme {
+        ComponentDatePicker("Choose date", "", rememberDatePickerState(), { mills, string -> })
+    }
 }

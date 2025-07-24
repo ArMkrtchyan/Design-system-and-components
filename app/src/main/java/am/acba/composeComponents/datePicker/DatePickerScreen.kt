@@ -6,7 +6,7 @@ import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
-import am.acba.compose.components.datePicker.PrimaryDatePicker
+import am.acba.compose.components.datePicker.ComponentDatePicker
 import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.EMPTY_STRING
@@ -110,7 +110,7 @@ private fun DatePickerPopup(selectedDate: MutableState<String>, error: String, h
         yearRange = Calendar.getInstance().get(Calendar.YEAR)..Calendar.getInstance().get(Calendar.YEAR)
     )
 
-    PrimaryDatePicker(
+    ComponentDatePicker(
         label = "ChooseDate",
         selectedDate = selectedDate.value,
         state,
@@ -131,7 +131,7 @@ private fun DatePickerModal(selectedDate: MutableState<String>, error: String, h
         yearRange = Calendar.getInstance().get(Calendar.YEAR)..Calendar.getInstance().get(Calendar.YEAR)
     )
 
-    PrimaryDatePicker(
+    ComponentDatePicker(
         label = "ChooseDate",
         selectedDate = selectedDate.value,
         state,

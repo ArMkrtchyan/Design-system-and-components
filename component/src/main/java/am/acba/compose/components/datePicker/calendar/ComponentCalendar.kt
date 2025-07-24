@@ -45,7 +45,7 @@ import androidx.compose.ui.window.DialogProperties
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PrimaryCalendar(
+fun ComponentCalendar(
     state: DatePickerState,
     onDismissRequest: () -> Unit,
     onDateSelected: (Long, String) -> Unit,
@@ -179,5 +179,7 @@ private fun ActionRow(state: DatePickerState, onDismissRequest: () -> Unit, onDa
 @Composable
 @PreviewLightDark
 private fun AcbaCalendarPreview() {
-    PrimaryCalendar(rememberDatePickerState(), onDismissRequest = {}, onDateSelected = { _, _ -> })
+    DigitalTheme {
+        ComponentCalendar(rememberDatePickerState(), onDismissRequest = {}, onDateSelected = { _, _ -> })
+    }
 }
