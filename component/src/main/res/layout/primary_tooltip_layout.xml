@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="264dp"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_background"
     android:orientation="vertical"
@@ -29,8 +29,8 @@
             android:id="@+id/close"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:padding="6dp"
             android:layout_gravity="center_vertical"
+            android:padding="6dp"
             android:src="@drawable/ic_close"
             android:tint="?attr/contentPrimary" />
 
@@ -55,10 +55,9 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="12dp"
-        android:padding="6dp"
         android:tint="@null"
         android:visibility="gone"
-        tools:src="@drawable/ic_user_protect"
+        tools:src="@drawable/ic_success_filled"
         tools:visibility="visible" />
 
     <com.airbnb.lottie.LottieAnimationView
