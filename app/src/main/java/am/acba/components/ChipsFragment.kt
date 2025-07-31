@@ -72,12 +72,32 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
                     R.string.ok,
                     onLastButtonClick = {
                         Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
+                    },
+                    onCloseButtonClick = {
+                        if (tooltipList.size > 1) {
+                            Toast.makeText(requireContext(), "Closed by x button", Toast.LENGTH_LONG).show()
+                        }
+                        mBinding.clContainer.removeView(onboardingHint)
                     }
+
+
                 )
             mBinding.clContainer.addView(onboardingHint)
             onboardingHint?.handleSkip {
                 mBinding.clContainer.removeView(onboardingHint)
             }
+
+            if (tooltipList.size == 1)
+                Toast.makeText(requireContext(), "Onboarding has 1 tooltip", Toast.LENGTH_LONG).show()
+
+
+            onboardingHint?.setForwardClickListener { position ->
+                if (position == tooltipList.size - 1) {
+                    Toast.makeText(requireContext(), "Onboarding reached to last tooltip", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            onboardingHint?.handleSkip { }
         }
 
     }

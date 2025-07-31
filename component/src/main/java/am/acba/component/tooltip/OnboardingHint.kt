@@ -59,6 +59,15 @@ class OnboardingHint(
         }
     }
 
+    //Added to return tooltip current position on forward click
+    fun setForwardClickListener(onClick: (Int) -> Unit) {
+        binding.tooltip.setForwardClickListener {
+            currentPosition++
+            handleScrollPositionAndChangeTargetView()
+            onClick(currentPosition)
+        }
+    }
+
     private fun handleScrollPositionAndChangeTargetView() {
         val view = contentAndViews[currentPosition].second
         if (!view.isViewFullyVisible()) {
