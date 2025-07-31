@@ -108,7 +108,10 @@ class OnboardingHint(
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
-                val height = binding.infoContainer.height
+                var height = binding.infoContainer.height
+                if (contentAndViews.first().first.imageUrl.isNotEmpty() || contentAndViews.first().first.localImage != 0 || contentAndViews.first().first.lottieAnimationName.isNotEmpty()) {
+                    height += 100.dpToPx()
+                }
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
                 binding.infoContainer.x = coordinates.first
                 binding.infoContainer.y = coordinates.second
@@ -185,7 +188,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY + view.height - 32.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY + view.height - 24.dpToPx() + context.getStatusBarHeight())
         }
 
     }
