@@ -62,7 +62,7 @@
             android:layout_gravity="center_horizontal"
             android:tint="@null"
             android:visibility="gone"
-            tools:src="@drawable/aaaaa"
+            tools:src="@drawable/ic_success"
             tools:visibility="visible" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -77,7 +77,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:gravity="center_vertical">
 
             <am.acba.component.textView.PrimaryTextView
@@ -91,7 +90,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end">
+                android:gravity="end"
+                android:paddingVertical="12dp">
 
                 <am.acba.component.imageView.PrimaryImageView
                     android:id="@+id/backward"
