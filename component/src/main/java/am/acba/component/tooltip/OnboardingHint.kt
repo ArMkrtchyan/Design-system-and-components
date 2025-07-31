@@ -176,7 +176,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY + view.height - 16.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY + view.height - 8.dpToPx() + context.getStatusBarHeight())
         }
 
     }
