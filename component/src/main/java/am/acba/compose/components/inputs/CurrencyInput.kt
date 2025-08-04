@@ -188,8 +188,6 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
         currencyTextColor = DigitalTheme.colorScheme.contentPrimaryTonal1Disable
         flagOpacity = 0.5f
     }
-    modifier
-
     Row(
         modifier = modifier
             .wrapContentWidth()
@@ -275,7 +273,7 @@ fun CurrencyInputPreview() {
                 value = textNormal.value,
                 onValueChange = { textNormal.value = it },
                 label = "Amount",
-                isError = true,
+                isError = false,
                 helpText = "Min. 50,000.00 AMD",
             )
         }
