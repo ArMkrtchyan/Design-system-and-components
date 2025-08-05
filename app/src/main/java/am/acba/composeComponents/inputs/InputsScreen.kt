@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -59,6 +61,7 @@ fun InputsScreen(title: String = "") {
                     value = textNormal.value,
                     onValueChange = { textNormal.value = it },
                     label = "Label",
+                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                     helpText = "Some help text",
                     visualTransformation = MaxLengthVisualTransformation(15),
                     leadingIcon = R.drawable.ic_close,
