@@ -180,7 +180,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY - height - 44.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY - height - 12.dpToPx())
         } else {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
@@ -188,7 +188,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY + view.height - 24.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY + view.height + 12.dpToPx())
         }
 
     }
