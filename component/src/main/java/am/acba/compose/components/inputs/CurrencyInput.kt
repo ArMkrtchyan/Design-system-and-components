@@ -3,7 +3,7 @@ package am.acba.compose.components.inputs
 
 import am.acba.component.R
 import am.acba.component.extensions.numberFormatting
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
@@ -105,7 +105,7 @@ fun CurrencyInput(
                 isError,
                 label
             )
-            HorizontalSpacer(width = 1)
+            HorizontalSpacer(1.dp)
             CurrencyField(currencyModifier, enabled, showArrow, onCurrencyClick)
         }
         SupportAndErrorTexts(isError, enabled, errorText, helpText)
@@ -208,9 +208,9 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
                 .height(20.dp),
             alpha = flagOpacity
         )
-        HorizontalSpacer(width = 4)
+        HorizontalSpacer(4.dp)
         PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor)
-        HorizontalSpacer(width = 2)
+        HorizontalSpacer(2.dp)
         if (showArrow) {
             PrimaryIcon(
                 painterResource(R.drawable.ic_down), modifier = Modifier

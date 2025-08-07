@@ -3,22 +3,17 @@
 package am.acba.compose.components.datePicker
 
 import am.acba.component.R
+import am.acba.compose.common.TransparentButton
 import am.acba.compose.components.datePicker.calendar.ComponentCalendar
 import am.acba.compose.components.datePicker.calendar.model.CalendarMode
 import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.theme.DigitalTheme
-import am.acba.compose.theme.ShapeTokens
 import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.DatePickerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -55,7 +50,9 @@ fun ComponentDatePicker(
             helpText = helpText,
             isError = error.isNotEmpty()
         )
-        TransparentButton(enabled, showCalendar)
+        TransparentButton(enabled) {
+            showCalendar.value = true
+        }
         if (showCalendar.value) {
             ComponentCalendar(
                 state = datePickerState,
@@ -66,25 +63,6 @@ fun ComponentDatePicker(
                 })
         }
     }
-}
-
-@Composable
-@NonRestartableComposable
-private fun TransparentButton(enabled: Boolean, showCalendar: MutableState<Boolean>) {
-    Button(
-        modifier = Modifier.fillMaxSize(),
-        onClick = {
-            showCalendar.value = true
-        },
-        enabled = enabled,
-        shape = ShapeTokens.shapePrimaryButton,
-        colors = ButtonColors(
-            contentColor = Color.Transparent,
-            containerColor = Color.Transparent,
-            disabledContentColor = Color.Transparent,
-            disabledContainerColor = Color.Transparent
-        )
-    ) {}
 }
 
 @Composable

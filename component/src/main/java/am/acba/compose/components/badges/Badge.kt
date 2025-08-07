@@ -1,8 +1,8 @@
 ﻿package am.acba.compose.components.badges
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.AvatarImage
@@ -143,7 +143,7 @@ private fun BadgeTextAndIcon(
                             .width(16.dp)
                             .height(16.dp),
                     )
-                    HorizontalSpacer(width = 4)
+                    HorizontalSpacer(4.dp)
                 }
             } ?: run {
                 imageUrl?.takeIf { it.isNotEmpty() }?.let {
@@ -154,7 +154,7 @@ private fun BadgeTextAndIcon(
                     ) {
                         AvatarImage(modifier = Modifier, imageUrl = it, iconColor = textColor)
                     }
-                    HorizontalSpacer(width = 4)
+                    HorizontalSpacer(4.dp)
                 }
             }
 
@@ -182,22 +182,22 @@ fun AlertsScreenPreview() {
                 .padding(10.dp)
         ) {
             Badge(badgeType = BadgeEnum.DOT, backgroundColor = DigitalTheme.colorScheme.backgroundWarning)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Badge(
                 badgeType = BadgeEnum.ICON, modifier = Modifier
                     .width(24.dp)
                     .height(24.dp)
                     .padding(4.dp), icon = R.drawable.ic_edit
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Badge(badgeType = BadgeEnum.ICON)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Badge(badgeType = BadgeEnum.NUMBER, text = "2")
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Badge(badgeType = BadgeEnum.INFO, text = "Badge")
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Badge(badgeType = BadgeEnum.INFO, icon = R.drawable.ic_info, text = "Info text")
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
         }
     }
 }

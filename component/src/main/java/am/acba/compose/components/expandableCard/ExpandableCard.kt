@@ -2,8 +2,8 @@
 
 import am.acba.component.R
 import am.acba.component.viewUtil.ViewUtil.copyWithVibration
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.StatusBadge
@@ -168,7 +168,7 @@ fun ExpandableCardPreview() {
                         style = DigitalTheme.typography.xSmallRegular,
                         color = DigitalTheme.colorScheme.contentPrimaryTonal1
                     )
-                    VerticalSpacer(4)
+                    VerticalSpacer(4.dp)
                     PrimaryText(
                         text = "400,000.00 AMD",
                         style = DigitalTheme.typography.heading6Bold,
@@ -179,9 +179,9 @@ fun ExpandableCardPreview() {
                         modifier = Modifier
                             .fillMaxWidth()
                     ) {
-                        VerticalSpacer(24)
+                        VerticalSpacer(24.dp)
                         PrimaryDivider()
-                        VerticalSpacer(12)
+                        VerticalSpacer(12.dp)
                         AmountRow(
                             title = "Սկզբնական գումար",
                             value = "400,000.00 AMD"
@@ -208,7 +208,7 @@ fun AmountRow(title: String, value: String) {
             style = DigitalTheme.typography.smallRegular,
             color = DigitalTheme.colorScheme.contentPrimaryTonal1
         )
-        HorizontalSpacer(8)
+        HorizontalSpacer(8.dp)
         PrimaryText(text = value, modifier = Modifier
             .weight(0.5f)
             .combinedClickable(

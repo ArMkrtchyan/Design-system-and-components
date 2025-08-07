@@ -2,8 +2,8 @@
 
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -71,14 +71,14 @@ private fun CardContent(guide: IGuide, size: Int, currentCoordinatePosition: Mut
             .padding(16.dp)
     ) {
         TitleWithCloseIcon(guide.title, size > 1, onFinished)
-        VerticalSpacer(12)
+        VerticalSpacer(12.dp)
 
         Description(guide.description)
-        VerticalSpacer(16)
+        VerticalSpacer(16.dp)
 
         guide.content?.let {
             it.invoke()
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
         }
 
         NavigationButtonsWithText(currentCoordinatePosition, size, completeButtonText, onFinished)
@@ -154,14 +154,14 @@ private fun NavigationButtonsStartState(currentCoordinatePosition: MutableIntSta
 @Composable
 private fun NavigationButtonsMiddleState(currentCoordinatePosition: MutableIntState) {
     LeftRightIcon(true, currentCoordinatePosition)
-    HorizontalSpacer(8)
+    HorizontalSpacer(8.dp)
     LeftRightIcon(false, currentCoordinatePosition)
 }
 
 @Composable
 private fun NavigationButtonsEndState(currentCoordinatePosition: MutableIntState, completeButtonText: String, onFinished: () -> Unit) {
     LeftRightIcon(true, currentCoordinatePosition)
-    HorizontalSpacer(8)
+    HorizontalSpacer(8.dp)
     CompleteButton(completeButtonText, onFinished)
 }
 

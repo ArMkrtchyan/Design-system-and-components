@@ -1,6 +1,6 @@
 ﻿package am.acba.compose.components.controls
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -70,22 +70,22 @@ fun PrimarySwitchPreview() {
             PrimarySwitch(checked = isChecked.value, onCheckedChange = {
                 isChecked.value = it
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked2 = remember { mutableStateOf(true) }
             PrimarySwitch(checked = isChecked2.value, onCheckedChange = {
                 isChecked2.value = it
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked3 = remember { mutableStateOf(false) }
             PrimarySwitch(checked = isChecked3.value, enabled = false, onCheckedChange = {
                 isChecked3.value = it
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked4 = remember { mutableStateOf(true) }
             PrimarySwitch(checked = isChecked4.value, enabled = false, onCheckedChange = {
                 isChecked4.value = it
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
         }
     }
 }

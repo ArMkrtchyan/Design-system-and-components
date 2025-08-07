@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.buttons
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.EmojiButton
 import am.acba.compose.components.GhostButton
 import am.acba.compose.components.PrimaryButton
@@ -49,7 +49,7 @@ fun ButtonsScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 EmojiButton(
                     onClick = {
 
@@ -58,7 +58,7 @@ fun ButtonsScreen(title: String = "") {
                     iconGravity = Gravity.END,
                     emojiIcon = am.acba.component.R.drawable.ic_add_small,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryButton(
                     onClick = {
 
@@ -67,7 +67,7 @@ fun ButtonsScreen(title: String = "") {
                     icon = am.acba.component.R.drawable.ic_add_small,
                     iconGravity = Gravity.START,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryButtonSmall(
                     onClick = {
 
@@ -76,7 +76,7 @@ fun ButtonsScreen(title: String = "") {
                     icon = am.acba.component.R.drawable.ic_add_small,
                     iconGravity = Gravity.START,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryButton(
                     onClick = {
 
@@ -86,7 +86,7 @@ fun ButtonsScreen(title: String = "") {
                     iconGravity = Gravity.END,
                     enabled = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 SecondaryButtonGreen(
                     onClick = {
 
@@ -95,7 +95,7 @@ fun ButtonsScreen(title: String = "") {
                     icon = am.acba.component.R.drawable.ic_add_small,
                     iconGravity = Gravity.START,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 SecondaryButtonGreen(
                     onClick = {
 
@@ -105,7 +105,7 @@ fun ButtonsScreen(title: String = "") {
                     iconGravity = Gravity.END,
                     enabled = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 SecondaryButtonGrey(
                     onClick = {
 
@@ -114,7 +114,7 @@ fun ButtonsScreen(title: String = "") {
                     icon = am.acba.component.R.drawable.ic_add_small,
                     iconGravity = Gravity.START,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 SecondaryButtonGrey(
                     onClick = {
 
@@ -124,7 +124,7 @@ fun ButtonsScreen(title: String = "") {
                     iconGravity = Gravity.END,
                     enabled = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 GhostButton(
                     onClick = {
 
@@ -133,7 +133,7 @@ fun ButtonsScreen(title: String = "") {
                     icon = am.acba.component.R.drawable.ic_add_small,
                     iconGravity = Gravity.START,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 GhostButton(
                     onClick = {
 

@@ -1,7 +1,7 @@
 ﻿package am.acba.compose.components
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
@@ -44,7 +44,7 @@ fun StatusBadge(
         ) {
             icon?.let {
                 PrimaryIcon(modifier = Modifier.size(14.dp), painter = painterResource(icon), tint = iconColor)
-                HorizontalSpacer(4)
+                HorizontalSpacer(4.dp)
             }
             PrimaryText(text = title, color = textColor, style = DigitalTheme.typography.xSmallRegular, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }

@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.onboardingTooltip
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.chips.PrimaryChip
 import am.acba.compose.components.guide.ElementPositionAndSize
@@ -107,43 +107,43 @@ fun GuideScreen(title: String = "") {
                         })
 
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item 5555",
                     modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
@@ -151,15 +151,15 @@ fun GuideScreen(title: String = "") {
                         coordinatesState.value = coordinates
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ListItem(
                     title = "List item"
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
             }
         }
     }

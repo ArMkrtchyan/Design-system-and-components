@@ -2,7 +2,7 @@
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
@@ -100,7 +100,7 @@ fun ActionButton(
             badgeBorderColor,
             onBadgeClick
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
         PrimaryText(
             text = actionText,
             color = actionTextColor,
@@ -311,9 +311,9 @@ fun AvatarScreenPreview() {
                 .padding(10.dp)
         ) {
             Avatar(avatarSize = AvatarSizeEnum.AVATAR_SIZE_24)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, badgeType = BadgeEnum.DOT)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.ICON,
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
@@ -323,7 +323,7 @@ fun AvatarScreenPreview() {
                 backgroundRadius = 12,
                 iconPadding = 16.dp
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.TEXT, avatarSize = AvatarSizeEnum.AVATAR_SIZE_36,
                 text = "AA",
@@ -331,7 +331,7 @@ fun AvatarScreenPreview() {
                 backgroundColor = DigitalTheme.colorScheme.backgroundAlternative5,
                 backgroundRadius = 100,
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.IMAGE,
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_40,
@@ -339,15 +339,15 @@ fun AvatarScreenPreview() {
                 icon = R.drawable.logo_amex_light,
                 clipPercent = 50
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(avatarType = AvatarEnum.LOTTIE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, badgeType = BadgeEnum.DOT)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
                 backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
                 backgroundRadius = 100,
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             ActionButton(actionText = "Action button")
         }
     }

@@ -1,7 +1,7 @@
 ﻿package am.acba.compose.components.alerts
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -115,10 +115,10 @@ fun PrimaryAlert(
                         .padding(horizontal = 8.dp)
                 ) {
                     PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3)
-                    VerticalSpacer(4)
+                    VerticalSpacer(4.dp)
                     PrimaryText(text = description, style = DigitalTheme.typography.smallRegular)
                     if (!linkText.isNullOrEmpty()) {
-                        VerticalSpacer(4)
+                        VerticalSpacer(4.dp)
                         val color = DigitalTheme.colorScheme.contentPrimary
                         PrimaryText(modifier = Modifier
                             .drawBehind {

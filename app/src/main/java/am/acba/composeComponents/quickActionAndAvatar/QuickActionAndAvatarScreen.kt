@@ -1,8 +1,8 @@
 ﻿package am.acba.composeComponents.quickActionAndAvatar
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.ActionButton
 import am.acba.compose.components.avatar.Avatar
@@ -58,33 +58,33 @@ fun QuickActionAndAvatarScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider(text = "Avatar icon state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarIconStates()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Avatar icon state with square background")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarIconWithRoundedStates()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Avatar Image state rounded")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarImageStates()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Avatar Image state not rounded")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarImageStates(0)
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Avatar Text state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarTextStates()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Avatar Lottie state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 AvatarLottieStates()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Action buttons state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ActionButtonStates()
-                VerticalSpacer(40)
+                VerticalSpacer(40.dp)
             }
         }
     }
@@ -100,28 +100,28 @@ private fun AvatarIconStates() {
             backgroundRadius = 100,
             iconPadding = 4.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 100,
             iconPadding = 6.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 100,
             iconPadding = 8.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 100,
             iconPadding = 8.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
@@ -129,7 +129,7 @@ private fun AvatarIconStates() {
             badgeType = BadgeEnum.DOT,
             iconPadding = 16.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
@@ -139,7 +139,7 @@ private fun AvatarIconStates() {
             badgeIconColor = DigitalTheme.colorScheme.contentBrand,
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -153,28 +153,28 @@ private fun AvatarIconWithRoundedStates() {
             backgroundRadius = 4,
             iconPadding = 4.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 4,
             iconPadding = 6.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 4,
             iconPadding = 8.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
             backgroundRadius = 6,
             iconPadding = 8.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
@@ -183,7 +183,7 @@ private fun AvatarIconWithRoundedStates() {
             badgeBackgroundColor = DigitalTheme.colorScheme.backgroundWarning,
             iconPadding = 16.dp
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
             backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
@@ -193,7 +193,7 @@ private fun AvatarIconWithRoundedStates() {
             badgeIconColor = DigitalTheme.colorScheme.contentBrand,
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -211,19 +211,19 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
             clipPercent = 0, iconColor = null
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType37_1_1.png",
@@ -231,25 +231,25 @@ private fun AvatarImageStates(clipPercent: Int = 50) {
             contentScale = ContentScale.FillWidth,
 
             )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.IMAGE, imageUrl = "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
             clipPercent = clipPercent
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -261,28 +261,28 @@ private fun AvatarLottieStates() {
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE, badgeType = BadgeEnum.DOT,
             badgeBackgroundColor = DigitalTheme.colorScheme.backgroundInfo,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.LOTTIE, badgeType = BadgeEnum.ICON,
@@ -290,7 +290,7 @@ private fun AvatarLottieStates() {
             badgeIconColor = DigitalTheme.colorScheme.contentBrand,
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -305,7 +305,7 @@ private fun AvatarTextStates() {
             backgroundColor = DigitalTheme.colorScheme.backgroundAlternative6,
             backgroundRadius = 100,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.TEXT, text = "AA",
@@ -313,7 +313,7 @@ private fun AvatarTextStates() {
             backgroundColor = DigitalTheme.colorScheme.backgroundAlternative,
             backgroundRadius = 100,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_36, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.TEXT, text = "AA",
@@ -321,7 +321,7 @@ private fun AvatarTextStates() {
             backgroundColor = DigitalTheme.colorScheme.backgroundAlternative2,
             backgroundRadius = 100,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_40, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.TEXT, text = "AA",
@@ -329,7 +329,7 @@ private fun AvatarTextStates() {
             backgroundColor = DigitalTheme.colorScheme.backgroundAlternative3,
             backgroundRadius = 100,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.TEXT, badgeType = BadgeEnum.DOT,
@@ -338,7 +338,7 @@ private fun AvatarTextStates() {
             backgroundColor = DigitalTheme.colorScheme.backgroundAlternative4,
             backgroundRadius = 100,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
             avatarType = AvatarEnum.TEXT, badgeType = BadgeEnum.ICON,
@@ -349,7 +349,7 @@ private fun AvatarTextStates() {
             backgroundRadius = 100,
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -365,13 +365,13 @@ private fun ActionButtonStates() {
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() },
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         ActionButton(
             actionText = "Action button", icon = R.drawable.ic_phonebook, backgroundRadius = 12, badgeType = BadgeEnum.DOT,
             badgeBackgroundColor = DigitalTheme.colorScheme.backgroundInfo,
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         ActionButton(
             actionText = "Action button",
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
@@ -383,7 +383,7 @@ private fun ActionButtonStates() {
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() },
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         ActionButton(
             actionText = "Action button",
             avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
@@ -391,7 +391,7 @@ private fun ActionButtonStates() {
             clipPercent = 0,
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         ActionButton(
             actionText = "Action button",
             avatarType = AvatarEnum.TEXT, text = "AA",
@@ -403,13 +403,13 @@ private fun ActionButtonStates() {
             onBadgeClick = { Toast.makeText(context, "On badge icon click", Toast.LENGTH_SHORT).show() },
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         ActionButton(
             actionText = "Action button", avatarType = AvatarEnum.LOTTIE,
             backgroundColor = Color.Transparent,
             onActionButtonClick = { Toast.makeText(context, "On action button click", Toast.LENGTH_SHORT).show() }
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
 
     }
 }

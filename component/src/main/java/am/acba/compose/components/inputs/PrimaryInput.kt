@@ -1,7 +1,7 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
@@ -166,7 +166,7 @@ fun PrimaryInputPreview(
                     textNormal.value = TextFieldValue("jcndskjcndk")
                 }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             PrimaryInput(
                 value = TextFieldValue("Some text"),
                 onValueChange = { textNormal.value = it },
@@ -176,7 +176,7 @@ fun PrimaryInputPreview(
                     textNormal.value = TextFieldValue("jcndskjcndk")
                 }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             SearchBar(hint = "Search...", modifier = modifier)
         }
     }

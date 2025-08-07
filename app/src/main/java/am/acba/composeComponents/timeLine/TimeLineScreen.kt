@@ -3,7 +3,7 @@
 
 import am.acba.component.R
 import am.acba.component.primaryTimeLine.TimeLineType
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.timeLine.PrimaryTimeLine
 import am.acba.compose.components.timeLine.TimeLineComposeModel
@@ -152,18 +152,18 @@ fun TimeLineScreen(title: String = "") {
                         )
                     ),
                 )
-                VerticalSpacer(30)
+                VerticalSpacer(30.dp)
                 PrimaryTimeLine(
                     title = "Մարման գրաֆիկ",
                     endIconPainter = painterResource(R.drawable.ic_right),
                     timeLineItems = list,
                 )
-                VerticalSpacer(30)
+                VerticalSpacer(30.dp)
                 PrimaryTimeLine(
                     timeLineItems = progressList,
                     timeLineType = TimeLineType.PROGRESS
                 )
-                VerticalSpacer(30)
+                VerticalSpacer(30.dp)
             }
         }
     }

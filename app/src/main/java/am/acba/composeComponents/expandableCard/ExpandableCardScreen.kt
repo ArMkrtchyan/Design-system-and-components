@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.expandableCard
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.divider.PrimaryDivider
@@ -61,7 +61,7 @@ fun ExpandableCardScreen(title: String = "") {
                             style = DigitalTheme.typography.xSmallRegular,
                             color = DigitalTheme.colorScheme.contentPrimaryTonal1
                         )
-                        VerticalSpacer(4)
+                        VerticalSpacer(4.dp)
                         PrimaryText(
                             text = "400,000.00 AMD",
                             style = DigitalTheme.typography.heading6Bold,
@@ -72,9 +72,9 @@ fun ExpandableCardScreen(title: String = "") {
                             modifier = Modifier
                                 .fillMaxWidth()
                         ) {
-                            VerticalSpacer(24)
+                            VerticalSpacer(24.dp)
                             PrimaryDivider()
-                            VerticalSpacer(12)
+                            VerticalSpacer(12.dp)
                             AmountRow(
                                 title = "Սկզբնական գումար",
                                 value = "400,000.00 AMD"

@@ -1,8 +1,8 @@
 ﻿package am.acba.compose.components.chips
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.Avatar
@@ -84,10 +84,10 @@ fun PrimaryChip(
                 )
             }
         }
-        HorizontalSpacer(8)
+        HorizontalSpacer(8.dp)
         PrimaryText(text = title, style = DigitalTheme.typography.body2Regular, color = chipStateEnum.getContentColor())
         if (endIcon == null) {
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
         } else {
             Box(Modifier
                 .fillMaxHeight()
@@ -116,41 +116,41 @@ fun PrimaryChipPreview() {
             PrimaryChip(
                 title = "Chip component"
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipSizeEnum = ChipSizeEnum.LARGE,
                 title = "Chip component"
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 title = "Chip component",
                 endIcon = R.drawable.ic_down
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipSizeEnum = ChipSizeEnum.LARGE,
                 title = "Chip component",
                 endIcon = R.drawable.ic_down
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipStateEnum = ChipStateEnum.SELECTED,
                 title = "Chip component"
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipStateEnum = ChipStateEnum.SELECTED,
                 chipSizeEnum = ChipSizeEnum.LARGE,
                 title = "Chip component"
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipStateEnum = ChipStateEnum.SELECTED,
                 title = "Chip component",
                 endIcon = R.drawable.ic_down,
                 icon = R.drawable.ic_camera
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryChip(
                 chipStateEnum = ChipStateEnum.SELECTED,
                 chipSizeEnum = ChipSizeEnum.LARGE,
@@ -159,7 +159,7 @@ fun PrimaryChipPreview() {
                 imageRes = R.drawable.default_avatar,
                 badgeType = BadgeEnum.DOT
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
         }
     }
 }

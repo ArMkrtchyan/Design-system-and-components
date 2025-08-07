@@ -3,8 +3,8 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -130,7 +130,7 @@ fun PinInput(
             }
         )
         error.takeIf { it.isNotEmpty() }?.let {
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
             ErrorRow(it)
         }
     }
@@ -246,7 +246,7 @@ private fun ErrorRow(error: String) {
             painter = painterResource(R.drawable.ic_info),
             tint = DigitalTheme.colorScheme.contentDangerTonal1
         )
-        HorizontalSpacer(4)
+        HorizontalSpacer(4.dp)
         PrimaryText(
             error,
             style = DigitalTheme.typography.smallRegular,

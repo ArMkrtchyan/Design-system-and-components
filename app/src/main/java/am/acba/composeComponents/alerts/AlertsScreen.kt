@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.alerts
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.alerts.ComposeAlertTypes
 import am.acba.compose.components.alerts.PrimaryAlert
@@ -54,14 +54,14 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     endIconPainter = painterResource(R.drawable.ic_close),
                     title = "Title",
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     onCloseClick = { Toast.makeText(context, "Close", Toast.LENGTH_SHORT).show() }
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.DANGER,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -69,7 +69,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.WARNING,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -77,7 +77,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.SUCCESS,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -85,7 +85,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.NEUTRAL,
                     iconPainter = painterResource(R.drawable.ic_settings),
@@ -94,7 +94,7 @@ fun AlertsScreen(title: String = "") {
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link"
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     endIconPainter = painterResource(R.drawable.ic_close),
                     endIconTint = DigitalTheme.colorScheme.contentPrimary,
@@ -103,7 +103,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.DANGER,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -112,7 +112,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.WARNING,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -121,7 +121,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.SUCCESS,
                     endIconPainter = painterResource(R.drawable.ic_close),
@@ -130,7 +130,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryAlert(
                     alertType = ComposeAlertTypes.NEUTRAL,
                     iconPainter = painterResource(R.drawable.ic_settings),
@@ -140,7 +140,7 @@ fun AlertsScreen(title: String = "") {
                     linkText = "Link",
                     isRounded = false
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
             }
         }
     }
