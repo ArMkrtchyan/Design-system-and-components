@@ -96,7 +96,7 @@
                 <am.acba.component.imageView.PrimaryImageView
                     android:id="@+id/backward"
                     style="@style/Small.Regular"
-                    android:layout_width="55dp"
+                    android:layout_width="40dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:background="@drawable/tooltip_button_background"
@@ -109,16 +109,14 @@
                 <am.acba.component.textView.PrimaryTextView
                     android:id="@+id/skip"
                     style="@style/Small.Regular"
-                    android:layout_width="wrap_content"
+                    android:layout_width="56dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/tooltip_button_fill_background"
                     android:drawableTint="?attr/contentPrimary"
                     android:gravity="center"
-                    android:padding="6dp"
-                    android:paddingHorizontal="@dimen/spacing_4"
-                    android:text="Ok"
+                    android:text="lav"
                     android:textColor="@color/White"
                     android:visibility="gone"
                     tools:visibility="visible" />
@@ -126,7 +124,7 @@
                 <am.acba.component.imageView.PrimaryImageView
                     android:id="@+id/forward"
                     style="@style/Small.Regular"
-                    android:layout_width="55dp"
+                    android:layout_width="40dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="8dp"
