@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:padding="6dp"
                 tools:text="Title " />
 
