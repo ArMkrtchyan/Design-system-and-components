@@ -81,6 +81,7 @@ fun ComponentDropDown(
             onTrailingIconClick = { showBottomSheet.value = true },
             singleLine = true,
             maxLines = maxLines,
+            durationMillis = 350
         )
     }
     PrimaryBottomSheet(
