@@ -3,7 +3,6 @@
 package am.acba.compose.components.dropDown
 
 import am.acba.component.R
-import am.acba.compose.common.TransparentButton
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.dropDown.model.ContentProperties
@@ -22,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.TextFieldValue
@@ -62,6 +62,11 @@ fun ComponentDropDown(
             modifier = Modifier
                 .focusRequester(focusRequester)
                 .fillMaxWidth()
+                .onFocusChanged { focusState ->
+                    if (focusState.isFocused) {
+                        showBottomSheet.value = true
+                    }
+                }
                 .then(modifier),
             label = label,
             helpText = helpText,
@@ -73,12 +78,10 @@ fun ComponentDropDown(
             leadingIcon = leadingIcon,
             leadingIconTint = leadingIconTint,
             trailingIcon = if (showBottomSheet.value) R.drawable.ic_up else R.drawable.ic_down,
+            onTrailingIconClick = { showBottomSheet.value = true },
             singleLine = true,
             maxLines = maxLines,
         )
-        TransparentButton(enabled) {
-            showBottomSheet.value = true
-        }
     }
     PrimaryBottomSheet(
         title = contentProperties.title,
