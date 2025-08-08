@@ -26,7 +26,7 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipSmall4)
 
         val tooltipModel1 = TooltipModel(
-            "AAA",
+            "AAA  AAA  AAA AAA AAA AAA  AAA AAA AAA AAA",
             "AAA AAA AAA AAA",
             localImage = R.drawable.ic_launcher_background
         )
