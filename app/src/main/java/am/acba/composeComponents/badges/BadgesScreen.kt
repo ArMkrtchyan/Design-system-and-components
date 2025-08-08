@@ -1,8 +1,8 @@
 ﻿package am.acba.composeComponents.badges
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
@@ -34,13 +34,13 @@ import androidx.compose.ui.unit.dp
 private fun BadgesDefault() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Badge(badgeType = BadgeEnum.DOT)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.ICON)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.NUMBER, text = "2")
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.INFO, text = "Badge")
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.INFO, icon = R.drawable.ic_info, text = "With icon")
     }
 }
@@ -49,13 +49,13 @@ private fun BadgesDefault() {
 private fun BadgesNeutral() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Badge(badgeType = BadgeEnum.DOT, backgroundColor = DigitalTheme.colorScheme.backgroundPending)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.ICON, backgroundColor = DigitalTheme.colorScheme.backgroundPending, iconColor = DigitalTheme.colorScheme.contentPending)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.NUMBER, text = "2", backgroundColor = DigitalTheme.colorScheme.backgroundPending, textColor = DigitalTheme.colorScheme.contentPending)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.INFO, text = "Badge", backgroundColor = DigitalTheme.colorScheme.backgroundPending, textColor = DigitalTheme.colorScheme.contentPending)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.INFO,
             icon = R.drawable.ic_info,
@@ -70,13 +70,13 @@ private fun BadgesNeutral() {
 private fun BadgesWarning() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Badge(badgeType = BadgeEnum.DOT, backgroundColor = DigitalTheme.colorScheme.backgroundWarning)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.ICON, backgroundColor = DigitalTheme.colorScheme.backgroundWarning, iconColor = DigitalTheme.colorScheme.contentWarning)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.NUMBER, text = "2", backgroundColor = DigitalTheme.colorScheme.backgroundWarning, textColor = DigitalTheme.colorScheme.contentWarning)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(badgeType = BadgeEnum.INFO, text = "Badge", backgroundColor = DigitalTheme.colorScheme.backgroundWarning, textColor = DigitalTheme.colorScheme.contentWarning)
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.INFO,
             icon = R.drawable.ic_info,
@@ -96,39 +96,39 @@ private fun OtherSizes() {
                 .width(8.dp)
                 .height(8.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.DOT,
             modifier = Modifier
                 .width(9.dp)
                 .height(9.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.DOT
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.DOT,
             modifier = Modifier
                 .width(12.dp)
                 .height(12.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.DOT,
             modifier = Modifier
                 .width(14.dp)
                 .height(14.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.DOT,
             modifier = Modifier
                 .width(16.dp)
                 .height(16.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -139,7 +139,7 @@ private fun IconOtherSizes() {
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -147,7 +147,7 @@ private fun IconOtherSizes() {
                 .width(14.dp)
                 .height(14.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -155,7 +155,7 @@ private fun IconOtherSizes() {
                 .width(16.dp)
                 .height(16.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -163,7 +163,7 @@ private fun IconOtherSizes() {
                 .width(18.dp)
                 .height(18.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -171,7 +171,7 @@ private fun IconOtherSizes() {
                 .width(20.dp)
                 .height(20.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -180,7 +180,7 @@ private fun IconOtherSizes() {
                 .height(24.dp)
                 .padding(3.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
@@ -189,7 +189,7 @@ private fun IconOtherSizes() {
                 .height(32.dp)
                 .padding(6.dp)
         )
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
     }
 }
 
@@ -216,23 +216,23 @@ fun BadgesScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider(text = "Badges default state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 BadgesDefault()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Badges pending state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 BadgesNeutral()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Badges warning state")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 BadgesWarning()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Other sizes")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 OtherSizes()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 IconOtherSizes()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
             }
         }
     }

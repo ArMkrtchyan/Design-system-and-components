@@ -1,8 +1,8 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.Image
@@ -35,7 +35,7 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
     ) {
         iconRes?.let {
             SupportIcon(it)
-            HorizontalSpacer(4)
+            HorizontalSpacer(4.dp)
         }
         SupportText(text = text, color = color)
     }
@@ -81,8 +81,8 @@ fun leadingOrTrailingIcon(
         iconRes != null && secondaryIconRes != null -> {
             {
                 Row {
-                    ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 12, onSecondaryIconClick)
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 0, spaceEnd = 16, onClick)
+                    ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12.dp, spaceEnd = 12.dp, onSecondaryIconClick)
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 0.dp, spaceEnd = 16.dp, onClick)
                 }
             }
         }
@@ -90,16 +90,16 @@ fun leadingOrTrailingIcon(
         iconRes != null -> {
             {
                 if (isLeading) {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 16, spaceEnd = 8, onClick)
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 16.dp, spaceEnd = 8.dp, onClick)
                 } else {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 12, spaceEnd = 16, onClick)
+                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 12.dp, spaceEnd = 16.dp, onClick)
                 }
             }
         }
 
         secondaryIconRes != null -> {
             {
-                ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 16, onSecondaryIconClick)
+                ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12.dp, spaceEnd = 16.dp, onSecondaryIconClick)
             }
         }
 
@@ -108,7 +108,7 @@ fun leadingOrTrailingIcon(
 }
 
 @Composable
-private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24.dp, spaceStart: Int, spaceEnd: Int, onClick: (() -> Unit)? = null) {
+private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24.dp, spaceStart: Dp, spaceEnd: Dp, onClick: (() -> Unit)? = null) {
     Row {
         HorizontalSpacer(spaceStart)
         Image(
@@ -151,7 +151,7 @@ fun SupportText(text: String, color: Color) {
 @Composable
 fun SupportAndErrorTexts(isError: Boolean, enabled: Boolean, errorText: String?, helpText: String?) {
     Column {
-        VerticalSpacer(4)
+        VerticalSpacer(4.dp)
         if (isError) {
             if (!errorText.isNullOrEmpty()) {
                 SupportRow(

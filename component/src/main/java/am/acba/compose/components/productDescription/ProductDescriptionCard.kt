@@ -4,8 +4,8 @@ package am.acba.compose.components.productDescription
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
@@ -92,10 +92,10 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 
         ) {
             ProductDescriptionHeaderTitle(title)
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             ProductDescriptionHeaderIcon()
         }
-        VerticalSpacer(12)
+        VerticalSpacer(12.dp)
         ProductDescriptionSubTitle(subTitle)
     }
 }
@@ -103,7 +103,7 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 @Composable
 @NonRestartableComposable
 private fun RowScope.ProductDescriptionHeaderTitle(title: String) {
-    VerticalSpacer(8)
+    VerticalSpacer(8.dp)
     PrimaryText(
         modifier = Modifier
             .weight(1f)
@@ -147,7 +147,7 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
                     mediaHeight.intValue = layoutCoordinates.size.height
                 }
         ) {
-            VerticalSpacer(12)
+            VerticalSpacer(12.dp)
             ProductDescriptionSecondTitle(productDescription.secondTitle)
             ProductDescriptionBadges(productDescription.badges, productDescription.badgeBackgroundColor, productDescription.badgeTextColor)
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
@@ -168,7 +168,7 @@ private fun ProductDescriptionSecondTitle(secondTitle: String) {
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -189,7 +189,7 @@ private fun ProductDescriptionBadges(badges: List<ProductDescriptionBadge>, badg
                 )
             }
         }
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -202,7 +202,7 @@ private fun ProductDescriptionSecondSubTitle(secondSubTitle: String) {
             text = secondSubTitle,
             style = DigitalTheme.typography.smallRegular
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -215,13 +215,13 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 PrimaryIcon(modifier = Modifier.size(20.dp), painter = painterResource(R.drawable.ic_success_small), tint = DigitalTheme.colorScheme.contentBrand)
-                HorizontalSpacer(4)
+                HorizontalSpacer(4.dp)
                 PrimaryText(text = bullet, style = DigitalTheme.typography.smallRegular, modifier = Modifier.weight(1f))
             }
-            VerticalSpacer(4)
+            VerticalSpacer(4.dp)
         }
     }
-    VerticalSpacer(12)
+    VerticalSpacer(12.dp)
 }
 
 @Composable
@@ -279,7 +279,7 @@ fun ProductDescriptionCardPreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
         }
     }

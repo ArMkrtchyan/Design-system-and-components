@@ -1,11 +1,14 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -63,8 +66,15 @@ fun PrimaryInput(
     errorText: String? = null,
     helpText: String? = null,
     label: String? = null,
+    durationMillis: Int = 0
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
+    val borderAlpha by animateFloatAsState(
+        targetValue = if (isFocused) 1f else 0f,
+        animationSpec = tween(durationMillis = durationMillis, easing = FastOutSlowInEasing)
+    )
+    val animatedFocusColor = DigitalTheme.colorScheme.borderPrimary.copy(alpha = borderAlpha)
+
     val newModifier = when {
         isError -> {
             Modifier
@@ -77,7 +87,7 @@ fun PrimaryInput(
 
         isFocused -> {
             Modifier
-                .border(1.dp, DigitalTheme.colorScheme.borderPrimary, ShapeTokens.shapePrimaryInput)
+                .border(1.dp, animatedFocusColor, ShapeTokens.shapePrimaryInput)
         }
 
         else -> {
@@ -166,7 +176,7 @@ fun PrimaryInputPreview(
                     textNormal.value = TextFieldValue("jcndskjcndk")
                 }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             PrimaryInput(
                 value = TextFieldValue("Some text"),
                 onValueChange = { textNormal.value = it },
@@ -176,7 +186,7 @@ fun PrimaryInputPreview(
                     textNormal.value = TextFieldValue("jcndskjcndk")
                 }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             SearchBar(hint = "Search...", modifier = modifier)
         }
     }

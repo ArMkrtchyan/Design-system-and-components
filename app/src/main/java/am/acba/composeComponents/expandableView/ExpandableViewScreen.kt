@@ -1,8 +1,8 @@
 ﻿package am.acba.composeComponents.expandableView
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.accordion.Accordion
@@ -68,7 +68,7 @@ fun ExpandableViewScreen(title: String = "") {
 private fun AccordionStateWithDivider() {
     val expanded = remember { mutableStateOf(true) }
     PrimaryDivider(text = "Accordions with icon, title, amount and currency")
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     Accordion(
         avatarIcon = R.drawable.ic_income,
         avatarIconColor = DigitalTheme.colorScheme.contentBrand,
@@ -87,7 +87,7 @@ private fun AccordionStateWithDivider() {
                     style = DigitalTheme.typography.smallRegular,
                     color = DigitalTheme.colorScheme.contentPrimaryTonal1
                 )
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 PrimaryText(
                     text = "15/05/2025",
                     style = DigitalTheme.typography.smallRegular,
@@ -95,7 +95,7 @@ private fun AccordionStateWithDivider() {
                     textAlign = TextAlign.End
                 )
             }
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
             PrimaryText(
                 text = "Վճարում (SAS 10)",
                 style = DigitalTheme.typography.smallRegular,
@@ -103,14 +103,14 @@ private fun AccordionStateWithDivider() {
             )
         }
     }
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable
 private fun AccordionOutComeStateWithDivider() {
     val expanded = remember { mutableStateOf(false) }
     PrimaryDivider(text = "Accordions with icon, title, amount and currency")
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     Accordion(
         avatarIcon = R.drawable.ic_outcome,
         avatarIconColor = DigitalTheme.colorScheme.contentDangerTonal1,
@@ -128,7 +128,7 @@ private fun AccordionOutComeStateWithDivider() {
                     style = DigitalTheme.typography.smallRegular,
                     color = DigitalTheme.colorScheme.contentPrimaryTonal1
                 )
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 PrimaryText(
                     text = "15/05/2025",
                     style = DigitalTheme.typography.smallRegular,
@@ -136,7 +136,7 @@ private fun AccordionOutComeStateWithDivider() {
                     textAlign = TextAlign.End
                 )
             }
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
             PrimaryText(
                 text = "Վճարում (SAS 10)",
                 style = DigitalTheme.typography.smallRegular,
@@ -144,14 +144,14 @@ private fun AccordionOutComeStateWithDivider() {
             )
         }
     }
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable
 private fun AccordionOutComeStateWithoutIconWithDivider() {
     val expanded = remember { mutableStateOf(false) }
     PrimaryDivider(text = "Accordions with title, amount and currency")
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     Accordion(
         title = "Փոխանցում հաշվին ",
         endText = "-5,200.00",
@@ -167,7 +167,7 @@ private fun AccordionOutComeStateWithoutIconWithDivider() {
                     style = DigitalTheme.typography.smallRegular,
                     color = DigitalTheme.colorScheme.contentPrimaryTonal1
                 )
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 PrimaryText(
                     text = "15/05/2025",
                     style = DigitalTheme.typography.smallRegular,
@@ -175,7 +175,7 @@ private fun AccordionOutComeStateWithoutIconWithDivider() {
                     textAlign = TextAlign.End
                 )
             }
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
             PrimaryText(
                 text = "Վճարում (SAS 10)",
                 style = DigitalTheme.typography.smallRegular,
@@ -183,14 +183,14 @@ private fun AccordionOutComeStateWithoutIconWithDivider() {
             )
         }
     }
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable
 private fun AccordionWithTitleStateWithDivider() {
     val expanded = remember { mutableStateOf(false) }
     PrimaryDivider(text = "Accordions with title")
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     Accordion(
         title = "Ինչպե՞ս բացել դասական ավանդ;",
         expanded = expanded.value,
@@ -202,14 +202,14 @@ private fun AccordionWithTitleStateWithDivider() {
             color = DigitalTheme.colorScheme.contentPrimaryTonal1
         )
     }
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable
 private fun AccordionWithTitleStateWithoutBackgroundWithDivider() {
     val expanded = remember { mutableStateOf(false) }
     PrimaryDivider(text = "Accordions with title and divider")
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     Accordion(
         title = "Ինչպե՞ս բացել դասական ավանդ;",
         expanded = expanded.value,
@@ -223,7 +223,7 @@ private fun AccordionWithTitleStateWithoutBackgroundWithDivider() {
             color = DigitalTheme.colorScheme.contentPrimaryTonal1
         )
     }
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable

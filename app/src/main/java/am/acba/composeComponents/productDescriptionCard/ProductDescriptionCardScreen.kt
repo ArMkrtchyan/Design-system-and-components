@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.productDescriptionCard
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.productDescription.MockState
 import am.acba.compose.components.productDescription.ProductDescriptionCard
@@ -47,21 +47,21 @@ fun ProductDescriptionCardScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(2))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(3))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(4))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(5))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(6))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(7))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(8))) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(9))) {}
             }
         }

@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.cardListing
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.cardListing.CardListItem
@@ -53,7 +53,7 @@ fun CardListingsScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider("Only text")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562 jh db dsbhdsh sdbdsc sdjsdb",
@@ -61,7 +61,7 @@ fun CardListingsScreen(title: String = "") {
                     endDescription = "400,000,000.00",
                     currency = "AMD",
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -71,9 +71,9 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("With icon")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -84,7 +84,7 @@ fun CardListingsScreen(title: String = "") {
                     avatarIconPadding = 6.dp,
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal2,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -97,9 +97,9 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("With media")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -111,7 +111,7 @@ fun CardListingsScreen(title: String = "") {
                     avatarImageCornerRadius = 4,
                     avatarContentScale = ContentScale.FillWidth,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -125,15 +125,15 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("One line")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
                     currency = "AMD",
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
@@ -141,9 +141,9 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("One line with icon/media")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
@@ -153,7 +153,7 @@ fun CardListingsScreen(title: String = "") {
                     avatarImageCornerRadius = 4,
                     avatarContentScale = ContentScale.FillWidth,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
@@ -165,16 +165,16 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("One line right action")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
                     currency = "AMD",
                     endIcon = am.acba.component.R.drawable.ic_down
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endDescription = "400,000,000.00",
@@ -183,9 +183,9 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("With status")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -198,7 +198,7 @@ fun CardListingsScreen(title: String = "") {
                     statusTitle = "Հօգուտ`Անի Փ, Աստղիկ, Համո, Աննա, Լաուրա, Թիմային",
                     statusIcon = am.acba.component.R.drawable.ic_user
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -213,9 +213,9 @@ fun CardListingsScreen(title: String = "") {
                     statusTitle = "Հօգուտ`Անի Փ, Աստղիկ, Համո, Աննա, Լաուրա, Թիմային",
                     statusIcon = am.acba.component.R.drawable.ic_user
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("With 3 texts")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endTitle = "հասանելի",
@@ -225,7 +225,7 @@ fun CardListingsScreen(title: String = "") {
                     avatarIconPadding = 6.dp,
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal2,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -235,7 +235,7 @@ fun CardListingsScreen(title: String = "") {
                     avatarIconPadding = 6.dp,
                     avatarBackgroundColor = DigitalTheme.colorScheme.backgroundTonal2,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     endTitle = "հասանելի",
@@ -247,7 +247,7 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 CardListItem(
                     startTitle = "Դրամային",
                     startDescription = "***3562",
@@ -259,9 +259,9 @@ fun CardListingsScreen(title: String = "") {
                     showBorder = true,
                     backgroundColor = Color.Transparent,
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider("With controllers")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val checkBoxState = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -275,7 +275,7 @@ fun CardListingsScreen(title: String = "") {
                         checkBoxState.value = it
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val switchState = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -289,7 +289,7 @@ fun CardListingsScreen(title: String = "") {
                         switchState.value = it
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val radioButtonState = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -303,7 +303,7 @@ fun CardListingsScreen(title: String = "") {
                         radioButtonState.value = !radioButtonState.value
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val checkBoxState2 = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -319,7 +319,7 @@ fun CardListingsScreen(title: String = "") {
                         checkBoxState2.value = it
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val switchState2 = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -335,7 +335,7 @@ fun CardListingsScreen(title: String = "") {
                         switchState2.value = it
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 val radioButtonState2 = remember { mutableStateOf(false) }
                 CardListItem(
                     startTitle = "Դրամային",
@@ -351,7 +351,7 @@ fun CardListingsScreen(title: String = "") {
                         radioButtonState2.value = !radioButtonState2.value
                     }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
             }
         }
     }

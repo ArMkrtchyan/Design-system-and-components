@@ -1,8 +1,8 @@
 package am.acba.compose.components.cardListing
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.StatusBadge
@@ -147,7 +147,7 @@ fun CardListItem(
                         imageCornerRadius = avatarImageCornerRadius,
                         contentScale = avatarContentScale,
                     )
-                    HorizontalSpacer(16)
+                    HorizontalSpacer(16.dp)
                 }
                 Column(
                     modifier = Modifier.weight(1f)
@@ -160,7 +160,7 @@ fun CardListItem(
                         maxLines = 1
                     )
                     if (startDescription.isNotEmpty()) {
-                        VerticalSpacer(2)
+                        VerticalSpacer(2.dp)
                         PrimaryText(
                             text = startDescription,
                             style = startDescriptionStyle,
@@ -170,7 +170,7 @@ fun CardListItem(
                         )
                     }
                 }
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 Column(
                     horizontalAlignment = Alignment.End
                 ) {
@@ -183,7 +183,7 @@ fun CardListItem(
                         )
                     }
                     if (endDescription.isNotEmpty()) {
-                        VerticalSpacer(2)
+                        VerticalSpacer(2.dp)
                         Row {
                             PrimaryText(
                                 text = endDescription,
@@ -192,7 +192,7 @@ fun CardListItem(
                                 maxLines = 1
                             )
                             if (!currency.isNullOrEmpty()) {
-                                HorizontalSpacer(2)
+                                HorizontalSpacer(2.dp)
                                 PrimaryText(
                                     text = currency,
                                     style = currencyStyle,
@@ -206,30 +206,30 @@ fun CardListItem(
                 when (controllerType) {
                     ControllerTypeEnum.NONE -> Unit
                     ControllerTypeEnum.CHECK_BOX -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimaryCheckbox(state = if (controllerSelected) ToggleableState.On else ToggleableState.Off, onClick = {
                             onCheckedChangeListener.invoke(it == ToggleableState.On)
                         })
                     }
 
                     ControllerTypeEnum.RADIO_BUTTON -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimaryRadioButton(selected = controllerSelected, onClick = onRadioButtonClick)
                     }
 
                     ControllerTypeEnum.SWITCH -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimarySwitch(checked = controllerSelected, onCheckedChange = {
                             onCheckedChangeListener.invoke(it)
                         })
                     }
                 }
                 endIcon?.let {
-                    HorizontalSpacer(8)
+                    HorizontalSpacer(8.dp)
                     PrimaryIcon(painter = painterResource(it), tint = endIconColor, modifier = Modifier.size(24.dp))
                 }
             }
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             if (!statusTitle.isNullOrEmpty()) {
                 StatusBadge(
                     title = statusTitle,

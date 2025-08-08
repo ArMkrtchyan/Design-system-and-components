@@ -2,7 +2,7 @@ package am.acba.compose.components.inputs
 
 import am.acba.component.R
 import am.acba.component.cardInput.PrimaryCardInput.CardSystemTypes
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.inputs.visualTransformations.CardFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.detectCardSystem
 import am.acba.compose.theme.DigitalTheme
@@ -127,7 +127,7 @@ fun CardInputPreview() {
                 trailingIcon = R.drawable.ic_scan,
                 trailingTint = DigitalTheme.colorScheme.contentPrimary,
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             CardInput(
                 value = TextFieldValue("9556236558963658"),
                 onValueChange = { textNormal.value = it },
@@ -136,7 +136,7 @@ fun CardInputPreview() {
                 enabled = false,
                 trailingTint = DigitalTheme.colorScheme.contentPrimary,
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             CardInput(
                 value = textNormal.value,
                 onValueChange = { textNormal.value = it },

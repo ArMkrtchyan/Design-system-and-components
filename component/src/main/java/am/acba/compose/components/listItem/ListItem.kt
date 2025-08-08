@@ -3,8 +3,8 @@
 package am.acba.compose.components.listItem
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
@@ -15,8 +15,8 @@ import am.acba.compose.components.controls.PrimaryCheckbox
 import am.acba.compose.components.controls.PrimaryRadioButton
 import am.acba.compose.components.controls.PrimarySwitch
 import am.acba.compose.components.divider.PrimaryDivider
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -175,7 +175,7 @@ fun ListItem(
                         badgeBorderColor = avatarBadgeBorderColor,
                     )
                 }
-                HorizontalSpacer(16)
+                HorizontalSpacer(16.dp)
             }
             Column(
                 modifier = Modifier.fillMaxWidth()
@@ -196,7 +196,7 @@ fun ListItem(
                         overflow = TextOverflow.Ellipsis
                     )
                     if (badgeType != BadgeEnum.NONE) {
-                        HorizontalSpacer(12)
+                        HorizontalSpacer(12.dp)
                         Badge(
                             badgeType = badgeType,
                             icon = badgeIcon,
@@ -210,7 +210,7 @@ fun ListItem(
                         )
                     }
                     if (endIcon != null) {
-                        HorizontalSpacer(12)
+                        HorizontalSpacer(12.dp)
                         Avatar(
                             avatarType = AvatarEnum.ICON,
                             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
@@ -224,7 +224,7 @@ fun ListItem(
                         )
                     }
                     if (endIconSecond != null) {
-                        HorizontalSpacer(12)
+                        HorizontalSpacer(12.dp)
                         Avatar(
                             avatarType = AvatarEnum.ICON,
                             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
@@ -327,7 +327,7 @@ fun ListItem(
                 }
             }
         }
-        VerticalSpacer(16)
+        VerticalSpacer(16.dp)
         if (showDivider) {
             PrimaryDivider()
         }

@@ -1,12 +1,11 @@
 ﻿package am.acba.compose.components.progressComponents
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.progressComponents.model.ProgressCaption
 import am.acba.compose.components.progressComponents.model.ProgressCaptionLine
 import am.acba.compose.components.progressComponents.model.ProgressIndicatorType
 import am.acba.compose.theme.DigitalTheme
-import am.acba.utils.extensions.safeLet
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -70,7 +69,7 @@ private fun Primary(
         defaultStyle = DigitalTheme.typography.body2Bold,
         defaultColor = DigitalTheme.colorScheme.contentPrimary
     )
-    VerticalSpacer(8)
+    VerticalSpacer(8.dp)
     LinearProgressIndicator(
         progress = { progress },
         modifier = Modifier
@@ -80,7 +79,7 @@ private fun Primary(
         trackColor = trackColor,
         drawStopIndicator = {}
     )
-    VerticalSpacer(4)
+    VerticalSpacer(4.dp)
     ProgressTextRow(
         progressCaptionLine = bottomCaptionLine,
         defaultStyle = DigitalTheme.typography.smallRegular,
@@ -105,7 +104,7 @@ private fun Secondary(
         trackColor = trackColor,
         drawStopIndicator = {}
     )
-    VerticalSpacer(4)
+    VerticalSpacer(4.dp)
     ProgressTextRow(
         progressCaptionLine = topCaptionLine,
         defaultStyle = DigitalTheme.typography.smallRegular,

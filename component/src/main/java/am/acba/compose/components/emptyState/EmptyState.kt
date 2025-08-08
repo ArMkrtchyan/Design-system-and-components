@@ -1,11 +1,11 @@
 ﻿package am.acba.compose.components.emptyState
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.SecondaryButtonGreen
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import android.view.Gravity
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -197,7 +197,7 @@ private fun SetEmptyStateMedia(
                     }
                 }
             }
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
         }
     }
 }
@@ -212,7 +212,7 @@ private fun SetEmptyStateText(text: String? = null, textColor: Color, style: Tex
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             PrimaryText(text = it, color = textColor, style = style, textAlign = TextAlign.Center, modifier = Modifier.id(textFieldId))
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
         }
     }
 }
@@ -239,7 +239,7 @@ private fun SetEmptyStateButton(
                 isSmall = true,
                 modifier = Modifier.id("emptyStateButton")
             )
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
         }
     }
 }

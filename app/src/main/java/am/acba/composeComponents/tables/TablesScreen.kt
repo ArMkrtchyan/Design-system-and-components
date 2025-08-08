@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.tables
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.listItem.ListItemStartAvatarSizeEnum
@@ -66,7 +66,7 @@ fun TablesScreen(title: String = "") {
                     ),
                     minimumVisibleItemsCount = 3
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 TableComponent(
                     title = "5G վարկ",
                     avatarIcon = R.drawable.ic_phonebook,
@@ -80,7 +80,7 @@ fun TablesScreen(title: String = "") {
                         Pair("Միջնորդավճար", "4,000.00 AMD")
                     )
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 TableComponent(
                     title = "5G վարկ",
                     avatarIcon = R.drawable.ic_phonebook,
@@ -88,7 +88,7 @@ fun TablesScreen(title: String = "") {
                         Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 TableComponent(
                     title = "5G վարկ",
                     avatarIcon = R.drawable.default_avatar,
@@ -99,14 +99,14 @@ fun TablesScreen(title: String = "") {
                         Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 TableComponent(
                     title = "5G վարկ",
                     tableItems = arrayListOf(
                         Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 TableComponent(
                     tableItems = arrayListOf(
                         Pair("Վարկային կոդ", "234567890"),

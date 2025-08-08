@@ -2,8 +2,8 @@ package am.acba.compose.components
 
 import am.acba.component.R
 import am.acba.component.extensions.getActivity
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api

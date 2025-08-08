@@ -1,6 +1,6 @@
 ﻿package am.acba.compose.components.divider
 
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.layout.Row
@@ -31,9 +31,9 @@ fun PrimaryDivider(
         HorizontalDivider(modifier = Modifier.weight(1f), color = dividerColor, thickness = thickness)
         text?.let {
             val modifiedText = if (modifyTextAllCaps) text.uppercase() else text
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             PrimaryText(modifiedText, style = style, color = textColor)
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             HorizontalDivider(modifier = Modifier.weight(1f), color = dividerColor, thickness = thickness)
         }
     }
