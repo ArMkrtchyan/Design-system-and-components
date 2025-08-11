@@ -180,7 +180,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY - height - 12.dpToPx())
+            Pair(x, viewY - view.height - 12.dpToPx())
         } else {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
