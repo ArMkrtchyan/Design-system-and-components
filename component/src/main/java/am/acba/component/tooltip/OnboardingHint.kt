@@ -108,9 +108,9 @@ class OnboardingHint(
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
-                var height = binding.infoContainer.height + 16.dpToPx()
+                var height = binding.infoContainer.height + 32.dpToPx()
                 if (contentAndViews.first().first.imageUrl.isNotEmpty() || contentAndViews.first().first.localImage != null || contentAndViews.first().first.lottieAnimationName.isNotEmpty()) {
-                    height += 84.dpToPx()
+                    height += 78.dpToPx()
                 }
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
                 binding.infoContainer.x = coordinates.first
