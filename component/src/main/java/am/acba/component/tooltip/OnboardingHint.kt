@@ -108,7 +108,7 @@ class OnboardingHint(
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
-                var height = binding.infoContainer.height + 24.dpToPx()
+                var height = binding.infoContainer.height + 16
                 if (contentAndViews.first().first.imageUrl.isNotEmpty() || contentAndViews.first().first.localImage != null || contentAndViews.first().first.lottieAnimationName.isNotEmpty()) {
                     height += 100.dpToPx()
                 }
