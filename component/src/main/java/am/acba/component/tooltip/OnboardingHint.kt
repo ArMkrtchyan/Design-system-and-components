@@ -113,8 +113,19 @@ class OnboardingHint(
                     height += 100.dpToPx()
                 }
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
-                binding.infoContainer.x = coordinates.first
-                binding.infoContainer.y = coordinates.second
+                binding.infoContainer.animate()
+                    .y(coordinates.second)
+                    .setInterpolator(LinearInterpolator())
+                    .setDuration(300)
+                    .start()
+                binding.infoContainer.animate()
+                    .x(coordinates.first)
+                    .setInterpolator(LinearInterpolator())
+                    .setDuration(300)
+                    .withStartAction {
+                        binding.clipView.clipForView(view)
+                    }
+                    .start()
                 binding.tooltip.setForwardVisibility(contentAndViews.size > 1)
                 binding.tooltip.setSkipVisibility(contentAndViews.size == 1)
                 binding.tooltip.setTooltip(contentAndViews[0].first)
@@ -180,7 +191,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY - view.height - 12.dpToPx())
+            Pair(x, viewY - height - 12.dpToPx())
         } else {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
