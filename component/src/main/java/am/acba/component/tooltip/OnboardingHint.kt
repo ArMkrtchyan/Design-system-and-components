@@ -108,24 +108,13 @@ class OnboardingHint(
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
-                var height = binding.infoContainer.height
+                var height = binding.infoContainer.height + 16.dpToPx()
                 if (contentAndViews.first().first.imageUrl.isNotEmpty() || contentAndViews.first().first.localImage != null || contentAndViews.first().first.lottieAnimationName.isNotEmpty()) {
-                    height += 100.dpToPx()
+                    height += 84.dpToPx()
                 }
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
-                binding.infoContainer.animate()
-                    .y(coordinates.second)
-                    .setInterpolator(LinearInterpolator())
-                    .setDuration(300)
-                    .start()
-                binding.infoContainer.animate()
-                    .x(coordinates.first)
-                    .setInterpolator(LinearInterpolator())
-                    .setDuration(300)
-                    .withStartAction {
-                        binding.clipView.clipForView(view)
-                    }
-                    .start()
+                binding.infoContainer.x = coordinates.first
+                binding.infoContainer.y = coordinates.second
                 binding.tooltip.setForwardVisibility(contentAndViews.size > 1)
                 binding.tooltip.setSkipVisibility(contentAndViews.size == 1)
                 binding.tooltip.setTooltip(contentAndViews[0].first)
