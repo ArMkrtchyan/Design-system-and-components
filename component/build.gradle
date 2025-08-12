@@ -49,6 +49,7 @@ dependencies {
     implementation libs.glide.compose
     /*implementation libs.pageIndicatorView*/
     implementation libs.countries
+    implementation libs.newCountries
     implementation libs.live.event
     implementation libs.gson
     implementation libs.shimmer

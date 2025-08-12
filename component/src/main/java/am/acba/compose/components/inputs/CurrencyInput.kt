@@ -150,7 +150,7 @@ private fun RowScope.AmountTextField(
         enabled = enabled,
         readOnly = readOnly,
         placeholder = placeholder?.let { { Label(text = placeholder) } },
-        shape = ShapeTokens.shapeCurrencyInput,
+        shape = ShapeTokens.inputShapeLeftSide,
         textStyle = DigitalTheme.typography.body1Regular,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
@@ -192,7 +192,7 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
         modifier = modifier
             .wrapContentWidth()
             .height(58.dp)
-            .background(shape = ShapeTokens.shapeCurrency, color = currencyBackgroundColor)
+            .background(shape = ShapeTokens.inputShapeRightSide, color = currencyBackgroundColor)
             .padding(horizontal = 12.dp)
             .clickable(enabled = showArrow && enabled) {
                 onCurrencyClick?.invoke()
@@ -225,7 +225,7 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
 private fun errorBorderForAmountInput() = Modifier.border(
     1.dp,
     DigitalTheme.colorScheme.contentDangerTonal1,
-    ShapeTokens.shapeCurrencyInput
+    ShapeTokens.inputShapeLeftSide
 )
 
 @SuppressLint("ModifierFactoryExtensionFunction")
@@ -234,7 +234,7 @@ private fun errorBorderForCurrency() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.contentDangerTonal1,
-        ShapeTokens.shapeCurrency
+        ShapeTokens.inputShapeRightSide
     )
 
 
@@ -244,7 +244,7 @@ private fun focusedBorderForAmountInput() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.borderPrimary,
-        ShapeTokens.shapeCurrencyInput
+        ShapeTokens.inputShapeLeftSide
     )
 
 
@@ -254,7 +254,7 @@ private fun focusedBorderForCurrency() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.borderPrimary,
-        ShapeTokens.shapeCurrency
+        ShapeTokens.inputShapeRightSide
     )
 
 
