@@ -18,8 +18,6 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.TextField
@@ -55,12 +53,11 @@ fun DropDownScreen(title: String = "") {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState()),
+                    .padding(horizontal = 16.dp),
             ) {
                 DropDownWithSpacer(
                     value = TextFieldValue("Drop Down Value"),
-                    dropDownModifier = Modifier.fillMaxSize(),
+                    dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
                     helpText = "Help text",
                     contentProperties = ContentProperties(title = "Bottom Sheet 1"),
@@ -72,7 +69,7 @@ fun DropDownScreen(title: String = "") {
 
                 DropDownWithSpacer(
                     value = text,
-                    dropDownModifier = Modifier.fillMaxSize(),
+                    dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
                     contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = false),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
@@ -104,7 +101,7 @@ fun DropDownScreen(title: String = "") {
 
                 DropDownWithSpacer(
                     value = TextFieldValue("Drop Down Value"),
-                    dropDownModifier = Modifier.fillMaxSize(),
+                    dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
                     isError = true,
                     errorText = "Some error",
@@ -115,7 +112,7 @@ fun DropDownScreen(title: String = "") {
 
                 DropDownWithSpacer(
                     value = TextFieldValue("Drop Down Value"),
-                    dropDownModifier = Modifier.fillMaxSize(),
+                    dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
                     enabled = false,
                     contentProperties = ContentProperties(title = "Bottom Sheet", calculatePercentForOpenFullScreen = false),

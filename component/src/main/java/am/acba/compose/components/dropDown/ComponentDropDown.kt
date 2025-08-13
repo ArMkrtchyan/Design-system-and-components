@@ -3,6 +3,7 @@
 package am.acba.compose.components.dropDown
 
 import am.acba.component.R
+import am.acba.compose.common.TransparentButton
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.dropDown.model.ContentProperties
@@ -15,7 +16,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -46,7 +46,7 @@ fun ComponentDropDown(
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
-    val showBottomSheet: MutableState<Boolean> = remember { mutableStateOf(false) }
+    val showBottomSheet = remember { mutableStateOf(false) }
 
     LaunchedEffect(showBottomSheet.value) {
         if (showBottomSheet.value) {
@@ -56,7 +56,7 @@ fun ComponentDropDown(
         }
     }
 
-    Box {
+    Box(modifier = Modifier.fillMaxWidth()) {
         PrimaryInput(
             value = value,
             modifier = Modifier
@@ -79,29 +79,38 @@ fun ComponentDropDown(
             leadingIconTint = leadingIconTint,
             trailingIcon = if (showBottomSheet.value) R.drawable.ic_up else R.drawable.ic_down,
             onTrailingIconClick = { showBottomSheet.value = true },
-            singleLine = true,
+            singleLine = singleLine,
             maxLines = maxLines,
             durationMillis = 350
         )
+
+        TransparentButton(
+            enabled = enabled,
+            modifier = Modifier.matchParentSize()
+        ) {
+            showBottomSheet.value = true
+        }
     }
-    PrimaryBottomSheet(
-        title = contentProperties.title,
-        dismiss = {
-            showBottomSheet.value = false
-        },
-        properties = contentProperties.modalBottomSheetProperties,
-        contentHorizontalPadding = contentProperties.horizontalPadding,
-        contentBottomPadding = contentProperties.bottomPadding,
-        calculatePercentForOpenFullScreen = contentProperties.calculatePercentForOpenFullScreen,
-        content = { sheetState, coroutineScope ->
-            content(sheetState, coroutineScope) {
-                closeBottomSheet(state = sheetState, scope = coroutineScope) {
-                    showBottomSheet.value = false
+
+    if (showBottomSheet.value) {
+        androidx.compose.ui.window.Popup {
+            PrimaryBottomSheet(
+                title = contentProperties.title,
+                dismiss = { showBottomSheet.value = false },
+                properties = contentProperties.modalBottomSheetProperties,
+                contentHorizontalPadding = contentProperties.horizontalPadding,
+                contentBottomPadding = contentProperties.bottomPadding,
+                calculatePercentForOpenFullScreen = contentProperties.calculatePercentForOpenFullScreen,
+                bottomSheetVisible = showBottomSheet.value
+            ) { sheetState, coroutineScope ->
+                content(sheetState, coroutineScope) {
+                    closeBottomSheet(state = sheetState, scope = coroutineScope) {
+                        showBottomSheet.value = false
+                    }
                 }
             }
-        },
-        bottomSheetVisible = showBottomSheet.value,
-    )
+        }
+    }
 }
 
 @Composable
