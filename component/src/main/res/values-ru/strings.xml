@@ -4,7 +4,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Отменить</string>
     <string name="all">Все</string>
-    <string name="search">Search</string>
+    <string name="search">Поиск...</string>
 
     <!--Phone Input-->
 
@@ -154,7 +154,7 @@
     <string name="name_mali">Мали</string>
     <string name="name_malta">Мальта</string>
     <string name="name_marshall_islands">Маршалловы Острова</string>
-    <string name="name_martinique">Մարտինիկա</string>
+    <string name="name_martinique">Мартиника</string>
     <string name="name_mauritania">Мавритания</string>
     <string name="name_mauritius">Маврикий</string>
     <string name="name_mayotte">Майотта</string>

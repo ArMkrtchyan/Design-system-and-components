@@ -102,7 +102,7 @@ fun ListItem(
     avatarBadgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     avatarBadgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     avatarBadgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
-
+    contentHorizontalPadding: Dp = 16.dp,
     badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
@@ -127,13 +127,13 @@ fun ListItem(
             modifier
                 .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
                 .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = contentHorizontalPadding)
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
         } else {
             modifier
                 .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = contentHorizontalPadding)
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
         }

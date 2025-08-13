@@ -3,7 +3,11 @@
 package am.acba.compose.components.inputs.phoneInput
 
 import am.acba.component.R
+import am.acba.component.extensions.getLastCountryActionsEnum
+import am.acba.component.extensions.saveCountryLastAction
+import am.acba.component.input.SearchInput
 import am.acba.compose.HorizontalSpacer
+import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.Avatar
@@ -11,7 +15,10 @@ import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
+import am.acba.compose.components.chips.PrimaryChip
 import am.acba.compose.components.inputs.Label
+import am.acba.compose.components.inputs.PrimaryInput
+import am.acba.compose.components.inputs.SearchBar
 import am.acba.compose.components.inputs.SupportAndErrorTexts
 import am.acba.compose.components.inputs.createStateColors
 import am.acba.compose.components.listItem.ListItem
@@ -27,6 +34,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -68,6 +76,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.google.i18n.phonenumbers.NumberParseException
@@ -168,7 +178,7 @@ fun PhoneNumberInput(
             }
             SupportAndErrorTexts(isError, true, errorText, helpText)
         }
-        CountriesBottomSheet(bottomSheetVisible, onCountrySelected = { newCountry ->
+        CountriesBottomSheet(context, bottomSheetVisible, onCountrySelected = { newCountry ->
             selectedCountry = newCountry
         })
     }
@@ -306,19 +316,60 @@ private fun focusedBorderForRegionCode() =
         ShapeTokens.inputShapeLeftSide
     )
 
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 private fun CountriesBottomSheet(
+    context: Context,
     bottomSheetVisible: MutableState<Boolean>,
     onCountrySelected: (CountryEnum) -> Unit
 ) {
+    var dBActionsList by remember { mutableStateOf(context.getLastCountryActionsEnum()) }
+
     val countries = CountryEnum.entries.toList()
-    PrimaryBottomSheet(bottomSheetVisible = bottomSheetVisible.value, dismiss = {
-        bottomSheetVisible.value = false
-    }) { state: SheetState, coroutineScope: CoroutineScope ->
-        Column(modifier = Modifier.fillMaxSize()) {
+    PrimaryBottomSheet(
+        title = stringResource(R.string.select_country_code),
+        contentHorizontalPadding = 0.dp,
+        bottomSheetVisible = bottomSheetVisible.value,
+        dismiss = {
+            bottomSheetVisible.value = false
+        }) { state: SheetState, coroutineScope: CoroutineScope ->
+        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+            VerticalSpacer(24)
+            SearchBar(hint = stringResource(R.string.search))
+            VerticalSpacer(32)
+            PrimaryText(
+                text = stringResource(R.string.phone_number_most_searched).toUpperCase(Locale.current),
+                style = DigitalTheme.typography.smallRegular,
+                color = DigitalTheme.colorScheme.contentPrimaryTonal1
+            )
+            VerticalSpacer(10)
+            FlowRow(
+                itemVerticalAlignment = Alignment.CenterVertically
+            ) {
+                dBActionsList.forEach { country ->
+                    PrimaryChip(
+                        modifier = Modifier.padding(top = 10.dp, end = 10.dp),
+                        title = stringResource(country.titleResId), imageUrl = country.flagUrl, clipPercent = 50
+                    ) {
+                        closeBottomSheet(state = state, scope = coroutineScope) {
+                            bottomSheetVisible.value = false
+                        }
+                        onCountrySelected(country)
+                        dBActionsList = context.saveCountryLastAction(country)
+                    }
+                }
+            }
+            VerticalSpacer(32)
+            PrimaryText(
+                text = stringResource(R.string.all).toUpperCase(Locale.current),
+                style = DigitalTheme.typography.smallRegular,
+                color = DigitalTheme.colorScheme.contentPrimaryTonal1
+            )
+            VerticalSpacer(20)
             LazyColumn {
                 itemsIndexed(countries) { index, item ->
                     ListItem(
+                        contentHorizontalPadding = 0.dp,
                         title = "${stringResource(item.titleResId)} (${item.dialCode})",
                         titleStyle = DigitalTheme.typography.body1Regular,
                         backgroundColor = Color.Transparent,
@@ -327,10 +378,11 @@ private fun CountriesBottomSheet(
                         avatarClipPercent = 50,
                         showDivider = true,
                         onClick = {
-                            onCountrySelected(item)
                             closeBottomSheet(state = state, scope = coroutineScope) {
                                 bottomSheetVisible.value = false
                             }
+                            onCountrySelected(item)
+                            dBActionsList = context.saveCountryLastAction(item)
                         }
                     )
                 }

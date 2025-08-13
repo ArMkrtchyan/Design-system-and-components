@@ -15,6 +15,7 @@ glideVersion = "4.15.1"
 glidComposeVersion = "1.0.0-beta01"
 countriesVersion = "2.7.0"
 newCountriesVersion = "8.13.39"
+flowlayout = "0.36.0"
 navigationFragmentKtx = "2.8.0"
 navigationUiKtx = "2.8.0"
 lottieVersion = "5.2.0"
@@ -47,6 +48,7 @@ lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottieV
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottieComposeVersion" }
 countries = { group = "com.hbb20", name = "ccp", version.ref = "countriesVersion" }
 newCountries = { group = "com.googlecode.libphonenumber", name = "libphonenumber", version.ref = "newCountriesVersion" }
+flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "flowlayout" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmerVersion" }
 live-event = { group = "com.github.hadilq", name = "live-event", version.ref = "liveEventVersion" }

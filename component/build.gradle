@@ -50,6 +50,7 @@ dependencies {
     /*implementation libs.pageIndicatorView*/
     implementation libs.countries
     implementation libs.newCountries
+    implementation libs.flowlayout
     implementation libs.live.event
     implementation libs.gson
     implementation libs.shimmer
