@@ -71,7 +71,7 @@ fun DropDownScreen(title: String = "") {
                     value = text,
                     dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
-                    contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = false),
+                    contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = true),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
                         val list = listOf(
                             "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg" to "Հերթական մարում",

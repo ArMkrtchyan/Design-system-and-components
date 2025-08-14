@@ -42,7 +42,7 @@ fun ComponentDropDown(
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
-    content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit,
+    content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
@@ -101,7 +101,7 @@ fun ComponentDropDown(
                 contentHorizontalPadding = contentProperties.horizontalPadding,
                 contentBottomPadding = contentProperties.bottomPadding,
                 calculatePercentForOpenFullScreen = contentProperties.calculatePercentForOpenFullScreen,
-                bottomSheetVisible = showBottomSheet.value
+                bottomSheetVisible = showBottomSheet.value,
             ) { sheetState, coroutineScope ->
                 content(sheetState, coroutineScope) {
                     closeBottomSheet(state = sheetState, scope = coroutineScope) {
