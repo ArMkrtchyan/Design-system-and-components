@@ -71,13 +71,23 @@ fun DropDownScreen(title: String = "") {
                     value = text,
                     dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
-                    contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = false),
+                    contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = true),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
                         val list = listOf(
                             "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg" to "Հերթական մարում",
                             "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Partial.svg" to "Մասնակի մարում",
                             "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Total.svg" to "Ամբողջական մարում",
                             "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ1",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ2",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ3",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ4",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ5",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ6",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներև",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներր",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներչ",
+                            "https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Other.svg" to "Այլ վճարումներ6ճ",
                         )
                         LazyColumn {
                             items(list) {
