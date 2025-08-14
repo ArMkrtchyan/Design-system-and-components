@@ -16,13 +16,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -32,7 +32,6 @@ import androidx.compose.material3.ModalBottomSheetDefaults
 import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.SheetValue
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
@@ -71,10 +71,11 @@ fun PrimaryBottomSheet(
     val openFullScreen = remember { mutableStateOf(false) }
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
-    val fullScreenHeight = screenHeight - TopAppBarDefaults.windowInsets
-        .only(WindowInsetsSides.Bottom)
-        .asPaddingValues()
-        .calculateBottomPadding()
+    val density = LocalDensity.current
+    val topInset = WindowInsets.statusBars.getTop(density).dp
+    val bottomInset = WindowInsets.navigationBars.getBottom(density).dp
+
+    val fullScreenHeight = screenHeight - topInset - bottomInset
 
     if (bottomSheetVisible) {
         Box(
@@ -114,8 +115,10 @@ fun PrimaryBottomSheet(
                         val contentHeightDouble = it.size.height * 1.0
                         val displayHeightDouble = screenHeight.value.dpToPx() * 1.0
                         val dimensionInPercent =
-                            contentHeightDouble.log("HeightTag", "contentHeightDouble -> ").div(displayHeightDouble.log("HeightTag", "displayHeightDouble -> ")) * 100.0
-                        openFullScreen.value = if (calculatePercentForOpenFullScreen) dimensionInPercent.log("HeightTag", "dimensionInPercent -> ") > 70 else false
+                            contentHeightDouble.log("HeightTag", "contentHeightDouble -> ")
+                                .div(displayHeightDouble.log("HeightTag", "displayHeightDouble -> ")) * 100.0
+                        openFullScreen.value =
+                            if (calculatePercentForOpenFullScreen) dimensionInPercent.log("HeightTag", "dimensionInPercent -> ") > 70 else false
                     }
                 ) {
                     if (title.isNotEmpty() || icon != null) {
