@@ -103,15 +103,13 @@ class OnboardingHint(
     }
 
     private fun setTargetViews() {
+        binding.tooltip.setTooltip(contentAndViews[currentPosition].first)
         val globalListener = object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
                 var height = binding.infoContainer.height
-                if (contentAndViews.first().first.imageUrl.isNotEmpty() || contentAndViews.first().first.localImage != null || contentAndViews.first().first.lottieAnimationName.isNotEmpty()) {
-                    height += 100.dpToPx()
-                }
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
                 binding.infoContainer.x = coordinates.first
                 binding.infoContainer.y = coordinates.second
