@@ -187,7 +187,7 @@ fun PrimaryInputPreview(
                 }
             )
             VerticalSpacer(16.dp)
-            SearchBar(hint = "Search...", modifier = modifier)
+            SearchBar(hint = "Search...", searchBarModifier = modifier)
         }
     }
 }

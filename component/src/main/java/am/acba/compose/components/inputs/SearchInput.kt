@@ -41,7 +41,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SearchBar(
     hint: String = stringResource(R.string.search),
-    modifier: Modifier = Modifier,
+    searchBarModifier: Modifier = Modifier,
+    iconModifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     height: Dp = 40.dp,
     cornerShape: Shape = ShapeTokens.shapePrimaryInput,
@@ -51,13 +52,12 @@ fun SearchBar(
     onComponentClick: (() -> Unit)? = null,
 ) {
     onComponentClick?.let {
-        modifier.clickable {
-
+        searchBarModifier.clickable {
         }
     }
     var text by remember { mutableStateOf(TextFieldValue()) }
     Row(
-        modifier = Modifier
+        modifier = searchBarModifier
             .height(height)
             .fillMaxWidth()
             .background(color = backgroundColor, shape = cornerShape),
@@ -124,7 +124,7 @@ fun SearchBar(
         ) {
             if (text.text.isNotEmpty()) {
                 Icon(
-                    modifier = modifier
+                    modifier = iconModifier
                         .fillMaxSize()
                         .padding(8.dp),
                     painter = painterResource(id = R.drawable.ic_close),
