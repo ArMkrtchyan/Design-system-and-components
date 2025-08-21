@@ -21,6 +21,7 @@ import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.inputs.SearchBar
 import am.acba.compose.components.inputs.SupportAndErrorTexts
 import am.acba.compose.components.inputs.createStateColors
+import am.acba.compose.components.inputs.visualTransformations.PhoneNumberVisualTransformation
 import am.acba.compose.components.listItem.ListItem
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
@@ -165,6 +166,8 @@ fun PhoneNumberInput(
                 PhoneTextField(
                     modifier = inputModifier,
                     value = value,
+                    isoCode = selectedCountry.iso,
+                    dialCode = selectedCountry.dialCode,
                     onValueChange = onValueChange,
                     onPickContactClick = onPickContactClick,
                     onFocusChanged = { isFocused = it.isFocused },
@@ -233,6 +236,8 @@ fun RowScope.PhoneTextField(
     value: TextFieldValue,
     label: String? = null,
     placeholder: String?,
+    isoCode: String,
+    dialCode: String,
     onValueChange: (TextFieldValue) -> Unit,
     onPickContactClick: (() -> Unit)?,
     onFocusChanged: (FocusState) -> Unit,
@@ -243,13 +248,16 @@ fun RowScope.PhoneTextField(
     focusRequester: FocusRequester = remember { FocusRequester() }
 ) {
     val pattern = Regex("^\\d*$")
+    val visualTransformation = PhoneNumberVisualTransformation(isoCode, dialCode) { isValid ->
 
+    }
     TextField(
         value = value,
         onValueChange = {
             if (checkInputValidation(value, maxLength, pattern, it))
                 onValueChange(it)
         },
+        visualTransformation = visualTransformation,
         placeholder = placeholder?.let { { Text(text = it) } },
         shape = ShapeTokens.inputShapeRightSide,
         modifier = modifier
@@ -333,7 +341,11 @@ private fun CountriesBottomSheet(
         dismiss = {
             bottomSheetVisible.value = false
         }) { state: SheetState, coroutineScope: CoroutineScope ->
-        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+        ) {
             VerticalSpacer(24)
             SearchBar(hint = stringResource(R.string.search))
             VerticalSpacer(32)
