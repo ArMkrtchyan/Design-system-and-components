@@ -88,7 +88,8 @@ private fun BadgeIcon(
                 modifier = iconModifier
                     .width(12.dp)
                     .height(12.dp)
-                    .padding(2.dp),
+                    .padding(2.dp)
+                    .align(Alignment.Center),
             )
         } else {
             imageUrl?.takeIf { it.isNotEmpty() }?.let {
@@ -132,31 +133,31 @@ private fun BadgeTextAndIcon(
         modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
             .padding(horizontal = 8.dp, vertical = 2.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            icon?.let {
-                if (icon > 0) {
-                    PrimaryIcon(
-                        painter = painterResource(icon),
-                        tint = textColor,
-                        modifier = Modifier
-                            .width(16.dp)
-                            .height(16.dp),
-                    )
-                    HorizontalSpacer(4.dp)
-                }
-            } ?: run {
-                imageUrl?.takeIf { it.isNotEmpty() }?.let {
-                    Box(
-                        modifier = Modifier
-                            .width(12.dp)
-                            .height(12.dp)
-                    ) {
-                        AvatarImage(modifier = Modifier, imageUrl = it, iconColor = textColor)
-                    }
-                    HorizontalSpacer(4.dp)
-                }
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        icon?.let {
+            if (icon > 0) {
+                PrimaryIcon(
+                    painter = painterResource(icon),
+                    tint = textColor,
+                    modifier = Modifier
+                        .width(16.dp)
+                        .height(16.dp),
+                )
+                HorizontalSpacer(4.dp)
             }
+        } ?: run {
+            imageUrl?.takeIf { it.isNotEmpty() }?.let {
+                Box(
+                    modifier = Modifier
+                        .width(12.dp)
+                        .height(12.dp)
+                ) {
+                    AvatarImage(modifier = Modifier, imageUrl = it, iconColor = textColor)
+                }
+                HorizontalSpacer(4.dp)
+            }
+        }
 
         BadgeText(Modifier, text ?: "", textColor)
     }
