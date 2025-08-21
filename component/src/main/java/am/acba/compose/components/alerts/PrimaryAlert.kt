@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun PrimaryAlert(
-    title: String,
-    description: String,
+    title: String? = null,
+    description: String? = null,
     alertType: ComposeAlertTypes = ComposeAlertTypes.INFO,
     iconPainter: Painter? = null,
     endIconPainter: Painter? = null,
@@ -114,24 +114,29 @@ fun PrimaryAlert(
                         .weight(1f)
                         .padding(horizontal = 8.dp)
                 ) {
-                    PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3)
-                    VerticalSpacer(4.dp)
-                    PrimaryText(text = description, style = DigitalTheme.typography.smallRegular)
+                    title?.takeIf { it.isNotEmpty() }?.let {
+                        PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3)
+                        VerticalSpacer(4.dp)
+                    }
+                    description?.takeIf { it.isNotEmpty() }?.let {
+                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular)
+                    }
                     if (!linkText.isNullOrEmpty()) {
                         VerticalSpacer(4.dp)
                         val color = DigitalTheme.colorScheme.contentPrimary
-                        PrimaryText(modifier = Modifier
-                            .drawBehind {
-                                val strokeWidthPx = 1.dp.toPx()
-                                val verticalOffset = size.height - 2.sp.toPx()
-                                drawLine(
-                                    color = color,
-                                    strokeWidth = strokeWidthPx,
-                                    start = Offset(0f, verticalOffset),
-                                    end = Offset(size.width, verticalOffset)
-                                )
-                            }
-                            .clickable { onLinkClick.invoke() }, text = linkText, style = DigitalTheme.typography.smallBold, textDecoration = TextDecoration.Underline
+                        PrimaryText(
+                            modifier = Modifier
+                                .drawBehind {
+                                    val strokeWidthPx = 1.dp.toPx()
+                                    val verticalOffset = size.height - 2.sp.toPx()
+                                    drawLine(
+                                        color = color,
+                                        strokeWidth = strokeWidthPx,
+                                        start = Offset(0f, verticalOffset),
+                                        end = Offset(size.width, verticalOffset)
+                                    )
+                                }
+                                .clickable { onLinkClick.invoke() }, text = linkText, style = DigitalTheme.typography.smallBold, textDecoration = TextDecoration.Underline
                         )
                     }
                 }
@@ -142,13 +147,14 @@ fun PrimaryAlert(
 
         }
         endIconPainter?.let {
-            Box(modifier = Modifier
-                .align(Alignment.TopEnd)
-                .size(40.dp)
-                .padding(top = 8.dp, end = 8.dp)
-                .clickable {
-                    onCloseClick.invoke()
-                }) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .size(40.dp)
+                    .padding(top = 8.dp, end = 8.dp)
+                    .clickable {
+                        onCloseClick.invoke()
+                    }) {
             }
         }
     }

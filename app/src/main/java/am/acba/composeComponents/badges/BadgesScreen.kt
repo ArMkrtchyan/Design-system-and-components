@@ -184,6 +184,9 @@ private fun IconOtherSizes() {
         Badge(
             badgeType = BadgeEnum.ICON,
             icon = R.drawable.ic_camera,
+            iconModifier = Modifier
+                .fillMaxSize()
+                .padding(2.dp),
             modifier = Modifier
                 .width(32.dp)
                 .height(32.dp)
