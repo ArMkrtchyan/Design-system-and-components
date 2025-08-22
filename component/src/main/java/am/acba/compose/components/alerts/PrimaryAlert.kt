@@ -46,9 +46,9 @@ fun PrimaryAlert(
     onCloseClick: () -> Unit = {},
 ) {
     var startIconPainter = painterResource(R.drawable.ic_info)
-    var startIconTint = DigitalTheme.colorScheme.contentInfoTonal1
-    var backgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1
-    var borderColor = DigitalTheme.colorScheme.borderInfoTonal1
+    var startIconTint: Color
+    var backgroundColor: Color
+    var borderColor: Color
     when (alertType) {
         ComposeAlertTypes.INFO -> {
             startIconPainter = painterResource(R.drawable.ic_info)
@@ -85,28 +85,24 @@ fun PrimaryAlert(
             borderColor = DigitalTheme.colorScheme.borderPrimary
         }
     }
-    val modifier = if (isRounded) {
-        modifier
-            .fillMaxWidth()
+    val roundModifier = if (isRounded) {
+        Modifier
             .clip(ShapeTokens.shapePrimaryButton)
-            .background(backgroundColor)
             .border(1.dp, borderColor, ShapeTokens.shapePrimaryButton)
-            .padding(16.dp)
-            .clickable {
-                onClick.invoke()
-            }
     } else {
-        modifier
-            .fillMaxWidth()
-            .background(backgroundColor)
-            .padding(16.dp)
-            .clickable {
-                onClick.invoke()
-            }
+        Modifier
     }
     Box {
         Box(
-            modifier = modifier
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(roundModifier)
+                .background(backgroundColor)
+                .padding(16.dp)
+                .clickable {
+                    onClick.invoke()
+                }
+                .then(modifier)
         ) {
             Row {
                 PrimaryIcon(painter = startIconPainter, tint = startIconTint, modifier = Modifier.id("alertStartIcon"))
