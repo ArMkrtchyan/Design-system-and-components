@@ -6,6 +6,7 @@ import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.alerts.ComposeAlertTypes
 import am.acba.compose.components.alerts.PrimaryAlert
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -56,6 +57,7 @@ fun AlertsScreen(title: String = "") {
                 )
                 VerticalSpacer(16.dp)
                 PrimaryAlert(
+                    modifier = Modifier.id("alertId"),
                     endIconPainter = painterResource(R.drawable.ic_close),
                     title = "Title",
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",

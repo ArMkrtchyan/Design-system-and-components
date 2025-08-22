@@ -6,6 +6,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun PrimaryAlert(
+    modifier: Modifier = Modifier,
     title: String? = null,
     description: String? = null,
     alertType: ComposeAlertTypes = ComposeAlertTypes.INFO,
@@ -44,9 +46,9 @@ fun PrimaryAlert(
     onCloseClick: () -> Unit = {},
 ) {
     var startIconPainter = painterResource(R.drawable.ic_info)
-    var startIconTint = DigitalTheme.colorScheme.contentInfoTonal1
-    var backgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1
-    var borderColor = DigitalTheme.colorScheme.borderInfoTonal1
+    var startIconTint: Color
+    var backgroundColor: Color
+    var borderColor: Color
     when (alertType) {
         ComposeAlertTypes.INFO -> {
             startIconPainter = painterResource(R.drawable.ic_info)
@@ -83,31 +85,27 @@ fun PrimaryAlert(
             borderColor = DigitalTheme.colorScheme.borderPrimary
         }
     }
-    val modifier = if (isRounded) {
+    val roundModifier = if (isRounded) {
         Modifier
-            .fillMaxWidth()
             .clip(ShapeTokens.shapePrimaryButton)
-            .background(backgroundColor)
             .border(1.dp, borderColor, ShapeTokens.shapePrimaryButton)
-            .padding(16.dp)
-            .clickable {
-                onClick.invoke()
-            }
     } else {
         Modifier
-            .fillMaxWidth()
-            .background(backgroundColor)
-            .padding(16.dp)
-            .clickable {
-                onClick.invoke()
-            }
     }
     Box {
         Box(
-            modifier = modifier
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(roundModifier)
+                .background(backgroundColor)
+                .padding(16.dp)
+                .clickable {
+                    onClick.invoke()
+                }
+                .then(modifier)
         ) {
             Row {
-                PrimaryIcon(painter = startIconPainter, tint = startIconTint)
+                PrimaryIcon(painter = startIconPainter, tint = startIconTint, modifier = Modifier.id("alertStartIcon"))
                 Column(
                     Modifier
                         .fillMaxWidth()
@@ -115,17 +113,18 @@ fun PrimaryAlert(
                         .padding(horizontal = 8.dp)
                 ) {
                     title?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3)
+                        PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3, modifier = Modifier.id("alertTitle"))
                         VerticalSpacer(4.dp)
                     }
                     description?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular)
+                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular, modifier = Modifier.id("alertDescription"))
                     }
                     if (!linkText.isNullOrEmpty()) {
                         VerticalSpacer(4.dp)
                         val color = DigitalTheme.colorScheme.contentPrimary
                         PrimaryText(
                             modifier = Modifier
+                                .id("alertLink")
                                 .drawBehind {
                                     val strokeWidthPx = 1.dp.toPx()
                                     val verticalOffset = size.height - 2.sp.toPx()
@@ -136,12 +135,19 @@ fun PrimaryAlert(
                                         end = Offset(size.width, verticalOffset)
                                     )
                                 }
-                                .clickable { onLinkClick.invoke() }, text = linkText, style = DigitalTheme.typography.smallBold, textDecoration = TextDecoration.Underline
+                                .clickable { onLinkClick.invoke() },
+                            text = linkText,
+                            style = DigitalTheme.typography.smallBold,
+                            textDecoration = TextDecoration.Underline
                         )
                     }
                 }
                 endIconPainter?.let {
-                    PrimaryIcon(modifier = Modifier.size(16.dp), painter = endIconPainter, tint = endIconTint)
+                    PrimaryIcon(
+                        modifier = Modifier
+                            .size(16.dp)
+                            .id("alertEndIcon"), painter = endIconPainter, tint = endIconTint
+                    )
                 }
             }
 
@@ -149,6 +155,7 @@ fun PrimaryAlert(
         endIconPainter?.let {
             Box(
                 modifier = Modifier
+                    .id("alertEndIconBox")
                     .align(Alignment.TopEnd)
                     .size(40.dp)
                     .padding(top = 8.dp, end = 8.dp)
