@@ -21,7 +21,7 @@
     <string name="file_limit_error">Առավելագույն սահմանաչափը՝ 700 KB</string>
     <string name="file_format_error">Թույլատրելի ֆորմատներ՝ %s</string>
     <string name="document_deletion_title">Փաստաթղթի հեռացում</string>
-    <string name="document_deletion_message">Վստա՞հ եք որ ցանկանում եք հեռացնել փաստաթուղթը</string>
+    <string name="document_deletion_message">Վստա՞հ եք որ ցանկանում եք հեռացնել փաստաթուղթը:</string>
     <string name="uploading">Վերբեռնվում է…</string>
 
 </resources>
