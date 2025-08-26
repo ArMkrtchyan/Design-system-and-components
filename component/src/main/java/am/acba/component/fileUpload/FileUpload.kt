@@ -355,6 +355,8 @@ class FileUpload : FrameLayout {
 
     private fun clearUploadedImage() {
         binding.ivUploadedImage.apply {
+            fileUri = null
+            image = null
             isVisible = false
             setImageDrawable(null)
         }
