@@ -94,7 +94,7 @@ fun PrimaryAlert(
     }
     Box {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .then(roundModifier)
                 .background(backgroundColor)
@@ -102,7 +102,6 @@ fun PrimaryAlert(
                 .clickable {
                     onClick.invoke()
                 }
-                .then(modifier)
         ) {
             Row {
                 PrimaryIcon(painter = startIconPainter, tint = startIconTint, modifier = Modifier.id("alertStartIcon"))
