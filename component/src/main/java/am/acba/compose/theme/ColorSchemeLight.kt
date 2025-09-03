@@ -34,6 +34,9 @@ fun lightColorScheme(): ColorTokens = ColorTokens(
     backgroundAlternative7 = AcbaColors.Silver_150,
     backgroundAlternative8 = AcbaColors.Orange_500,
     backgroundAlternative9 = AcbaColors.Blue_800,
+    backgroundAlternative11 = AcbaColors.SplashBackgroundLight,
+    backgroundAlternative12 = AcbaColors.NeonGreen,
+    backgroundAlternative13 = AcbaColors.OceanBlue,
     backgroundInverse = AcbaColors.BlueGrey_300,
     backgroundNavBar = AcbaColors.White_60,
 
@@ -91,5 +94,7 @@ fun lightColorScheme(): ColorTokens = ColorTokens(
     contentAlternative4 = AcbaColors.Orchid_700,
     contentAlternative5 = AcbaColors.BrandGreen_550,
     contentAlternative6 = AcbaColors.Blue_700,
-    transparent = Color.Transparent
+    gradPrimary = AcbaColors.GradPrimaryLight,
+    gradPrimary2 = AcbaColors.GradPrimary2Light,
+    transparent = Color.Transparent,
 )

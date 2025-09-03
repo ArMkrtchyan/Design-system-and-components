@@ -33,6 +33,9 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     backgroundAlternative7 = AcbaColors.Silver_100,
     backgroundAlternative8 = AcbaColors.Orange_500,
     backgroundAlternative9 = AcbaColors.Blue_800,
+    backgroundAlternative11 = AcbaColors.SplashBackgroundDark,
+    backgroundAlternative12 = AcbaColors.Cyan,
+    backgroundAlternative13 = AcbaColors.VioletSpecial,
     backgroundInverse = AcbaColors.BlueGrey_50,
     backgroundNavBar = AcbaColors.Black_60,
 
@@ -91,5 +94,7 @@ fun darkColorScheme(): ColorTokens = ColorTokens(
     contentAlternative5 = AcbaColors.BrandGreen_550,
     contentAlternative6 = AcbaColors.Blue_700,
     backgroundPendingTonal1 = AcbaColors.BlueGrey_550_15,
+    gradPrimary = AcbaColors.GradPrimaryDark,
+    gradPrimary2 = AcbaColors.GradPrimary2Dark,
     transparent = Color.Transparent,
 )
