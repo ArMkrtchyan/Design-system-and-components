@@ -93,7 +93,8 @@ data class ColorTokens(
     val contentAlternative4: Color,
     val contentAlternative5: Color,
     val contentAlternative6: Color,
+    val contentAlternative7: Color,
+    val contentAlternative8: Color,
+    val contentAlternative10: Color,
     val transparent: Color,
-    val gradPrimary: Color,
-    val gradPrimary2: Color,
 )
