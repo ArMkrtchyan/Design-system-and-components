@@ -110,7 +110,7 @@ object AcbaColors {
     val Silver_200_95 = Color(0xF2252525)
     val Silver_200_82 = Color(0xD1252525)
     val Cyan_400 = Color(0xFF47C5CC)
-    val OceanBlue_300 = Color(0xFF6BCEEF)
+    val OceanBlue_300 = Color(0xFF6BCEFF)
     val MoodyBlue_400 = Color(0xFF6B72FF)
-    val RichTeal_500 = Color(0xFF00B2DA)
+    val RichTeal_500 = Color(0xFF758FE5)
 }
