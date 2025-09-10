@@ -111,12 +111,12 @@ fun PrimaryAlert(
                         .weight(1f)
                         .padding(horizontal = 8.dp)
                 ) {
-                    title?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = title, style = DigitalTheme.typography.body1Bold, maxLines = 3, modifier = Modifier.id("alertTitle"))
+                    title?.let {
+                        PrimaryText(text = it, style = DigitalTheme.typography.body1Bold, maxLines = 3)
                         VerticalSpacer(4.dp)
                     }
-                    description?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular, modifier = Modifier.id("alertDescription"))
+                    description?.let {
+                        PrimaryText(text = it, style = DigitalTheme.typography.smallRegular)
                     }
                     if (!linkText.isNullOrEmpty()) {
                         VerticalSpacer(4.dp)
