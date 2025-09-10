@@ -76,6 +76,14 @@ fun InputsScreen(title: String = "") {
                 VerticalSpacer(16.dp)
                 SearchBar(hint = "Search...")
                 VerticalSpacer(16.dp)
+                PrimaryInput(
+                    value = textNormal2.value,
+                    onValueChange = { textNormal2.value = it },
+                    label = "Label",
+                    singleLine = true,
+                    helpText = "Some help text",
+                    visualTransformation = MaxLengthVisualTransformation(100),
+                )
             }
         }
     }

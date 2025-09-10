@@ -141,6 +141,7 @@ fun PrimaryInput(
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            singleLine = singleLine,
             maxLines = maxLines,
             minLines = minLines,
             interactionSource = interactionSource,
