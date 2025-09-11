@@ -28,7 +28,6 @@ import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -222,8 +221,8 @@ class CurrencyInput @JvmOverloads constructor(
     fun validateAmount() {
         val amount = getFloatAmount()
         val text = binding.amount.editText?.text ?: ""
-        val isBelowMin = minAmount != 0.0 && amount < minAmount
-        val isAboveMax = maxAmount != 0.0 && amount > maxAmount
+        val isBelowMin = amount < minAmount
+        val isAboveMax = amount > maxAmount
         if (text.isEmpty()) isFirstFocusable = true
         isValidAmount = text.isEmpty() || !(isBelowMin || isAboveMax)
 
