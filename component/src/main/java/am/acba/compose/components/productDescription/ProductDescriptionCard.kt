@@ -61,6 +61,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 fun <T : IProductDescription> ProductDescriptionCard(
     modifier: Modifier = Modifier,
     productDescription: T,
+    contentScale: ContentScale = ContentScale.None,
     onClick: (T) -> Unit
 ) {
     val contentMinHeight = remember { mutableIntStateOf(100) }
@@ -73,7 +74,7 @@ fun <T : IProductDescription> ProductDescriptionCard(
             .clickable { onClick.invoke(productDescription) }
     ) {
         ProductDescriptionHeader(productDescription.title, productDescription.subTitle, contentMinHeight)
-        ProductDescriptionContent(productDescription, contentMinHeight)
+        ProductDescriptionContent(productDescription, contentMinHeight, contentScale)
     }
 }
 
@@ -135,7 +136,7 @@ private fun ProductDescriptionSubTitle(subTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState) {
+private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState, contentScale: ContentScale) {
     val mediaHeight = remember { mutableIntStateOf(200) }
     val density = LocalDensity.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -153,7 +154,7 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
             ProductDescriptionBullets(productDescription.bullets)
         }
-        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() })
+        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() }, contentScale)
     }
 }
 
@@ -226,7 +227,7 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
+private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: ContentScale) {
     Box(
         modifier = Modifier
             .height(height)
@@ -245,7 +246,7 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
                 .clip(ClipRightBottomRoundedShape()),
             model = imageUrl,
             contentDescription = null,
-            contentScale = ContentScale.FillBounds
+            contentScale = contentScale
         )
     }
 }
