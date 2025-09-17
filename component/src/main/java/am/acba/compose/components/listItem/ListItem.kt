@@ -89,7 +89,7 @@ fun ListItem(
     avatarBackgroundColor: Color = Color.Transparent,
     avatarBackgroundRadius: Int = 0,
     avatarIcon: Int? = null,
-    avatarIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    avatarIconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     avatarIconPadding: Dp = Dp.Unspecified,
     avatarImageUrl: String? = null,
     avatarClipPercent: Int = 0,
