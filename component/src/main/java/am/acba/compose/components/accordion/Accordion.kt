@@ -10,8 +10,8 @@ import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.divider.PrimaryDivider
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
