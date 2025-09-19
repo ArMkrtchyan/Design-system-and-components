@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +36,7 @@ fun PrimaryAlert(
     modifier: Modifier = Modifier,
     title: String? = null,
     description: String? = null,
+    descriptionMaxLines: Int = Int.MAX_VALUE,
     alertType: ComposeAlertTypes = ComposeAlertTypes.INFO,
     iconPainter: Painter? = null,
     endIconPainter: Painter? = null,
@@ -116,7 +118,13 @@ fun PrimaryAlert(
                         VerticalSpacer(4.dp)
                     }
                     description?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular, modifier = Modifier.id("alertDescription"))
+                        PrimaryText(
+                            text = description,
+                            style = DigitalTheme.typography.smallRegular,
+                            maxLines = descriptionMaxLines,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier.id("alertDescription")
+                        )
                     }
                     if (!linkText.isNullOrEmpty()) {
                         VerticalSpacer(4.dp)
