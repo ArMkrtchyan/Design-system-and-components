@@ -184,17 +184,19 @@ fun ListItem(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = if (isTitleOnly) Alignment.CenterVertically else Alignment.Top
                 ) {
-                    PrimaryText(
-                        modifier = Modifier
-                            .weight(1f)
-                            .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
-                            .id("title"),
-                        text = title,
-                        color = titleColor ?: listItemType.getTitleTextColor(),
-                        style = titleStyle ?: listItemType.getTitleStyle(),
-                        maxLines = titleMaxLines ?: listItemType.titleMaxLines,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    if (title.isNotEmpty()) {
+                        PrimaryText(
+                            modifier = Modifier
+                                .weight(1f)
+                                .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
+                                .id("title"),
+                            text = title,
+                            color = titleColor ?: listItemType.getTitleTextColor(),
+                            style = titleStyle ?: listItemType.getTitleStyle(),
+                            maxLines = titleMaxLines ?: listItemType.titleMaxLines,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                     if (badgeType != BadgeEnum.NONE) {
                         HorizontalSpacer(12.dp)
                         Badge(
