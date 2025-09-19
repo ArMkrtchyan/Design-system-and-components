@@ -35,6 +35,7 @@ fun PrimaryAlert(
     modifier: Modifier = Modifier,
     title: String? = null,
     description: String? = null,
+    descriptionMaxLines: Int = Int.MAX_VALUE,
     alertType: ComposeAlertTypes = ComposeAlertTypes.INFO,
     iconPainter: Painter? = null,
     endIconPainter: Painter? = null,
@@ -116,7 +117,12 @@ fun PrimaryAlert(
                         VerticalSpacer(4.dp)
                     }
                     description?.takeIf { it.isNotEmpty() }?.let {
-                        PrimaryText(text = description, style = DigitalTheme.typography.smallRegular, modifier = Modifier.id("alertDescription"))
+                        PrimaryText(
+                            text = description,
+                            style = DigitalTheme.typography.smallRegular,
+                            maxLines = descriptionMaxLines,
+                            modifier = Modifier.id("alertDescription")
+                        )
                     }
                     if (!linkText.isNullOrEmpty()) {
                         VerticalSpacer(4.dp)
