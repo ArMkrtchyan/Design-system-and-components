@@ -1,6 +1,6 @@
 ﻿package am.acba.compose.components.alertDialog
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.GhostButton
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.divider.PrimaryDivider
@@ -58,18 +58,18 @@ fun PrimaryAlertDialog(
             ) {
                 icon?.let {
                     PrimaryAlertDialogIcon(icon = it, iconColor = iconColor)
-                    VerticalSpacer(24)
+                    VerticalSpacer(24.dp)
                 }
                 PrimaryAlertDialogTexts(text = title, textColor = titleColor, style = DigitalTheme.typography.heading7Bold, 2)
                 description?.let {
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                     PrimaryAlertDialogTexts(text = it, textColor = descriptionColor, style = DigitalTheme.typography.subTitle2Regular, 3)
                 }
                 content?.let {
-                    VerticalSpacer(24)
+                    VerticalSpacer(24.dp)
                     it.invoke()
                 }
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 positiveButtonText?.let { PrimaryAlertDialogButton(text = it, buttonColor = positiveButtonColor, onClick = onPositiveButtonClick) }
                 negativeButtonText?.let { PrimaryAlertDialogButton(text = it, buttonColor = negativeButtonColor, onClick = onNegativeButtonClick) }
             }

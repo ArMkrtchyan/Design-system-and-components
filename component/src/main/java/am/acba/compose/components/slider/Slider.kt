@@ -1,7 +1,7 @@
 ﻿package am.acba.compose.components.slider
 
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
@@ -92,7 +92,7 @@ fun PrimarySlider(
         }
         Row(modifier = Modifier.fillMaxWidth()) {
             BottomText("${state.valueRange.start.formatWithPattern(pattern, minimumFractionDigits)} $startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             BottomText("${state.valueRange.endInclusive.formatWithPattern(pattern, minimumFractionDigits)} $endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
         }
     }

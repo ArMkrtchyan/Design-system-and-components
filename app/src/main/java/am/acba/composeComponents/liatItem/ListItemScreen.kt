@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.liatItem
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.badges.BadgeEnum
@@ -338,7 +338,7 @@ private fun ListItemWithDivider(
     onClick: () -> Unit = {}
 ) {
     PrimaryDivider()
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     ListItem(
         modifier = modifier,
         listItemType = listItemType,
@@ -407,7 +407,7 @@ private fun ListItemWithDivider(
         onCheckedChangeListener = onCheckedChangeListener,
         onClick = onClick
     )
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable

@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.divider
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
@@ -44,7 +44,7 @@ fun DividerScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider()
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryDivider(text = "Primary Divider")
             }
         }

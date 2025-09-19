@@ -1,7 +1,7 @@
 package am.acba.compose.components
 
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import android.view.Gravity
@@ -102,7 +102,7 @@ fun PrimaryButtonSmall(
         contentPadding = contentPadding,
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4) }
+    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4.dp) }
 }
 
 @Composable
@@ -298,7 +298,7 @@ fun SecondaryButtonSmall(
         contentPadding = contentPadding,
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4) }
+    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4.dp) }
 }
 
 @Composable
@@ -333,7 +333,7 @@ fun EmojiButton(
 }
 
 @Composable
-private fun SetIconWithText(icon: Int, iconGravity: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Int = 8) {
+private fun SetIconWithText(icon: Int, iconGravity: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp) {
     if (icon > -1) {
         when (iconGravity) {
             Gravity.START -> SetStartIconWithText(icon, text, style, iconSize = iconSize, iconAndTextSpacing = iconAndTextSpacing)
@@ -347,7 +347,7 @@ private fun SetIconWithText(icon: Int, iconGravity: Int, text: String, style: Te
 }
 
 @Composable
-private fun SetStartIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Int = 8) {
+private fun SetStartIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         PrimaryButtonIcon(icon = icon, iconSize = iconSize)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -356,7 +356,7 @@ private fun SetStartIconWithText(icon: Int, text: String, style: TextStyle, icon
 }
 
 @Composable
-private fun SetEndIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Int = 8) {
+private fun SetEndIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         PrimaryButtonText(text = text, style)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -365,7 +365,7 @@ private fun SetEndIconWithText(icon: Int, text: String, style: TextStyle, iconSi
 }
 
 @Composable
-private fun SetTopIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Int = 8) {
+private fun SetTopIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         PrimaryButtonIcon(icon = icon, iconSize = iconSize)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -374,7 +374,7 @@ private fun SetTopIconWithText(icon: Int, text: String, style: TextStyle, iconSi
 }
 
 @Composable
-private fun SetBottomIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Int = 8) {
+private fun SetBottomIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         PrimaryButtonText(text = text, style)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -397,7 +397,7 @@ private fun PrimaryButtonText(text: String, style: TextStyle) {
 }
 
 @Composable
-private fun PrimaryButtonSpacer(width: Int = 8) {
+private fun PrimaryButtonSpacer(width: Dp = 8.dp) {
     HorizontalSpacer(width)
 }
 
@@ -431,7 +431,7 @@ fun PrimaryButtonPreview() {
                         .padding(horizontal = 16.dp)
                         .verticalScroll(rememberScrollState()),
                 ) {
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     EmojiButton(
                         onClick = {
 
@@ -440,7 +440,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         emojiIcon = am.acba.component.R.drawable.ic_add_small,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     PrimaryButton(
                         onClick = {
 
@@ -449,7 +449,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     PrimaryButtonSmall(
                         onClick = {
 
@@ -458,7 +458,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     PrimaryButton(
                         onClick = {
 
@@ -468,7 +468,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     SecondaryButtonGreen(
                         onClick = {
 
@@ -477,7 +477,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     SecondaryButtonGreen(
                         onClick = {
 
@@ -487,7 +487,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     SecondaryButtonGrey(
                         onClick = {
 
@@ -496,7 +496,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     SecondaryButtonGrey(
                         onClick = {
 
@@ -506,7 +506,7 @@ fun PrimaryButtonPreview() {
                         iconGravity = Gravity.END,
                         enabled = false
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     GhostButton(
                         onClick = {
 
@@ -515,7 +515,7 @@ fun PrimaryButtonPreview() {
                         icon = am.acba.component.R.drawable.ic_add_small,
                         iconGravity = Gravity.START,
                     )
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     GhostButton(
                         onClick = {
 

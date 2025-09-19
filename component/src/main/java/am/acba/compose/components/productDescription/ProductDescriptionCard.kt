@@ -4,8 +4,8 @@ package am.acba.compose.components.productDescription
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
@@ -61,6 +61,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 fun <T : IProductDescription> ProductDescriptionCard(
     modifier: Modifier = Modifier,
     productDescription: T,
+    contentScale: ContentScale = ContentScale.None,
     onClick: (T) -> Unit
 ) {
     val contentMinHeight = remember { mutableIntStateOf(100) }
@@ -73,7 +74,7 @@ fun <T : IProductDescription> ProductDescriptionCard(
             .clickable { onClick.invoke(productDescription) }
     ) {
         ProductDescriptionHeader(productDescription.title, productDescription.subTitle, contentMinHeight)
-        ProductDescriptionContent(productDescription, contentMinHeight)
+        ProductDescriptionContent(productDescription, contentMinHeight, contentScale)
     }
 }
 
@@ -92,10 +93,10 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 
         ) {
             ProductDescriptionHeaderTitle(title)
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             ProductDescriptionHeaderIcon()
         }
-        VerticalSpacer(12)
+        VerticalSpacer(12.dp)
         ProductDescriptionSubTitle(subTitle)
     }
 }
@@ -103,7 +104,7 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 @Composable
 @NonRestartableComposable
 private fun RowScope.ProductDescriptionHeaderTitle(title: String) {
-    VerticalSpacer(8)
+    VerticalSpacer(8.dp)
     PrimaryText(
         modifier = Modifier
             .weight(1f)
@@ -135,7 +136,7 @@ private fun ProductDescriptionSubTitle(subTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState) {
+private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState, contentScale: ContentScale) {
     val mediaHeight = remember { mutableIntStateOf(200) }
     val density = LocalDensity.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -147,13 +148,13 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
                     mediaHeight.intValue = layoutCoordinates.size.height
                 }
         ) {
-            VerticalSpacer(12)
+            VerticalSpacer(12.dp)
             ProductDescriptionSecondTitle(productDescription.secondTitle)
             ProductDescriptionBadges(productDescription.badges, productDescription.badgeBackgroundColor, productDescription.badgeTextColor)
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
             ProductDescriptionBullets(productDescription.bullets)
         }
-        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() })
+        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() }, contentScale)
     }
 }
 
@@ -168,7 +169,7 @@ private fun ProductDescriptionSecondTitle(secondTitle: String) {
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -189,7 +190,7 @@ private fun ProductDescriptionBadges(badges: List<ProductDescriptionBadge>, badg
                 )
             }
         }
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -202,7 +203,7 @@ private fun ProductDescriptionSecondSubTitle(secondSubTitle: String) {
             text = secondSubTitle,
             style = DigitalTheme.typography.smallRegular
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -215,18 +216,18 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 PrimaryIcon(modifier = Modifier.size(20.dp), painter = painterResource(R.drawable.ic_success_small), tint = DigitalTheme.colorScheme.contentBrand)
-                HorizontalSpacer(4)
+                HorizontalSpacer(4.dp)
                 PrimaryText(text = bullet, style = DigitalTheme.typography.smallRegular, modifier = Modifier.weight(1f))
             }
-            VerticalSpacer(4)
+            VerticalSpacer(4.dp)
         }
     }
-    VerticalSpacer(12)
+    VerticalSpacer(12.dp)
 }
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
+private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: ContentScale) {
     Box(
         modifier = Modifier
             .height(height)
@@ -245,7 +246,7 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
                 .clip(ClipRightBottomRoundedShape()),
             model = imageUrl,
             contentDescription = null,
-            contentScale = ContentScale.FillBounds
+            contentScale = contentScale
         )
     }
 }
@@ -279,7 +280,7 @@ fun ProductDescriptionCardPreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
         }
     }

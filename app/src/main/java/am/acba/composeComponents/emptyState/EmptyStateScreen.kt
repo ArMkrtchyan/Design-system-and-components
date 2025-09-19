@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.emptyState
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.components.emptyState.EmptyState
@@ -133,7 +133,7 @@ private fun SetEmptyItemWithDivider(
     onButtonClick: () -> Unit = {}
 ) {
     PrimaryDivider(text = dividerTitle)
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
     EmptyState(
         icon = icon,
         iconColor = iconColor,
@@ -149,7 +149,7 @@ private fun SetEmptyItemWithDivider(
         buttonIconGravity = buttonIconGravity,
         onButtonClick = onButtonClick
     )
-    VerticalSpacer(20)
+    VerticalSpacer(20.dp)
 }
 
 @Composable

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 
@@ -128,6 +129,8 @@ class PrimaryAlertDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DialogLayoutBinding.inflate(layoutInflater)
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        window?.setDimAmount(0.5f) // or any float 0.0 to 1.0
         setContentView(mBinding.root)
         window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         setCancelable(mCancelable)

@@ -1,8 +1,8 @@
 ﻿package am.acba.composeComponents.chips
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.chips.ChipSizeEnum
@@ -56,37 +56,37 @@ fun ChipsScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider(text = "Chips size S with text")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsSmallWithText()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size L with text")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsLargeWithText()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size S with text and end icon")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsSmallWithTextAndEndIcon()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size L with text and end icon")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsLargeWithTextAndEndIcon()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size S with text,avatar and end icon")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsSmallWithTextAvatarAndEndIcon()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size L with text,avatar and end icon")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsLargeWithTextAvatarAndEndIcon()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size S with text and two icons")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsSmallWithTextAndTwoIcons()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Chips size L with text and two icons")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 ChipsLargeWithTextAndTwoIcons()
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
 
             }
         }
@@ -99,7 +99,7 @@ private fun ChipsSmallWithText() {
         PrimaryChip(
             title = "Chip component"
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             title = "Chip component",
             chipStateEnum = ChipStateEnum.SELECTED
@@ -114,7 +114,7 @@ private fun ChipsLargeWithText() {
             chipSizeEnum = ChipSizeEnum.LARGE,
             title = "Chip component"
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             chipSizeEnum = ChipSizeEnum.LARGE,
             title = "Chip component",
@@ -137,7 +137,7 @@ private fun ChipsSmallWithTextAndEndIcon() {
                 Toast.makeText(context, "Chip clicked", Toast.LENGTH_SHORT).show()
             }
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             title = "Chip component",
             chipStateEnum = ChipStateEnum.SELECTED,
@@ -160,7 +160,7 @@ private fun ChipsLargeWithTextAndEndIcon() {
             title = "Chip component",
             endIcon = R.drawable.ic_down,
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             chipSizeEnum = ChipSizeEnum.LARGE,
             title = "Chip component",
@@ -179,7 +179,7 @@ private fun ChipsSmallWithTextAvatarAndEndIcon() {
             imageRes = R.drawable.default_avatar,
             badgeType = BadgeEnum.DOT
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             title = "Chip component",
             chipStateEnum = ChipStateEnum.SELECTED,
@@ -209,7 +209,7 @@ private fun ChipsLargeWithTextAvatarAndEndIcon() {
                     Toast.makeText(context, "Chip clicked", Toast.LENGTH_SHORT).show()
                 }
             )
-            HorizontalSpacer(20)
+            HorizontalSpacer(20.dp)
 
         }
     }
@@ -223,7 +223,7 @@ private fun ChipsSmallWithTextAndTwoIcons() {
             endIcon = R.drawable.ic_close,
             icon = R.drawable.ic_house
         )
-        HorizontalSpacer(20)
+        HorizontalSpacer(20.dp)
         PrimaryChip(
             title = "Chip component",
             chipStateEnum = ChipStateEnum.SELECTED,
@@ -244,7 +244,7 @@ private fun ChipsLargeWithTextAndTwoIcons() {
                 endIcon = R.drawable.ic_down,
                 icon = R.drawable.ic_house
             )
-            HorizontalSpacer(20)
+            HorizontalSpacer(20.dp)
         }
     }
 }

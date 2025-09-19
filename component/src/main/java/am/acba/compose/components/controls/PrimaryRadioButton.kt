@@ -1,6 +1,6 @@
 ﻿package am.acba.compose.components.controls
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -56,22 +56,22 @@ fun PrimaryRadioButtonPreview() {
             PrimaryRadioButton(selected = isChecked.value, onClick = {
                 isChecked.value = !isChecked.value
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked2 = remember { mutableStateOf(true) }
             PrimaryRadioButton(selected = isChecked2.value, onClick = {
                 isChecked2.value = !isChecked2.value
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked3 = remember { mutableStateOf(false) }
             PrimaryRadioButton(selected = isChecked3.value, enabled = false, onClick = {
                 isChecked3.value = !isChecked3.value
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             val isChecked4 = remember { mutableStateOf(true) }
             PrimaryRadioButton(selected = isChecked4.value, enabled = false, onClick = {
                 isChecked4.value = !isChecked4.value
             })
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
         }
     }
 }

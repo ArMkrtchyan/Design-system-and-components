@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.dialog
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
@@ -56,7 +56,7 @@ fun DialogsScreen(title: String = "") {
                     .verticalScroll(rememberScrollState()),
             ) {
                 PrimaryDivider(text = "Dialog with all components")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -64,9 +64,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 1
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Dialog without icon and content")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -74,9 +74,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 2
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Dialog with title and one button")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -84,9 +84,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 3
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Dialog with title, description and button")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -94,9 +94,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 4
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Dialog with title, description and two button")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -104,9 +104,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 5
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Dialog with title, icon and button")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -114,9 +114,9 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 6
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryDivider(text = "Non cancelable dialog")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -124,7 +124,7 @@ fun DialogsScreen(title: String = "") {
                 ) {
                     shouldShowDialog.intValue = 7
                 }
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
             }
         }
     }
