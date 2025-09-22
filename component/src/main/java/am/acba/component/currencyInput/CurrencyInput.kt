@@ -221,8 +221,8 @@ class CurrencyInput @JvmOverloads constructor(
     fun validateAmount() {
         val amount = getFloatAmount()
         val text = binding.amount.editText?.text ?: ""
-        val isBelowMin = amount < minAmount
-        val isAboveMax = amount > maxAmount
+        val isBelowMin = minAmount != 0.0 && amount < minAmount
+        val isAboveMax = maxAmount != 0.0 && amount > maxAmount
         if (text.isEmpty()) isFirstFocusable = true
         isValidAmount = text.isEmpty() || !(isBelowMin || isAboveMax)
 
