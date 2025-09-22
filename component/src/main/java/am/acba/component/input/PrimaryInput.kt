@@ -264,7 +264,7 @@ open class PrimaryInput : TextInputLayout {
 
             tvError?.isVisible = error != null
             error?.let {
-                errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_attention_18)
+                errorIcon = ContextCompat.getDrawable(context, R.drawable.ic_info_18)
                 initErrorView(tvError)
             }
         } else {
