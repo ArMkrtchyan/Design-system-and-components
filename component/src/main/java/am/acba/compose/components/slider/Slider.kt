@@ -12,6 +12,9 @@ import am.acba.utils.extensions.formatWithPattern
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -37,6 +40,7 @@ import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -56,7 +60,9 @@ fun PrimarySlider(
     endSuffix: String = EMPTY_STRING,
     pattern: String = PATTERN_NUMBER_SEPARATOR,
     minimumFractionDigits: Int = 0,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
+    onTouch: () -> Unit = {},
 ) {
     Column(modifier = modifier) {
         Box {
@@ -65,6 +71,7 @@ fun PrimarySlider(
             Slider(
                 enabled = enabled,
                 state = state,
+                interactionSource = interactionSource,
                 thumb = {
                     Box(
                         modifier = Modifier
@@ -72,11 +79,28 @@ fun PrimarySlider(
                             .shadow(4.dp, ShapeTokens.shapeRound)
                             .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapeRound)
                             .border(2.dp, DigitalTheme.colorScheme.backgroundBrand, ShapeTokens.shapeRound)
+                            .pointerInput(Unit) {
+                                awaitEachGesture {
+                                    val down = awaitFirstDown()
+                                    if (down.pressed) {
+                                        onTouch.invoke()
+                                    }
+                                }
+                            }
                     )
                 },
                 track = {
                     SliderDefaults.Track(
-                        modifier = Modifier.height(7.dp),
+                        modifier = Modifier
+                            .height(7.dp)
+                            .pointerInput(Unit) {
+                                awaitEachGesture {
+                                    val down = awaitFirstDown()
+                                    if (down.pressed) {
+                                        onTouch.invoke()
+                                    }
+                                }
+                            },
                         colors = SliderDefaults.colors(
                             activeTrackColor = DigitalTheme.colorScheme.backgroundBrand,
                             inactiveTrackColor = DigitalTheme.colorScheme.backgroundTonal2,
@@ -91,9 +115,9 @@ fun PrimarySlider(
             )
         }
         Row(modifier = Modifier.fillMaxWidth()) {
-            BottomText("${state.valueRange.start.formatWithPattern(pattern, minimumFractionDigits)} $startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
+            BottomText("${state.valueRange.start.formatWithPattern(pattern, minimumFractionDigits)}$startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
             HorizontalSpacer(8.dp)
-            BottomText("${state.valueRange.endInclusive.formatWithPattern(pattern, minimumFractionDigits)} $endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
+            BottomText("${state.valueRange.endInclusive.formatWithPattern(pattern, minimumFractionDigits)}$endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
         }
     }
 }

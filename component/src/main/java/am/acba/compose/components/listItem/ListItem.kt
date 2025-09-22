@@ -116,27 +116,30 @@ fun ListItem(
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
+    controllerEnabled: Boolean = false,
     onRadioButtonClick: () -> Unit = {},
     onCheckedChangeListener: (Boolean) -> Unit = {},
 
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    onSecondEndIconClick: () -> Unit = {},
+    onEndIconClick: () -> Unit = {}
 ) {
     Column(
         modifier =
-        if (showBorder) {
-            modifier
-                .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
-                .clickable { onClick.invoke() }
-        } else {
-            modifier
-                .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
-                .clickable { onClick.invoke() }
-        }
+            if (showBorder) {
+                modifier
+                    .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
+                    .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp)
+                    .clickable { onClick.invoke() }
+            } else {
+                modifier
+                    .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 16.dp)
+                    .clickable { onClick.invoke() }
+            }
     ) {
         val isTitleOnly = description.isEmpty() && description2.isEmpty() && description3.isEmpty() && description4.isEmpty()
         val showStartAvatar = avatarIcon != null || avatarImageUrl != null || avatarText != null
@@ -221,6 +224,7 @@ fun ListItem(
                             iconPadding = endIconPadding.dp,
                             backgroundModifier = Modifier
                                 .id("endIcon")
+                                .clickable(onClick = onEndIconClick),
                         )
                     }
                     if (endIconSecond != null) {
@@ -235,12 +239,14 @@ fun ListItem(
                             iconPadding = endIconSecondPadding.dp,
                             backgroundModifier = Modifier
                                 .id("endIconSecond")
+                                .clickable(onClick = onSecondEndIconClick)
                         )
                     }
 
                     when (controllerType) {
                         ControllerTypeEnum.NONE -> Unit
                         ControllerTypeEnum.CHECK_BOX -> PrimaryCheckbox(
+                            enabled = controllerEnabled,
                             state = if (controllerSelected) ToggleableState.On else ToggleableState.Off,
                             onClick = { onCheckedChangeListener.invoke(it == ToggleableState.On) },
                             modifier = Modifier
@@ -248,6 +254,7 @@ fun ListItem(
                         )
 
                         ControllerTypeEnum.RADIO_BUTTON -> PrimaryRadioButton(
+                            enabled = controllerEnabled,
                             selected = controllerSelected,
                             onClick = onRadioButtonClick,
                             modifier = Modifier
@@ -255,6 +262,7 @@ fun ListItem(
                         )
 
                         ControllerTypeEnum.SWITCH -> PrimarySwitch(
+                            enabled = controllerEnabled,
                             checked = controllerSelected,
                             onCheckedChange = { onCheckedChangeListener.invoke(it) },
                             modifier = Modifier

@@ -1,5 +1,6 @@
 ﻿package am.acba.composeComponents.slider
 
+import am.acba.component.extensions.log
 import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
@@ -61,7 +62,10 @@ fun SliderScreen(title: String = "") {
                     state = sliderState,
                     startSuffix = "AMD",
                     endSuffix = "AMD",
-                    minimumFractionDigits = 2
+                    minimumFractionDigits = 2,
+                    onTouch = {
+                        "OnTouch".log()
+                    }
                 )
                 VerticalSpacer(20.dp)
 
