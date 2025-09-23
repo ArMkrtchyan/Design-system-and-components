@@ -6,6 +6,7 @@ import am.acba.compose.components.inputs.visualTransformations.AmountFormattingV
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -110,6 +111,7 @@ fun PrimaryInput(
                     onValueChange(it)
             },
             modifier = newModifier
+                .id("input")
                 .fillMaxWidth()
                 .heightIn(min = 58.dp),
             enabled = enabled,
