@@ -68,7 +68,8 @@ fun ComponentDropDown(
                     }
                 }
                 .then(modifier),
-            label = label,
+            label = if (value.text.isNotEmpty()) label else null,
+            placeholder = label,
             helpText = helpText,
             isError = isError,
             errorText = errorText,
