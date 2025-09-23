@@ -65,7 +65,7 @@ fun DropDownScreen(title: String = "") {
                         TextField(value = "a", onValueChange = {}, modifier = Modifier.fillMaxWidth())
                     })
 
-                var text by remember { mutableStateOf(TextFieldValue("Drop Down Value")) }
+                var text by remember { mutableStateOf(TextFieldValue("")) }
 
                 DropDownWithSpacer(
                     value = text,
