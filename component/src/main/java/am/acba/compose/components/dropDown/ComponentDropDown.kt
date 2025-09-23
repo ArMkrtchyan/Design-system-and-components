@@ -42,7 +42,8 @@ fun ComponentDropDown(
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
-    content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit
+    onDismissRequest: () -> Unit = {},
+    content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
@@ -68,7 +69,8 @@ fun ComponentDropDown(
                     }
                 }
                 .then(modifier),
-            label = label,
+            label = if (value.text.isNotEmpty()) label else null,
+            placeholder = label,
             helpText = helpText,
             isError = isError,
             errorText = errorText,
@@ -96,7 +98,10 @@ fun ComponentDropDown(
         androidx.compose.ui.window.Popup {
             PrimaryBottomSheet(
                 title = contentProperties.title,
-                dismiss = { showBottomSheet.value = false },
+                dismiss = {
+                    showBottomSheet.value = false
+                    onDismissRequest.invoke()
+                },
                 properties = contentProperties.modalBottomSheetProperties,
                 contentHorizontalPadding = contentProperties.horizontalPadding,
                 contentBottomPadding = contentProperties.bottomPadding,
@@ -106,6 +111,7 @@ fun ComponentDropDown(
                 content(sheetState, coroutineScope) {
                     closeBottomSheet(state = sheetState, scope = coroutineScope) {
                         showBottomSheet.value = false
+                        onDismissRequest.invoke()
                     }
                 }
             }
