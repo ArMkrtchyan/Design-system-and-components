@@ -159,10 +159,12 @@ private fun ChipContent(
             var avatarType = AvatarEnum.IMAGE
             var avatarSize = chipSizeEnum.avatarSizeForImage
             Row(Modifier) {
-                HorizontalSpacer(iconStartPadding?:chipSizeEnum.avatarSpacerWidth)
                 if (icon != null) {
+                    HorizontalSpacer(chipSizeEnum.avatarSpacerWidth)
                     avatarType = AvatarEnum.ICON
                     avatarSize = chipSizeEnum.avatarSizeForIcon
+                } else {
+                    if (iconStartPadding != null) HorizontalSpacer(iconStartPadding)
                 }
                 avatarContent(avatarType, avatarSize)
             }
