@@ -707,6 +707,11 @@ class ListItem2 : FrameLayout {
         checkbox.isChecked = isChecked
     }
 
+    fun setCheckBoxState(checkedState: Int) {
+        ensureSecondEndComponentCheckbox()
+        checkbox.checkedState = checkedState
+    }
+
     fun isCheckboxChecked() = checkbox.isChecked
 
     fun setCheckboxEnabled(isEnabled: Boolean) {
