@@ -42,6 +42,7 @@ fun ComponentDropDown(
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
+    onDismissRequest: () -> Unit = {},
     content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
@@ -88,6 +89,7 @@ fun ComponentDropDown(
         title = contentProperties.title,
         dismiss = {
             showBottomSheet.value = false
+            onDismissRequest.invoke()
         },
         properties = contentProperties.modalBottomSheetProperties,
         contentHorizontalPadding = contentProperties.horizontalPadding,
@@ -97,6 +99,7 @@ fun ComponentDropDown(
             content(sheetState, coroutineScope) {
                 closeBottomSheet(state = sheetState, scope = coroutineScope) {
                     showBottomSheet.value = false
+                    onDismissRequest.invoke()
                 }
             }
         },

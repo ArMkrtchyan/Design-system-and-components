@@ -116,7 +116,7 @@ fun ListItem(
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
-    controllerEnabled: Boolean = false,
+    controllerEnabled: Boolean = true,
     onRadioButtonClick: () -> Unit = {},
     onCheckedChangeListener: (Boolean) -> Unit = {},
 
