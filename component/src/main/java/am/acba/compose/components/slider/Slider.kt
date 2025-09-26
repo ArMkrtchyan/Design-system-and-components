@@ -1,6 +1,7 @@
 ﻿package am.acba.compose.components.slider
 
 import am.acba.component.extensions.dpToPx
+import am.acba.component.extensions.vibrate
 import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -27,7 +28,9 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,7 +42,9 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -63,6 +68,13 @@ fun PrimarySlider(
     enabled: Boolean = true,
     onTouch: (TouchComponent, PointerEvent) -> Unit = { _, _ -> },
 ) {
+    val pressed = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    LaunchedEffect(state.value) {
+        if (pressed.value) {
+            context.vibrate(40L)
+        }
+    }
     Column(modifier = modifier) {
         Box {
             LeftAdditionalTrack()
@@ -83,6 +95,10 @@ fun PrimarySlider(
                                     while (true) {
                                         val event = awaitPointerEvent()
                                         onTouch.invoke(TouchComponent.THUMB, event)
+                                        when (event.type) {
+                                            PointerEventType.Press -> pressed.value = true
+                                            PointerEventType.Release -> pressed.value = false
+                                        }
                                     }
                                 }
                             }
@@ -97,6 +113,10 @@ fun PrimarySlider(
                                     while (true) {
                                         val event = awaitPointerEvent()
                                         onTouch.invoke(TouchComponent.TRACK, event)
+                                        when (event.type) {
+                                            PointerEventType.Press -> pressed.value = true
+                                            PointerEventType.Release -> pressed.value = false
+                                        }
                                     }
                                 }
                             },
