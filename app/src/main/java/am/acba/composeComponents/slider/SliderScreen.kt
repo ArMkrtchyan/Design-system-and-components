@@ -23,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
@@ -63,8 +64,16 @@ fun SliderScreen(title: String = "") {
                     startSuffix = "AMD",
                     endSuffix = "AMD",
                     minimumFractionDigits = 2,
-                    onTouch = {
-                        "OnTouch".log()
+                    onTouch = { touchComponent, pointerEvent ->
+                        when (pointerEvent.type) {
+                            PointerEventType.Press -> {
+                                touchComponent.log(prefix = "Press ->")
+                            }
+
+                            PointerEventType.Release -> {
+                                touchComponent.log(prefix = "Release ->")
+                            }
+                        }
                     }
                 )
                 VerticalSpacer(20.dp)

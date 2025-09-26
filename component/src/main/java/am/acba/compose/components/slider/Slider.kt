@@ -12,8 +12,6 @@ import am.acba.utils.extensions.formatWithPattern
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -40,6 +38,7 @@ import androidx.compose.ui.graphics.ClipOp
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -62,7 +61,7 @@ fun PrimarySlider(
     minimumFractionDigits: Int = 0,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
-    onTouch: () -> Unit = {},
+    onTouch: (TouchComponent, PointerEvent) -> Unit = { _, _ -> },
 ) {
     Column(modifier = modifier) {
         Box {
@@ -80,10 +79,10 @@ fun PrimarySlider(
                             .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapeRound)
                             .border(2.dp, DigitalTheme.colorScheme.backgroundBrand, ShapeTokens.shapeRound)
                             .pointerInput(Unit) {
-                                awaitEachGesture {
-                                    val down = awaitFirstDown()
-                                    if (down.pressed) {
-                                        onTouch.invoke()
+                                awaitPointerEventScope {
+                                    while (true) {
+                                        val event = awaitPointerEvent()
+                                        onTouch.invoke(TouchComponent.THUMB, event)
                                     }
                                 }
                             }
@@ -94,10 +93,10 @@ fun PrimarySlider(
                         modifier = Modifier
                             .height(7.dp)
                             .pointerInput(Unit) {
-                                awaitEachGesture {
-                                    val down = awaitFirstDown()
-                                    if (down.pressed) {
-                                        onTouch.invoke()
+                                awaitPointerEventScope {
+                                    while (true) {
+                                        val event = awaitPointerEvent()
+                                        onTouch.invoke(TouchComponent.TRACK, event)
                                     }
                                 }
                             },
@@ -172,6 +171,11 @@ private fun BottomText(value: String, modifier: Modifier, textAlign: TextAlign =
         style = DigitalTheme.typography.smallRegular,
         color = DigitalTheme.colorScheme.contentPrimaryTonal1
     )
+}
+
+enum class TouchComponent {
+    THUMB,
+    TRACK;
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
