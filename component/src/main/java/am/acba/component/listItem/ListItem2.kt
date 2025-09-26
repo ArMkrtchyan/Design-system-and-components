@@ -520,6 +520,7 @@ class ListItem2 : FrameLayout {
 
     private fun getBarrierReferenceIds(alignTop: Boolean) = mutableListOf(
         binding.tvTitle.id,
+        binding.badgeListItem.id,
         binding.ivFirstEndIcon.id,
         binding.layoutSecondEndComponent.id,
     ).apply {
