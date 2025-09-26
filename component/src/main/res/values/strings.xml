@@ -3,10 +3,10 @@
     <!--General-->
 
     <string name="ok">Ok</string>
-    <string name="cancel">Cancel</string>
     <string name="all">All</string>
-    <string name="search">Search</string>
-
+    <string name="search">Search…</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
     <string name="date_picker_title_text">Select date</string>
 
     <!--Phone Input-->
@@ -17,4 +17,13 @@
     <string name="phone_number_from_acba_contact">From acba contacts</string>
     <string name="select_country_code">Select country code</string>
     <string name="phone_number_most_searched">Most searched</string>
+
+    <!--File Upload-->
+
+    <string name="file_limit_error">The maximum limit is 700 KB</string>
+    <string name="file_format_error">Allowed formats: %s</string>
+    <string name="document_deletion_title">Remove document</string>
+    <string name="document_deletion_message">Are you sure you want to delete the document?</string>
+    <string name="uploading">Uploading…</string>
+
 </resources>

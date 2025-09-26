@@ -25,22 +25,27 @@ fun PrimaryToolbar(
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val activity = LocalContext.current.getActivity()
-    TopAppBar(title = {
-        PrimaryText(
-            modifier = Modifier
-                .padding(end = 16.dp, start = 16.dp)
-                .id("centre_title"), text = title, maxLines = 1, overflow = TextOverflow.Ellipsis
-        )
-    }, colors = TopAppBarDefaults.topAppBarColors(
-        containerColor = DigitalTheme.colorScheme.backgroundBase,
-        titleContentColor = DigitalTheme.colorScheme.contentPrimary,
-    ), actions = actions, navigationIcon = {
-        IconButton(onClick = {
-            activity?.onBackPressed()
-        }, modifier = Modifier.id("leftIcon")) {
-            PrimaryIcon(painterResource(R.drawable.ic_back))
-        }
-    })
+    TopAppBar(
+        title = {
+            PrimaryText(
+                modifier = Modifier
+                    .padding(end = 16.dp, start = 16.dp)
+                    .id("centre_title"),
+                text = title,
+                style = DigitalTheme.typography.body1Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }, colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = DigitalTheme.colorScheme.backgroundBase,
+            titleContentColor = DigitalTheme.colorScheme.contentPrimary,
+        ), actions = actions, navigationIcon = {
+            IconButton(onClick = {
+                activity?.onBackPressed()
+            }, modifier = Modifier.id("leftIcon")) {
+                PrimaryIcon(painterResource(R.drawable.ic_back))
+            }
+        })
 }
 
 @Composable

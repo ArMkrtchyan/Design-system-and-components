@@ -140,7 +140,8 @@ fun AlertsScreen(title: String = "") {
                     title = "Title",
                     description = "Lorem ipsum dolor sit amet consectetur. Integer odio consectetur interdum at nullam.",
                     linkText = "Link",
-                    isRounded = false
+                    isRounded = false,
+                    descriptionMaxLines = 1
                 )
                 VerticalSpacer(16.dp)
             }

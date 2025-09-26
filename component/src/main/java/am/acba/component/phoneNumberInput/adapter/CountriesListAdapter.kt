@@ -45,7 +45,7 @@ class CountriesListAdapter(
                     itemClick?.invoke(countries[position])
                 }
                 if (position != selectedIndex) {
-                    countries[selectedIndex].isSelected = false
+                    if (selectedIndex != -1) countries[selectedIndex].isSelected = false
                     countries[position].isSelected = true
                 }
                 notifyItemChanged(selectedIndex)

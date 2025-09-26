@@ -109,8 +109,8 @@ class CountryBottomSheetDialog : PrimaryBottomSheetDialog<CountryBottomSheetBind
     ) {
         if (rvCountries.adapter == null) {
             countriesAdapter = CountriesListAdapter(::selectCountry, countriesList, bottomSheetType)
-            val countriesTitleAdapter = TitleAdapter(getString(R.string.phone_number_most_searched))
-            titleAdapter = TitleAdapter(getString(R.string.all))
+            val countriesTitleAdapter = TitleAdapter(getString(R.string.all))
+            titleAdapter = TitleAdapter(getString(R.string.phone_number_most_searched))
             chipsAdapter = CountriesChipsAdapter(dBActionsList, ::selectCountry)
             concatAdapter = ConcatAdapter().apply {
                 if (dBActionsList.isNotEmpty()) {
