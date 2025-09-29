@@ -5,7 +5,6 @@ package am.acba.compose.components.inputs.phoneInput
 import am.acba.component.R
 import am.acba.component.extensions.getLastCountryActionsEnum
 import am.acba.component.extensions.saveCountryLastAction
-import am.acba.component.input.SearchInput
 import am.acba.compose.HorizontalSpacer
 import am.acba.compose.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
@@ -17,7 +16,6 @@ import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
 import am.acba.compose.components.chips.PrimaryChip
 import am.acba.compose.components.inputs.Label
-import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.inputs.SearchBar
 import am.acba.compose.components.inputs.SupportAndErrorTexts
 import am.acba.compose.components.inputs.createStateColors
@@ -25,6 +23,7 @@ import am.acba.compose.components.inputs.visualTransformations.PhoneNumberVisual
 import am.acba.compose.components.listItem.ListItem
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.Constants.EMPTY_STRING
 import am.acba.utils.enums.CountryEnum
 import android.annotation.SuppressLint
 import android.content.Context
@@ -332,14 +331,17 @@ private fun CountriesBottomSheet(
     onCountrySelected: (CountryEnum) -> Unit
 ) {
     var dBActionsList by remember { mutableStateOf(context.getLastCountryActionsEnum()) }
-
+    var searchQuery by remember { mutableStateOf(EMPTY_STRING) }
     val countries = CountryEnum.entries.toList()
+    val visibleItems: List<CountryEnum> = filterCountries(countries, searchQuery)
+
     PrimaryBottomSheet(
         title = stringResource(R.string.select_country_code),
         contentHorizontalPadding = 0.dp,
         bottomSheetVisible = bottomSheetVisible.value,
         dismiss = {
             bottomSheetVisible.value = false
+            searchQuery = EMPTY_STRING
         }) { state: SheetState, coroutineScope: CoroutineScope ->
         Column(
             modifier = Modifier
@@ -347,7 +349,11 @@ private fun CountriesBottomSheet(
                 .padding(horizontal = 16.dp)
         ) {
             VerticalSpacer(24)
-            SearchBar(hint = stringResource(R.string.search))
+            SearchBar(
+                hint = stringResource(R.string.search),
+                onTextChange = { countryText ->
+                    searchQuery = countryText
+                })
             VerticalSpacer(32)
             PrimaryText(
                 text = stringResource(R.string.phone_number_most_searched).toUpperCase(Locale.current),
@@ -355,22 +361,15 @@ private fun CountriesBottomSheet(
                 color = DigitalTheme.colorScheme.contentPrimaryTonal1
             )
             VerticalSpacer(10)
-            FlowRow(
-                itemVerticalAlignment = Alignment.CenterVertically
-            ) {
-                dBActionsList.forEach { country ->
-                    PrimaryChip(
-                        modifier = Modifier.padding(top = 10.dp, end = 10.dp),
-                        title = stringResource(country.titleResId), imageUrl = country.flagUrl, clipPercent = 50
-                    ) {
-                        closeBottomSheet(state = state, scope = coroutineScope) {
-                            bottomSheetVisible.value = false
-                        }
-                        onCountrySelected(country)
-                        dBActionsList = context.saveCountryLastAction(country)
-                    }
-                }
-            }
+            CountrySelectionRow(
+                dBActionsList = dBActionsList,
+                coroutineScope = coroutineScope,
+                bottomSheetVisible = bottomSheetVisible,
+                state = state,
+                onCountrySelected = onCountrySelected,
+                onUpdateList = { dBActionsList = it },
+                context = context
+            )
             VerticalSpacer(32)
             PrimaryText(
                 text = stringResource(R.string.all).toUpperCase(Locale.current),
@@ -378,29 +377,94 @@ private fun CountriesBottomSheet(
                 color = DigitalTheme.colorScheme.contentPrimaryTonal1
             )
             VerticalSpacer(20)
-            LazyColumn {
-                itemsIndexed(countries) { index, item ->
-                    ListItem(
-                        contentHorizontalPadding = 0.dp,
-                        title = "${stringResource(item.titleResId)} (${item.dialCode})",
-                        titleStyle = DigitalTheme.typography.body1Regular,
-                        backgroundColor = Color.Transparent,
-                        avatarType = AvatarEnum.IMAGE,
-                        avatarImageUrl = item.flagUrl,
-                        avatarClipPercent = 50,
-                        showDivider = true,
-                        onClick = {
-                            closeBottomSheet(state = state, scope = coroutineScope) {
-                                bottomSheetVisible.value = false
-                            }
-                            onCountrySelected(item)
-                            dBActionsList = context.saveCountryLastAction(item)
-                        }
-                    )
-                }
-            }
+            CountrySelectionList(
+                countries = visibleItems,
+                state = state,
+                coroutineScope = coroutineScope,
+                bottomSheetVisible = bottomSheetVisible,
+                onUpdateList = { dBActionsList = it },
+                onCountrySelected = onCountrySelected,
+                context = context
+            )
         }
 
+    }
+}
+
+@Composable
+private fun filterCountries(
+    countries: List<CountryEnum>,
+    searchQuery: String
+): List<CountryEnum> {
+    return if (searchQuery.length > 2) {
+        countries.filter {
+            stringResource(it.titleResId).contains(searchQuery, ignoreCase = true) ||
+                it.dialCode.contains(searchQuery, ignoreCase = true) ||
+                it.name.contains(searchQuery, ignoreCase = true)
+        }
+    } else {
+        countries
+    }
+}
+
+@Composable
+private fun CountrySelectionList(
+    countries: List<CountryEnum>,
+    state: SheetState,
+    coroutineScope: CoroutineScope,
+    bottomSheetVisible: MutableState<Boolean>,
+    onUpdateList: (MutableList<CountryEnum>) -> Unit,
+    onCountrySelected: (CountryEnum) -> Unit,
+    context: Context,
+) {
+    LazyColumn {
+        itemsIndexed(countries) { index, item ->
+            ListItem(
+                contentHorizontalPadding = 0.dp,
+                title = "${stringResource(item.titleResId)} (${item.dialCode})",
+                titleStyle = DigitalTheme.typography.body1Regular,
+                backgroundColor = Color.Transparent,
+                avatarType = AvatarEnum.IMAGE,
+                avatarImageUrl = item.flagUrl,
+                avatarClipPercent = 50,
+                showDivider = true,
+                onClick = {
+                    closeBottomSheet(state = state, scope = coroutineScope) {
+                        bottomSheetVisible.value = false
+                    }
+                    onCountrySelected(item)
+                    onUpdateList(context.saveCountryLastAction(item))
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun CountrySelectionRow(
+    dBActionsList: MutableList<CountryEnum>,
+    coroutineScope: CoroutineScope,
+    bottomSheetVisible: MutableState<Boolean>,
+    state: SheetState,
+    onCountrySelected: (CountryEnum) -> Unit,
+    onUpdateList: (MutableList<CountryEnum>) -> Unit,
+    context: Context,
+) {
+    FlowRow(
+        itemVerticalAlignment = Alignment.CenterVertically
+    ) {
+        dBActionsList.forEach { country ->
+            PrimaryChip(
+                modifier = Modifier.padding(top = 10.dp, end = 10.dp),
+                title = stringResource(country.titleResId), imageUrl = country.flagUrl, clipPercent = 50
+            ) {
+                closeBottomSheet(state = state, scope = coroutineScope) {
+                    bottomSheetVisible.value = false
+                }
+                onCountrySelected(country)
+                onUpdateList(context.saveCountryLastAction(country))
+            }
+        }
     }
 }
 

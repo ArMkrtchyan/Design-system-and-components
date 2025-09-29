@@ -1,9 +1,11 @@
 ﻿package am.acba.compose.components.inputs.visualTransformations
 
+import android.util.Log
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
+import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import java.util.Locale
 
@@ -25,9 +27,18 @@ class PhoneNumberVisualTransformation(
             formatted = formatter.inputDigit(ch)
         }
         val displayedText = formatted.removePrefix(dialCode).trimStart()
-
-        var numberProto = phoneUtil.parse(fullNumber, isoCode)
-        isValidPhoneNumber.invoke(phoneUtil.isValidNumberForRegion(numberProto, isoCode))
+        try {
+            val numberProto = phoneUtil.parse(fullNumber, isoCode)
+            if (phoneUtil.isPossibleNumber(numberProto)) {
+                // valid number
+                Log.d("Phone TAG", "Valid number: ${phoneUtil.format(numberProto, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)}")
+            } else {
+                Log.d("Phone TAG", "Number is incomplete or invalid")
+            }
+            isValidPhoneNumber.invoke(phoneUtil.isValidNumberForRegion(numberProto, isoCode))
+        } catch (e: NumberParseException) {
+            Log.w("Phone TAG", "Invalid or incomplete number: ${e.message}")
+        }
 
         return TransformedText(
             AnnotatedString(displayedText),
