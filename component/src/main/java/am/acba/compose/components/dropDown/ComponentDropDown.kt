@@ -10,6 +10,7 @@ import am.acba.compose.components.dropDown.model.ContentProperties
 import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.EMPTY_STRING
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -57,10 +58,15 @@ fun ComponentDropDown(
         }
     }
 
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Box(
+        modifier = Modifier
+            .id("component_drop_down")
+            .fillMaxWidth()
+    ) {
         PrimaryInput(
             value = value,
             modifier = Modifier
+                .id("drop_down_input")
                 .focusRequester(focusRequester)
                 .fillMaxWidth()
                 .onFocusChanged { focusState ->
@@ -88,7 +94,9 @@ fun ComponentDropDown(
 
         TransparentButton(
             enabled = enabled,
-            modifier = Modifier.matchParentSize()
+            modifier = Modifier
+                .id("drop_down_button")
+                .matchParentSize()
         ) {
             showBottomSheet.value = true
         }
