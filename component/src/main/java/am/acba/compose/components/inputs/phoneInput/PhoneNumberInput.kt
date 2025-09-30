@@ -92,7 +92,6 @@ fun PhoneNumberInput(
     label: String? = null,
     placeholder: String? = null,
     errorText: String? = null,
-    isValidNumber: Boolean = true,
     showArrow: Boolean = true,
     isError: Boolean = false,
     onPickContactClick: (() -> Unit)? = null,
@@ -102,37 +101,26 @@ fun PhoneNumberInput(
     ) {
     val context: Context = LocalContext.current
     var inputModifier: Modifier = Modifier
-    var regionModifier: Modifier = Modifier
+    var currencyModifier: Modifier = Modifier
     var isFocused by remember { mutableStateOf(false) }
+    var isErrorState by remember { mutableStateOf(isError) }
     val bottomSheetVisible = remember { mutableStateOf(false) }
     var selectedCountry by remember {
-        val telephonyManager =
-            context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        val simCountryISO = telephonyManager.simCountryIso.ifEmpty { CountryEnum.ARMENIA.iso }
-        mutableStateOf<CountryEnum>(CountryEnum[simCountryISO])
-    }
-    val (formattedValue, isNumberValid) = remember(value.text, selectedCountry.dialCode) {
-        if (value.text.isNotEmpty()) {
-            formatAndValidatePhone(value.text, selectedCountry.dialCode)
-        } else {
-            value.text to false
-        }
+        mutableStateOf<CountryEnum>(CountryEnum[detectCountryCodeBySim(context)])
     }
     when {
-        isError -> {
+        isErrorState -> {
             inputModifier = errorBorderForPhoneInput()
-            regionModifier = errorBorderForRegionCode()
+            currencyModifier = errorBorderForRegionCode()
         }
 
         isFocused -> {
             inputModifier = focusedBorderForPhoneInput()
-            regionModifier = focusedBorderForRegionCode()
+            currencyModifier = focusedBorderForRegionCode()
         }
 
         !isFocused && value.text.isNotEmpty() -> {
-            if (formattedValue != null && formattedValue != value.text) {
-                onValueChange(TextFieldValue(formattedValue))
-            }
+
         }
     }
 
@@ -156,7 +144,7 @@ fun PhoneNumberInput(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 RegionCode(
-                    modifier = regionModifier,
+                    modifier = currencyModifier,
                     showArrow = showArrow,
                     country = selectedCountry,
                     onRegionClick = { bottomSheetVisible.value = true }
@@ -170,9 +158,9 @@ fun PhoneNumberInput(
                     onValueChange = onValueChange,
                     onPickContactClick = onPickContactClick,
                     onFocusChanged = { isFocused = it.isFocused },
+                    isErrorState = { isErrorState = it },
                     label = label,
                     placeholder = placeholder,
-                    isError = !isValidNumber,
                     maxLength = 15,
                     keyboardOptions = keyboardOptions,
                     keyboardActions = keyboardActions
@@ -184,6 +172,13 @@ fun PhoneNumberInput(
             selectedCountry = newCountry
         })
     }
+}
+
+private fun detectCountryCodeBySim(context: Context): String {
+    val telephonyManager =
+        context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+    val simCountryISO = telephonyManager.simCountryIso.ifEmpty { CountryEnum.ARMENIA.iso }
+    return simCountryISO
 }
 
 @Composable
@@ -239,17 +234,15 @@ fun RowScope.PhoneTextField(
     dialCode: String,
     onValueChange: (TextFieldValue) -> Unit,
     onPickContactClick: (() -> Unit)?,
+    isErrorState: ((Boolean) -> Unit),
     onFocusChanged: (FocusState) -> Unit,
     maxLength: Int,
-    isError: Boolean,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
     focusRequester: FocusRequester = remember { FocusRequester() }
 ) {
     val pattern = Regex("^\\d*$")
-    val visualTransformation = PhoneNumberVisualTransformation(isoCode, dialCode) { isValid ->
-
-    }
+    val visualTransformation = PhoneNumberVisualTransformation(isoCode, dialCode) { isErrorState::invoke.invoke(!it) }
     TextField(
         value = value,
         onValueChange = {
@@ -264,7 +257,7 @@ fun RowScope.PhoneTextField(
             .weight(1f)
             .focusRequester(focusRequester)
             .onFocusChanged(onFocusChanged),
-        label = label?.let { { Label(text = label, isError = isError, isEnabled = true) } },
+        label = label?.let { { Label(text = label, isEnabled = true) } },
         colors = createStateColors(),
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -476,7 +469,7 @@ private fun formatAndValidatePhone(phone: String, isoCode: String): Pair<String?
         val formatted = phoneUtil.format(parsed, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)
         val lastValue = formatted.removePrefix("+${parsed.countryCode}").trimStart()
         lastValue to isValid
-    } catch (e: NumberParseException) {
+    } catch (_: NumberParseException) {
         null to false
     }
 }
@@ -500,7 +493,6 @@ fun PhoneInputPreview() {
                 label = "Phone",
                 placeholder = "Phone Number",
                 isError = false,
-                isValidNumber = true,
             )
         }
     }

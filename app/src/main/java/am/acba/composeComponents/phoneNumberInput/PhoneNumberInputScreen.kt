@@ -58,7 +58,6 @@ fun PhoneNumberInputScreen(title: String = "") {
                     label = "Phone",
                     placeholder = "Phone Number",
                     isError = false,
-                    isValidNumber = true,
                 )
             }
         }

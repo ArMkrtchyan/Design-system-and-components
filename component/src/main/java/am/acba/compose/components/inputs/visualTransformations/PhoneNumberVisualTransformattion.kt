@@ -17,6 +17,7 @@ class PhoneNumberVisualTransformation(
 
     override fun filter(text: AnnotatedString): TransformedText {
         if (text.isEmpty()) {
+            isValidPhoneNumber.invoke(true)
             return TransformedText(AnnotatedString(""), OffsetMapping.Identity)
         }
         val phoneUtil = PhoneNumberUtil.getInstance()
@@ -29,13 +30,7 @@ class PhoneNumberVisualTransformation(
         val displayedText = formatted.removePrefix(dialCode).trimStart()
         try {
             val numberProto = phoneUtil.parse(fullNumber, isoCode)
-            if (phoneUtil.isPossibleNumber(numberProto)) {
-                // valid number
-                Log.d("Phone TAG", "Valid number: ${phoneUtil.format(numberProto, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL)}")
-            } else {
-                Log.d("Phone TAG", "Number is incomplete or invalid")
-            }
-            isValidPhoneNumber.invoke(phoneUtil.isValidNumberForRegion(numberProto, isoCode))
+            isValidPhoneNumber.invoke(phoneUtil.isValidNumber(numberProto))
         } catch (e: NumberParseException) {
             Log.w("Phone TAG", "Invalid or incomplete number: ${e.message}")
         }
