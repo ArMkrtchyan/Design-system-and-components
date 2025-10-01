@@ -14,7 +14,7 @@ fun PrimaryIcon(painter: Painter, tint: Color = DigitalTheme.colorScheme.content
         modifier = modifier
             .wrapContentSize(),
         painter = painter,
-        contentDescription = "",
+        contentDescription = "primary_icon",
         tint = tint,
     )
 }
