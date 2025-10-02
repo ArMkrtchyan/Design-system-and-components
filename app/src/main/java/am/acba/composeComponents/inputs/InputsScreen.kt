@@ -59,9 +59,10 @@ fun InputsScreen(title: String = "") {
                     value = textNormal.value,
                     onValueChange = { textNormal.value = it },
                     label = "Label",
+                    leadingImageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+                    leadingIconTint = null,
                     helpText = "Some help text",
                     visualTransformation = MaxLengthVisualTransformation(15),
-                    leadingIcon = R.drawable.ic_close,
                 )
                 VerticalSpacer(16.dp)
                 PrimaryInput(

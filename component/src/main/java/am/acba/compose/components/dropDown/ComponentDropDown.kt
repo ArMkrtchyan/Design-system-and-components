@@ -38,6 +38,7 @@ fun ComponentDropDown(
     isError: Boolean = false,
     errorText: String? = null,
     enabled: Boolean = true,
+    leadingImageUrl: String? = null,
     leadingIcon: Int? = null,
     leadingIconTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
     singleLine: Boolean = true,
@@ -83,6 +84,7 @@ fun ComponentDropDown(
             onValueChange = {},
             readOnly = true,
             enabled = enabled,
+            leadingImageUrl = leadingImageUrl,
             leadingIcon = leadingIcon,
             leadingIconTint = leadingIconTint,
             trailingIcon = if (showBottomSheet.value) R.drawable.ic_up else R.drawable.ic_down,
@@ -131,6 +133,10 @@ fun ComponentDropDown(
 @PreviewLightDark
 fun PrimaryDatePickerPreview() {
     DigitalTheme {
-        ComponentDropDown("DropDown", TextFieldValue("DropDown"), content = { _, _, _ -> })
+        ComponentDropDown(
+            "DropDown",
+            TextFieldValue("DropDown"),
+            leadingImageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+            content = { _, _, _ -> })
     }
 }

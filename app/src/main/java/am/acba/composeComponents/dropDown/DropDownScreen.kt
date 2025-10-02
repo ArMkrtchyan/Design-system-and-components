@@ -135,7 +135,7 @@ fun DropDownWithSpacer(
     errorText: String? = null,
     enabled: Boolean = true,
     leadingIcon: Int? = null,
-    leadingIconTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    leadingIconTint: Color? = null,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
@@ -154,6 +154,7 @@ fun DropDownWithSpacer(
         leadingIconTint = leadingIconTint,
         singleLine = true,
         maxLines = maxLines,
+        leadingImageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
         contentProperties = contentProperties,
         content = bottomSheetContent
     )

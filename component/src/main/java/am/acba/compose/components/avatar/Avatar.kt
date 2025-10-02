@@ -145,7 +145,7 @@ fun Avatar(
             AvatarEnum.ICON -> AvatarIcon(
                 modifier = contentModifier,
                 icon = icon ?: R.drawable.default_icon,
-                iconColor = iconColor ?: DigitalTheme.colorScheme.contentPrimary,
+                iconColor = iconColor,
                 padding = iconPadding
             )
 
@@ -160,7 +160,13 @@ fun Avatar(
                 padding = iconPadding
             )
 
-            AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
+            AvatarEnum.TEXT -> AvatarText(
+                modifier = contentModifier,
+                avatarSize = avatarSize,
+                text = text ?: "",
+                textColor = textColor
+            )
+
             AvatarEnum.LOTTIE -> AvatarLottie(modifier = contentModifier)
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
@@ -218,7 +224,10 @@ fun AvatarImage(
                 factory = {
                     val imageView = ImageView(context)
                     iconColor?.let {
-                        ImageViewCompat.setImageTintList(imageView, iconColor.toGraphicColorStateList())
+                        ImageViewCompat.setImageTintList(
+                            imageView,
+                            iconColor.toGraphicColorStateList()
+                        )
                         ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
                     }
                     Glide
@@ -261,13 +270,13 @@ fun AvatarImage(
 private fun AvatarIcon(
     modifier: Modifier = Modifier,
     icon: Int,
-    iconColor: Color,
+    iconColor: Color?,
     padding: Dp = Dp.Unspecified,
 ) {
     Icon(
         painterResource(icon),
         contentDescription = null,
-        tint = iconColor,
+        tint = iconColor ?: Color.Unspecified,
         modifier = modifier
             .fillMaxSize()
             .padding(padding)
@@ -312,7 +321,11 @@ fun AvatarScreenPreview() {
         ) {
             Avatar(avatarSize = AvatarSizeEnum.AVATAR_SIZE_24)
             VerticalSpacer(16.dp)
-            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, badgeType = BadgeEnum.DOT)
+            Avatar(
+                avatarType = AvatarEnum.IMAGE,
+                avatarSize = AvatarSizeEnum.AVATAR_SIZE_32,
+                badgeType = BadgeEnum.DOT
+            )
             VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.ICON,
@@ -340,7 +353,11 @@ fun AvatarScreenPreview() {
                 clipPercent = 50
             )
             VerticalSpacer(16.dp)
-            Avatar(avatarType = AvatarEnum.LOTTIE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, badgeType = BadgeEnum.DOT)
+            Avatar(
+                avatarType = AvatarEnum.LOTTIE,
+                avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
+                badgeType = BadgeEnum.DOT
+            )
             VerticalSpacer(16.dp)
             Avatar(
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,

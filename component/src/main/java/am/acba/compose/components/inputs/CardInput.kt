@@ -3,6 +3,7 @@ package am.acba.compose.components.inputs
 import am.acba.component.R
 import am.acba.component.cardInput.PrimaryCardInput.CardSystemTypes
 import am.acba.compose.common.VerticalSpacer
+import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.inputs.visualTransformations.CardFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.detectCardSystem
 import am.acba.compose.theme.DigitalTheme
@@ -86,7 +87,7 @@ fun CardInput(
             showSecondaryIcon.value = false
             cardSystemTypes.value = CardSystemTypes.UNKNOWN
         },
-        leadingIconSize = 36.dp,
+        leadingIconSize = AvatarSizeEnum.AVATAR_SIZE_36,
         trailingIconSize = trailingIconSize,
     )
 }
