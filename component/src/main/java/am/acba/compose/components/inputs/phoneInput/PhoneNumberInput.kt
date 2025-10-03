@@ -104,12 +104,13 @@ fun PhoneNumberInput(
     var currencyModifier: Modifier = Modifier
     var isFocused by remember { mutableStateOf(false) }
     var isErrorState by remember { mutableStateOf(isError) }
+    var isErrorStateEnabled by remember { mutableStateOf(false) }
     val bottomSheetVisible = remember { mutableStateOf(false) }
     var selectedCountry by remember {
-        mutableStateOf<CountryEnum>(CountryEnum[detectCountryCodeBySim(context)])
+        mutableStateOf(CountryEnum[detectCountryCodeBySim(context)])
     }
     when {
-        isErrorState -> {
+        isErrorState && isErrorStateEnabled -> {
             inputModifier = errorBorderForPhoneInput()
             currencyModifier = errorBorderForRegionCode()
         }
@@ -120,7 +121,11 @@ fun PhoneNumberInput(
         }
 
         !isFocused && value.text.isNotEmpty() -> {
+            isErrorStateEnabled = isErrorState
+        }
 
+        value.text.isEmpty() -> {
+            isErrorStateEnabled = false
         }
     }
 
@@ -170,6 +175,7 @@ fun PhoneNumberInput(
         }
         CountriesBottomSheet(context, bottomSheetVisible, onCountrySelected = { newCountry ->
             selectedCountry = newCountry
+            isErrorStateEnabled = false
         })
     }
 }
@@ -192,7 +198,10 @@ fun RegionCode(
         modifier = modifier
             .wrapContentWidth()
             .height(58.dp)
-            .background(shape = ShapeTokens.inputShapeLeftSide, color = DigitalTheme.colorScheme.backgroundTonal2)
+            .background(
+                shape = ShapeTokens.inputShapeLeftSide,
+                color = DigitalTheme.colorScheme.backgroundTonal2
+            )
             .padding(horizontal = 12.dp)
             .clickable {
                 onRegionClick?.invoke()
@@ -242,7 +251,8 @@ fun RowScope.PhoneTextField(
     focusRequester: FocusRequester = remember { FocusRequester() }
 ) {
     val pattern = Regex("^\\d*$")
-    val visualTransformation = PhoneNumberVisualTransformation(isoCode, dialCode) { isErrorState::invoke.invoke(!it) }
+    val visualTransformation =
+        PhoneNumberVisualTransformation(isoCode, dialCode) { isErrorState::invoke.invoke(!it) }
     TextField(
         value = value,
         onValueChange = {
@@ -275,7 +285,12 @@ fun RowScope.PhoneTextField(
     )
 }
 
-private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
+private fun checkInputValidation(
+    value: TextFieldValue,
+    maxLength: Int,
+    pattern: Regex,
+    textFieldValue: TextFieldValue
+): Boolean {
     return (value.text.length != maxLength || textFieldValue.text.length <= maxLength)
         && textFieldValue.text.matches(pattern)
 }
@@ -449,7 +464,9 @@ private fun CountrySelectionRow(
         dBActionsList.forEach { country ->
             PrimaryChip(
                 modifier = Modifier.padding(top = 10.dp, end = 10.dp),
-                title = stringResource(country.titleResId), imageUrl = country.flagUrl, clipPercent = 50
+                title = stringResource(country.titleResId),
+                imageUrl = country.flagUrl,
+                clipPercent = 50
             ) {
                 closeBottomSheet(state = state, scope = coroutineScope) {
                     bottomSheetVisible.value = false

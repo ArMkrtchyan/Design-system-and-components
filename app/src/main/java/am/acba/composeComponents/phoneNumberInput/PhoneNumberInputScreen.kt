@@ -41,7 +41,6 @@ fun PhoneNumberInputScreen(title: String = "") {
     ) {
         Column(Modifier.fillMaxSize()) {
 
-
             PrimaryToolbar(title = title)
             Column(
                 modifier = Modifier
@@ -49,7 +48,6 @@ fun PhoneNumberInputScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-
                 PhoneNumberInput(
                     value = textNormal.value,
                     onValueChange = { textNormal.value = it },
@@ -57,6 +55,7 @@ fun PhoneNumberInputScreen(title: String = "") {
                     errorText = "error text",
                     label = "Phone",
                     placeholder = "Phone Number",
+                    onPickContactClick = {},
                     isError = false,
                 )
             }
