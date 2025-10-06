@@ -107,6 +107,7 @@ fun ComponentDropDown(
     if (showBottomSheet.value) {
         androidx.compose.ui.window.Popup {
             PrimaryBottomSheet(
+                modifier = Modifier.id("drop_down_bottom_sheet_title"),
                 title = contentProperties.title,
                 dismiss = {
                     showBottomSheet.value = false
