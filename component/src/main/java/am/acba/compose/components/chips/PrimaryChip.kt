@@ -13,6 +13,7 @@ import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -145,15 +146,16 @@ private fun ChipContent(
 ) {
     Row(
         modifier = modifier
+            .wrapContentWidth()
             .height(chipSizeEnum.height)
             .widthIn(min = chipSizeEnum.minWidth)
-            .wrapContentWidth()
             .background(chipStateEnum.getBackgroundColor(), ShapeTokens.shapeRound)
-            .padding(horizontal = chipSizeEnum.paddingHorizontal)
             .clickable {
                 onClick.invoke()
-            },
-        verticalAlignment = Alignment.CenterVertically
+            }
+            .padding(horizontal = chipSizeEnum.paddingHorizontal),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         if (icon != null || imageUrl != null || imageRes != null) {
             var avatarType = AvatarEnum.IMAGE
@@ -170,7 +172,11 @@ private fun ChipContent(
             }
         }
         HorizontalSpacer(iconStartPadding ?: 8.dp)
-        PrimaryText(text = title, style = DigitalTheme.typography.body2Regular, color = chipStateEnum.getContentColor())
+        PrimaryText(
+            text = title,
+            style = DigitalTheme.typography.body2Regular,
+            color = chipStateEnum.getContentColor()
+        )
         if (endIcon == null) {
             HorizontalSpacer(8.dp)
         } else {
@@ -200,7 +206,7 @@ fun PrimaryChipPreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             PrimaryChip(
-                title = "Chip component"
+                title = "Chi"
             )
             VerticalSpacer(20.dp)
             PrimaryChip(
