@@ -8,6 +8,7 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.AvatarImage
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -169,7 +170,7 @@ private fun BadgeText(modifier: Modifier, text: String, textColor: Color) {
         text = text,
         color = textColor,
         style = DigitalTheme.typography.smallRegular,
-        modifier = modifier
+        modifier = modifier.id("badge_text")
     )
 }
 
