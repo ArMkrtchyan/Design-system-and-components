@@ -25,9 +25,17 @@ import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
 import am.acba.utils.Constants.EMPTY_STRING
 import am.acba.utils.enums.CountryEnum
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.ContactsContract
 import android.telephony.TelephonyManager
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -37,6 +45,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -50,6 +59,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -80,6 +90,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 import kotlinx.coroutines.CoroutineScope
@@ -253,6 +264,10 @@ fun RowScope.PhoneTextField(
     val pattern = Regex("^\\d*$")
     val visualTransformation =
         PhoneNumberVisualTransformation(isoCode, dialCode) { isErrorState::invoke.invoke(!it) }
+    val onPickContact = rememberContactPickerLauncher { contactName ->
+        Log.d("ContactPicker", "Picked contact: $contactName") //TODO continue
+    }
+
     TextField(
         value = value,
         onValueChange = {
@@ -273,10 +288,13 @@ fun RowScope.PhoneTextField(
         keyboardActions = keyboardActions,
         trailingIcon = {
             IconButton(onClick = { onPickContactClick?.invoke() }) {
-                Icon(
+                PrimaryIcon(
                     painter = painterResource(id = R.drawable.ic_contacts),
-                    contentDescription = "Contacts Icon",
-                    modifier = Modifier.padding(0.dp, 0.dp, 4.dp, 0.dp),
+                    modifier = Modifier
+                        .padding(0.dp, 0.dp, 4.dp, 0.dp)
+                        .clickable {
+                            onPickContact()
+                        },
                     tint = DigitalTheme.colorScheme.contentPrimary
                 )
             }
@@ -292,7 +310,7 @@ private fun checkInputValidation(
     textFieldValue: TextFieldValue
 ): Boolean {
     return (value.text.length != maxLength || textFieldValue.text.length <= maxLength)
-        && textFieldValue.text.matches(pattern)
+            && textFieldValue.text.matches(pattern)
 }
 
 @SuppressLint("ModifierFactoryExtensionFunction")
@@ -407,8 +425,8 @@ private fun filterCountries(
     return if (searchQuery.length > 2) {
         countries.filter {
             stringResource(it.titleResId).contains(searchQuery, ignoreCase = true) ||
-                it.dialCode.contains(searchQuery, ignoreCase = true) ||
-                it.name.contains(searchQuery, ignoreCase = true)
+                    it.dialCode.contains(searchQuery, ignoreCase = true) ||
+                    it.name.contains(searchQuery, ignoreCase = true)
         }
     } else {
         countries
@@ -514,3 +532,78 @@ fun PhoneInputPreview() {
         }
     }
 }
+
+@Composable
+fun rememberContactPickerLauncher(
+    onContactPicked: (String) -> Unit
+): () -> Unit {
+    val context = LocalContext.current
+
+    val contactPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickContact()
+    ) { uri: Uri? ->
+        if (uri == null) return@rememberLauncherForActivityResult
+
+        try {
+            val idCursor = context.contentResolver.query(
+                uri,
+                arrayOf(ContactsContract.Contacts._ID),
+                null,
+                null,
+                null
+            )
+
+            var contactId: String? = null
+            idCursor?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    contactId = cursor.getString(
+                        cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID)
+                    )
+                }
+            }
+            contactId?.let { id ->
+                val phoneCursor = context.contentResolver.query(
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                    arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
+                    "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?",
+                    arrayOf(id),
+                    null
+                )
+
+                phoneCursor?.use { pCursor ->
+                    if (pCursor.moveToFirst()) {
+                        val number = pCursor.getString(
+                            pCursor.getColumnIndexOrThrow(
+                                ContactsContract.CommonDataKinds.Phone.NUMBER
+                            )
+                        )
+                        val cleanNumber = number
+                            .replace("[^+\\d]".toRegex(), "")
+                            .trim()
+                        onContactPicked(cleanNumber)
+                    } else {
+                        Toast.makeText(context, "No phone number found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Error reading contact", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            contactPickerLauncher.launch(null)
+        } else {
+            Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    return {
+        permissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+    }
+}
+
