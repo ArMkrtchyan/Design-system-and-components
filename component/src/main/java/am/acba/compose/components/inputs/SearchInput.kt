@@ -80,6 +80,7 @@ fun SearchBar(
         }
         BasicTextField(
             modifier = Modifier
+                .id("search_bar_input")
                 .weight(5f)
                 .fillMaxWidth().id("search"),
             value = text,
