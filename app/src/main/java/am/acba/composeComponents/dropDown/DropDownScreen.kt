@@ -66,11 +66,14 @@ fun DropDownScreen(title: String = "") {
                     })
 
                 var text by remember { mutableStateOf(TextFieldValue("")) }
+                var image by remember { mutableStateOf("") }
 
                 DropDownWithSpacer(
                     value = text,
                     dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
+                    leadingIconTint = null,
+                    leadingImageUrl = image,
                     contentProperties = ContentProperties(title = "Bottom Sheet 3", calculatePercentForOpenFullScreen = true),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
                         val list = listOf(
@@ -91,6 +94,7 @@ fun DropDownScreen(title: String = "") {
                                     showDivider = true,
                                     onClick = {
                                         text = TextFieldValue(it.second)
+                                        image = it.first
                                         onItemClick.invoke()
                                     }
                                 )
@@ -136,6 +140,7 @@ fun DropDownWithSpacer(
     enabled: Boolean = true,
     leadingIcon: Int? = null,
     leadingIconTint: Color? = null,
+    leadingImageUrl: String? = null,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
@@ -154,7 +159,7 @@ fun DropDownWithSpacer(
         leadingIconTint = leadingIconTint,
         singleLine = true,
         maxLines = maxLines,
-        leadingImageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+        leadingImageUrl = leadingImageUrl,
         contentProperties = contentProperties,
         content = bottomSheetContent
     )
