@@ -230,11 +230,14 @@ fun AvatarImage(
                         )
                         ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
                     }
+                    imageView
+                },
+                update = { imageView ->
+                    imageView.setImageDrawable(null)
                     Glide
                         .with(context)
                         .load(imageUrl)
                         .into(imageView)
-                    imageView
                 },
                 modifier = Modifier
                     .fillMaxSize()
