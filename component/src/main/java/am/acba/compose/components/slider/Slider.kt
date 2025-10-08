@@ -63,6 +63,7 @@ fun PrimarySlider(
     startSuffix: String = EMPTY_STRING,
     endSuffix: String = EMPTY_STRING,
     pattern: String = PATTERN_NUMBER_SEPARATOR,
+    isShowSliderValue: Boolean = true,
     minimumFractionDigits: Int = 0,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
@@ -88,8 +89,15 @@ fun PrimarySlider(
                         modifier = Modifier
                             .size(22.dp)
                             .shadow(4.dp, ShapeTokens.shapeRound)
-                            .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapeRound)
-                            .border(2.dp, DigitalTheme.colorScheme.backgroundBrand, ShapeTokens.shapeRound)
+                            .background(
+                                DigitalTheme.colorScheme.backgroundTonal1,
+                                ShapeTokens.shapeRound
+                            )
+                            .border(
+                                2.dp,
+                                DigitalTheme.colorScheme.backgroundBrand,
+                                ShapeTokens.shapeRound
+                            )
                             .pointerInput(Unit) {
                                 awaitPointerEventScope {
                                     while (true) {
@@ -134,9 +142,17 @@ fun PrimarySlider(
             )
         }
         Row(modifier = Modifier.fillMaxWidth()) {
-            BottomText("${state.valueRange.start.formatWithPattern(pattern, minimumFractionDigits)}$startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
+            val startText = if (isShowSliderValue) state.valueRange.start.formatWithPattern(
+                pattern,
+                minimumFractionDigits
+            ) else EMPTY_STRING
+            val endText = if (isShowSliderValue) state.valueRange.endInclusive.formatWithPattern(
+                pattern,
+                minimumFractionDigits
+            ) else EMPTY_STRING
+            BottomText("$startText$startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
             HorizontalSpacer(8.dp)
-            BottomText("${state.valueRange.endInclusive.formatWithPattern(pattern, minimumFractionDigits)}$endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
+            BottomText("$endText$endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
         }
     }
 }
@@ -146,7 +162,13 @@ fun PrimarySlider(
 private fun BoxScope.LeftAdditionalTrack() {
     val color = DigitalTheme.colorScheme.backgroundBrand
     val cornerRadius = CornerRadius(100.dpToPx().toFloat(), 100.dpToPx().toFloat())
-    val roundRect = RoundRect(left = 11.5.dpToPx().toFloat(), top = 0f, right = 19.dpToPx().toFloat(), bottom = 7.dpToPx().toFloat(), cornerRadius = cornerRadius)
+    val roundRect = RoundRect(
+        left = 11.5.dpToPx().toFloat(),
+        top = 0f,
+        right = 19.dpToPx().toFloat(),
+        bottom = 7.dpToPx().toFloat(),
+        cornerRadius = cornerRadius
+    )
     Canvas(
         modifier = Modifier
             .width(18.dp)
@@ -166,7 +188,13 @@ private fun BoxScope.LeftAdditionalTrack() {
 private fun BoxScope.RightAdditionalTrack() {
     val color = DigitalTheme.colorScheme.backgroundTonal2
     val cornerRadius = CornerRadius(100.dpToPx().toFloat(), 100.dpToPx().toFloat())
-    val roundRect = RoundRect(left = -11.5.dpToPx().toFloat(), top = 0f, right = 6.9.dpToPx().toFloat(), bottom = 7.dpToPx().toFloat(), cornerRadius = cornerRadius)
+    val roundRect = RoundRect(
+        left = -11.5.dpToPx().toFloat(),
+        top = 0f,
+        right = 6.9.dpToPx().toFloat(),
+        bottom = 7.dpToPx().toFloat(),
+        cornerRadius = cornerRadius
+    )
     Canvas(
         modifier = Modifier
             .width(18.dp)

@@ -45,7 +45,7 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
 }
 
 @Composable
-fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
+fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, maxLines: Int = 1) {
     val textColor = when {
         isError -> DigitalTheme.colorScheme.contentDangerTonal1
         !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
@@ -53,7 +53,9 @@ fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
     }
     Text(
         text = text ?: "",
-        color = textColor
+        color = textColor,
+        maxLines = maxLines,
+        overflow = if (maxLines == 1) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }
 
