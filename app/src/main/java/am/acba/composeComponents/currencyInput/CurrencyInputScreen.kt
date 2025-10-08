@@ -61,7 +61,7 @@ fun CurrencyInputScreen(title: String = "") {
                 CurrencyInput(
                     value = currencyText1.value,
                     onValueChange = { currencyText1.value = it },
-                    label = "Amount",
+                    label = "Amount iwhcihhucewiudhchiieine ihiceic",
                     helpText = "Input without dot",
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
