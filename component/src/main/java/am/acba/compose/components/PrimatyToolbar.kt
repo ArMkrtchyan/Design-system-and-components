@@ -12,6 +12,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -22,6 +23,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PrimaryToolbar(
     title: String = "",
+    contentColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    containerColor: Color = DigitalTheme.colorScheme.backgroundBase,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
     val activity = LocalContext.current.getActivity()
@@ -34,16 +37,17 @@ fun PrimaryToolbar(
                 text = title,
                 style = DigitalTheme.typography.body1Bold,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                color = contentColor
             )
         }, colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = DigitalTheme.colorScheme.backgroundBase,
-            titleContentColor = DigitalTheme.colorScheme.contentPrimary,
+            containerColor = containerColor,
+            titleContentColor = contentColor,
         ), actions = actions, navigationIcon = {
             IconButton(onClick = {
                 activity?.onBackPressed()
             }, modifier = Modifier.id("leftIcon")) {
-                PrimaryIcon(painterResource(R.drawable.ic_back))
+                PrimaryIcon(painterResource(R.drawable.ic_back), tint = contentColor)
             }
         })
 }
