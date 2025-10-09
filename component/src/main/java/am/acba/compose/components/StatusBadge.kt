@@ -4,6 +4,7 @@ import am.acba.component.R
 import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -35,6 +36,7 @@ fun StatusBadge(
             .fillMaxWidth()
             .background(color = backgroundColor, shape = ShapeTokens.shapeStatus)
             .padding(horizontal = 16.dp, vertical = 4.dp)
+            .id("statusBadge")
     ) {
         Row(
             modifier = Modifier
@@ -43,10 +45,23 @@ fun StatusBadge(
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
-                PrimaryIcon(modifier = Modifier.size(14.dp), painter = painterResource(icon), tint = iconColor)
+                PrimaryIcon(
+                    modifier = Modifier
+                        .size(14.dp)
+                        .id("statusBadgeIcon"),
+                    painter = painterResource(icon),
+                    tint = iconColor
+                )
                 HorizontalSpacer(4.dp)
             }
-            PrimaryText(text = title, color = textColor, style = DigitalTheme.typography.xSmallRegular, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            PrimaryText(
+                text = title,
+                color = textColor,
+                style = DigitalTheme.typography.xSmallRegular,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.id("statusBadgeText")
+            )
         }
     }
 }
