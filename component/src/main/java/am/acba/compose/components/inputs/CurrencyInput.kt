@@ -171,7 +171,6 @@ private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern:
         && textFieldValue.text.matches(pattern)
         && isDotPositionValid
         && !textFieldValue.text.startsWith(".")
-        && !textFieldValue.text.startsWith("0")
 }
 
 @Composable
