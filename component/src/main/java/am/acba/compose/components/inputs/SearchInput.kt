@@ -60,7 +60,7 @@ fun SearchBar(
         modifier = Modifier
             .height(height)
             .fillMaxWidth()
-            .background(color = backgroundColor, shape = cornerShape),
+            .background(color = backgroundColor, shape = cornerShape).then(modifier),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
