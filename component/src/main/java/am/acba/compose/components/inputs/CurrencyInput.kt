@@ -81,7 +81,11 @@ fun CurrencyInput(
         }
 
         !isFocused && formatDecimal && value.text.isNotEmpty() -> {
-            onValueChange(TextFieldValue(value.text.replace(",", "").numberFormatting().replace(",", "")))
+            onValueChange(
+                TextFieldValue(
+                    value.text.replace(",", "").numberFormatting().replace(",", "")
+                )
+            )
 
         }
     }
@@ -166,7 +170,12 @@ private fun RowScope.AmountTextField(
     )
 }
 
-private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
+private fun checkInputValidation(
+    value: TextFieldValue,
+    maxLength: Int,
+    pattern: Regex,
+    textFieldValue: TextFieldValue
+): Boolean {
     val splitTextArray = textFieldValue.text.split(".")
     val isDecimal = splitTextArray.size == 2
     val isDotPositionValid = !isDecimal || splitTextArray[1].length <= 2
@@ -174,11 +183,16 @@ private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern:
         && textFieldValue.text.matches(pattern)
         && isDotPositionValid
         && !textFieldValue.text.startsWith(".")
-        && !textFieldValue.text.startsWith("0")
+        && !(textFieldValue.text.length > 1 && textFieldValue.text.startsWith("0"))
 }
 
 @Composable
-private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boolean, onCurrencyClick: (() -> Unit)?) {
+private fun CurrencyField(
+    modifier: Modifier,
+    enabled: Boolean,
+    showArrow: Boolean,
+    onCurrencyClick: (() -> Unit)?
+) {
     var currencyBackgroundColor: Color
     var currencyTextColor: Color
     var flagOpacity: Float
