@@ -137,7 +137,9 @@ private fun ProductDescriptionHeaderIcon() {
 private fun ProductDescriptionSubTitle(subTitle: String) {
     if (subTitle.isNotEmpty()) {
         PrimaryText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .id("subTitle"),
             text = subTitle,
             style = DigitalTheme.typography.body2Regular
         )
@@ -276,13 +278,13 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: 
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxSize()
-                .id("mediaImage")
                 .background(DigitalTheme.colorScheme.backgroundTonal2, RoundedCornerShape(12.dp))
         )
 
         GlideImage(
             modifier = Modifier
                 .fillMaxSize()
+                .id("mediaImage")
                 .clip(ClipRightBottomRoundedShape()),
             model = imageUrl,
             contentDescription = null,
