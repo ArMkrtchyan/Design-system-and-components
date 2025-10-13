@@ -1,5 +1,6 @@
 ﻿package am.acba.composeComponents.dropDown
 
+import am.acba.component.R
 import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.AvatarEnum
@@ -56,10 +57,11 @@ fun DropDownScreen(title: String = "") {
                     .padding(horizontal = 16.dp),
             ) {
                 DropDownWithSpacer(
+                    enabled = true,
                     value = TextFieldValue("Drop Down Value"),
                     dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
-                    helpText = "Help text",
+                    leadingIcon = R.drawable.ic_close,
                     contentProperties = ContentProperties(title = "Bottom Sheet 1"),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
                         TextField(value = "a", onValueChange = {}, modifier = Modifier.fillMaxWidth())
@@ -107,8 +109,6 @@ fun DropDownScreen(title: String = "") {
                     value = TextFieldValue("Drop Down Value"),
                     dropDownModifier = Modifier.fillMaxWidth(),
                     label = "Drop Down Label",
-                    isError = true,
-                    errorText = "Some error",
                     contentProperties = ContentProperties(title = "Bottom Sheet 2", calculatePercentForOpenFullScreen = false),
                     bottomSheetContent = { sheetState, scope, onItemClick ->
                         TextField(value = "a", onValueChange = {}, modifier = Modifier.fillMaxWidth())
@@ -134,15 +134,10 @@ fun DropDownWithSpacer(
     value: TextFieldValue = TextFieldValue(""),
     dropDownModifier: Modifier = Modifier,
     label: String,
-    helpText: String? = null,
-    isError: Boolean = false,
-    errorText: String? = null,
     enabled: Boolean = true,
     leadingIcon: Int? = null,
     leadingIconTint: Color? = null,
     leadingImageUrl: String? = null,
-    singleLine: Boolean = true,
-    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     contentProperties: ContentProperties = ContentProperties(),
     bottomSheetContent: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, closeBottomSheetCallback: () -> Unit) -> Unit,
 ) {
@@ -151,14 +146,9 @@ fun DropDownWithSpacer(
         value = value,
         modifier = dropDownModifier,
         label = label,
-        helpText = helpText,
-        isError = isError,
-        errorText = errorText,
         enabled = enabled,
         leadingIcon = leadingIcon,
         leadingIconTint = leadingIconTint,
-        singleLine = true,
-        maxLines = maxLines,
         leadingImageUrl = leadingImageUrl,
         contentProperties = contentProperties,
         content = bottomSheetContent
