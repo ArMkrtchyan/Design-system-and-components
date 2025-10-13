@@ -6,6 +6,7 @@ import am.acba.component.R
 import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.StatusBadge
 import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
@@ -120,32 +121,37 @@ fun ListItem(
     onRadioButtonClick: () -> Unit = {},
     onCheckedChangeListener: (Boolean) -> Unit = {},
 
+    statusModifier: Modifier = Modifier,
+    statusTitle: String? = null,
+    statusIcon: Int? = null,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusAlign: Alignment = Alignment.TopEnd,
+
     onClick: () -> Unit = {},
     onSecondEndIconClick: () -> Unit = {},
     onEndIconClick: () -> Unit = {}
 ) {
+    val borderModifier = if (showBorder) {
+        modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
+    } else {
+        modifier
+    }
     Column(
-        modifier =
-            if (showBorder) {
-                modifier
-                    .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                    .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp)
-                    .clickable { onClick.invoke() }
-            } else {
-                modifier
-                    .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp)
-                    .clickable { onClick.invoke() }
-            }
+        modifier = Modifier
+            .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
+            .then(borderModifier)
+            .padding(top = 16.dp)
+            .clickable { onClick.invoke() }
     ) {
-        val isTitleOnly = description.isEmpty() && description2.isEmpty() && description3.isEmpty() && description4.isEmpty()
+        val isTitleOnly =
+            description.isEmpty() && description2.isEmpty() && description3.isEmpty() && description4.isEmpty()
         val showStartAvatar = avatarIcon != null || avatarImageUrl != null || avatarText != null
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = 16.dp)
                 .wrapContentHeight(),
             verticalAlignment = if (isTitleOnly) Alignment.CenterVertically else Alignment.Top
         ) {
@@ -270,21 +276,33 @@ fun ListItem(
                         )
                     }
                 }
-                val newDescriptions = arrayListOf(description, description2, description3, description4).filter { it.isNotEmpty() }
-                val newDescription = if (newDescriptions.isNotEmpty()) newDescriptions.first() else ""
+                val newDescriptions = arrayListOf(
+                    description,
+                    description2,
+                    description3,
+                    description4
+                ).filter { it.isNotEmpty() }
+                val newDescription =
+                    if (newDescriptions.isNotEmpty()) newDescriptions.first() else ""
                 val newDescription2 = if (newDescriptions.size > 1) newDescriptions[1] else ""
                 val newDescription3 = if (newDescriptions.size > 2) newDescriptions[2] else ""
                 val newDescription4 = if (newDescriptions.size > 3) newDescriptions[3] else ""
 
-                val descriptionsList = arrayListOf(newDescription2, newDescription3, newDescription4)
-                val newDescriptionMaxLines = if (descriptionMaxLines == null || descriptionMaxLines < 1) null else descriptionMaxLines
-                val newDescription2MaxLines = if (description2MaxLines == null || description2MaxLines < 1) null else description2MaxLines
-                val newDescription3MaxLines = if (description3MaxLines == null || description3MaxLines < 1) null else description3MaxLines
+                val descriptionsList =
+                    arrayListOf(newDescription2, newDescription3, newDescription4)
+                val newDescriptionMaxLines =
+                    if (descriptionMaxLines == null || descriptionMaxLines < 1) null else descriptionMaxLines
+                val newDescription2MaxLines =
+                    if (description2MaxLines == null || description2MaxLines < 1) null else description2MaxLines
+                val newDescription3MaxLines =
+                    if (description3MaxLines == null || description3MaxLines < 1) null else description3MaxLines
 
-                val firstDescriptionMaxLines = newDescriptionMaxLines ?: (listItemType.descriptionMaxLines - descriptionsList.count { it.isNotEmpty() })
+                val firstDescriptionMaxLines = newDescriptionMaxLines
+                    ?: (listItemType.descriptionMaxLines - descriptionsList.count { it.isNotEmpty() })
                 val descriptions2List = arrayListOf(newDescription3, newDescription4)
                 val secondDescriptionMaxLines =
-                    newDescription2MaxLines ?: (listItemType.descriptionMaxLines - firstDescriptionMaxLines - descriptions2List.count { it.isNotEmpty() })
+                    newDescription2MaxLines
+                        ?: (listItemType.descriptionMaxLines - firstDescriptionMaxLines - descriptions2List.count { it.isNotEmpty() })
                 val descriptions3List = arrayListOf(newDescription4)
                 val thirdDescriptionMaxLines = newDescription3MaxLines
                     ?: (listItemType.descriptionMaxLines - (firstDescriptionMaxLines + secondDescriptionMaxLines) - descriptions3List.count { it.isNotEmpty() })
@@ -337,7 +355,22 @@ fun ListItem(
         }
         VerticalSpacer(16.dp)
         if (showDivider) {
-            PrimaryDivider()
+            PrimaryDivider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            )
+        }
+        if (!statusTitle.isNullOrEmpty()) {
+            StatusBadge(
+                title = statusTitle,
+                icon = statusIcon,
+                textColor = statusTextColor,
+                iconColor = statusIconColor,
+                backgroundColor = statusBackgroundColor,
+                align = statusAlign,
+                modifier = statusModifier
+            )
         }
     }
 }
@@ -362,7 +395,9 @@ fun PrimaryListItemPreview() {
                 //    description3 = "Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 Description 3 ",
                 description4 = "Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4 Description 4",
                 endIcon = R.drawable.ic_right,
-                controllerType = ControllerTypeEnum.CHECK_BOX
+                controllerType = ControllerTypeEnum.CHECK_BOX,
+                statusTitle = "dhscbdsjhcbjhsdhcjdsjn",
+                showBorder = true
             )
         }
     }
