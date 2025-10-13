@@ -12,6 +12,7 @@ import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.timeLine.ProductDescriptionBadge
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -73,14 +74,22 @@ fun <T : IProductDescription> ProductDescriptionCard(
             .padding(top = 12.dp, start = 16.dp)
             .clickable { onClick.invoke(productDescription) }
     ) {
-        ProductDescriptionHeader(productDescription.title, productDescription.subTitle, contentMinHeight)
+        ProductDescriptionHeader(
+            productDescription.title,
+            productDescription.subTitle,
+            contentMinHeight
+        )
         ProductDescriptionContent(productDescription, contentMinHeight, contentScale)
     }
 }
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionHeader(title: String, subTitle: String, contentMinHeight: MutableIntState) {
+private fun ProductDescriptionHeader(
+    title: String,
+    subTitle: String,
+    contentMinHeight: MutableIntState
+) {
     Column(
         modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
             contentMinHeight.intValue = 190.dpToPx() - layoutCoordinates.size.height
@@ -108,7 +117,8 @@ private fun RowScope.ProductDescriptionHeaderTitle(title: String) {
     PrimaryText(
         modifier = Modifier
             .weight(1f)
-            .padding(end = 16.dp),
+            .padding(end = 16.dp)
+            .id("headerTitle"),
         text = title,
         style = DigitalTheme.typography.body1Bold,
         maxLines = 2,
@@ -136,7 +146,11 @@ private fun ProductDescriptionSubTitle(subTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState, contentScale: ContentScale) {
+private fun <T : IProductDescription> ProductDescriptionContent(
+    productDescription: T,
+    contentMinHeight: MutableIntState,
+    contentScale: ContentScale
+) {
     val mediaHeight = remember { mutableIntStateOf(200) }
     val density = LocalDensity.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -150,11 +164,19 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
         ) {
             VerticalSpacer(12.dp)
             ProductDescriptionSecondTitle(productDescription.secondTitle)
-            ProductDescriptionBadges(productDescription.badges, productDescription.badgeBackgroundColor, productDescription.badgeTextColor)
+            ProductDescriptionBadges(
+                productDescription.badges,
+                productDescription.badgeBackgroundColor,
+                productDescription.badgeTextColor
+            )
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
             ProductDescriptionBullets(productDescription.bullets)
         }
-        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() }, contentScale)
+        ProductDescriptionMedia(
+            productDescription.mediaImage,
+            with(density) { mediaHeight.intValue.toDp() },
+            contentScale
+        )
     }
 }
 
@@ -163,7 +185,9 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
 private fun ProductDescriptionSecondTitle(secondTitle: String) {
     if (secondTitle.isNotEmpty()) {
         PrimaryText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .id("secondTitle"),
             text = secondTitle,
             style = DigitalTheme.typography.xSmallBold,
             maxLines = 2,
@@ -175,16 +199,23 @@ private fun ProductDescriptionSecondTitle(secondTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionBadges(badges: List<ProductDescriptionBadge>, badgeBackgroundColor: Color?, badgeTextColor: Color?) {
+private fun ProductDescriptionBadges(
+    badges: List<ProductDescriptionBadge>,
+    badgeBackgroundColor: Color?,
+    badgeTextColor: Color?
+) {
     if (badges.isNotEmpty()) {
         FlowRow(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            badges.forEach { badge ->
+            badges.forEachIndexed { index, badge ->
                 Badge(
+                    modifier = Modifier
+                        .id("badge${index}"),
                     text = badge.title,
-                    backgroundColor = badgeBackgroundColor ?: DigitalTheme.colorScheme.backgroundTonal2,
+                    backgroundColor = badgeBackgroundColor
+                        ?: DigitalTheme.colorScheme.backgroundTonal2,
                     textColor = badgeTextColor ?: DigitalTheme.colorScheme.contentPrimary,
                     imageUrl = badge.iconUrl
                 )
@@ -215,9 +246,17 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                PrimaryIcon(modifier = Modifier.size(20.dp), painter = painterResource(R.drawable.ic_success_small), tint = DigitalTheme.colorScheme.contentBrand)
+                PrimaryIcon(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(R.drawable.ic_success_small),
+                    tint = DigitalTheme.colorScheme.contentBrand
+                )
                 HorizontalSpacer(4.dp)
-                PrimaryText(text = bullet, style = DigitalTheme.typography.smallRegular, modifier = Modifier.weight(1f))
+                PrimaryText(
+                    text = bullet,
+                    style = DigitalTheme.typography.smallRegular,
+                    modifier = Modifier.weight(1f)
+                )
             }
             VerticalSpacer(4.dp)
         }
@@ -237,6 +276,7 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: 
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxSize()
+                .id("mediaImage")
                 .background(DigitalTheme.colorScheme.backgroundTonal2, RoundedCornerShape(12.dp))
         )
 
@@ -252,7 +292,11 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: 
 }
 
 private class ClipRightBottomRoundedShape : Shape {
-    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
         val path = Path().apply {
             addRoundRect(
                 RoundRect(
@@ -260,7 +304,10 @@ private class ClipRightBottomRoundedShape : Shape {
                     right = size.width - 16.dpToPx(),
                     top = 0f,
                     bottom = size.height - 16.dpToPx(),
-                    bottomRightCornerRadius = CornerRadius(12.dpToPx().toFloat(), 12.dpToPx().toFloat())
+                    bottomRightCornerRadius = CornerRadius(
+                        12.dpToPx().toFloat(),
+                        12.dpToPx().toFloat()
+                    )
                 )
             )
         }
