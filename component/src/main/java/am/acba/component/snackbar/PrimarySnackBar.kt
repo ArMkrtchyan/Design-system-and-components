@@ -59,23 +59,20 @@ class PrimarySnackBar(
         }
     }
 
-
     fun show() {
         val rootView = context.window.decorView.findViewById<FrameLayout>(android.R.id.content)
-        var coordinatorLayout: CoordinatorLayout? = rootView.findViewById(R.id.snackbar_coordinator_layout)
-        var sheetBehavior: BottomSheetBehavior<*> = BottomSheetBehavior.from<View>(binding.bottomSheet)
-        if (coordinatorLayout != null) {
-            val bottomSheet = coordinatorLayout.findViewById<FrameLayout>(R.id.bottom_sheet)
-            sheetBehavior = BottomSheetBehavior.from<View>(bottomSheet!! as View)
-            bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 400)
-        } else {
-            coordinatorLayout = binding.snackbarCoordinatorLayout
-
-            rootView.addView(binding.root)
-
-            swipeDown(sheetBehavior)
-            binding.bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 400)
+        rootView.findViewById<CoordinatorLayout>(R.id.snackbar_coordinator_layout)?.let {
+            rootView.removeView(it)
         }
+        val newBinding = PrimarySnackBarBinding.inflate(context.inflater(), rootView, false)
+        val coordinatorLayout = newBinding.snackbarCoordinatorLayout
+        rootView.addView(newBinding.root)
+
+        val sheetBehavior = BottomSheetBehavior.from<View>(newBinding.bottomSheet)
+
+        swipeDown(sheetBehavior)
+        newBinding.bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 400)
+
         val lottie = coordinatorLayout.findViewById<LottieAnimationView>(R.id.lottie)
         val startIcon = coordinatorLayout.findViewById<PrimaryImageView>(R.id.start_icon)
         val endIcon = coordinatorLayout.findViewById<PrimaryImageView>(R.id.end_icon)
@@ -94,13 +91,10 @@ class PrimarySnackBar(
         }
         coordinatorLayout.invalidate()
         endIcon.setOnClickListener { swipeDown(sheetBehavior, coordinatorLayout) }
-        var handlerCallback: Runnable? = coordinatorLayout.getTag(R.id.snackbar_coordinator_layout) as? Runnable
-        handlerCallback?.let(coordinatorLayout::removeCallbacks)
-
         val appearTime = (3000 + title.split(" ").size * 200).coerceAtMost(15000)
-        handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
+        val handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
         coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
-        coordinatorLayout.postDelayed(handlerCallback, (appearTime).toLong())
+        coordinatorLayout.postDelayed(handlerCallback, appearTime.toLong())
 
         lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
             override fun onStop(owner: LifecycleOwner) {
