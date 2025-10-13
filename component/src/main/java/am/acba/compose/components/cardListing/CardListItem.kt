@@ -97,9 +97,9 @@ fun CardListItem(
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {}

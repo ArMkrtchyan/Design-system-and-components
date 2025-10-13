@@ -59,7 +59,8 @@ fun PrimaryButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val color = if (isPressed) DigitalTheme.colorScheme.backgroundBrandPressed else DigitalTheme.colorScheme.backgroundBrand
+    val color =
+        if (isPressed) DigitalTheme.colorScheme.backgroundBrandPressed else DigitalTheme.colorScheme.backgroundBrand
     Button(
         onClick = onClick,
         modifier = modifier,
@@ -74,7 +75,15 @@ fun PrimaryButton(
         contentPadding = contentPadding,
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, text = text, style = textStyle, textId = textId) }
+    ) {
+        SetIconWithText(
+            icon = icon,
+            iconGravity = iconGravity,
+            text = text,
+            style = textStyle,
+            textId = textId
+        )
+    }
 }
 
 @Composable
@@ -91,7 +100,8 @@ fun PrimaryButtonSmall(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val color = if (isPressed) DigitalTheme.colorScheme.backgroundBrandPressed else DigitalTheme.colorScheme.backgroundBrand
+    val color =
+        if (isPressed) DigitalTheme.colorScheme.backgroundBrandPressed else DigitalTheme.colorScheme.backgroundBrand
     Button(
         onClick = onClick,
         modifier = modifier,
@@ -106,7 +116,17 @@ fun PrimaryButtonSmall(
         contentPadding = contentPadding,
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4.dp, textId = textId) }
+    ) {
+        SetIconWithText(
+            icon = icon,
+            iconGravity = iconGravity,
+            iconSize = 16.dp,
+            text = text,
+            style = textStyle,
+            iconAndTextSpacing = 4.dp,
+            textId = textId
+        )
+    }
 }
 
 @Composable
@@ -141,14 +161,23 @@ fun GhostButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, text = text, textStyle, textId = textId) }
+    ) {
+        SetIconWithText(
+            icon = icon,
+            iconGravity = iconGravity,
+            text = text,
+            textStyle,
+            textId = textId
+        )
+    }
 }
 
 
 @Composable
 fun SecondaryButtonGreen(
     modifier: Modifier = Modifier,
-    text: String = "",
+    text: String = EMPTY_STRING,
+    textId: String = EMPTY_STRING,
     textStyle: TextStyle = DigitalTheme.typography.body1Bold,
     icon: Int = -1,
     iconGravity: Int = Gravity.START,
@@ -158,12 +187,15 @@ fun SecondaryButtonGreen(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val backgroundColor = if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
-    val borderColor = if (enabled) DigitalTheme.colorScheme.borderBrandTonal1 else DigitalTheme.colorScheme.borderBrandTonal1Disable
+    val backgroundColor =
+        if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
+    val borderColor =
+        if (enabled) DigitalTheme.colorScheme.borderBrandTonal1 else DigitalTheme.colorScheme.borderBrandTonal1Disable
     if (isSmall) {
         SecondaryButtonSmall(
             modifier = modifier,
             text = text,
+            textId = textId,
             textStyle = textStyle,
             icon = icon,
             iconGravity = iconGravity,
@@ -182,6 +214,7 @@ fun SecondaryButtonGreen(
         SecondaryButton(
             modifier = modifier,
             text = text,
+            textId = textId,
             textStyle = textStyle,
             icon = icon,
             iconGravity = iconGravity,
@@ -202,7 +235,8 @@ fun SecondaryButtonGreen(
 @Composable
 fun SecondaryButtonGrey(
     modifier: Modifier = Modifier,
-    text: String = "",
+    text: String = EMPTY_STRING,
+    textId: String = EMPTY_STRING,
     textStyle: TextStyle = DigitalTheme.typography.body1Bold,
     icon: Int = -1,
     iconGravity: Int = Gravity.START,
@@ -212,12 +246,15 @@ fun SecondaryButtonGrey(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val backgroundColor = if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
-    val borderColor = if (enabled) DigitalTheme.colorScheme.borderBase else DigitalTheme.colorScheme.borderBrandTonal1Disable
+    val backgroundColor =
+        if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent
+    val borderColor =
+        if (enabled) DigitalTheme.colorScheme.borderBase else DigitalTheme.colorScheme.borderBrandTonal1Disable
     if (isSmall) {
         SecondaryButtonSmall(
             modifier = modifier,
             text = text,
+            textId = textId,
             textStyle = textStyle,
             icon = icon,
             iconGravity = iconGravity,
@@ -236,6 +273,7 @@ fun SecondaryButtonGrey(
         SecondaryButton(
             modifier = modifier,
             text = text,
+            textId = textId,
             textStyle = textStyle,
             icon = icon,
             iconGravity = iconGravity,
@@ -277,7 +315,15 @@ fun SecondaryButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, text = text, textStyle, textId = textId) }
+    ) {
+        SetIconWithText(
+            icon = icon,
+            iconGravity = iconGravity,
+            text = text,
+            textStyle,
+            textId = textId
+        )
+    }
 }
 
 @Composable
@@ -305,7 +351,17 @@ fun SecondaryButtonSmall(
         contentPadding = contentPadding,
         elevation = null,
         interactionSource = interactionSource
-    ) { SetIconWithText(icon = icon, iconGravity = iconGravity, iconSize = 16.dp, text = text, style = textStyle, iconAndTextSpacing = 4.dp, textId = textId) }
+    ) {
+        SetIconWithText(
+            icon = icon,
+            iconGravity = iconGravity,
+            iconSize = 16.dp,
+            text = text,
+            style = textStyle,
+            iconAndTextSpacing = 4.dp,
+            textId = textId
+        )
+    }
 }
 
 @Composable
@@ -320,7 +376,8 @@ fun EmojiButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val color = if (isPressed) DigitalTheme.colorScheme.backgroundSecondaryPressed else DigitalTheme.colorScheme.backgroundSecondary
+    val color =
+        if (isPressed) DigitalTheme.colorScheme.backgroundSecondaryPressed else DigitalTheme.colorScheme.backgroundSecondary
     Button(
         onClick = onClick,
         modifier = modifier,
@@ -336,18 +393,63 @@ fun EmojiButton(
             disabledContainerColor = DigitalTheme.colorScheme.backgroundBrandDisable
         ),
     ) {
-        SetIconWithText(icon = emojiIcon, iconGravity = iconGravity, text = text, textStyle, textId = textId)
+        SetIconWithText(
+            icon = emojiIcon,
+            iconGravity = iconGravity,
+            text = text,
+            textStyle,
+            textId = textId
+        )
     }
 }
 
 @Composable
-private fun SetIconWithText(icon: Int, iconGravity: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp, textId: String) {
+private fun SetIconWithText(
+    icon: Int,
+    iconGravity: Int,
+    text: String,
+    style: TextStyle,
+    iconSize: Dp = 24.dp,
+    iconAndTextSpacing: Dp = 8.dp,
+    textId: String
+) {
     if (icon > -1) {
         when (iconGravity) {
-            Gravity.START -> SetStartIconWithText(icon, text, style, iconSize = iconSize, iconAndTextSpacing = iconAndTextSpacing, textId)
-            Gravity.TOP -> SetTopIconWithText(icon, text, style, iconSize = iconSize, iconAndTextSpacing = iconAndTextSpacing, textId)
-            Gravity.BOTTOM -> SetBottomIconWithText(icon, text, style, iconSize = iconSize, iconAndTextSpacing = iconAndTextSpacing, textId)
-            Gravity.END -> SetEndIconWithText(icon, text, style, iconSize = iconSize, iconAndTextSpacing = iconAndTextSpacing, textId)
+            Gravity.START -> SetStartIconWithText(
+                icon,
+                text,
+                style,
+                iconSize = iconSize,
+                iconAndTextSpacing = iconAndTextSpacing,
+                textId
+            )
+
+            Gravity.TOP -> SetTopIconWithText(
+                icon,
+                text,
+                style,
+                iconSize = iconSize,
+                iconAndTextSpacing = iconAndTextSpacing,
+                textId
+            )
+
+            Gravity.BOTTOM -> SetBottomIconWithText(
+                icon,
+                text,
+                style,
+                iconSize = iconSize,
+                iconAndTextSpacing = iconAndTextSpacing,
+                textId
+            )
+
+            Gravity.END -> SetEndIconWithText(
+                icon,
+                text,
+                style,
+                iconSize = iconSize,
+                iconAndTextSpacing = iconAndTextSpacing,
+                textId
+            )
         }
     } else {
         PrimaryButtonText(text = text, style, textId)
@@ -355,7 +457,14 @@ private fun SetIconWithText(icon: Int, iconGravity: Int, text: String, style: Te
 }
 
 @Composable
-private fun SetStartIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp, textId: String) {
+private fun SetStartIconWithText(
+    icon: Int,
+    text: String,
+    style: TextStyle,
+    iconSize: Dp = 24.dp,
+    iconAndTextSpacing: Dp = 8.dp,
+    textId: String
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         PrimaryButtonIcon(icon = icon, iconSize = iconSize)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -364,7 +473,14 @@ private fun SetStartIconWithText(icon: Int, text: String, style: TextStyle, icon
 }
 
 @Composable
-private fun SetEndIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp, textId: String) {
+private fun SetEndIconWithText(
+    icon: Int,
+    text: String,
+    style: TextStyle,
+    iconSize: Dp = 24.dp,
+    iconAndTextSpacing: Dp = 8.dp,
+    textId: String
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         PrimaryButtonText(text = text, style, textId)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -373,7 +489,14 @@ private fun SetEndIconWithText(icon: Int, text: String, style: TextStyle, iconSi
 }
 
 @Composable
-private fun SetTopIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp, textId: String) {
+private fun SetTopIconWithText(
+    icon: Int,
+    text: String,
+    style: TextStyle,
+    iconSize: Dp = 24.dp,
+    iconAndTextSpacing: Dp = 8.dp,
+    textId: String
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         PrimaryButtonIcon(icon = icon, iconSize = iconSize)
         PrimaryButtonSpacer(iconAndTextSpacing)
@@ -382,7 +505,14 @@ private fun SetTopIconWithText(icon: Int, text: String, style: TextStyle, iconSi
 }
 
 @Composable
-private fun SetBottomIconWithText(icon: Int, text: String, style: TextStyle, iconSize: Dp = 24.dp, iconAndTextSpacing: Dp = 8.dp, textId: String) {
+private fun SetBottomIconWithText(
+    icon: Int,
+    text: String,
+    style: TextStyle,
+    iconSize: Dp = 24.dp,
+    iconAndTextSpacing: Dp = 8.dp,
+    textId: String
+) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         PrimaryButtonText(text = text, style, textId)
         PrimaryButtonSpacer(iconAndTextSpacing)

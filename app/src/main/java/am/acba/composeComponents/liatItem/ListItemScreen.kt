@@ -26,6 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -56,6 +57,10 @@ fun ListItemScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                ListItemWithDivider(
+                    title = "djcknsdkjbncsdbcsdbcjhds",
+                    showBorder = true, statusTitle = "dscnsdjcndsj"
+                )
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds"
                 )
@@ -266,7 +271,7 @@ private fun ListItemWithDivider(
     backgroundRadius: Int = 12,
 
     showBorder: Boolean = false,
-    borderColor: Color = DigitalTheme.colorScheme.borderPrimaryTonal1,
+    borderColor: Color = DigitalTheme.colorScheme.borderNeutral,
     borderRadius: Int = 12,
 
     endIcon: Int? = null,
@@ -329,6 +334,14 @@ private fun ListItemWithDivider(
     badgeText: String? = null,
 
     showDivider: Boolean = false,
+
+    statusModifier: Modifier = Modifier,
+    statusTitle: String? = null,
+    statusIcon: Int? = null,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusAlign: Alignment = Alignment.TopEnd,
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
@@ -401,6 +414,13 @@ private fun ListItemWithDivider(
         badgeTextColor = badgeTextColor,
         badgeText = badgeText,
         showDivider = showDivider,
+        statusModifier = statusModifier,
+        statusTitle = statusTitle,
+        statusIcon = statusIcon,
+        statusBackgroundColor = statusBackgroundColor,
+        statusIconColor = statusIconColor,
+        statusTextColor = statusTextColor,
+        statusAlign = statusAlign,
         controllerType = controllerType,
         controllerSelected = controllerSelected,
         onRadioButtonClick = onRadioButtonClick,

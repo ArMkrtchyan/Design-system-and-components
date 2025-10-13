@@ -26,9 +26,9 @@ fun StatusBadge(
     modifier: Modifier = Modifier,
     title: String = "",
     icon: Int? = null,
-    backgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    textColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    iconColor: Color = DigitalTheme.colorScheme.contentPending,
+    textColor: Color = DigitalTheme.colorScheme.contentPending,
     align: Alignment = Alignment.TopEnd,
 ) {
     Box(
