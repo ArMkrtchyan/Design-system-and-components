@@ -63,44 +63,50 @@ class PrimarySnackBar(
     fun show() {
         val rootView = context.window.decorView.findViewById<FrameLayout>(android.R.id.content)
         var coordinatorLayout: CoordinatorLayout? = rootView.findViewById(R.id.snackbar_coordinator_layout)
-        var sheetBehavior: BottomSheetBehavior<*> = BottomSheetBehavior.from<View>(binding.bottomSheet)
-        if (coordinatorLayout != null) {
-            val bottomSheet = coordinatorLayout.findViewById<FrameLayout>(R.id.bottom_sheet)
-            sheetBehavior = BottomSheetBehavior.from<View>(bottomSheet!! as View)
-            bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 400)
-        } else {
+        if (coordinatorLayout == null) {
             coordinatorLayout = binding.snackbarCoordinatorLayout
-
             rootView.addView(binding.root)
-
-            swipeDown(sheetBehavior)
-            binding.bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 400)
         }
+
+        val bottomSheet = coordinatorLayout.findViewById<FrameLayout>(R.id.bottom_sheet)
+        val sheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        sheetBehavior.isDraggable = isUserClosable
+
+        (coordinatorLayout.getTag(R.id.snackbar_coordinator_layout) as? Runnable)?.let {
+            coordinatorLayout.removeCallbacks(it)
+            coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, null)
+        }
+
         val lottie = coordinatorLayout.findViewById<LottieAnimationView>(R.id.lottie)
         val startIcon = coordinatorLayout.findViewById<PrimaryImageView>(R.id.start_icon)
         val endIcon = coordinatorLayout.findViewById<PrimaryImageView>(R.id.end_icon)
         val snackBarTitle = coordinatorLayout.findViewById<PrimaryTextView>(R.id.title)
+
+        snackBarTitle.text = ""
+        lottie.cancelAnimation()
+        startIcon.setImageDrawable(null)
+
         lottie.isVisible = lottieIcon != null
         startIcon.isVisible = icon != null
-        snackBarTitle.text = title
         endIcon.isVisible = isUserClosable
+        snackBarTitle.text = title
         snackBarTitle.setPadding(0, 0, if (isUserClosable) 0 else 16.dpToPx(), 0)
         icon?.let(startIcon::setImageResource)
-        sheetBehavior.isDraggable = isUserClosable
+
         if (lottieIcon != null) {
             lottie.playLottieAnimation(500) {
                 lottie.setAnimation(lottieIcon)
             }
         }
-        coordinatorLayout.invalidate()
+
         endIcon.setOnClickListener { swipeDown(sheetBehavior, coordinatorLayout) }
-        var handlerCallback: Runnable? = coordinatorLayout.getTag(R.id.snackbar_coordinator_layout) as? Runnable
-        handlerCallback?.let(coordinatorLayout::removeCallbacks)
+        swipeDown(sheetBehavior)
+        bottomSheet.postDelayed({ swipeUp(sheetBehavior) }, 200)
 
         val appearTime = (3000 + title.split(" ").size * 200).coerceAtMost(15000)
-        handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
+        val handlerCallback = Runnable { swipeDown(sheetBehavior, coordinatorLayout) }
         coordinatorLayout.setTag(R.id.snackbar_coordinator_layout, handlerCallback)
-        coordinatorLayout.postDelayed(handlerCallback, (appearTime).toLong())
+        coordinatorLayout.postDelayed(handlerCallback, appearTime.toLong())
 
         lifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
             override fun onStop(owner: LifecycleOwner) {
