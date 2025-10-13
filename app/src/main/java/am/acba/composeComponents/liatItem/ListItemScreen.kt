@@ -26,6 +26,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -56,6 +57,10 @@ fun ListItemScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                ListItemWithDivider(
+                    title = "djcknsdkjbncsdbcsdbcjhds",
+                    showBorder = true, statusTitle = "dscnsdjcndsj"
+                )
                 ListItemWithDivider(
                     title = "djcknsdkjbncsdbcsdbcjhds"
                 )
@@ -330,6 +335,14 @@ private fun ListItemWithDivider(
 
     showDivider: Boolean = false,
 
+    statusModifier: Modifier = Modifier,
+    statusTitle: String? = null,
+    statusIcon: Int? = null,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusAlign: Alignment = Alignment.TopEnd,
+
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
     onRadioButtonClick: () -> Unit = {},
@@ -401,6 +414,13 @@ private fun ListItemWithDivider(
         badgeTextColor = badgeTextColor,
         badgeText = badgeText,
         showDivider = showDivider,
+        statusModifier = statusModifier,
+        statusTitle = statusTitle,
+        statusIcon = statusIcon,
+        statusBackgroundColor = statusBackgroundColor,
+        statusIconColor = statusIconColor,
+        statusTextColor = statusTextColor,
+        statusAlign = statusAlign,
         controllerType = controllerType,
         controllerSelected = controllerSelected,
         onRadioButtonClick = onRadioButtonClick,
