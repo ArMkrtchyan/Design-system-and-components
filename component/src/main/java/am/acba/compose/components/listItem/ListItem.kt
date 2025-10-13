@@ -51,7 +51,7 @@ fun ListItem(
     backgroundRadius: Int = 12,
 
     showBorder: Boolean = false,
-    borderColor: Color = DigitalTheme.colorScheme.borderPrimaryTonal1,
+    borderColor: Color = DigitalTheme.colorScheme.borderNeutral,
     borderRadius: Int = 12,
 
     endIcon: Int? = null,
@@ -124,9 +124,9 @@ fun ListItem(
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {},
