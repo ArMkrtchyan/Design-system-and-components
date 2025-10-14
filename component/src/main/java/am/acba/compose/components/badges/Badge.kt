@@ -160,7 +160,7 @@ private fun BadgeTextAndIcon(
             }
         }
 
-        BadgeText(Modifier, text ?: "", textColor)
+        BadgeText(Modifier.height(20.dp), text ?: "", textColor)
     }
 }
 
