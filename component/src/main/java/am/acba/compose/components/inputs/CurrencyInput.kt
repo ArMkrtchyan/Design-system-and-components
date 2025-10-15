@@ -56,6 +56,7 @@ fun CurrencyInput(
     readOnly: Boolean = false,
     isError: Boolean = false,
     maxLength: Int = 15,
+    returnTextWhenValueZero: String = "",
     labelMaxLines: Int = 1,
     formatDecimal: Boolean = false,
     showArrow: Boolean = false,
@@ -83,7 +84,7 @@ fun CurrencyInput(
         !isFocused && formatDecimal && value.text.isNotEmpty() -> {
             onValueChange(
                 TextFieldValue(
-                    value.text.replace(",", "").numberFormatting().replace(",", "")
+                    value.text.replace(",", "").numberFormatting(returnTextWhenValueZero).replace(",", "")
                 )
             )
 
