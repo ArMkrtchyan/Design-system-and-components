@@ -71,6 +71,7 @@ fun CurrencyInputScreen(title: String = "") {
                     value = currencyText2.value,
                     onValueChange = { currencyText2.value = it },
                     label = "Amount",
+                    returnTextWhenValueZero = currencyText2.value.text,
                     formatDecimal = true,
                     onFocusChanged = { hasFocus -> hasFocus.log() },
                     helpText = "Input with dot",
