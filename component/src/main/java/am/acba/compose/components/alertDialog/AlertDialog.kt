@@ -47,16 +47,14 @@ fun PrimaryAlertDialog(
     content: @Composable (() -> Unit)? = null
 ) {
     Dialog(
-        onDismissRequest = onDismissRequest,
-        properties = properties
+        onDismissRequest = onDismissRequest, properties = properties
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
                 .background(
-                    DigitalTheme.colorScheme.backgroundTonal1,
-                    ShapeTokens.shapePrimaryButton
+                    DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapePrimaryButton
                 )
         ) {
             Column(
@@ -67,20 +65,12 @@ fun PrimaryAlertDialog(
                     VerticalSpacer(24.dp)
                 }
                 PrimaryAlertDialogTexts(
-                    text = title,
-                    textId = "title",
-                    textColor = titleColor,
-                    style = DigitalTheme.typography.heading7Bold,
-                    2
+                    text = title, textId = "title", textColor = titleColor, style = DigitalTheme.typography.heading7Bold, 2
                 )
                 description?.let {
                     VerticalSpacer(8.dp)
                     PrimaryAlertDialogTexts(
-                        text = it,
-                        textId = "description",
-                        textColor = descriptionColor,
-                        style = DigitalTheme.typography.subTitle2Regular,
-                        3
+                        text = it, textId = "description", textColor = descriptionColor, style = DigitalTheme.typography.subTitle2Regular, 3
                     )
                 }
                 content?.let {
@@ -90,20 +80,12 @@ fun PrimaryAlertDialog(
                 VerticalSpacer(24.dp)
                 positiveButtonText?.let {
                     PrimaryAlertDialogButton(
-                        buttonId = "positiveButton",
-                        text = it,
-                        textId = "positiveButtonText",
-                        buttonColor = positiveButtonColor,
-                        onClick = onPositiveButtonClick
+                        buttonId = "positiveButton", text = it, textId = "positiveButtonText", buttonColor = positiveButtonColor, onClick = onPositiveButtonClick
                     )
                 }
                 negativeButtonText?.let {
                     PrimaryAlertDialogButton(
-                        buttonId = "negativeButton",
-                        text = it,
-                        textId = "negativeButtonText",
-                        buttonColor = negativeButtonColor,
-                        onClick = onNegativeButtonClick
+                        buttonId = "negativeButton", text = it, textId = "negativeButtonText", buttonColor = negativeButtonColor, onClick = onNegativeButtonClick
                     )
                 }
             }
@@ -115,21 +97,14 @@ fun PrimaryAlertDialog(
 private fun PrimaryAlertDialogIcon(icon: Int, iconColor: Color) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
-            modifier = Modifier.align(Alignment.Center),
-            painter = painterResource(icon),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(iconColor)
+            modifier = Modifier.align(Alignment.Center), painter = painterResource(icon), contentDescription = null, colorFilter = ColorFilter.tint(iconColor)
         )
     }
 }
 
 @Composable
 private fun PrimaryAlertDialogTexts(
-    text: String,
-    textId: String,
-    textColor: Color,
-    style: TextStyle,
-    maxLines: Int
+    text: String, textId: String, textColor: Color, style: TextStyle, maxLines: Int
 ) {
     PrimaryText(
         modifier = Modifier
@@ -147,22 +122,13 @@ private fun PrimaryAlertDialogTexts(
 
 @Composable
 private fun PrimaryAlertDialogButton(
-    text: String,
-    textId: String,
-    buttonId: String,
-    buttonColor: Color,
-    onClick: () -> Unit
+    text: String, textId: String, buttonId: String, buttonColor: Color, onClick: () -> Unit
 ) {
     PrimaryDivider()
     GhostButton(
         modifier = Modifier
             .fillMaxWidth()
-            .id(buttonId),
-        text = text,
-        textId = textId,
-        textColor = buttonColor,
-        onClick = onClick,
-        shape = ShapeTokens.unspecified
+            .id(buttonId), text = text, textId = textId, textColor = buttonColor, onClick = onClick, shape = ShapeTokens.unspecified
     )
 }
 
@@ -185,8 +151,7 @@ fun AlertsScreenPreview() {
                     .padding(horizontal = 16.dp)
                     .height(125.dp)
                     .background(
-                        DigitalTheme.colorScheme.backgroundTonal2,
-                        ShapeTokens.shapePrimaryButton
+                        DigitalTheme.colorScheme.backgroundTonal2, ShapeTokens.shapePrimaryButton
                     )
             ) {
                 PrimaryText(modifier = Modifier.align(Alignment.Center), text = "Arshak .Mkrtchyan")
