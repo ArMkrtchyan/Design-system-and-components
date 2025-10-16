@@ -72,6 +72,7 @@
         <attr name="backgroundAlternative7" format="color" />
         <attr name="backgroundAlternative8" format="color" />
         <attr name="backgroundAlternative9" format="color" />
+        <attr name="backgroundAlternative11" format="color" />
         <attr name="backgroundInverse" format="color" />
         <attr name="backgroundInverse2" format="color" />
         <attr name="backgroundNavBar" format="color" />
