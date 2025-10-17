@@ -65,6 +65,7 @@ fun CardsItemScreen(title: String = "") {
                     badgeText = "Badge",
                     endIcon = R.drawable.ic_info,
                     badgeType = BadgeEnum.INFO,
+                    swipeActionText = "Բլոկավորել",
                     imageUrl =
                         "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png"
                 )
@@ -85,6 +86,7 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
+                    swipeActionText = "Բլոկավորել"
                 )
                 VerticalSpacer(20.dp)
                 PrimaryButton(

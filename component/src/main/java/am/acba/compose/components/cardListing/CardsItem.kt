@@ -10,6 +10,7 @@ import am.acba.compose.components.avatar.AvatarImage
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.Constants.EMPTY_STRING
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -61,30 +62,33 @@ fun CardsItem(
     modifier: Modifier = Modifier,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 12,
-    imageUrl: String = "",
+    imageUrl: String = EMPTY_STRING,
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
+
     endIcon: Int? = null,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundInfoTonal1,
     statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusAlign: Alignment = Alignment.TopEnd,
-    title: String = "",
+    title: String = EMPTY_STRING,
     titleStyle: TextStyle = DigitalTheme.typography.body1Regular,
-    subTitle: String = "",
+    subTitle: String = EMPTY_STRING,
     subTitleStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    cardNumber: String = "",
+    cardNumber: String = EMPTY_STRING,
     cardNumberStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    badgeText: String = "",
+    badgeText: String = EMPTY_STRING,
     badgeTextColor: Color = DigitalTheme.colorScheme.contentPending,
     badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
     maxSwipe: Float = 100f,
     onClick: () -> Unit = {},
     isEditingInitial: Boolean = false,
-    onDeleteClick: () -> Unit = {}
+    swipeActionIcon: Int = R.drawable.ic_flake,
+    swipeActionText: String = EMPTY_STRING,
+    onSwipeAction: () -> Unit = {}
 ) {
     val swipePx = with(LocalDensity.current) { maxSwipe.dp.toPx() }
     var offsetX by remember { mutableFloatStateOf(0f) }
@@ -131,16 +135,16 @@ fun CardsItem(
                 .padding(end = 16.dp)
         ) {
             PrimaryIcon(
-                painter = painterResource(R.drawable.ic_flake), tint = Color.White, modifier = Modifier
+                painter = painterResource(swipeActionIcon), tint = Color.White, modifier = Modifier
                     .padding(end = 24.dp)
                     .size(28.dp)
                     .clickable {
-                        onDeleteClick()
+                        onSwipeAction()
                         offsetX = 0f
                         isOpen = false
                     })
             PrimaryText(
-                color = DigitalTheme.colorScheme.contentSecondary, text = "Բլոկավորել", style = DigitalTheme.typography.smallRegular
+                color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
             )
         }
 
@@ -251,7 +255,7 @@ fun CardsItemPreview() {
                 badgeType = BadgeEnum.INFO,
                 imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
                 isEditingInitial = false,
-                onDeleteClick = { println("Delete clicked") })
+                onSwipeAction = { println("Delete clicked") })
         }
     }
 }
