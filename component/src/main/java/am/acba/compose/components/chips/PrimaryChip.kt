@@ -11,6 +11,7 @@ import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -182,7 +183,8 @@ private fun ChipContent(
         PrimaryText(
             text = title,
             style = DigitalTheme.typography.body2Regular,
-            color = chipStateEnum.getContentColor()
+            color = chipStateEnum.getContentColor(),
+            modifier = Modifier.id("chipTitle")
         )
         if (endIcon == null) {
             HorizontalSpacer(8.dp)
