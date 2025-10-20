@@ -134,12 +134,13 @@ fun ListItem(
     onEndIconClick: () -> Unit = {}
 ) {
     val borderModifier = if (showBorder) {
-        modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
+        Modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
     } else {
-        modifier
+        Modifier
     }
     Column(
         modifier = Modifier
+            .then(modifier)
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
             .then(borderModifier)
             .padding(top = 16.dp)
