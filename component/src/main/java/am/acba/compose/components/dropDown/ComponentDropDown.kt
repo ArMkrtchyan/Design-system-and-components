@@ -115,7 +115,8 @@ fun ComponentDropDown(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
+        modifier = Modifier
+            .then(modifier)
             .fillMaxWidth()
             .heightIn(58.dp)
             .id("component_drop_down")
