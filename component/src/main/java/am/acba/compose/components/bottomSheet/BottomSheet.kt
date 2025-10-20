@@ -8,6 +8,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -146,7 +147,11 @@ private fun BottomSheetHeader(title: String = "", icon: Int? = null, onDismissRe
     ) {
         PrimaryText(text = title, modifier = Modifier.weight(1f), style = DigitalTheme.typography.body1Bold)
         if (icon != null) {
-            PrimaryIcon(painter = painterResource(icon), modifier = Modifier.clickable { onDismissRequest.invoke() })
+            PrimaryIcon(
+                painter = painterResource(icon),
+                modifier = Modifier
+                    .id("bottom_sheet_close_icon")
+                    .clickable { onDismissRequest.invoke() })
         }
     }
 }

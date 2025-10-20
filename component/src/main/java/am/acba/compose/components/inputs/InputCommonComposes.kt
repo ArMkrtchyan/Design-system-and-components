@@ -4,6 +4,9 @@ import am.acba.component.R
 import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.avatar.Avatar
+import am.acba.compose.components.avatar.AvatarEnum
+import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -42,7 +45,7 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
 }
 
 @Composable
-fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
+fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, maxLines: Int = 1) {
     val textColor = when {
         isError -> DigitalTheme.colorScheme.contentDangerTonal1
         !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
@@ -50,12 +53,14 @@ fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
     }
     Text(
         text = text ?: "",
-        color = textColor
+        color = textColor,
+        maxLines = maxLines,
+        overflow = if (maxLines == 1) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }
 
 @Composable
-fun leadingOrTrailingIcon(
+fun trailingIcon(
     iconRes: Int? = null,
     tint: Color?,
     secondaryIconRes: Int? = null,
@@ -63,7 +68,6 @@ fun leadingOrTrailingIcon(
     isEnabled: Boolean = true,
     secondaryIconSize: Dp = 24.dp,
     iconSize: Dp = 24.dp,
-    isLeading: Boolean = true,
     onSecondaryIconClick: (() -> Unit)? = null,
     onClick: (() -> Unit)? = null
 ): @Composable (() -> Unit)? {
@@ -81,25 +85,49 @@ fun leadingOrTrailingIcon(
         iconRes != null && secondaryIconRes != null -> {
             {
                 Row {
-                    ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12.dp, spaceEnd = 12.dp, onSecondaryIconClick)
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 0.dp, spaceEnd = 16.dp, onClick)
+                    ImageIcon(
+                        secondaryIconRes,
+                        secondaryIconColorFilter,
+                        secondaryIconSize,
+                        spaceStart = 12.dp,
+                        spaceEnd = 12.dp,
+                        onSecondaryIconClick
+                    )
+                    ImageIcon(
+                        iconRes,
+                        iconColorFilter,
+                        iconSize,
+                        spaceStart = 0.dp,
+                        spaceEnd = 16.dp,
+                        onClick
+                    )
                 }
             }
         }
 
         iconRes != null -> {
             {
-                if (isLeading) {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 16.dp, spaceEnd = 8.dp, onClick)
-                } else {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 12.dp, spaceEnd = 16.dp, onClick)
-                }
+                ImageIcon(
+                    iconRes,
+                    iconColorFilter,
+                    iconSize,
+                    spaceStart = 12.dp,
+                    spaceEnd = 16.dp,
+                    onClick
+                )
             }
         }
 
         secondaryIconRes != null -> {
             {
-                ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12.dp, spaceEnd = 16.dp, onSecondaryIconClick)
+                ImageIcon(
+                    secondaryIconRes,
+                    secondaryIconColorFilter,
+                    secondaryIconSize,
+                    spaceStart = 12.dp,
+                    spaceEnd = 16.dp,
+                    onSecondaryIconClick
+                )
             }
         }
 
@@ -108,7 +136,14 @@ fun leadingOrTrailingIcon(
 }
 
 @Composable
-private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24.dp, spaceStart: Dp, spaceEnd: Dp, onClick: (() -> Unit)? = null) {
+private fun ImageIcon(
+    iconRes: Int,
+    colorFilter: ColorFilter?,
+    iconSize: Dp = 24.dp,
+    spaceStart: Dp,
+    spaceEnd: Dp,
+    onClick: (() -> Unit)? = null
+) {
     Row {
         HorizontalSpacer(spaceStart)
         Image(
@@ -122,6 +157,35 @@ private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24
         )
         HorizontalSpacer(spaceEnd)
     }
+}
+
+fun leadingAvatar(
+    imageUrl: String?,
+    iconRes: Int?,
+    iconColor: Color?,
+    iconSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_24,
+    spaceStart: Dp,
+    spaceEnd: Dp,
+    enabled: Boolean
+): @Composable (() -> Unit)? {
+    if (iconRes != null || imageUrl != null) {
+        return {
+            Row {
+                val color = if (iconRes != null && imageUrl == null) {
+                    if (enabled) iconColor else DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+                } else iconColor
+                HorizontalSpacer(spaceStart)
+                Avatar(
+                    avatarType = imageUrl?.let { AvatarEnum.IMAGE } ?: AvatarEnum.ICON,
+                    avatarSize = iconSize,
+                    icon = iconRes,
+                    iconColor = color,
+                    imageUrl = imageUrl,
+                )
+                HorizontalSpacer(spaceEnd)
+            }
+        }
+    } else return null
 }
 
 @Composable
@@ -149,7 +213,12 @@ fun SupportText(text: String, color: Color) {
 }
 
 @Composable
-fun SupportAndErrorTexts(isError: Boolean, enabled: Boolean, errorText: String?, helpText: String?) {
+fun SupportAndErrorTexts(
+    isError: Boolean,
+    enabled: Boolean,
+    errorText: String?,
+    helpText: String?
+) {
     Column {
         VerticalSpacer(4.dp)
         if (isError) {

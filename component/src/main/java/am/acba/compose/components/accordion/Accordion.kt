@@ -11,6 +11,7 @@ import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -112,7 +113,9 @@ fun Accordion(
         ) {
             if (showStartAvatar) {
                 Avatar(
-                    backgroundModifier = avatarBackgroundModifier,
+                    backgroundModifier = Modifier
+                        .id("accordionAvatar")
+                        .then(avatarBackgroundModifier),
                     badgeModifier = avatarBadgeModifier,
                     contentModifier = avatarContentModifier,
                     avatarType = AvatarEnum.ICON,
@@ -136,7 +139,9 @@ fun Accordion(
                 )
                 HorizontalSpacer(16.dp)
             }
-            PrimaryText(text = title, style = titleStyle, color = titleColor, modifier = Modifier.weight(1f), maxLines = 1)
+            PrimaryText(text = title, style = titleStyle, color = titleColor, modifier = Modifier
+                .weight(1f)
+                .id("startText"), maxLines = 1)
             Row(
                 modifier = Modifier
                     .wrapContentHeight(),
@@ -146,17 +151,17 @@ fun Accordion(
                     HorizontalSpacer(8.dp)
                 }
                 if (!endText.isNullOrEmpty()) {
-                    PrimaryText(text = endText, style = endTextStyle, color = endTextColor, maxLines = 1)
+                    PrimaryText(modifier = Modifier.id("endText"), text = endText, style = endTextStyle, color = endTextColor, maxLines = 1)
                 }
                 if (!endText.isNullOrEmpty() && !currency.isNullOrEmpty()) {
                     HorizontalSpacer(2.dp)
                 }
                 if (!currency.isNullOrEmpty()) {
-                    PrimaryText(text = currency, style = currencyStyle, color = currencyColor, maxLines = 1)
+                    PrimaryText(modifier = Modifier.id("currency"),text = currency, style = currencyStyle, color = currencyColor, maxLines = 1)
                 }
                 if (endIcon != null) {
                     HorizontalSpacer(8.dp)
-                    PrimaryIcon(painter = painterResource(endIcon), modifier = Modifier.rotate(arrowRotation), tint = endIconColor)
+                    PrimaryIcon(painter = painterResource(endIcon), modifier = Modifier.rotate(arrowRotation).id("endIcon"), tint = endIconColor)
                 }
             }
         }
@@ -210,7 +215,11 @@ fun AccordionPreview() {
                 .padding(10.dp)
         ) {
             val expanded = remember { mutableStateOf(true) }
-            Accordion(avatarIcon = R.drawable.ic_income, title = "Փոխանցում հաշվին ", expanded = expanded.value, onClick = { expanded.value = !expanded.value }) {
+            Accordion(
+                avatarIcon = R.drawable.ic_income,
+                title = "Փոխանցում հաշվին ",
+                expanded = expanded.value,
+                onClick = { expanded.value = !expanded.value }) {
                 PrimaryText(text = "ՊՔ սպասարկման միջն./վճ. գանձում")
             }
         }

@@ -56,6 +56,8 @@ fun CurrencyInput(
     readOnly: Boolean = false,
     isError: Boolean = false,
     maxLength: Int = 15,
+    returnTextWhenValueZero: String = "",
+    labelMaxLines: Int = 1,
     formatDecimal: Boolean = false,
     showArrow: Boolean = false,
     autoFormatting: Boolean = true,
@@ -80,7 +82,11 @@ fun CurrencyInput(
         }
 
         !isFocused && formatDecimal && value.text.isNotEmpty() -> {
-            onValueChange(TextFieldValue(value.text.replace(",", "").numberFormatting().replace(",", "")))
+            onValueChange(
+                TextFieldValue(
+                    value.text.replace(",", "").numberFormatting(returnTextWhenValueZero).replace(",", "")
+                )
+            )
 
         }
     }
@@ -103,7 +109,8 @@ fun CurrencyInput(
                 keyboardActions,
                 interactionSource,
                 isError,
-                label
+                label,
+                labelMaxLines
             )
             HorizontalSpacer(1.dp)
             CurrencyField(currencyModifier, enabled, showArrow, onCurrencyClick)
@@ -127,7 +134,8 @@ private fun RowScope.AmountTextField(
     keyboardActions: KeyboardActions,
     interactionSource: MutableInteractionSource,
     isError: Boolean,
-    label: String?
+    label: String?,
+    labelMaxLines: Int = 1
 ) {
     val pattern = remember {
         if (formatDecimal) Regex("^\\d*\\.?\\d*\$")
@@ -149,7 +157,7 @@ private fun RowScope.AmountTextField(
             .height(58.dp),
         enabled = enabled,
         readOnly = readOnly,
-        placeholder = placeholder?.let { { Label(text = placeholder) } },
+        placeholder = placeholder?.let { { Label(text = placeholder, maxLines = labelMaxLines) } },
         shape = ShapeTokens.shapeCurrencyInput,
         textStyle = DigitalTheme.typography.body1Regular,
         visualTransformation = visualTransformation,
@@ -159,11 +167,16 @@ private fun RowScope.AmountTextField(
         interactionSource = interactionSource,
         colors = createStateColors(),
         isError = isError,
-        label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
+        label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled, maxLines = labelMaxLines) } },
     )
 }
 
-private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
+private fun checkInputValidation(
+    value: TextFieldValue,
+    maxLength: Int,
+    pattern: Regex,
+    textFieldValue: TextFieldValue
+): Boolean {
     val splitTextArray = textFieldValue.text.split(".")
     val isDecimal = splitTextArray.size == 2
     val isDotPositionValid = !isDecimal || splitTextArray[1].length <= 2
@@ -171,11 +184,16 @@ private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern:
         && textFieldValue.text.matches(pattern)
         && isDotPositionValid
         && !textFieldValue.text.startsWith(".")
-        && !textFieldValue.text.startsWith("0")
+        && !(textFieldValue.text.length > 1 && textFieldValue.text.startsWith("0"))
 }
 
 @Composable
-private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boolean, onCurrencyClick: (() -> Unit)?) {
+private fun CurrencyField(
+    modifier: Modifier,
+    enabled: Boolean,
+    showArrow: Boolean,
+    onCurrencyClick: (() -> Unit)?
+) {
     var currencyBackgroundColor: Color
     var currencyTextColor: Color
     var flagOpacity: Float

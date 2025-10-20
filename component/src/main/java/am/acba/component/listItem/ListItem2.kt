@@ -59,24 +59,28 @@ class ListItem2 : FrameLayout {
     private val radiobutton by lazy { PrimaryRadioButton(context) }
     private val body1 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body2 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body3 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body4 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
@@ -516,6 +520,7 @@ class ListItem2 : FrameLayout {
 
     private fun getBarrierReferenceIds(alignTop: Boolean) = mutableListOf(
         binding.tvTitle.id,
+        binding.badgeListItem.id,
         binding.ivFirstEndIcon.id,
         binding.layoutSecondEndComponent.id,
     ).apply {
@@ -711,6 +716,11 @@ class ListItem2 : FrameLayout {
     fun setCheckboxChecked(isChecked: Boolean) {
         ensureSecondEndComponentCheckbox()
         checkbox.isChecked = isChecked
+    }
+
+    fun setCheckBoxState(checkedState: Int) {
+        ensureSecondEndComponentCheckbox()
+        checkbox.checkedState = checkedState
     }
 
     fun isCheckboxChecked() = checkbox.isChecked

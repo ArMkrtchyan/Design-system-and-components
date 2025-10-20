@@ -14,6 +14,7 @@ import am.acba.compose.components.controls.PrimaryRadioButton
 import am.acba.compose.components.controls.PrimarySwitch
 import am.acba.compose.components.listItem.ControllerTypeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -96,9 +97,9 @@ fun CardListItem(
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {}
@@ -157,7 +158,8 @@ fun CardListItem(
                         style = startTitleStyle,
                         color = startTitleColor,
                         overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                        maxLines = 1,
+                        modifier = Modifier.id("startTitle")
                     )
                     if (startDescription.isNotEmpty()) {
                         VerticalSpacer(2.dp)
@@ -166,7 +168,8 @@ fun CardListItem(
                             style = startDescriptionStyle,
                             color = startDescriptionColor,
                             overflow = TextOverflow.Ellipsis,
-                            maxLines = 1
+                            maxLines = 1,
+                            modifier = Modifier.id("startDescription")
                         )
                     }
                 }
@@ -179,7 +182,8 @@ fun CardListItem(
                             text = endTitle,
                             style = endTitleStyle,
                             color = endTitleColor,
-                            maxLines = 1
+                            maxLines = 1,
+                            modifier = Modifier.id("endTitle")
                         )
                     }
                     if (endDescription.isNotEmpty()) {
@@ -189,7 +193,8 @@ fun CardListItem(
                                 text = endDescription,
                                 style = endDescriptionStyle,
                                 color = endDescriptionColor,
-                                maxLines = 1
+                                maxLines = 1,
+                                modifier = Modifier.id("endDescription")
                             )
                             if (!currency.isNullOrEmpty()) {
                                 HorizontalSpacer(2.dp)
@@ -197,7 +202,8 @@ fun CardListItem(
                                     text = currency,
                                     style = currencyStyle,
                                     color = currencyColor,
-                                    maxLines = 1
+                                    maxLines = 1,
+                                    modifier = Modifier.id("currency")
                                 )
                             }
                         }

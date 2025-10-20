@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale.Companion.None
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
@@ -46,9 +47,10 @@ fun ProductDescriptionCardScreen(title: String = "") {
                     .padding(bottom = 40.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
-                VerticalSpacer(20.dp)
-                ProductDescriptionCard(productDescription = createMockState(MockState(2))) {}
+                VerticalSpacer(80.dp)
+                ProductDescriptionCard(productDescription = createMockState(MockState(1)), contentScale = None) {}
+                VerticalSpacer(8.dp)
+                ProductDescriptionCard(productDescription = createMockState(MockState(2)), contentScale = None) {}
                 VerticalSpacer(20.dp)
                 ProductDescriptionCard(productDescription = createMockState(MockState(3))) {}
                 VerticalSpacer(20.dp)
