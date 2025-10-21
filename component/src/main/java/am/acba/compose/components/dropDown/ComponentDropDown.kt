@@ -117,11 +117,12 @@ fun ComponentDropDown(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = newModifier
+        modifier = Modifier
             .fillMaxWidth()
             .heightIn(58.dp)
             .id("component_drop_down")
             .then(modifier)
+            .then(newModifier)
     ) {
         LeadingAvatar(
             iconRes = leadingIcon,

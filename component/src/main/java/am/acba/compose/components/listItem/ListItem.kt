@@ -134,12 +134,13 @@ fun ListItem(
     onEndIconClick: () -> Unit = {}
 ) {
     val borderModifier = if (showBorder) {
-        modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
+        Modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
     } else {
-        modifier
+        Modifier
     }
     Column(
         modifier = Modifier
+            .then(modifier)
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
             .then(borderModifier)
             .padding(top = 16.dp)
@@ -193,17 +194,19 @@ fun ListItem(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = if (isTitleOnly) Alignment.CenterVertically else Alignment.Top
                 ) {
-                    PrimaryText(
-                        modifier = Modifier
-                            .weight(1f)
-                            .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
-                            .id("title"),
-                        text = title,
-                        color = titleColor ?: listItemType.getTitleTextColor(),
-                        style = titleStyle ?: listItemType.getTitleStyle(),
-                        maxLines = titleMaxLines ?: listItemType.titleMaxLines,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    if (title.isNotEmpty()) {
+                        PrimaryText(
+                            modifier = Modifier
+                                .weight(1f)
+                                .align(if (isTitleOnly) Alignment.CenterVertically else Alignment.Top)
+                                .id("title"),
+                            text = title,
+                            color = titleColor ?: listItemType.getTitleTextColor(),
+                            style = titleStyle ?: listItemType.getTitleStyle(),
+                            maxLines = titleMaxLines ?: listItemType.titleMaxLines,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                     if (badgeType != BadgeEnum.NONE) {
                         HorizontalSpacer(12.dp)
                         Badge(
