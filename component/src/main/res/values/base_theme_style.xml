@@ -62,6 +62,7 @@
         <item name="backgroundAlternative7">@color/Silver_150</item>
         <item name="backgroundAlternative8">@color/Orange_500</item>
         <item name="backgroundAlternative9">@color/Blue_800</item>
+        <item name="backgroundAlternative11">@color/White</item>
         <item name="backgroundNavBar">@color/White_60</item>
         <item name="homeShadowGradientStartColor">#1A000000</item>
 

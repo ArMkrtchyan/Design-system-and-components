@@ -69,6 +69,8 @@ fun ComponentDropDown(
     textColor: Color = DigitalTheme.colorScheme.contentPrimary,
     contentProperties: ContentProperties = ContentProperties(),
     onDismissRequest: () -> Unit = {},
+    labelId: String = "label",
+    valueId: String = "value",
     content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit,
 ) {
     var isFocused by remember { mutableStateOf(false) }
@@ -149,6 +151,7 @@ fun ComponentDropDown(
                 modifier = Modifier
                     .offset(y = labelOffsetY)
                     .padding(start = 16.dp)
+                    .id(labelId)
             )
 
             if (isLabelFocused) {
@@ -158,7 +161,9 @@ fun ComponentDropDown(
                     overflow = TextOverflow.Ellipsis,
                     color = textColors(enabled, textColor),
                     style = textStyle,
-                    modifier = Modifier.padding(top = 12.dp, start = 16.dp)
+                    modifier = Modifier
+                        .padding(top = 12.dp, start = 16.dp)
+                        .id(valueId)
                 )
             }
         }

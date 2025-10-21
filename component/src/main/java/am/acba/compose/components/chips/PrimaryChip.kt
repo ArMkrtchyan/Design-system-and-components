@@ -11,6 +11,7 @@ import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +42,7 @@ fun PrimaryChip(
     chipSizeEnum: ChipSizeEnum = ChipSizeEnum.SMALL,
     chipStateEnum: ChipStateEnum = ChipStateEnum.NOT_SELECTED,
     icon: Int? = null,
+    iconUrl: String? = null,
     iconStartPadding: Dp? = null,
     iconColor: Color? = null,
     imageRes: Int? = null,
@@ -59,6 +61,7 @@ fun PrimaryChip(
         chipSizeEnum = chipSizeEnum,
         chipStateEnum = chipStateEnum,
         icon = icon,
+        iconUrl = iconUrl,
         iconStartPadding = iconStartPadding,
         imageRes = imageRes,
         imageUrl = imageUrl,
@@ -72,7 +75,7 @@ fun PrimaryChip(
             avatarSize = avatarSize,
             icon = icon ?: imageRes,
             iconColor = iconColor,
-            imageUrl = imageUrl,
+            imageUrl = imageUrl ?: iconUrl,
             clipPercent = clipPercent,
             contentScale = contentScale,
             badgeBackgroundColor = badgeBackgroundColor,
@@ -89,6 +92,7 @@ fun PrimaryChip(
     chipSizeEnum: ChipSizeEnum = ChipSizeEnum.SMALL,
     chipStateEnum: ChipStateEnum = ChipStateEnum.NOT_SELECTED,
     icon: Int? = null,
+    iconUrl: String? = null,
     iconStartPadding: Dp? = null,
     imageRes: Int? = null,
     imageUrl: String? = null,
@@ -106,6 +110,7 @@ fun PrimaryChip(
         chipSizeEnum = chipSizeEnum,
         chipStateEnum = chipStateEnum,
         icon = icon,
+        iconUrl = iconUrl,
         iconStartPadding = iconStartPadding,
         imageRes = imageRes,
         imageUrl = imageUrl,
@@ -119,7 +124,7 @@ fun PrimaryChip(
             avatarSize = avatarSize,
             icon = icon ?: imageRes,
             iconColor = chipStateEnum.getContentColor(),
-            imageUrl = imageUrl,
+            imageUrl = imageUrl ?: iconUrl,
             clipPercent = clipPercent,
             contentScale = contentScale,
             badgeBackgroundColor = badgeBackgroundColor,
@@ -135,6 +140,7 @@ private fun ChipContent(
     chipSizeEnum: ChipSizeEnum = ChipSizeEnum.SMALL,
     chipStateEnum: ChipStateEnum = ChipStateEnum.NOT_SELECTED,
     icon: Int? = null,
+    iconUrl: String? = null,
     iconStartPadding: Dp? = null,
     imageRes: Int? = null,
     imageUrl: String? = null,
@@ -157,13 +163,15 @@ private fun ChipContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        if (icon != null || imageUrl != null || imageRes != null) {
+        if (icon != null || imageUrl != null || imageRes != null || iconUrl != null) {
             var avatarType = AvatarEnum.IMAGE
             var avatarSize = chipSizeEnum.avatarSizeForImage
             Row(Modifier) {
-                if (icon != null) {
+                if (icon != null || iconUrl != null) {
                     HorizontalSpacer(chipSizeEnum.avatarSpacerWidth)
-                    avatarType = AvatarEnum.ICON
+                    if (icon != null) {
+                        avatarType = AvatarEnum.ICON
+                    }
                     avatarSize = chipSizeEnum.avatarSizeForIcon
                 } else {
                     if (iconStartPadding != null) HorizontalSpacer(iconStartPadding)
@@ -175,7 +183,8 @@ private fun ChipContent(
         PrimaryText(
             text = title,
             style = DigitalTheme.typography.body2Regular,
-            color = chipStateEnum.getContentColor()
+            color = chipStateEnum.getContentColor(),
+            modifier = Modifier.id("chipTitle")
         )
         if (endIcon == null) {
             HorizontalSpacer(8.dp)

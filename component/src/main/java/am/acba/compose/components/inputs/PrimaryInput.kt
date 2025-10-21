@@ -68,6 +68,7 @@ fun PrimaryInput(
     errorText: String? = null,
     helpText: String? = null,
     label: String? = null,
+    labelId: String = "inputLabel",
     durationMillis: Int = 0
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
@@ -152,7 +153,7 @@ fun PrimaryInput(
             interactionSource = interactionSource,
             colors = createStateColors(),
             isError = isError,
-            label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
+            label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled, id = labelId) } },
         )
         SupportAndErrorTexts(isError, enabled, errorText, helpText)
     }
