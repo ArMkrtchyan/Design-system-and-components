@@ -66,6 +66,7 @@ fun PrimaryCheckbox(
             modifier = Modifier
                 .size(24.dp)
                 .background(backgroundColor, ShapeTokens.shapeRound)
+                .id("checkboxMain")
                 .triStateToggleable(
                     state = state,
                     interactionSource = interactionSource,
