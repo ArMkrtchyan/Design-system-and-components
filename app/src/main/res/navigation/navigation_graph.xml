@@ -359,4 +359,8 @@
         android:name="am.acba.components.FilePreviewBottomSheetDialog"
         android:label="FilePreviewBottomSheetDialog"
         tools:layout="@layout/bottom_sheet_file_preview" />
+    <fragment
+        android:id="@+id/cardsItemsFragment"
+        android:name="am.acba.composeComponents.cards.CardsItemsFragment"
+        android:label="CardsItemsFragment" />
 </navigation>
