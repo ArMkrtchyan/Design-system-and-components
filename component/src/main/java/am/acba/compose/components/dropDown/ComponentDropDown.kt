@@ -69,8 +69,8 @@ fun ComponentDropDown(
     textColor: Color = DigitalTheme.colorScheme.contentPrimary,
     contentProperties: ContentProperties = ContentProperties(),
     onDismissRequest: () -> Unit = {},
-    labelId: String = "label",
-    valueId: String = "value",
+    labelId: String = "dropDownLabel",
+    valueId: String = "dropDownValue",
     content: @Composable (sheetState: SheetState, coroutineScope: CoroutineScope, onItemClick: () -> Unit) -> Unit,
 ) {
     var isFocused by remember { mutableStateOf(false) }
