@@ -145,7 +145,7 @@ private fun BottomSheetHeader(title: String = "", icon: Int? = null, onDismissRe
             .padding(horizontal = 16.dp)
             .padding(bottom = 16.dp),
     ) {
-        PrimaryText(text = title, modifier = Modifier.weight(1f), style = DigitalTheme.typography.body1Bold)
+        PrimaryText(text = title, modifier = Modifier.weight(1f).id("bottom_sheet_title"), style = DigitalTheme.typography.body1Bold)
         if (icon != null) {
             PrimaryIcon(
                 painter = painterResource(icon),

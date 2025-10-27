@@ -10,6 +10,7 @@ import am.acba.compose.components.inputs.visualTransformations.AmountFormattingV
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -227,7 +228,7 @@ private fun CurrencyField(
             alpha = flagOpacity
         )
         HorizontalSpacer(4.dp)
-        PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor)
+        PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor, modifier = Modifier.id("currency"))
         HorizontalSpacer(2.dp)
         if (showArrow) {
             PrimaryIcon(
