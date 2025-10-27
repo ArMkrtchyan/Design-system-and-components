@@ -65,7 +65,7 @@ class FileUpload : FrameLayout {
 
     var fileDeleteDialogTitle: String = context.getString(R.string.document_deletion_title)
     var fileDeleteDialogDescription: String = context.getString(R.string.document_deletion_message)
-    var fileDeleteDialogPositiveButtonText: String = context.getString(R.string.delete)
+    var fileDeleteDialogPositiveButtonText: String = context.getString(R.string.remove)
 
     var fileDeleteDialogNegativeButtonText: String = context.getString(R.string.cancel)
 

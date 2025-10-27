@@ -6,7 +6,7 @@
     <string name="all">All</string>
     <string name="search">Search…</string>
     <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
     <string name="date_picker_title_text">Select date</string>
 
     <!--Phone Input-->
@@ -23,7 +23,7 @@
     <string name="file_limit_error">The maximum limit is 700 KB</string>
     <string name="file_format_error">Allowed formats: %s</string>
     <string name="document_deletion_title">Remove document</string>
-    <string name="document_deletion_message">Are you sure you want to delete the document?</string>
+    <string name="document_deletion_message">Are you sure you want to remove the document?</string>
     <string name="uploading">Uploading…</string>
 
 </resources>
