@@ -3,6 +3,7 @@ package am.acba.components
 import am.acba.component.bottomsheet.PrimaryBottomSheetDialog
 import am.acba.component.extensions.Inflater
 import am.acba.component.extensions.parcelable
+import am.acba.component.fileUpload.FileUpload
 import am.acba.components.databinding.BottomSheetFilePreviewBinding
 import am.acba.components.models.ClickListener
 import android.net.Uri
@@ -23,11 +24,10 @@ class FilePreviewBottomSheetDialog : PrimaryBottomSheetDialog<BottomSheetFilePre
 
     override fun BottomSheetFilePreviewBinding.initView() {
         openFullScreen = true
-        arguments?.getString(IMAGE_URI)?.let { imagePath ->
-            fileUpload.showImage(requireContext(), File(imagePath))
-        }
+
+        val fileType = arguments?.parcelable<FileUpload.FileType>(FILE_TYPE) ?: FileUpload.FileType.IMAGE
         arguments?.parcelable<Uri>(FILE_URI)?.let { fileUri ->
-            fileUpload.showFile(requireContext(), fileUri)
+            fileUpload.showMediaFile(fileType,  fileUri)
         }
         initListeners()
     }
@@ -47,7 +47,7 @@ class FilePreviewBottomSheetDialog : PrimaryBottomSheetDialog<BottomSheetFilePre
     }
 
     companion object {
-        const val IMAGE_URI = "args.imageUri"
+        const val FILE_TYPE = "args.fileType"
         const val FILE_URI = "args.fileUri"
         const val CLEAR_IMAGE = "args.clearImage"
     }

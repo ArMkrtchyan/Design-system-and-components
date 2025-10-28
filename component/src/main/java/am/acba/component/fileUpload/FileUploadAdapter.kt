@@ -74,9 +74,10 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
 
         private fun setUploadedData(model: FileUploadModel) {
             binding.fileUpload.apply {
-                model.uploadedImage?.let { setUploadedImage(context, it) }
-                model.uploadedFile?.let { setUploadedFile(context, it) }
-
+                model.fileType?.let {
+                    setUploadedMediaFile(it, model.fileUri)
+                }
+                model.fileUri = fileUri
             }
         }
 
@@ -85,7 +86,12 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
             val updatedList = currentList.map {
                 if (it.id == model.id) {
                     position = currentList.indexOf(it)
-                    it.copy(fileUploadState = FileUpload.FileUploadState.EMPTY, description = null, uploadedFile = null, uploadedImage = null)
+                    it.copy(
+                        fileUploadState = FileUpload.FileUploadState.EMPTY,
+                        description = null,
+                        fileType = null,
+                        fileUri = null,
+                    )
                 } else {
                     it.copy()
                 }
@@ -122,14 +128,12 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
             && oldItem.fileUploadState == newItem.fileUploadState
             && oldItem.title == newItem.title
             && oldItem.description == newItem.description
-            && oldItem.uploadedImage == newItem.uploadedImage
-            && oldItem.uploadedFile == newItem.uploadedFile
+            && oldItem.fileUri == newItem.fileUri
 
         override fun areContentsTheSame(oldItem: FileUploadModel, newItem: FileUploadModel) = oldItem.id == newItem.id
             && oldItem.fileUploadState == newItem.fileUploadState
             && oldItem.title == newItem.title
             && oldItem.description == newItem.description
-            && oldItem.uploadedImage == newItem.uploadedImage
-            && oldItem.uploadedFile == newItem.uploadedFile
+            && oldItem.fileUri == newItem.fileUri
     }
 }

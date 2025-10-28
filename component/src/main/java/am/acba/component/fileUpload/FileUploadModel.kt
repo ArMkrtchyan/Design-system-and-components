@@ -4,11 +4,12 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
-import java.io.File
 import java.util.UUID
 
 data class FileUploadModel(
     val id: String = UUID.randomUUID().toString(),
+    var fileType: FileUpload.FileType? = null,
+    var fileUri: Uri? = null,
     var fileUploadState: FileUpload.FileUploadState = FileUpload.FileUploadState.EMPTY,
     var isDescriptionVisible: Boolean? = null,
     val title: String? = null,
@@ -22,8 +23,6 @@ data class FileUploadModel(
     val uploadedIconTint: ColorStateList? = null,
     val uploadedIconBackground: Drawable? = null,
     val uploadedIconBackgroundTint: ColorStateList? = null,
-    val uploadedFile: Uri? = null,
-    var uploadedImage: File? = null,
     val validExtensions: List<String>? = null,
     val fileDeleteDialogTitle: String? = null,
     val fileDeleteDialogDescription: String? = null,
