@@ -173,6 +173,7 @@ class FileUpload : FrameLayout {
                 hideContainerTexts()
                 setDescription(context.getString(R.string.uploading))
                 startProgress(onFinished)
+                setUploadedImageVisibility(false)
 
                 layoutParams = layoutParams.apply {
                     this.width = width
@@ -338,7 +339,10 @@ class FileUpload : FrameLayout {
         binding.ivIcon.imageTintList = colorStateList
     }
 
-    private fun showUploadedIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {
+    private fun showUploadedIconBackground(
+        clipToOutline: Boolean = false,
+        backgroundRes: Drawable?
+    ) {
         binding.ivIcon.apply {
             this.clipToOutline = clipToOutline
             backgroundRes?.let {
@@ -407,7 +411,7 @@ class FileUpload : FrameLayout {
         errorMessage = context.getString(errorRes, formatArgs)
         setFileUploadState(FileUploadState.ERROR)
         fileUri = null
-        image?.delete()
+        image = null
         return false
     }
 
@@ -425,7 +429,7 @@ class FileUpload : FrameLayout {
             .positiveButtonClick {
                 setFileUploadState(FileUploadState.EMPTY)
                 fileUri = null
-                image?.delete()
+                image = null
                 fileDeleteDialogClickListener?.invoke()
             }
             .setCancelable(true)
@@ -487,8 +491,8 @@ class FileUpload : FrameLayout {
     }
 
     fun setUploadedImage(context: Context, file: File?) {
+        if (!isFileValid(file, file?.extension)) return
         this.image = file
-        if (!isFileValid(image, file?.extension)) return
 
         setFileUploadState(FileUploadState.UPLOADED)
         loadImage(context, file)
@@ -509,9 +513,9 @@ class FileUpload : FrameLayout {
     }
 
     fun setUploadedFile(context: Context, uri: Uri?) {
-        fileUri = uri
         val extension = context.getFileExtension(uri)
         if (!isFileValid(uri?.path?.let { File(it) }, extension)) return
+        fileUri = uri
 
         setFileUploadState(FileUploadState.UPLOADED)
         loadFile(context, uri)
