@@ -206,6 +206,8 @@ class PhoneNumberInput @JvmOverloads constructor(
         return ccpBinding.countryCodeLib.fullNumberWithPlus
     }
 
+    fun getSelectedCountryNameCode(): String? = ccpBinding.countryCodeLib.selectedCountryNameCode
+
     fun isPhoneValid(): Boolean {
         return ccpBinding.countryCodeLib.isValidFullNumber
     }
