@@ -173,6 +173,7 @@ class FileUpload : FrameLayout {
                 hideContainerTexts()
                 setDescription(context.getString(R.string.uploading))
                 startProgress(onFinished)
+                setUploadedImageVisibility(false)
 
                 layoutParams = layoutParams.apply {
                     this.width = width
@@ -338,7 +339,10 @@ class FileUpload : FrameLayout {
         binding.ivIcon.imageTintList = colorStateList
     }
 
-    private fun showUploadedIconBackground(clipToOutline: Boolean = false, backgroundRes: Drawable?) {
+    private fun showUploadedIconBackground(
+        clipToOutline: Boolean = false,
+        backgroundRes: Drawable?
+    ) {
         binding.ivIcon.apply {
             this.clipToOutline = clipToOutline
             backgroundRes?.let {
@@ -407,7 +411,7 @@ class FileUpload : FrameLayout {
         errorMessage = context.getString(errorRes, formatArgs)
         setFileUploadState(FileUploadState.ERROR)
         fileUri = null
-        image?.delete()
+        image = null
         return false
     }
 
@@ -425,7 +429,7 @@ class FileUpload : FrameLayout {
             .positiveButtonClick {
                 setFileUploadState(FileUploadState.EMPTY)
                 fileUri = null
-                image?.delete()
+                image = null
                 fileDeleteDialogClickListener?.invoke()
             }
             .setCancelable(true)
