@@ -22,7 +22,7 @@ data class FileUploadModel(
     val uploadedIconTint: ColorStateList? = null,
     val uploadedIconBackground: Drawable? = null,
     val uploadedIconBackgroundTint: ColorStateList? = null,
-    val uploadedFile: Uri? = null,
+    var uploadedFile: Uri? = null,
     var uploadedImage: File? = null,
     val validExtensions: List<String>? = null,
     val fileDeleteDialogTitle: String? = null,

@@ -77,6 +77,8 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
                 model.uploadedImage?.let { setUploadedImage(context, it) }
                 model.uploadedFile?.let { setUploadedFile(context, it) }
 
+                model.uploadedImage = image
+                model.uploadedFile = fileUri
             }
         }
 
@@ -85,7 +87,12 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
             val updatedList = currentList.map {
                 if (it.id == model.id) {
                     position = currentList.indexOf(it)
-                    it.copy(fileUploadState = FileUpload.FileUploadState.EMPTY, description = null, uploadedFile = null, uploadedImage = null)
+                    it.copy(
+                        fileUploadState = FileUpload.FileUploadState.EMPTY,
+                        description = null,
+                        uploadedFile = null,
+                        uploadedImage = null
+                    )
                 } else {
                     it.copy()
                 }
