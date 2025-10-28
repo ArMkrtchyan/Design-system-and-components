@@ -67,7 +67,8 @@ fun CardsItemScreen(title: String = "") {
                     badgeType = BadgeEnum.INFO,
                     swipeActionText = "Բլոկավորել",
                     imageUrl =
-                        "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png"
+                        "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
+                    cardStatusIcon = R.drawable.ic_flake
                 )
                 VerticalSpacer(20.dp)
                 CardsItem(
@@ -77,11 +78,28 @@ fun CardsItemScreen(title: String = "") {
                     subTitle = "Aramayis Ter-Stepanyan",
                     isEditingInitial = isEditing,
                     cardNumber = "**** 5678",
-                    badgeText = "Badge",
+                    badgeText = "Լրացուցիչ",
                     endIcon = R.drawable.ic_info,
                     badgeType = BadgeEnum.INFO,
                     imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType46_1_1.png",
                     statusTitle = "Քարտը պատրաստ է ակտիվացման",
+                    statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusIcon = R.drawable.ic_info,
+                    statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
+                    swipeActionText = "Բլոկավորել"
+                )
+                VerticalSpacer(20.dp)
+                CardsItem(
+                    modifier = Modifier.id("card2"),
+                    title = "***** AMD",
+                    titleStyle = DigitalTheme.typography.body1Bold,
+                    subTitle = "Aramayis Ter-Stepanyan",
+                    isEditingInitial = isEditing,
+                    cardNumber = "**** 5678",
+                    endIcon = R.drawable.ic_info,
+                    badgeType = BadgeEnum.INFO,
+                    imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType46_1_1.png",
                     statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,

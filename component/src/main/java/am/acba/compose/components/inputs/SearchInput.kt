@@ -3,6 +3,7 @@ package am.acba.compose.components.inputs
 import am.acba.component.R
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -80,7 +81,7 @@ fun SearchBar(
         BasicTextField(
             modifier = Modifier
                 .weight(5f)
-                .fillMaxWidth(),
+                .fillMaxWidth().id("search"),
             value = text,
             cursorBrush = SolidColor(DigitalTheme.colorScheme.contentBrand),
             onValueChange = {

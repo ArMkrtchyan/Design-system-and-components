@@ -11,16 +11,21 @@ import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.Constants.EMPTY_STRING
+import am.acba.utils.extensions.id
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,6 +49,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
@@ -63,6 +70,7 @@ fun CardsItem(
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     backgroundRadius: Int = 12,
     imageUrl: String = EMPTY_STRING,
+    cardStatusIcon: Int = 0,
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
@@ -94,6 +102,43 @@ fun CardsItem(
     var offsetX by remember { mutableFloatStateOf(0f) }
     var isOpen by remember { mutableStateOf(false) }
     var startAnimation by remember { mutableStateOf(false) }
+    val dragState = rememberDraggableState { delta ->
+        if (!isEditingInitial) {
+            val newOffset = (offsetX + delta).coerceIn(-swipePx, 0f)
+            offsetX = newOffset
+        }
+    }
+    val transition = updateTransition(targetState = isEditingInitial, label = "expand-transition")
+    val scale by transition.animateFloat(
+        label = "box-scale",
+        transitionSpec = {
+            tween(
+                durationMillis = 200,
+                delayMillis = 100
+            )
+        }
+    ) { isEditingInitial ->
+        if (isEditingInitial) 0f else 1f
+    }
+
+    val scale2 by transition.animateFloat(
+        label = "box-scale",
+        transitionSpec = {
+            tween(
+                durationMillis = 200,
+                delayMillis = 100
+            )
+        }
+    ) { isEditingInitial ->
+        if (!isEditingInitial) 0f else 1f
+    }
+
+    val animatedWidth by animateDpAsState(
+        targetValue = if (isEditingInitial) 24.dp else 0.dp,
+        animationSpec = tween(durationMillis = 300),
+        label = "width-animation"
+    )
+
     LaunchedEffect(isEditingInitial) {
         if (isEditingInitial) {
             delay(Random.nextInt(0, 200).toLong())
@@ -117,49 +162,56 @@ fun CardsItem(
     }
 
     Box(
-        modifier = modifier
+        modifier = Modifier
+            .then(modifier)
             .graphicsLayer { rotationZ = rotation }
             .pointerInput(Unit) {
-                detectTapGestures(onLongPress = {}, onTap = { onClick() })
+                detectTapGestures(onTap = { onClick() })
             }
             .fillMaxWidth()
             .height(IntrinsicSize.Min)) {
-        Column(
-            horizontalAlignment = Alignment.End,
-            verticalArrangement = Arrangement.Center,
+        Box(
             modifier = Modifier
                 .matchParentSize()
                 .background(
                     DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius.dp)
                 )
-                .padding(end = 16.dp)
+                .padding(end = 16.dp),
+            contentAlignment = Alignment.CenterEnd
         ) {
-            PrimaryIcon(
-                painter = painterResource(swipeActionIcon), tint = Color.White, modifier = Modifier
-                    .padding(end = 24.dp)
-                    .size(28.dp)
-                    .clickable {
-                        onSwipeAction()
-                        offsetX = 0f
-                        isOpen = false
-                    })
-            PrimaryText(
-                color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.align(Alignment.CenterEnd)
+            ) {
+                PrimaryIcon(
+                    painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
+                        .size(28.dp)
+                        .clickable {
+                            onSwipeAction()
+                            offsetX = 0f
+                            isOpen = false
+                        })
+                PrimaryText(
+                    color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
+                )
+            }
         }
 
         Column(
             modifier = Modifier
                 .offset { IntOffset(offsetX.roundToInt(), 0) }
-                .pointerInput(Unit) {
-                    detectHorizontalDragGestures(onHorizontalDrag = { _, dragAmount ->
-                        val newOffset = (offsetX + dragAmount).coerceIn(-swipePx, 0f)
-                        offsetX = newOffset
-                    }, onDragEnd = {
-                        isOpen = offsetX < -swipePx / 2
-                        offsetX = if (isOpen) -swipePx else 0f
-                    })
-                }
+                .draggable(
+                    state = dragState,
+                    orientation = Orientation.Horizontal,
+                    enabled = !isEditingInitial,
+                    onDragStopped = {
+                        if (!isEditingInitial) {
+                            isOpen = offsetX < -swipePx / 2
+                            offsetX = if (isOpen) -swipePx else 0f
+                        }
+                    }
+                )
                 .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
                 .fillMaxWidth()) {
             Row(
@@ -167,11 +219,22 @@ fun CardsItem(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                AvatarImage(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(64.dp), clipPercent = 10, imageUrl = imageUrl
-                )
+                Box {
+                    AvatarImage(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(64.dp), clipPercent = 10, imageUrl = imageUrl
+                    )
+                    if (cardStatusIcon != 0)
+                        PrimaryIcon(
+                            painter = painterResource(cardStatusIcon),
+                            tint = DigitalTheme.colorScheme.contentSecondary,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .align(Alignment.Center)
+                        )
+                }
+
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -182,12 +245,14 @@ fun CardsItem(
                         PrimaryText(
                             modifier = Modifier.weight(1f), text = title, style = titleStyle
                         )
-                        if (endIcon != null && !isEditingInitial) {
+                        if (endIcon != null) {
                             HorizontalSpacer(8.dp)
                             PrimaryIcon(
                                 painter = painterResource(endIcon),
                                 tint = endIconColor,
-                                modifier = Modifier.size(24.dp)
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .scale(scale)
                             )
                         }
                     }
@@ -203,23 +268,27 @@ fun CardsItem(
                         PrimaryText(
                             modifier = Modifier
                                 .weight(1f)
+                                .id("cardNumber")
                                 .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
                         )
                         if (badgeText.isNotEmpty())
                             Badge(
                                 badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
-                                textColor = badgeTextColor, modifier = Modifier.align(Alignment.Bottom)
+                                textColor = badgeTextColor, modifier = Modifier
+                                    .align(Alignment.Bottom)
+                                    .id("badge")
                             )
                     }
                 }
                 if (isEditingInitial) {
                     HorizontalSpacer(8.dp)
-                    PrimaryIcon(
-                        painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
-                            .size(24.dp)
-                            .align(Alignment.CenterVertically)
-                    )
                 }
+                PrimaryIcon(
+                    painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
+                        .size(animatedWidth)
+                        .id("editModeIcon")
+                        .align(Alignment.CenterVertically)
+                )
             }
             if (!statusTitle.isNullOrEmpty()) {
                 StatusBadge(
