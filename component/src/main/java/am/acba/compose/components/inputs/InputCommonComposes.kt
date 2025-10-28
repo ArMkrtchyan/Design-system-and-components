@@ -205,7 +205,7 @@ fun SupportIcon(iconRes: Int) {
 @Composable
 fun SupportText(text: String, color: Color) {
     PrimaryText(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().id("supportText"),
         text = text,
         style = DigitalTheme.typography.smallRegular,
         color = color,

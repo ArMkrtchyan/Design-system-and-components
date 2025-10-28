@@ -10,6 +10,7 @@ import am.acba.utils.Constants.EMPTY_STRING
 import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
 import am.acba.utils.annotations.AcbaScheme
 import am.acba.utils.extensions.formatWithPattern
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -150,9 +151,9 @@ fun PrimarySlider(
                 pattern,
                 minimumFractionDigits
             ) else EMPTY_STRING
-            BottomText("$startText$startSuffix", Modifier.fillMaxWidth(fraction = 0.5f))
+            BottomText("$startText$startSuffix", Modifier.fillMaxWidth(fraction = 0.5f), id = "startText")
             HorizontalSpacer(8.dp)
-            BottomText("$endText$endSuffix", Modifier.weight(1f), textAlign = TextAlign.End)
+            BottomText("$endText$endSuffix", Modifier.weight(1f), textAlign = TextAlign.End, id = "endText")
         }
     }
 }
@@ -211,9 +212,9 @@ private fun BoxScope.RightAdditionalTrack() {
 
 @Composable
 @NonRestartableComposable
-private fun BottomText(value: String, modifier: Modifier, textAlign: TextAlign = TextAlign.Start) {
+private fun BottomText(value: String, modifier: Modifier, id: String = EMPTY_STRING, textAlign: TextAlign = TextAlign.Start) {
     PrimaryText(
-        modifier = modifier,
+        modifier = modifier.id(id),
         text = value,
         textAlign = textAlign,
         style = DigitalTheme.typography.smallRegular,
