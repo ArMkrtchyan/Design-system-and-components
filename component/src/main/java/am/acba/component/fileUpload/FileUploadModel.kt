@@ -24,6 +24,7 @@ data class FileUploadModel(
     val uploadedIconBackgroundTint: ColorStateList? = null,
     val uploadedFile: Uri? = null,
     var uploadedImage: File? = null,
+    val validExtensions: List<String>? = null,
     val fileDeleteDialogTitle: String? = null,
     val fileDeleteDialogDescription: String? = null,
     val fileDeleteDialogPositiveButtonText: String? = null,

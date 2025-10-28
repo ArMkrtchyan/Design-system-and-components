@@ -27,6 +27,9 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
 
         fun onBind(model: FileUploadModel) {
             binding.fileUpload.apply {
+                model.validExtensions?.let {
+                    setValidExtensions(it)
+                }
                 setTitle(model.title)
                 setBody(model.body)
 
