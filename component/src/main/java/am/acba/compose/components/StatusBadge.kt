@@ -62,8 +62,6 @@ fun StatusBadge(
                 style = DigitalTheme.typography.xSmallRegular,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
-            ,
-                modifier = Modifier.id("statusBadgeText")
             )
         }
     }

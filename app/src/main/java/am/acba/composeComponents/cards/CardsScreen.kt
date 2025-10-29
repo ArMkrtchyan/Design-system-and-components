@@ -107,6 +107,23 @@ fun CardsItemScreen(title: String = "") {
                     swipeActionText = "Բլոկավորել"
                 )
                 VerticalSpacer(20.dp)
+                CardsItem(
+                    modifier = Modifier.id("card2"),
+                    title = "Evocabank",
+                    titleStyle = DigitalTheme.typography.body1Bold,
+                    isEditingInitial = isEditing,
+                    cardNumber = "**** 5678",
+                    endIcon = R.drawable.ic_info,
+                    badgeType = BadgeEnum.INFO,
+                    badgeText = "Լրացուցիչ",
+                    imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
+                    statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusIcon = R.drawable.ic_info,
+                    statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
+                    swipeActionText = "Բլոկավորել"
+                )
+                VerticalSpacer(20.dp)
                 PrimaryButton(
                     onClick = { isEditing = true },
                     text = "play jiggle",

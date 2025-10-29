@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -172,7 +173,7 @@ fun CardsItem(
             .height(IntrinsicSize.Min)) {
         Box(
             modifier = Modifier
-                .matchParentSize()
+                .fillMaxSize()
                 .background(
                     DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius.dp)
                 )
@@ -187,12 +188,14 @@ fun CardsItem(
                 PrimaryIcon(
                     painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
                         .size(28.dp)
+                        .id("actionIcon")
                         .clickable {
                             onSwipeAction()
                             offsetX = 0f
                             isOpen = false
                         })
                 PrimaryText(
+                    modifier = Modifier.id("actionText"),
                     color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
                 )
             }
@@ -237,14 +240,17 @@ fun CardsItem(
 
                 Column(
                     modifier = Modifier
+                        .height(66.dp)
                         .weight(1f)
-                        .height(64.dp)
                         .padding(start = 12.dp)
                 ) {
-                    Row(modifier = Modifier.height(24.dp)) {
-                        PrimaryText(
-                            modifier = Modifier.weight(1f), text = title, style = titleStyle
-                        )
+                    Row(
+                        modifier = Modifier
+                            .height(24.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        PrimaryText(text = title, style = titleStyle)
                         if (endIcon != null && !isEditingInitial) {
                             HorizontalSpacer(8.dp)
                             PrimaryIcon(
@@ -258,16 +264,16 @@ fun CardsItem(
                     }
                     if (subTitle.isNotEmpty()) {
                         PrimaryText(text = subTitle, style = subTitleStyle)
+                        VerticalSpacer(4.dp)
                     }
-                    VerticalSpacer(4.dp)
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f)
+                            .weight(1f),
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         PrimaryText(
                             modifier = Modifier
-                                .weight(1f)
                                 .id("cardNumber")
                                 .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
                         )
@@ -323,7 +329,11 @@ fun CardsItemPreview() {
                 endIcon = R.drawable.ic_info,
                 badgeType = BadgeEnum.INFO,
                 imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
-                isEditingInitial = false,
+                isEditingInitial = false, statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                statusIcon = R.drawable.ic_info,
+                statusTitle = "Քարտը պատրաստ է ակտիվացման",
+                statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                 onSwipeAction = { println("Delete clicked") })
         }
     }
