@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 fun StatusBadge(
     modifier: Modifier = Modifier,
     title: String = "",
+    id: String = "statusBadge",
     icon: Int? = null,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
     iconColor: Color = DigitalTheme.colorScheme.contentPending,
@@ -36,7 +37,7 @@ fun StatusBadge(
             .fillMaxWidth()
             .background(color = backgroundColor, shape = ShapeTokens.shapeStatus)
             .padding(horizontal = 16.dp, vertical = 4.dp)
-            .id("statusBadge")
+            .id(id)
     ) {
         Row(
             modifier = Modifier
@@ -55,12 +56,12 @@ fun StatusBadge(
                 HorizontalSpacer(4.dp)
             }
             PrimaryText(
+                modifier = Modifier.id("${id}Text"),
                 text = title,
                 color = textColor,
                 style = DigitalTheme.typography.xSmallRegular,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.id("statusBadgeText")
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
