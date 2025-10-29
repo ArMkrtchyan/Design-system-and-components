@@ -11,12 +11,14 @@ import am.acba.component.extensions.inflater
 import am.acba.component.extensions.onLottieAnimationEndListener
 import am.acba.component.extensions.playLottieAnimation
 import am.acba.component.extensions.renderPdfPageAsBitmap
+import am.acba.component.fileUpload.FileUpload.FileType.Companion.findTypeByOrdinal
 import am.acba.component.fileUpload.FileUpload.FileUploadState.Companion.findStateByOrdinal
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -33,6 +35,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import java.io.File
 
 class FileUpload : FrameLayout {
@@ -48,10 +51,11 @@ class FileUpload : FrameLayout {
     private var hasBody = false
     private var errorMessage: String? = null
 
+    var fileType: FileType? = null
+
     var fileUploadState: FileUploadState = FileUploadState.EMPTY
         private set
     var fileUri: Uri? = null
-    var image: File? = null
     var descriptionText: String? = null
     var emptyIconDrawable: Drawable? = null
     var emptyIconBackground: Drawable? = null
@@ -86,12 +90,11 @@ class FileUpload : FrameLayout {
         context.obtainStyledAttributes(attrs, R.styleable.FileUpload).apply {
             addView(binding.root)
             try {
-
+                fileType = getInt(R.styleable.FileUpload_fileType, 0).findTypeByOrdinal()
                 val title = getString(R.styleable.FileUpload_fileUploadTitle)
                 val body = getString(R.styleable.FileUpload_fileUploadBody)
                 emptyIconDrawable = getDrawable(R.styleable.FileUpload_fileUploadEmptyIcon)
-                emptyIconTint = getColorStateList(R.styleable.FileUpload_fileUploadEmptyIconTint)
-                    ?: emptyIconTint
+                emptyIconTint = getColorStateList(R.styleable.FileUpload_fileUploadEmptyIconTint) ?: emptyIconTint
                 emptyIconBackground = getDrawable(R.styleable.FileUpload_fileUploadEmptyIconBackground)
                 emptyIconBackgroundTint = getColorStateList(R.styleable.FileUpload_fileUploadEmptyIconBackgroundTint)
 
@@ -360,17 +363,17 @@ class FileUpload : FrameLayout {
     private fun clearUploadedImage() {
         binding.ivUploadedImage.apply {
             fileUri = null
-            image = null
+            fileType = null
             isVisible = false
             setImageDrawable(null)
         }
     }
 
-    private fun loadImage(context: Context, file: File?) {
-        load(context, file)
+    private fun loadImage(uri: Uri?) {
+        load(uri)
     }
 
-    private fun loadFile(context: Context, uri: Uri?) {
+    private fun loadFile(uri: Uri?) {
         val bitmap = uri?.let {
             renderPdfPageAsBitmap(
                 context = context,
@@ -378,10 +381,10 @@ class FileUpload : FrameLayout {
                 backgroundColor = context.getColorFromAttr(R.attr.overlayBackgroundTonal1)
             )
         }?.toDrawable(context.resources)
-        load(context, bitmap)
+        load(bitmap)
     }
 
-    private fun load(context: Context, model: Any?) {
+    private fun load(model: Any?) {
         post {
             val width = binding.container.width
             val height = binding.container.height
@@ -411,7 +414,7 @@ class FileUpload : FrameLayout {
         errorMessage = context.getString(errorRes, formatArgs)
         setFileUploadState(FileUploadState.ERROR)
         fileUri = null
-        image = null
+        fileType = null
         return false
     }
 
@@ -428,8 +431,6 @@ class FileUpload : FrameLayout {
             .negativeButtonTextColor(negativeButtonTextColor)
             .positiveButtonClick {
                 setFileUploadState(FileUploadState.EMPTY)
-                fileUri = null
-                image = null
                 fileDeleteDialogClickListener?.invoke()
             }
             .setCancelable(true)
@@ -490,36 +491,32 @@ class FileUpload : FrameLayout {
         binding.ivUploadedImage.isVisible = isVisible
     }
 
-    fun setUploadedImage(context: Context, file: File?) {
-        if (!isFileValid(file, file?.extension)) return
-        this.image = file
-
-        setFileUploadState(FileUploadState.UPLOADED)
-        loadImage(context, file)
-        setDescription(file?.name)
-    }
-
-    fun showImage(context: Context, file: File?) {
-        this.image = file
-        loadImage(context, file)
-        setDescription(file?.name)
-    }
-
-    fun showFile(context: Context, uri: Uri?) {
-        fileUri = uri
-        val extension = context.getFileExtension(uri)
-        loadFile(context, uri)
-        setDescription(uri?.path?.substringAfterLast('/') + ".$extension")
-    }
-
-    fun setUploadedFile(context: Context, uri: Uri?) {
+    fun setUploadedMediaFile(fileType: FileType, uri: Uri? = null) {
         val extension = context.getFileExtension(uri)
         if (!isFileValid(uri?.path?.let { File(it) }, extension)) return
-        fileUri = uri
-
         setFileUploadState(FileUploadState.UPLOADED)
-        loadFile(context, uri)
-        setDescription(uri?.path?.substringAfterLast('/') + ".$extension")
+        showMediaFile(fileType, uri)
+    }
+
+    fun showMediaFile(fileType: FileType, uri: Uri?) {
+        loadMediaFile(fileType, uri)
+        val extension = ".${context.getFileExtension(uri)}"
+        val path = uri?.path?.substringAfterLast('/').orEmpty()
+        val description = if (path.lowercase().endsWith(extension.lowercase())) {
+            path
+        } else {
+            path + extension
+        }
+        setDescription(description)
+    }
+
+    private fun loadMediaFile(fileType: FileType, uri: Uri?) {
+        this.fileType = fileType
+        this.fileUri = uri
+        when (fileType) {
+            FileType.IMAGE -> loadImage(uri)
+            FileType.FILE -> loadFile(uri)
+        }
     }
 
     fun setOnItemClickListener(listener: OnClickListener) {
@@ -548,5 +545,15 @@ class FileUpload : FrameLayout {
         PROGRESS,
         LOTTIE,
         NOTHING
+    }
+
+    @Parcelize
+    enum class FileType : Parcelable {
+        IMAGE,
+        FILE;
+
+        companion object {
+            fun Int.findTypeByOrdinal() = entries.find { it.ordinal == this } ?: IMAGE
+        }
     }
 }
