@@ -7,6 +7,7 @@ import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -60,11 +61,12 @@ fun PrimaryCheckbox(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val backgroundColor: Color by animateColorAsState(if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent)
-    Row(modifier = modifier.wrapContentWidth()) {
+    Row(modifier = modifier.wrapContentWidth().id("checkbox")) {
         Box(
             modifier = Modifier
                 .size(24.dp)
                 .background(backgroundColor, ShapeTokens.shapeRound)
+                .id("checkboxMain")
                 .triStateToggleable(
                     state = state,
                     interactionSource = interactionSource,

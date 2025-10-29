@@ -1,10 +1,13 @@
 package am.acba.compose.components
 
 import am.acba.compose.theme.DigitalTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -34,26 +37,32 @@ fun PrimaryText(
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
-    style: TextStyle = DigitalTheme.typography.body1Medium
+    style: TextStyle = DigitalTheme.typography.body1Medium,
+    autoSize: TextAutoSize? = null
 ) {
-    Text(
+    val textColor = color.takeOrElse { style.color.takeOrElse { LocalContentColor.current } }
+
+    BasicText(
         text = text,
         modifier = modifier,
-        color = color,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textDecoration = textDecoration,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
+        style =
+            style.merge(
+                color = textColor,
+                fontSize = fontSize,
+                fontWeight = fontWeight,
+                textAlign = textAlign ?: TextAlign.Unspecified,
+                lineHeight = lineHeight,
+                fontFamily = fontFamily,
+                textDecoration = textDecoration,
+                fontStyle = fontStyle,
+                letterSpacing = letterSpacing
+            ),
+        onTextLayout = onTextLayout,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
         minLines = minLines,
-        onTextLayout = onTextLayout,
-        style = style,
+        autoSize = autoSize
     )
 }
 
@@ -75,25 +84,31 @@ fun PrimaryText(
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = DigitalTheme.typography.body1Medium
+    style: TextStyle = DigitalTheme.typography.body1Medium,
+    autoSize: TextAutoSize? = null
 ) {
-    Text(
+    val textColor = color.takeOrElse { style.color.takeOrElse { LocalContentColor.current } }
+
+    BasicText(
         text = text,
         modifier = modifier,
-        color = color,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textDecoration = textDecoration,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
+        style =
+            style.merge(
+                color = textColor,
+                fontSize = fontSize,
+                fontWeight = fontWeight,
+                textAlign = textAlign ?: TextAlign.Unspecified,
+                lineHeight = lineHeight,
+                fontFamily = fontFamily,
+                textDecoration = textDecoration,
+                fontStyle = fontStyle,
+                letterSpacing = letterSpacing
+            ),
+        onTextLayout = onTextLayout,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
         minLines = minLines,
-        onTextLayout = onTextLayout,
-        style = style,
+        autoSize = autoSize
     )
 }

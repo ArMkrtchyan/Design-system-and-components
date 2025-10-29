@@ -27,9 +27,9 @@ fun StatusBadge(
     title: String = "",
     id: String = "statusBadge",
     icon: Int? = null,
-    backgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    textColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    iconColor: Color = DigitalTheme.colorScheme.contentPending,
+    textColor: Color = DigitalTheme.colorScheme.contentPending,
     align: Alignment = Alignment.TopEnd,
 ) {
     Box(
@@ -46,7 +46,13 @@ fun StatusBadge(
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
-                PrimaryIcon(modifier = Modifier.size(14.dp), painter = painterResource(icon), tint = iconColor)
+                PrimaryIcon(
+                    modifier = Modifier
+                        .size(14.dp)
+                        .id("statusBadgeIcon"),
+                    painter = painterResource(icon),
+                    tint = iconColor
+                )
                 HorizontalSpacer(4.dp)
             }
             PrimaryText(
@@ -56,6 +62,8 @@ fun StatusBadge(
                 style = DigitalTheme.typography.xSmallRegular,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
+            ,
+                modifier = Modifier.id("statusBadgeText")
             )
         }
     }

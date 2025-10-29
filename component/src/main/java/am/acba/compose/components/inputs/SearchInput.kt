@@ -58,7 +58,7 @@ fun SearchBar(
     }
     var text by remember { mutableStateOf(TextFieldValue()) }
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(height)
             .fillMaxWidth()
             .background(color = backgroundColor, shape = cornerShape),

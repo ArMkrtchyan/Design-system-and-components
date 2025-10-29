@@ -6,6 +6,7 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.divider.PrimaryDivider
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -46,13 +47,16 @@ fun PrimaryAlertDialog(
     content: @Composable (() -> Unit)? = null
 ) {
     Dialog(
-        onDismissRequest = onDismissRequest,
-        properties = properties
+        onDismissRequest = onDismissRequest, properties = properties
     ) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .background(DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapePrimaryButton)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .background(
+                    DigitalTheme.colorScheme.backgroundTonal1, ShapeTokens.shapePrimaryButton
+                )
+        ) {
             Column(
                 Modifier.padding(top = 24.dp)
             ) {
@@ -60,18 +64,30 @@ fun PrimaryAlertDialog(
                     PrimaryAlertDialogIcon(icon = it, iconColor = iconColor)
                     VerticalSpacer(24.dp)
                 }
-                PrimaryAlertDialogTexts(text = title, textColor = titleColor, style = DigitalTheme.typography.heading7Bold, 2)
+                PrimaryAlertDialogTexts(
+                    text = title, textId = "title", textColor = titleColor, style = DigitalTheme.typography.heading7Bold, 2
+                )
                 description?.let {
                     VerticalSpacer(8.dp)
-                    PrimaryAlertDialogTexts(text = it, textColor = descriptionColor, style = DigitalTheme.typography.subTitle2Regular, 3)
+                    PrimaryAlertDialogTexts(
+                        text = it, textId = "description", textColor = descriptionColor, style = DigitalTheme.typography.subTitle2Regular, 3
+                    )
                 }
                 content?.let {
                     VerticalSpacer(24.dp)
                     it.invoke()
                 }
                 VerticalSpacer(24.dp)
-                positiveButtonText?.let { PrimaryAlertDialogButton(text = it, buttonColor = positiveButtonColor, onClick = onPositiveButtonClick) }
-                negativeButtonText?.let { PrimaryAlertDialogButton(text = it, buttonColor = negativeButtonColor, onClick = onNegativeButtonClick) }
+                positiveButtonText?.let {
+                    PrimaryAlertDialogButton(
+                        buttonId = "positiveButton", text = it, textId = "positiveButtonText", buttonColor = positiveButtonColor, onClick = onPositiveButtonClick
+                    )
+                }
+                negativeButtonText?.let {
+                    PrimaryAlertDialogButton(
+                        buttonId = "negativeButton", text = it, textId = "negativeButtonText", buttonColor = negativeButtonColor, onClick = onNegativeButtonClick
+                    )
+                }
             }
         }
     }
@@ -80,16 +96,21 @@ fun PrimaryAlertDialog(
 @Composable
 private fun PrimaryAlertDialogIcon(icon: Int, iconColor: Color) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        Image(modifier = Modifier.align(Alignment.Center), painter = painterResource(icon), contentDescription = null, colorFilter = ColorFilter.tint(iconColor))
+        Image(
+            modifier = Modifier.align(Alignment.Center), painter = painterResource(icon), contentDescription = null, colorFilter = ColorFilter.tint(iconColor)
+        )
     }
 }
 
 @Composable
-private fun PrimaryAlertDialogTexts(text: String, textColor: Color, style: TextStyle, maxLines: Int) {
+private fun PrimaryAlertDialogTexts(
+    text: String, textId: String, textColor: Color, style: TextStyle, maxLines: Int
+) {
     PrimaryText(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .id(textId),
         style = style,
         text = text,
         color = textColor,
@@ -100,9 +121,15 @@ private fun PrimaryAlertDialogTexts(text: String, textColor: Color, style: TextS
 }
 
 @Composable
-private fun PrimaryAlertDialogButton(text: String, buttonColor: Color, onClick: () -> Unit) {
+private fun PrimaryAlertDialogButton(
+    text: String, textId: String, buttonId: String, buttonColor: Color, onClick: () -> Unit
+) {
     PrimaryDivider()
-    GhostButton(modifier = Modifier.fillMaxWidth(), text = text, textColor = buttonColor, onClick = onClick, shape = ShapeTokens.unspecified)
+    GhostButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .id(buttonId), text = text, textId = textId, textColor = buttonColor, onClick = onClick, shape = ShapeTokens.unspecified
+    )
 }
 
 @Composable
@@ -123,7 +150,9 @@ fun AlertsScreenPreview() {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .height(125.dp)
-                    .background(DigitalTheme.colorScheme.backgroundTonal2, ShapeTokens.shapePrimaryButton)
+                    .background(
+                        DigitalTheme.colorScheme.backgroundTonal2, ShapeTokens.shapePrimaryButton
+                    )
             ) {
                 PrimaryText(modifier = Modifier.align(Alignment.Center), text = "Arshak .Mkrtchyan")
             }

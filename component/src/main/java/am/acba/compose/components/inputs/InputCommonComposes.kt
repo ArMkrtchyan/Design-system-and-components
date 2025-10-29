@@ -8,6 +8,7 @@ import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -45,7 +46,7 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
 }
 
 @Composable
-fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, maxLines: Int = 1) {
+fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, maxLines: Int = 1, id: String = "inputLabel") {
     val textColor = when {
         isError -> DigitalTheme.colorScheme.contentDangerTonal1
         !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
@@ -55,6 +56,7 @@ fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, ma
         text = text ?: "",
         color = textColor,
         maxLines = maxLines,
+        modifier = Modifier.id(id),
         overflow = if (maxLines == 1) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }
@@ -203,7 +205,7 @@ fun SupportIcon(iconRes: Int) {
 @Composable
 fun SupportText(text: String, color: Color) {
     PrimaryText(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().id("supportText"),
         text = text,
         style = DigitalTheme.typography.smallRegular,
         color = color,

@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
@@ -55,6 +56,13 @@ import androidx.compose.ui.unit.dp
 fun TableComponent(
     modifier: Modifier = Modifier,
     title: String? = null,
+    titleMaxLines: Int? = null,
+    titleColor: Color? = null,
+    titleStyle: TextStyle? = null,
+    description: String = "",
+    descriptionMaxLines: Int? = null,
+    descriptionColor: Color? = null,
+    descriptionStyle: TextStyle? = null,
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
     avatarContentModifier: Modifier = Modifier,
@@ -65,6 +73,11 @@ fun TableComponent(
     avatarIcon: Int? = null,
     avatarIconColor: Color = DigitalTheme.colorScheme.contentBrand,
     avatarIconPadding: Dp = 8.dp,
+    endIcon: Int? = null,
+    endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    endIconPadding: Int = 0,
+    endIconBackgroundColor: Color = Color.Transparent,
+    endIconBackgroundRadius: Int = 4,
     avatarImageUrl: String? = null,
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
@@ -104,6 +117,13 @@ fun TableComponent(
         if (!title.isNullOrEmpty()) {
             TableHeader(
                 title = title,
+                titleMaxLines = titleMaxLines,
+                titleColor = titleColor,
+                titleStyle = titleStyle,
+                description = description,
+                descriptionMaxLines = descriptionMaxLines,
+                descriptionColor = descriptionColor,
+                descriptionStyle = descriptionStyle,
                 avatarBackgroundModifier = avatarBackgroundModifier,
                 avatarBadgeModifier = avatarBadgeModifier,
                 avatarContentModifier = avatarContentModifier,
@@ -114,6 +134,11 @@ fun TableComponent(
                 avatarIcon = avatarIcon,
                 avatarIconColor = avatarIconColor,
                 avatarIconPadding = avatarIconPadding,
+                endIcon = endIcon,
+                endIconColor = endIconColor,
+                endIconPadding = endIconPadding,
+                endIconBackgroundColor = endIconBackgroundColor,
+                endIconBackgroundRadius = endIconBackgroundRadius,
                 avatarImageUrl = avatarImageUrl,
                 avatarClipPercent = avatarClipPercent,
                 avatarImageCornerRadius = avatarImageCornerRadius,
@@ -156,6 +181,13 @@ fun TableComponent(
 @Composable
 private fun TableHeader(
     title: String,
+    titleMaxLines: Int? = null,
+    titleColor: Color? = null,
+    titleStyle: TextStyle? = null,
+    description: String = "",
+    descriptionMaxLines: Int? = null,
+    descriptionColor: Color? = null,
+    descriptionStyle: TextStyle? = null,
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
     avatarContentModifier: Modifier = Modifier,
@@ -166,6 +198,11 @@ private fun TableHeader(
     avatarIcon: Int? = null,
     avatarIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
     avatarIconPadding: Dp = Dp.Unspecified,
+    endIcon: Int? = null,
+    endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    endIconPadding: Int = 0,
+    endIconBackgroundColor: Color = Color.Transparent,
+    endIconBackgroundRadius: Int = 4,
     avatarImageUrl: String? = null,
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
@@ -181,6 +218,13 @@ private fun TableHeader(
     ) {
     ListItem(
         title = title,
+        titleMaxLines = titleMaxLines,
+        titleColor = titleColor,
+        titleStyle = titleStyle,
+        description = description,
+        descriptionMaxLines = descriptionMaxLines,
+        descriptionColor = descriptionColor,
+        descriptionStyle = descriptionStyle,
         showDivider = true,
         backgroundColor = Color.Transparent,
         backgroundRadius = 0,
@@ -194,6 +238,11 @@ private fun TableHeader(
         avatarIcon = avatarIcon,
         avatarIconColor = avatarIconColor,
         avatarIconPadding = avatarIconPadding,
+        endIcon = endIcon,
+        endIconColor = endIconColor,
+        endIconPadding = endIconPadding,
+        endIconBackgroundColor = endIconBackgroundColor,
+        endIconBackgroundRadius = endIconBackgroundRadius,
         avatarImageUrl = avatarImageUrl,
         avatarClipPercent = avatarClipPercent,
         avatarImageCornerRadius = avatarImageCornerRadius,
@@ -216,7 +265,11 @@ private fun MainContent(tableItems: List<Pair<String, String>>) {
 }
 
 @Composable
-private fun AnimatedContent(expanded: MutableState<Boolean>, tableItems: List<Pair<String, String>>, minimumVisibleItemsCount: Int) {
+private fun AnimatedContent(
+    expanded: MutableState<Boolean>,
+    tableItems: List<Pair<String, String>>,
+    minimumVisibleItemsCount: Int
+) {
     val enterTransition = remember {
         expandVertically(
             expandFrom = Alignment.Top,
@@ -258,16 +311,22 @@ private fun AnimatedContent(expanded: MutableState<Boolean>, tableItems: List<Pa
 fun TableRow(title: String, value: String, isLast: Boolean) {
     val context = LocalContext.current
     Row(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
-        PrimaryText(text = title, modifier = Modifier.weight(0.5f), style = DigitalTheme.typography.smallRegular, color = DigitalTheme.colorScheme.contentPrimaryTonal1)
+        PrimaryText(
+            text = title,
+            modifier = Modifier.weight(0.5f),
+            style = DigitalTheme.typography.smallRegular,
+            color = DigitalTheme.colorScheme.contentPrimaryTonal1
+        )
         HorizontalSpacer(8.dp)
-        PrimaryText(text = value, modifier = Modifier
-            .weight(0.5f)
-            .combinedClickable(
-                onClick = {},
-                onLongClick = {
-                    context.copyWithVibration(value)
-                }
-            ), textAlign = TextAlign.End, style = DigitalTheme.typography.smallBold)
+        PrimaryText(
+            text = value, modifier = Modifier
+                .weight(0.5f)
+                .combinedClickable(
+                    onClick = {},
+                    onLongClick = {
+                        context.copyWithVibration(value)
+                    }
+                ), textAlign = TextAlign.End, style = DigitalTheme.typography.smallBold)
     }
     if (!isLast) {
         PrimaryDivider(modifier = Modifier.padding(horizontal = 16.dp))
