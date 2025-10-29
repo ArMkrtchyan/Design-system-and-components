@@ -59,6 +59,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -68,35 +69,33 @@ import kotlin.random.Random
 @Composable
 fun CardsItem(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
-    backgroundRadius: Int = 12,
-    imageUrl: String = EMPTY_STRING,
-    cardStatusIcon: Int = 0,
-    statusModifier: Modifier = Modifier,
+    cardStatusIcon: Int? = null,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-
     endIcon: Int? = null,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundInfoTonal1,
     statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusAlign: Alignment = Alignment.TopEnd,
-    title: String = EMPTY_STRING,
     titleStyle: TextStyle = DigitalTheme.typography.body1Regular,
-    subTitle: String = EMPTY_STRING,
     subTitleStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    cardNumber: String = EMPTY_STRING,
     cardNumberStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    badgeText: String = EMPTY_STRING,
     badgeTextColor: Color = DigitalTheme.colorScheme.contentPending,
-    badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    imageUrl: String = EMPTY_STRING,
+    title: String = EMPTY_STRING,
+    subTitle: String = EMPTY_STRING,
+    cardNumber: String = EMPTY_STRING,
+    badgeText: String = EMPTY_STRING,
+    swipeActionText: String = EMPTY_STRING,
+    id: String = "cardsItem",
+    badgeType: BadgeEnum = BadgeEnum.NONE,
     maxSwipe: Float = 100f,
+    backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
     isEditingInitial: Boolean = false,
     swipeActionIcon: Int = R.drawable.ic_flake,
-    swipeActionText: String = EMPTY_STRING,
     onSwipeAction: () -> Unit = {}
 ) {
     val swipePx = with(LocalDensity.current) { maxSwipe.dp.toPx() }
@@ -109,9 +108,9 @@ fun CardsItem(
             offsetX = newOffset
         }
     }
-    val transition = updateTransition(targetState = isEditingInitial, label = "expand-transition")
+    val transition = updateTransition(targetState = isEditingInitial, label = "scale-transition")
     val scale by transition.animateFloat(
-        label = "box-scale",
+        label = "scale",
         transitionSpec = {
             tween(
                 durationMillis = 200,
@@ -120,18 +119,6 @@ fun CardsItem(
         }
     ) { isEditingInitial ->
         if (isEditingInitial) 0f else 1f
-    }
-
-    val scale2 by transition.animateFloat(
-        label = "box-scale",
-        transitionSpec = {
-            tween(
-                durationMillis = 200,
-                delayMillis = 100
-            )
-        }
-    ) { isEditingInitial ->
-        if (!isEditingInitial) 0f else 1f
     }
 
     val animatedWidth by animateDpAsState(
@@ -170,32 +157,37 @@ fun CardsItem(
                 detectTapGestures(onTap = { onClick() })
             }
             .fillMaxWidth()
-            .height(IntrinsicSize.Min)) {
+            .height(IntrinsicSize.Min)
+            .id(id)) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
-                    DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius.dp)
+                    DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius)
                 )
-                .padding(end = 16.dp),
+                .padding(end = 16.dp)
+                .id("${id}Box"),
             contentAlignment = Alignment.CenterEnd
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.align(Alignment.CenterEnd)
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .id("${id}Action")
+                    .clickable {
+                        onSwipeAction()
+                        offsetX = 0f
+                        isOpen = false
+                    }
             ) {
                 PrimaryIcon(
                     painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
                         .size(28.dp)
-                        .id("actionIcon")
-                        .clickable {
-                            onSwipeAction()
-                            offsetX = 0f
-                            isOpen = false
-                        })
+                        .id("${id}ActionIcon")
+                )
                 PrimaryText(
-                    modifier = Modifier.id("actionText"),
+                    modifier = Modifier.id("${id}ActionText"),
                     color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
                 )
             }
@@ -215,8 +207,9 @@ fun CardsItem(
                         }
                     }
                 )
-                .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
-                .fillMaxWidth()) {
+                .background(backgroundColor, RoundedCornerShape(backgroundRadius))
+                .fillMaxWidth()
+                .id("${id}MainColumn")) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -228,7 +221,7 @@ fun CardsItem(
                             .width(100.dp)
                             .height(64.dp), clipPercent = 10, imageUrl = imageUrl
                     )
-                    if (cardStatusIcon != 0)
+                    if (cardStatusIcon != null)
                         PrimaryIcon(
                             painter = painterResource(cardStatusIcon),
                             tint = DigitalTheme.colorScheme.contentSecondary,
@@ -250,7 +243,7 @@ fun CardsItem(
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        PrimaryText(text = title, style = titleStyle)
+                        PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
                         if (endIcon != null && !isEditingInitial) {
                             HorizontalSpacer(8.dp)
                             PrimaryIcon(
@@ -263,7 +256,7 @@ fun CardsItem(
                         }
                     }
                     if (subTitle.isNotEmpty()) {
-                        PrimaryText(text = subTitle, style = subTitleStyle)
+                        PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
                         VerticalSpacer(4.dp)
                     }
                     Row(
@@ -274,7 +267,7 @@ fun CardsItem(
                     ) {
                         PrimaryText(
                             modifier = Modifier
-                                .id("cardNumber")
+                                .id("${id}CardNumber")
                                 .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
                         )
                         if (badgeText.isNotEmpty())
@@ -282,7 +275,7 @@ fun CardsItem(
                                 badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
                                 textColor = badgeTextColor, modifier = Modifier
                                     .align(Alignment.Bottom)
-                                    .id("badge")
+                                    .id("${id}Badge")
                             )
                     }
                 }
@@ -292,7 +285,6 @@ fun CardsItem(
                 PrimaryIcon(
                     painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
                         .size(animatedWidth)
-                        .id("editModeIcon")
                         .align(Alignment.CenterVertically)
                 )
             }
@@ -300,11 +292,11 @@ fun CardsItem(
                 StatusBadge(
                     title = statusTitle,
                     icon = statusIcon,
+                    id = "${id}StatusBadge",
                     textColor = statusTextColor,
                     iconColor = statusIconColor,
                     backgroundColor = statusBackgroundColor,
-                    align = statusAlign,
-                    modifier = statusModifier
+                    align = Alignment.TopEnd
                 )
             }
         }
