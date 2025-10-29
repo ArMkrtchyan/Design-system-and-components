@@ -245,7 +245,7 @@ fun CardsItem(
                         PrimaryText(
                             modifier = Modifier.weight(1f), text = title, style = titleStyle
                         )
-                        if (endIcon != null) {
+                        if (endIcon != null && !isEditingInitial) {
                             HorizontalSpacer(8.dp)
                             PrimaryIcon(
                                 painter = painterResource(endIcon),
