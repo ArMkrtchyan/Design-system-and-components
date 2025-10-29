@@ -51,6 +51,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -151,21 +152,20 @@ fun CardsItem(
 
     Box(
         modifier = Modifier
-            .then(modifier)
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .pointerInput(Unit) {
                 detectTapGestures(onTap = { onClick() })
             }
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min)
-            .id(id)) {
+            .clip(RoundedCornerShape(backgroundRadius))
+            .background(DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius))
+            .id(id)
+            .then(modifier)) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius)
-                )
-                .padding(end = 16.dp)
+                .clip(RoundedCornerShape(backgroundRadius))
                 .id("${id}Box"),
             contentAlignment = Alignment.CenterEnd
         ) {
@@ -174,6 +174,7 @@ fun CardsItem(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
+                    .padding(end = 16.dp)
                     .id("${id}Action")
                     .clickable {
                         onSwipeAction()
@@ -195,6 +196,7 @@ fun CardsItem(
 
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .offset { IntOffset(offsetX.roundToInt(), 0) }
                 .draggable(
                     state = dragState,
@@ -207,99 +209,100 @@ fun CardsItem(
                         }
                     }
                 )
-                .background(backgroundColor, RoundedCornerShape(backgroundRadius))
-                .fillMaxWidth()
-                .id("${id}MainColumn")) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Box {
-                    AvatarImage(
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(64.dp), clipPercent = 10, imageUrl = imageUrl
-                    )
-                    if (cardStatusIcon != null)
-                        PrimaryIcon(
-                            painter = painterResource(cardStatusIcon),
-                            tint = DigitalTheme.colorScheme.contentSecondary,
-                            modifier = Modifier
-                                .size(24.dp)
-                                .align(Alignment.Center)
-                        )
-                }
-
-                Column(
-                    modifier = Modifier
-                        .height(66.dp)
-                        .weight(1f)
-                        .padding(start = 12.dp)
+                .background(
+                    backgroundColor, shape = RoundedCornerShape(backgroundRadius))
+                        .id("${id}MainColumn")
                 ) {
                     Row(
                         modifier = Modifier
-                            .height(24.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
-                        if (endIcon != null && !isEditingInitial) {
-                            HorizontalSpacer(8.dp)
-                            PrimaryIcon(
-                                painter = painterResource(endIcon),
-                                tint = endIconColor,
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .scale(scale)
-                            )
-                        }
-                    }
-                    if (subTitle.isNotEmpty()) {
-                        PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
-                        VerticalSpacer(4.dp)
-                    }
-                    Row(
-                        modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                            .padding(16.dp)
                     ) {
-                        PrimaryText(
-                            modifier = Modifier
-                                .id("${id}CardNumber")
-                                .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
-                        )
-                        if (badgeText.isNotEmpty())
-                            Badge(
-                                badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
-                                textColor = badgeTextColor, modifier = Modifier
-                                    .align(Alignment.Bottom)
-                                    .id("${id}Badge")
+                        Box {
+                            AvatarImage(
+                                modifier = Modifier
+                                    .width(100.dp)
+                                    .height(64.dp), clipPercent = 10, imageUrl = imageUrl
                             )
+                            if (cardStatusIcon != null)
+                                PrimaryIcon(
+                                    painter = painterResource(cardStatusIcon),
+                                    tint = DigitalTheme.colorScheme.contentSecondary,
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .align(Alignment.Center)
+                                )
+                        }
+
+                        Column(
+                            modifier = Modifier
+                                .height(66.dp)
+                                .weight(1f)
+                                .padding(start = 12.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .height(24.dp)
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
+                                if (endIcon != null && !isEditingInitial) {
+                                    HorizontalSpacer(8.dp)
+                                    PrimaryIcon(
+                                        painter = painterResource(endIcon),
+                                        tint = endIconColor,
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .scale(scale)
+                                    )
+                                }
+                            }
+                            if (subTitle.isNotEmpty()) {
+                                PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
+                                VerticalSpacer(4.dp)
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                PrimaryText(
+                                    modifier = Modifier
+                                        .id("${id}CardNumber")
+                                        .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
+                                )
+                                if (badgeText.isNotEmpty())
+                                    Badge(
+                                        badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
+                                        textColor = badgeTextColor, modifier = Modifier
+                                            .align(Alignment.Bottom)
+                                            .id("${id}Badge")
+                                    )
+                            }
+                        }
+                        if (isEditingInitial) {
+                            HorizontalSpacer(8.dp)
+                        }
+                        PrimaryIcon(
+                            painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
+                                .size(animatedWidth)
+                                .align(Alignment.CenterVertically)
+                        )
+                    }
+                    if (!statusTitle.isNullOrEmpty()) {
+                        StatusBadge(
+                            title = statusTitle,
+                            icon = statusIcon,
+                            id = "${id}StatusBadge",
+                            textColor = statusTextColor,
+                            iconColor = statusIconColor,
+                            backgroundColor = statusBackgroundColor,
+                            align = Alignment.TopEnd
+                        )
                     }
                 }
-                if (isEditingInitial) {
-                    HorizontalSpacer(8.dp)
-                }
-                PrimaryIcon(
-                    painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
-                        .size(animatedWidth)
-                        .align(Alignment.CenterVertically)
-                )
-            }
-            if (!statusTitle.isNullOrEmpty()) {
-                StatusBadge(
-                    title = statusTitle,
-                    icon = statusIcon,
-                    id = "${id}StatusBadge",
-                    textColor = statusTextColor,
-                    iconColor = statusIconColor,
-                    backgroundColor = statusBackgroundColor,
-                    align = Alignment.TopEnd
-                )
-            }
-        }
     }
 }
 
