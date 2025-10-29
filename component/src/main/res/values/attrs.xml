@@ -690,6 +690,11 @@
     </declare-styleable>
 
     <declare-styleable name="FileUpload">
+        <attr name="fileType" format="enum">
+            <enum name="Image" value="0" />
+            <enum name="File" value="1" />
+        </attr>
+
         <attr name="fileUploadState" format="enum">
             <enum name="Empty" value="0" />
             <enum name="Uploading" value="1" />
