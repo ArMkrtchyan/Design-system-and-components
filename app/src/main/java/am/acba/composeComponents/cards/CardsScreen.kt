@@ -115,13 +115,14 @@ fun CardsItemScreen(title: String = "") {
                     cardNumber = "**** 5678",
                     endIcon = R.drawable.ic_info,
                     badgeType = BadgeEnum.INFO,
-                    badgeText = "Լրացուցիչ",
+                    swipeActionIcon = R.drawable.ic_trash,
+                    actionBackgroundColor = DigitalTheme.colorScheme.backgroundDanger,
                     imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
                     statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Բլոկավորել"
+                    swipeActionText = "Հեռացնել"
                 )
                 VerticalSpacer(20.dp)
                 PrimaryButton(
