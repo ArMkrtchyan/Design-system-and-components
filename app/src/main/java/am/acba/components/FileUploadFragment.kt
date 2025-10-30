@@ -1,6 +1,5 @@
 package am.acba.components
 
-import am.acba.component.extensions.getFile
 import am.acba.component.fileUpload.FileUpload
 import am.acba.component.fileUpload.FileUploadModel
 import am.acba.component.toolbar.PrimaryToolbar
@@ -52,7 +51,10 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
                 Intent.FLAG_GRANT_READ_URI_PERMISSION
             )
 
-            mBinding.fThird.setUploadedFile(requireContext(), it)
+            mBinding.fThird.setUploadedMediaFile(
+                fileType = FileUpload.FileType.FILE,
+                uri = it
+            )
         }
     }
 
@@ -147,13 +149,12 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
     }
 
     private fun openPreview(fileUpload: FileUpload? = null) {
-        val fileUri = fileUpload?.fileUri
-        val imagePath = fileUpload?.image?.absolutePath
+        val filePath = fileUpload?.fileUri
 
         val bundle = bundleOf(
             "title" to "Ավելացնել պատճենը",
-            FilePreviewBottomSheetDialog.IMAGE_URI to imagePath,
-            FilePreviewBottomSheetDialog.FILE_URI to fileUri,
+            FilePreviewBottomSheetDialog.FILE_TYPE to fileUpload?.fileType,
+            FilePreviewBottomSheetDialog.FILE_URI to filePath,
             CLEAR_IMAGE to ClickListener({ clearImage ->
                 if (clearImage) fileUpload?.setFileUploadState(FileUpload.FileUploadState.EMPTY)
             })
@@ -162,11 +163,11 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
     }
 
     private fun openPreview(model: FileUploadModel? = null) {
-        val imagePath = model?.uploadedImage?.absolutePath
+        val imagePath = model?.fileUri
         val bundle = bundleOf(
             "title" to "Ավելացնել պատճենը",
-            FilePreviewBottomSheetDialog.IMAGE_URI to imagePath,
-            FilePreviewBottomSheetDialog.FILE_URI to model?.uploadedFile,
+            FilePreviewBottomSheetDialog.FILE_TYPE to model?.fileType,
+            FilePreviewBottomSheetDialog.FILE_URI to imagePath,
             CLEAR_IMAGE to ClickListener({ clearImage ->
                 if (clearImage) {
                     model?.let {
@@ -189,20 +190,20 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
     }
 
     private fun handleCameraResult(success: Boolean) {
-        if (success) showImage(mBinding.fSecond, uri?.getFile(requireContext()), uri)
+        if (success) showImage(mBinding.fSecond, uri)
     }
 
-    private fun showImage(fileUpload: FileUpload, file: File? = null, uri: Uri? = null) {
-        if (file != null && uri != null) {
-            onMediaFileResultSuccess(file, fileUpload)
+    private fun showImage(fileUpload: FileUpload, uri: Uri? = null) {
+        if (uri != null) {
+            onMediaFileResultSuccess(uri, fileUpload)
         }
     }
 
-    private fun onMediaFileResultSuccess(file: File, fileUpload: FileUpload) {
+    private fun onMediaFileResultSuccess(file: Uri, fileUpload: FileUpload) {
         lifecycleScope.launch(Dispatchers.Main) {
             fileUpload.setFileUploadState(FileUpload.FileUploadState.UPLOADING) {
                 lifecycleScope.launch(Dispatchers.Main) {
-                    fileUpload.setUploadedImage(requireContext(), file)
+                    fileUpload.setUploadedMediaFile(FileUpload.FileType.IMAGE, file)
                 }
             }
         }
@@ -240,12 +241,11 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
     private fun handleGalleryResult(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val uri = result.data?.data
-            val file = uri?.getFile(requireActivity())
-            imageRequestSourceView?.let { showImage(it, file, uri) }
+            imageRequestSourceView?.let { showImage(it, uri) }
             imageRequestSourceItem?.let { item ->
                 lifecycleScope.launch(Dispatchers.Main) {
                     mBinding.fileUploadList.updateList(item) {
-                        item.copy(description = " ", fileUploadState = FileUpload.FileUploadState.UPLOADING, uploadedImage = file)
+                        item.copy(description = " ", fileUploadState = FileUpload.FileUploadState.UPLOADING, fileUri = uri)
                     }
                 }
             }

@@ -96,7 +96,10 @@ fun PrimaryBottomSheet(
                             modifier = Modifier
                                 .width(32.dp)
                                 .height(4.dp)
-                                .background(DigitalTheme.colorScheme.contentPrimaryTonal2, ShapeTokens.shapeRound)
+                                .background(
+                                    DigitalTheme.colorScheme.contentPrimaryTonal2,
+                                    ShapeTokens.shapeRound
+                                )
                                 .align(Alignment.Center)
                         )
                     }
@@ -110,9 +113,17 @@ fun PrimaryBottomSheet(
                         val contentHeightDouble = it.size.height * 1.0
                         val dimensionInPercent =
                             contentHeightDouble.log("HeightTag", "contentHeightDouble -> ")
-                                .div(displayHeightDouble.log("HeightTag", "displayHeightDouble -> ")) * 100.0
+                                .div(
+                                    displayHeightDouble.log(
+                                        "HeightTag",
+                                        "displayHeightDouble -> "
+                                    )
+                                ) * 100.0
                         openFullScreen.value =
-                            if (calculatePercentForOpenFullScreen) dimensionInPercent.log("HeightTag", "dimensionInPercent -> ") > 70 else false
+                            if (calculatePercentForOpenFullScreen) dimensionInPercent.log(
+                                "HeightTag",
+                                "dimensionInPercent -> "
+                            ) > 70 else false
                     }
                 ) {
                     if (title.isNotEmpty() || icon != null) {
@@ -145,7 +156,13 @@ private fun BottomSheetHeader(title: String = "", icon: Int? = null, onDismissRe
             .padding(horizontal = 16.dp)
             .padding(bottom = 16.dp),
     ) {
-        PrimaryText(text = title, modifier = Modifier.weight(1f).id("bottom_sheet_title"), style = DigitalTheme.typography.body1Bold)
+        PrimaryText(
+            text = title,
+            modifier = Modifier
+                .id("bottom_sheet_title")
+                .weight(1f),
+            style = DigitalTheme.typography.body1Bold
+        )
         if (icon != null) {
             PrimaryIcon(
                 painter = painterResource(icon),

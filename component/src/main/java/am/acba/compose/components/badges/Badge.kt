@@ -8,6 +8,7 @@ import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.AvatarImage
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 fun Badge(
     modifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier,
+    id: String = "badge",
     badgeType: BadgeEnum = BadgeEnum.INFO,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     badgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
@@ -43,9 +45,26 @@ fun Badge(
 ) {
     when (badgeType) {
         BadgeEnum.DOT -> Dot(modifier = modifier, backgroundColor = backgroundColor, borderColor = badgeBorderColor)
-        BadgeEnum.ICON -> BadgeIcon(modifier = modifier, iconModifier = iconModifier, icon = icon, backgroundColor = backgroundColor, iconColor = iconColor, imageUrl = imageUrl)
-        BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, text = text, backgroundColor = backgroundColor, textColor = textColor)
-        BadgeEnum.INFO -> BadgeTextAndIcon(modifier = modifier, icon = icon, text = text, backgroundColor = backgroundColor, textColor = textColor, imageUrl = imageUrl)
+        BadgeEnum.ICON -> BadgeIcon(
+            modifier = modifier,
+            iconModifier = iconModifier,
+            icon = icon,
+            backgroundColor = backgroundColor,
+            iconColor = iconColor,
+            imageUrl = imageUrl
+        )
+
+        BadgeEnum.NUMBER -> BadgeNumber(modifier = modifier, id = id, text = text, backgroundColor = backgroundColor, textColor = textColor)
+        BadgeEnum.INFO -> BadgeTextAndIcon(
+            modifier = modifier,
+            id = id,
+            icon = icon,
+            text = text,
+            backgroundColor = backgroundColor,
+            textColor = textColor,
+            imageUrl = imageUrl
+        )
+
         BadgeEnum.NONE -> Unit
     }
 }
@@ -109,6 +128,7 @@ private fun BadgeIcon(
 private fun BadgeNumber(
     modifier: Modifier = Modifier,
     text: String? = null,
+    id: String,
     textColor: Color,
     backgroundColor: Color,
 ) {
@@ -116,13 +136,14 @@ private fun BadgeNumber(
         modifier = modifier
             .background(backgroundColor, ShapeTokens.shapeBadge)
     ) {
-        BadgeText(Modifier.padding(horizontal = 4.dp), text.orEmpty(), textColor)
+        BadgeText(Modifier.padding(horizontal = 4.dp), id = id, text.orEmpty(), textColor)
     }
 }
 
 @Composable
 private fun BadgeTextAndIcon(
     modifier: Modifier = Modifier,
+    id: String,
     icon: Int? = null,
     imageUrl: String? = null,
     text: String? = null,
@@ -159,17 +180,17 @@ private fun BadgeTextAndIcon(
             }
         }
 
-        BadgeText(Modifier, text ?: "", textColor)
+        BadgeText(Modifier.height(20.dp), id = id, text ?: "", textColor)
     }
 }
 
 @Composable
-private fun BadgeText(modifier: Modifier, text: String, textColor: Color) {
+private fun BadgeText(modifier: Modifier, id: String, text: String, textColor: Color) {
     PrimaryText(
         text = text,
         color = textColor,
         style = DigitalTheme.typography.smallRegular,
-        modifier = modifier
+        modifier = modifier.id("${id}_text")
     )
 }
 

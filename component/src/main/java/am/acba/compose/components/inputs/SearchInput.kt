@@ -80,8 +80,9 @@ fun SearchBar(
         }
         BasicTextField(
             modifier = Modifier
+                .id("search")
                 .weight(5f)
-                .fillMaxWidth().id("search"),
+                .fillMaxWidth(),
             value = text,
             cursorBrush = SolidColor(DigitalTheme.colorScheme.contentBrand),
             onValueChange = {

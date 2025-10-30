@@ -25,6 +25,7 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
             phoneNumber.getFormattedFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumber().log("PhoneNumber")
             phoneNumber.getFullNumberWithPlus().log("PhoneNumber")
+            phoneNumber.getSelectedCountryNameCode().log("SelectedCountry")
         }
     }
 
