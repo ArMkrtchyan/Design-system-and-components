@@ -105,6 +105,7 @@ fun CurrencyInput(
                 readOnly,
                 placeholder,
                 formatDecimal,
+                isFocused,
                 autoFormatting,
                 keyboardOptions,
                 keyboardActions,
@@ -130,6 +131,7 @@ private fun RowScope.AmountTextField(
     readOnly: Boolean,
     placeholder: String?,
     formatDecimal: Boolean,
+    isFocused: Boolean,
     autoFormatting: Boolean = true,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
@@ -148,7 +150,7 @@ private fun RowScope.AmountTextField(
         MaxLengthVisualTransformation(maxLength)
     }
     TextField(
-        value = value,
+        value = if (formatDecimal && isFocused) value.copy(text = value.text.removeSuffix(".00")) else value,
         onValueChange = {
             if (checkInputValidation(value, maxLength, pattern, it))
                 onValueChange(it)
