@@ -11,7 +11,6 @@ import am.acba.component.extensions.inflater
 import am.acba.component.extensions.onLottieAnimationEndListener
 import am.acba.component.extensions.playLottieAnimation
 import am.acba.component.extensions.renderPdfPageAsBitmap
-import am.acba.component.fileUpload.FileUpload.FileType.Companion.findTypeByOrdinal
 import am.acba.component.fileUpload.FileUpload.FileUploadState.Companion.findStateByOrdinal
 import android.content.Context
 import android.content.res.ColorStateList
@@ -90,7 +89,9 @@ class FileUpload : FrameLayout {
         context.obtainStyledAttributes(attrs, R.styleable.FileUpload).apply {
             addView(binding.root)
             try {
-                fileType = getInt(R.styleable.FileUpload_fileType, 0).findTypeByOrdinal()
+                val type = getInt(R.styleable.FileUpload_fileType, 0)
+                fileType = FileType.Companion.getFileType(type)
+
                 val title = getString(R.styleable.FileUpload_fileUploadTitle)
                 val body = getString(R.styleable.FileUpload_fileUploadBody)
                 emptyIconDrawable = getDrawable(R.styleable.FileUpload_fileUploadEmptyIcon)
@@ -556,12 +557,13 @@ class FileUpload : FrameLayout {
     }
 
     @Parcelize
-    enum class FileType : Parcelable {
-        IMAGE,
-        FILE;
+    enum class FileType(val type: Int) : Parcelable {
+        IMAGE(0),
+        FILE(1);
 
         companion object {
-            fun Int.findTypeByOrdinal() = entries.find { it.ordinal == this } ?: IMAGE
+            private val map = entries.associateBy(FileType::type)
+            fun getFileType(type: Int) = map[type]
         }
     }
 }
