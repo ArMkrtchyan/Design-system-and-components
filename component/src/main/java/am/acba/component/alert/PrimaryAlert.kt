@@ -23,7 +23,7 @@ class PrimaryAlert : FrameLayout {
     private val binding by lazy { AlertLayoutBinding.inflate(context.inflater(), this, false) }
 
     private var isFilledBackground = false
-    private var showCloseIcon = true
+    private var isCloseIconVisible = true
     private var type = AlertTypes.INFO
     private var clickInterval = 1000
 
@@ -33,8 +33,7 @@ class PrimaryAlert : FrameLayout {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int)
-            : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
 
@@ -42,7 +41,7 @@ class PrimaryAlert : FrameLayout {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryAlert).apply {
             addView(binding.root)
             try {
-                showCloseIcon = getBoolean(R.styleable.PrimaryAlert_showAlertCloseIcon, true)
+                val isCloseIconVisible = getBoolean(R.styleable.PrimaryAlert_showAlertCloseIcon, true)
                 type = getInt(R.styleable.PrimaryAlert_alertType, 0).findAlertTypeByOrdinal()
                     ?: AlertTypes.INFO
 
@@ -56,7 +55,7 @@ class PrimaryAlert : FrameLayout {
                 val link = getString(R.styleable.PrimaryAlert_alertLink)
                 val neutralIcon = getDrawable(R.styleable.PrimaryAlert_alertNeutralIcon)
 
-                updateCloseIconVisibility()
+                setCloseIconVisibility(isCloseIconVisible)
                 setType(type)
                 setTitle(title)
                 setTitleSingleLine(titleSingleLine)
@@ -72,8 +71,9 @@ class PrimaryAlert : FrameLayout {
         }
     }
 
-    private fun updateCloseIconVisibility() {
-        binding.ivClose.isVisible = showCloseIcon
+    fun setCloseIconVisibility(isCloseIconVisible: Boolean) {
+        this.isCloseIconVisible = isCloseIconVisible
+        binding.ivClose.isVisible = isCloseIconVisible
     }
 
     fun setTitle(title: String?) {
@@ -129,7 +129,7 @@ class PrimaryAlert : FrameLayout {
     }
 
     fun setOnCloseClickListener(onClickListener: OnClickListener?) {
-        if (showCloseIcon && onClickListener != null) {
+        if (isCloseIconVisible && onClickListener != null) {
             binding.ivClose.setOnClickListener(
                 PreventDoubleClickListener(
                     onClickListener,
