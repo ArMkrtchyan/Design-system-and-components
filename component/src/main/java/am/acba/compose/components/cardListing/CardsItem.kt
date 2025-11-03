@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -174,6 +175,7 @@ fun CardsItem(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(end = 16.dp)
+                    .widthIn(min = 70.dp)
                     .id("${id}Action")
                     .clickable {
                         onSwipeAction()
@@ -222,7 +224,7 @@ fun CardsItem(
                     AvatarImage(
                         modifier = Modifier
                             .width(100.dp)
-                            .height(64.dp), clipPercent = 10, imageUrl = imageUrl
+                            .height(64.dp), clipPercent = 14, imageUrl = imageUrl
                     )
                     if (cardStatusIcon != null)
                         PrimaryIcon(
