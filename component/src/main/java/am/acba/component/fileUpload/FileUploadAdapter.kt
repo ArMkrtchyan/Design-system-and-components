@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewHolder>(FileUploadDiffCallBack()) {
 
@@ -61,7 +64,6 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
                 if (model.fileUploadState == FileUpload.FileUploadState.UPLOADING) {
                     setFileUploadState(model.fileUploadState) {
                         setUploadedData(model)
-                        model.fileUploadState = fileUploadState
                     }
                 } else {
                     setFileUploadState(model.fileUploadState)
@@ -73,16 +75,28 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
         }
 
         private fun setUploadedData(model: FileUploadModel) {
-            binding.fileUpload.apply {
+            CoroutineScope(Dispatchers.Main).launch {
                 model.fileType?.let {
-                    setUploadedMediaFile(it, model.fileUri)
+                    if (binding.fileUpload.setUploadedMediaFile(it, model.fileUri).await()) {
+                        setFileUploadData(model)
+                    } else {
+                        setFileUploadData(model)
+                    }
                 }
+            }
+        }
+
+        private fun setFileUploadData(model: FileUploadModel) {
+            binding.fileUpload.apply {
+                model.fileUploadState = fileUploadState
                 model.fileUri = fileUri
+                model.base64 = getBase64()
             }
         }
 
         private fun resetEmptyStateAfterDeletion(model: FileUploadModel) {
             var position = 0
+            model.base64 = null
             val updatedList = currentList.map {
                 if (it.id == model.id) {
                     position = currentList.indexOf(it)
