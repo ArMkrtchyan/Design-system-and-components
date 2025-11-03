@@ -15,6 +15,7 @@ data class FileUploadModel(
     val title: String? = null,
     val body: String? = null,
     var description: String? = null,
+    var base64: String? = null,
     val emptyIcon: Drawable?,
     val emptyIconTint: ColorStateList? = null,
     val emptyIconBackground: Drawable? = null,
