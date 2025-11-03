@@ -456,7 +456,9 @@ class PhoneNumberInput @JvmOverloads constructor(
         ccpBinding.countryCodeLib.fullNumber = phoneNumber
         ccpBinding.countryCodeLib.selectedCountryNameCode
         countriesList.forEach {
-            if (it.nameCode == ccpBinding.countryCodeLib.selectedCountryNameCode) {
+            val isSelectedPhoneNumber = it.nameCode == ccpBinding.countryCodeLib.selectedCountryNameCode
+            it.isSelected = isSelectedPhoneNumber
+            if (isSelectedPhoneNumber) {
                 context.saveCountryLastAction(it)
                 selectCountry(it)
             }
