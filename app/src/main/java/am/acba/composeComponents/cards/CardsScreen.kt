@@ -55,7 +55,7 @@ fun CardsItemScreen(title: String = "") {
                     .padding(bottom = 50.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
-                VerticalSpacer(20.dp)
+                VerticalSpacer(8.dp)
                 CardsItem(
                     modifier = Modifier.id("card1"),
                     isEditingInitial = isEditing,
@@ -70,12 +70,10 @@ fun CardsItemScreen(title: String = "") {
                         "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
                     cardStatusIcon = R.drawable.ic_flake
                 )
-                VerticalSpacer(20.dp)
+                VerticalSpacer(8.dp)
                 CardsItem(
                     modifier = Modifier.id("card2"),
-                    title = "***** AMD",
-                    titleStyle = DigitalTheme.typography.body1Bold,
-                    subTitle = "Aramayis Ter-Stepanyan",
+                    title = "Mastercard Standard",
                     isEditingInitial = isEditing,
                     cardNumber = "**** 5678",
                     badgeText = "Լրացուցիչ",
@@ -89,7 +87,7 @@ fun CardsItemScreen(title: String = "") {
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                     swipeActionText = "Բլոկավորել"
                 )
-                VerticalSpacer(20.dp)
+                VerticalSpacer(8.dp)
                 CardsItem(
                     modifier = Modifier.id("card2"),
                     title = "***** AMD",
@@ -106,22 +104,39 @@ fun CardsItemScreen(title: String = "") {
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                     swipeActionText = "Բլոկավորել"
                 )
-                VerticalSpacer(20.dp)
+                VerticalSpacer(8.dp)
                 CardsItem(
                     modifier = Modifier.id("card2"),
-                    title = "Evocabank",
+                    title = "10,000.00 AMD",
                     titleStyle = DigitalTheme.typography.body1Bold,
+                    subTitle = "Aramayis Ter-Stepanyan",
                     isEditingInitial = isEditing,
                     cardNumber = "**** 5678",
                     endIcon = R.drawable.ic_info,
                     badgeType = BadgeEnum.INFO,
-                    badgeText = "Լրացուցիչ",
                     imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
                     statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                     swipeActionText = "Բլոկավորել"
+                )
+                VerticalSpacer(8.dp)
+                CardsItem(
+                    modifier = Modifier.id("card2"),
+                    title = "Evocabank",
+                    isEditingInitial = isEditing,
+                    cardNumber = "**** 5678",
+                    endIcon = R.drawable.ic_info,
+                    badgeType = BadgeEnum.INFO,
+                    swipeActionIcon = R.drawable.ic_trash,
+                    actionBackgroundColor = DigitalTheme.colorScheme.backgroundDanger,
+                    imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
+                    statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusIcon = R.drawable.ic_info,
+                    statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                    statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
+                    swipeActionText = "Հեռացնել"
                 )
                 VerticalSpacer(20.dp)
                 PrimaryButton(

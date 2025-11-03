@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -50,7 +51,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -73,16 +73,18 @@ fun CardsItem(
     statusTitle: String? = null,
     statusIcon: Int? = null,
     endIcon: Int? = null,
+    swipeActionIcon: Int = R.drawable.ic_flake,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundInfoTonal1,
     statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
     statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    badgeTextColor: Color = DigitalTheme.colorScheme.contentPending,
+    actionBackgroundColor: Color = DigitalTheme.colorScheme.backgroundInfo,
     titleStyle: TextStyle = DigitalTheme.typography.body1Regular,
     subTitleStyle: TextStyle = DigitalTheme.typography.smallRegular,
     cardNumberStyle: TextStyle = DigitalTheme.typography.smallRegular,
-    badgeTextColor: Color = DigitalTheme.colorScheme.contentPending,
-    badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
     imageUrl: String = EMPTY_STRING,
     title: String = EMPTY_STRING,
     subTitle: String = EMPTY_STRING,
@@ -95,7 +97,6 @@ fun CardsItem(
     backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
     isEditingInitial: Boolean = false,
-    swipeActionIcon: Int = R.drawable.ic_flake,
     onSwipeAction: () -> Unit = {}
 ) {
     val swipePx = with(LocalDensity.current) { maxSwipe.dp.toPx() }
@@ -130,6 +131,8 @@ fun CardsItem(
     LaunchedEffect(isEditingInitial) {
         if (isEditingInitial) {
             delay(Random.nextInt(0, 200).toLong())
+            offsetX = 0f
+            isOpen = false
             startAnimation = true
         } else {
             startAnimation = false
@@ -151,21 +154,18 @@ fun CardsItem(
 
     Box(
         modifier = Modifier
-            .then(modifier)
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .pointerInput(Unit) {
                 detectTapGestures(onTap = { onClick() })
             }
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min)
-            .id(id)) {
+            .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
+            .id(id)
+            .then(modifier)) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(
-                    DigitalTheme.colorScheme.backgroundInfo, RoundedCornerShape(backgroundRadius)
-                )
-                .padding(end = 16.dp)
                 .id("${id}Box"),
             contentAlignment = Alignment.CenterEnd
         ) {
@@ -174,6 +174,8 @@ fun CardsItem(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
+                    .padding(end = 16.dp)
+                    .widthIn(min = 70.dp)
                     .id("${id}Action")
                     .clickable {
                         onSwipeAction()
@@ -195,6 +197,7 @@ fun CardsItem(
 
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .offset { IntOffset(offsetX.roundToInt(), 0) }
                 .draggable(
                     state = dragState,
@@ -207,9 +210,11 @@ fun CardsItem(
                         }
                     }
                 )
-                .background(backgroundColor, RoundedCornerShape(backgroundRadius))
-                .fillMaxWidth()
-                .id("${id}MainColumn")) {
+                .background(
+                    backgroundColor, shape = RoundedCornerShape(backgroundRadius)
+                )
+                .id("${id}MainColumn")
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -219,7 +224,7 @@ fun CardsItem(
                     AvatarImage(
                         modifier = Modifier
                             .width(100.dp)
-                            .height(64.dp), clipPercent = 10, imageUrl = imageUrl
+                            .height(64.dp), clipPercent = 14, imageUrl = imageUrl
                     )
                     if (cardStatusIcon != null)
                         PrimaryIcon(
