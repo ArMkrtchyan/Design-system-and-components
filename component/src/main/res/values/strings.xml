@@ -20,7 +20,7 @@
 
     <!--File Upload-->
 
-    <string name="file_limit_error">The maximum limit is 700 KB</string>
+    <string name="file_limit_error">The maximum limit is 1.2 MB</string>
     <string name="file_format_error">Allowed formats: %s</string>
     <string name="document_deletion_title">Remove document</string>
     <string name="document_deletion_message">Are you sure you want to remove the document?</string>
