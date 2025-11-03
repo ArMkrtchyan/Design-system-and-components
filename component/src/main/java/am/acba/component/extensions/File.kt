@@ -1,5 +1,6 @@
 package am.acba.component.extensions
 
+import am.acba.utils.extensions.orEmpty
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,39 +11,46 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.util.Base64
 import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.core.graphics.createBitmap
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
 
-fun Bitmap.createFile(context: Context, ext: String?): File {
+fun Bitmap.createFileComponent(context: Context, imageMaxSize: Double, extension: String): File {
     val file = File(
         context.cacheDir,
-        this.hashCode().toString() + ".$ext"
+        this.hashCode().toString() + ".$extension"
     )
     file.createNewFile()
     try {
-        Log.d("ImageSize", "Before compress -> " + getFileSize(this.getByteCount().toLong()))
-        val imageSizeInKB: Double = getByteCount() / 1024.0
+        Log.d("ImageSize", "Before compress -> " + getFileSizeComponent(this.byteCount.toLong()))
+        val imageSizeInKB: Double = byteCount / 1024.0
         val bos = ByteArrayOutputStream()
-        if (imageSizeInKB > 600) {
+        if (imageSizeInKB > imageMaxSize) {
             var quality = 100
             this.compress(Bitmap.CompressFormat.JPEG, quality, bos) // ignored for PNG
-            while (bos.toByteArray().size / 1024 > 600) {
+            while (bos.toByteArray().size / 1024 > imageMaxSize) {
                 bos.reset()
                 compress(Bitmap.CompressFormat.JPEG, quality, bos)
-                when {
-                    quality == 0 -> break
-                    quality > 15 -> quality -= 15
-                    else -> break
+                if (quality == 0) {
+                    break
+                } else if (quality > 15) {
+                    quality -= 15
+                } else {
+                    break
                 }
             }
-            Log.d("ImageSize", "After compress -> " + getFileSize(bos.toByteArray().size.toLong()))
+            Log.d("ImageSize", "After compress -> " + getFileSizeComponent(bos.toByteArray().size.toLong()))
         } else {
             this.compress(Bitmap.CompressFormat.JPEG, 100, bos) // ignored for PNG
         }
@@ -58,7 +66,39 @@ fun Bitmap.createFile(context: Context, ext: String?): File {
     return file
 }
 
-fun Uri.getFile(context: Context): File? {
+fun File.createBase64Component(): String {
+    var inputStream: InputStream? = null
+
+    try {
+        inputStream = FileInputStream(this.absolutePath)
+    } catch (e: FileNotFoundException) {
+        e.printStackTrace()
+    }
+    val bytes: ByteArray
+    val buffer = ByteArray(this.length().toInt())
+    var bytesRead: Int
+    val output = ByteArrayOutputStream()
+    try {
+        if (inputStream != null) {
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                output.write(buffer, 0, bytesRead)
+            }
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    bytes = output.toByteArray()
+    return Base64.encodeToString(bytes, Base64.NO_WRAP)
+}
+
+fun Uri.createBase64Component(context: Context, imageMaxSize: Double): String {
+    val file = getFileComponent(context, imageMaxSize)
+    val fileBase64 = (file?.createBase64Component().orEmpty()).log()
+    file?.delete()
+    return fileBase64
+}
+
+fun Uri.getFileComponent(context: Context, imageMaxSize: Double): File? {
     var bitmap: Bitmap? = null
     val contentResolver: ContentResolver = context.contentResolver
     try {
@@ -71,32 +111,19 @@ fun Uri.getFile(context: Context): File? {
     } catch (e: java.lang.Exception) {
         e.printStackTrace()
     }
-    val fileName = getFileName(context, this)
-    val ext = getExtensionFromFileName(fileName)
-    return bitmap?.createFile(context, ext)
+    val extension = getFileExtensionComponent(context).orEmpty()
+    return bitmap?.createFileComponent(context, imageMaxSize, extension)
 }
 
-fun getFileName(context: Context, uri: Uri): String? {
-    if (uri.scheme == "content") {
-        context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
-            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            if (cursor.moveToFirst() && nameIndex != -1) {
-                return cursor.getString(nameIndex)
-            }
-        }
-    }
-    return uri.path?.substringAfterLast('/')
-}
-
-fun Context.getFileExtension(uri: Uri?): String? {
-    return uri?.let {
-        contentResolver.getType(it)?.let { mimeType ->
+fun Uri.getFileExtensionComponent(context: Context): String? {
+    return let {
+        context.contentResolver.getType(it)?.let { mimeType ->
             MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)
-        } ?: uri.path?.substringAfterLast('.', missingDelimiterValue = "")
+        } ?: path?.substringAfterLast('.', missingDelimiterValue = "")
     }
 }
 
-fun getFileSize(size: Long): String {
+fun getFileSizeComponent(size: Long): String {
     if (size <= 0) return "0"
 
     val units: Array<String> = arrayOf("B", "KB", "MB", "GB", "TB")
@@ -105,11 +132,21 @@ fun getFileSize(size: Long): String {
     return DecimalFormat("#,##0.#").format(size / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
 }
 
-fun getExtensionFromFileName(name: String?): String? {
-    return name?.substringAfterLast('.', "")
+fun Uri.getFileSizeComponent(context: Context): Long {
+    return when (scheme) {
+        "content" -> {
+            context.contentResolver?.query(this, arrayOf(OpenableColumns.SIZE), null, null, null)?.use { cursor ->
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                if (cursor.moveToFirst() && sizeIndex != -1) cursor.getLong(sizeIndex) else 0L
+            }.orEmpty()
+        }
+
+        "file" -> path?.let { File(it).length() }.orEmpty()
+        else -> 0L
+    }
 }
 
-fun renderPdfPageAsBitmap(context: Context, uri: Uri, pageIndex: Int = 0, backgroundColor: Int): Bitmap? {
+fun renderPdfPageAsBitmapComponent(context: Context, uri: Uri, pageIndex: Int = 0, backgroundColor: Int): Bitmap? {
     return try {
         val fileDescriptor = context.contentResolver.openFileDescriptor(uri, "r") ?: return null
         val renderer = PdfRenderer(fileDescriptor)
@@ -129,6 +166,26 @@ fun renderPdfPageAsBitmap(context: Context, uri: Uri, pageIndex: Int = 0, backgr
         fileDescriptor.close()
 
         bitmap
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
+}
+
+fun Uri.deleteFileComponent(): Boolean = File(path.orEmpty()).delete()
+
+fun Uri.createBase64ForPdfComponent(context: Context): String? {
+    return try {
+        context.contentResolver.openInputStream(this)?.use { inputStream ->
+            val outputStream = ByteArrayOutputStream()
+            val buffer = ByteArray(1024)
+            var bytesRead: Int
+            while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                outputStream.write(buffer, 0, bytesRead)
+            }
+            val pdfBytes = outputStream.toByteArray()
+            Base64.encodeToString(pdfBytes, Base64.NO_WRAP)
+        }
     } catch (e: Exception) {
         e.printStackTrace()
         null
