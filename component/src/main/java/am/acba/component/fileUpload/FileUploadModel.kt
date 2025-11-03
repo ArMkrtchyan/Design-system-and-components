@@ -15,6 +15,7 @@ data class FileUploadModel(
     val title: String? = null,
     val body: String? = null,
     var description: String? = null,
+    var base64: String? = null,
     val emptyIcon: Drawable?,
     val emptyIconTint: ColorStateList? = null,
     val emptyIconBackground: Drawable? = null,
@@ -30,4 +31,5 @@ data class FileUploadModel(
     val fileDeleteDialogNegativeButtonText: String? = null,
     var itemClickListener: ((View, FileUploadModel) -> Unit)?,
     var fileDeleteDialogClickListener: ((List<FileUploadModel>, Int) -> Unit)? = null,
+    var fileUploaded: ((FileUploadModel) -> Unit)? = null
 )
