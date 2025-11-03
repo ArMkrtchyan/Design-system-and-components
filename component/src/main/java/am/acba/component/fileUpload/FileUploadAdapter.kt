@@ -78,11 +78,13 @@ class FileUploadAdapter() : ListAdapter<FileUploadModel, FileUploadAdapter.ViewH
                     setUploadedMediaFile(it, model.fileUri)
                 }
                 model.fileUri = fileUri
+                model.base64 = getBase64()
             }
         }
 
         private fun resetEmptyStateAfterDeletion(model: FileUploadModel) {
             var position = 0
+            model.base64 = null
             val updatedList = currentList.map {
                 if (it.id == model.id) {
                     position = currentList.indexOf(it)
