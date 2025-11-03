@@ -3,14 +3,19 @@
 import am.acba.component.R
 import am.acba.component.databinding.FileUploadBinding
 import am.acba.component.dialog.PrimaryAlertDialog
+import am.acba.component.extensions.createBase64Component
+import am.acba.component.extensions.createBase64ForPdfComponent
+import am.acba.component.extensions.deleteFileComponent
 import am.acba.component.extensions.dpToPx
 import am.acba.component.extensions.getColorFromAttr
 import am.acba.component.extensions.getColorStateListFromAttr
-import am.acba.component.extensions.getFileExtension
+import am.acba.component.extensions.getFileComponent
+import am.acba.component.extensions.getFileExtensionComponent
+import am.acba.component.extensions.getFileSizeComponent
 import am.acba.component.extensions.inflater
 import am.acba.component.extensions.onLottieAnimationEndListener
 import am.acba.component.extensions.playLottieAnimation
-import am.acba.component.extensions.renderPdfPageAsBitmap
+import am.acba.component.extensions.renderPdfPageAsBitmapComponent
 import am.acba.component.fileUpload.FileUpload.FileUploadState.Companion.findStateByOrdinal
 import android.content.Context
 import android.content.res.ColorStateList
@@ -18,7 +23,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Parcelable
-import android.provider.OpenableColumns
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -26,15 +30,19 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.toDrawable
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.parcelize.Parcelize
 
 class FileUpload : FrameLayout {
@@ -147,7 +155,7 @@ class FileUpload : FrameLayout {
     }
 
     private fun initEmptyState() {
-        clearUploadedImage()
+        clearUploadedMediaFile()
         setDescription("")
         setDescriptionVisibility(false)
         setBorder(R.attr.borderPrimaryTonal1)
@@ -361,13 +369,18 @@ class FileUpload : FrameLayout {
         binding.ivIcon.backgroundTintList = color
     }
 
-    private fun clearUploadedImage() {
+    private fun clearUploadedMediaFile() {
         binding.ivUploadedImage.apply {
-            fileUri = null
-            fileType = null
+            deleteFile()
             isVisible = false
             setImageDrawable(null)
         }
+    }
+
+    private fun deleteFile() {
+        fileUri?.deleteFileComponent()
+        fileUri = null
+        fileType = null
     }
 
     private fun loadImage(uri: Uri?) {
@@ -376,7 +389,7 @@ class FileUpload : FrameLayout {
 
     private fun loadFile(uri: Uri?) {
         val bitmap = uri?.let {
-            renderPdfPageAsBitmap(
+            renderPdfPageAsBitmapComponent(
                 context = context,
                 uri = it,
                 backgroundColor = context.getColorFromAttr(R.attr.overlayBackgroundTonal1)
@@ -399,32 +412,42 @@ class FileUpload : FrameLayout {
         }
     }
 
-    private fun isUriValid(uri: Uri?, extension: String?): Boolean {
+    private suspend fun isUriValid(fileType: FileType, uri: Uri?, extension: String?): Boolean {
         if (uri == null) return false
 
-        val maxSize = 700 * 1024 // 700 KB
-        val resolver = context.contentResolver
-        val fileSize = resolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)?.use { cursor ->
-            val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-            if (cursor.moveToFirst() && sizeIndex != -1) cursor.getLong(sizeIndex) else 0L
-        } ?: 0L
+        return withContext(Dispatchers.IO) {
+            val compressedUri = getCompressedUri(fileType, uri)
 
-        return when {
-            validExtensions.isNotEmpty() && extension != null && !validExtensions.contains(extension.lowercase()) -> {
-                getError(R.string.file_format_error, validExtensions.joinToString(", "))
+            val maxSize = IMAGE_MAX_SIZE * 1024
+            val fileSize = compressedUri.getFileSizeComponent(context)
+
+            when {
+                validExtensions.isNotEmpty() && extension != null && !validExtensions.contains(extension.lowercase()) -> {
+                    getError(R.string.file_format_error, validExtensions.joinToString(", "))
+                }
+
+                fileSize > maxSize -> getError(R.string.file_limit_error)
+                else -> {
+                    this@FileUpload.fileType = fileType
+                    this@FileUpload.fileUri = compressedUri
+                    true
+                }
             }
-
-            fileSize > maxSize -> getError(R.string.file_limit_error)
-            else -> true
         }
     }
 
-    private fun getError(errorRes: Int, formatArgs: String? = null): Boolean {
-        errorMessage = context.getString(errorRes, formatArgs)
-        setFileUploadState(FileUploadState.ERROR)
-        fileUri = null
-        fileType = null
-        return false
+    private fun getCompressedUri(
+        fileType: FileType,
+        uri: Uri
+    ) = if (fileType == FileType.IMAGE) uri.getFileComponent(context, IMAGE_MAX_SIZE)?.toUri() ?: uri else uri
+
+    private suspend fun getError(errorRes: Int, formatArgs: String? = null): Boolean {
+        return withContext(Dispatchers.Main) {
+            errorMessage = context.getString(errorRes, formatArgs)
+            setFileUploadState(FileUploadState.ERROR)
+            deleteFile()
+            false
+        }
     }
 
     private fun openDialog() {
@@ -500,16 +523,19 @@ class FileUpload : FrameLayout {
         binding.ivUploadedImage.isVisible = isVisible
     }
 
-    fun setUploadedMediaFile(fileType: FileType, uri: Uri? = null) {
-        val extension = context.getFileExtension(uri)
-        if (!isUriValid(uri, extension)) return
-        setFileUploadState(FileUploadState.UPLOADED)
-        showMediaFile(fileType, uri)
+    fun setUploadedMediaFile(fileType: FileType, uri: Uri? = null): Deferred<Boolean> {
+        return CoroutineScope(Dispatchers.Main).async {
+            val extension = uri?.getFileExtensionComponent(context)
+            if (!isUriValid(fileType, uri, extension)) return@async false
+            setFileUploadState(FileUploadState.UPLOADED)
+            showMediaFile(fileType, uri)
+            return@async true
+        }
     }
 
     fun showMediaFile(fileType: FileType, uri: Uri?) {
         loadMediaFile(fileType, uri)
-        val extension = ".${context.getFileExtension(uri)}"
+        val extension = ".${uri?.getFileExtensionComponent(context)}"
         val path = uri?.path?.substringAfterLast('/').orEmpty()
         val description = if (path.lowercase().endsWith(extension.lowercase())) {
             path
@@ -519,9 +545,15 @@ class FileUpload : FrameLayout {
         setDescription(description)
     }
 
+    fun getBase64(): String? {
+        return if (fileType == FileType.IMAGE) {
+            fileUri?.createBase64Component(context, IMAGE_MAX_SIZE)
+        } else {
+            fileUri?.createBase64ForPdfComponent(context)
+        }
+    }
+
     private fun loadMediaFile(fileType: FileType, uri: Uri?) {
-        this.fileType = fileType
-        this.fileUri = uri
         when (fileType) {
             FileType.IMAGE -> loadImage(uri)
             FileType.FILE -> loadFile(uri)
@@ -534,6 +566,10 @@ class FileUpload : FrameLayout {
 
     fun setCloseIconVisibility(isVisible: Boolean) {
         binding.ivClose.isVisible = isVisible
+    }
+
+    companion object {
+        private const val IMAGE_MAX_SIZE = 700
     }
 
     enum class FileUploadState {
