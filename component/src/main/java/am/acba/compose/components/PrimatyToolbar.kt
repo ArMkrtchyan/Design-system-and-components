@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBar
@@ -68,41 +67,6 @@ fun PrimaryToolbar(
         })
 }
 
-
-@OptIn(ExperimentalGlideComposeApi::class)
-@Composable
-fun ToolbarContent() {
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Image(
-            modifier = Modifier
-                .size(32.dp, 20.dp)
-                .align(Alignment.CenterHorizontally),
-            painter = painterResource(id = R.drawable.empty_card_logo_light),
-            contentDescription = null
-        )
-        PrimaryText(
-            modifier = Modifier
-                .padding(end = 16.dp, start = 16.dp)
-                .id("centre_title")
-                .align(Alignment.CenterHorizontally),
-            text = "Աշխատավարձային",
-            style = DigitalTheme.typography.xSmallRegular,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-        PrimaryText(
-            modifier = Modifier
-                .padding(end = 16.dp, start = 16.dp)
-                .id("centre_title")
-                .align(Alignment.CenterHorizontally),
-            text = "**** AMD",
-            style = DigitalTheme.typography.body1Bold,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
-    }
-}
-
 @Composable
 @PreviewLightDark
 fun PrimaryToolbarPreview() {
@@ -135,5 +99,39 @@ fun PrimaryToolbarPreview() {
                 }
             })
         }
+    }
+}
+
+@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+private fun ToolbarContent() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Image(
+            modifier = Modifier
+                .size(32.dp, 20.dp)
+                .align(Alignment.CenterHorizontally),
+            painter = painterResource(id = R.drawable.empty_card_logo_light),
+            contentDescription = null
+        )
+        PrimaryText(
+            modifier = Modifier
+                .padding(end = 16.dp, start = 16.dp)
+                .id("centre_title")
+                .align(Alignment.CenterHorizontally),
+            text = "Աշխատավարձային",
+            style = DigitalTheme.typography.xSmallRegular,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+        PrimaryText(
+            modifier = Modifier
+                .padding(end = 16.dp, start = 16.dp)
+                .id("centre_title")
+                .align(Alignment.CenterHorizontally),
+            text = "**** AMD",
+            style = DigitalTheme.typography.body1Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
 }

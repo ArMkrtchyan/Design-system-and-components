@@ -47,6 +47,7 @@ import com.bumptech.glide.request.RequestOptions
 
 @Composable
 fun ActionButton(
+    modifier: Modifier = Modifier,
     actionText: String,
     actionTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
     backgroundModifier: Modifier = Modifier,
@@ -73,7 +74,7 @@ fun ActionButton(
     onActionButtonClick: () -> Unit = {},
     onBadgeClick: () -> Unit = {},
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.clickable {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.clickable {
         onActionButtonClick.invoke()
     }) {
         Avatar(
