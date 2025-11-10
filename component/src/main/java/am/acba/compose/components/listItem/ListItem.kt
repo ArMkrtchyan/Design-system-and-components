@@ -130,8 +130,8 @@ fun ListItem(
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {},
-    onSecondEndIconClick: () -> Unit = {},
-    onEndIconClick: () -> Unit = {}
+    onSecondEndIconClick: (() -> Unit)? = null,
+    onEndIconClick: (() -> Unit)? = null
 ) {
     val borderModifier = if (showBorder) {
         Modifier.border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
@@ -223,6 +223,11 @@ fun ListItem(
                     }
                     if (endIcon != null) {
                         HorizontalSpacer(12.dp)
+                        val endIconClickableModifier = if (onEndIconClick != null) {
+                            Modifier.clickable(onClick = onEndIconClick)
+                        } else {
+                            Modifier
+                        }
                         Avatar(
                             avatarType = AvatarEnum.ICON,
                             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
@@ -233,11 +238,16 @@ fun ListItem(
                             iconPadding = endIconPadding.dp,
                             backgroundModifier = Modifier
                                 .id("endIcon")
-                                .clickable(onClick = onEndIconClick),
+                                .then(endIconClickableModifier)
                         )
                     }
                     if (endIconSecond != null) {
                         HorizontalSpacer(12.dp)
+                        val secondEndIconClickableModifier = if (onSecondEndIconClick != null) {
+                            Modifier.clickable(onClick = onSecondEndIconClick)
+                        } else {
+                            Modifier
+                        }
                         Avatar(
                             avatarType = AvatarEnum.ICON,
                             avatarSize = AvatarSizeEnum.AVATAR_SIZE_24,
@@ -248,7 +258,7 @@ fun ListItem(
                             iconPadding = endIconSecondPadding.dp,
                             backgroundModifier = Modifier
                                 .id("endIconSecond")
-                                .clickable(onClick = onSecondEndIconClick)
+                                .then(secondEndIconClickableModifier),
                         )
                     }
 
