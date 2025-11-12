@@ -18,7 +18,7 @@
 
     <!--File Upload-->
 
-    <string name="file_limit_error">Максимальный лимит — 700 КБ</string>
+    <string name="file_limit_error">Максимальный лимит — 1.2 МБ</string>
     <string name="file_format_error">Допустимые форматы: %s</string>
     <string name="document_deletion_title">Удалить  документ</string>
     <string name="document_deletion_message">Вы уверены, что хотите удалить документ?</string>

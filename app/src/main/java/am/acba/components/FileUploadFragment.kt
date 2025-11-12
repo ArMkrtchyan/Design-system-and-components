@@ -55,6 +55,7 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
                 fileType = FileUpload.FileType.FILE,
                 uri = it
             )
+            mBinding.fThird.getBase64()
         }
     }
 
@@ -204,6 +205,7 @@ class FileUploadFragment : BaseViewBindingFragment<FragmentFileUploadBinding>() 
             fileUpload.setFileUploadState(FileUpload.FileUploadState.UPLOADING) {
                 lifecycleScope.launch(Dispatchers.Main) {
                     fileUpload.setUploadedMediaFile(FileUpload.FileType.IMAGE, file)
+                    fileUpload.getBase64()
                 }
             }
         }

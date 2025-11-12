@@ -18,6 +18,7 @@ class PhoneNumberInputFragment : BaseViewBindingFragment<FragmentPhoneNumberInpu
         phoneNumber.handleAcbaContactClick {
             "Open acba contact dialog".log("Acba Contact")
         }
+        phoneNumber.setPhoneNumber("+39 347 123 4567")
         phoneNumber.openKeyboard()
         phoneNumber.helpText = "Min 25 symbol"
         phoneNumber.errorText = "Something wrong happened"
