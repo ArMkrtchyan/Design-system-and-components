@@ -55,6 +55,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -93,13 +94,14 @@ fun CardsItem(
     swipeActionText: String = EMPTY_STRING,
     id: String = "cardsItem",
     badgeType: BadgeEnum = BadgeEnum.NONE,
-    maxSwipe: Float = 100f,
     backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
+    onSwipeStateChanged: (Boolean) -> Unit = {},
     isEditingInitial: Boolean = false,
     onSwipeAction: () -> Unit = {}
 ) {
-    val swipePx = with(LocalDensity.current) { maxSwipe.dp.toPx() }
+    var swipePx by remember { mutableFloatStateOf(0f) }
+    val density = LocalDensity.current
     var offsetX by remember { mutableFloatStateOf(0f) }
     var isOpen by remember { mutableStateOf(false) }
     var startAnimation by remember { mutableStateOf(false) }
@@ -182,6 +184,10 @@ fun CardsItem(
                         offsetX = 0f
                         isOpen = false
                     }
+                    .onGloballyPositioned { coordinates ->
+                        val extraPaddingPx = with(density) { 28.dp.toPx() }
+                        swipePx = coordinates.size.width.toFloat() + extraPaddingPx
+                    }
             ) {
                 PrimaryIcon(
                     painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
@@ -206,6 +212,7 @@ fun CardsItem(
                     onDragStopped = {
                         if (!isEditingInitial) {
                             isOpen = offsetX < -swipePx / 2
+                            onSwipeStateChanged.invoke(isOpen)
                             offsetX = if (isOpen) -swipePx else 0f
                         }
                     }
@@ -335,3 +342,4 @@ fun CardsItemPreview() {
         }
     }
 }
+

@@ -8,6 +8,7 @@ import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.cardListing.CardsItem
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.extensions.id
+import android.util.Log
 import android.view.Gravity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -102,7 +103,7 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Բլոկավորել"
+                    swipeActionText = "Ապաբլոկավորել"
                 )
                 VerticalSpacer(8.dp)
                 CardsItem(
@@ -136,8 +137,11 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Հեռացնել"
-                )
+                    swipeActionText = "Հեռացնել",
+                    onSwipeStateChanged = { isOpen ->
+                        Log.i("cardItem", "$isOpen")
+                    })
+
                 VerticalSpacer(20.dp)
                 PrimaryButton(
                     onClick = { isEditing = true },
