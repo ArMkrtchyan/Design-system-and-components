@@ -35,6 +35,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,7 +44,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
@@ -75,6 +78,7 @@ fun ComponentDropDown(
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val showBottomSheet = remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(showBottomSheet.value) {
         isFocused = showBottomSheet.value
@@ -136,8 +140,11 @@ fun ComponentDropDown(
             modifier = Modifier
                 .weight(1f)
                 .clickable {
-                    if (enabled)
-                        showBottomSheet.value = true
+                    showBottomSheet(
+                        isEnabled = enabled,
+                        showBottomSheet = showBottomSheet,
+                        focusManager = focusManager
+                    )
                 },
             contentAlignment = Alignment.CenterStart
         ) {
@@ -172,8 +179,11 @@ fun ComponentDropDown(
                 .padding(end = 16.dp)
                 .rotate(arrowRotation)
                 .clickable {
-                    if (enabled)
-                        showBottomSheet.value = true
+                    showBottomSheet(
+                        isEnabled = enabled,
+                        showBottomSheet = showBottomSheet,
+                        focusManager = focusManager
+                    )
                 },
             tint = textColors(enabled, DigitalTheme.colorScheme.contentPrimaryTonal1),
             painter = painterResource(R.drawable.ic_down)
@@ -231,11 +241,22 @@ private fun LeadingAvatar(
     }
 }
 
-
 @NonRestartableComposable
 @Composable
 private fun textColors(enabled: Boolean, color: Color) =
     if (enabled) color else DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+
+
+private fun showBottomSheet(
+    isEnabled: Boolean,
+    showBottomSheet: MutableState<Boolean>,
+    focusManager: FocusManager
+) {
+    if (isEnabled) {
+        showBottomSheet.value = true
+        focusManager.clearFocus()
+    }
+}
 
 @Composable
 @PreviewLightDark
