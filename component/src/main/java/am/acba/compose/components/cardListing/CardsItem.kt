@@ -16,6 +16,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -55,10 +56,12 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -93,20 +96,25 @@ fun CardsItem(
     swipeActionText: String = EMPTY_STRING,
     id: String = "cardsItem",
     badgeType: BadgeEnum = BadgeEnum.NONE,
-    maxSwipe: Float = 100f,
     backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
+    onSwipeAction: (Boolean) -> Unit = {},
     isEditingInitial: Boolean = false,
-    onSwipeAction: () -> Unit = {}
+    isOpen: Boolean = false,
 ) {
-    val swipePx = with(LocalDensity.current) { maxSwipe.dp.toPx() }
+    val density = LocalDensity.current
+    var swipePx by remember { mutableFloatStateOf(0f) }
     var offsetX by remember { mutableFloatStateOf(0f) }
-    var isOpen by remember { mutableStateOf(false) }
     var startAnimation by remember { mutableStateOf(false) }
+    val animatedOffsetX by animateFloatAsState(
+        targetValue = if (offsetX < -swipePx / 2) offsetX else 0f,
+        animationSpec = tween(durationMillis = 100, easing = LinearEasing),
+        label = "animated-offset"
+    )
+
     val dragState = rememberDraggableState { delta ->
         if (!isEditingInitial) {
-            val newOffset = (offsetX + delta).coerceIn(-swipePx, 0f)
-            offsetX = newOffset
+            offsetX = (offsetX + delta).coerceIn(-swipePx, 0f)
         }
     }
     val transition = updateTransition(targetState = isEditingInitial, label = "scale-transition")
@@ -128,16 +136,265 @@ fun CardsItem(
         label = "width-animation"
     )
 
-    LaunchedEffect(isEditingInitial) {
+    LaunchedEffect(isEditingInitial,isOpen) {
         if (isEditingInitial) {
             delay(Random.nextInt(0, 200).toLong())
             offsetX = 0f
-            isOpen = false
             startAnimation = true
         } else {
             startAnimation = false
         }
+        if (!isOpen) offsetX = 0f
     }
+
+    val rotation = editStateRotation(startAnimation)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min)
+            .graphicsLayer { rotationZ = rotation }
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = { onClick() })
+            }
+            .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
+            .id(id)
+            .then(modifier)) {
+        SwipeableCardItem(
+            id = id,
+            onOffsetChange = { offsetX = it },
+            onSwipePxChange = { swipePx = it },
+            density = density,
+            swipeActionIcon = swipeActionIcon,
+            swipeActionText = swipeActionText
+        )
+        CardsItemContent(
+            id = id,
+            animatedOffsetX = animatedOffsetX,
+            dragState = dragState,
+            offsetX = offsetX,
+            onOffsetChange = { offsetX = it },
+            swipePx = swipePx,
+            isEditingInitial = isEditingInitial,
+            onSwipeAction = onSwipeAction,
+            backgroundColor = backgroundColor,
+            backgroundRadius = backgroundRadius,
+            endIcon = endIcon,
+            endIconColor = endIconColor,
+            scale = scale,
+            imageUrl = imageUrl,
+            title = title,
+            subTitle = subTitle,
+            cardNumber = cardNumber,
+            badgeText = badgeText,
+            badgeType = badgeType,
+            badgeBackgroundColor = badgeBackgroundColor,
+            badgeTextColor = badgeTextColor,
+            statusTitle = statusTitle,
+            statusIcon = statusIcon,
+            cardStatusIcon = cardStatusIcon,
+            statusBackgroundColor = statusBackgroundColor,
+            statusIconColor = statusIconColor,
+            statusTextColor = statusTextColor,
+            cardNumberStyle = cardNumberStyle,
+            titleStyle = titleStyle,
+            subTitleStyle = subTitleStyle,
+            animatedWidth = animatedWidth
+        )
+    }
+}
+
+@Composable
+private fun SwipeableCardItem(
+    id: String,
+    onOffsetChange: (Float) -> Unit,
+    onSwipePxChange: (Float) -> Unit,
+    density: Density,
+    swipeActionIcon: Int,
+    swipeActionText: String
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .id("${id}Box"),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 16.dp)
+                .widthIn(min = 70.dp)
+                .id("${id}Action")
+                .clickable {
+                    onOffsetChange(0f)
+                }
+                .onGloballyPositioned { coordinates ->
+                    val extraPaddingPx = with(density) { 28.dp.toPx() }
+                    onSwipePxChange(coordinates.size.width.toFloat() + extraPaddingPx)
+                }
+        ) {
+            PrimaryIcon(
+                painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
+                    .size(28.dp)
+                    .id("${id}ActionIcon")
+            )
+            PrimaryText(
+                modifier = Modifier.id("${id}ActionText"),
+                color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
+            )
+        }
+    }
+}
+
+@Composable
+private fun CardsItemContent(
+    id: String,
+    animatedOffsetX: Float,
+    dragState: androidx.compose.foundation.gestures.DraggableState,
+    offsetX: Float,
+    onOffsetChange: (Float) -> Unit,
+    swipePx: Float,
+    isEditingInitial: Boolean,
+    onSwipeAction: (Boolean) -> Unit,
+    backgroundColor: Color,
+    backgroundRadius: Dp,
+    endIcon: Int?,
+    endIconColor: Color,
+    scale: Float,
+    imageUrl: String,
+    title: String,
+    subTitle: String,
+    cardNumber: String,
+    badgeText: String,
+    badgeType: BadgeEnum,
+    badgeBackgroundColor: Color,
+    badgeTextColor: Color,
+    statusTitle: String?,
+    statusIcon: Int?,
+    cardStatusIcon: Int?,
+    statusBackgroundColor: Color,
+    statusIconColor: Color,
+    statusTextColor: Color,
+    cardNumberStyle: TextStyle,
+    titleStyle: TextStyle,
+    subTitleStyle: TextStyle,
+    animatedWidth: Dp
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
+            .draggable(
+                state = dragState,
+                orientation = Orientation.Horizontal,
+                enabled = !isEditingInitial,
+                onDragStopped = {
+                    if (!isEditingInitial) {
+                        val shouldOpen = offsetX < -swipePx / 2
+                        onSwipeAction.invoke(shouldOpen)
+                        onOffsetChange(if (shouldOpen) -swipePx else 0f)
+                    }
+                }
+            )
+            .background(
+                backgroundColor, shape = RoundedCornerShape(backgroundRadius)
+            )
+            .id("${id}MainColumn")
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Box {
+                AvatarImage(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(64.dp), clipPercent = 14, imageUrl = imageUrl
+                )
+                if (cardStatusIcon != null)
+                    PrimaryIcon(
+                        painter = painterResource(cardStatusIcon),
+                        tint = DigitalTheme.colorScheme.contentSecondary,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .align(Alignment.Center)
+                    )
+            }
+            Column(
+                modifier = Modifier
+                    .height(66.dp)
+                    .weight(1f)
+                    .padding(start = 12.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .height(24.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
+                    if (endIcon != null && !isEditingInitial) {
+                        HorizontalSpacer(8.dp)
+                        PrimaryIcon(
+                            painter = painterResource(endIcon),
+                            tint = endIconColor,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .scale(scale)
+                        )
+                    }
+                }
+                if (subTitle.isNotEmpty()) {
+                    PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
+                    VerticalSpacer(4.dp)
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    PrimaryText(
+                        modifier = Modifier
+                            .id("${id}CardNumber")
+                            .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
+                    )
+                    if (badgeText.isNotEmpty())
+                        Badge(
+                            badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
+                            textColor = badgeTextColor, modifier = Modifier
+                                .align(Alignment.Bottom)
+                                .id("${id}Badge")
+                        )
+                }
+            }
+            if (isEditingInitial) {
+                HorizontalSpacer(8.dp)
+            }
+            PrimaryIcon(
+                painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
+                    .size(animatedWidth)
+                    .align(Alignment.CenterVertically)
+            )
+        }
+        if (!statusTitle.isNullOrEmpty()) {
+            StatusBadge(
+                title = statusTitle,
+                icon = statusIcon,
+                id = "${id}StatusBadge",
+                textColor = statusTextColor,
+                iconColor = statusIconColor,
+                backgroundColor = statusBackgroundColor,
+                align = Alignment.TopEnd
+            )
+        }
+    }
+}
+
+@Composable
+private fun editStateRotation(startAnimation: Boolean): Float {
     val rotation: Float = if (startAnimation) {
         val infiniteTransition = rememberInfiniteTransition(label = "card_wobble")
         val randomStart = remember { if (Random.nextBoolean()) -0.5f else 0.5f }
@@ -151,161 +408,7 @@ fun CardsItem(
     } else {
         0f
     }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(IntrinsicSize.Min)
-            .graphicsLayer { rotationZ = rotation }
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { onClick() })
-            }
-            .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
-            .id(id)
-            .then(modifier)) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .id("${id}Box"),
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = 16.dp)
-                    .widthIn(min = 70.dp)
-                    .id("${id}Action")
-                    .clickable {
-                        onSwipeAction()
-                        offsetX = 0f
-                        isOpen = false
-                    }
-            ) {
-                PrimaryIcon(
-                    painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
-                        .size(28.dp)
-                        .id("${id}ActionIcon")
-                )
-                PrimaryText(
-                    modifier = Modifier.id("${id}ActionText"),
-                    color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .offset { IntOffset(offsetX.roundToInt(), 0) }
-                .draggable(
-                    state = dragState,
-                    orientation = Orientation.Horizontal,
-                    enabled = !isEditingInitial,
-                    onDragStopped = {
-                        if (!isEditingInitial) {
-                            isOpen = offsetX < -swipePx / 2
-                            offsetX = if (isOpen) -swipePx else 0f
-                        }
-                    }
-                )
-                .background(
-                    backgroundColor, shape = RoundedCornerShape(backgroundRadius)
-                )
-                .id("${id}MainColumn")
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Box {
-                    AvatarImage(
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(64.dp), clipPercent = 14, imageUrl = imageUrl
-                    )
-                    if (cardStatusIcon != null)
-                        PrimaryIcon(
-                            painter = painterResource(cardStatusIcon),
-                            tint = DigitalTheme.colorScheme.contentSecondary,
-                            modifier = Modifier
-                                .size(24.dp)
-                                .align(Alignment.Center)
-                        )
-                }
-
-                Column(
-                    modifier = Modifier
-                        .height(66.dp)
-                        .weight(1f)
-                        .padding(start = 12.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .height(24.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
-                        if (endIcon != null && !isEditingInitial) {
-                            HorizontalSpacer(8.dp)
-                            PrimaryIcon(
-                                painter = painterResource(endIcon),
-                                tint = endIconColor,
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .scale(scale)
-                            )
-                        }
-                    }
-                    if (subTitle.isNotEmpty()) {
-                        PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
-                        VerticalSpacer(4.dp)
-                    }
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        PrimaryText(
-                            modifier = Modifier
-                                .id("${id}CardNumber")
-                                .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
-                        )
-                        if (badgeText.isNotEmpty())
-                            Badge(
-                                badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
-                                textColor = badgeTextColor, modifier = Modifier
-                                    .align(Alignment.Bottom)
-                                    .id("${id}Badge")
-                            )
-                    }
-                }
-                if (isEditingInitial) {
-                    HorizontalSpacer(8.dp)
-                }
-                PrimaryIcon(
-                    painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
-                        .size(animatedWidth)
-                        .align(Alignment.CenterVertically)
-                )
-            }
-            if (!statusTitle.isNullOrEmpty()) {
-                StatusBadge(
-                    title = statusTitle,
-                    icon = statusIcon,
-                    id = "${id}StatusBadge",
-                    textColor = statusTextColor,
-                    iconColor = statusIconColor,
-                    backgroundColor = statusBackgroundColor,
-                    align = Alignment.TopEnd
-                )
-            }
-        }
-    }
+    return rotation
 }
 
 @Composable
@@ -330,8 +433,9 @@ fun CardsItemPreview() {
                 statusIcon = R.drawable.ic_info,
                 statusTitle = "Քարտը պատրաստ է ակտիվացման",
                 statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
-                statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                onSwipeAction = { println("Delete clicked") })
+                statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1
+            )
         }
     }
 }
+

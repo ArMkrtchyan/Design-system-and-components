@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CardsItemScreen(title: String = "") {
     var isEditing by remember { mutableStateOf(false) }
+    var isCloseSwipe by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -102,7 +103,7 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Բլոկավորել"
+                    swipeActionText = "Ապաբլոկավորել"
                 )
                 VerticalSpacer(8.dp)
                 CardsItem(
@@ -119,7 +120,11 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Բլոկավորել"
+                    swipeActionText = "Բլոկավորել",
+                    onSwipeAction = { isOpen ->
+                        isCloseSwipe = isOpen
+                    },
+                    isOpen = isCloseSwipe
                 )
                 VerticalSpacer(8.dp)
                 CardsItem(
@@ -136,8 +141,12 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Հեռացնել"
-                )
+                    swipeActionText = "Հեռացնել",
+                    onSwipeAction = { isOpen ->
+                       isCloseSwipe = isOpen
+                    },
+                    isOpen = isCloseSwipe)
+
                 VerticalSpacer(20.dp)
                 PrimaryButton(
                     onClick = { isEditing = true },
@@ -148,6 +157,12 @@ fun CardsItemScreen(title: String = "") {
                 PrimaryButton(
                     onClick = { isEditing = false },
                     text = "cancel jiggle",
+                    iconGravity = Gravity.START,
+                )
+                VerticalSpacer(20.dp)
+                PrimaryButton(
+                    onClick = { isCloseSwipe = false },
+                    text = "close cards",
                     iconGravity = Gravity.START,
                 )
             }
