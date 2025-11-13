@@ -8,7 +8,6 @@ import am.acba.compose.components.badges.BadgeEnum
 import am.acba.compose.components.cardListing.CardsItem
 import am.acba.compose.theme.DigitalTheme
 import am.acba.utils.extensions.id
-import android.util.Log
 import android.view.Gravity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -34,6 +33,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CardsItemScreen(title: String = "") {
     var isEditing by remember { mutableStateOf(false) }
+    var isCloseSwipe by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -120,7 +120,11 @@ fun CardsItemScreen(title: String = "") {
                     statusIcon = R.drawable.ic_info,
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
-                    swipeActionText = "Բլոկավորել"
+                    swipeActionText = "Բլոկավորել",
+                    onSwipeAction = { isOpen ->
+                        isCloseSwipe = isOpen
+                    },
+                    isOpen = isCloseSwipe
                 )
                 VerticalSpacer(8.dp)
                 CardsItem(
@@ -138,9 +142,10 @@ fun CardsItemScreen(title: String = "") {
                     statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                     swipeActionText = "Հեռացնել",
-                    onSwipeStateChanged = { isOpen ->
-                        Log.i("cardItem", "$isOpen")
-                    })
+                    onSwipeAction = { isOpen ->
+                       isCloseSwipe = isOpen
+                    },
+                    isOpen = isCloseSwipe)
 
                 VerticalSpacer(20.dp)
                 PrimaryButton(
@@ -152,6 +157,12 @@ fun CardsItemScreen(title: String = "") {
                 PrimaryButton(
                     onClick = { isEditing = false },
                     text = "cancel jiggle",
+                    iconGravity = Gravity.START,
+                )
+                VerticalSpacer(20.dp)
+                PrimaryButton(
+                    onClick = { isCloseSwipe = false },
+                    text = "close cards",
                     iconGravity = Gravity.START,
                 )
             }
