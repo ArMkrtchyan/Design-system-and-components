@@ -35,6 +35,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -68,6 +69,7 @@ fun ComponentDropDown(
     textStyle: TextStyle = DigitalTheme.typography.body1Regular,
     textColor: Color = DigitalTheme.colorScheme.contentPrimary,
     contentProperties: ContentProperties = ContentProperties(),
+    onOpenRequest: () -> Unit = {},
     onDismissRequest: () -> Unit = {},
     labelId: String = "dropDownLabel",
     valueId: String = "dropDownValue",
@@ -136,8 +138,11 @@ fun ComponentDropDown(
             modifier = Modifier
                 .weight(1f)
                 .clickable {
-                    if (enabled)
-                        showBottomSheet.value = true
+                    showBottomSheet(
+                        isEnabled = enabled,
+                        showBottomSheet = showBottomSheet,
+                        onClick = onOpenRequest
+                    )
                 },
             contentAlignment = Alignment.CenterStart
         ) {
@@ -172,8 +177,11 @@ fun ComponentDropDown(
                 .padding(end = 16.dp)
                 .rotate(arrowRotation)
                 .clickable {
-                    if (enabled)
-                        showBottomSheet.value = true
+                    showBottomSheet(
+                        isEnabled = enabled,
+                        showBottomSheet = showBottomSheet,
+                        onClick = onOpenRequest,
+                    )
                 },
             tint = textColors(enabled, DigitalTheme.colorScheme.contentPrimaryTonal1),
             painter = painterResource(R.drawable.ic_down)
@@ -231,11 +239,22 @@ private fun LeadingAvatar(
     }
 }
 
-
 @NonRestartableComposable
 @Composable
 private fun textColors(enabled: Boolean, color: Color) =
     if (enabled) color else DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+
+
+private fun showBottomSheet(
+    isEnabled: Boolean,
+    showBottomSheet: MutableState<Boolean>,
+    onClick: () -> Unit
+) {
+    if (isEnabled) {
+        onClick.invoke()
+        showBottomSheet.value = true
+    }
+}
 
 @Composable
 @PreviewLightDark
