@@ -231,6 +231,7 @@ fun PrimaryChipPreview() {
             PrimaryChip(
                 chipSizeEnum = ChipSizeEnum.LARGE,
                 title = "Chip component",
+                chipStateEnum = ChipStateEnum.DISABLED,
                 endIcon = R.drawable.ic_down
             )
             VerticalSpacer(20.dp)
