@@ -118,7 +118,7 @@ fun ExpandableCard(
 
 
 @Composable
-private fun AnimatedContent(expanded: Boolean, animatedContent: @Composable () -> Unit) {
+fun AnimatedContent(expanded: Boolean, animatedContent: @Composable () -> Unit) {
     val enterTransition = remember {
         expandVertically(
             expandFrom = Alignment.Top,
