@@ -88,6 +88,7 @@ fun CardListItem(
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
     avatarContentScale: ContentScale = ContentScale.Crop,
+    avatarSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_36,
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
@@ -137,7 +138,7 @@ fun CardListItem(
                         badgeModifier = avatarBadgeModifier,
                         contentModifier = avatarContentModifier,
                         avatarType = avatarType,
-                        avatarSize = AvatarSizeEnum.AVATAR_SIZE_36,
+                        avatarSize = avatarSize,
                         backgroundColor = avatarBackgroundColor,
                         backgroundRadius = avatarBackgroundRadius,
                         icon = avatarIcon,
@@ -148,7 +149,7 @@ fun CardListItem(
                         imageCornerRadius = avatarImageCornerRadius,
                         contentScale = avatarContentScale,
                     )
-                    HorizontalSpacer(16.dp)
+                    HorizontalSpacer(8.dp)
                 }
                 Column(
                     modifier = Modifier.weight(1f)
