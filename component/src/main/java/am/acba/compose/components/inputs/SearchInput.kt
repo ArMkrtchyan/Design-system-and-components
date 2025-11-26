@@ -21,11 +21,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
@@ -47,6 +49,8 @@ fun SearchBar(
     height: Dp = 40.dp,
     cornerShape: Shape = ShapeTokens.shapePrimaryInput,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal2,
+    toolbarMode: Boolean = false,
+    onBackButtonClick: () -> Unit = {},
     onSearchClicked: () -> Unit = {},
     onTextChange: (String) -> Unit = {},
     onComponentClick: (() -> Unit)? = null,
@@ -57,6 +61,7 @@ fun SearchBar(
         }
     }
     var text by remember { mutableStateOf(TextFieldValue()) }
+    var startIcon by remember { mutableIntStateOf(R.drawable.ic_search) }
     Row(
         modifier = modifier
             .height(height)
@@ -72,8 +77,13 @@ fun SearchBar(
             Icon(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(8.dp),
-                painter = painterResource(id = R.drawable.ic_search),
+                    .padding(8.dp)
+                    .clickable {
+                        if (startIcon == R.drawable.ic_back) {
+                            onBackButtonClick.invoke()
+                        }
+                    },
+                painter = painterResource(id = startIcon),
                 contentDescription = "search",
                 tint = DigitalTheme.colorScheme.contentPrimaryTonal1,
             )
@@ -82,7 +92,14 @@ fun SearchBar(
             modifier = Modifier
                 .id("search")
                 .weight(5f)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .onFocusChanged {
+                    if (toolbarMode) {
+                        if (it.isFocused) {
+                            startIcon = R.drawable.ic_back
+                        }
+                    }
+                },
             value = text,
             cursorBrush = SolidColor(DigitalTheme.colorScheme.contentBrand),
             onValueChange = {
@@ -116,8 +133,7 @@ fun SearchBar(
                 .size(40.dp)
                 .clickable(
                     indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ) {
+                    interactionSource = remember { MutableInteractionSource() }) {
                     if (text.text.isNotEmpty()) {
                         text = TextFieldValue(text = "")
                         onTextChange("")
