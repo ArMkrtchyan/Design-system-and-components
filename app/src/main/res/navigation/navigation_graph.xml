@@ -338,6 +338,10 @@
         android:name="am.acba.composeComponents.slider.SliderComposeFragment"
         android:label="SliderComposeFragment" />
     <fragment
+        android:id="@+id/stockListItemComposeFragment"
+        android:name="am.acba.composeComponents.stockListItem.StockListItemComposeFragment"
+        android:label="StockListItemComposeFragment" />
+    <fragment
         android:id="@+id/pieChartComposeFragment"
         android:name="am.acba.composeComponents.piechart.PieChartComposeFragment"
         android:label="PieChartComposeFragment" />
