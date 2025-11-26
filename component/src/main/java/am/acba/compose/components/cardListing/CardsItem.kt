@@ -76,6 +76,7 @@ fun CardsItem(
     statusTitle: String? = null,
     statusIcon: Int? = null,
     endIcon: Int? = null,
+    onEndIconClick: () -> Unit = {},
     swipeActionIcon: Int = R.drawable.ic_flake,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
@@ -98,6 +99,7 @@ fun CardsItem(
     badgeType: BadgeEnum = BadgeEnum.NONE,
     backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
+    onActionClick: () -> Unit = {},
     onSwipeAction: (Boolean) -> Unit = {},
     isEditingInitial: Boolean = false,
     isOpen: Boolean = false,
@@ -136,7 +138,7 @@ fun CardsItem(
         label = "width-animation"
     )
 
-    LaunchedEffect(isEditingInitial,isOpen) {
+    LaunchedEffect(isEditingInitial, isOpen) {
         if (isEditingInitial) {
             delay(Random.nextInt(0, 200).toLong())
             offsetX = 0f
@@ -165,7 +167,8 @@ fun CardsItem(
             onSwipePxChange = { swipePx = it },
             density = density,
             swipeActionIcon = swipeActionIcon,
-            swipeActionText = swipeActionText
+            swipeActionText = swipeActionText,
+            onActionClick = onActionClick
         )
         CardsItemContent(
             id = id,
@@ -180,6 +183,7 @@ fun CardsItem(
             backgroundRadius = backgroundRadius,
             endIcon = endIcon,
             endIconColor = endIconColor,
+            onEndIconClick = onEndIconClick,
             scale = scale,
             imageUrl = imageUrl,
             title = title,
@@ -210,7 +214,8 @@ private fun SwipeableCardItem(
     onSwipePxChange: (Float) -> Unit,
     density: Density,
     swipeActionIcon: Int,
-    swipeActionText: String
+    swipeActionText: String,
+    onActionClick: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -227,6 +232,7 @@ private fun SwipeableCardItem(
                 .widthIn(min = 70.dp)
                 .id("${id}Action")
                 .clickable {
+                    onActionClick.invoke()
                     onOffsetChange(0f)
                 }
                 .onGloballyPositioned { coordinates ->
@@ -261,6 +267,7 @@ private fun CardsItemContent(
     backgroundRadius: Dp,
     endIcon: Int?,
     endIconColor: Color,
+    onEndIconClick: () -> Unit,
     scale: Float,
     imageUrl: String,
     title: String,
@@ -343,6 +350,7 @@ private fun CardsItemContent(
                             modifier = Modifier
                                 .size(24.dp)
                                 .scale(scale)
+                                .clickable { onEndIconClick.invoke() }
                         )
                     }
                 }
