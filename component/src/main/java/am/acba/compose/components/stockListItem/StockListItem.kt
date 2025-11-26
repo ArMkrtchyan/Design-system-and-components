@@ -258,13 +258,18 @@ private fun EndContent(
                 endPercentColor = DigitalTheme.colorScheme.contentPrimaryTonal1
             }
             if (endPercent != 0.0 && endPercentIconUrl != null) {
-                AvatarImage(
-                    imageUrl = endPercentIconUrl,
-                    iconColor = endPercentColor,
-                    modifier = Modifier
+                Box(
+                    Modifier
                         .size(14.dp)
-                        .id("stockListItemEndPercentIcon")
-                )
+                ) {
+                    AvatarImage(
+                        imageUrl = endPercentIconUrl,
+                        iconColor = endPercentColor,
+                        modifier = Modifier
+                            .size(14.dp)
+                            .id("stockListItemEndPercentIcon")
+                    )
+                }
                 HorizontalSpacer(4.dp)
             }
             PrimaryText(

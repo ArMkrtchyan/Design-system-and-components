@@ -51,7 +51,8 @@ fun StockListItemScreen(title: String = EMPTY_STRING) {
                 endTitle = "Քանակ։ 25",
                 endValue = "2,122,233.12 USD",
                 endPercent = 0.36,
-                endPercentText = "+0.36%"
+                endPercentText = "+0.36%",
+                endPercentIconUrl = "https://online1-test.acba.am/Shared/Invest/Trend-up.svg"
             )
             VerticalSpacer(16.dp)
             StockListItem(
@@ -72,7 +73,7 @@ fun StockListItemScreen(title: String = EMPTY_STRING) {
             VerticalSpacer(16.dp)
             StockListItem(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                avatarIcon = R.drawable.ic_stock,
+                avatarImageUrl = "https://online1-test.acba.am/Shared/Invest/stock.svg",
                 infoText = "AMACBAS10ER7",
                 infoTitle = "Ակբա բաց բաժնետիրական",
                 infoSubTitle = "Մարումը՝ 01/03/2025",
@@ -83,7 +84,8 @@ fun StockListItemScreen(title: String = EMPTY_STRING) {
                 endTitle = "Քանակ։ 25",
                 endValue = "2,122,233.12 USD",
                 endPercent = -0.5,
-                endPercentText = "-0.5%"
+                endPercentText = "-0.5%",
+                endPercentIconUrl = "https://online1-test.acba.am/Shared/Invest/Trend-down.svg"
             )
         }
     }
