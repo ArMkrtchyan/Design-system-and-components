@@ -90,7 +90,8 @@ fun TableComponent(
     avatarBadgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     avatarBadgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     tableItems: List<Pair<String, String>> = emptyList(),
-    minimumVisibleItemsCount: Int = 7
+    minimumVisibleItemsCount: Int = 7,
+    borderColor: Color = DigitalTheme.colorScheme.borderNeutral
 ) {
     val expanded = remember { mutableStateOf(false) }
     val expandable = tableItems.size > minimumVisibleItemsCount
@@ -106,7 +107,7 @@ fun TableComponent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, DigitalTheme.colorScheme.borderNeutral, ShapeTokens.shapePrimaryButton)
+            .border(1.dp, borderColor, ShapeTokens.shapePrimaryButton)
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
