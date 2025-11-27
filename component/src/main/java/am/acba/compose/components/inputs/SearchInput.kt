@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 fun SearchBar(
     hint: String = stringResource(R.string.search),
     modifier: Modifier = Modifier,
+    textFieldModifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     height: Dp = 40.dp,
     cornerShape: Shape = ShapeTokens.shapePrimaryInput,
@@ -93,6 +94,7 @@ fun SearchBar(
                 .id("search")
                 .weight(5f)
                 .fillMaxWidth()
+                .then(textFieldModifier)
                 .onFocusChanged {
                     if (toolbarMode) {
                         if (it.isFocused) {
