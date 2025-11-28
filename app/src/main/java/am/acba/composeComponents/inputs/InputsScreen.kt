@@ -75,7 +75,7 @@ fun InputsScreen(title: String = "") {
                     leadingIcon = R.drawable.ic_close,
                 )
                 VerticalSpacer(16.dp)
-                SearchBar(hint = "Search...")
+                SearchBar(hint = "Search...", toolbarMode = true)
                 VerticalSpacer(16.dp)
                 PrimaryInput(
                     value = textNormal2.value,

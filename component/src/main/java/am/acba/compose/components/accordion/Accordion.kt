@@ -50,6 +50,7 @@ fun Accordion(
     title: String,
     titleColor: Color = DigitalTheme.colorScheme.contentPrimary,
     titleStyle: TextStyle = DigitalTheme.typography.smallRegular,
+    titleMaxLines: Int = 1,
 
     endText: String? = null,
     endTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
@@ -141,7 +142,8 @@ fun Accordion(
             }
             PrimaryText(text = title, style = titleStyle, color = titleColor, modifier = Modifier
                 .weight(1f)
-                .id("startText"), maxLines = 1)
+                .id("startText"), maxLines = titleMaxLines
+            )
             Row(
                 modifier = Modifier
                     .wrapContentHeight(),
@@ -161,7 +163,9 @@ fun Accordion(
                 }
                 if (endIcon != null) {
                     HorizontalSpacer(8.dp)
-                    PrimaryIcon(painter = painterResource(endIcon), modifier = Modifier.rotate(arrowRotation).id("endIcon"), tint = endIconColor)
+                    PrimaryIcon(painter = painterResource(endIcon), modifier = Modifier
+                        .rotate(arrowRotation)
+                        .id("endIcon"), tint = endIconColor)
                 }
             }
         }
