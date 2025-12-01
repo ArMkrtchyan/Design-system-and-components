@@ -23,6 +23,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.DraggableState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
@@ -99,9 +100,11 @@ fun CardsItem(
     badgeType: BadgeEnum = BadgeEnum.NONE,
     backgroundRadius: Dp = 12.dp,
     onClick: () -> Unit = {},
+    onLongClick: () -> Unit = {},
     onActionClick: () -> Unit = {},
     onSwipeAction: (Boolean) -> Unit = {},
     isEditingInitial: Boolean = false,
+    isSwipEnabled: Boolean = true,
     isOpen: Boolean = false,
 ) {
     val density = LocalDensity.current
@@ -156,7 +159,7 @@ fun CardsItem(
             .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .pointerInput(Unit) {
-                detectTapGestures(onTap = { onClick() })
+                detectTapGestures(onTap = { onClick() }, onLongPress ={onLongClick()} )
             }
             .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
             .id(id)
@@ -202,7 +205,8 @@ fun CardsItem(
             cardNumberStyle = cardNumberStyle,
             titleStyle = titleStyle,
             subTitleStyle = subTitleStyle,
-            animatedWidth = animatedWidth
+            animatedWidth = animatedWidth,
+            isSwipEnabled = isSwipEnabled
         )
     }
 }
@@ -257,7 +261,7 @@ private fun SwipeableCardItem(
 private fun CardsItemContent(
     id: String,
     animatedOffsetX: Float,
-    dragState: androidx.compose.foundation.gestures.DraggableState,
+    dragState: DraggableState,
     offsetX: Float,
     onOffsetChange: (Float) -> Unit,
     swipePx: Float,
@@ -286,7 +290,8 @@ private fun CardsItemContent(
     cardNumberStyle: TextStyle,
     titleStyle: TextStyle,
     subTitleStyle: TextStyle,
-    animatedWidth: Dp
+    animatedWidth: Dp,
+    isSwipEnabled: Boolean
 ) {
     Column(
         modifier = Modifier
@@ -295,7 +300,7 @@ private fun CardsItemContent(
             .draggable(
                 state = dragState,
                 orientation = Orientation.Horizontal,
-                enabled = !isEditingInitial,
+                enabled = !isEditingInitial && isSwipEnabled,
                 onDragStopped = {
                     if (!isEditingInitial) {
                         val shouldOpen = offsetX < -swipePx / 2

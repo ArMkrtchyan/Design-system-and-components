@@ -66,7 +66,9 @@ fun CardsItemScreen(title: String = "") {
                     badgeText = "Badge",
                     endIcon = R.drawable.ic_info,
                     badgeType = BadgeEnum.INFO,
+                    isSwipEnabled = false,
                     swipeActionText = "Բլոկավորել",
+                    onLongClick = { isEditing = true },
                     imageUrl =
                         "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
                     cardStatusIcon = R.drawable.ic_flake
@@ -143,9 +145,10 @@ fun CardsItemScreen(title: String = "") {
                     statusBackgroundColor = DigitalTheme.colorScheme.backgroundInfoTonal1,
                     swipeActionText = "Հեռացնել",
                     onSwipeAction = { isOpen ->
-                       isCloseSwipe = isOpen
+                        isCloseSwipe = isOpen
                     },
-                    isOpen = isCloseSwipe)
+                    isOpen = isCloseSwipe
+                )
 
                 VerticalSpacer(20.dp)
                 PrimaryButton(
