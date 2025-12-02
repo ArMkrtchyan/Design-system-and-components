@@ -235,6 +235,13 @@ fun AvatarImage(
                 },
                 update = { imageView ->
                     imageView.setImageDrawable(null)
+                    iconColor?.let {
+                        ImageViewCompat.setImageTintList(
+                            imageView,
+                            iconColor.toGraphicColorStateList()
+                        )
+                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
+                    }
                     Glide
                         .with(context)
                         .load(imageUrl)
