@@ -302,6 +302,7 @@
         <attr name="chipBackground" format="reference" />
         <attr name="chipText" format="string" />
         <attr name="chipTextAppearance" format="reference" />
+        <attr name="chipTextAndIconColor" format="color"/>
         <attr name="chipStartIconType" format="enum">
             <enum name="None" value="0" />
             <enum name="Icon" value="1" />

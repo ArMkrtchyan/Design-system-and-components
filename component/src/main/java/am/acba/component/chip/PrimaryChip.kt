@@ -59,7 +59,8 @@ class PrimaryChip : FrameLayout {
         addView(binding.root, layoutParams)
         val background = ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
         background?.let { setChipBackground(it) }
-        chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
+        chipTextAndIconColor =
+            ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
         setChipSize(ChipSize.SMALL)
     }
 
@@ -67,27 +68,49 @@ class PrimaryChip : FrameLayout {
         init(attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(attrs)
     }
 
     fun init(attrs: AttributeSet) {
         context.obtainStyledAttributes(attrs, R.styleable.PrimaryChip).apply {
-            layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
-                gravity = Gravity.CENTER
-                minimumWidth = 56.dpToPx()
-            }
+            layoutParams =
+                LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {
+                    gravity = Gravity.CENTER
+                    minimumWidth = 56.dpToPx()
+                }
             addView(binding.root, layoutParams)
-            chipTextAndIconColor = ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
+            chipTextAndIconColor = getColorStateList(R.styleable.PrimaryChip_chipTextAndIconColor)
+                ?: ContextCompat.getColorStateList(context, R.color.chip_text_and_icons_selector)
             setChipText(getString(R.styleable.PrimaryChip_chipText))
-            setChipTextAppearance(getResourceId(R.styleable.PrimaryChip_chipTextAppearance, R.style.Body2_Regular))
+            setChipTextAppearance(
+                getResourceId(
+                    R.styleable.PrimaryChip_chipTextAppearance,
+                    R.style.Body2_Regular
+                )
+            )
             val background =
-                getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(context, R.drawable.background_primary_chip)
+                getDrawable(R.styleable.PrimaryChip_chipBackground) ?: ContextCompat.getDrawable(
+                    context,
+                    R.drawable.background_primary_chip
+                )
             background?.let { setChipBackground(it) }
-            setChipStartIconType(getInt(R.styleable.PrimaryChip_chipStartIconType, 0).findChipStartIconTypeByOrdinal() ?: ChipStartIconType.NONE)
+            setChipStartIconType(
+                getInt(
+                    R.styleable.PrimaryChip_chipStartIconType,
+                    0
+                ).findChipStartIconTypeByOrdinal() ?: ChipStartIconType.NONE
+            )
             setStartIcon(getDrawable(R.styleable.PrimaryChip_chipStartIcon))
             setEndIcon(getDrawable(R.styleable.PrimaryChip_chipEndIcon))
-            setChipSize(getInt(R.styleable.PrimaryChip_chipSize, 0).findChipSizeByOrdinal() ?: ChipSize.SMALL)
+            setChipSize(
+                getInt(R.styleable.PrimaryChip_chipSize, 0).findChipSizeByOrdinal()
+                    ?: ChipSize.SMALL
+            )
             isSelected = getBoolean(R.styleable.PrimaryChip_isChipSelected, false)
             recycle()
             invalidate()
@@ -134,7 +157,12 @@ class PrimaryChip : FrameLayout {
                     }
                     avatar.setActionImageSize(PrimaryActionTextButton.ActionIconSize.XSMALL)
                 }
-                binding.parentLayout.setPadding(startPadding.dpToPx(), verticalPAdding.dpToPx(), endPAdding.dpToPx(), verticalPAdding.dpToPx())
+                binding.parentLayout.setPadding(
+                    startPadding.dpToPx(),
+                    verticalPAdding.dpToPx(),
+                    endPAdding.dpToPx(),
+                    verticalPAdding.dpToPx()
+                )
             }
 
             ChipSize.MEDIUM -> {
@@ -169,7 +197,12 @@ class PrimaryChip : FrameLayout {
                     }
                     avatar.setActionImageSize(PrimaryActionTextButton.ActionIconSize.SMALL)
                 }
-                binding.parentLayout.setPadding(startPadding.dpToPx(), verticalPAdding.dpToPx(), endPAdding.dpToPx(), verticalPAdding.dpToPx())
+                binding.parentLayout.setPadding(
+                    startPadding.dpToPx(),
+                    verticalPAdding.dpToPx(),
+                    endPAdding.dpToPx(),
+                    verticalPAdding.dpToPx()
+                )
             }
 
             ChipSize.CUSTOM -> {}
