@@ -73,10 +73,7 @@ fun PrimaryAlertDialog(
                         text = it, textId = "description", textColor = descriptionColor, style = DigitalTheme.typography.subTitle2Regular, 3
                     )
                 }
-                content?.let {
-                    VerticalSpacer(24.dp)
-                    it.invoke()
-                }
+                content?.invoke()
                 VerticalSpacer(24.dp)
                 positiveButtonText?.let {
                     PrimaryAlertDialogButton(
