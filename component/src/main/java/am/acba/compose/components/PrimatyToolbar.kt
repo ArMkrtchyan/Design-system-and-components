@@ -58,6 +58,9 @@ fun PrimaryToolbar(
         }, colors = TopAppBarDefaults.topAppBarColors(
             containerColor = containerColor,
             titleContentColor = contentColor,
+            scrolledContainerColor = containerColor,
+            navigationIconContentColor = contentColor,
+            actionIconContentColor = contentColor
         ), actions = actions, navigationIcon = {
             IconButton(onClick = {
                 activity?.onBackPressed()
