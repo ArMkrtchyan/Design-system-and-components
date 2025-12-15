@@ -458,6 +458,8 @@ class PrimaryStatusScreen : FrameLayout {
         SMALL(40), LARGE(130);
 
         companion object {
+            private val map = entries.associateBy(MediaTypes::size)
+            fun from(type: Int?) = map[type] ?: SMALL
             fun Int.findMediaTypeByOrdinal() = entries.find { it.ordinal == this }
         }
     }
