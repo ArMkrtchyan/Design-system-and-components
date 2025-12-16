@@ -454,11 +454,11 @@ class PrimaryStatusScreen : FrameLayout {
         animationView.pauseAnimation()
     }
 
-    enum class MediaTypes(var size: Int) {
-        SMALL(40), LARGE(130);
+    enum class MediaTypes(var size: Int, val type: Int) {
+        SMALL(40, 1), LARGE(130, 2);
 
         companion object {
-            private val map = entries.associateBy(MediaTypes::size)
+            private val map = entries.associateBy(MediaTypes::type)
             fun from(type: Int?) = map[type] ?: SMALL
             fun Int.findMediaTypeByOrdinal() = entries.find { it.ordinal == this }
         }
