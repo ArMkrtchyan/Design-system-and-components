@@ -23,9 +23,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.DraggableState
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
@@ -56,7 +56,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -158,12 +157,10 @@ fun CardsItem(
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { onClick() }, onLongPress ={onLongClick()} )
-            }
             .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
             .id(id)
-            .then(modifier)) {
+            .then(modifier.combinedClickable(onClick = onClick, onLongClick = onLongClick))
+    ) {
         SwipeableCardItem(
             id = id,
             onOffsetChange = { offsetX = it },
