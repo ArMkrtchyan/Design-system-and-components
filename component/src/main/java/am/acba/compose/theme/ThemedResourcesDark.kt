@@ -9,4 +9,5 @@ fun darkResourcesScheme(): ThemedResources = ThemedResources(
     arcaCardIcon = R.drawable.logo_arca_with_background_dark,
     amexCardIcon = R.drawable.logo_amex_with_background_dark,
     uPayCardIcon = R.drawable.logo_upay_with_background_dark,
+    efesLogoIcon = R.drawable.ic_efes_logo_dark,
 )

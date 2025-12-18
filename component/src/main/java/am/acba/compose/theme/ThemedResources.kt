@@ -10,4 +10,5 @@ data class ThemedResources(
     val arcaCardIcon: Int,
     val amexCardIcon: Int,
     val uPayCardIcon: Int,
+    val efesLogoIcon: Int,
 )
