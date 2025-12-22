@@ -88,6 +88,7 @@ fun Modifier.detectReorder(state: ReorderableState<*>) =
         }
     )
 
+@SuppressLint("ReturnFromAwaitPointerEventScope")
 fun Modifier.detectReorderAfterLongPress(state: ReorderableState<*>) =
     this.then(
         Modifier.pointerInput(Unit) {
