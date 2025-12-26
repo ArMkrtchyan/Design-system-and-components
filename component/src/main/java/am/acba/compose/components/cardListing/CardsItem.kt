@@ -31,7 +31,6 @@ import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -156,7 +155,6 @@ fun CardsItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .pointerInput(Unit) {
                 detectTapGestures(onTap = { onClick() }, onLongPress ={onLongClick()} )
@@ -336,7 +334,6 @@ private fun CardsItemContent(
             }
             Column(
                 modifier = Modifier
-                    .height(66.dp)
                     .weight(1f)
                     .padding(start = 12.dp)
             ) {
@@ -365,8 +362,7 @@ private fun CardsItemContent(
                 }
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     PrimaryText(
@@ -436,7 +432,7 @@ fun CardsItemPreview() {
         ) {
             CardsItem(
                 title = "Mastercard Standard",
-                subTitle = "Aramayis Ter-Stepanyan",
+                subTitle = "Aramayis Ter-Stepanyan Ter-Stepanyan",
                 cardNumber = "**** 5678",
                 badgeText = "Badge",
                 endIcon = R.drawable.ic_info,

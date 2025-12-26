@@ -77,6 +77,7 @@ fun CardsItemScreen(title: String = "") {
                 CardsItem(
                     modifier = Modifier.id("card2"),
                     title = "Mastercard Standard",
+                    subTitle = "Aramayis Ter-Stepanyan Ter-Stepanyan Ter-Stepanyan",
                     isEditingInitial = isEditing,
                     cardNumber = "**** 5678",
                     badgeText = "Լրացուցիչ",
