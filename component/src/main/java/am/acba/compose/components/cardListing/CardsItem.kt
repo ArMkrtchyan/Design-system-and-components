@@ -36,6 +36,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -155,6 +156,7 @@ fun CardsItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
             .id(id)
@@ -430,7 +432,6 @@ fun CardsItemPreview() {
         ) {
             CardsItem(
                 title = "Mastercard Standard",
-                subTitle = "Aramayis Ter-Stepanyan Ter-Stepanyan",
                 cardNumber = "**** 5678",
                 badgeText = "Badge",
                 endIcon = R.drawable.ic_info,
