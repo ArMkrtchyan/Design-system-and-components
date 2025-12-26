@@ -155,7 +155,6 @@ fun CardsItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
             .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
             .id(id)
@@ -333,7 +332,6 @@ private fun CardsItemContent(
             }
             Column(
                 modifier = Modifier
-                    .height(66.dp)
                     .weight(1f)
                     .padding(start = 12.dp)
             ) {
@@ -362,8 +360,7 @@ private fun CardsItemContent(
                 }
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     PrimaryText(
@@ -433,7 +430,7 @@ fun CardsItemPreview() {
         ) {
             CardsItem(
                 title = "Mastercard Standard",
-                subTitle = "Aramayis Ter-Stepanyan",
+                subTitle = "Aramayis Ter-Stepanyan Ter-Stepanyan",
                 cardNumber = "**** 5678",
                 badgeText = "Badge",
                 endIcon = R.drawable.ic_info,
