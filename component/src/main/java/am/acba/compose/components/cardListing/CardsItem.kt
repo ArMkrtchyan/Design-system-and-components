@@ -23,9 +23,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.DraggableState
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Arrangement
@@ -56,7 +56,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -158,12 +157,10 @@ fun CardsItem(
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .graphicsLayer { rotationZ = rotation }
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { onClick() }, onLongPress ={onLongClick()} )
-            }
             .background(actionBackgroundColor, RoundedCornerShape(backgroundRadius + 1.dp))
             .id(id)
-            .then(modifier)) {
+            .then(modifier.combinedClickable(onClick = onClick, onLongClick = onLongClick))
+    ) {
         SwipeableCardItem(
             id = id,
             onOffsetChange = { offsetX = it },
@@ -245,13 +242,17 @@ private fun SwipeableCardItem(
                 }
         ) {
             PrimaryIcon(
-                painter = painterResource(swipeActionIcon), tint = DigitalTheme.colorScheme.contentSecondary, modifier = Modifier
+                painter = painterResource(swipeActionIcon),
+                tint = DigitalTheme.colorScheme.contentSecondary,
+                modifier = Modifier
                     .size(28.dp)
                     .id("${id}ActionIcon")
             )
             PrimaryText(
                 modifier = Modifier.id("${id}ActionText"),
-                color = DigitalTheme.colorScheme.contentSecondary, text = swipeActionText, style = DigitalTheme.typography.smallRegular
+                color = DigitalTheme.colorScheme.contentSecondary,
+                text = swipeActionText,
+                style = DigitalTheme.typography.smallRegular
             )
         }
     }
@@ -293,116 +294,129 @@ private fun CardsItemContent(
     animatedWidth: Dp,
     isSwipEnabled: Boolean
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
-            .draggable(
-                state = dragState,
-                orientation = Orientation.Horizontal,
-                enabled = !isEditingInitial && isSwipEnabled,
-                onDragStopped = {
-                    if (!isEditingInitial) {
-                        val shouldOpen = offsetX < -swipePx / 2
-                        onSwipeAction.invoke(shouldOpen)
-                        onOffsetChange(if (shouldOpen) -swipePx else 0f)
-                    }
-                }
-            )
-            .background(
-                backgroundColor, shape = RoundedCornerShape(backgroundRadius)
-            )
-            .id("${id}MainColumn")
-    ) {
-        Row(
+    Box {
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-        ) {
-            Box {
-                AvatarImage(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(64.dp), clipPercent = 14, imageUrl = imageUrl
+                .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
+                .draggable(
+                    state = dragState,
+                    orientation = Orientation.Horizontal,
+                    enabled = !isEditingInitial && isSwipEnabled,
+                    onDragStopped = {
+                        if (!isEditingInitial) {
+                            val shouldOpen = offsetX < -swipePx / 2
+                            onSwipeAction.invoke(shouldOpen)
+                            onOffsetChange(if (shouldOpen) -swipePx else 0f)
+                        }
+                    }
                 )
-                if (cardStatusIcon != null)
-                    PrimaryIcon(
-                        painter = painterResource(cardStatusIcon),
-                        tint = DigitalTheme.colorScheme.contentSecondary,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .align(Alignment.Center)
-                    )
-            }
-            Column(
+                .background(
+                    backgroundColor, shape = RoundedCornerShape(backgroundRadius)
+                )
+                .id("${id}MainColumn")
+        ) {
+            Row(
                 modifier = Modifier
-                    .height(66.dp)
-                    .weight(1f)
-                    .padding(start = 12.dp)
+                    .fillMaxWidth()
+                    .padding(16.dp)
             ) {
-                Row(
-                    modifier = Modifier
-                        .height(24.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    PrimaryText(modifier = Modifier.id("${id}Title"), text = title, style = titleStyle)
-                    if (endIcon != null && !isEditingInitial) {
-                        HorizontalSpacer(8.dp)
+                Box {
+                    AvatarImage(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(64.dp), clipPercent = 14, imageUrl = imageUrl
+                    )
+                    if (cardStatusIcon != null)
                         PrimaryIcon(
-                            painter = painterResource(endIcon),
-                            tint = endIconColor,
+                            painter = painterResource(cardStatusIcon),
+                            tint = DigitalTheme.colorScheme.contentSecondary,
                             modifier = Modifier
                                 .size(24.dp)
-                                .scale(scale)
-                                .clickable { onEndIconClick.invoke() }
+                                .align(Alignment.Center)
+                        )
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .height(24.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        PrimaryText(
+                            modifier = Modifier.id("${id}Title"),
+                            text = title,
+                            style = titleStyle
+                        )
+                        if (endIcon != null && !isEditingInitial) {
+                            HorizontalSpacer(8.dp)
+                            PrimaryIcon(
+                                painter = painterResource(endIcon),
+                                tint = endIconColor,
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .scale(scale)
+                                    .clickable { onEndIconClick.invoke() }
+                            )
+                        }
+                    }
+                    if (subTitle.isNotEmpty()) {
+                        PrimaryText(
+                            modifier = Modifier.id("${id}SubTitle"),
+                            text = subTitle,
+                            style = subTitleStyle
+                        )
+                        VerticalSpacer(4.dp)
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        PrimaryText(
+                            modifier = Modifier
+                                .id("${id}CardNumber")
+                                .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
                         )
                     }
                 }
-                if (subTitle.isNotEmpty()) {
-                    PrimaryText(modifier = Modifier.id("${id}SubTitle"), text = subTitle, style = subTitleStyle)
-                    VerticalSpacer(4.dp)
+                if (isEditingInitial) {
+                    HorizontalSpacer(8.dp)
                 }
-                Row(
+                PrimaryIcon(
+                    painter = painterResource(R.drawable.ic_drag_indicator),
+                    tint = endIconColor,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    PrimaryText(
-                        modifier = Modifier
-                            .id("${id}CardNumber")
-                            .padding(top = 2.dp), text = cardNumber, style = cardNumberStyle
+                        .size(animatedWidth)
+                        .align(Alignment.CenterVertically)
+                )
+            }
+            if (!statusTitle.isNullOrEmpty()) {
+                StatusBadge(
+                    title = statusTitle,
+                    icon = statusIcon,
+                    id = "${id}StatusBadge",
+                    textColor = statusTextColor,
+                    iconColor = statusIconColor,
+                    backgroundColor = statusBackgroundColor,
+                    align = Alignment.BottomEnd
+                )
+            }
+        }
+        if (badgeText.isNotEmpty())
+            Badge(
+                badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
+                textColor = badgeTextColor,
+                modifier = Modifier
+                    .padding(
+                        end = 16.dp,
+                        bottom = if (!statusTitle.isNullOrEmpty()) 32.dp else 16.dp
                     )
-                    if (badgeText.isNotEmpty())
-                        Badge(
-                            badgeType = badgeType, text = badgeText, backgroundColor = badgeBackgroundColor,
-                            textColor = badgeTextColor, modifier = Modifier
-                                .align(Alignment.Bottom)
-                                .id("${id}Badge")
-                        )
-                }
-            }
-            if (isEditingInitial) {
-                HorizontalSpacer(8.dp)
-            }
-            PrimaryIcon(
-                painter = painterResource(R.drawable.ic_drag_indicator), tint = endIconColor, modifier = Modifier
-                    .size(animatedWidth)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.BottomEnd)
+                    .id("${id}Badge")
             )
-        }
-        if (!statusTitle.isNullOrEmpty()) {
-            StatusBadge(
-                title = statusTitle,
-                icon = statusIcon,
-                id = "${id}StatusBadge",
-                textColor = statusTextColor,
-                iconColor = statusIconColor,
-                backgroundColor = statusBackgroundColor,
-                align = Alignment.TopEnd
-            )
-        }
     }
 }
 
@@ -436,13 +450,13 @@ fun CardsItemPreview() {
         ) {
             CardsItem(
                 title = "Mastercard Standard",
-                subTitle = "Aramayis Ter-Stepanyan",
                 cardNumber = "**** 5678",
                 badgeText = "Badge",
                 endIcon = R.drawable.ic_info,
                 badgeType = BadgeEnum.INFO,
                 imageUrl = "https://online1-test.acba.am/Shared/CardImages/PhysicalCards/CardType41_1_1.png",
-                isEditingInitial = false, statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
+                isEditingInitial = false,
+                statusTextColor = DigitalTheme.colorScheme.contentInfoTonal1,
                 statusIcon = R.drawable.ic_info,
                 statusTitle = "Քարտը պատրաստ է ակտիվացման",
                 statusIconColor = DigitalTheme.colorScheme.contentInfoTonal1,
