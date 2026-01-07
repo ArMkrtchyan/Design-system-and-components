@@ -93,7 +93,7 @@ fun TableComponent(
     minimumVisibleItemsCount: Int = 7,
     borderColor: Color = DigitalTheme.colorScheme.borderNeutral
 ) {
-    val expanded = remember { mutableStateOf(false) }
+    val expanded = rememberSaveable { mutableStateOf(false) }
     val expandable = tableItems.size > minimumVisibleItemsCount
     val arrowRotation by animateFloatAsState(
         targetValue = if (expanded.value) 180f else 0f,
