@@ -1,6 +1,7 @@
 ﻿package am.acba.compose.components.tableComponent
 
 import am.acba.component.R
+import am.acba.component.table.TableItem
 import am.acba.component.viewUtil.ViewUtil.copyWithVibration
 import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.common.VerticalSpacer
@@ -89,7 +90,7 @@ fun TableComponent(
     avatarBadgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     avatarBadgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     avatarBadgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
-    tableItems: List<Pair<String, String>> = emptyList(),
+    tableItems: List<TableItem> = emptyList(),
     minimumVisibleItemsCount: Int = 7,
     borderColor: Color = DigitalTheme.colorScheme.borderNeutral
 ) {
@@ -259,16 +260,16 @@ private fun TableHeader(
 }
 
 @Composable
-private fun MainContent(tableItems: List<Pair<String, String>>) {
+private fun MainContent(tableItems: List<TableItem>) {
     tableItems.forEachIndexed { index, item ->
-        TableRow(item.first, item.second, tableItems.size - 1 == index)
+        TableRow(item.fieldTitle, item.fieldValue, tableItems.size - 1 == index)
     }
 }
 
 @Composable
 private fun AnimatedContent(
     expanded: MutableState<Boolean>,
-    tableItems: List<Pair<String, String>>,
+    tableItems: List<TableItem>,
     minimumVisibleItemsCount: Int
 ) {
     val enterTransition = remember {
@@ -352,16 +353,16 @@ fun TableComponentPreview(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.ic_phonebook,
                 tableItems = arrayListOf(
-                    Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
-                    Pair("Վարկային կոդ", "234567890"),
-                    Pair("Հաշվեհամար", "123454354553224"),
-                    Pair("Հերթական մարում", "4,000.00 AMD"),
-                    Pair("Ընթացիկ", "4,000.00 AMD"),
-                    Pair("Տոկոսագումար", "4,000.00 AMD"),
-                    Pair("Միջնորդավճար", "4,000.00 AMD"),
-                    Pair("Միջնորդավճար 2", "4,000.00 AMD"),
-                    Pair("Միջնորդավճար 3", "4,000.00 AMD"),
-                    Pair("Ընդամենը", "4,000.00 AMD")
+                    TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
+                    TableItem("Վարկային կոդ", "234567890"),
+                    TableItem("Հաշվեհամար", "123454354553224"),
+                    TableItem("Հերթական մարում", "4,000.00 AMD"),
+                    TableItem("Ընթացիկ", "4,000.00 AMD"),
+                    TableItem("Տոկոսագումար", "4,000.00 AMD"),
+                    TableItem("Միջնորդավճար", "4,000.00 AMD"),
+                    TableItem("Միջնորդավճար 2", "4,000.00 AMD"),
+                    TableItem("Միջնորդավճար 3", "4,000.00 AMD"),
+                    TableItem("Ընդամենը", "4,000.00 AMD")
                 )
             )
             VerticalSpacer(20.dp)
@@ -369,13 +370,13 @@ fun TableComponentPreview(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.ic_phonebook,
                 tableItems = arrayListOf(
-                    Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
-                    Pair("Վարկային կոդ", "234567890"),
-                    Pair("Հաշվեհամար", "123454354553224"),
-                    Pair("Հերթական մարում", "4,000.00 AMD"),
-                    Pair("Ընթացիկ", "4,000.00 AMD"),
-                    Pair("Տոկոսագումար", "4,000.00 AMD"),
-                    Pair("Միջնորդավճար", "4,000.00 AMD")
+                    TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
+                    TableItem("Վարկային կոդ", "234567890"),
+                    TableItem("Հաշվեհամար", "123454354553224"),
+                    TableItem("Հերթական մարում", "4,000.00 AMD"),
+                    TableItem("Ընթացիկ", "4,000.00 AMD"),
+                    TableItem("Տոկոսագումար", "4,000.00 AMD"),
+                    TableItem("Միջնորդավճար", "4,000.00 AMD")
                 )
             )
             VerticalSpacer(20.dp)
@@ -383,7 +384,7 @@ fun TableComponentPreview(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.ic_phonebook,
                 tableItems = arrayListOf(
-                    Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                    TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
             VerticalSpacer(20.dp)
@@ -394,22 +395,22 @@ fun TableComponentPreview(
                 avatarType = AvatarEnum.IMAGE,
                 listItemStartAvatarSizeEnum = ListItemStartAvatarSizeEnum.AVATAR,
                 tableItems = arrayListOf(
-                    Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                    TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
             VerticalSpacer(20.dp)
             TableComponent(
                 title = "5G վարկ",
                 tableItems = arrayListOf(
-                    Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                    TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
             VerticalSpacer(20.dp)
             TableComponent(
                 tableItems = arrayListOf(
-                    Pair("Վարկային կոդ", "234567890"),
-                    Pair("Հաշվեհամար", "123454354553224"),
-                    Pair("Հերթական մարում", "4,000.00 AMD"),
+                    TableItem("Վարկային կոդ", "234567890"),
+                    TableItem("Հաշվեհամար", "123454354553224"),
+                    TableItem("Հերթական մարում", "4,000.00 AMD"),
                 )
             )
         }
