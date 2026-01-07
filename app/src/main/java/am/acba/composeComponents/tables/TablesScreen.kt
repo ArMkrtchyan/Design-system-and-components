@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.tables
 
 import am.acba.component.R
+import am.acba.component.table.TableItem
 import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.avatar.AvatarEnum
@@ -53,16 +54,16 @@ fun TablesScreen(title: String = "") {
                     title = "5G վարկ",
                     avatarIcon = R.drawable.ic_phonebook,
                     tableItems = arrayListOf(
-                        Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
-                        Pair("Վարկային կոդ", "234567890"),
-                        Pair("Հաշվեհամար", "123454354553224"),
-                        Pair("Հերթական մարում", "4,000.00 AMD"),
-                        Pair("Ընթացիկ", "4,000.00 AMD"),
-                        Pair("Տոկոսագումար", "4,000.00 AMD"),
-                        Pair("Միջնորդավճար", "4,000.00 AMD"),
-                        Pair("Միջնորդավճար 2", "4,000.00 AMD"),
-                        Pair("Միջնորդավճար 3", "4,000.00 AMD"),
-                        Pair("Ընդամենը", "4,000.00 AMD")
+                        TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
+                        TableItem("Վարկային կոդ", "234567890"),
+                        TableItem("Հաշվեհամար", "123454354553224"),
+                        TableItem("Հերթական մարում", "4,000.00 AMD"),
+                        TableItem("Ընթացիկ", "4,000.00 AMD"),
+                        TableItem("Տոկոսագումար", "4,000.00 AMD"),
+                        TableItem("Միջնորդավճար", "4,000.00 AMD"),
+                        TableItem("Միջնորդավճար 2", "4,000.00 AMD"),
+                        TableItem("Միջնորդավճար 3", "4,000.00 AMD"),
+                        TableItem("Ընդամենը", "4,000.00 AMD")
                     ),
                     minimumVisibleItemsCount = 3
                 )
@@ -71,13 +72,13 @@ fun TablesScreen(title: String = "") {
                     title = "5G վարկ",
                     avatarIcon = R.drawable.ic_phonebook,
                     tableItems = arrayListOf(
-                        Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
-                        Pair("Վարկային կոդ", "234567890"),
-                        Pair("Հաշվեհամար", "123454354553224"),
-                        Pair("Հերթական մարում", "4,000.00 AMD"),
-                        Pair("Ընթացիկ", "4,000.00 AMD"),
-                        Pair("Տոկոսագումար", "4,000.00 AMD"),
-                        Pair("Միջնորդավճար", "4,000.00 AMD")
+                        TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան"),
+                        TableItem("Վարկային կոդ", "234567890"),
+                        TableItem("Հաշվեհամար", "123454354553224"),
+                        TableItem("Հերթական մարում", "4,000.00 AMD"),
+                        TableItem("Ընթացիկ", "4,000.00 AMD"),
+                        TableItem("Տոկոսագումար", "4,000.00 AMD"),
+                        TableItem("Միջնորդավճար", "4,000.00 AMD")
                     )
                 )
                 VerticalSpacer(20.dp)
@@ -85,7 +86,7 @@ fun TablesScreen(title: String = "") {
                     title = "5G վարկ",
                     avatarIcon = R.drawable.ic_phonebook,
                     tableItems = arrayListOf(
-                        Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                        TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
                 VerticalSpacer(20.dp)
@@ -96,22 +97,22 @@ fun TablesScreen(title: String = "") {
                     avatarType = AvatarEnum.IMAGE,
                     listItemStartAvatarSizeEnum = ListItemStartAvatarSizeEnum.AVATAR,
                     tableItems = arrayListOf(
-                        Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                        TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
                 VerticalSpacer(20.dp)
                 TableComponent(
                     title = "5G վարկ",
                     tableItems = arrayListOf(
-                        Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
+                        TableItem("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                     )
                 )
                 VerticalSpacer(20.dp)
                 TableComponent(
                     tableItems = arrayListOf(
-                        Pair("Վարկային կոդ", "234567890"),
-                        Pair("Հաշվեհամար", "123454354553224"),
-                        Pair("Հերթական մարում", "4,000.00 AMD"),
+                        TableItem("Վարկային կոդ", "234567890"),
+                        TableItem("Հաշվեհամար", "123454354553224"),
+                        TableItem("Հերթական մարում", "4,000.00 AMD"),
                     )
                 )
             }
