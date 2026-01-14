@@ -294,23 +294,26 @@ private fun CardsItemContent(
     animatedWidth: Dp,
     isSwipEnabled: Boolean
 ) {
-    Box {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
+            .draggable(
+                state = dragState,
+                orientation = Orientation.Horizontal,
+                enabled = !isEditingInitial && isSwipEnabled,
+                onDragStopped = {
+                    if (!isEditingInitial) {
+                        val shouldOpen = offsetX < -swipePx / 2
+                        onSwipeAction.invoke(shouldOpen)
+                        onOffsetChange(if (shouldOpen) -swipePx else 0f)
+                    }
+                }
+            )
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
-                .draggable(
-                    state = dragState,
-                    orientation = Orientation.Horizontal,
-                    enabled = !isEditingInitial && isSwipEnabled,
-                    onDragStopped = {
-                        if (!isEditingInitial) {
-                            val shouldOpen = offsetX < -swipePx / 2
-                            onSwipeAction.invoke(shouldOpen)
-                            onOffsetChange(if (shouldOpen) -swipePx else 0f)
-                        }
-                    }
-                )
                 .background(
                     backgroundColor, shape = RoundedCornerShape(backgroundRadius)
                 )
