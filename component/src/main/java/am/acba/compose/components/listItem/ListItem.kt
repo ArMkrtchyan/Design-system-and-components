@@ -21,6 +21,7 @@ import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -130,6 +131,7 @@ fun ListItem(
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {},
+    onLongClick: (() -> Unit)? = null,
     onSecondEndIconClick: (() -> Unit)? = null,
     onEndIconClick: (() -> Unit)? = null
 ) {
@@ -144,7 +146,9 @@ fun ListItem(
             .background(backgroundColor, RoundedCornerShape(backgroundRadius.dp))
             .then(borderModifier)
             .padding(top = 16.dp)
-            .clickable { onClick.invoke() }
+            .combinedClickable(
+                onClick = { onClick.invoke() },
+                onLongClick = { onLongClick?.invoke() })
     ) {
         val isTitleOnly =
             description.isEmpty() && description2.isEmpty() && description3.isEmpty() && description4.isEmpty()
