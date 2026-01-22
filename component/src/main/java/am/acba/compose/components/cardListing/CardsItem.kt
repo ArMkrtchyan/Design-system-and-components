@@ -54,12 +54,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -294,6 +296,11 @@ private fun CardsItemContent(
     animatedWidth: Dp,
     isSwipEnabled: Boolean
 ) {
+    var isDragging by remember { mutableStateOf(false) }
+    val elevation by animateDpAsState(
+        targetValue = if (isDragging) 8.dp else 0.dp,
+        label = "shadow-animation"
+    )
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -302,7 +309,11 @@ private fun CardsItemContent(
                 state = dragState,
                 orientation = Orientation.Horizontal,
                 enabled = !isEditingInitial && isSwipEnabled,
+                onDragStarted = {
+                    isDragging = true
+                },
                 onDragStopped = {
+                    isDragging = false
                     if (!isEditingInitial) {
                         val shouldOpen = offsetX < -swipePx / 2
                         onSwipeAction.invoke(shouldOpen)
@@ -314,8 +325,13 @@ private fun CardsItemContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .shadow(
+                    elevation = elevation,
+                    shape = RoundedCornerShape(backgroundRadius)
+                )
                 .background(
-                    backgroundColor, shape = RoundedCornerShape(backgroundRadius)
+                    backgroundColor,
+                    shape = RoundedCornerShape(backgroundRadius)
                 )
                 .id("${id}MainColumn")
         ) {
@@ -371,7 +387,9 @@ private fun CardsItemContent(
                         PrimaryText(
                             modifier = Modifier.id("${id}SubTitle"),
                             text = subTitle,
-                            style = subTitleStyle
+                            maxLines = 1,
+                            style = subTitleStyle,
+                            overflow = TextOverflow.Ellipsis
                         )
                         VerticalSpacer(4.dp)
                     }
@@ -414,7 +432,7 @@ private fun CardsItemContent(
                 textColor = badgeTextColor,
                 modifier = Modifier
                     .padding(
-                        end = 16.dp,
+                        end = if (isEditingInitial) 16.dp + animatedWidth + 8.dp else 16.dp,
                         bottom = if (!statusTitle.isNullOrEmpty()) 32.dp else 16.dp
                     )
                     .align(Alignment.BottomEnd)
