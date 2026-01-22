@@ -107,6 +107,7 @@ fun CardsItem(
     isEditingInitial: Boolean = false,
     isSwipEnabled: Boolean = true,
     isOpen: Boolean = false,
+    isReordering: Boolean = false,
 ) {
     val density = LocalDensity.current
     var swipePx by remember { mutableFloatStateOf(0f) }
@@ -205,7 +206,8 @@ fun CardsItem(
             titleStyle = titleStyle,
             subTitleStyle = subTitleStyle,
             animatedWidth = animatedWidth,
-            isSwipEnabled = isSwipEnabled
+            isSwipEnabled = isSwipEnabled,
+            isReordering = isReordering
         )
     }
 }
@@ -294,26 +296,26 @@ private fun CardsItemContent(
     titleStyle: TextStyle,
     subTitleStyle: TextStyle,
     animatedWidth: Dp,
-    isSwipEnabled: Boolean
+    isSwipEnabled: Boolean,
+    isReordering: Boolean
 ) {
-    var isDragging by remember { mutableStateOf(false) }
     val elevation by animateDpAsState(
-        targetValue = if (isDragging) 8.dp else 0.dp,
+        targetValue = if (isReordering) 8.dp else 0.dp,
         label = "shadow-animation"
     )
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
+            .shadow(
+                elevation = elevation,
+                shape = RoundedCornerShape(backgroundRadius)
+            )
             .draggable(
                 state = dragState,
                 orientation = Orientation.Horizontal,
                 enabled = !isEditingInitial && isSwipEnabled,
-                onDragStarted = {
-                    isDragging = true
-                },
                 onDragStopped = {
-                    isDragging = false
                     if (!isEditingInitial) {
                         val shouldOpen = offsetX < -swipePx / 2
                         onSwipeAction.invoke(shouldOpen)
@@ -325,10 +327,6 @@ private fun CardsItemContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .shadow(
-                    elevation = elevation,
-                    shape = RoundedCornerShape(backgroundRadius)
-                )
                 .background(
                     backgroundColor,
                     shape = RoundedCornerShape(backgroundRadius)
