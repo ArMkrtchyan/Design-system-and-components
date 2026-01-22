@@ -303,14 +303,21 @@ private fun CardsItemContent(
         targetValue = if (isReordering) 8.dp else 0.dp,
         label = "shadow-animation"
     )
+    val scale by animateFloatAsState(
+        targetValue = if (isReordering) 1.04f else 1f,
+        label = "drag-scale"
+    )
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
-            .shadow(
-                elevation = elevation,
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+                shadowElevation = elevation.toPx()
                 shape = RoundedCornerShape(backgroundRadius)
-            )
+                clip = true
+            }
+            .offset { IntOffset(animatedOffsetX.roundToInt(), 0) }
             .draggable(
                 state = dragState,
                 orientation = Orientation.Horizontal,
