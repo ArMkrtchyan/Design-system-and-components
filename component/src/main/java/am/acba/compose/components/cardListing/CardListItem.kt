@@ -117,11 +117,13 @@ fun CardListItem(
                 .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
+                .id("cardListItemRoot")
         } else {
             modifier
                 .background(bgColor, RoundedCornerShape(backgroundRadius.dp))
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
+                .id("cardListItemRoot")
         }
     ) {
         Column(
@@ -233,7 +235,13 @@ fun CardListItem(
                 }
                 endIcon?.let {
                     HorizontalSpacer(8.dp)
-                    PrimaryIcon(painter = painterResource(it), tint = endIconColor, modifier = Modifier.size(24.dp))
+                    PrimaryIcon(
+                        painter = painterResource(it),
+                        tint = endIconColor,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .id("cardListItemEndIcon")
+                    )
                 }
             }
             VerticalSpacer(16.dp)
