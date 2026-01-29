@@ -61,7 +61,6 @@ fun CardsItemScreen(title: String = "") {
                     modifier = Modifier.id("card1"),
                     isEditingInitial = isEditing,
                     title = "Mastercard Standard",
-                    subTitle = "Aramayis Ter-Stepanyan",
                     cardNumber = "**** 5678",
                     badgeText = "Badge",
                     endIcon = R.drawable.ic_info,
@@ -77,6 +76,7 @@ fun CardsItemScreen(title: String = "") {
                 CardsItem(
                     modifier = Modifier.id("card2"),
                     title = "Mastercard Standard",
+                    subTitle = "Aramayis Ter-Stepanyan StepanyanStepanyan",
                     isEditingInitial = isEditing,
                     cardNumber = "**** 5678",
                     badgeText = "Լրացուցիչ",
