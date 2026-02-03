@@ -138,11 +138,8 @@ fun ComponentDropDown(
             modifier = Modifier
                 .weight(1f)
                 .clickable {
-                    showBottomSheet(
-                        isEnabled = enabled,
-                        showBottomSheet = showBottomSheet,
-                        onClick = onOpenRequest
-                    )
+                    onOpenRequest.invoke()
+                    if (enabled) showBottomSheet.value = true
                 },
             contentAlignment = Alignment.CenterStart
         ) {
@@ -177,11 +174,8 @@ fun ComponentDropDown(
                 .padding(end = 16.dp)
                 .rotate(arrowRotation)
                 .clickable {
-                    showBottomSheet(
-                        isEnabled = enabled,
-                        showBottomSheet = showBottomSheet,
-                        onClick = onOpenRequest,
-                    )
+                    onOpenRequest.invoke()
+                    if (enabled) showBottomSheet.value = true
                 },
             tint = textColors(enabled, DigitalTheme.colorScheme.contentPrimaryTonal1),
             painter = painterResource(R.drawable.ic_down)
