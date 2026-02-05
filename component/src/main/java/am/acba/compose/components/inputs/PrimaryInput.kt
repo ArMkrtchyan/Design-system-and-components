@@ -1,11 +1,16 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
+import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -38,16 +43,16 @@ fun PrimaryInput(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     placeholder: String? = null,
+    leadingImageUrl: String? = null,
     leadingIcon: Int? = null,
     trailingIcon: Int? = null,
     secondaryTrailingIcon: Int? = null,
     leadingIconTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
     trailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
     secondaryTrailingTint: Color? = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    leadingIconSize: Dp = 24.dp,
+    leadingIconSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_24,
     trailingIconSize: Dp = 24.dp,
     secondaryTrailingIconSize: Dp = 24.dp,
-    onLeadingIconClick: (() -> Unit)? = null,
     onTrailingIconClick: (() -> Unit)? = null,
     onSecondaryTrailingIconClick: (() -> Unit)? = null,
     prefix: @Composable (() -> Unit)? = null,
@@ -63,8 +68,16 @@ fun PrimaryInput(
     errorText: String? = null,
     helpText: String? = null,
     label: String? = null,
+    labelId: String = "inputLabel",
+    durationMillis: Int = 0
 ) {
     val isFocused by interactionSource.collectIsFocusedAsState()
+    val borderAlpha by animateFloatAsState(
+        targetValue = if (isFocused) 1f else 0f,
+        animationSpec = tween(durationMillis = durationMillis, easing = FastOutSlowInEasing)
+    )
+    val animatedFocusColor = DigitalTheme.colorScheme.borderPrimary.copy(alpha = borderAlpha)
+
     val newModifier = when {
         isError -> {
             Modifier
@@ -77,7 +90,7 @@ fun PrimaryInput(
 
         isFocused -> {
             Modifier
-                .border(1.dp, DigitalTheme.colorScheme.borderPrimary, ShapeTokens.shapePrimaryInput)
+                .border(1.dp, animatedFocusColor, ShapeTokens.shapePrimaryInput)
         }
 
         else -> {
@@ -100,26 +113,29 @@ fun PrimaryInput(
                     onValueChange(it)
             },
             modifier = newModifier
+                .id("input")
                 .fillMaxWidth()
                 .heightIn(min = 58.dp),
             enabled = enabled,
             readOnly = readOnly,
             placeholder = placeholder?.let { { Label(text = placeholder) } },
-            leadingIcon = leadingOrTrailingIcon(
-                iconRes = leadingIcon,
-                tint = leadingIconTint,
-                isEnabled = enabled,
-                iconSize = leadingIconSize,
-                onClick = onLeadingIconClick
-            ),
-            trailingIcon = leadingOrTrailingIcon(
+            leadingIcon =
+                leadingAvatar(
+                    iconRes = leadingIcon,
+                    iconColor = leadingIconTint,
+                    iconSize = leadingIconSize,
+                    spaceStart = 12.dp,
+                    spaceEnd = 12.dp,
+                    imageUrl = leadingImageUrl,
+                    enabled = enabled
+                ),
+            trailingIcon = trailingIcon(
                 iconRes = trailingIcon,
                 secondaryIconRes = secondaryTrailingIcon,
                 tint = trailingTint,
                 secondaryTint = secondaryTrailingTint,
                 isEnabled = enabled,
                 iconSize = trailingIconSize,
-                isLeading = false,
                 secondaryIconSize = secondaryTrailingIconSize,
                 onSecondaryIconClick = onSecondaryTrailingIconClick,
                 onClick = onTrailingIconClick
@@ -131,12 +147,13 @@ fun PrimaryInput(
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
+            singleLine = singleLine,
             maxLines = maxLines,
             minLines = minLines,
             interactionSource = interactionSource,
             colors = createStateColors(),
             isError = isError,
-            label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
+            label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled, id = labelId) } },
         )
         SupportAndErrorTexts(isError, enabled, errorText, helpText)
     }
@@ -162,21 +179,15 @@ fun PrimaryInputPreview(
                 isError = true,
                 errorText = "Error",
                 leadingIcon = R.drawable.ic_close,
-                onLeadingIconClick = {
-                    textNormal.value = TextFieldValue("jcndskjcndk")
-                }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             PrimaryInput(
                 value = TextFieldValue("Some text"),
                 onValueChange = { textNormal.value = it },
                 enabled = false,
                 leadingIcon = R.drawable.ic_close,
-                onLeadingIconClick = {
-                    textNormal.value = TextFieldValue("jcndskjcndk")
-                }
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             SearchBar(hint = "Search...", modifier = modifier)
         }
     }

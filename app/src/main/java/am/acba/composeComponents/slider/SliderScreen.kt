@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.slider
 
-import am.acba.compose.VerticalSpacer
+import am.acba.component.extensions.log
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.slider.PrimarySlider
@@ -22,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
@@ -56,14 +58,25 @@ fun SliderScreen(title: String = "") {
                     )
                 }
                 PrimaryText(text = "${sliderState.value.formatWithPattern(minimumFractionDigits = 2)}$")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimarySlider(
                     state = sliderState,
                     startSuffix = "AMD",
                     endSuffix = "AMD",
-                    minimumFractionDigits = 2
+                    minimumFractionDigits = 2,
+                    onTouch = { touchComponent, pointerEvent ->
+                        when (pointerEvent.type) {
+                            PointerEventType.Press -> {
+                                touchComponent.log(prefix = "Press ->")
+                            }
+
+                            PointerEventType.Release -> {
+                                touchComponent.log(prefix = "Release ->")
+                            }
+                        }
+                    }
                 )
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
 
                 val sliderState2 = remember {
                     SliderState(
@@ -74,7 +87,7 @@ fun SliderScreen(title: String = "") {
                     )
                 }
                 PrimaryText(text = "${sliderState2.value.formatWithPattern()} Months")
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 PrimarySlider(
                     state = sliderState2,
                     startSuffix = "Months",

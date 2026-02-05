@@ -2,8 +2,8 @@
 
 import am.acba.component.R
 import am.acba.component.viewUtil.ViewUtil.copyWithVibration
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.avatar.AvatarEnum
@@ -39,6 +39,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,6 +47,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
@@ -55,6 +57,13 @@ import androidx.compose.ui.unit.dp
 fun TableComponent(
     modifier: Modifier = Modifier,
     title: String? = null,
+    titleMaxLines: Int? = null,
+    titleColor: Color? = null,
+    titleStyle: TextStyle? = null,
+    description: String = "",
+    descriptionMaxLines: Int? = null,
+    descriptionColor: Color? = null,
+    descriptionStyle: TextStyle? = null,
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
     avatarContentModifier: Modifier = Modifier,
@@ -63,8 +72,13 @@ fun TableComponent(
     avatarBackgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     avatarBackgroundRadius: Int = 8,
     avatarIcon: Int? = null,
-    avatarIconColor: Color = DigitalTheme.colorScheme.contentBrand,
+    avatarIconColor: Color? = DigitalTheme.colorScheme.contentBrand,
     avatarIconPadding: Dp = 8.dp,
+    endIcon: Int? = null,
+    endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    endIconPadding: Int = 0,
+    endIconBackgroundColor: Color = Color.Transparent,
+    endIconBackgroundRadius: Int = 4,
     avatarImageUrl: String? = null,
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
@@ -77,9 +91,10 @@ fun TableComponent(
     avatarBadgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     avatarBadgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
     tableItems: List<Pair<String, String>> = emptyList(),
-    minimumVisibleItemsCount: Int = 7
+    minimumVisibleItemsCount: Int = 7,
+    borderColor: Color = DigitalTheme.colorScheme.borderNeutral
 ) {
-    val expanded = remember { mutableStateOf(false) }
+    val expanded = rememberSaveable { mutableStateOf(false) }
     val expandable = tableItems.size > minimumVisibleItemsCount
     val arrowRotation by animateFloatAsState(
         targetValue = if (expanded.value) 180f else 0f,
@@ -93,7 +108,7 @@ fun TableComponent(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, DigitalTheme.colorScheme.borderNeutral, ShapeTokens.shapePrimaryButton)
+            .border(1.dp, borderColor, ShapeTokens.shapePrimaryButton)
             .animateContentSize(
                 animationSpec = tween(
                     durationMillis = 300,
@@ -104,6 +119,13 @@ fun TableComponent(
         if (!title.isNullOrEmpty()) {
             TableHeader(
                 title = title,
+                titleMaxLines = titleMaxLines,
+                titleColor = titleColor,
+                titleStyle = titleStyle,
+                description = description,
+                descriptionMaxLines = descriptionMaxLines,
+                descriptionColor = descriptionColor,
+                descriptionStyle = descriptionStyle,
                 avatarBackgroundModifier = avatarBackgroundModifier,
                 avatarBadgeModifier = avatarBadgeModifier,
                 avatarContentModifier = avatarContentModifier,
@@ -114,6 +136,11 @@ fun TableComponent(
                 avatarIcon = avatarIcon,
                 avatarIconColor = avatarIconColor,
                 avatarIconPadding = avatarIconPadding,
+                endIcon = endIcon,
+                endIconColor = endIconColor,
+                endIconPadding = endIconPadding,
+                endIconBackgroundColor = endIconBackgroundColor,
+                endIconBackgroundRadius = endIconBackgroundRadius,
                 avatarImageUrl = avatarImageUrl,
                 avatarClipPercent = avatarClipPercent,
                 avatarImageCornerRadius = avatarImageCornerRadius,
@@ -127,7 +154,7 @@ fun TableComponent(
                 avatarBadgeBorderColor = avatarBadgeBorderColor,
             )
         } else {
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
         }
         MainContent(tableItems.take(minimumVisibleItemsCount))
         if (expandable) {
@@ -148,7 +175,7 @@ fun TableComponent(
                 )
             }
         } else {
-            VerticalSpacer(8)
+            VerticalSpacer(8.dp)
         }
     }
 }
@@ -156,6 +183,13 @@ fun TableComponent(
 @Composable
 private fun TableHeader(
     title: String,
+    titleMaxLines: Int? = null,
+    titleColor: Color? = null,
+    titleStyle: TextStyle? = null,
+    description: String = "",
+    descriptionMaxLines: Int? = null,
+    descriptionColor: Color? = null,
+    descriptionStyle: TextStyle? = null,
     avatarBackgroundModifier: Modifier = Modifier,
     avatarBadgeModifier: Modifier = Modifier,
     avatarContentModifier: Modifier = Modifier,
@@ -164,8 +198,13 @@ private fun TableHeader(
     avatarBackgroundColor: Color = Color.Transparent,
     avatarBackgroundRadius: Int = 0,
     avatarIcon: Int? = null,
-    avatarIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    avatarIconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     avatarIconPadding: Dp = Dp.Unspecified,
+    endIcon: Int? = null,
+    endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    endIconPadding: Int = 0,
+    endIconBackgroundColor: Color = Color.Transparent,
+    endIconBackgroundRadius: Int = 4,
     avatarImageUrl: String? = null,
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
@@ -181,6 +220,13 @@ private fun TableHeader(
     ) {
     ListItem(
         title = title,
+        titleMaxLines = titleMaxLines,
+        titleColor = titleColor,
+        titleStyle = titleStyle,
+        description = description,
+        descriptionMaxLines = descriptionMaxLines,
+        descriptionColor = descriptionColor,
+        descriptionStyle = descriptionStyle,
         showDivider = true,
         backgroundColor = Color.Transparent,
         backgroundRadius = 0,
@@ -194,6 +240,11 @@ private fun TableHeader(
         avatarIcon = avatarIcon,
         avatarIconColor = avatarIconColor,
         avatarIconPadding = avatarIconPadding,
+        endIcon = endIcon,
+        endIconColor = endIconColor,
+        endIconPadding = endIconPadding,
+        endIconBackgroundColor = endIconBackgroundColor,
+        endIconBackgroundRadius = endIconBackgroundRadius,
         avatarImageUrl = avatarImageUrl,
         avatarClipPercent = avatarClipPercent,
         avatarImageCornerRadius = avatarImageCornerRadius,
@@ -216,7 +267,11 @@ private fun MainContent(tableItems: List<Pair<String, String>>) {
 }
 
 @Composable
-private fun AnimatedContent(expanded: MutableState<Boolean>, tableItems: List<Pair<String, String>>, minimumVisibleItemsCount: Int) {
+private fun AnimatedContent(
+    expanded: MutableState<Boolean>,
+    tableItems: List<Pair<String, String>>,
+    minimumVisibleItemsCount: Int
+) {
     val enterTransition = remember {
         expandVertically(
             expandFrom = Alignment.Top,
@@ -258,16 +313,22 @@ private fun AnimatedContent(expanded: MutableState<Boolean>, tableItems: List<Pa
 fun TableRow(title: String, value: String, isLast: Boolean) {
     val context = LocalContext.current
     Row(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
-        PrimaryText(text = title, modifier = Modifier.weight(0.5f), style = DigitalTheme.typography.smallRegular, color = DigitalTheme.colorScheme.contentPrimaryTonal1)
-        HorizontalSpacer(8)
-        PrimaryText(text = value, modifier = Modifier
-            .weight(0.5f)
-            .combinedClickable(
-                onClick = {},
-                onLongClick = {
-                    context.copyWithVibration(value)
-                }
-            ), textAlign = TextAlign.End, style = DigitalTheme.typography.smallBold)
+        PrimaryText(
+            text = title,
+            modifier = Modifier.weight(0.5f),
+            style = DigitalTheme.typography.smallRegular,
+            color = DigitalTheme.colorScheme.contentPrimaryTonal1
+        )
+        HorizontalSpacer(8.dp)
+        PrimaryText(
+            text = value, modifier = Modifier
+                .weight(0.5f)
+                .combinedClickable(
+                    onClick = {},
+                    onLongClick = {
+                        context.copyWithVibration(value)
+                    }
+                ), textAlign = TextAlign.End, style = DigitalTheme.typography.smallBold)
     }
     if (!isLast) {
         PrimaryDivider(modifier = Modifier.padding(horizontal = 16.dp))
@@ -304,7 +365,7 @@ fun TableComponentPreview(
                     Pair("Ընդամենը", "4,000.00 AMD")
                 )
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             TableComponent(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.ic_phonebook,
@@ -318,7 +379,7 @@ fun TableComponentPreview(
                     Pair("Միջնորդավճար", "4,000.00 AMD")
                 )
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             TableComponent(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.ic_phonebook,
@@ -326,7 +387,7 @@ fun TableComponentPreview(
                     Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             TableComponent(
                 title = "5G վարկ",
                 avatarIcon = R.drawable.default_avatar,
@@ -337,14 +398,14 @@ fun TableComponentPreview(
                     Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             TableComponent(
                 title = "5G վարկ",
                 tableItems = arrayListOf(
                     Pair("Անուն Ազգանուն", "Արշակ Մկրտչյան")
                 )
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             TableComponent(
                 tableItems = arrayListOf(
                     Pair("Վարկային կոդ", "234567890"),

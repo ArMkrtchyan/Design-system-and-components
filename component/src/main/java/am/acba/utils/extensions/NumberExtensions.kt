@@ -3,6 +3,7 @@
 import am.acba.utils.Constants.PATTERN_NUMBER_SEPARATOR
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -33,4 +34,26 @@ fun Float.formatWithPattern(
 infix fun Long.toDateStringFrom(format: String): String {
     val formatter = SimpleDateFormat(format, Locale.getDefault())
     return formatter.format(Date(this))
+}
+
+fun Double.formatWithPattern(
+    pattern: String = PATTERN_NUMBER_SEPARATOR,
+    minimumFractionDigits: Int = 0
+): String {
+    return try {
+        val decimalFormat = DecimalFormat(pattern, DecimalFormatSymbols(Locale.US))
+        decimalFormat.minimumFractionDigits = minimumFractionDigits
+        decimalFormat.maximumFractionDigits = 2
+        decimalFormat.format(this)
+    } catch (e: NumberFormatException) {
+        e.stackTrace
+        ""
+    }
+}
+
+fun Double.formatWithPercent(minimumFractionDigits: Int = 0, percent: String = "%"): String {
+    val formatter = NumberFormat.getInstance(Locale.ENGLISH)
+    formatter.maximumFractionDigits = 2
+    formatter.minimumFractionDigits = minimumFractionDigits
+    return formatter.format(this) + percent
 }

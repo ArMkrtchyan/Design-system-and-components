@@ -2,9 +2,10 @@
 <resources>
     <!--General-->
     <string name="ok">Ok</string>
-    <string name="cancel">Отменить</string>
     <string name="all">Все</string>
-    <string name="search">Поиск...</string>
+    <string name="search">Искать…</string>
+    <string name="cancel">Отменить</string>
+    <string name="remove">Удалить</string>
 
     <!--Phone Input-->
 
@@ -14,6 +15,15 @@
     <string name="phone_number_from_acba_contact">Из acba contact</string>
     <string name="select_country_code">Выберите код страны</string>
     <string name="phone_number_most_searched">Популярные запросы</string>
+
+    <!--File Upload-->
+
+    <string name="file_limit_error">Максимальный лимит — 1.2 МБ</string>
+    <string name="file_format_error">Допустимые форматы: %s</string>
+    <string name="document_deletion_title">Удалить  документ</string>
+    <string name="document_deletion_message">Вы уверены, что хотите удалить документ?</string>
+    <string name="uploading">Загружается…</string>
+
 
     <string name="name_afghanistan">Афганистан</string>
     <string name="name_aland_islands">Аландские острова</string>

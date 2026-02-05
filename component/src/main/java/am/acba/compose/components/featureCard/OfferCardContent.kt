@@ -1,8 +1,8 @@
 ﻿package am.acba.compose.components.featureCard
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
@@ -97,7 +97,7 @@ fun <T : IOfferCardItem> OfferCardContent(
                     .fillMaxWidth()
             ) {
                 ExpandedAmountText(item.amount)
-                VerticalSpacer(8)
+                VerticalSpacer(8.dp)
                 ExpirationDateText(item.expirationDate)
             }
         }
@@ -151,7 +151,7 @@ private fun AmountText(offerAmount: String, isExpanded: Boolean) {
                 style = DigitalTheme.typography.smallBold,
                 maxLines = 1
             )
-            if (!isExpanded) HorizontalSpacer(4)
+            if (!isExpanded) HorizontalSpacer(4.dp)
         }
     }
 }

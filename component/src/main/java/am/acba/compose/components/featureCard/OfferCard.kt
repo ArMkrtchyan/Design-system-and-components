@@ -1,8 +1,8 @@
 ﻿package am.acba.compose.components.featureCard
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
@@ -87,16 +87,16 @@ fun <T : IOfferCardItem> OfferCard(
                 style = DigitalTheme.typography.body2Regular,
             )
             badge.takeIf { it.isNotEmpty() }?.let {
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 Badge(badgeType = BadgeEnum.INFO, text = badge, backgroundColor = badgeBackground, textColor = badgeTextColor)
             }
             Spacer(modifier = Modifier.weight(1f))
             trailingIcon.takeIf { it != null }?.let {
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 PrimaryIcon(painter = painterResource(it), modifier = Modifier.rotate(arrowRotation), tint = trailingIconColor)
             }
         }
-        VerticalSpacer(12)
+        VerticalSpacer(12.dp)
         ItemsPager(items, isExpanded, onItemClick, cardItemPadding)
         seeAllTitle.takeIf { it.isNotEmpty() }?.let {
             SeeAllText(seeAllTitle, onSeeAllClick)

@@ -78,7 +78,7 @@ class PhoneNumberInput @JvmOverloads constructor(
     private val CONTACT_PERMISSION_REQUEST = 100
     private val PICK_CONTACT_REQUEST = 101
     lateinit var fragment: Fragment
-    var onSelectedContactSet: (() -> Unit)? = null
+    var onContactDataSelected: (() -> Unit)? = null
     private var onAcbaContactClick: (() -> Unit)? = null
     private var searchInputHint = context.getString(R.string.search)
     private var bottomSheetTitle: String = context.getString(R.string.select_country_code)
@@ -206,6 +206,8 @@ class PhoneNumberInput @JvmOverloads constructor(
         return ccpBinding.countryCodeLib.fullNumberWithPlus
     }
 
+    fun getSelectedCountryNameCode(): String? = ccpBinding.countryCodeLib.selectedCountryNameCode
+
     fun isPhoneValid(): Boolean {
         return ccpBinding.countryCodeLib.isValidFullNumber
     }
@@ -269,6 +271,12 @@ class PhoneNumberInput @JvmOverloads constructor(
             context,
             if (isFocusable) R.drawable.background_primary_input_left_border else R.drawable.background_primary_input_left_corner
         )
+    }
+
+    private fun handleCountryDialogSelect(countryModel: CountryModel) {
+        selectCountry(countryModel)
+        isValidNumber(ccpBinding.countryCodeLib.isValidFullNumber)
+        onContactDataSelected?.invoke()
     }
 
     @SuppressLint("SetTextI18n")
@@ -374,7 +382,7 @@ class PhoneNumberInput @JvmOverloads constructor(
         CountryBottomSheetDialog.show(
             getFragmentManager(),
             bundle,
-            ::selectCountry,
+            ::handleCountryDialogSelect,
             topCountryChipList
         )
     }
@@ -435,7 +443,7 @@ class PhoneNumberInput @JvmOverloads constructor(
                             contact.name.log("ContactTag", "Success -> ")
                             contact.email.log("ContactTag", "Success -> ")
                             setPhoneNumber(contact.phoneNumber ?: "")
-                            onSelectedContactSet?.invoke()
+                            onContactDataSelected?.invoke()
                         }
                     }
                 }
@@ -448,7 +456,9 @@ class PhoneNumberInput @JvmOverloads constructor(
         ccpBinding.countryCodeLib.fullNumber = phoneNumber
         ccpBinding.countryCodeLib.selectedCountryNameCode
         countriesList.forEach {
-            if (it.nameCode == ccpBinding.countryCodeLib.selectedCountryNameCode) {
+            val isSelectedPhoneNumber = it.nameCode == ccpBinding.countryCodeLib.selectedCountryNameCode
+            it.isSelected = isSelectedPhoneNumber
+            if (isSelectedPhoneNumber) {
                 context.saveCountryLastAction(it)
                 selectCountry(it)
             }

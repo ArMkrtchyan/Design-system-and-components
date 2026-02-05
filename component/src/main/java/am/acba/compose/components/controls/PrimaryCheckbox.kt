@@ -1,12 +1,13 @@
 ﻿package am.acba.compose.components.controls
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -60,11 +61,12 @@ fun PrimaryCheckbox(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val backgroundColor: Color by animateColorAsState(if (isPressed) DigitalTheme.colorScheme.backgroundTonal2 else Color.Transparent)
-    Row(modifier = modifier.wrapContentWidth()) {
+    Row(modifier = modifier.wrapContentWidth().id("checkbox")) {
         Box(
             modifier = Modifier
                 .size(24.dp)
                 .background(backgroundColor, ShapeTokens.shapeRound)
+                .id("checkboxMain")
                 .triStateToggleable(
                     state = state,
                     interactionSource = interactionSource,
@@ -84,7 +86,7 @@ fun PrimaryCheckbox(
             }
         }
         if (!text.isNullOrEmpty()) {
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             Column(modifier = Modifier.wrapContentWidth()) {
                 PrimaryText(text = text, color = textColor, style = textStyle, modifier = Modifier.wrapContentWidth())
             }
@@ -184,17 +186,17 @@ fun PrimaryCheckboxPreview() {
                 onClick = { checkboxState.value = it },
                 text = "Checkbox title Checkbox title Checkbox title Checkbox title"
             )
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryCheckbox(state = ToggleableState.On)
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryCheckbox(state = ToggleableState.Indeterminate)
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryCheckbox(enabled = false)
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryCheckbox(state = ToggleableState.Off, enabled = false)
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             PrimaryCheckbox(state = ToggleableState.Indeterminate, enabled = false)
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
         }
     }
 }

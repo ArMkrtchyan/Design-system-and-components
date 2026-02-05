@@ -26,7 +26,7 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         setChipClicks(chipSmall4)
 
         val tooltipModel1 = TooltipModel(
-            "AAA",
+            "AAA  AAA  AAA AAA AAA AAA  AAA AAA AAA AAA",
             "AAA AAA AAA AAA",
             localImage = R.drawable.ic_launcher_background
         )
@@ -35,7 +35,6 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         val tooltipModel4 = TooltipModel(
             "CCC",
             "CCC 444 CCC CCC",
-            "https://pixlr.com/images/index/ai-image-generator-one.webp"
         )
         val tooltipModel5 = TooltipModel(
             "CCC",
@@ -50,10 +49,10 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
         val tooltipModel7 = TooltipModel("CCC", "info 555 CCC CCC")
 
         val tooltipList = arrayListOf(
+            tooltipModel4 to mBinding.selectedCurrencyChip,
             tooltipModel1 to mBinding.chipSmall1,
             tooltipModel2 to mBinding.chipSmall2,
             tooltipModel3 to mBinding.chipSmall3,
-            tooltipModel4 to mBinding.chipSmall4,
             tooltipModel5 to mBinding.chipSmall5,
             tooltipModel6 to mBinding.chipSmall6,
             tooltipModel7 to mBinding.chipSmall8
@@ -72,12 +71,32 @@ class ChipsFragment : BaseViewBindingFragment<FragmentChipsBinding>() {
                     R.string.ok,
                     onLastButtonClick = {
                         Toast.makeText(requireContext(), "Click on close", Toast.LENGTH_LONG).show()
+                    },
+                    onCloseButtonClick = {
+                        if (tooltipList.size > 1) {
+                            Toast.makeText(requireContext(), "Closed by x button", Toast.LENGTH_LONG).show()
+                        }
+                        mBinding.clContainer.removeView(onboardingHint)
                     }
+
+
                 )
             mBinding.clContainer.addView(onboardingHint)
             onboardingHint?.handleSkip {
                 mBinding.clContainer.removeView(onboardingHint)
             }
+
+            if (tooltipList.size == 1)
+                Toast.makeText(requireContext(), "Onboarding has 1 tooltip", Toast.LENGTH_LONG).show()
+
+
+            onboardingHint?.setForwardClickListener { position ->
+                if (position == tooltipList.size - 1) {
+                    Toast.makeText(requireContext(), "Onboarding reached to last tooltip", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            onboardingHint?.handleSkip { }
         }
 
     }

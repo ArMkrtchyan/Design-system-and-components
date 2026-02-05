@@ -4,14 +4,15 @@ package am.acba.compose.components.productDescription
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.timeLine.ProductDescriptionBadge
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -61,6 +62,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 fun <T : IProductDescription> ProductDescriptionCard(
     modifier: Modifier = Modifier,
     productDescription: T,
+    contentScale: ContentScale = ContentScale.None,
     onClick: (T) -> Unit
 ) {
     val contentMinHeight = remember { mutableIntStateOf(100) }
@@ -72,14 +74,22 @@ fun <T : IProductDescription> ProductDescriptionCard(
             .padding(top = 12.dp, start = 16.dp)
             .clickable { onClick.invoke(productDescription) }
     ) {
-        ProductDescriptionHeader(productDescription.title, productDescription.subTitle, contentMinHeight)
-        ProductDescriptionContent(productDescription, contentMinHeight)
+        ProductDescriptionHeader(
+            productDescription.title,
+            productDescription.subTitle,
+            contentMinHeight
+        )
+        ProductDescriptionContent(productDescription, contentMinHeight, contentScale)
     }
 }
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionHeader(title: String, subTitle: String, contentMinHeight: MutableIntState) {
+private fun ProductDescriptionHeader(
+    title: String,
+    subTitle: String,
+    contentMinHeight: MutableIntState
+) {
     Column(
         modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
             contentMinHeight.intValue = 190.dpToPx() - layoutCoordinates.size.height
@@ -92,10 +102,10 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 
         ) {
             ProductDescriptionHeaderTitle(title)
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             ProductDescriptionHeaderIcon()
         }
-        VerticalSpacer(12)
+        VerticalSpacer(12.dp)
         ProductDescriptionSubTitle(subTitle)
     }
 }
@@ -103,11 +113,12 @@ private fun ProductDescriptionHeader(title: String, subTitle: String, contentMin
 @Composable
 @NonRestartableComposable
 private fun RowScope.ProductDescriptionHeaderTitle(title: String) {
-    VerticalSpacer(8)
+    VerticalSpacer(8.dp)
     PrimaryText(
         modifier = Modifier
             .weight(1f)
-            .padding(end = 16.dp),
+            .padding(end = 16.dp)
+            .id("headerTitle"),
         text = title,
         style = DigitalTheme.typography.body1Bold,
         maxLines = 2,
@@ -126,7 +137,9 @@ private fun ProductDescriptionHeaderIcon() {
 private fun ProductDescriptionSubTitle(subTitle: String) {
     if (subTitle.isNotEmpty()) {
         PrimaryText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .id("subTitle"),
             text = subTitle,
             style = DigitalTheme.typography.body2Regular
         )
@@ -135,7 +148,11 @@ private fun ProductDescriptionSubTitle(subTitle: String) {
 
 @Composable
 @NonRestartableComposable
-private fun <T : IProductDescription> ProductDescriptionContent(productDescription: T, contentMinHeight: MutableIntState) {
+private fun <T : IProductDescription> ProductDescriptionContent(
+    productDescription: T,
+    contentMinHeight: MutableIntState,
+    contentScale: ContentScale
+) {
     val mediaHeight = remember { mutableIntStateOf(200) }
     val density = LocalDensity.current
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -147,13 +164,21 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
                     mediaHeight.intValue = layoutCoordinates.size.height
                 }
         ) {
-            VerticalSpacer(12)
+            VerticalSpacer(12.dp)
             ProductDescriptionSecondTitle(productDescription.secondTitle)
-            ProductDescriptionBadges(productDescription.badges, productDescription.badgeBackgroundColor, productDescription.badgeTextColor)
+            ProductDescriptionBadges(
+                productDescription.badges,
+                productDescription.badgeBackgroundColor,
+                productDescription.badgeTextColor
+            )
             ProductDescriptionSecondSubTitle(productDescription.secondSubTitle)
             ProductDescriptionBullets(productDescription.bullets)
         }
-        ProductDescriptionMedia(productDescription.mediaImage, with(density) { mediaHeight.intValue.toDp() })
+        ProductDescriptionMedia(
+            productDescription.mediaImage,
+            with(density) { mediaHeight.intValue.toDp() },
+            contentScale
+        )
     }
 }
 
@@ -162,34 +187,43 @@ private fun <T : IProductDescription> ProductDescriptionContent(productDescripti
 private fun ProductDescriptionSecondTitle(secondTitle: String) {
     if (secondTitle.isNotEmpty()) {
         PrimaryText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .id("secondTitle"),
             text = secondTitle,
             style = DigitalTheme.typography.xSmallBold,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionBadges(badges: List<ProductDescriptionBadge>, badgeBackgroundColor: Color?, badgeTextColor: Color?) {
+private fun ProductDescriptionBadges(
+    badges: List<ProductDescriptionBadge>,
+    badgeBackgroundColor: Color?,
+    badgeTextColor: Color?
+) {
     if (badges.isNotEmpty()) {
         FlowRow(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            badges.forEach { badge ->
+            badges.forEachIndexed { index, badge ->
                 Badge(
+                    modifier = Modifier
+                        .id("badge${index}"),
                     text = badge.title,
-                    backgroundColor = badgeBackgroundColor ?: DigitalTheme.colorScheme.backgroundTonal2,
+                    backgroundColor = badgeBackgroundColor
+                        ?: DigitalTheme.colorScheme.backgroundTonal2,
                     textColor = badgeTextColor ?: DigitalTheme.colorScheme.contentPrimary,
                     imageUrl = badge.iconUrl
                 )
             }
         }
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -202,7 +236,7 @@ private fun ProductDescriptionSecondSubTitle(secondSubTitle: String) {
             text = secondSubTitle,
             style = DigitalTheme.typography.smallRegular
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
     }
 }
 
@@ -214,19 +248,27 @@ private fun ProductDescriptionBullets(bullets: List<String>) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                PrimaryIcon(modifier = Modifier.size(20.dp), painter = painterResource(R.drawable.ic_success_small), tint = DigitalTheme.colorScheme.contentBrand)
-                HorizontalSpacer(4)
-                PrimaryText(text = bullet, style = DigitalTheme.typography.smallRegular, modifier = Modifier.weight(1f))
+                PrimaryIcon(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(R.drawable.ic_success_small),
+                    tint = DigitalTheme.colorScheme.contentBrand
+                )
+                HorizontalSpacer(4.dp)
+                PrimaryText(
+                    text = bullet,
+                    style = DigitalTheme.typography.smallRegular,
+                    modifier = Modifier.weight(1f)
+                )
             }
-            VerticalSpacer(4)
+            VerticalSpacer(4.dp)
         }
     }
-    VerticalSpacer(12)
+    VerticalSpacer(12.dp)
 }
 
 @Composable
 @NonRestartableComposable
-private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
+private fun ProductDescriptionMedia(imageUrl: String, height: Dp, contentScale: ContentScale) {
     Box(
         modifier = Modifier
             .height(height)
@@ -242,16 +284,21 @@ private fun ProductDescriptionMedia(imageUrl: String, height: Dp) {
         GlideImage(
             modifier = Modifier
                 .fillMaxSize()
+                .id("mediaImage")
                 .clip(ClipRightBottomRoundedShape()),
             model = imageUrl,
             contentDescription = null,
-            contentScale = ContentScale.FillBounds
+            contentScale = contentScale
         )
     }
 }
 
 private class ClipRightBottomRoundedShape : Shape {
-    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
         val path = Path().apply {
             addRoundRect(
                 RoundRect(
@@ -259,7 +306,10 @@ private class ClipRightBottomRoundedShape : Shape {
                     right = size.width - 16.dpToPx(),
                     top = 0f,
                     bottom = size.height - 16.dpToPx(),
-                    bottomRightCornerRadius = CornerRadius(12.dpToPx().toFloat(), 12.dpToPx().toFloat())
+                    bottomRightCornerRadius = CornerRadius(
+                        12.dpToPx().toFloat(),
+                        12.dpToPx().toFloat()
+                    )
                 )
             )
         }
@@ -279,7 +329,7 @@ fun ProductDescriptionCardPreview() {
                 .verticalScroll(rememberScrollState()),
         ) {
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductDescriptionCard(productDescription = createMockState(MockState(1))) {}
         }
     }

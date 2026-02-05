@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.inputs
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.PrimaryInput
 import am.acba.compose.components.inputs.SearchBar
@@ -59,11 +59,12 @@ fun InputsScreen(title: String = "") {
                     value = textNormal.value,
                     onValueChange = { textNormal.value = it },
                     label = "Label",
+                    leadingImageUrl = "https://online1-test.acba.am/Shared/Currencies/US.svg",
+                    leadingIconTint = null,
                     helpText = "Some help text",
                     visualTransformation = MaxLengthVisualTransformation(15),
-                    leadingIcon = R.drawable.ic_close,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 PrimaryInput(
                     value = textNormal3.value,
                     onValueChange = { textNormal3.value = it },
@@ -73,9 +74,17 @@ fun InputsScreen(title: String = "") {
                     helpText = "Some help text",
                     leadingIcon = R.drawable.ic_close,
                 )
-                VerticalSpacer(16)
-                SearchBar(hint = "Search...")
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
+                SearchBar(hint = "Search...", toolbarMode = true)
+                VerticalSpacer(16.dp)
+                PrimaryInput(
+                    value = textNormal2.value,
+                    onValueChange = { textNormal2.value = it },
+                    label = "Label",
+                    singleLine = true,
+                    helpText = "Some help text",
+                    visualTransformation = MaxLengthVisualTransformation(100),
+                )
             }
         }
     }

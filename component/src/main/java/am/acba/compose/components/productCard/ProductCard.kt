@@ -1,17 +1,17 @@
 ﻿package am.acba.compose.components.productCard
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.StatusBadge
 import am.acba.compose.components.avatar.Avatar
 import am.acba.compose.components.avatar.AvatarEnum
 import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.components.divider.PrimaryDivider
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -60,9 +60,9 @@ fun ProductCard(
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
     statusAlign: Alignment = Alignment.TopEnd,
     onClick: () -> Unit,
 ) {
@@ -72,7 +72,10 @@ fun ProductCard(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(DigitalTheme.colorScheme.backgroundTonal1, shape = ShapeTokens.shapePrimaryButton)
+            .background(
+                DigitalTheme.colorScheme.backgroundTonal1,
+                shape = ShapeTokens.shapePrimaryButton
+            )
             .padding(top = 16.dp)
             .clickable { onClick.invoke() }
     ) {
@@ -98,17 +101,17 @@ fun ProductCard(
                     startAvatarContentScale = startAvatarContentScale
                 )
                 if (rowItems.isNotEmpty()) {
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     ProductCardDynamicRows(rowItems, showBottomRow1.value || showBottomRow2.value)
                 }
                 if (showBottomRow1.value || showBottomRow2.value) {
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                 }
                 if (showBottomRow1.value) {
                     ProductRowTexts(bottomRowTitle1, bottomRowValue1 ?: "", index = 4)
                 }
                 if (showBottomRow1.value && showBottomRow2.value) {
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                 }
                 if (showBottomRow2.value) {
                     ProductRowTexts(
@@ -119,7 +122,7 @@ fun ProductCard(
                     )
                 }
                 if (showBottomRow1.value || showBottomRow2.value) {
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                 }
             }
             if (!statusTitle.isNullOrEmpty()) {
@@ -171,7 +174,7 @@ private fun ProductCardHeader(
                 contentScale = startAvatarContentScale,
                 backgroundModifier = Modifier.id("productCardIcon")
             )
-            HorizontalSpacer(16)
+            HorizontalSpacer(16.dp)
         }
         Column(
             modifier = Modifier
@@ -197,7 +200,7 @@ private fun ProductCardHeader(
                 )
             }
         }
-        HorizontalSpacer(16)
+        HorizontalSpacer(16.dp)
         Avatar(icon = R.drawable.ic_right, iconColor = DigitalTheme.colorScheme.contentPrimaryTonal1, backgroundModifier = Modifier.id("productCardEndIcon"))
     }
 }
@@ -291,7 +294,7 @@ fun ProductCardPreview() {
                 bottomRowTitle2 = "Վճարման ենթակա գումար",
                 bottomRowValue2 = "40,000.00 AMD",
             ) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductCard(
                 title = "Ավանդի գրավորվ վարկային", description = "Վերջ - 12/սեպ/2024", rowItems = arrayListOf(
                     "Պայմանագրի համար" to "1231456789",
@@ -299,7 +302,7 @@ fun ProductCardPreview() {
                     "Ընթացիկ պարտք" to "200,000.00 AMD"
                 )
             ) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductCard(
                 title = "Ավանդի գրավորվ վարկային", description = "Վերջ - 12/սեպ/2024",
                 rowItems = arrayListOf(
@@ -312,7 +315,7 @@ fun ProductCardPreview() {
                 bottomRowTitle2 = "Վճարման ենթակա գումար",
                 bottomRowValue2 = "40,000.00 AMD",
             ) {}
-            VerticalSpacer(20)
+            VerticalSpacer(20.dp)
             ProductCard(
                 title = "Ավանդի գրավորվ վարկային", description = "Վերջ - 12/սեպ/2024",
                 rowItems = arrayListOf(

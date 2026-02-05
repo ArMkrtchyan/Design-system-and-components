@@ -1,9 +1,10 @@
 ﻿package am.acba.compose.components
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -24,10 +25,11 @@ import androidx.compose.ui.unit.dp
 fun StatusBadge(
     modifier: Modifier = Modifier,
     title: String = "",
+    id: String = "statusBadge",
     icon: Int? = null,
-    backgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    iconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    textColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    backgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    iconColor: Color = DigitalTheme.colorScheme.contentPending,
+    textColor: Color = DigitalTheme.colorScheme.contentPending,
     align: Alignment = Alignment.TopEnd,
 ) {
     Box(
@@ -35,6 +37,7 @@ fun StatusBadge(
             .fillMaxWidth()
             .background(color = backgroundColor, shape = ShapeTokens.shapeStatus)
             .padding(horizontal = 16.dp, vertical = 4.dp)
+            .id(id)
     ) {
         Row(
             modifier = Modifier
@@ -43,10 +46,23 @@ fun StatusBadge(
             verticalAlignment = Alignment.CenterVertically
         ) {
             icon?.let {
-                PrimaryIcon(modifier = Modifier.size(14.dp), painter = painterResource(icon), tint = iconColor)
-                HorizontalSpacer(4)
+                PrimaryIcon(
+                    modifier = Modifier
+                        .size(14.dp)
+                        .id("statusBadgeIcon"),
+                    painter = painterResource(icon),
+                    tint = iconColor
+                )
+                HorizontalSpacer(4.dp)
             }
-            PrimaryText(text = title, color = textColor, style = DigitalTheme.typography.xSmallRegular, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            PrimaryText(
+                modifier = Modifier.id("${id}Text"),
+                text = title,
+                color = textColor,
+                style = DigitalTheme.typography.xSmallRegular,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }

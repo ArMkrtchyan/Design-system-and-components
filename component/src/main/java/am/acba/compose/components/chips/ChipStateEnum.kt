@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 enum class ChipStateEnum {
+    DISABLED,
     NOT_SELECTED,
     SELECTED;
 
@@ -13,6 +14,7 @@ enum class ChipStateEnum {
         return when (this) {
             NOT_SELECTED -> DigitalTheme.colorScheme.contentPrimary
             SELECTED -> DigitalTheme.colorScheme.contentInverse2
+            DISABLED -> DigitalTheme.colorScheme.contentPrimaryDisable
         }
     }
 
@@ -21,6 +23,7 @@ enum class ChipStateEnum {
         return when (this) {
             NOT_SELECTED -> DigitalTheme.colorScheme.backgroundTonal2
             SELECTED -> DigitalTheme.colorScheme.contentNeutralTonal1
+            DISABLED -> DigitalTheme.colorScheme.backgroundTonal2Disable
         }
     }
 }

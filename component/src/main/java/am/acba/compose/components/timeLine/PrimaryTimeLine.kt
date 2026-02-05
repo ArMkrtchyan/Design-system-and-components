@@ -2,8 +2,8 @@ package am.acba.compose.components.timeLine
 
 import am.acba.component.R
 import am.acba.component.primaryTimeLine.TimeLineType
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.theme.DigitalTheme
@@ -70,11 +70,11 @@ fun <T : ITimeLineCompose> PrimaryTimeLine(
                 ) {
                     PrimaryText(modifier = Modifier.weight(1f), text = title, maxLines = titleMaxLines, style = DigitalTheme.typography.body2Bold)
                     endIconPainter?.let {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimaryIcon(modifier = Modifier.size(20.dp), painter = endIconPainter, tint = endIconTint)
                     }
                 }
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
             }
 
             timeLineItems.forEachIndexed { index, timeLineItem ->
@@ -103,7 +103,7 @@ private fun <T : ITimeLineCompose> TimeLineItem(item: T, timeLineItems: List<T>,
                 }
                 TimeLineItemIcon(item)
             }
-            HorizontalSpacer(8)
+            HorizontalSpacer(8.dp)
             TimeLineItemContent(item, onItemClick = onItemClick)
         }
         Box(
@@ -214,7 +214,7 @@ private fun <T : ITimeLineCompose> TimeLineItemContent(item: T, onItemClick: (T)
         Row {
             PrimaryText(modifier = Modifier.weight(1f), text = item.getTitle(), style = titleStyle, color = item.getTitleColor())
             item.getEndText()?.let {
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 PrimaryText(modifier = Modifier.wrapContentWidth(), text = it, style = endTextStyle, color = item.getEndTextColor())
             }
         }
@@ -222,7 +222,7 @@ private fun <T : ITimeLineCompose> TimeLineItemContent(item: T, onItemClick: (T)
             PrimaryText(modifier = Modifier.fillMaxWidth(), text = it, style = DigitalTheme.typography.xSmallRegular, color = item.getDescriptionColor())
         }
         item.getLinkText()?.let {
-            VerticalSpacer(2)
+            VerticalSpacer(2.dp)
             PrimaryText(
                 modifier = Modifier.fillMaxWidth(),
                 text = it,
@@ -330,7 +330,7 @@ fun PrimaryListItemPreview() {
 //                endIconPainter = painterResource(R.drawable.ic_right),
 //                timeLineItems = list,
 //            )
-//            VerticalSpacer(30)
+//            VerticalSpacer(30.dp)
 //            PrimaryTimeLine(
 //                timeLineItems = progressList,
 //                timeLineType = TimeLineType.PROGRESS

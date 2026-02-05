@@ -36,6 +36,9 @@ data class ColorTokens(
     val backgroundAlternative7: Color,
     val backgroundAlternative8: Color,
     val backgroundAlternative9: Color,
+    val backgroundAlternative11: Color,
+    val backgroundAlternative12: Color,
+    val backgroundAlternative13: Color,
     val backgroundInverse: Color,
     val backgroundNavBar: Color,
     val borderBase: Color,
@@ -90,5 +93,8 @@ data class ColorTokens(
     val contentAlternative4: Color,
     val contentAlternative5: Color,
     val contentAlternative6: Color,
+    val contentAlternative7: Color,
+    val contentAlternative8: Color,
+    val contentAlternative10: Color,
     val transparent: Color,
 )

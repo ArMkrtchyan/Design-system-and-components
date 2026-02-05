@@ -3,7 +3,7 @@
 package am.acba.compose.components.datePicker.calendar
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.bottomSheet.PrimaryBottomSheet
 import am.acba.compose.components.bottomSheet.closeBottomSheet
@@ -158,7 +158,7 @@ private fun ActionRow(state: DatePickerState, onDismissRequest: () -> Unit, onDa
                 style = DigitalTheme.typography.body1Regular
             )
         }
-        HorizontalSpacer(8)
+        HorizontalSpacer(8.dp)
         TextButton(onClick = {
             val selectedDateMills = state.selectedDateMillis.orEmpty()
             val selectedDateString = selectedDateMills toDateStringFrom DATE_FORMAT_DD_MM_YYYY

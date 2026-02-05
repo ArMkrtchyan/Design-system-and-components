@@ -1,6 +1,6 @@
 ﻿package am.acba.composeComponents.cardView
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.productCard.ProductCard
 import am.acba.compose.theme.DigitalTheme
@@ -56,7 +56,7 @@ fun ProductCardScreen(title: String = "") {
                     bottomRowTitle2 = "Վճարման ենթակա գումար",
                     bottomRowValue2 = "40,000.00 AMD",
                 ) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductCard(
                     startAvatarIcon = am.acba.component.R.drawable.default_icon,
                     title = "Ավանդի գրավորվ վարկային",
@@ -66,7 +66,7 @@ fun ProductCardScreen(title: String = "") {
                         "Ընթացիկ պարտք" to "200,000.00 AMD"
                     )
                 ) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductCard(
                     startAvatarIcon = am.acba.component.R.drawable.default_icon,
                     title = "Ավանդի գրավորվ վարկային", description = "Վերջ - 12/սեպ/2024",
@@ -85,7 +85,7 @@ fun ProductCardScreen(title: String = "") {
                     statusTextColor = DigitalTheme.colorScheme.contentDangerTonal1,
                     statusIconColor = DigitalTheme.colorScheme.contentDangerTonal1
                 ) {}
-                VerticalSpacer(20)
+                VerticalSpacer(20.dp)
                 ProductCard(
                     title = "Ավանդի գրավորվ վարկային", description = "Վերջ - 12/սեպ/2024",
                     rowItems = arrayListOf(
@@ -96,7 +96,7 @@ fun ProductCardScreen(title: String = "") {
                     bottomRowTitle1 = "Վճարման օր",
                     bottomRowValue1 = "14/սեպ/2024",
                 ) {}
-                VerticalSpacer(50)
+                VerticalSpacer(50.dp)
             }
         }
     }

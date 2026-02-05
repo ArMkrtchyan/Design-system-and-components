@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.base
 
 import am.acba.components.mainScreen.MainActivity
-import am.acba.compose.composableView
+import am.acba.utils.extensions.composableView
 import am.acba.compose.theme.DigitalTheme
 import android.os.Bundle
 import android.view.LayoutInflater

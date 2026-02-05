@@ -1,10 +1,14 @@
 package am.acba.compose.components.inputs
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
+import am.acba.compose.components.avatar.Avatar
+import am.acba.compose.components.avatar.AvatarEnum
+import am.acba.compose.components.avatar.AvatarSizeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -35,14 +39,14 @@ fun SupportRow(iconRes: Int? = null, text: String, color: Color) {
     ) {
         iconRes?.let {
             SupportIcon(it)
-            HorizontalSpacer(4)
+            HorizontalSpacer(4.dp)
         }
         SupportText(text = text, color = color)
     }
 }
 
 @Composable
-fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
+fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true, maxLines: Int = 1, id: String = "inputLabel") {
     val textColor = when {
         isError -> DigitalTheme.colorScheme.contentDangerTonal1
         !isEnabled -> DigitalTheme.colorScheme.contentPrimaryTonal1Disable
@@ -50,12 +54,15 @@ fun Label(text: String?, isError: Boolean = false, isEnabled: Boolean = true) {
     }
     Text(
         text = text ?: "",
-        color = textColor
+        color = textColor,
+        maxLines = maxLines,
+        modifier = Modifier.id(id),
+        overflow = if (maxLines == 1) TextOverflow.Ellipsis else TextOverflow.Clip
     )
 }
 
 @Composable
-fun leadingOrTrailingIcon(
+fun trailingIcon(
     iconRes: Int? = null,
     tint: Color?,
     secondaryIconRes: Int? = null,
@@ -63,7 +70,6 @@ fun leadingOrTrailingIcon(
     isEnabled: Boolean = true,
     secondaryIconSize: Dp = 24.dp,
     iconSize: Dp = 24.dp,
-    isLeading: Boolean = true,
     onSecondaryIconClick: (() -> Unit)? = null,
     onClick: (() -> Unit)? = null
 ): @Composable (() -> Unit)? {
@@ -81,25 +87,49 @@ fun leadingOrTrailingIcon(
         iconRes != null && secondaryIconRes != null -> {
             {
                 Row {
-                    ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 12, onSecondaryIconClick)
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 0, spaceEnd = 16, onClick)
+                    ImageIcon(
+                        secondaryIconRes,
+                        secondaryIconColorFilter,
+                        secondaryIconSize,
+                        spaceStart = 12.dp,
+                        spaceEnd = 12.dp,
+                        onSecondaryIconClick
+                    )
+                    ImageIcon(
+                        iconRes,
+                        iconColorFilter,
+                        iconSize,
+                        spaceStart = 0.dp,
+                        spaceEnd = 16.dp,
+                        onClick
+                    )
                 }
             }
         }
 
         iconRes != null -> {
             {
-                if (isLeading) {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 16, spaceEnd = 8, onClick)
-                } else {
-                    ImageIcon(iconRes, iconColorFilter, iconSize, spaceStart = 12, spaceEnd = 16, onClick)
-                }
+                ImageIcon(
+                    iconRes,
+                    iconColorFilter,
+                    iconSize,
+                    spaceStart = 12.dp,
+                    spaceEnd = 16.dp,
+                    onClick
+                )
             }
         }
 
         secondaryIconRes != null -> {
             {
-                ImageIcon(secondaryIconRes, secondaryIconColorFilter, secondaryIconSize, spaceStart = 12, spaceEnd = 16, onSecondaryIconClick)
+                ImageIcon(
+                    secondaryIconRes,
+                    secondaryIconColorFilter,
+                    secondaryIconSize,
+                    spaceStart = 12.dp,
+                    spaceEnd = 16.dp,
+                    onSecondaryIconClick
+                )
             }
         }
 
@@ -108,7 +138,14 @@ fun leadingOrTrailingIcon(
 }
 
 @Composable
-private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24.dp, spaceStart: Int, spaceEnd: Int, onClick: (() -> Unit)? = null) {
+private fun ImageIcon(
+    iconRes: Int,
+    colorFilter: ColorFilter?,
+    iconSize: Dp = 24.dp,
+    spaceStart: Dp,
+    spaceEnd: Dp,
+    onClick: (() -> Unit)? = null
+) {
     Row {
         HorizontalSpacer(spaceStart)
         Image(
@@ -122,6 +159,35 @@ private fun ImageIcon(iconRes: Int, colorFilter: ColorFilter?, iconSize: Dp = 24
         )
         HorizontalSpacer(spaceEnd)
     }
+}
+
+fun leadingAvatar(
+    imageUrl: String?,
+    iconRes: Int?,
+    iconColor: Color?,
+    iconSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_24,
+    spaceStart: Dp,
+    spaceEnd: Dp,
+    enabled: Boolean
+): @Composable (() -> Unit)? {
+    if (iconRes != null || imageUrl != null) {
+        return {
+            Row {
+                val color = if (iconRes != null && imageUrl == null) {
+                    if (enabled) iconColor else DigitalTheme.colorScheme.contentPrimaryTonal1Disable
+                } else iconColor
+                HorizontalSpacer(spaceStart)
+                Avatar(
+                    avatarType = imageUrl?.let { AvatarEnum.IMAGE } ?: AvatarEnum.ICON,
+                    avatarSize = iconSize,
+                    icon = iconRes,
+                    iconColor = color,
+                    imageUrl = imageUrl,
+                )
+                HorizontalSpacer(spaceEnd)
+            }
+        }
+    } else return null
 }
 
 @Composable
@@ -139,7 +205,7 @@ fun SupportIcon(iconRes: Int) {
 @Composable
 fun SupportText(text: String, color: Color) {
     PrimaryText(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().id("supportText"),
         text = text,
         style = DigitalTheme.typography.smallRegular,
         color = color,
@@ -149,9 +215,14 @@ fun SupportText(text: String, color: Color) {
 }
 
 @Composable
-fun SupportAndErrorTexts(isError: Boolean, enabled: Boolean, errorText: String?, helpText: String?) {
+fun SupportAndErrorTexts(
+    isError: Boolean,
+    enabled: Boolean,
+    errorText: String?,
+    helpText: String?
+) {
     Column {
-        VerticalSpacer(4)
+        VerticalSpacer(4.dp)
         if (isError) {
             if (!errorText.isNullOrEmpty()) {
                 SupportRow(

@@ -3,6 +3,7 @@ package am.acba.compose.components.inputs
 import am.acba.component.R
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -20,15 +21,18 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,12 +43,15 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun SearchBar(
-    hint: String,
+    hint: String = stringResource(R.string.search),
     modifier: Modifier = Modifier,
+    textFieldModifier: Modifier = Modifier,
     isEnabled: Boolean = true,
     height: Dp = 40.dp,
     cornerShape: Shape = ShapeTokens.shapePrimaryInput,
     backgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal2,
+    toolbarMode: Boolean = false,
+    onBackButtonClick: () -> Unit = {},
     onSearchClicked: () -> Unit = {},
     onTextChange: (String) -> Unit = {},
     onComponentClick: (() -> Unit)? = null,
@@ -55,8 +62,9 @@ fun SearchBar(
         }
     }
     var text by remember { mutableStateOf(TextFieldValue()) }
+    var startIcon by remember { mutableIntStateOf(R.drawable.ic_search) }
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(height)
             .fillMaxWidth()
             .background(color = backgroundColor, shape = cornerShape),
@@ -70,16 +78,30 @@ fun SearchBar(
             Icon(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(8.dp),
-                painter = painterResource(id = R.drawable.ic_search),
+                    .padding(8.dp)
+                    .clickable {
+                        if (startIcon == R.drawable.ic_back) {
+                            onBackButtonClick.invoke()
+                        }
+                    },
+                painter = painterResource(id = startIcon),
                 contentDescription = "search",
                 tint = DigitalTheme.colorScheme.contentPrimaryTonal1,
             )
         }
         BasicTextField(
             modifier = Modifier
+                .id("search")
                 .weight(5f)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .then(textFieldModifier)
+                .onFocusChanged {
+                    if (toolbarMode) {
+                        if (it.isFocused) {
+                            startIcon = R.drawable.ic_back
+                        }
+                    }
+                },
             value = text,
             cursorBrush = SolidColor(DigitalTheme.colorScheme.contentBrand),
             onValueChange = {
@@ -113,8 +135,7 @@ fun SearchBar(
                 .size(40.dp)
                 .clickable(
                     indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ) {
+                    interactionSource = remember { MutableInteractionSource() }) {
                     if (text.text.isNotEmpty()) {
                         text = TextFieldValue(text = "")
                         onTextChange("")

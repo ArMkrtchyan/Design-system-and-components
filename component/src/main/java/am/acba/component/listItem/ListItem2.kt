@@ -59,24 +59,28 @@ class ListItem2 : FrameLayout {
     private val radiobutton by lazy { PrimaryRadioButton(context) }
     private val body1 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body2 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body3 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
     }
     private val body4 by lazy {
         PrimaryTextView(context).apply {
+            id = generateViewId()
             isSingleLine = true
             ellipsize = TextUtils.TruncateAt.END
         }
@@ -516,6 +520,7 @@ class ListItem2 : FrameLayout {
 
     private fun getBarrierReferenceIds(alignTop: Boolean) = mutableListOf(
         binding.tvTitle.id,
+        binding.badgeListItem.id,
         binding.ivFirstEndIcon.id,
         binding.layoutSecondEndComponent.id,
     ).apply {
@@ -702,9 +707,20 @@ class ListItem2 : FrameLayout {
         }
     }
 
+    fun setCheckboxTouchable(isTouchable: Boolean) {
+        ensureSecondEndComponentCheckbox()
+        checkbox.isFocusable = isTouchable
+        checkbox.isClickable = isTouchable
+    }
+
     fun setCheckboxChecked(isChecked: Boolean) {
         ensureSecondEndComponentCheckbox()
         checkbox.isChecked = isChecked
+    }
+
+    fun setCheckBoxState(checkedState: Int) {
+        ensureSecondEndComponentCheckbox()
+        checkbox.checkedState = checkedState
     }
 
     fun isCheckboxChecked() = checkbox.isChecked
@@ -730,6 +746,11 @@ class ListItem2 : FrameLayout {
 
     fun isSwitchEnabled() = switch.isEnabled
 
+    fun setRadioButtonTouchable(isTouchable: Boolean) {
+        ensureSecondEndComponentRadioButton()
+        radiobutton.isFocusable = isTouchable
+        radiobutton.isClickable = isTouchable
+    }
     fun setRadioButtonChecked(isChecked: Boolean) {
         ensureSecondEndComponentRadioButton()
         radiobutton.isChecked = isChecked

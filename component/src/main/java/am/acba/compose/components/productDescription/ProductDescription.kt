@@ -36,34 +36,38 @@ class MockState(private val type: Int) : ProductDescriptionMockDataCreator {
         return when (type) {
 
             1 -> ProductDescription(
-                title = "Հաշվով իրականացրու",
-                subTitle = "Հաշվով իրականացրու ընթացիկ գործառնություններ",
-                mediaImage = "https://online1-test.acba.am/Shared/LoanImages/FastOverdraft.png",
-                secondTitle = "ԹՎԱՅԻՆ ՔԱՐՏ",
-                secondSubTitle = "Հասանելի 7 արժույթagxyagxgaxgaxajhcahjcahjgxahjgcahjchajcahach svcavchjsvhjcshcbshjcbshjcbshjbcsjkbcksbs",
+                title = "Տեղական շուկա",
+                subTitle = "Ներդրումներ տեղական շուկայում",
+                mediaImage = "https://online1-test.acba.am/Shared/Invest/LocalMarket.png",
                 bullets = listOf(
-                    "Տոկոսադրույք՝ 0%",
-                    "Տևողություն՝ 4 ամիս",
-                    "Գումարի չափ՝ 50.000 կամ 100.000 ՀՀ դրամ",
-                    "Միանվագ միջնորդավճար 2.900 կամ 5.800 ՀՀ դրամ"
-                ),
-                badges = listOf(
-                    ProductDescriptionBadge("https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg", "-50% տարեկան վճար"),
-                    ProductDescriptionBadge("https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg", "Բարերար"),
-                    ProductDescriptionBadge("https://online1-test.acba.am/Shared/LeasingImages/PaymentTypes/Standard.svg", "Նոր"),
+                    "Բաժնետոմսեր և կորպորատիվ պարտատոմսեր",
+                    "Արժեթղթերի առաջնային և երկրորդային շուկաներ",
+                    "AMD, USD, EUR արժույթներով պարտատոմսեր"
+
                 ),
             )
 
             2 -> ProductDescription(
-                title = "5G վարկ",
-                mediaImage = "https://online1-test.acba.am/Shared/LoanImages/5g.png",
+                title = "Միջազգային շուկա",
+                subTitle = "Ներդրումներ միջազգային շուկայում",
+                mediaImage = "https://online1-test.acba.am/Shared/Invest/InternationalMarket.png",
                 bullets = listOf(
-                    "Մինչև 10 մլն ՀՀ դրամ",
-                    "Տևողություն՝ 48 կամ 60 ամիս",
-                    "Տոկոսադրույք՝ 18.9%-19.9%",
-                    "Առանց գրավի և երաշխավորության"
+                    "Միջազգային կազմակերպությունների պարտատոմսեր և բաժնետոմսեր",
+                    "Պետական պարտատոմսերի շուկայի առկայություն",
+                    "Տարբեր արժույթներով արժեթղթերում ներդրման հնարավորություն"
                 ),
             )
+
+//            2 -> ProductDescription(
+//                title = "5G վարկ",
+//                mediaImage = "https://online1-test.acba.am/Shared/LoanImages/5g.png",
+//                bullets = listOf(
+//                    "Մինչև 10 մլն ՀՀ դրամ",
+//                    "Տևողություն՝ 48 կամ 60 ամիս",
+//                    "Տոկոսադրույք՝ 18.9%-19.9%",
+//                    "Առանց գրավի և երաշխավորության"
+//                ),
+//            )
 
             3 -> ProductDescription(
                 title = "Ավանդի գրավով վարկ",

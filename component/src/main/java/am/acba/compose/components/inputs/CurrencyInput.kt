@@ -3,13 +3,14 @@ package am.acba.compose.components.inputs
 
 import am.acba.component.R
 import am.acba.component.extensions.numberFormatting
-import am.acba.compose.HorizontalSpacer
+import am.acba.compose.common.HorizontalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.inputs.visualTransformations.AmountFormattingVisualTransformation
 import am.acba.compose.components.inputs.visualTransformations.MaxLengthVisualTransformation
 import am.acba.compose.theme.DigitalTheme
 import am.acba.compose.theme.ShapeTokens
+import am.acba.utils.extensions.id
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -56,6 +57,8 @@ fun CurrencyInput(
     readOnly: Boolean = false,
     isError: Boolean = false,
     maxLength: Int = 15,
+    returnTextWhenValueZero: String = "",
+    labelMaxLines: Int = 1,
     formatDecimal: Boolean = false,
     showArrow: Boolean = false,
     autoFormatting: Boolean = true,
@@ -98,14 +101,16 @@ fun CurrencyInput(
                 readOnly,
                 placeholder,
                 formatDecimal,
+                isFocused,
                 autoFormatting,
                 keyboardOptions,
                 keyboardActions,
                 interactionSource,
                 isError,
-                label
+                label,
+                labelMaxLines
             )
-            HorizontalSpacer(width = 1)
+            HorizontalSpacer(1.dp)
             CurrencyField(currencyModifier, enabled, showArrow, onCurrencyClick)
         }
         SupportAndErrorTexts(isError, enabled, errorText, helpText)
@@ -122,12 +127,14 @@ private fun RowScope.AmountTextField(
     readOnly: Boolean,
     placeholder: String?,
     formatDecimal: Boolean,
+    isFocused: Boolean,
     autoFormatting: Boolean = true,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
     interactionSource: MutableInteractionSource,
     isError: Boolean,
-    label: String?
+    label: String?,
+    labelMaxLines: Int = 1
 ) {
     val pattern = remember {
         if (formatDecimal) Regex("^\\d*\\.?\\d*\$")
@@ -139,7 +146,7 @@ private fun RowScope.AmountTextField(
         MaxLengthVisualTransformation(maxLength)
     }
     TextField(
-        value = value,
+        value = if (formatDecimal && isFocused) value.copy(text = value.text.removeSuffix(".00")) else value,
         onValueChange = {
             if (checkInputValidation(value, maxLength, pattern, it))
                 onValueChange(it)
@@ -149,7 +156,7 @@ private fun RowScope.AmountTextField(
             .height(58.dp),
         enabled = enabled,
         readOnly = readOnly,
-        placeholder = placeholder?.let { { Label(text = placeholder) } },
+        placeholder = placeholder?.let { { Label(text = placeholder, maxLines = labelMaxLines) } },
         shape = ShapeTokens.inputShapeLeftSide,
         textStyle = DigitalTheme.typography.body1Regular,
         visualTransformation = visualTransformation,
@@ -159,11 +166,16 @@ private fun RowScope.AmountTextField(
         interactionSource = interactionSource,
         colors = createStateColors(),
         isError = isError,
-        label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled) } },
+        label = label?.let { { Label(text = label, isError = isError, isEnabled = enabled, maxLines = labelMaxLines) } },
     )
 }
 
-private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern: Regex, textFieldValue: TextFieldValue): Boolean {
+private fun checkInputValidation(
+    value: TextFieldValue,
+    maxLength: Int,
+    pattern: Regex,
+    textFieldValue: TextFieldValue
+): Boolean {
     val splitTextArray = textFieldValue.text.split(".")
     val isDecimal = splitTextArray.size == 2
     val isDotPositionValid = !isDecimal || splitTextArray[1].length <= 2
@@ -171,11 +183,16 @@ private fun checkInputValidation(value: TextFieldValue, maxLength: Int, pattern:
         && textFieldValue.text.matches(pattern)
         && isDotPositionValid
         && !textFieldValue.text.startsWith(".")
-        && !textFieldValue.text.startsWith("0")
+        && !(textFieldValue.text.length > 1 && textFieldValue.text.startsWith("0"))
 }
 
 @Composable
-private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boolean, onCurrencyClick: (() -> Unit)?) {
+private fun CurrencyField(
+    modifier: Modifier,
+    enabled: Boolean,
+    showArrow: Boolean,
+    onCurrencyClick: (() -> Unit)?
+) {
     var currencyBackgroundColor: Color
     var currencyTextColor: Color
     var flagOpacity: Float
@@ -206,9 +223,9 @@ private fun CurrencyField(modifier: Modifier, enabled: Boolean, showArrow: Boole
                 .height(20.dp),
             alpha = flagOpacity
         )
-        HorizontalSpacer(width = 4)
-        PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor)
-        HorizontalSpacer(width = 2)
+        HorizontalSpacer(4.dp)
+        PrimaryText("AMD", style = DigitalTheme.typography.body1Regular, color = currencyTextColor, modifier = Modifier.id("currency"))
+        HorizontalSpacer(2.dp)
         if (showArrow) {
             PrimaryIcon(
                 painterResource(R.drawable.ic_down), modifier = Modifier

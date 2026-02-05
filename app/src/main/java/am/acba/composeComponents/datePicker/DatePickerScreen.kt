@@ -2,7 +2,7 @@
 
 package am.acba.composeComponents.datePicker
 
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryButton
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.PrimaryToolbar
@@ -67,23 +67,23 @@ fun DatePickerScreen(title: String = EMPTY_STRING) {
                     .verticalScroll(rememberScrollState()),
             ) {
                 DescriptionText()
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 PrimaryText("Date picker Dialog")
-                VerticalSpacer(8)
+                VerticalSpacer(8.dp)
                 DatePickerPopup(selectedDate, error, helpText, enabled)
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 PrimaryText("Date picker Bottom sheet")
-                VerticalSpacer(8)
+                VerticalSpacer(8.dp)
                 DatePickerModal(selectedDateModal, error, helpText, enabled)
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 PrimaryButton(text = "show hide error") {
                     error = if (error.isEmpty()) "error text" else EMPTY_STRING
                 }
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 PrimaryButton(text = "show hide help text") {
                     helpText = if (helpText.isEmpty()) "help text" else EMPTY_STRING
                 }
-                VerticalSpacer(24)
+                VerticalSpacer(24.dp)
                 PrimaryButton(text = "enable disable") {
                     enabled = !enabled
                 }

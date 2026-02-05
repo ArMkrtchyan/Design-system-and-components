@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.controls
 
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.controls.PrimaryCheckbox
 import am.acba.compose.components.controls.PrimaryRadioButton
@@ -58,21 +58,21 @@ fun ControlsScreen(title: String = "") {
                     val checkboxState = remember { mutableStateOf(ToggleableState.Off) }
                     val checkbox2State = remember { mutableStateOf(ToggleableState.Off) }
                     PrimaryCheckbox(checkboxState.value, onClick = { checkboxState.value = it })
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                     PrimaryCheckbox(
                         state = checkbox2State.value,
                         useIndeterminateState = true,
                         onClick = { checkbox2State.value = it }, text = "sd s ds "
                     )
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                     PrimaryCheckbox(enabled = false)
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                     PrimaryCheckbox(state = ToggleableState.Off, enabled = false)
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                     PrimaryCheckbox(state = ToggleableState.Indeterminate, enabled = false)
-                    VerticalSpacer(8)
+                    VerticalSpacer(8.dp)
                 }
-                HorizontalSpacer(20)
+                HorizontalSpacer(20.dp)
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -81,24 +81,24 @@ fun ControlsScreen(title: String = "") {
                     PrimaryRadioButton(selected = isChecked.value, onClick = {
                         isChecked.value = !isChecked.value
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked2 = remember { mutableStateOf(true) }
                     PrimaryRadioButton(selected = isChecked2.value, onClick = {
                         isChecked2.value = !isChecked2.value
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked3 = remember { mutableStateOf(false) }
                     PrimaryRadioButton(selected = isChecked3.value, enabled = false, onClick = {
                         isChecked3.value = !isChecked3.value
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked4 = remember { mutableStateOf(true) }
                     PrimaryRadioButton(selected = isChecked4.value, enabled = false, onClick = {
                         isChecked4.value = !isChecked4.value
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                 }
-                HorizontalSpacer(20)
+                HorizontalSpacer(20.dp)
                 Column(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -107,24 +107,24 @@ fun ControlsScreen(title: String = "") {
                     PrimarySwitch(checked = isChecked.value, onCheckedChange = {
                         isChecked.value = it
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked2 = remember { mutableStateOf(true) }
                     PrimarySwitch(checked = isChecked2.value, onCheckedChange = {
                         isChecked2.value = it
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked3 = remember { mutableStateOf(false) }
                     PrimarySwitch(checked = isChecked3.value, enabled = false, onCheckedChange = {
                         isChecked3.value = it
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                     val isChecked4 = remember { mutableStateOf(true) }
                     PrimarySwitch(checked = isChecked4.value, enabled = false, onCheckedChange = {
                         isChecked4.value = it
                     })
-                    VerticalSpacer(16)
+                    VerticalSpacer(16.dp)
                 }
-                HorizontalSpacer(20)
+                HorizontalSpacer(20.dp)
             }
         }
     }

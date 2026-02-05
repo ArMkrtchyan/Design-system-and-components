@@ -1,8 +1,8 @@
 package am.acba.compose.components.cardListing
 
 import am.acba.component.R
-import am.acba.compose.HorizontalSpacer
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.HorizontalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.StatusBadge
@@ -14,6 +14,7 @@ import am.acba.compose.components.controls.PrimaryRadioButton
 import am.acba.compose.components.controls.PrimarySwitch
 import am.acba.compose.components.listItem.ControllerTypeEnum
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -87,6 +88,7 @@ fun CardListItem(
     avatarClipPercent: Int = 0,
     avatarImageCornerRadius: Int? = null,
     avatarContentScale: ContentScale = ContentScale.Crop,
+    avatarSize: AvatarSizeEnum = AvatarSizeEnum.AVATAR_SIZE_36,
 
     controllerType: ControllerTypeEnum = ControllerTypeEnum.NONE,
     controllerSelected: Boolean = false,
@@ -96,9 +98,9 @@ fun CardListItem(
     statusModifier: Modifier = Modifier,
     statusTitle: String? = null,
     statusIcon: Int? = null,
-    statusBackgroundColor: Color = DigitalTheme.colorScheme.borderNeutral,
-    statusIconColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
-    statusTextColor: Color = DigitalTheme.colorScheme.contentPrimaryTonal1,
+    statusBackgroundColor: Color = DigitalTheme.colorScheme.backgroundPending,
+    statusIconColor: Color = DigitalTheme.colorScheme.contentPending,
+    statusTextColor: Color = DigitalTheme.colorScheme.contentPending,
     statusAlign: Alignment = Alignment.TopEnd,
 
     onClick: () -> Unit = {}
@@ -115,11 +117,13 @@ fun CardListItem(
                 .border(1.dp, borderColor, RoundedCornerShape(borderRadius.dp))
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
+                .id("cardListItemRoot")
         } else {
             modifier
                 .background(bgColor, RoundedCornerShape(backgroundRadius.dp))
                 .padding(top = 16.dp)
                 .clickable { onClick.invoke() }
+                .id("cardListItemRoot")
         }
     ) {
         Column(
@@ -136,7 +140,7 @@ fun CardListItem(
                         badgeModifier = avatarBadgeModifier,
                         contentModifier = avatarContentModifier,
                         avatarType = avatarType,
-                        avatarSize = AvatarSizeEnum.AVATAR_SIZE_36,
+                        avatarSize = avatarSize,
                         backgroundColor = avatarBackgroundColor,
                         backgroundRadius = avatarBackgroundRadius,
                         icon = avatarIcon,
@@ -147,7 +151,7 @@ fun CardListItem(
                         imageCornerRadius = avatarImageCornerRadius,
                         contentScale = avatarContentScale,
                     )
-                    HorizontalSpacer(16)
+                    HorizontalSpacer(8.dp)
                 }
                 Column(
                     modifier = Modifier.weight(1f)
@@ -157,20 +161,22 @@ fun CardListItem(
                         style = startTitleStyle,
                         color = startTitleColor,
                         overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
+                        maxLines = 1,
+                        modifier = Modifier.id("startTitle")
                     )
                     if (startDescription.isNotEmpty()) {
-                        VerticalSpacer(2)
+                        VerticalSpacer(2.dp)
                         PrimaryText(
                             text = startDescription,
                             style = startDescriptionStyle,
                             color = startDescriptionColor,
                             overflow = TextOverflow.Ellipsis,
-                            maxLines = 1
+                            maxLines = 1,
+                            modifier = Modifier.id("startDescription")
                         )
                     }
                 }
-                HorizontalSpacer(8)
+                HorizontalSpacer(8.dp)
                 Column(
                     horizontalAlignment = Alignment.End
                 ) {
@@ -179,25 +185,28 @@ fun CardListItem(
                             text = endTitle,
                             style = endTitleStyle,
                             color = endTitleColor,
-                            maxLines = 1
+                            maxLines = 1,
+                            modifier = Modifier.id("endTitle")
                         )
                     }
                     if (endDescription.isNotEmpty()) {
-                        VerticalSpacer(2)
+                        VerticalSpacer(2.dp)
                         Row {
                             PrimaryText(
                                 text = endDescription,
                                 style = endDescriptionStyle,
                                 color = endDescriptionColor,
-                                maxLines = 1
+                                maxLines = 1,
+                                modifier = Modifier.id("endDescription")
                             )
                             if (!currency.isNullOrEmpty()) {
-                                HorizontalSpacer(2)
+                                HorizontalSpacer(2.dp)
                                 PrimaryText(
                                     text = currency,
                                     style = currencyStyle,
                                     color = currencyColor,
-                                    maxLines = 1
+                                    maxLines = 1,
+                                    modifier = Modifier.id("currency")
                                 )
                             }
                         }
@@ -206,30 +215,36 @@ fun CardListItem(
                 when (controllerType) {
                     ControllerTypeEnum.NONE -> Unit
                     ControllerTypeEnum.CHECK_BOX -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimaryCheckbox(state = if (controllerSelected) ToggleableState.On else ToggleableState.Off, onClick = {
                             onCheckedChangeListener.invoke(it == ToggleableState.On)
                         })
                     }
 
                     ControllerTypeEnum.RADIO_BUTTON -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimaryRadioButton(selected = controllerSelected, onClick = onRadioButtonClick)
                     }
 
                     ControllerTypeEnum.SWITCH -> {
-                        HorizontalSpacer(8)
+                        HorizontalSpacer(8.dp)
                         PrimarySwitch(checked = controllerSelected, onCheckedChange = {
                             onCheckedChangeListener.invoke(it)
                         })
                     }
                 }
                 endIcon?.let {
-                    HorizontalSpacer(8)
-                    PrimaryIcon(painter = painterResource(it), tint = endIconColor, modifier = Modifier.size(24.dp))
+                    HorizontalSpacer(8.dp)
+                    PrimaryIcon(
+                        painter = painterResource(it),
+                        tint = endIconColor,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .id("cardListItemEndIcon")
+                    )
                 }
             }
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             if (!statusTitle.isNullOrEmpty()) {
                 StatusBadge(
                     title = statusTitle,

@@ -1,42 +1,36 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center|bottom"
-    android:paddingBottom="70dp">
+    android:orientation="vertical"
+    android:paddingBottom="36dp">
 
-    <am.acba.component.textView.PrimaryTextView
-        android:id="@+id/acba_contacts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_16"
-        android:layout_marginTop="@dimen/spacing_20"
-        android:layout_marginEnd="@dimen/spacing_16"
-        android:drawableEnd="@drawable/ic_contacts"
-        android:drawableTint="?attr/contentPrimary"
-        android:text="@string/phone_number_from_acba_contact"
-        app:drawableTint="?attr/contentPrimary"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <am.acba.component.divider.PrimaryDivider
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_8"
-        app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
-
-    <am.acba.component.textView.PrimaryTextView
+    <am.acba.component.listItem.ListItem2
         android:id="@+id/phone_contacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_16"
-        android:layout_marginTop="@dimen/spacing_20"
-        android:layout_marginEnd="@dimen/spacing_16"
-        android:drawableEnd="@drawable/ic_phonebook"
-        android:drawableTint="?attr/contentPrimary"
-        android:text="@string/phone_number_from_phone_book"
-        app:drawableTint="?attr/contentPrimary"
+        app:listItemBackgroundColor="@color/Transparent"
+        app:listItemShowDivider="true"
+        app:listItemStartComponentType="Icon"
+        app:listItemStartIcon="@drawable/ic_phonebook"
+        app:listItemStartIconDimensionsType="WithoutBackground"
+        app:listItemStartIconTint="?attr/contentPrimary"
+        app:listItemTextType="TitleOnly"
+        app:listItemTitle="@string/phone_number_from_phone_book"
+        app:listItemTitleTextAppearance="@style/Body1.Regular" />
 
-        app:layout_constraintTop_toBottomOf="@id/acba_contacts" />
+    <am.acba.component.listItem.ListItem2
+        android:id="@+id/acba_contacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:listItemBackgroundColor="@color/Transparent"
+        app:listItemStartComponentType="Icon"
+        app:listItemStartIcon="@drawable/ic_contacts"
+        app:listItemStartIconDimensionsType="WithoutBackground"
+        app:listItemStartIconTint="?attr/contentPrimary"
+        app:listItemTextType="TitleOnly"
+        app:listItemTitle="@string/phone_number_from_acba_contact"
+        app:listItemTitleTextAppearance="@style/Body1.Regular" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

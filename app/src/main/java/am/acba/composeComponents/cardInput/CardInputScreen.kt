@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.cardInput
 
 import am.acba.component.R
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.CardInput
 import am.acba.compose.theme.DigitalTheme
@@ -62,14 +62,14 @@ fun CardInputScreen(title: String = "") {
                     trailingIcon = R.drawable.ic_scan,
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CardInput(
                     value = textNormal2.value,
                     onValueChange = { textNormal2.value = it },
                     placeholder = "Քարտի համար",
                     helpText = "Enter card number",
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CardInput(
                     value = textNormal3.value,
                     onValueChange = { textNormal3.value = it },
@@ -79,7 +79,7 @@ fun CardInputScreen(title: String = "") {
                     errorText = "Wrong card number",
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CardInput(
                     value = textNormal4.value,
                     onValueChange = { textNormal4.value = it },
@@ -88,7 +88,7 @@ fun CardInputScreen(title: String = "") {
                     enabled = false,
                     trailingTint = DigitalTheme.colorScheme.contentPrimary,
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
             }
         }
     }

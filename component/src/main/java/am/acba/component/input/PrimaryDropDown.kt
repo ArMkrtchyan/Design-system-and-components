@@ -16,11 +16,16 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
+import androidx.core.view.isVisible
 
 open class PrimaryDropDown @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs, 0) {
     protected val binding by lazy { PrimaryDropdownBinding.inflate(context.inflater(), this, false) }
+
+    val inputView: PrimaryInput
+        get() = binding.inputDropDown
+
     private var isEnabled = true
 
     init {
@@ -53,6 +58,11 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.frame.setOnClickListener {
             l?.onClick(it)
         }
+    }
+
+    fun showDropdown(hasDropdown: Boolean) {
+        binding.inputDropDown.hasDropDown = hasDropdown
+        binding.frame.isVisible = hasDropdown
     }
 
     fun setStartIcon(drawable: Drawable?) {
@@ -95,6 +105,7 @@ open class PrimaryDropDown @JvmOverloads constructor(
         binding.parent.isClickable = isEnabled
         binding.frame.isFocusable = isEnabled
         binding.frame.isClickable = isEnabled
+        binding.frame.isEnabled = isEnabled
         binding.inputDropDown.isFocusable = isEnabled
         binding.inputDropDown.isClickable = isEnabled
     }

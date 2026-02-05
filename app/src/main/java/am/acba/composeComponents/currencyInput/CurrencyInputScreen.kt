@@ -1,7 +1,7 @@
 ﻿package am.acba.composeComponents.currencyInput
 
 import am.acba.component.extensions.log
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryToolbar
 import am.acba.compose.components.inputs.CurrencyInput
 import am.acba.compose.theme.DigitalTheme
@@ -66,16 +66,17 @@ fun CurrencyInputScreen(title: String = "") {
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CurrencyInput(
                     value = currencyText2.value,
                     onValueChange = { currencyText2.value = it },
                     label = "Amount",
+                    returnTextWhenValueZero = currencyText2.value.text,
                     formatDecimal = true,
                     onFocusChanged = { hasFocus -> hasFocus.log() },
                     helpText = "Input with dot",
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CurrencyInput(
                     value = currencyText3.value,
                     onValueChange = { currencyText3.value = it },
@@ -85,7 +86,7 @@ fun CurrencyInputScreen(title: String = "") {
                     showArrow = true,
                     onCurrencyClick = { Toast.makeText(context, "On currency click", Toast.LENGTH_SHORT).show() }
                 )
-                VerticalSpacer(16)
+                VerticalSpacer(16.dp)
                 CurrencyInput(
                     value = currencyText4.value,
                     onValueChange = { currencyText4.value = it },

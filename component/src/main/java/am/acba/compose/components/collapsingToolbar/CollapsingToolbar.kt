@@ -6,8 +6,8 @@ import am.acba.component.R
 import am.acba.component.extensions.getActivity
 import am.acba.compose.components.PrimaryIcon
 import am.acba.compose.components.PrimaryText
-import am.acba.compose.id
 import am.acba.compose.theme.DigitalTheme
+import am.acba.utils.extensions.id
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row

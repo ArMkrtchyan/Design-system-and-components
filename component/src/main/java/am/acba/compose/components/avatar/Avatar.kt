@@ -2,7 +2,7 @@
 
 import am.acba.component.R
 import am.acba.component.extensions.dpToPx
-import am.acba.compose.VerticalSpacer
+import am.acba.compose.common.VerticalSpacer
 import am.acba.compose.components.PrimaryText
 import am.acba.compose.components.badges.Badge
 import am.acba.compose.components.badges.BadgeEnum
@@ -47,6 +47,7 @@ import com.bumptech.glide.request.RequestOptions
 
 @Composable
 fun ActionButton(
+    modifier: Modifier = Modifier,
     actionText: String,
     actionTextColor: Color = DigitalTheme.colorScheme.contentPrimary,
     backgroundModifier: Modifier = Modifier,
@@ -73,7 +74,7 @@ fun ActionButton(
     onActionButtonClick: () -> Unit = {},
     onBadgeClick: () -> Unit = {},
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.clickable {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.clickable {
         onActionButtonClick.invoke()
     }) {
         Avatar(
@@ -100,7 +101,7 @@ fun ActionButton(
             badgeBorderColor,
             onBadgeClick
         )
-        VerticalSpacer(8)
+        VerticalSpacer(8.dp)
         PrimaryText(
             text = actionText,
             color = actionTextColor,
@@ -145,7 +146,7 @@ fun Avatar(
             AvatarEnum.ICON -> AvatarIcon(
                 modifier = contentModifier,
                 icon = icon ?: R.drawable.default_icon,
-                iconColor = iconColor ?: DigitalTheme.colorScheme.contentPrimary,
+                iconColor = iconColor,
                 padding = iconPadding
             )
 
@@ -160,7 +161,13 @@ fun Avatar(
                 padding = iconPadding
             )
 
-            AvatarEnum.TEXT -> AvatarText(modifier = contentModifier, avatarSize = avatarSize, text = text ?: "", textColor = textColor)
+            AvatarEnum.TEXT -> AvatarText(
+                modifier = contentModifier,
+                avatarSize = avatarSize,
+                text = text ?: "",
+                textColor = textColor
+            )
+
             AvatarEnum.LOTTIE -> AvatarLottie(modifier = contentModifier)
         }
         if (badgeType == BadgeEnum.DOT || badgeType == BadgeEnum.ICON) {
@@ -218,14 +225,27 @@ fun AvatarImage(
                 factory = {
                     val imageView = ImageView(context)
                     iconColor?.let {
-                        ImageViewCompat.setImageTintList(imageView, iconColor.toGraphicColorStateList())
+                        ImageViewCompat.setImageTintList(
+                            imageView,
+                            iconColor.toGraphicColorStateList()
+                        )
+                        ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
+                    }
+                    imageView
+                },
+                update = { imageView ->
+                    imageView.setImageDrawable(null)
+                    iconColor?.let {
+                        ImageViewCompat.setImageTintList(
+                            imageView,
+                            iconColor.toGraphicColorStateList()
+                        )
                         ImageViewCompat.setImageTintMode(imageView, PorterDuff.Mode.SRC_IN)
                     }
                     Glide
                         .with(context)
                         .load(imageUrl)
                         .into(imageView)
-                    imageView
                 },
                 modifier = Modifier
                     .fillMaxSize()
@@ -261,13 +281,13 @@ fun AvatarImage(
 private fun AvatarIcon(
     modifier: Modifier = Modifier,
     icon: Int,
-    iconColor: Color,
+    iconColor: Color?,
     padding: Dp = Dp.Unspecified,
 ) {
     Icon(
         painterResource(icon),
         contentDescription = null,
-        tint = iconColor,
+        tint = iconColor ?: Color.Unspecified,
         modifier = modifier
             .fillMaxSize()
             .padding(padding)
@@ -311,9 +331,13 @@ fun AvatarScreenPreview() {
                 .padding(10.dp)
         ) {
             Avatar(avatarSize = AvatarSizeEnum.AVATAR_SIZE_24)
-            VerticalSpacer(16)
-            Avatar(avatarType = AvatarEnum.IMAGE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_32, badgeType = BadgeEnum.DOT)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
+            Avatar(
+                avatarType = AvatarEnum.IMAGE,
+                avatarSize = AvatarSizeEnum.AVATAR_SIZE_32,
+                badgeType = BadgeEnum.DOT
+            )
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.ICON,
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
@@ -323,7 +347,7 @@ fun AvatarScreenPreview() {
                 backgroundRadius = 12,
                 iconPadding = 16.dp
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.TEXT, avatarSize = AvatarSizeEnum.AVATAR_SIZE_36,
                 text = "AA",
@@ -331,7 +355,7 @@ fun AvatarScreenPreview() {
                 backgroundColor = DigitalTheme.colorScheme.backgroundAlternative5,
                 backgroundRadius = 100,
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarType = AvatarEnum.IMAGE,
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_40,
@@ -339,15 +363,19 @@ fun AvatarScreenPreview() {
                 icon = R.drawable.logo_amex_light,
                 clipPercent = 50
             )
-            VerticalSpacer(16)
-            Avatar(avatarType = AvatarEnum.LOTTIE, avatarSize = AvatarSizeEnum.AVATAR_SIZE_56, badgeType = BadgeEnum.DOT)
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
+            Avatar(
+                avatarType = AvatarEnum.LOTTIE,
+                avatarSize = AvatarSizeEnum.AVATAR_SIZE_56,
+                badgeType = BadgeEnum.DOT
+            )
+            VerticalSpacer(16.dp)
             Avatar(
                 avatarSize = AvatarSizeEnum.AVATAR_SIZE_80, icon = R.drawable.ic_phonebook,
                 backgroundColor = DigitalTheme.colorScheme.backgroundTonal1,
                 backgroundRadius = 100,
             )
-            VerticalSpacer(16)
+            VerticalSpacer(16.dp)
             ActionButton(actionText = "Action button")
         }
     }

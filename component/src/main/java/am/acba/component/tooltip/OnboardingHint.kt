@@ -59,6 +59,15 @@ class OnboardingHint(
         }
     }
 
+    //Added to return tooltip current position on forward click
+    fun setForwardClickListener(onClick: (Int) -> Unit) {
+        binding.tooltip.setForwardClickListener {
+            currentPosition++
+            handleScrollPositionAndChangeTargetView()
+            onClick(currentPosition)
+        }
+    }
+
     private fun handleScrollPositionAndChangeTargetView() {
         val view = contentAndViews[currentPosition].second
         if (!view.isViewFullyVisible()) {
@@ -94,12 +103,13 @@ class OnboardingHint(
     }
 
     private fun setTargetViews() {
+        binding.tooltip.setTooltip(contentAndViews[currentPosition].first)
         val globalListener = object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 val view = contentAndViews.first().second
                 binding.clipView.clipForView(view)
-                val height = binding.infoContainer.height
+                var height = binding.infoContainer.height
                 val coordinates = calculateNewXYCoordinatesForInfoContainer(view, height)
                 binding.infoContainer.x = coordinates.first
                 binding.infoContainer.y = coordinates.second
@@ -168,7 +178,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY - height - view.height - 64.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY - height - 12.dpToPx())
         } else {
             val x = calculateXCoordinateOfView(view)
             setAnchorPosition(
@@ -176,7 +186,7 @@ class OnboardingHint(
                 viewX - x + view.width / 2 - binding.anchor.width / 2
             )
 
-            Pair(x, viewY + view.height - 16.dpToPx() + context.getStatusBarHeight())
+            Pair(x, viewY + view.height + 12.dpToPx())
         }
 
     }
