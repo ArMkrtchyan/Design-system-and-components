@@ -1,6 +1,7 @@
 package am.acba.component.extensions
 
 import am.acba.component.phoneNumberInput.CountryModel
+import am.acba.utils.enums.CountryEnum
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.ColorStateList
@@ -46,7 +47,7 @@ fun Context.getActionBarHeight(): Int {
 
 fun Context.saveCountryLastAction(country: CountryModel) {
     val dBActionsList: MutableList<CountryModel> = this.getCountryLastActions()
-    dBActionsList.remove(dBActionsList.find { it.name == country.name })
+    dBActionsList.remove(country)
     if (dBActionsList.size > 4) {
         dBActionsList.removeAt(dBActionsList.size - 1)
     }
@@ -59,6 +60,22 @@ fun Context.saveCountryLastAction(country: CountryModel) {
     editor?.apply()
 }
 
+fun Context.saveCountryLastAction(country: CountryEnum): MutableList<CountryEnum> {
+    val dBActionsList: MutableList<CountryEnum> = this.getLastCountryActionsEnum()
+    dBActionsList.remove(country)
+    if (dBActionsList.size > 4) {
+        dBActionsList.removeAt(dBActionsList.size - 1)
+    }
+    dBActionsList.add(0, country)
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    val gson = Gson()
+    val json = gson.toJson(dBActionsList)
+    editor.putString("LastActionCountryListEnum", json)
+    editor.apply()
+    return dBActionsList
+}
+
 fun Context.getCountryLastActions(): MutableList<CountryModel> {
     val dBActionsList: MutableList<CountryModel>
     val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
@@ -69,6 +86,13 @@ fun Context.getCountryLastActions(): MutableList<CountryModel> {
     return dBActionsList
 }
 
+fun Context.getLastCountryActionsEnum(): MutableList<CountryEnum> {
+    val sharedPreferences = this.getSharedPreferences("phoneNumber_countries", Context.MODE_PRIVATE)
+    val gson = Gson()
+    val json = sharedPreferences.getString("LastActionCountryListEnum", null)
+    val type = object : TypeToken<ArrayList<CountryEnum>>() {}.type
+    return gson.fromJson<ArrayList<CountryEnum>>(json, type) ?: ArrayList()
+}
 
 fun Context.getStatusBarHeight(): Int {
     var result = 0

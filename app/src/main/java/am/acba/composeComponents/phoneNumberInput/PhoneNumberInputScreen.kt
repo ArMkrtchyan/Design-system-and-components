@@ -1,6 +1,7 @@
 ﻿package am.acba.composeComponents.phoneNumberInput
 
 import am.acba.compose.components.PrimaryToolbar
+import am.acba.compose.components.inputs.phoneInput.PhoneNumberInput
 import am.acba.compose.theme.DigitalTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,13 +16,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PhoneNumberInputScreen(title: String = "") {
+    val textNormal =
+        remember { mutableStateOf(TextFieldValue("")) }
     Box(
         modifier = Modifier
             .background(DigitalTheme.colorScheme.backgroundBase)
@@ -34,6 +40,7 @@ fun PhoneNumberInputScreen(title: String = "") {
             )
     ) {
         Column(Modifier.fillMaxSize()) {
+
             PrimaryToolbar(title = title)
             Column(
                 modifier = Modifier
@@ -41,6 +48,16 @@ fun PhoneNumberInputScreen(title: String = "") {
                     .padding(horizontal = 16.dp)
                     .verticalScroll(rememberScrollState()),
             ) {
+                PhoneNumberInput(
+                    value = textNormal.value,
+                    onValueChange = { textNormal.value = it },
+                    helpText = "help text",
+                    errorText = "error text",
+                    label = "Phone",
+                    placeholder = "Phone Number",
+                    onPickContactClick = {},
+                    isError = false,
+                )
             }
         }
     }

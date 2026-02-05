@@ -13,6 +13,7 @@ enum class AvatarSizeEnum(
     val iconBadgePadding: Dp,
 ) {
     AVATAR_SIZE_16(16.dp, 0.dp, 0.dp, 0.dp, 0.dp),
+    AVATAR_SIZE_20(20.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     AVATAR_SIZE_24(24.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     AVATAR_SIZE_26(26.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     AVATAR_SIZE_32(32.dp, 11.dp, 0.dp, 0.dp, 0.dp),
@@ -25,6 +26,7 @@ enum class AvatarSizeEnum(
     @Composable
     fun getTextStyle() = when (this) {
         AVATAR_SIZE_16 -> DigitalTheme.typography.xSmallRegular
+        AVATAR_SIZE_20 -> DigitalTheme.typography.xSmallRegular
         AVATAR_SIZE_24 -> DigitalTheme.typography.xSmallRegular
         AVATAR_SIZE_26 -> DigitalTheme.typography.xSmallRegular
         AVATAR_SIZE_32 -> DigitalTheme.typography.smallRegular

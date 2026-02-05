@@ -104,7 +104,7 @@ fun ListItem(
     avatarBadgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,
     avatarBadgeIconColor: Color = DigitalTheme.colorScheme.contentSecondary,
     avatarBadgeBorderColor: Color = DigitalTheme.colorScheme.borderSecondary,
-
+    contentHorizontalPadding: Dp = 16.dp,
     badgeType: BadgeEnum = BadgeEnum.NONE,
     badgeIcon: Int? = null,
     badgeBackgroundColor: Color = DigitalTheme.colorScheme.backgroundBrand,

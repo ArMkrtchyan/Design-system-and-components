@@ -83,11 +83,7 @@ fun CurrencyInput(
         }
 
         !isFocused && formatDecimal && value.text.isNotEmpty() -> {
-            onValueChange(
-                TextFieldValue(
-                    value.text.replace(",", "").numberFormatting(returnTextWhenValueZero).replace(",", "")
-                )
-            )
+            onValueChange(TextFieldValue(value.text.replace(",", "").numberFormatting().replace(",", "")))
 
         }
     }
@@ -161,7 +157,7 @@ private fun RowScope.AmountTextField(
         enabled = enabled,
         readOnly = readOnly,
         placeholder = placeholder?.let { { Label(text = placeholder, maxLines = labelMaxLines) } },
-        shape = ShapeTokens.shapeCurrencyInput,
+        shape = ShapeTokens.inputShapeLeftSide,
         textStyle = DigitalTheme.typography.body1Regular,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
@@ -209,13 +205,11 @@ private fun CurrencyField(
         currencyTextColor = DigitalTheme.colorScheme.contentPrimaryTonal1Disable
         flagOpacity = 0.5f
     }
-    modifier
-
     Row(
         modifier = modifier
             .wrapContentWidth()
             .height(58.dp)
-            .background(shape = ShapeTokens.shapeCurrency, color = currencyBackgroundColor)
+            .background(shape = ShapeTokens.inputShapeRightSide, color = currencyBackgroundColor)
             .padding(horizontal = 12.dp)
             .clickable(enabled = showArrow && enabled) {
                 onCurrencyClick?.invoke()
@@ -248,7 +242,7 @@ private fun CurrencyField(
 private fun errorBorderForAmountInput() = Modifier.border(
     1.dp,
     DigitalTheme.colorScheme.contentDangerTonal1,
-    ShapeTokens.shapeCurrencyInput
+    ShapeTokens.inputShapeLeftSide
 )
 
 @SuppressLint("ModifierFactoryExtensionFunction")
@@ -257,7 +251,7 @@ private fun errorBorderForCurrency() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.contentDangerTonal1,
-        ShapeTokens.shapeCurrency
+        ShapeTokens.inputShapeRightSide
     )
 
 
@@ -267,7 +261,7 @@ private fun focusedBorderForAmountInput() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.borderPrimary,
-        ShapeTokens.shapeCurrencyInput
+        ShapeTokens.inputShapeLeftSide
     )
 
 
@@ -277,7 +271,7 @@ private fun focusedBorderForCurrency() =
     Modifier.border(
         1.dp,
         DigitalTheme.colorScheme.borderPrimary,
-        ShapeTokens.shapeCurrency
+        ShapeTokens.inputShapeRightSide
     )
 
 
@@ -296,7 +290,7 @@ fun CurrencyInputPreview() {
                 value = textNormal.value,
                 onValueChange = { textNormal.value = it },
                 label = "Amount",
-                isError = true,
+                isError = false,
                 helpText = "Min. 50,000.00 AMD",
             )
         }
