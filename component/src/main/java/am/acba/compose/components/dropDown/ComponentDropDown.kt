@@ -26,9 +26,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.isImeVisible
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,7 +47,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
@@ -55,6 +60,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.CoroutineScope
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ComponentDropDown(
     label: String,
@@ -69,7 +75,6 @@ fun ComponentDropDown(
     textStyle: TextStyle = DigitalTheme.typography.body1Regular,
     textColor: Color = DigitalTheme.colorScheme.contentPrimary,
     contentProperties: ContentProperties = ContentProperties(),
-    onOpenRequest: () -> Unit = {},
     onDismissRequest: () -> Unit = {},
     labelId: String = "dropDownLabel",
     valueId: String = "dropDownValue",
@@ -77,6 +82,9 @@ fun ComponentDropDown(
 ) {
     var isFocused by remember { mutableStateOf(false) }
     val showBottomSheet = remember { mutableStateOf(false) }
+    val isImeVisible = WindowInsets.isImeVisible
+
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(showBottomSheet.value) {
         isFocused = showBottomSheet.value
@@ -141,7 +149,7 @@ fun ComponentDropDown(
                     showBottomSheet(
                         isEnabled = enabled,
                         showBottomSheet = showBottomSheet,
-                        onClick = onOpenRequest
+                        focusManager = focusManager
                     )
                 },
             contentAlignment = Alignment.CenterStart
@@ -180,7 +188,7 @@ fun ComponentDropDown(
                     showBottomSheet(
                         isEnabled = enabled,
                         showBottomSheet = showBottomSheet,
-                        onClick = onOpenRequest,
+                        focusManager
                     )
                 },
             tint = textColors(enabled, DigitalTheme.colorScheme.contentPrimaryTonal1),
@@ -188,7 +196,7 @@ fun ComponentDropDown(
         )
     }
 
-    if (showBottomSheet.value) {
+    if (showBottomSheet.value && !isImeVisible) {
         androidx.compose.ui.window.Popup {
             PrimaryBottomSheet(
                 title = contentProperties.title,
@@ -248,10 +256,10 @@ private fun textColors(enabled: Boolean, color: Color) =
 private fun showBottomSheet(
     isEnabled: Boolean,
     showBottomSheet: MutableState<Boolean>,
-    onClick: () -> Unit
+    focusManager: FocusManager
 ) {
     if (isEnabled) {
-        onClick.invoke()
+        focusManager.clearFocus()
         showBottomSheet.value = true
     }
 }
