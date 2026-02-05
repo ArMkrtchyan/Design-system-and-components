@@ -39,6 +39,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -71,7 +72,7 @@ fun TableComponent(
     avatarBackgroundColor: Color = DigitalTheme.colorScheme.backgroundTonal1,
     avatarBackgroundRadius: Int = 8,
     avatarIcon: Int? = null,
-    avatarIconColor: Color = DigitalTheme.colorScheme.contentBrand,
+    avatarIconColor: Color? = DigitalTheme.colorScheme.contentBrand,
     avatarIconPadding: Dp = 8.dp,
     endIcon: Int? = null,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
@@ -93,7 +94,7 @@ fun TableComponent(
     minimumVisibleItemsCount: Int = 7,
     borderColor: Color = DigitalTheme.colorScheme.borderNeutral
 ) {
-    val expanded = remember { mutableStateOf(false) }
+    val expanded = rememberSaveable { mutableStateOf(false) }
     val expandable = tableItems.size > minimumVisibleItemsCount
     val arrowRotation by animateFloatAsState(
         targetValue = if (expanded.value) 180f else 0f,
@@ -197,7 +198,7 @@ private fun TableHeader(
     avatarBackgroundColor: Color = Color.Transparent,
     avatarBackgroundRadius: Int = 0,
     avatarIcon: Int? = null,
-    avatarIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
+    avatarIconColor: Color? = DigitalTheme.colorScheme.contentPrimary,
     avatarIconPadding: Dp = Dp.Unspecified,
     endIcon: Int? = null,
     endIconColor: Color = DigitalTheme.colorScheme.contentPrimary,
